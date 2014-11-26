@@ -1,0 +1,20 @@
+#########################
+# .gitignore file for Ultraschall Installer
+#########################
+
+#####
+# OS X temporary files that should never be committed
+
+.DS_Store
+*.swp
+*.lock
+profile
+
+
+####
+# Installer output files that should never be committed
+#
+
+*.pkg
+*.dmg
+
