@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# remove UltraschallHub driver
+if [ -d /Library/Extensions/UltraschallHub.kext ]
+then
+	kextunload /Library/Extensions/UltraschallHub.kext
+	kextunload /Library/Extensions/UltraschallHub.kext
+	rm -rf /Library/Extensions/UltraschallHub.kext
+fi
+if [ -d /System/Library/Extensions/UltraschallHub.kext ]
+then
+	kextunload /System/Library/Extensions/UltraschallHub.kext
+	kextunload /System/Library/Extensions/UltraschallHub.kext
+	rm -rf /System/Library/Extensions/UltraschallHub.kext
+fi
+
+# remove early UltraschallHub driver
+if [ -d /Library/Extensions/Ultraschall.kext ]
+then
+	kextunload /Library/Extensions/Ultraschall.kext
+	kextunload /Library/Extensions/Ultraschall.kext
+	rm -rf /Library/Extensions/Ultraschall.kext
+fi
+if [ -d /System/Library/Extensions/Ultraschall.kext ]
+then
+	kextunload /System/Library/Extensions/Ultraschall.kext
+	kextunload /System/Library/Extensions/Ultraschall.kext
+	rm -rf /System/Library/Extensions/Ultraschall.kext
+fi
+
+#remove Soundflower (incl. Ultraschall Edition and experimental builds)
+if [ -d /Library/Extensions/Soundflower.kext ]
+then
+	kextunload /Library/Extensions/Soundflower.kext
+	kextunload /Library/Extensions/Soundflower.kext
+	rm -rf /Library/Extensions/Soundflower.kext
+fi
+if [ -d /System/Library/Extensions/Soundflower.kext ]
+then
+	kextunload /System/Library/Extensions/Soundflower.kext
+	kextunload /System/Library/Extensions/Soundflower.kext
+	rm -rf /System/Library/Extensions/Soundflower.kext
+fi
+
