@@ -11,14 +11,18 @@
 	<!-- List all component packages -->
 	<pkg-ref id="fm.ultraschall.Soundboard" version="1.2">UltraschallSoundboard-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin" version="1.2">UltraschallPlugin-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.2">UltraschallPluginScripts-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
 	<pkg-ref id="com.mj-s.sws" version="2.5.0.0">SWS_Extension-2.5.0.0.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws.Scripts" version="2.5.0.0">SWS_ExtensionScripts-2.5.0.0.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
 	<choices-outline>
 		<line choice="fm.ultraschall.Driver"/>
 		<line choice="fm.ultraschall.Soundboard"/>
 		<line choice="fm.ultraschall.Plugin"/>
+		<line choice="fm.ultraschall.Plugin.Scripts"/>
 		<line choice="com.mj-s.sws"/>
+		<line choice="com.mj-s.sws.Scripts"/>
 	</choices-outline>
 	<!-- Define each choice above -->
 	<choice id="fm.ultraschall.Soundboard" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard description" start_selected="true">
@@ -27,10 +31,16 @@
 	<choice id="fm.ultraschall.Plugin" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension description" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Plugin"/>
 	</choice>
+	<choice id="fm.ultraschall.Plugin.Scripts" visible="true" title="Ultraschall REAPER Extension Scripts" description="Ultraschall REAPER Extension Scripts description" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Plugin.Scripts"/>
+	</choice>
 	<choice id="fm.ultraschall.Driver" visible="true" title="Ultraschall Driver" description="Ultraschall Driver description" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Driver"/>
 	</choice>
 	<choice id="com.mj-s.sws" visible="true" title="SWS REAPER Extension" description="SWS REAPER Extension description" start_selected="true">
 	  <pkg-ref id="com.mj-s.sws"/>
+	</choice>
+	<choice id="com.mj-s.sws.Scripts" visible="true" title="SWS REAPER Extension Scripts" description="SWS REAPER Extension Scripts description" start_selected="true">
+	  <pkg-ref id="com.mj-s.sws.Scripts"/>
 	</choice>
 </installer-gui-script>

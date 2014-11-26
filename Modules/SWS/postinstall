@@ -1,7 +1,0 @@
-#!/bin/sh
-if [ ! -d ~/Library/Application\ Support/REAPER/Scripts ]; then
-  mkdir ~/Library/Application\ Support/REAPER/Scripts
-fi
-mv ~/Library/Application\ Support/REAPER/UserPlugins/sws_python.py ~/Library/Application\ Support/REAPER/Scripts/sws_python.py
-mv ~/Library/Application\ Support/REAPER/UserPlugins/sws_python32.py ~/Library/Application\ Support/REAPER/Scripts/sws_python32.py
-mv ~/Library/Application\ Support/REAPER/UserPlugins/sws_python64.py ~/Library/Application\ Support/REAPER/Scripts/sws_python64.py

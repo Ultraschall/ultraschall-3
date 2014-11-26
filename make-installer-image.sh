@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ -f ./Build/UltraschallHub-1.2.dmg ]; then
-	rm -f ./Build/UltraschallHub-1.2.dmg
+if [ -f UltraschallHub-1.2.dmg ]; then
+	rm -f UltraschallHub-1.2.dmg
 fi
 
 make-plugin-package.sh
