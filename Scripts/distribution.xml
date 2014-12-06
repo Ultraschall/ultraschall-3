@@ -2,27 +2,26 @@
 <installer-gui-script minSpecVersion="1">
 	<title>Ultraschall Hub</title>
 	<organization>fm.ultraschall</organization>
-	<domains enable_anywhere="true"/>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
 	<os-version min="10.9"/>
 	<background file="background.png" mime-type="image/png"/>
 	<!-- Define documents displayed at various steps -->
 	<license file="license.html" mime-type="text/html"/>
 	<!-- List all component packages -->
-	<pkg-ref id="fm.ultraschall.Soundboard" version="1.2">UltraschallSoundboard-1.2.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.2">UltraschallSoundboardScripts-1.2.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin" version="1.2">UltraschallPlugin-1.2.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.2">UltraschallPluginScripts-1.2.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws" version="2.5.0.0">SWS_Extension-2.5.0.0.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws.Scripts" version="2.5.0.0">SWS_ExtensionScripts-2.5.0.0.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard" version="1.2" auth="none">UltraschallSoundboard-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.2" auth="none">UltraschallSoundboardScripts-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin" version="1.2" auth="none">UltraschallPlugin-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.2" auth="none">UltraschallPluginScripts-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Driver" version="1.2" auth="root">UltraschallDriver-1.2.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws" version="2.5.0.0" auth="none">SWS_Extension-2.5.0.0.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws.Scripts" version="2.5.0.0" auth="none">SWS_ExtensionScripts-2.5.0.0.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
 	<choices-outline>
-		<line choice="fm.ultraschall.Driver"/>
 		<line choice="fm.ultraschall.Soundboard"/>
 		<line choice="fm.ultraschall.Soundboard.Scripts"/>
 		<line choice="fm.ultraschall.Plugin"/>
 		<line choice="fm.ultraschall.Plugin.Scripts"/>
+		<line choice="fm.ultraschall.Driver"/>
 		<line choice="com.mj-s.sws"/>
 		<line choice="com.mj-s.sws.Scripts"/>
 	</choices-outline>
