@@ -63,6 +63,10 @@ if [ -d ~/Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	sudo rm -rf ~/Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
+if [ -d ~/Documents/Ultraschall ]; then
+	sudo rm -rf ~/Documents/Ultraschall
+fi
+
 # Uninstall Ultraschall Driver
 if [ -d /Library/Extensions/UltraschallHub.kext ]; then
 	sudo kextunload /Library/Extensions/UltraschallHub.kext

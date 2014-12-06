@@ -10,6 +10,7 @@
 	<license file="license.html" mime-type="text/html"/>
 	<!-- List all component packages -->
 	<pkg-ref id="fm.ultraschall.Soundboard" version="1.2">UltraschallSoundboard-1.2.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.2">UltraschallSoundboardScripts-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin" version="1.2">UltraschallPlugin-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.2">UltraschallPluginScripts-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
@@ -19,14 +20,18 @@
 	<choices-outline>
 		<line choice="fm.ultraschall.Driver"/>
 		<line choice="fm.ultraschall.Soundboard"/>
+		<line choice="fm.ultraschall.Soundboard.Scripts"/>
 		<line choice="fm.ultraschall.Plugin"/>
 		<line choice="fm.ultraschall.Plugin.Scripts"/>
 		<line choice="com.mj-s.sws"/>
 		<line choice="com.mj-s.sws.Scripts"/>
 	</choices-outline>
 	<!-- Define each choice above -->
-	<choice id="fm.ultraschall.Soundboard" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard description" start_selected="true">
+	<choice id="fm.ultraschall.Soundboard" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard VST Plug-in" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Soundboard"/>
+	</choice>
+	<choice id="fm.ultraschall.Soundboard.Scripts" visible="true" title="Ultraschall Soundboard Scripts" description="Ultraschall Soundboard TouchOSC-Vorlagen" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Soundboard.Scripts"/>
 	</choice>
 	<choice id="fm.ultraschall.Plugin" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension description" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Plugin"/>
