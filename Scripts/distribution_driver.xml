@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="1">
+	<title>Ultraschall Driver</title>
+	<organization>fm.ultraschall</organization>
+	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
+	<domains enable_localSystem="true"/>
+	<os-version min="10.9"/>
+	<background file="background.png" mime-type="image/png"/>
+	<!-- Define documents displayed at various steps -->
+	<license file="license.html" mime-type="text/html"/>
+	<!-- List all component packages -->
+	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
+	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
+	<choices-outline>
+		<line choice="fm.ultraschall.Driver"/>
+	</choices-outline>
+	<!-- Define each choice above -->
+	<choice id="fm.ultraschall.Driver" visible="true" title="Ultraschall Driver" description="Ultraschall Virtuelle Soundgeräte" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Driver"/>
+  	</choice>
+</installer-gui-script>
