@@ -63,18 +63,56 @@ if [ -d ~/Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	rm -rf ~/Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
-if [ -d ~/Documents/Ultraschall ]; then
-	rm -rf ~/Documents/Ultraschall
+if [ -d ~/Library/Application\ Support/Ultraschall/Soundboard ]; then
+	rm -rf ~/Library/Application\ Support/Ultraschall/Soundboard
 fi
 
-# Uninstall Ultraschall Driver
-if [ -d /Library/Extensions/UltraschallHub.kext ]; then
-	sudo kextunload /Library/Extensions/UltraschallHub.kext
-	sudo kextunload /Library/Extensions/UltraschallHub.kext
-	sudo rm -rf /Library/Extensions/UltraschallHub.kext
+# Remove receipts
+if [ -f /var/db/receipts/fm.ultraschall.Soundboard.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Soundboard.bom
 fi
 
-sudo rm -f /var/db/receipts/com.mj-s.sws.*
-sudo rm -f /var/db/receipts/fm.ultraschall.*
+if [ -f /var/db/receipts/fm.ultraschall.Soundboard.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Soundboard.plist
+fi
 
+if [ -f /var/db/receipts/fm.ultraschall.Soundboard.Scripts.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Soundboard.Scripts.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Soundboard.Scripts.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Soundboard.Scripts.plist
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Plugin.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Plugin.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Plugin.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Plugin.plist
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Plugin.Scripts.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Plugin.Scripts.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Plugin.Scripts.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Plugin.Scripts.plist
+fi
+
+if [ -f /var/db/receipts/com.mj-s.sws.bom ]; then
+	sudo rm -f /var/db/receipts/com.mj-s.sws.bom
+fi
+
+if [ -f /var/db/receipts/com.mj-s.sws.plist ]; then
+	sudo rm -f /var/db/receipts/com.mj-s.sws.plist
+fi
+
+if [ -f /var/db/receipts/com.mj-s.sws.Scripts.bom ]; then
+	sudo rm -f /var/db/receipts/com.mj-s.sws.Scripts.bom
+fi
+
+if [ -f /var/db/receipts/com.mj-s.sws.Scripts.plist ]; then
+	sudo rm -f /var/db/receipts/com.mj-s.sws.Scripts.plist
+fi
 
