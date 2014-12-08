@@ -7,7 +7,7 @@
 	<os-version min="10.9"/>
 	<background file="background.png" mime-type="image/png"/>
 	<!-- Define documents displayed at various steps -->
-	<license file="license.html" mime-type="text/html"/>
+	<license file="license_driver.html" mime-type="text/html"/>
 	<!-- List all component packages -->
 	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
