@@ -28,7 +28,7 @@
 	<choice id="fm.ultraschall.Soundboard" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard VST Plug-in" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Soundboard"/>
 	</choice>
-	<choice id="fm.ultraschall.Soundboard.Scripts" visible="true" title="Ultraschall Soundboard Scripts" description="Ultraschall Soundboard TouchOSC-Vorlagen" start_selected="true">
+	<choice id="fm.ultraschall.Soundboard.Scripts" visible="true" title="Ultraschall Soundboard Extras" description="Ultraschall Soundboard TouchOSC-Vorlagen und Sounds" start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Soundboard.Scripts"/>
 	</choice>
 	<choice id="fm.ultraschall.Plugin" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension für den Import und Export von Shownotes und Kapitelmarken" start_selected="true">

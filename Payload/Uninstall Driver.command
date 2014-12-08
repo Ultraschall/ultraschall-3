@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Uninstall Ultraschall Driver
-if [ -d /Library/Extension/UltraschallHub.kext ]; then
-	sudo kextunload /Library/Extension/UltraschallHub.kext
-	sudo kextunload /Library/Extension/UltraschallHub.kext
-	sudo rm -rf /Library/Extension/UltraschallHub.kext
+if [ -d /Library/Extensions/UltraschallHub.kext ]; then
+	sudo kextunload /Library/Extensions/UltraschallHub.kext
+	sudo kextunload /Library/Extensions/UltraschallHub.kext
+	sudo rm -rf /Library/Extensions/UltraschallHub.kext
 fi
 
 # Remove installer receipts
