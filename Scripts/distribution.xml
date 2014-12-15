@@ -15,8 +15,8 @@
 	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.2">UltraschallPluginScripts-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Driver" version="1.2">UltraschallDriver-1.2.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Resources" version="1.2">UltraschallResources-1.2.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws" version="2.5.0.0">SWS_Extension-2.5.0.0.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws.Scripts" version="2.5.0.0">SWS_ExtensionScripts-2.5.0.0.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws" version="2.5.0.1">SWS_Extension-2.5.0.1.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws.Scripts" version="2.5.0.1">SWS_ExtensionScripts-2.5.0.1.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
 	<choices-outline>
 		<line choice="fm.ultraschall.Soundboard"/>
