@@ -18,7 +18,7 @@
 			<key>type</key>
 			<string>aumu</string>
 			<key>version</key>
-			<integer>65792</integer>
+			<integer>66048</integer>
 		</dict>
 	</array>
 	<key>BuildMachineOSBuild</key>
@@ -32,11 +32,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleSignature</key>
 	<string>PTul</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>

@@ -18,4 +18,5 @@ profile
 *.pkg
 !Modules/Driver/UltraschallDriver-1.2.pkg
 *.dmg
+*.dmg.gz
 
