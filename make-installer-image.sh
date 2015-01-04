@@ -1,6 +1,10 @@
 #!/bin/sh
-if [ -f UltraschallHub-1.2_rc5.dmg.gz ]; then
-	rm -f UltraschallHub-1.2_rc5.dmg.gz
+if [ -f Ultraschall-1.2.dmg ]; then
+	rm -f Ultraschall-1.2.dmg
+fi
+
+if [ -f Ultraschall-1.2.dmg.zip ]; then
+	rm -f Ultraschall-1.2.dmg.zip
 fi
 
 make-plugin-package.sh
@@ -10,6 +14,8 @@ make-resources-package.sh
 make-soundfloweruninstaller-package.sh
 make-ultraschall-package.sh
 
-hdiutil create -size 50m -srcfolder ./Payload -fs HFS+ -volname UltraschallHub-1.2_RELEASE_CANDIDATE_5 ./UltraschallHub-1.2_rc5.dmg
-gzip ./UltraschallHub-1.2_rc5.dmg
+hdiutil create -size 50m -srcfolder ./Payload -fs HFS+ -volname "Ultraschall 1.2" ./Ultraschall-1.2.dmg
+zip Ultraschall-1.2.dmg.zip Ultraschall-1.2.dmg
+rm Ultraschall-1.2.dmg
+
 

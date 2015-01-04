@@ -1,4 +1,4 @@
-Ultraschall DR Reaper Theme
+Ultraschall DR Reaper Theme 1.2
 =================================
 
 Mit Podlove und Auphonic wurden uns Produzierenden von Podcasts mächtige Werkzeuge an die Hand gegeben. Was jedoch fehlte, war eine für Podcasts optimierte Umgebung für Aufnahme und Produktion der eigentlichen Podcasts.
@@ -25,7 +25,7 @@ Alle Angaben beziehen sich auf die Englische Standardfassung von Reaper auf dem 
 ---------------------------------------
 1. **Nur für Neuinstallation:** Reaper laden und installieren - eine **Vollversion ist für 30 Tage kostenlos** testbar: <http://www.reaper.fm> danach werden 44 € fällig. Es wird zwingend Reaper 4.75 oder neuer vorausgesetzt
 2. **MAC**: Das mit der Version 1.2 eingeführte Install-Programm **UltraschallHub-1.2.pkg** starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen.
-3. **MAC + PC:** Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei Ultraschall-1-2_final.ReaperConfigZip in das Reaper Hauptfenster ziehen. Sollte dies auf dem **PC** nicht funktionieren: im Repaer-Menü unter Reaper/Preferences.../General mit "import configuration..." die Datei laden. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:**
+3. **MAC + PC:** Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei Ultraschall_1_2.ReaperConfigZip in das Reaper Hauptfenster ziehen. Sollte dies auf dem **PC** nicht funktionieren: im Repaer-Menü unter Reaper/Preferences.../General mit "import configuration..." die Datei laden. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:**
 Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren - es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
 4. **Nur für Neuinstallation:** Im Menü unter Podcast/Projekt-Vorlagen/ "Ultraschall" aufrufen. Direkt im selben Menü "Aktuelles Projekt als Vorlage speichern..." anwählen und unter dem eigenen Sendungsnamen speichern. Darüber kann man später auch einzelne Setups verwalten (Solopodcast, Podcast mit Skype-Partnern etc.)
 5. **Nur für Neuinstallation:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt "Extensions" den Punkt Auto Color/Icon aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster "Show Color Management Window" aufrufen. Dort den Punkt "Load color set from file..." auswählen und die in dieser Distribution mitgelieferte Datei "Ultraschall Colorset.SWSColor" laden. Nun stehen alle 11 Ultraschall-Farben zur Verfügung.
@@ -37,7 +37,7 @@ Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es si
 
 wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
 
-* Die Projektseite - wo ich unter anderem in nunmehr zwei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.wikigeeks.de>
+* Die Projektseite - wo ich unter anderem in nunmehr zwei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
 
 * Ultraschall-Screencast: Alle Funktionen werden in einem Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
 
@@ -47,7 +47,7 @@ wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ul
 
 * Unser Dokuwiki, in dem wir Stück für Stück eine Dokumentation zusammentragen sowie einzelne Einsatz-Szenarien vorstellen: <http://wiki.ultraschall-podcast.de>
 
-Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich bei (rstockm) auf Twitter oder ADN
+Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich bei (@rstockm) auf Twitter oder ADN
 
 
 ### Bedienung:
@@ -77,26 +77,31 @@ Was sonst noch so anfällt
 
 ---
 Changelog
----------------------------------------
-### Release 1.2 - 7.12.2014
+---
 
-* **Installer** Unter Mac OSX können weite Teile der Distribution nun über einen einfachen Installer abgewickelt werden *Soundflower Ultraschall-Edition, Startlogo, SWS-Extensions sowie das Ultraschall-Soundboard werden installiert. Manuell muss nur noch einmalig die Theme-Datei in Reaper gezogen werden.*
+### Release 1.2 - 4.1.2015
+
+* **Installer** Unter Mac OSX können weite Teile der Distribution nun über einen einfachen Installer abgewickelt werden *Soundflower Ultraschall-Edition, Startlogo, SWS-Extensions sowie das Ultraschall-Soundboard werden installiert. Manuell muss nur noch einmalig die Theme -Datei in Reaper gezogen werden.*
 
 * **Theme** Neuer Eintrag im Podcast-Menü: Navigation/Springe zu Play-Cursor (#-Taste) *springt zur aktuellen Position des Play-Cursors (Orange)*
+
+* **Theme** Neuer Eintrag im Podcast-Menü: Soundboard Spur anlegen *Legt eine Spur an, in der bereits alle Einstellungen für das Ultraschall Soundboard gesetzt sind. Im sich öffnenden Auswahlfenster muss man einmalig "Soundboard.RTrackTemplate" anwählen. Zur Funktionalität des Soundboard s.U.*
 
 * **Theme** Neues Untermenü im Podcast-Menü: Selection *bieter verschiedene nützliche Aktionen um den Schnitt mittels Selections zu beschleunigen - insbesondere Ripple-Delete zum schnellen Löschen von ganzen Passagen über alle Spuren*
 
 * **Theme** Einheitliche Symbole für Chapters(Dreieck/Strick) *neue Icons für setze Kapitelmarke, Export Chapters und Audiodatei Schreiben*
 
+* **Theme** Mute- und Solo-Buttons *In der Spuranzeige links sind nun immer die jeweiligen Mute- und Solo-Buttons sichtbar.*
+
 * **Actions** Neue Menüpunkte und Kontext-Links für den Umgang mit der Mute-Spur (Räuspertasten) *Separate Mute-Spur für ausgewähltenTrack an/Ausschalten, Sichtbarkeit aler Mute-Spuren an/ausschalten. In der separaten Mute-Spur kann direkt mit dem Mauscursor und der linken Maustaste ein Mute-Bereich gemalt werden*
 
-* **Actions** Verbessertes Audiodatei schreiben *Der Menüpunkt* **Audiodatei Schreiben** *und das entsprechende Icon links unten im Edit-View setzen zunächst die Playrate des Projektes auf 1.0 um dann das Render-Menü zu starten.*
+* **Actions** Verbessertes Audiodatei schreiben *Der Menüpunkt* **Audiodatei Schreiben** *und das entsprechende Icon links unten im Edit-View setzen zunächst die Playrate des Projektes auf 1.0 um dann das Render-Menü zu starten. Ferner werden zuvor sämtliche Spuren ausgewählt, so dass man direkt einen Multifrack Export für Auphonic (Stems Export) starten kann.*
 
-* **Misc** Das Ultraschall-Soundboard feiert seinen Einstand und ist als VST-Effekt-Plugin realisiert. *Für die genaue Bediehnung und das etwas ungewöhnliche Routing bitte den Release-Screencast schauen. Funktionen: Verwalten von verschiedenen Sets, Play, Pause, Stop, Loop, Fade, einstellbare Fade-Zeit, regelbare Lautsärke pro Einspieler, direkte OSC-Kopplung. Zur OSC-Steuerung - etwas über ein iOS Gerät oder die Wiimotes - kommt in Kürze ein weiterer Screencast*
+* **Misc** Das Ultraschall-Soundboard feiert seinen Einstand und ist als VST-Effekt-Plugin realisiert. *Für die genaue Bedienung bitte den Release-Screencast schauen. Funktionen: Verwalten von verschiedenen Sets, Play, Pause, Stop, Loop, Fade, einstellbare Fade-Zeit, regelbare Lautstärke pro Einspieler, direkte OSC-Kopplung. Zur OSC-Steuerung - etwas über ein iOS Gerät oder die Wiimotes - kommt in Kürze ein weiterer Screencast*
 
 * **Presets** Ultraschall-Presets für Expander und EQ *als Ergebnis eine kleinen Workshops mit Michael Kummeth gibt es im EQ das "Ultraschall2" Preset, das einen sehr guten Ausgangspunkt für moderate EQ-Einstellungen bietet.*
 
-* **Presets** optimietes Datei-Handling *Alle Dateien einer Podcast-Folge (Projektdatei, Aufnahmedateien, Peak-Dateien, Kapitelmarken-Datei) werden übersichtlich im Projektordner und mit sinnvollen Unterordnern abgelegt. Details sind dem Screencast zu entnehmen.*
+* **Presets** optimiertes Datei-Handling *Alle Dateien einer Podcast-Folge (Projektdatei, Aufnahmedateien, Peak-Dateien, Kapitelmarken-Datei) werden übersichtlich im Projektordner und mit sinnvollen Unterordnern abgelegt. Details sind dem Screencast zu entnehmen.*
 
 * **Presets** Sinnvolle Presets zur Dateibenamung von Aufnahmen eingestellt (Tracknummer-Trackname-Folgenname)
 
@@ -104,6 +109,7 @@ Changelog
 
 * **Misc** Für Probleme, Anregungen etc. wurde auf sendegate.de ein Support-Forum eingerichtet das den bisherigen Patter-Raum ersetzt:  <https://sendegate.de/c/ultraschall>
 
+------
 
 ### Release 1.1 - 9.6.2014
 

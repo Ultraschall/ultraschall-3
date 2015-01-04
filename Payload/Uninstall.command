@@ -115,6 +115,30 @@ if [ -f /var/db/receipts/fm.ultraschall.pkg.UltraschallDriver.plist ]; then
 	sudo rm -f /var/db/receipts/fm.ultraschall.pkg.UltraschallDriver.plist
 fi
 
+if [ -f /var/db/receipts/fm.ultraschall.SoundflowerUninstaller.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.SoundflowerUninstaller.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.SoundflowerUninstaller.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.SoundflowerUninstaller.plist
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.UltraschallHub.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.UltraschallHub.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.UltraschallHub.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.UltraschallHub.plist
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Ultraschall.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Ultraschall.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.Ultraschall.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.Ultraschall.plist
+fi
+
 if [ -f /var/db/receipts/fm.ultraschall.Resources.bom ]; then
 	sudo rm -f /var/db/receipts/fm.ultraschall.Resources.bom
 fi
