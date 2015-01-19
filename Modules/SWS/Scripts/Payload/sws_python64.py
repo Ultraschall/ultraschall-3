@@ -5,95 +5,95 @@ def BR_EnvAlloc(p0,p1):
   f=CFUNCTYPE(c_uint64,c_uint64,c_byte)(a)
   t=(rpr_packp('TrackEnvelope*',p0),c_byte(p1))
   r=f(t[0],t[1])
-  return rpr_unpackp('void*',r)
+  return rpr_unpackp('BR_Envelope*',r)
 
 def BR_EnvCountPoints(p0):
   a=rpr_getfp('BR_EnvCountPoints')
   f=CFUNCTYPE(c_int,c_uint64)(a)
-  t=(rpr_packp('void*',p0),)
+  t=(rpr_packp('BR_Envelope*',p0),)
   r=f(t[0])
   return r
 
 def BR_EnvDeletePoint(p0,p1):
   a=rpr_getfp('BR_EnvDeletePoint')
   f=CFUNCTYPE(c_byte,c_uint64,c_int)(a)
-  t=(rpr_packp('void*',p0),c_int(p1))
+  t=(rpr_packp('BR_Envelope*',p0),c_int(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_EnvFind(p0,p1,p2):
   a=rpr_getfp('BR_EnvFind')
   f=CFUNCTYPE(c_int,c_uint64,c_double,c_double)(a)
-  t=(rpr_packp('void*',p0),c_double(p1),c_double(p2))
+  t=(rpr_packp('BR_Envelope*',p0),c_double(p1),c_double(p2))
   r=f(t[0],t[1],t[2])
   return r
 
 def BR_EnvFindNext(p0,p1):
   a=rpr_getfp('BR_EnvFindNext')
   f=CFUNCTYPE(c_int,c_uint64,c_double)(a)
-  t=(rpr_packp('void*',p0),c_double(p1))
+  t=(rpr_packp('BR_Envelope*',p0),c_double(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_EnvFindPrevious(p0,p1):
   a=rpr_getfp('BR_EnvFindPrevious')
   f=CFUNCTYPE(c_int,c_uint64,c_double)(a)
-  t=(rpr_packp('void*',p0),c_double(p1))
+  t=(rpr_packp('BR_Envelope*',p0),c_double(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_EnvFree(p0,p1):
   a=rpr_getfp('BR_EnvFree')
   f=CFUNCTYPE(c_byte,c_uint64,c_byte)(a)
-  t=(rpr_packp('void*',p0),c_byte(p1))
+  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_EnvGetParentTake(p0):
   a=rpr_getfp('BR_EnvGetParentTake')
   f=CFUNCTYPE(c_uint64,c_uint64)(a)
-  t=(rpr_packp('void*',p0),)
+  t=(rpr_packp('BR_Envelope*',p0),)
   r=f(t[0])
   return rpr_unpackp('MediaItem_Take*',r)
 
 def BR_EnvGetParentTrack(p0):
   a=rpr_getfp('BR_EnvGetParentTrack')
   f=CFUNCTYPE(c_uint64,c_uint64)(a)
-  t=(rpr_packp('void*',p0),)
+  t=(rpr_packp('BR_Envelope*',p0),)
   r=f(t[0])
   return rpr_unpackp('MediaItem*',r)
 
 def BR_EnvGetPoint(p0,p1,p2,p3,p4,p5,p6):
   a=rpr_getfp('BR_EnvGetPoint')
   f=CFUNCTYPE(c_byte,c_uint64,c_int,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
-  t=(rpr_packp('void*',p0),c_int(p1),c_double(p2),c_double(p3),c_int(p4),c_byte(p5),c_double(p6))
+  t=(rpr_packp('BR_Envelope*',p0),c_int(p1),c_double(p2),c_double(p3),c_int(p4),c_byte(p5),c_double(p6))
   r=f(t[0],t[1],byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]))
   return (r,p0,p1,float(t[2].value),float(t[3].value),int(t[4].value),int(t[5].value),float(t[6].value))
 
 def BR_EnvGetProperties(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10):
   a=rpr_getfp('BR_EnvGetProperties')
   f=CFUNCTYPE(None,c_uint64,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
-  t=(rpr_packp('void*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6),c_double(p7),c_double(p8),c_double(p9),c_int(p10))
+  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6),c_double(p7),c_double(p8),c_double(p9),c_int(p10))
   f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]),byref(t[7]),byref(t[8]),byref(t[9]),byref(t[10]))
   return (p0,int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value),int(t[5].value),int(t[6].value),float(t[7].value),float(t[8].value),float(t[9].value),int(t[10].value))
 
 def BR_EnvSetPoint(p0,p1,p2,p3,p4,p5,p6):
   a=rpr_getfp('BR_EnvSetPoint')
   f=CFUNCTYPE(c_byte,c_uint64,c_int,c_double,c_double,c_int,c_byte,c_double)(a)
-  t=(rpr_packp('void*',p0),c_int(p1),c_double(p2),c_double(p3),c_int(p4),c_byte(p5),c_double(p6))
+  t=(rpr_packp('BR_Envelope*',p0),c_int(p1),c_double(p2),c_double(p3),c_int(p4),c_byte(p5),c_double(p6))
   r=f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
   return r
 
 def BR_EnvSetProperties(p0,p1,p2,p3,p4,p5,p6):
   a=rpr_getfp('BR_EnvSetProperties')
   f=CFUNCTYPE(None,c_uint64,c_byte,c_byte,c_byte,c_byte,c_int,c_int)(a)
-  t=(rpr_packp('void*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6))
+  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6))
   f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
 
 def BR_EnvValueAtPos(p0,p1):
   a=rpr_getfp('BR_EnvValueAtPos')
   f=CFUNCTYPE(c_double,c_uint64,c_double)(a)
-  t=(rpr_packp('void*',p0),c_double(p1))
+  t=(rpr_packp('BR_Envelope*',p0),c_double(p1))
   r=f(t[0],t[1])
   return r
 
@@ -134,6 +134,12 @@ def BR_GetMouseCursorContext_MIDI(p0,p1,p2,p3,p4):
 def BR_GetMouseCursorContext_Position():
   a=rpr_getfp('BR_GetMouseCursorContext_Position')
   f=CFUNCTYPE(c_double)(a)
+  r=f()
+  return r
+
+def BR_GetMouseCursorContext_StretchMarker():
+  a=rpr_getfp('BR_GetMouseCursorContext_StretchMarker')
+  f=CFUNCTYPE(c_int)(a)
   r=f()
   return r
 

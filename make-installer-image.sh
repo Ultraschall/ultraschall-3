@@ -1,10 +1,10 @@
 #!/bin/sh
-if [ -f Ultraschall-1.2.2.dmg ]; then
-	rm -f Ultraschall-1.2.2.dmg
+if [ -f Ultraschall-1.2.3.dmg ]; then
+	rm -f Ultraschall-1.2.3.dmg
 fi
 
-if [ -f Ultraschall-1.2.2.dmg.zip ]; then
-	rm -f Ultraschall-1.2.2.dmg.zip
+if [ -f Ultraschall-1.2.3.dmg.zip ]; then
+	rm -f Ultraschall-1.2.3.dmg.zip
 fi
 
 make-plugin-package.sh
@@ -14,11 +14,11 @@ make-resources-package.sh
 make-soundfloweruninstaller-package.sh
 make-ultraschall-package.sh
 
-productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" Payload/Ultraschall-1.2.2-unsigned.pkg Payload/Ultraschall-1.2.2.pkg
-rm Payload/Ultraschall-1.2.2-unsigned.pkg
+productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" Payload/Ultraschall-1.2.3-unsigned.pkg Payload/Ultraschall-1.2.3.pkg
+rm Payload/Ultraschall-1.2.3-unsigned.pkg
 
-hdiutil create -size 50m -srcfolder ./Payload -fs HFS+ -volname "Ultraschall 1.2.2" ./Ultraschall-1.2.2.dmg
-zip Ultraschall-1.2.2.dmg.zip Ultraschall-1.2.2.dmg
-rm Ultraschall-1.2.2.dmg
+hdiutil create -size 50m -srcfolder ./Payload -fs HFS+ -volname "Ultraschall 1.2.3" ./Ultraschall-1.2.3.dmg
+zip Ultraschall-1.2.3.dmg.zip Ultraschall-1.2.3.dmg
+rm Ultraschall-1.2.3.dmg
 
 

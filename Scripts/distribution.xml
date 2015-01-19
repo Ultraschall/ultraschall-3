@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-	<title>Ultraschall 1.2.2</title>
+	<title>Ultraschall 1.2.3</title>
 	<organization>fm.ultraschall</organization>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
 	<domains enable_localSystem="true"/>
