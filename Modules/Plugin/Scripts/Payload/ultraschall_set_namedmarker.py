@@ -128,10 +128,6 @@ def msg(m):
     RPR_ShowConsoleMsg(str(m) + "\n") # Ausgabe
 
 text = getcb()
-#atext = text.decode('cp1252')
-#btext = atext.encode('cp1252')
-
-#text = btext
 
 # text = unicode(text)
 # text = unicodedata.normalize('NFD', unicode(utext)).encode('ascii','ignore')

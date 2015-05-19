@@ -15,7 +15,7 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 
 Unsere Änderungen sind so angelegt, dass sie **vermutlich** einen Versionssprung von Reaper ohne Einschränkungen überleben. Unsere Änderungen greifen auf sehr vielen verschiedenen Ebenen: Dateisystem (Grafiken), Walter-Themingdatei, Projektsettings, Reaper-Settings, Toolbar-Settings. All diese Änderungen sind **quelloffen** (CC0) und können beliebig angepasst werden - man sollte jedoch eine recht klare Vorstellung haben was man tut. Eine Screencast-Folge, die nur auf das Modding eingeht, ist in Planung.
 
-Alle Angaben beziehen sich auf die Englische Standardfassung von Reaper auf dem MAC (Mavericks). Eine Übersicht, welche der Features auch auf dem PC laufen, findet sich hier: <http://ultraschall.wikigeeks.de/kompatibilitaet/>. Generell 
+Alle Angaben beziehen sich auf die [Englische 64bit-Version von Reaper](http://www.reaper.fm/download.php) auf dem MAC (Mavericks). Eine Übersicht, welche der Features auch auf dem PC laufen, findet sich hier: <http://ultraschall.wikigeeks.de/kompatibilitaet/>. 
 
 ### Download:
 
@@ -256,3 +256,13 @@ Weiterer Dank geht an die Betatester:
 @david_1701
 @michaelblum
 @kleinesp
+
+###Flattr
+---------------------------------------
+Hier könnt ihr Flattr-Liebe loswerden:
+
+Daniel: https://flattr.com/profile/danlin
+Heiko: https://flattr.com/profile/heikopanjas
+Ralf: https://flattr.com/profile/rstockm
+
+Ultraschall insgesamt: https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware

@@ -2,12 +2,15 @@
 """This module prompts the reaper user to open an osf shownote file.
    It parses the file and creates Empty Timeline items with the shownote text attached
 """
-
+import os
 import sys
 import codecs
 import os.path
 import datetime
+from ctypes import *
 #import pdb
+
+import ultraschall_functions as ULT
 
 # Get the Reaper scripts folder and add it to pythons library path
 script_path = os.path.join(os.path.expanduser("~"), 'Library', 'Application Support', 'REAPER', 'Scripts')
@@ -27,17 +30,6 @@ __status__ = "Development"
 
 #filepath = os.path.join(os.path.expanduser("~"), 'Desktop', 'freak-show-128.osf')
 
-def getTrackByName(name):
-	"""iterate all tracks and find the one with the specified name"""
-	for i in range(RPR_GetNumTracks()):
-		track = RPR_GetTrack(0, i)
-		track_name = RPR_GetSetMediaTrackInfo_String(track, 'P_NAME', None, False)[3]
-		if track_name == name:
-			return track
-		else:
-			return None
-
-
 def createShownoteTrack():
 	"""create the shownote track"""
 	RPR_InsertTrackAtIndex(RPR_GetNumTracks() + 1, True)
@@ -46,7 +38,6 @@ def createShownoteTrack():
 	RPR_GetSetMediaTrackInfo_String(track, 'P_NAME', 'Shownotes', True)
 	return track
 
- 
 
 def createShownoteItem(lines, starttime, track):
 	"""iterate the shownote content and create shownote items on the track
@@ -55,14 +46,22 @@ def createShownoteItem(lines, starttime, track):
 
 	lastposition = None
 	maxlength = 30 # Standardlänge für Shownotes-Einträge
+	concat_string = ''
 
 	for line in lines:
 
 		splitstring = line.strip().split(' ')
+
+		# This line has no information
 		if line == '\n':
 			continue
+
+		# notes on this line need to be put on the same note as the last one
 		if line.startswith('-'):
-			continue
+			note = ' '.join(splitstring[1:len(splitstring)])
+			concat_string = concat_string + "\n-------------------------------------\n"
+			concat_string = concat_string + note
+
 
 		if not line.startswith('-'):
 			timestamp = datetime.datetime.fromtimestamp(int(splitstring[0]))
@@ -79,11 +78,16 @@ def createShownoteItem(lines, starttime, track):
 
 			note = ' '.join(splitstring[1:len(splitstring)])
 
+			if concat_string != '':
+				note = note + concat_string
+				concat_string = ''
 
 			item = RPR_AddMediaItemToTrack(track)
 			RPR_SetMediaItemLength(item, length, False)
 			RPR_SetMediaItemPosition(item, position, False)
 			ULT_SetMediaItemNote(item, note.encode('ascii', 'replace'))
+			#buffer = create_unicode_buffer(note)
+			#ULT_SetMediaItemNote(item, buffer.value)
 
 def loadShowNoteFile():
 	"""new main function. used to bail out if the user cancels the import request"""
@@ -109,7 +113,7 @@ def loadShowNoteFile():
 	lines.reverse()
 
 	# check if there is a shownote track. If not create one
-	track = getTrackByName('Shownotes')
+	track = ULT.getTrackByName('Shownotes')
 	if not track:
 		track = createShownoteTrack()
 

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py
+fi
+
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py
 fi
@@ -10,6 +14,10 @@ fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_notes.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_notes.py
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.py ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.py
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py ]; then
