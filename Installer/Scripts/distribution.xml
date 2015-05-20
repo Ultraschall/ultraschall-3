@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="1">
+	<title>Ultraschall 1.3beta1</title>
+	<organization>fm.ultraschall</organization>
+	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
+	<domains enable_localSystem="true"/>
+	<os-version min="10.9"/>
+	<background file="background.png" mime-type="image/png"/>
+	<!-- Define documents displayed at various steps -->
+	<license file="license.html" mime-type="text/html"/>
+	<!-- List all component packages -->
+	<pkg-ref id="fm.ultraschall.Soundboard" version="1.3beta1">UltraschallSoundboard-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.3beta1">UltraschallSoundboardScripts-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin" version="1.3beta1">UltraschallPlugin-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.3beta1">UltraschallPluginScripts-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.SoundflowerUninstaller" version="1.3beta1">UltraschallSoundflowerUninstaller-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Driver" version="1.3beta1">UltraschallDriver-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Resources" version="1.3beta1">UltraschallResources-1.3beta1.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws" version="2.6.0">SWS_Extension-2.6.0.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws.Scripts" version="2.6.0">SWS_ExtensionScripts-2.6.0.pkg</pkg-ref>
+	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
+	<choices-outline>
+		<line choice="fm.ultraschall.Soundboard"/>
+		<line choice="fm.ultraschall.Soundboard.Scripts"/>
+		<line choice="fm.ultraschall.Plugin"/>
+		<line choice="fm.ultraschall.Plugin.Scripts"/>
+		<line choice="fm.ultraschall.SoundflowerUninstaller"/>
+		<line choice="fm.ultraschall.Driver"/>
+		<line choice="fm.ultraschall.Resources"/>
+		<line choice="com.mj-s.sws"/>
+		<line choice="com.mj-s.sws.Scripts"/>
+	</choices-outline>
+	<!-- Define each choice above -->
+	<choice id="fm.ultraschall.Soundboard" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard VST Plug-in" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Soundboard"/>
+	</choice>
+	<choice id="fm.ultraschall.Soundboard.Scripts" visible="true" title="Ultraschall Soundboard Extras" description="Ultraschall Soundboard TouchOSC-Vorlagen und Sounds" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Soundboard.Scripts"/>
+	</choice>
+	<choice id="fm.ultraschall.Plugin" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension für den Import und Export von Shownotes und Kapitelmarken" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Plugin"/>
+	</choice>
+	<choice id="fm.ultraschall.Plugin.Scripts" visible="true" title="Ultraschall REAPER Extension Scripts" description="Ultraschall REAPER Extension Scripts für den Import und Export von Shownotes und Kapitelmarken" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Plugin.Scripts"/>
+	</choice>
+	<choice id="fm.ultraschall.SoundflowerUninstaller" visible="true" title="Soundflower entfernen" description="Entfernen alter Soundflower Installationen" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.SoundflowerUninstaller"/>
+  	</choice>
+	<choice id="fm.ultraschall.Driver" visible="true" title="Ultraschall Driver" description="Ultraschall Virtuelle Soundgeräte" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Driver"/>
+  	</choice>
+	<choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="internal" start_selected="true">
+	  <pkg-ref id="fm.ultraschall.Resources"/>
+  	</choice>
+	<choice id="com.mj-s.sws" visible="true" title="SWS REAPER Extension" description="SWS REAPER Extension (siehe http://sws.mj-s.com)" start_selected="true">
+	  <pkg-ref id="com.mj-s.sws"/>
+	</choice>
+	<choice id="com.mj-s.sws.Scripts" visible="true" title="SWS REAPER Extension Scripts" description="SWS REAPER Extension Scripts (siehe http://sws.mj-s.com)" start_selected="true">
+	  <pkg-ref id="com.mj-s.sws.Scripts"/>
+	</choice>
+</installer-gui-script>
