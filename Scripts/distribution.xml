@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-	<title>Ultraschall 1.3beta1</title>
+	<title>Ultraschall 1.3beta2</title>
 	<organization>fm.ultraschall</organization>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
 	<domains enable_localSystem="true"/>
@@ -9,15 +9,15 @@
 	<!-- Define documents displayed at various steps -->
 	<license file="license.html" mime-type="text/html"/>
 	<!-- List all component packages -->
-	<pkg-ref id="fm.ultraschall.Soundboard" version="1.3beta1">UltraschallSoundboard-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.3beta1">UltraschallSoundboardScripts-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin" version="1.3beta1">UltraschallPlugin-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.3beta1">UltraschallPluginScripts-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.SoundflowerUninstaller" version="1.3beta1">UltraschallSoundflowerUninstaller-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Driver" version="1.3beta1">UltraschallDriver-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Resources" version="1.3beta1">UltraschallResources-1.3beta1.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws" version="2.6.0">SWS_Extension-2.6.0.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws.Scripts" version="2.6.0">SWS_ExtensionScripts-2.6.0.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard" version="1.3">UltraschallSoundboard.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.Scripts" version="1.3">UltraschallSoundboardScripts.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin" version="1.3">UltraschallPlugin.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="1.3">UltraschallPluginScripts.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.SoundflowerUninstaller" version="1.3">UltraschallSoundflowerUninstaller.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Driver" version="1.3">UltraschallDriver.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Resources" version="1.3">UltraschallResources.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws" version="2.7.0">SWS_Extension-2.7.0.pkg</pkg-ref>
+	<pkg-ref id="com.mj-s.sws.Scripts" version="2.7.0">SWS_ExtensionScripts-2.7.0.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
 	<choices-outline>
 		<line choice="fm.ultraschall.Soundboard"/>
