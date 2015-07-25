@@ -327,6 +327,12 @@ def SNM_GetMediaItemTakeByGUID(p0,p1):
   r=f(t[0],t[1])
   return rpr_unpackp('MediaItem_Take*',r)
 
+def SNM_GetMIDIEditorActiveTake():
+  a=rpr_getfp('SNM_GetMIDIEditorActiveTake')
+  f=CFUNCTYPE(c_uint64)(a)
+  r=f()
+  return rpr_unpackp('MediaItem_Take*',r)
+
 def SNM_GetProjectMarkerName(p0,p1,p2,p3):
   a=rpr_getfp('SNM_GetProjectMarkerName')
   f=CFUNCTYPE(c_byte,c_uint64,c_int,c_byte,c_uint64)(a)

@@ -8,6 +8,10 @@ if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/whatsnew.txt ]; then
 	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/whatsnew.txt
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws_whatsnew.txt ]; then
+	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws_whatsnew.txt
+fi
+
 if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/license.txt ]; then
 	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/license.txt
 fi
