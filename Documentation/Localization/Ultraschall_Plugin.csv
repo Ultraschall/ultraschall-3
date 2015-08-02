@@ -1,45 +1,45 @@
 Deutsch;English;Kommentar/Korrektur
 1. Setup;1. Setup;
-Audiohardware einrichten...;Setup audio hardware...;
+Audiohardware einrichten...;Audio device settings...;
 Projektvorlagen;Project templates;
 -> Ultraschall;-> Ultraschall;
 -> Ultraschall Ducking;-> Ultraschall Ducking;
--> Aktuelles Projekt als Vorlage speichern;-> Project template from current project;
+-> Aktuelles Projekt als Vorlage speichern...;-> Save project as template...;
 Track-Vorlage laden;Load track template;
-Soundboard Spur anlegen;Insert Soundboard track;(hp) Soundboard-Spur anlegen
+Soundboard-Spur anlegen;Insert Soundboard track;
 Audiospur anlegen;Insert new audio track;
-Textelement einfŸgen;Insert text item;
+Textelement einfÅ¸gen;Insert text item;
 Routing Matrix anzeigen;Show routing matrix;
 Routing Snapshots anzeigen;Show routing snapshots;
-AusgewŠhlte Spuren fŸr RŠuspertaste aktivieren;Activate cough button for selected tracks;(hp) Vielleicht eher ''RŠuspertaste fŸr ausgewŠhlte Spuren aktivieren'
+RÅ uspertaste fÅ¸r ausgewÅ hlte Spuren aktivieren;Activate cough button for selected tracks;
 Projekt speichern unter...;Save project as...;
 2. Aufnahme;2. Recording;
 Kapitelmarke setzen;Insert chapter marker;
 Kapitelmarke mit Namen setzen;Insert chapter marker and edit name;
-Kapitelmarke 2 Minuten zurŸck setzen;Insert chapter marker back in time (-2min);
+Kapitelmarke 2 Minuten zurÅ¸ck setzen;Insert chapter marker back in time (-2min);
 Editiermarke setzen;Insert edit marker;
-Lšsche letzte Marke (links vom Cursor);Delete last chapter marker;(hp) 'marker' vs. 'chapter marker' bzw. 'left to cursor' hinzufŸgen?
+LÅ¡sche letzte Marke (links vom Cursor);Delete last marker (left to cursor);
 3. Produktion;3. Production;
-Alle Spuren fŸr Schnitt vorbereiten;Prepare all tracks for editing;
-Sichtbarkeit aller RŠuspertastenspuren ein/ausschalten;Toggle visibility of mute tracks;
-Separate RŠuspertastenspur  fŸr ausgewŠhlten Track ein/ausschalten;Toggle separate mute track  for selected track;
+Alle Spuren fÅ¸r Schnitt vorbereiten;Prepare all tracks for editing;
+Sichtbarkeit aller RÅ uspertastenspuren ein/ausschalten;Toggle visibility of mute tracks;
+Separate RÅ uspertastenspur  fÅ¸r ausgewÅ hlten Track ein/ausschalten;Toggle separate mute track for selected track;
 Kapitelmarken;Chapter markers;
 -> Kapitelmarken Editor anzeigen;-> Show chapter marker editor;
--> Am Anfang aller Objekte einer Spur  Kapitelmarken setzen;-> Add chapter markers to all objects of track;
--> Kapitelmarken aus Datei hinzufŸgen...;-> Add chapter markers from file...;
+-> Am Anfang aller Objekte einer Spur Kapitelmarken setzen;-> Add chapter markers to all objects of track;
+-> Kapitelmarken aus Datei hinzufÅ¸gen...;-> Add chapter markers from file...;
 -> Kapitelmarken in Datei speichern...;-> Save chapter markers to file...;
 -> Kapitelmarken im Projektverzeichnis speichern;-> Save chapter markers to project folder;
-Audiodatei schreiben...;Save audio file;(hp) 'Bounce project'?
-Projektordner šffnen;Open project folder;
+Audiodatei schreiben...;Render...?
+Projektordner Å¡ffnen;Open project folder;
 Auswahl;Selection;
 -> Zoome auf die Auswahl;-> Zoom to selection;
--> Schneide Elemente an beiden Kanten der Auswahl;-> Edit items at both edges of selection;(hp) Bin ich nicht mit zufrieden
--> Schneide Auswahl (Ripple Edit);-> Edit items (Ripple Edit);
--> Lšsche Elemente aus Auswahl;-> Delete items from selection;
--> Hebe die aktuelle Auswahl auf;-> Deselect all;
+-> Schneide Elemente an beiden Kanten der Auswahl;-> Split items at time selection;
+-> Schneide Auswahl (Ripple Edit);->  Remove contens of time selection (Ripple Edit);
+-> LÅ¡sche Elemente aus Auswahl;-> Cut selected area of items;
+-> Hebe die aktuelle Auswahl auf;-> Remove all selections;
 Navigation;Navigation;
--> Springe zu nŠchster Marke;-> Jump to next marker;(hp) Springe zur nŠchsten Marke
--> Springe zu vorheriger Marke;-> Jump to previous marker;(hp) Springe zur vorherigen Marke
--> Springe zu Kante des nŠchsten Elements;-> Jump to next item;(hp) Springe zur Kante des nŠchsten Elements
--> Springe zu Kante des vorherigen Elements;-> Jump to previous item;(hp) Springe zur Kante des vorherigen Elements
--> Springe zu Play-Cursor;-> Jump to cursor;(hp) Springe zum Play-Cursor
+-> Springe zur nÅ chsten Marke;-> Go to next marker;
+-> Springe zur vorherigen Marke;-> Go to previous marker;
+-> Springe zur Kante des nÅ chsten Elements;-> Go to next item;
+-> Springe zu Kante des vorherigen Elements;-> Go to previous item;
+-> Springe zum Play-Cursor;-> Go to play position cursor;
