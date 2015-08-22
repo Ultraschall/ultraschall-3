@@ -18,7 +18,7 @@
 			<key>type</key>
 			<string>aumu</string>
 			<key>version</key>
-			<integer>67845</integer>
+			<integer>67846</integer>
 		</dict>
 	</array>
 	<key>BuildMachineOSBuild</key>
@@ -32,29 +32,25 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.9.5</string>
+	<string>1.9.6</string>
 	<key>CFBundleSignature</key>
 	<string>PTul</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>MacOSX</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.9.5</string>
+	<string>1.9.6</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>7A176x</string>
+	<string>6E35b</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>15A244e</string>
+	<string>13F34</string>
 	<key>DTSDKName</key>
-	<string>macosx10.11</string>
+	<string>macosx10.9</string>
 	<key>DTXcode</key>
-	<string>0700</string>
+	<string>0640</string>
 	<key>DTXcodeBuild</key>
-	<string>7A176x</string>
+	<string>6E35b</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
