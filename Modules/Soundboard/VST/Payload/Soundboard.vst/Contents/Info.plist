@@ -18,11 +18,11 @@
 			<key>type</key>
 			<string>aumu</string>
 			<key>version</key>
-			<integer>67846</integer>
+			<integer>67847</integer>
 		</dict>
 	</array>
 	<key>BuildMachineOSBuild</key>
-	<string>15A244d</string>
+	<string>14F27</string>
 	<key>CFBundleExecutable</key>
 	<string>Soundboard</string>
 	<key>CFBundleIdentifier</key>
@@ -32,11 +32,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.9.6</string>
+	<string>1.9.7</string>
 	<key>CFBundleSignature</key>
 	<string>PTul</string>
 	<key>CFBundleVersion</key>
-	<string>1.9.6</string>
+	<string>1.9.7</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
