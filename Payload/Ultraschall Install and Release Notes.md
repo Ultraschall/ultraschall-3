@@ -1,4 +1,4 @@
-Ultraschall DR Reaper Theme 1.3
+Ultraschall DR Reaper Theme 2.0
 =================================
 
 Mit [Podlove](http://podlove.org/) und [Auphonic](https://auphonic.com/) wurden uns Produzierenden von Podcasts mächtige Werkzeuge an die Hand gegeben. Was jedoch fehlte, war eine für Podcasts optimierte Umgebung für Aufnahme und Produktion der eigentlichen Podcasts.
@@ -21,14 +21,14 @@ Alle Angaben beziehen sich auf die [englische 64bit-Version von Reaper](http://w
 
 
 
-### Installation der 1.3 - nur Mac:
+### Installation der 2.0 - nur Mac:
 ---------------------------------------
 1. **Nur für Neuinstallation:** [Reaper](http://www.reaper.fm/download-old.php?ver=4x) laden und installieren - eine **Vollversion ist für 30 Tage kostenlos** testbar, danach werden 44 € fällig. Es wird zwingend [Reaper v4.78](http://www.reaper.fm/download-old.php?ver=4x) in der **64BIT** Version vorausgesetzt; An einer Unterstützung für [v5](http://www.reaper.fm/download.php) wird gearbeitet. 
-2. Das Install-Programm **Ultraschall-1.3.4.pkg** starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
-3. Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei **Ultraschall-1.3.ReaperConfigZip** in das geöffnete Reaper Hauptfenster ziehen. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren – es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
+2. Das Install-Programm **Ultraschall-2.0.pkg** starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei **Ultraschall-2.0.ReaperConfigZip** in das geöffnete Reaper Hauptfenster ziehen. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren – es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
 4. **Nur für Neuinstallation:** Im Menü unter Podcast/Projekt-Vorlagen/ "Ultraschall" aufrufen. Direkt im selben Menü "Aktuelles Projekt als Vorlage speichern..." anwählen und unter dem eigenen Sendungsnamen speichern. Darüber kann man später auch einzelne Setups verwalten (Solopodcast, Podcast mit Skype-Partnern etc.)
 5. **Nur für Neuinstallation:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt "Extensions" den Punkt Auto Color/Icon aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster "Show Color Management Window" aufrufen. Dort den Punkt "Load color set from file..." auswählen und die in dieser Distribution mitgelieferte Datei "Ultraschall Colorset.SWSColor" laden. Nun stehen alle 11 von @graphorama handgeklöppelten Ultraschall-Farben zur Verfügung.
-6. Zur Handhabung der neuen Funktionen wird der 1.3 Release Screencast im Ultraschall-Youtube Kanal empfohlen: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
+6. Zur Handhabung der neuen Funktionen wird der 2.0 Release Screencast im Ultraschall-Youtube Kanal empfohlen: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
 
 
 ### Community:

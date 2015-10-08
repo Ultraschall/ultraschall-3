@@ -1,6 +1,13 @@
 #!/bin/sh
 
-# remove UltraschallHub driver
+# remove legacy UltraschallHub 1.x driver
+if [ -d /Library/Extensions/UltraschallHub.kext ]
+then
+	kextunload /Library/Extensions/UltraschallHub.kext
+	kextunload /Library/Extensions/UltraschallHub.kext
+	rm -rf /Library/Extensions/UltraschallHub.kext
+fi
+
 if [ -d /System/Library/Extensions/UltraschallHub.kext ]
 then
 	kextunload /System/Library/Extensions/UltraschallHub.kext
