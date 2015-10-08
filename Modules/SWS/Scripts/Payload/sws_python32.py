@@ -70,12 +70,12 @@ def BR_EnvGetPoint(p0,p1,p2,p3,p4,p5,p6):
   r=f(t[0],t[1],byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]))
   return (r,p0,p1,float(t[2].value),float(t[3].value),int(t[4].value),int(t[5].value),float(t[6].value))
 
-def BR_EnvGetProperties(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10):
+def BR_EnvGetProperties(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11):
   a=rpr_getfp('BR_EnvGetProperties')
-  f=CFUNCTYPE(None,c_uint,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
-  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6),c_double(p7),c_double(p8),c_double(p9),c_int(p10))
-  f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]),byref(t[7]),byref(t[8]),byref(t[9]),byref(t[10]))
-  return (p0,int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value),int(t[5].value),int(t[6].value),float(t[7].value),float(t[8].value),float(t[9].value),int(t[10].value))
+  f=CFUNCTYPE(None,c_uint,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6),c_double(p7),c_double(p8),c_double(p9),c_int(p10),c_byte(p11))
+  f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]),byref(t[7]),byref(t[8]),byref(t[9]),byref(t[10]),byref(t[11]))
+  return (p0,int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value),int(t[5].value),int(t[6].value),float(t[7].value),float(t[8].value),float(t[9].value),int(t[10].value),int(t[11].value))
 
 def BR_EnvSetPoint(p0,p1,p2,p3,p4,p5,p6):
   a=rpr_getfp('BR_EnvSetPoint')
@@ -84,11 +84,17 @@ def BR_EnvSetPoint(p0,p1,p2,p3,p4,p5,p6):
   r=f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
   return r
 
-def BR_EnvSetProperties(p0,p1,p2,p3,p4,p5,p6):
+def BR_EnvSetProperties(p0,p1,p2,p3,p4,p5,p6,p7):
   a=rpr_getfp('BR_EnvSetProperties')
-  f=CFUNCTYPE(None,c_uint,c_byte,c_byte,c_byte,c_byte,c_int,c_int)(a)
-  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6))
-  f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
+  f=CFUNCTYPE(None,c_uint,c_byte,c_byte,c_byte,c_byte,c_int,c_int,c_byte)(a)
+  t=(rpr_packp('BR_Envelope*',p0),c_byte(p1),c_byte(p2),c_byte(p3),c_byte(p4),c_int(p5),c_int(p6),c_byte(p7))
+  f(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7])
+
+def BR_EnvSortPoints(p0):
+  a=rpr_getfp('BR_EnvSortPoints')
+  f=CFUNCTYPE(None,c_uint)(a)
+  t=(rpr_packp('BR_Envelope*',p0),)
+  f(t[0])
 
 def BR_EnvValueAtPos(p0,p1):
   a=rpr_getfp('BR_EnvValueAtPos')
@@ -97,6 +103,55 @@ def BR_EnvValueAtPos(p0,p1):
   r=f(t[0],t[1])
   return r
 
+def BR_GetArrangeView(p0,p1,p2):
+  a=rpr_getfp('BR_GetArrangeView')
+  f=CFUNCTYPE(None,c_uint,c_void_p,c_void_p)(a)
+  t=(rpr_packp('ReaProject*',p0),c_double(p1),c_double(p2))
+  f(t[0],byref(t[1]),byref(t[2]))
+  return (p0,float(t[1].value),float(t[2].value))
+
+def BR_GetClosestGridDivision(p0):
+  a=rpr_getfp('BR_GetClosestGridDivision')
+  f=CFUNCTYPE(c_double,c_double)(a)
+  t=(c_double(p0),)
+  r=f(t[0])
+  return r
+
+def BR_GetCurrentTheme(p0,p1,p2,p3):
+  a=rpr_getfp('BR_GetCurrentTheme')
+  f=CFUNCTYPE(None,c_char_p,c_int,c_char_p,c_int)(a)
+  t=(rpr_packs(p0),c_int(p1),rpr_packs(p2),c_int(p3))
+  f(t[0],t[1],t[2],t[3])
+  return (rpr_unpacks(t[0]),p1,rpr_unpacks(t[2]),p3)
+
+def BR_GetMediaItemByGUID(p0,p1):
+  a=rpr_getfp('BR_GetMediaItemByGUID')
+  f=CFUNCTYPE(c_uint,c_uint,c_char_p)(a)
+  t=(rpr_packp('ReaProject*',p0),rpr_packsc(p1))
+  r=f(t[0],t[1])
+  return rpr_unpackp('MediaItem*',r)
+
+def BR_GetMediaItemGUID(p0,p1,p2):
+  a=rpr_getfp('BR_GetMediaItemGUID')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaItem*',p0),rpr_packs(p1),c_int(p2))
+  f(t[0],t[1],t[2])
+  return (p0,rpr_unpacks(t[1]),p2)
+
+def BR_GetMediaItemImageResource(p0,p1,p2,p3):
+  a=rpr_getfp('BR_GetMediaItemImageResource')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_int,c_void_p)(a)
+  t=(rpr_packp('MediaItem*',p0),rpr_packs(p1),c_int(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],byref(t[3]))
+  return (r,p0,rpr_unpacks(t[1]),p2,int(t[3].value))
+
+def BR_GetMediaItemTakeGUID(p0,p1,p2):
+  a=rpr_getfp('BR_GetMediaItemTakeGUID')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),rpr_packs(p1),c_int(p2))
+  f(t[0],t[1],t[2])
+  return (p0,rpr_unpacks(t[1]),p2)
+
 def BR_GetMediaSourceProperties(p0,p1,p2,p3,p4,p5):
   a=rpr_getfp('BR_GetMediaSourceProperties')
   f=CFUNCTYPE(c_byte,c_uint,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
@@ -104,12 +159,75 @@ def BR_GetMediaSourceProperties(p0,p1,p2,p3,p4,p5):
   r=f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]))
   return (r,p0,int(t[1].value),float(t[2].value),float(t[3].value),float(t[4].value),int(t[5].value))
 
-def BR_GetMouseCursorContext(p0,p1,p2,p3):
+def BR_GetMediaTrackByGUID(p0,p1):
+  a=rpr_getfp('BR_GetMediaTrackByGUID')
+  f=CFUNCTYPE(c_uint,c_uint,c_char_p)(a)
+  t=(rpr_packp('ReaProject*',p0),rpr_packsc(p1))
+  r=f(t[0],t[1])
+  return rpr_unpackp('MediaTrack*',r)
+
+def BR_GetMediaTrackFreezeCount(p0):
+  a=rpr_getfp('BR_GetMediaTrackFreezeCount')
+  f=CFUNCTYPE(c_int,c_uint)(a)
+  t=(rpr_packp('MediaTrack*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_GetMediaTrackGUID(p0,p1,p2):
+  a=rpr_getfp('BR_GetMediaTrackGUID')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaTrack*',p0),rpr_packs(p1),c_int(p2))
+  f(t[0],t[1],t[2])
+  return (p0,rpr_unpacks(t[1]),p2)
+
+def BR_GetMediaTrackLayouts(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_GetMediaTrackLayouts')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaTrack*',p0),rpr_packs(p1),c_int(p2),rpr_packs(p3),c_int(p4))
+  f(t[0],t[1],t[2],t[3],t[4])
+  return (p0,rpr_unpacks(t[1]),p2,rpr_unpacks(t[3]),p4)
+
+def BR_GetMediaTrackSendInfo_Envelope(p0,p1,p2,p3):
+  a=rpr_getfp('BR_GetMediaTrackSendInfo_Envelope')
+  f=CFUNCTYPE(c_uint,c_uint,c_int,c_int,c_int)(a)
+  t=(rpr_packp('MediaTrack*',p0),c_int(p1),c_int(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return rpr_unpackp('TrackEnvelope*',r)
+
+def BR_GetMediaTrackSendInfo_Track(p0,p1,p2,p3):
+  a=rpr_getfp('BR_GetMediaTrackSendInfo_Track')
+  f=CFUNCTYPE(c_uint,c_uint,c_int,c_int,c_int)(a)
+  t=(rpr_packp('MediaTrack*',p0),c_int(p1),c_int(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return rpr_unpackp('MediaTrack*',r)
+
+def BR_GetMidiSourceLenPPQ(p0):
+  a=rpr_getfp('BR_GetMidiSourceLenPPQ')
+  f=CFUNCTYPE(c_double,c_uint)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_GetMidiTakePoolGUID(p0,p1,p2):
+  a=rpr_getfp('BR_GetMidiTakePoolGUID')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),rpr_packs(p1),c_int(p2))
+  r=f(t[0],t[1],t[2])
+  return (r,p0,rpr_unpacks(t[1]),p2)
+
+def BR_GetMidiTakeTempoInfo(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_GetMidiTakeTempoInfo')
+  f=CFUNCTYPE(c_byte,c_uint,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1),c_double(p2),c_int(p3),c_int(p4))
+  r=f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]))
+  return (r,p0,int(t[1].value),float(t[2].value),int(t[3].value),int(t[4].value))
+
+def BR_GetMouseCursorContext(p0,p1,p2,p3,p4,p5):
   a=rpr_getfp('BR_GetMouseCursorContext')
-  f=CFUNCTYPE(None,c_char_p,c_char_p,c_char_p,c_int)(a)
-  t=(rpr_packs(p0),rpr_packs(p1),rpr_packs(p2),c_int(p3))
-  f(t[0],t[1],t[2],t[3])
-  return (rpr_unpacks(t[0]),rpr_unpacks(t[1]),rpr_unpacks(t[2]),p3)
+  f=CFUNCTYPE(None,c_char_p,c_int,c_char_p,c_int,c_char_p,c_int)(a)
+  t=(rpr_packs(p0),c_int(p1),rpr_packs(p2),c_int(p3),rpr_packs(p4),c_int(p5))
+  f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return (rpr_unpacks(t[0]),p1,rpr_unpacks(t[2]),p3,rpr_unpacks(t[4]),p5)
 
 def BR_GetMouseCursorContext_Envelope(p0):
   a=rpr_getfp('BR_GetMouseCursorContext_Envelope')
@@ -129,7 +247,7 @@ def BR_GetMouseCursorContext_MIDI(p0,p1,p2,p3,p4):
   f=CFUNCTYPE(c_uint,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
   t=(c_byte(p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4))
   r=f(byref(t[0]),byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]))
-  return (rpr_unpackp('void*',r),int(t[0].value),int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value))
+  return (rpr_unpackp('HWND',r),int(t[0].value),int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value))
 
 def BR_GetMouseCursorContext_Position():
   a=rpr_getfp('BR_GetMouseCursorContext_Position')
@@ -155,6 +273,41 @@ def BR_GetMouseCursorContext_Track():
   r=f()
   return rpr_unpackp('MediaTrack*',r)
 
+def BR_GetNextGridDivision(p0):
+  a=rpr_getfp('BR_GetNextGridDivision')
+  f=CFUNCTYPE(c_double,c_double)(a)
+  t=(c_double(p0),)
+  r=f(t[0])
+  return r
+
+def BR_GetPrevGridDivision(p0):
+  a=rpr_getfp('BR_GetPrevGridDivision')
+  f=CFUNCTYPE(c_double,c_double)(a)
+  t=(c_double(p0),)
+  r=f(t[0])
+  return r
+
+def BR_GetSetTrackSendInfo(p0,p1,p2,p3,p4,p5):
+  a=rpr_getfp('BR_GetSetTrackSendInfo')
+  f=CFUNCTYPE(c_double,c_uint,c_int,c_int,c_char_p,c_byte,c_double)(a)
+  t=(rpr_packp('MediaTrack*',p0),c_int(p1),c_int(p2),rpr_packsc(p3),c_byte(p4),c_double(p5))
+  r=f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return r
+
+def BR_GetTakeFXCount(p0):
+  a=rpr_getfp('BR_GetTakeFXCount')
+  f=CFUNCTYPE(c_int,c_uint)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_IsTakeMidi(p0,p1):
+  a=rpr_getfp('BR_IsTakeMidi')
+  f=CFUNCTYPE(c_byte,c_uint,c_void_p)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1))
+  r=f(t[0],byref(t[1]))
+  return (r,p0,int(t[1].value))
+
 def BR_ItemAtMouseCursor(p0):
   a=rpr_getfp('BR_ItemAtMouseCursor')
   f=CFUNCTYPE(c_uint,c_void_p)(a)
@@ -165,14 +318,14 @@ def BR_ItemAtMouseCursor(p0):
 def BR_MIDI_CCLaneRemove(p0,p1):
   a=rpr_getfp('BR_MIDI_CCLaneRemove')
   f=CFUNCTYPE(c_byte,c_uint,c_int)(a)
-  t=(rpr_packp('void*',p0),c_int(p1))
+  t=(rpr_packp('HWND',p0),c_int(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_MIDI_CCLaneReplace(p0,p1,p2):
   a=rpr_getfp('BR_MIDI_CCLaneReplace')
   f=CFUNCTYPE(c_byte,c_uint,c_int,c_int)(a)
-  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2))
+  t=(rpr_packp('HWND',p0),c_int(p1),c_int(p2))
   r=f(t[0],t[1],t[2])
   return r
 
@@ -183,11 +336,44 @@ def BR_PositionAtMouseCursor(p0):
   r=f(t[0])
   return r
 
+def BR_SetArrangeView(p0,p1,p2):
+  a=rpr_getfp('BR_SetArrangeView')
+  f=CFUNCTYPE(None,c_uint,c_double,c_double)(a)
+  t=(rpr_packp('ReaProject*',p0),c_double(p1),c_double(p2))
+  f(t[0],t[1],t[2])
+
+def BR_SetItemEdges(p0,p1,p2):
+  a=rpr_getfp('BR_SetItemEdges')
+  f=CFUNCTYPE(c_byte,c_uint,c_double,c_double)(a)
+  t=(rpr_packp('MediaItem*',p0),c_double(p1),c_double(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
+def BR_SetMediaItemImageResource(p0,p1,p2):
+  a=rpr_getfp('BR_SetMediaItemImageResource')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaItem*',p0),rpr_packsc(p1),c_int(p2))
+  f(t[0],t[1],t[2])
+
 def BR_SetMediaSourceProperties(p0,p1,p2,p3,p4,p5):
   a=rpr_getfp('BR_SetMediaSourceProperties')
   f=CFUNCTYPE(c_byte,c_uint,c_byte,c_double,c_double,c_double,c_byte)(a)
   t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1),c_double(p2),c_double(p3),c_double(p4),c_byte(p5))
   r=f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return r
+
+def BR_SetMediaTrackLayouts(p0,p1,p2):
+  a=rpr_getfp('BR_SetMediaTrackLayouts')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_char_p)(a)
+  t=(rpr_packp('MediaTrack*',p0),rpr_packsc(p1),rpr_packsc(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
+def BR_SetMidiTakeTempoInfo(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_SetMidiTakeTempoInfo')
+  f=CFUNCTYPE(c_byte,c_uint,c_byte,c_double,c_int,c_int)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1),c_double(p2),c_int(p3),c_int(p4))
+  r=f(t[0],t[1],t[2],t[3],t[4])
   return r
 
 def BR_SetTakeSourceFromFile(p0,p1,p2):
@@ -217,6 +403,34 @@ def BR_TrackAtMouseCursor(p0,p1):
   t=(c_int(p0),c_double(p1))
   r=f(byref(t[0]),byref(t[1]))
   return (rpr_unpackp('MediaTrack*',r),int(t[0].value),float(t[1].value))
+
+def BR_TrackFX_GetFXModuleName(p0,p1,p2,p3):
+  a=rpr_getfp('BR_TrackFX_GetFXModuleName')
+  f=CFUNCTYPE(c_byte,c_uint,c_int,c_char_p,c_int)(a)
+  t=(rpr_packp('MediaTrack*',p0),c_int(p1),rpr_packs(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return (r,p0,p1,rpr_unpacks(t[2]),p3)
+
+def BR_Win32_GetPrivateProfileString(p0,p1,p2,p3,p4,p5):
+  a=rpr_getfp('BR_Win32_GetPrivateProfileString')
+  f=CFUNCTYPE(c_int,c_char_p,c_char_p,c_char_p,c_char_p,c_char_p,c_int)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3),rpr_packs(p4),c_int(p5))
+  r=f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return (r,p0,p1,p2,p3,rpr_unpacks(t[4]),p5)
+
+def BR_Win32_ShellExecute(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_Win32_ShellExecute')
+  f=CFUNCTYPE(c_int,c_char_p,c_char_p,c_char_p,c_char_p,c_int)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3),c_int(p4))
+  r=f(t[0],t[1],t[2],t[3],t[4])
+  return r
+
+def BR_Win32_WritePrivateProfileString(p0,p1,p2,p3):
+  a=rpr_getfp('BR_Win32_WritePrivateProfileString')
+  f=CFUNCTYPE(c_byte,c_char_p,c_char_p,c_char_p,c_char_p)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return r
 
 def FNG_AddMidiNote(p0):
   a=rpr_getfp('FNG_AddMidiNote')
@@ -327,12 +541,6 @@ def SNM_GetMediaItemTakeByGUID(p0,p1):
   r=f(t[0],t[1])
   return rpr_unpackp('MediaItem_Take*',r)
 
-def SNM_GetMIDIEditorActiveTake():
-  a=rpr_getfp('SNM_GetMIDIEditorActiveTake')
-  f=CFUNCTYPE(c_uint)(a)
-  r=f()
-  return rpr_unpackp('MediaItem_Take*',r)
-
 def SNM_GetProjectMarkerName(p0,p1,p2,p3):
   a=rpr_getfp('SNM_GetProjectMarkerName')
   f=CFUNCTYPE(c_byte,c_uint,c_int,c_byte,c_uint)(a)
@@ -374,6 +582,13 @@ def SNM_MoveOrRemoveTrackFX(p0,p1,p2):
   t=(rpr_packp('MediaTrack*',p0),c_int(p1),c_int(p2))
   r=f(t[0],t[1],t[2])
   return r
+
+def SNM_ReadMediaFileTag(p0,p1,p2,p3):
+  a=rpr_getfp('SNM_ReadMediaFileTag')
+  f=CFUNCTYPE(c_byte,c_char_p,c_char_p,c_char_p,c_int)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packs(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return (r,p0,p1,rpr_unpacks(t[2]),p3)
 
 def SNM_RemoveReceive(p0,p1):
   a=rpr_getfp('SNM_RemoveReceive')
@@ -424,6 +639,13 @@ def SNM_SetProjectMarker(p0,p1,p2,p3,p4,p5,p6):
   r=f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
   return r
 
+def SNM_TagMediaFile(p0,p1,p2):
+  a=rpr_getfp('SNM_TagMediaFile')
+  f=CFUNCTYPE(c_byte,c_char_p,c_char_p,c_char_p)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
 def SNM_TieResourceSlotActions(p0):
   a=rpr_getfp('SNM_TieResourceSlotActions')
   f=CFUNCTYPE(None,c_int)(a)
@@ -440,7 +662,6 @@ def ULT_GetMediaItemNote(p0):
 def ULT_SetMediaItemNote(p0,p1):
   a=rpr_getfp('ULT_SetMediaItemNote')
   f=CFUNCTYPE(None,c_uint,c_char_p)(a)
-  t=(rpr_packp('MediaItem*',p0),rpr_packs(p1))
+  t=(rpr_packp('MediaItem*',p0),rpr_packsc(p1))
   f(t[0],t[1])
-  return (p0,rpr_unpacks(t[1]))
 
