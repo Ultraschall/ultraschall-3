@@ -1,9 +1,9 @@
-Ultraschall DR Reaper Theme 1.2
+Ultraschall DR Reaper Theme 2.0
 =================================
 
-Mit Podlove und Auphonic wurden uns Produzierenden von Podcasts mächtige Werkzeuge an die Hand gegeben. Was jedoch fehlte, war eine für Podcasts optimierte Umgebung für Aufnahme und Produktion der eigentlichen Podcasts.
+Mit [Podlove](http://podlove.org/) und [Auphonic](https://auphonic.com/) wurden uns Produzierenden von Podcasts mächtige Werkzeuge an die Hand gegeben. Was jedoch fehlte, war eine für Podcasts optimierte Umgebung für Aufnahme und Produktion der eigentlichen Podcasts.
 
-Die verschiedenen DAWs (Digital Audio Workstations) haben verschiedene Vor- und Nachteile, seien sie finanzieller Natur oder in Bezug auf Features. Reaper besetzt hier nach Meinung vieler einen Sweet Spot: für schlanke 44 € erhält man das Schweizer Offiziersmesser unter den DAWs, entwickelt von Audio-Nerds (das alte Winamp-Team). Das Problem: Ästhetisch ist Reaper - in der Windowswelt verankert - eine mittlere Zumutung. Zudem sind dutzende Presets gut für Musikproduktionen eingestellt, out-of-the-box jedoch nahezu **absurd falsch** für uns Podcaster - etwa die Orientierung an Takten statt an Zeiteinheiten.
+Die verschiedenen DAWs (Digital Audio Workstations) haben verschiedene Vor- und Nachteile, seien sie finanzieller Natur oder in Bezug auf Features. [Reaper](http://www.reaper.fm/) besetzt hier nach Meinung vieler einen Sweet Spot: für schlanke 44 € erhält man das Schweizer Offiziersmesser unter den DAWs, entwickelt von Audio-Nerds (das alte Winamp-Team). Das Problem: Ästhetisch ist Reaper - in der Windowswelt verankert - eine mittlere Zumutung. Zudem sind dutzende Presets gut für Musikproduktionen eingestellt, out-of-the-box jedoch nahezu **absurd falsch** für uns Podcaster - etwa die Orientierung an Takten statt an Zeiteinheiten.
 
 Diese Distribution von Presets, Layouts und Theme versucht Reaper soweit wie nur irgend möglich für Podcasting zu optimieren. Hierbei werden drei Ebenen angegangen:
 
@@ -13,41 +13,41 @@ Diese Distribution von Presets, Layouts und Theme versucht Reaper soweit wie nur
 
 Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellungen werden in der Regel ungefragt überschrieben** - es lohnt also, diese vorher zu sichern über Preferences/General/Export Configuration...
 
-Unsere Änderungen sind so angelegt, dass sie **vermutlich** einen Versionssprung von Reaper ohne Einschränkungen überleben. Unsere Änderungen greifen auf sehr vielen verschiedenen Ebenen: Dateisystem (Grafiken), Walter-Themingdatei, Projektsettings, Reaper-Settings, Toolbar-Settings. All diese Änderungen sind **quelloffen** (CC0) und können beliebig angepasst werden - man sollte jedoch eine recht klare Vorstellung haben was man tut. Eine Screencast-Folge, die nur auf das Modding eingeht, ist in Planung.
+Unsere Änderungen sind so angelegt, dass sie **vermutlich** einen Versionssprung von Reaper ohne Einschränkungen überleben. Unsere Änderungen greifen auf sehr vielen verschiedenen Ebenen: Dateisystem (Grafiken), Walter-Themingdatei, Projektsettings, Reaper-Settings, Toolbar-Settings. All diese Änderungen sind **quelloffen** ([CC0](https://creativecommons.org/about/cc0)) und können beliebig angepasst werden - man sollte jedoch eine recht klare Vorstellung haben was man tut. Eine Screencast-Folge, die nur auf das Modding eingeht, ist in Planung.
 
-Alle Angaben beziehen sich auf die [Englische 64bit-Version von Reaper](http://www.reaper.fm/download.php) auf dem MAC (Mavericks). Eine Übersicht, welche der Features auch auf dem PC laufen, findet sich hier: <http://ultraschall.wikigeeks.de/kompatibilitaet/>. 
+Alle Angaben beziehen sich auf die [englische 64bit-Version von Reaper](http://www.reaper.fm/download-old.php?ver=4x) auf dem MAC (Mavericks). Eine Übersicht, welche der Features auch auf dem PC laufen, findet sich hier: <http://ultraschall.wikigeeks.de/kompatibilitaet/>. 
 
 ### Download:
 
 
 
-### Installation:
+### Installation der 2.0 - nur Mac:
 ---------------------------------------
-1. **Nur für Neuinstallation:** Reaper laden und installieren - eine **Vollversion ist für 30 Tage kostenlos** testbar: <http://www.reaper.fm> danach werden 44 € fällig. Es wird zwingend Reaper 4.75 oder neuer vorausgesetzt
-2. **MAC**: Das mit der Version 1.2 eingeführte Install-Programm **UltraschallHub-1.2.pkg** starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen.
-3. **MAC + PC:** Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei Ultraschall_1_2.ReaperConfigZip in das Reaper Hauptfenster ziehen. Sollte dies auf dem **PC** nicht funktionieren: im Repaer-Menü unter Reaper/Preferences.../General mit "import configuration..." die Datei laden. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:**
-Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren - es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
+1. **Nur für Neuinstallation:** [Reaper](http://www.reaper.fm/download-old.php?ver=4x) laden und installieren - eine **Vollversion ist für 30 Tage kostenlos** testbar, danach werden 44 € fällig. Es wird zwingend [Reaper v4.78](http://www.reaper.fm/download-old.php?ver=4x) in der **64BIT** Version vorausgesetzt; An einer Unterstützung für [v5](http://www.reaper.fm/download.php) wird gearbeitet. 
+2. Das Install-Programm **Ultraschall-2.0.pkg** starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. Die Reaper-Ultraschall Konfiguration laden: Reaper starten. Die Datei **Ultraschall-2.0.ReaperConfigZip** in das geöffnete Reaper Hauptfenster ziehen. Die einzelnen Images und Configurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren – es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
 4. **Nur für Neuinstallation:** Im Menü unter Podcast/Projekt-Vorlagen/ "Ultraschall" aufrufen. Direkt im selben Menü "Aktuelles Projekt als Vorlage speichern..." anwählen und unter dem eigenen Sendungsnamen speichern. Darüber kann man später auch einzelne Setups verwalten (Solopodcast, Podcast mit Skype-Partnern etc.)
-5. **Nur für Neuinstallation:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt "Extensions" den Punkt Auto Color/Icon aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster "Show Color Management Window" aufrufen. Dort den Punkt "Load color set from file..." auswählen und die in dieser Distribution mitgelieferte Datei "Ultraschall Colorset.SWSColor" laden. Nun stehen alle 11 Ultraschall-Farben zur Verfügung.
-6. Zur Handhabung der doch zahlreichen neuen Funktionen wird der 1.2 Release Screencast im Ultraschall-Youtube Kanal empfohlen: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
+5. **Nur für Neuinstallation:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt "Extensions" den Punkt Auto Color/Icon aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster "Show Color Management Window" aufrufen. Dort den Punkt "Load color set from file..." auswählen und die in dieser Distribution mitgelieferte Datei "Ultraschall Colorset.SWSColor" laden. Nun stehen alle 11 von @graphorama handgeklöppelten Ultraschall-Farben zur Verfügung.
+6. Zur Handhabung der neuen Funktionen wird der 2.0 Release Screencast im Ultraschall-Youtube Kanal empfohlen: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
 
 
 ### Community:
 ---------------------------------------
 
-wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
+wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
 
-* Die Projektseite - wo ich unter anderem in nunmehr zwei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
+* Die Projektseite - wo ich unter anderem in nunmehr drei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
 
-* Ultraschall-Screencast: Alle Funktionen werden in einem Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
+* Ultraschall-Screencast: Alle Funktionen werden in einem Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
+Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
 
-* Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
+* Das Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
 
 * Unser Board auf Trello für die Weiterentwicklung: <https://trello.com/b/c1ulqLBu/ultraschall-dr-reaper> derzeit eher stiefmütterlich aktualisiert.
 
-* Unser Dokuwiki, in dem wir Stück für Stück eine Dokumentation zusammentragen sowie einzelne Einsatz-Szenarien vorstellen: <http://wiki.ultraschall-podcast.de>
+* Unser Dokuwiki, in dem wir gern Stück für Stück eine Dokumentation zusammentragen sowie einzelne Einsatz-Szenarien vorstellen würden: <http://wiki.ultraschall-podcast.de>
 
-Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich bei (@rstockm) auf Twitter oder ADN
+Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich bei (@rstockm) auf Twitter oder im Sendegate.
 
 
 ### Bedienung:
@@ -55,7 +55,7 @@ Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich
 
 Diese Distribution krempelt viele Bereiche von Reaper um - man muss umlernen, egal ob man von einer anderen DAW oder der Reaper-Originalversion kommt. Ein erster Anlaufpunkt mit kompakter Erklärung der drei Workflow-Views und der Icons findet sich im der Release beiliegenden Release-Poster (zur 1.0 - teilweise überholt, siehe Release-History unten).
 
-Begleitend sei mein Screencast empfohlen in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
+Begleitend sei mein Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
 
 ### Syntax für das Changelog
 ---------------------------------------
@@ -75,9 +75,54 @@ Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Ano
 **Misc**
 Was sonst noch so anfällt
 
+**Soundboard**
+Features unseres eigenen Soundboards für Einspieler aller Art
+
+**HUB**
+Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies Podcastingerlebnis
+
 ---
 Changelog
 ---
+### Release 1.3 - 5.7.2015
+
+* **WICHTIG** Bis auf weiteres ist diese Release nur unter Reaper 4.78 lauffähig. Wir arbeiten an einer Unterstützung der Reaper 5.0 Version, informiert Euch hierzu im <https://sendegate.de/c/ultraschall>.
+
+* **Installer** Der Installer hat ein geschmackvolleres Hintergrundbild bekommen. Die aktuelle stable Version der SWS Extension (2.7) wird installiert.
+
+* **Theme** Überarbeitung des Podcast-Menüs *Viele Begrifflichkeiten wurden klarer gefasst und vereinheitlicht. Track Templates (Einspieler, Audio-Track) werden direkt im Menü angezeigt.*
+
+* **Theme** Größe der Fenster *Die Default-Fenstergröße von Reaper wurde an ein 13" MBP Retina mit Standard-Auflösung optimiert.*
+
+* **Actions** Letzte Kapitelmarke löschen *Neue Funktion im Podcast-Menü und als Shortcut: die erste, sich links vom Edit-Cursor (rote Linie) befindliche Kapitelmarke wird gelöscht. In 99% der Fälle ist dies die zuletzt gesetzte.*
+
+* **Actions** Setze eine Kapitelmarke 2 Minuten in die Vergangenheit *Eine blaue Kapitelmarke mit der Bezeichnung "_Past" wird zwei Minuten VOR der derzeitigen Position des Edit-Markers gesetzt. Die hilft beim Markeiren einer Stelle in der Art von "eigentlich sind wir schon längst beim nächsten Thema". Durch die Farbe und den Bezeichner kann die Marke im Schnitt schnell gefunden und an die exakte Position geschoben werden.*
+
+* **Actoins** Kapitelmarken schreiben und lesen *Das Handling zum Export und Import der Kapitelmarken wurde überarbeitet. Kapitelmarken werden nun im Stil projektname.chapters.txt gespeichert.*
+
+* **Actions** Textelement einfügen *In eine leere Spur kann nun an der Position des Cursors ein Text-Element eingefügt werden, das man mit Klick auf die Sprechblase mit beliebigem Text versehen kann der sich dann wie ein Audio-Element verhält. Diese wenn man eine Folge eher "baut", also aus vielen Sequenzen zusammensetzt bei denen etwa die klassischen Kapitelmarken zu unflexibel sind.* 
+
+* **Presets** Ein neues Einspieler-Track Preset wird mitgeliefert, bei dem bereits ein Ducking voreingestellt ist. *Über die Routing-Matrix werden die Kanäle ausgewählt die das Ducking aktivieren. Die genaue Bediehnung wird im Release-Screencast demonstriert.*
+
+* **Preferences** Die Samplerate wird auf 48KHz gesetzt, die Buffer-Size auf 512. "Ignore running Change Notifications" wird gesetzt. *Bis zur Releasde unseres eigenen Audio-Treibers scheint dies unter OSX die am stabilsten funktionierenden Werte zu sein um Knaksen zu verhindern.*
+
+* **Soundboard** Neuer Grid-View *Die Ansicht des Soundboard lässt sich umschalten zwischen der bekannten Tabellenansicht und einer Grid-Ansicht*
+
+* **Soundboard** Ein- Ausfaden *Das Ein- und Ausfaden wird nun in sämtlichen Play-Modi unterstützt - etwa einfaden aus Pause etc.*
+
+* **Soundboard** Ducking *Es gibt einen neuen Ducking-Schalter der sämtliche gerade laufenden Einspieler sanft auf eine zu definierende, geringere Lautstärke runterregelt über die man gut drübersprechen kann. Ein Ausschalten bewirkt wieder eine Anhebung der Einspieler. Die stärke des Ducking lässt sich in den Soundboard-Settings einstellen.*
+
+* **Soundboard** Master-Volume *Die Gesamtlautstärke des Einspieler-Outputs kann über einen Schieberegler eingestellt werden*
+
+* **Soundboard** Themes *Man kann verschiedene Farbsets für das Soundboard einstellen*
+
+* **Soundboard** Live-Mode *Hat man alle Einstellungen im Soundboard wie Lautstärken einmal eingestellt, kann man diese nun für die Sendung in einen "Lock" Modus versetzen: egal welche Presets verwendet werden, die Soundboard Einstellungen bleiben unberührt.*
+
+* **Misc** Bugfixes in den Plugins *Einige garstige Speicherlecks wurden in unseren Reaper-Plugins geschlossen. Damit sich diese jeh auswirken hätte man aber einige Tage aufnehmen müssen.*
+
+* **HUB** [nur OSX] Die virtuellen Sound-Devices werden umbenannt, um die Zuordnung in SKYPE intuitiver zu gestalten. Stereo-Geräte werden vor Mono-Geräte gesetzt um Verschiebungen in der Routing-Matrix vorzubeugen.
+ 
+ 
 
 ### Release 1.2 - 4.1.2015
 
