@@ -1,9 +1,31 @@
+################################################################################
+# 
+# Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+# 
+################################################################################
+
 from reaper_python import *
 import os
 import platform
 import unicodedata
-
-# from AppKit import *
 
 import platform, os
 
@@ -11,7 +33,6 @@ def winGetClipboard():
     ctypes.windll.user32.OpenClipboard(0)
     pcontents = ctypes.windll.user32.GetClipboardData(1) # 1 is CF_TEXT
     data = ctypes.c_char_p(pcontents).value
-    #ctypes.windll.kernel32.GlobalUnlock(pcontents)
     ctypes.windll.user32.CloseClipboard()
     return data
 
@@ -128,14 +149,6 @@ def msg(m):
     RPR_ShowConsoleMsg(str(m) + "\n") # Ausgabe
 
 text = getcb()
-
-# text = unicode(text)
-# text = unicodedata.normalize('NFD', unicode(utext)).encode('ascii','ignore')
-# utext = text.decode("utf-8")
-#text = unicodedata.normalize('NFKD', unicode(utext) )
-# text = unicodedata.normalize('NFKD', unicode(utext).encode('ascii','ignore')
-# utext = xutext.decode("utf-8")
-# text = xutext.encode("ascii","ignore")
 
 if (RPR_GetPlayState() == 0) or (RPR_GetPlayState() == 2):  # 0 = Stop, 2 = Pause
 	current_position = RPR_GetCursorPosition() # Position of edit-cursor
