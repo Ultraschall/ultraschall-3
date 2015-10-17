@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_import_shownotes.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_import_shownotes.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_notes.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_notes.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.py
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_webserver.py ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_webserver.py
+fi
