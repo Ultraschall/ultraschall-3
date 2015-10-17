@@ -25,7 +25,6 @@ mkdir ./Payload/Resources
 cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Resources/Rams\ Edition\ Release-Poster.pdf
 cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Resources/Rams\ Edition\ Release-Poster.png
 cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html ./Payload/Ultraschall\ Install\ and\ Release\ Notes.html
-cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.md ./Payload/Ultraschall\ Install\ and\ Release\ Notes.md
 
 # Copy uninstall script to payload directory
 cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
@@ -34,6 +33,9 @@ cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
 cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Resources/Ultraschall\ Colorset.SWSColor
 cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Resources/Ultraschall\ Microbanner\ 80x15.png
 cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Resources/Ultraschall\ Webbanner.png
+
+# Copy REAPER theme to payload directory
+cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
 
 # Create Ultraschall REAPER Plugin package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
