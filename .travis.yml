@@ -4,5 +4,6 @@ branches:
     - master
     - develop
 script: "./build.sh"
+osx_image: xcode7
 notifications:
   slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
