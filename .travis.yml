@@ -3,6 +3,6 @@ branches:
   only:
     - master
     - develop
-script: "./Plugin/build.sh"
+script: "./build.sh"
 notifications:
   slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
