@@ -1,0 +1,8 @@
+language: objective-c
+branches:
+  only:
+    - master
+    - develop
+script: "./Plugin/build.sh"
+notifications:
+  slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
