@@ -40,31 +40,40 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 
    if (pPluginInfo != 0)
    {
-      reaper::ApplicationStartupInformation reaperStartupInformation;
-      reaperStartupInformation.instance = hInstance;
-      reaperStartupInformation.pPluginInfo = pPluginInfo;
-
-      framework::StartupInformation startupInformation;
-      startupInformation.data = &reaperStartupInformation;
-      if(ServiceSucceeded(application.Configure()))
+      static bool started = false;
+      if(false == started)
       {
-         if(ServiceSucceeded(application.Start(startupInformation)))
+         reaper::ApplicationStartupInformation reaperStartupInformation;
+         reaperStartupInformation.instance = hInstance;
+         reaperStartupInformation.pPluginInfo = pPluginInfo;
+         
+         framework::StartupInformation startupInformation;
+         startupInformation.data = &reaperStartupInformation;
+         if(ServiceSucceeded(application.Configure()))
          {
-            application.RegisterCustomAction<reaper::AddChaptersAction>();
-            application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
-            application.RegisterCustomAction<reaper::SaveChaptersAction>();
-            application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
-            application.RegisterCustomAction<reaper::InsertTranscriptAction>();
-
-            return 1;
+            if(ServiceSucceeded(application.Start(startupInformation)))
+            {
+               application.RegisterCustomAction<reaper::AddChaptersAction>();
+               application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
+               application.RegisterCustomAction<reaper::SaveChaptersAction>();
+               application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
+               application.RegisterCustomAction<reaper::InsertTranscriptAction>();
+            }
          }
+         
+         started = true;
       }
 
-      return 0;
+      return 1;
    }
    else
    {
-      application.Stop();
+      static bool stopped = false;
+      if(false == stopped)
+      {
+         application.Stop();
+         stopped = true;
+      }
       
       return 0;
    }

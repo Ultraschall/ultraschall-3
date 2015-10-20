@@ -25,6 +25,7 @@
 #include <ServiceManager.h>
 #include <ResourceManager.h>
 #include <StringUtilities.h>
+#include <TextFileReader.h>
 
 #include "Application.h"
 #include "EntryPoints.h"
@@ -72,17 +73,7 @@ const ServiceStatus Application::Start(const framework::StartupInformation& star
    bool started = (Register("hookcommand2", (void*)Application::OnCustomAction2) != 0);
    if(started == true)
    {
-      if(started == true)
-      {
-         return SERVICE_SUCCESS;
-      }
-      else
-      {
-         instance_ = 0;
-         pPluginInfo_ = 0;
-         
-         return SERVICE_FAILURE;
-      }
+      return SERVICE_SUCCESS;
    }
    else
    {
@@ -527,19 +518,34 @@ const bool Application::HealthCheck()
 {
    bool ok = true;
 
-   const std::string message1("\
-Ultraschall cannot continue. Your Application Support directory contains an unsupported \
-file. Please move '\
+   const std::string message("Ultraschall cannot continue!");
+   
+   const std::string information1("\
+The Application Support directory of your system contains an unsupported \
+file that must be removed in order to use the Ultraschall REAPER Extension. Please move '\
 ");
-   const std::string message2("\
-' to another location on your system and restart REAPER.\
+   const std::string information2("\
+' to a different folder on your system and restart REAPER.\
 ");
 
+   const std::string information3("\
+The Ultraschall REAPER Extension requires REAPER 5.x.\
+");
+
+   const std::string information4("\
+If you want to use the Ultraschall REAPER extension, you must install REAPER 5.x.\
+");
+   
+   const std::string information5("\
+\
+");
+   
+   
    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() +
                                               "/REAPER/UserPlugins/reaper_sws_extension.dylib";
    if(FileManager::FileExists(swsPlugin2_8SystemPath) == true)
    {
-      MessageBox::Show(message1 + swsPlugin2_8SystemPath + message2, true);
+      MessageBox::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
       ok = false;
    }
    
@@ -547,7 +553,7 @@ file. Please move '\
                                               "/REAPER/UserPlugins/reaper_sws.dylib";
    if(FileManager::FileExists(swsPlugin2_7SystemPath) == true)
    {
-      MessageBox::Show(message1 + swsPlugin2_7SystemPath + message2, true);
+      MessageBox::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
       ok = false;
    }
 
@@ -555,7 +561,27 @@ file. Please move '\
                                                    "/REAPER/UserPlugins/reaper_ultraschall.dylib";
    if(FileManager::FileExists(ultraschallPluginSystemPath) == true)
    {
-      MessageBox::Show(message1 + ultraschallPluginSystemPath + message2, true);
+      MessageBox::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
+      ok = false;
+   }
+   
+   const std::string reaperVersionFile = FileManager::UserApplicationSupportDirectory() +
+                                         "/REAPER/reaper-install-rev.txt";
+   if(FileManager::FileExists(reaperVersionFile) == true)
+   {
+      std::vector<std::string> lines = framework::TextFileReader::ReadLines(reaperVersionFile);
+      if(lines.empty() == false)
+      {
+         if(lines[0][0] != '5')
+         {
+            MessageBox::Show(message, information3 + " " + information4 , true);
+            ok = false;
+         }
+      }
+   }
+   else
+   {
+      MessageBox::Show(message, information3 + " " + information4 , true);
       ok = false;
    }
    

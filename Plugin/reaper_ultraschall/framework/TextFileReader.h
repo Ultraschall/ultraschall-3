@@ -21,52 +21,20 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+#ifndef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
+#define __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
 
-#include <ResourceManager.h>
+#include <vector>
+#include <string>
 
-#include "MessageBox.h"
+namespace ultraschall { namespace framework {
 
-#ifdef WIN32
-#include <windows.h>
-#else
-#import <AppKit/AppKit.h>
-#endif
-
-namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
+class TextFileReader
 {
-   Show(message, "", isError);
-}
+public:
+   static const std::vector<std::string> ReadLines(const std::string& filename);
+};
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
-{
-#ifdef WIN32
-#else
-   NSAlert* alert = [[NSAlert alloc] init];
-   alert.alertStyle = isError ? NSCriticalAlertStyle : NSInformationalAlertStyle;
-   
-   alert.messageText = [NSString stringWithUTF8String: message.c_str()];
-   if(information.empty() == false)
-   {
-      alert.informativeText = [NSString stringWithUTF8String: information.c_str()];
-   }
-   
-   [alert runModal];
-#endif
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-#ifdef WIN32
-#else
-   
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-#endif
-}
-   
 }}
 
+#endif // #ifdef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__

@@ -64,6 +64,8 @@
 		42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A701ABEE82200231F3D /* ICustomAction.h */; };
 		42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */; };
 		42F19A831ABEE82200231F3D /* Reaper.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A741ABEE82200231F3D /* Reaper.h */; };
+		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
+		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +139,8 @@
 		42F19A701ABEE82200231F3D /* ICustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICustomAction.h; path = reaper/ICustomAction.h; sourceTree = "<group>"; };
 		42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reaper_ultraschall.cpp; path = reaper/reaper_ultraschall.cpp; sourceTree = "<group>"; };
 		42F19A741ABEE82200231F3D /* Reaper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reaper.h; path = reaper/Reaper.h; sourceTree = "<group>"; };
+		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
+		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 		42F19A5E1ABEE7EA00231F3D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				42FB15761BD65A65004DFF99 /* TextFileReader.cpp */,
+				42FB15771BD65A65004DFF99 /* TextFileReader.h */,
 				4233400C1B51489900231F3D /* ChapterMarker.cpp */,
 				4233400D1B51489900231F3D /* ChapterMarker.h */,
 				425A03B31B4047F000231F3D /* ResourceId.cpp */,
@@ -256,6 +262,7 @@
 				424C82FE1AC8085D00231F3D /* SharedObjectFactory.h in Headers */,
 				42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */,
 				425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */,
+				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
 				420891461B248B9F00231F3D /* UnicodeStringTraits.h in Headers */,
 				4242E9771BAC983B00382B79 /* InsertTranscriptAction.h in Headers */,
 				42DC63E91AD0367A00231F3D /* SaveChaptersToProjectAction.h in Headers */,
@@ -341,6 +348,7 @@
 				42F19A7D1ABEE82200231F3D /* SaveChaptersAction.cpp in Sources */,
 				4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */,
 				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
+				42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */,
 				42DC63E81AD0367A00231F3D /* SaveChaptersToProjectAction.cpp in Sources */,
 				425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */,
 				42F19A791ABEE82200231F3D /* CustomActionManager.cpp in Sources */,
