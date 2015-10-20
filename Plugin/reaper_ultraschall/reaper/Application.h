@@ -87,6 +87,8 @@ public:
 private:
    Application();
 
+   static const bool HealthCheck();
+    
    REAPER_PLUGIN_HINSTANCE instance_;
    reaper_plugin_info_t* pPluginInfo_;
    mutable int (*pPluginRegister_)(const char* name, void* pInfoStruct);

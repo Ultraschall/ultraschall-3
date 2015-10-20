@@ -241,7 +241,7 @@ const std::string FileManager::AppendPath(const std::string& prefix, const std::
    return prefix + PATH_DELIMITER_CHAR + append;
 }
  
-const std::string FileManager::ApplicationSupportDirectory()
+const std::string FileManager::UserApplicationSupportDirectory()
 {
    std::string directory;
 #ifdef WIN32
@@ -252,7 +252,20 @@ const std::string FileManager::ApplicationSupportDirectory()
 #endif
    return directory;
 }
- 
+
+const std::string FileManager::SystemApplicationSupportDirectory()
+{
+   std::string directory;
+#ifdef WIN32
+#else
+   NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+                                                                                inDomains:NSSystemDomainMask] firstObject];
+   directory = [applicationSupportDirectory fileSystemRepresentation];
+#endif
+   return directory;
+}
+   
+
 const bool FileManager::FileExists(const std::string& path)
 {
    bool fileExists = false;

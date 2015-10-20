@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <ServiceStatus.h>
 #include "Application.h"
 #include "AddChaptersAction.h"
 #include "ReplaceChaptersAction.h"
@@ -45,16 +46,21 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 
       framework::StartupInformation startupInformation;
       startupInformation.data = &reaperStartupInformation;
-      application.Configure();
-      application.Start(startupInformation);
-      
-      application.RegisterCustomAction<reaper::AddChaptersAction>();
-      application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
-      application.RegisterCustomAction<reaper::SaveChaptersAction>();
-      application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
-      application.RegisterCustomAction<reaper::InsertTranscriptAction>();
-      
-      return 1;
+      if(ServiceSucceeded(application.Configure()))
+      {
+         if(ServiceSucceeded(application.Start(startupInformation)))
+         {
+            application.RegisterCustomAction<reaper::AddChaptersAction>();
+            application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
+            application.RegisterCustomAction<reaper::SaveChaptersAction>();
+            application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
+            application.RegisterCustomAction<reaper::InsertTranscriptAction>();
+
+            return 1;
+         }
+      }
+
+      return 0;
    }
    else
    {

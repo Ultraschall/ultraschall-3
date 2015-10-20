@@ -53,6 +53,7 @@ Application& Application::Instance()
 
 const ServiceStatus Application::Start(const framework::StartupInformation& startupInformation)
 {
+   PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
    PRECONDITION_RETURN(startupInformation.data != 0, SERVICE_FAILURE);
    
    ApplicationStartupInformation* pData = reinterpret_cast<ApplicationStartupInformation*>(startupInformation.data);
@@ -512,7 +513,6 @@ void Application::DeleteAllChapterMarkers() const
 
 const ServiceStatus Application::Configure()
 {
-   
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    resourceManager.SetLanguage("en-EN");
    return SERVICE_SUCCESS;
@@ -522,6 +522,45 @@ const bool Application::InsertTransriptItem(const framework::TranscriptItem tran
 {
    return true;
 }
+
+const bool Application::HealthCheck()
+{
+   bool ok = true;
+
+   const std::string message1("\
+Ultraschall cannot continue. Your Application Support directory contains an unsupported \
+file. Please move '\
+");
+   const std::string message2("\
+' to another location on your system and restart REAPER.\
+");
+
+   const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() +
+                                              "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+   if(FileManager::FileExists(swsPlugin2_8SystemPath) == true)
+   {
+      MessageBox::Show(message1 + swsPlugin2_8SystemPath + message2, true);
+      ok = false;
+   }
    
+   const std::string swsPlugin2_7SystemPath = FileManager::SystemApplicationSupportDirectory() +
+                                              "/REAPER/UserPlugins/reaper_sws.dylib";
+   if(FileManager::FileExists(swsPlugin2_7SystemPath) == true)
+   {
+      MessageBox::Show(message1 + swsPlugin2_7SystemPath + message2, true);
+      ok = false;
+   }
+
+   const std::string ultraschallPluginSystemPath = FileManager::SystemApplicationSupportDirectory() +
+                                                   "/REAPER/UserPlugins/reaper_ultraschall.dylib";
+   if(FileManager::FileExists(ultraschallPluginSystemPath) == true)
+   {
+      MessageBox::Show(message1 + ultraschallPluginSystemPath + message2, true);
+      ok = false;
+   }
+   
+   return ok;
+}
+    
 }}
 
