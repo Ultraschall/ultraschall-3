@@ -3,7 +3,7 @@
 	<title>Ultraschall 2.0</title>
 	<organization>fm.ultraschall</organization>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
-	<domains enable_localSystem="true"/>
+	<domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
 	<os-version min="10.11"/>
 	<background file="background.png" mime-type="image/png"/>
 	<!-- Define documents displayed at various steps -->

@@ -1,11 +1,11 @@
 #!/bin/sh
 
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-alpha2
+export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
+
 # Cleanup old installer image
-if [ -f ./Ultraschall-2.0.dmg ]; then
-	rm -f ./Ultraschall-2.0.dmg
-fi
-if [ -f ./Ultraschall-2.0.dmg.zip ]; then
-	rm -f ./Ultraschall-2.0.dmg.zip
+if [ -f ./$ULTRASCHALL_RELEASE_DISK1 ]; then
+	rm -f ./$ULTRASCHALL_RELEASE_DISK1
 fi
 
 # Cleanup temporary build directory
@@ -71,7 +71,7 @@ productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create installer image
-hdiutil create -srcfolder ./Payload -fs HFS+ -volname "Ultraschall 2.0-alpha1" ./Ultraschall-2.0.dmg
+hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
 rm -rf ./Payload
 
 
