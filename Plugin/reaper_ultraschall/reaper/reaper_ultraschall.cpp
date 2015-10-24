@@ -23,8 +23,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <ServiceStatus.h>
+#include <MessageBox.h>
+
 #include "Application.h"
-#include "AddChaptersAction.h"
+#include "ReaperEntryPoints.h"
+#include "InvalidEntryPointException.h"
+#include "InsertChaptersAction.h"
 #include "ReplaceChaptersAction.h"
 #include "SaveChaptersAction.h"
 #include "SaveChaptersToProjectAction.h"
@@ -37,28 +41,35 @@ extern "C"
 REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t *pPluginInfo)
 {
    reaper::Application& application = reaper::Application::Instance();
-
+    
    if (pPluginInfo != 0)
    {
       static bool started = false;
       if(false == started)
       {
-         reaper::ApplicationStartupInformation reaperStartupInformation;
-         reaperStartupInformation.instance = hInstance;
-         reaperStartupInformation.pPluginInfo = pPluginInfo;
-         
-         framework::StartupInformation startupInformation;
-         startupInformation.data = &reaperStartupInformation;
-         if(ServiceSucceeded(application.Configure()))
+         try
          {
-            if(ServiceSucceeded(application.Start(startupInformation)))
+            reaper::ReaperEntryPoints::Setup(pPluginInfo);
+
+            if(ServiceSucceeded(application.Configure()))
             {
-               application.RegisterCustomAction<reaper::AddChaptersAction>();
-               application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
-               application.RegisterCustomAction<reaper::SaveChaptersAction>();
-               application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
-               application.RegisterCustomAction<reaper::InsertTranscriptAction>();
+               if(ServiceSucceeded(application.Start()))
+               {
+                  application.RegisterCustomAction<reaper::InsertChaptersAction>();
+                  application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
+                  application.RegisterCustomAction<reaper::SaveChaptersAction>();
+                  application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
+                  application.RegisterCustomAction<reaper::InsertTranscriptAction>();
+               }
             }
+         }
+         catch(reaper::InvalidEntryPointException& e)
+         {
+            std::string errorReason = "\
+You are trying to load a version of REAPER that is not compatible to Ultraschall 2.";
+            
+            reaper::MessageBox::Show("Ultraschall failed to load!", errorReason, true);
+            return 0;
          }
          
          started = true;

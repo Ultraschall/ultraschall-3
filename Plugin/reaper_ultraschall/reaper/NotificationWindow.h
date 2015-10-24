@@ -22,32 +22,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#include "MessageBox.h"
+@interface NotificationWindow : NSObject
 
-#import "NotificationWindow.h"
++ (void) showWithMessage:(NSString*)message;
 
-namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
-}
++ (void) showWithMessage:(NSString*)message info:(NSString*)info;
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
-   
-}}
-
+@end

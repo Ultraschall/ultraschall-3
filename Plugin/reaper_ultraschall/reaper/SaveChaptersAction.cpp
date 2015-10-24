@@ -32,7 +32,7 @@
 
 namespace ultraschall { namespace reaper {
 
-static CustomAction<SaveChaptersAction> action;
+static DeclareCustomAction<SaveChaptersAction> action;
 
 const char* SaveChaptersAction::UniqueId()
 {

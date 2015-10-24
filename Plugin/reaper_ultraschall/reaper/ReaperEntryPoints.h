@@ -25,37 +25,40 @@
 #ifndef __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__
 #define __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__
 
-#include "Reaper.h"
+// disable 'unreferenced formal parameter'
+#pragma warning(disable: 4100)
+// Include base SDK header
+#include <reaper_plugin.h>
+#pragma warning(default: 4100)
+
+// This must be included after 'reaper_plugin.h'.
+#define REAPERAPI_DECL
+#define REAPERAPI_NO_LICE
+#define REAPERAPI_MINIMAL
+#define REAPERAPI_WANT_GetMainHwnd
+#define REAPERAPI_WANT_plugin_register
+#define REAPERAPI_WANT_GetProjectPath
+#define REAPERAPI_WANT_EnumProjects
+#define REAPERAPI_WANT_format_timestr_pos
+#define REAPERAPI_WANT_parse_timestr
+#define REAPERAPI_WANT_EnumProjectMarkers
+#define REAPERAPI_WANT_AddProjectMarker2
+#define REAPERAPI_WANT_DeleteProjectMarker
+namespace reaper_api {
+#include <reaper_plugin_functions.h>
+}
 
 namespace ultraschall { namespace reaper {
 
-struct EntryPoints
-{
-   static HWND (*pGetMainHwnd_)();
-   static void *(*pEnumProjects_)(int idx, char *projfn, int projfnlen);
-   
-   static void (*pGetProjectPath_)(char* buffer, int bufferSize);
-   static void *(*pEnumProjects2_)(int offset, char *buffer, int bufferSize);
-
-   static void (*p_format_timestr_pos_)(double timestamp, char *buffer, int bufferSize, int modeOverride);
-   static double(*p_parse_timestr_)(const char* buffer);
-   
-   static int (*pEnumProjectMarkers_)(int offset, bool *pIsRegion, double *pTimestamp, double *pEndOfRegion, char **ppName, int *pMarkerRegionIndex);
-   static int (*pAddProjectMarker2_)(void* projectHandle, bool isRegion, double timestamp, double endOfRegion, const char* pName, int markerRegionIndex, int color);
-   static bool (*pDeleteProjectMarker)(ReaProject* proj, int markrgnindexnumber, bool isrgn);
-   static bool (*pDeleteProjectMarkerByIndex)(ReaProject* proj, int markrgnidx);
-
-   static int (*pGetNumTracks_)();
-   static const char* (*pGetTrackInfo_)(INT_PTR track, int *flags);
-   static void* (*pGetTrack_)(void* projectHandle, int trackIndex);
-   static void* (*pGetSetMediaTrackInfo_)(void* track, const char* parameter, char* newValue);
-};
-
-class Reaper
+class ReaperEntryPoints
 {
 public:
-};
+   static void Setup(reaper_plugin_info_t* pPluginInfo);
    
+private:
+   ReaperEntryPoints(reaper_plugin_info_t* pPluginInfo);
+};
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__

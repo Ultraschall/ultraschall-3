@@ -22,32 +22,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
+#ifndef __ULTRASCHALL_REAPER_INVALIDENTRY_POINT_EXCEPTION_H_INCL__
+#define __ULTRASCHALL_REAPER_INVALIDENTRY_POINT_EXCEPTION_H_INCL__
 
-#include "MessageBox.h"
-
-#import "NotificationWindow.h"
+#include <string>
+#include <exception>
 
 namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
-}
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
+class InvalidEntryPointException : public std::exception
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
+public:
+   InvalidEntryPointException(const std::string& entryPoint);
+
+   virtual const char* what() const noexcept override;
+
+private:
+   std::string entryPoint_;
+};
    
 }}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_INVALIDENTRY_POINT_EXCEPTION_H_INCL__
 

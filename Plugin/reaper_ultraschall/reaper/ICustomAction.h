@@ -52,22 +52,6 @@ private:
    ICustomAction& operator=(const ICustomAction&);
 };
 
-template<class CustomActionType> class CustomAction
-{
-public:
-   CustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.RegisterCustomAction(CustomActionType::UniqueId(), CustomActionType::CreateCustomAction);
-   }
-
-   virtual ~CustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.UnregisterCustomAction(CustomActionType::UniqueId());
-   }
-};
-
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__

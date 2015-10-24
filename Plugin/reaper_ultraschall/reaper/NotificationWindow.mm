@@ -22,6 +22,33 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Reaper.h"
+#import "NotificationWindow.h"
 
+@implementation NotificationWindow
 
++ (void) showWithMessage:(NSString*)message
+{
+   NSAlert *alert = [[NSAlert alloc] init];
+   [alert addButtonWithTitle: @"Dismiss"];
+   [alert setMessageText: message];
+   [alert setAlertStyle: NSCriticalAlertStyle];
+   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
+                     modalDelegate: nil
+                    didEndSelector: nil
+                       contextInfo: nil];
+}
+
++ (void) showWithMessage:(NSString*)message info:(NSString*)info
+{
+   NSAlert *alert = [[NSAlert alloc] init];
+   [alert addButtonWithTitle: @"Dismiss"];
+   [alert setMessageText: message];
+   [alert setInformativeText: info];
+   [alert setAlertStyle: NSCriticalAlertStyle];
+   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
+                     modalDelegate: nil
+                    didEndSelector: nil
+                       contextInfo: nil];
+}
+
+@end

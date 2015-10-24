@@ -28,22 +28,18 @@
 #include <TextFileReader.h>
 
 #include "Application.h"
-#include "EntryPoints.h"
+#include "ReaperEntryPoints.h"
 #include "FileManager.h"
 #include "MessageBox.h"
 
 namespace ultraschall { namespace reaper {
 
-Application::Application() :
-   instance_(0), pPluginInfo_(0), pPluginRegister_(0)
+Application::Application()
 {
 }
 
 Application::~Application()
 {
-   pPluginRegister_ = 0;
-   pPluginInfo_ = 0;
-   instance_ = 0;
 }
 
 Application& Application::Instance()
@@ -52,166 +48,55 @@ Application& Application::Instance()
    return self;
 }
 
-const ServiceStatus Application::Start(const framework::StartupInformation& startupInformation)
+const ServiceStatus Application::Start()
 {
    PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-   PRECONDITION_RETURN(startupInformation.data != 0, SERVICE_FAILURE);
-   
-   ApplicationStartupInformation* pData = reinterpret_cast<ApplicationStartupInformation*>(startupInformation.data);
-   PRECONDITION_RETURN(pData != 0, SERVICE_FAILURE);
-   
-   REAPER_PLUGIN_HINSTANCE instance = pData->instance;
-   PRECONDITION_RETURN(instance != 0, SERVICE_FAILURE);
-   
-   reaper_plugin_info_t* pPluginInfo = pData->pPluginInfo;
-   PRECONDITION_RETURN(pPluginInfo != 0, SERVICE_FAILURE);
-   PRECONDITION_RETURN(pPluginInfo->caller_version == REAPER_PLUGIN_VERSION, SERVICE_FAILURE);
-   PRECONDITION_RETURN(pPluginInfo->GetFunc != 0, SERVICE_FAILURE);
-
-   instance_ = instance;
-   pPluginInfo_ = pPluginInfo;
-   bool started = (Register("hookcommand2", (void*)Application::OnCustomAction2) != 0);
-   if(started == true)
-   {
-      return SERVICE_SUCCESS;
-   }
-   else
-   {
-      instance_ = 0;
-      pPluginInfo_ = 0;
-
-      return SERVICE_FAILURE;
-   }
+ 
+   return SERVICE_SUCCESS;
 }
 
 void Application::Stop()
 {
-   pPluginInfo_ = 0;
-   instance_ = 0;
 }
 
 const int32_t Application::Register(const char* name, void* pInfoStruct) const
 {
-   if(0 == pPluginRegister_)
-   {
-      *((void**)(&pPluginRegister_)) = pPluginInfo_->GetFunc("plugin_register");
-   }
-   
-   int commandId = 0;
-   
-   if(0 != pPluginRegister_)
-   {
-      commandId = (*pPluginRegister_)(name, pInfoStruct);
-   }
-
-   return commandId;
+   return reaper_api::plugin_register(name, pInfoStruct);
 }
    
-const bool Application::OnCustomAction(const int32_t id, const int16_t)
+const bool Application::OnCustomAction(const int32_t id)
 {
    PRECONDITION_RETURN(id != 0, false);
-
+   
    bool executed = false;
-
+   
    CustomActionManager& manager = CustomActionManager::Instance();
    ICustomAction* pCustomAction = 0;
    ServiceStatus status = manager.LookupCustomAction(id, pCustomAction);
    if(ServiceSucceeded(status) && (pCustomAction != 0))
    {
-      status = pCustomAction->Execute();
-      if(ServiceSucceeded(status))
-      {
-         executed = true;
-      }
-
+      pCustomAction->Execute();
       framework::SafeRelease(pCustomAction);
-   }
-
-   return executed;
-}
-
-const bool Application::OnCustomAction2(KbdSectionInfo* sec, int cmdId, int val, int valhw, int relmode, HWND hwnd)
-{
-   PRECONDITION_RETURN(cmdId != 0, false);
-
-   bool executed = false;
-   
-   CustomActionManager& manager = CustomActionManager::Instance();
-   ICustomAction* pCustomAction = 0;
-   ServiceStatus status = manager.LookupCustomAction(cmdId, pCustomAction);
-   if(ServiceSucceeded(status) && (pCustomAction != 0))
-   {
-      status = pCustomAction->Execute();
-      if(ServiceSucceeded(status))
-      {
-      }
-      
-      framework::SafeRelease(pCustomAction);
-
       executed = true;
    }
    
    return executed;
 }
-   
-HWND Application::GetMainHwnd() const
-{
-   PRECONDITION_RETURN(pPluginInfo_ != 0, 0);
-
-   HWND hwnd = 0;
-
-   if(0 == EntryPoints::pGetMainHwnd_)
-   {
-      *((void **)&EntryPoints::pGetMainHwnd_) = pPluginInfo_->GetFunc("GetMainHwnd");
-   }
-
-   if(EntryPoints::pGetMainHwnd_ != 0)
-   {
-      hwnd = (*EntryPoints::pGetMainHwnd_)();
-   }
-
-   return hwnd;
-}
 
 const intptr_t Application::GetCurrentProject() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, 0);
-   
-   intptr_t currentProject = 0;
-   
-   if(0 == EntryPoints::pEnumProjects_)
-   {
-      *((void **)&EntryPoints::pEnumProjects_) = pPluginInfo_->GetFunc("EnumProjects");
-   }
-   
-   if(EntryPoints::pEnumProjects_ != 0)
-   {
-      currentProject = reinterpret_cast<intptr_t>((*EntryPoints::pEnumProjects_)(-1, 0, 0));
-   }
-   
-   return currentProject;
-      
+   return (intptr_t)reaper_api::EnumProjects(-1, 0, 0);
 }
    
 const std::string Application::GetExportPathName() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-
    std::string projectPath;
 
-   if (0 == EntryPoints::pGetProjectPath_)
+   char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
+   reaper_api::GetProjectPath(buffer, MAX_REAPER_STRING_BUFFER_SIZE);
+   if (strlen(buffer) > 0)
    {
-      *((void **)&EntryPoints::pGetProjectPath_) = pPluginInfo_->GetFunc("GetProjectPath");
-   }
-
-   if (0 != EntryPoints::pGetProjectPath_)
-   {
-      char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
-      (*EntryPoints::pGetProjectPath_)(buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-      if (strlen(buffer) > 0)
-      {
-         projectPath = buffer;
-      }
+      projectPath = buffer;
    }
 
    return projectPath;
@@ -219,23 +104,13 @@ const std::string Application::GetExportPathName() const
 
 const std::string Application::GetProjectPathName() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-
    std::string result;
 
-   if(0 == EntryPoints::pEnumProjects2_)
+   char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = { 0 };
+   reaper_api::EnumProjects(-1, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
+   if(strlen(buffer) > 0)
    {
-      *((void **)&EntryPoints::pEnumProjects2_) = pPluginInfo_->GetFunc("EnumProjects");
-   }
-
-   if(0 != EntryPoints::pEnumProjects2_)
-   {
-      char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = { 0 };
-      (*EntryPoints::pEnumProjects2_)(-1, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-      if(strlen(buffer) > 0)
-      {
-         result = buffer;
-      }
+      result = buffer;
    }
 
    return result;
@@ -243,19 +118,12 @@ const std::string Application::GetProjectPathName() const
 
 const std::string Application::GetProjectFileName() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-   
    std::string result;
    
    const std::string projectPath = GetProjectPathName();
    if(projectPath.empty() == false)
    {
-#ifdef WIN32
-      const char PATH_DELIMITER_CHAR = '\\';
-#else
-      const char PATH_DELIMITER_CHAR = '/';
-#endif
-      const std::vector<std::string> pathComponents = framework::split(projectPath, PATH_DELIMITER_CHAR);
+      const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
       if(pathComponents.empty() == false)
       {
          result = pathComponents[pathComponents.size() - 1];
@@ -267,24 +135,17 @@ const std::string Application::GetProjectFileName() const
 
 const std::string Application::GetProjectFolderName() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-   
    std::string result;
    
    const std::string projectPath = GetProjectPathName();
    if(projectPath.empty() == false)
    {
-#ifdef WIN32
-      const char PATH_DELIMITER_CHAR = '\\';
-#else
-      const char PATH_DELIMITER_CHAR = '/';
-#endif
-      const std::vector<std::string> pathComponents = framework::split(projectPath, PATH_DELIMITER_CHAR);
+      const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
       if(pathComponents.empty() == false)
       {
          for(size_t i = 0; i < pathComponents.size() - 1; i++)
          {
-            result += pathComponents[i] + PATH_DELIMITER_CHAR;
+            result += pathComponents[i] + '/';
          }
       }
    }
@@ -294,8 +155,6 @@ const std::string Application::GetProjectFolderName() const
    
 const std::string Application::GetProjectName() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-   
    std::string result;
    
    const std::string projectFile = GetProjectFileName();
@@ -377,23 +236,13 @@ struct Timestamp
 
 const std::string Application::TimestampToString(const double timestamp) const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::string());
-
    std::string result;
 
-   if (0 == EntryPoints::p_format_timestr_pos_)
+   char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = { 0 };
+   reaper_api::format_timestr_pos(timestamp, buffer, MAX_REAPER_STRING_BUFFER_SIZE, 0);
+   if (strlen(buffer) > 0)
    {
-      *((void **)&EntryPoints::p_format_timestr_pos_) = pPluginInfo_->GetFunc("format_timestr_pos");
-   }
-
-   if (0 != EntryPoints::p_format_timestr_pos_)
-   {
-      char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = { 0 };
-      (*EntryPoints::p_format_timestr_pos_)(timestamp, buffer, MAX_REAPER_STRING_BUFFER_SIZE, 0);
-      if (strlen(buffer) > 0)
-      {
-         result = Timestamp::FromString(buffer).ToString();
-      }
+      result = Timestamp::FromString(buffer).ToString();
    }
 
    return result;
@@ -401,95 +250,43 @@ const std::string Application::TimestampToString(const double timestamp) const
 
 const double Application::StringToTimestamp(const std::string& input) const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, -1);
    PRECONDITION_RETURN(input.empty() == false, -1);
-
-   double result = -1;
-
-   if(0 == EntryPoints::p_parse_timestr_)
-   {
-      *((void **)&EntryPoints::p_parse_timestr_) = pPluginInfo_->GetFunc("parse_timestr");
-   }
-
-   if(0 != EntryPoints::p_parse_timestr_)
-   {
-      result = (*EntryPoints::p_parse_timestr_)(input.c_str());
-   }
-
-   return result;
+   return reaper_api::parse_timestr(input.c_str());
 }
 
 const std::vector<framework::ChapterMarker> Application::ChapterMarkers() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, std::vector<framework::ChapterMarker>());
-
    std::vector<framework::ChapterMarker> chapterMarkers;
 
-   if(0 == EntryPoints::pEnumProjectMarkers_)
-   {
-      *((void **)&EntryPoints::pEnumProjectMarkers_) = pPluginInfo_->GetFunc("EnumProjectMarkers");
-   }
+   int nextOffset = 0;
+   bool isRegion = false;
+   double position = 0;
+   double endOfRegion = false;
+   const char* buffer = 0;
+   int index = 0;
 
-   if(0 != EntryPoints::pEnumProjectMarkers_)
+   do
    {
-      int nextOffset = 0;
-      bool isRegion = false;
-      double position = 0;
-      double endOfRegion = false;
-      char* buffer = 0;
-      int index = 0;
-
-      do
+      nextOffset = reaper_api::EnumProjectMarkers(nextOffset, &isRegion, &position, &endOfRegion, &buffer, &index);
+      if(nextOffset > 0)
       {
-         nextOffset = (*EntryPoints::pEnumProjectMarkers_)(nextOffset, &isRegion, &position, &endOfRegion, &buffer, &index);
-         if(nextOffset > 0)
-         {
-            const framework::ChapterMarker chapterMarker(position, buffer, index);
-            chapterMarkers.push_back(chapterMarker);
-         }
+         const framework::ChapterMarker chapterMarker(position, buffer, index);
+         chapterMarkers.push_back(chapterMarker);
       }
-      while(nextOffset > 0);
    }
+   while(nextOffset > 0);
 
    return chapterMarkers;
 }
 
 const int32_t Application::SetChapterMarker(const framework::ChapterMarker& projectMarker) const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, -1);
-
-   int32_t index = -1;
-
-   if(0 == EntryPoints::pAddProjectMarker2_)
-   {
-      *((void **)&EntryPoints::pAddProjectMarker2_) = pPluginInfo_->GetFunc("AddProjectMarker2");
-   }
-
-   if(0 != EntryPoints::pAddProjectMarker2_)
-   {
-      index = (*EntryPoints::pAddProjectMarker2_)(0, false, projectMarker.Position(), 10, projectMarker.Name().c_str(), 0, 0xffff00);
-   }
-
-   return index;
+   return reaper_api::AddProjectMarker2(0, false, projectMarker.Position(), 10, projectMarker.Name().c_str(), 0, 0xffff00);
 }
 
 const bool Application::DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, false);
-   
-   bool result = false;
-   
-   if(0 == EntryPoints::pDeleteProjectMarker)
-   {
-      *((void **)&EntryPoints::pDeleteProjectMarker) = pPluginInfo_->GetFunc("DeleteProjectMarker");
-   }
-   
-   if(0 != EntryPoints::pDeleteProjectMarker)
-   {
-      result = (*EntryPoints::pDeleteProjectMarker)(0, chapterMarker.Index(), chapterMarker.IsRegion());
-   }
-   
-   return result;
+   return reaper_api::DeleteProjectMarker(0, chapterMarker.Index(), chapterMarker.IsRegion());
 }
    
 void Application::DeleteAllChapterMarkers() const
