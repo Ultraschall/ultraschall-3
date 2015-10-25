@@ -29,6 +29,51 @@ All of the following details are based on the [English 64 bit version of Reaper]
 5. **Only for new installations:** In order to make the new Ultraschall color set work, overwrite the preset palette. **WARNING:** If you have already grown fond of a color preset, you should skip this import and rather set the colors manually. The import works like this: in the menu `Extensions`, select `Auto Color/Icon`. There you can extend/adjust the automagic assignment of colors and track names. Right-click into that window and select `Show Color Management Window | Load color set from file…` and then the `Ultraschall Colorset.SWSColor` file which is included in this distribution. Now you have available all the 11 colors that [@graphorama](https://twitter.com/graphorama) handcrafted for Ultraschall.
 6. In order to learn more about Ultraschall's functions and usage, we recommend the 2.0 Release Screencast in Ultraschall's Youtube channel: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
 
+### Donate via Flattr
+
+Daniel: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Daniel!")](https://flattr.com/profile/danlin "Flattr Daniel")
+
+Ralf: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ralf!")](https://flattr.com/profile/rstockm "Flattr Ralf")
+
+Ultraschall generally: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ultraschall!")](https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware "Flattr Ultraschall")
+
+### Credits:
+
+This distribution is based on the [Analog Default Theme by lerian](http://lerians.tumblr.com/post/63734186478/analog-default-theme-for-reaper) with minor changes. Be generous and donate there. Please remember, how optically burdened your Reaper work would still be.
+
+Our logo was designed by [@graphorama](https://twitter.com/graphorama).
+
+Further thanks go out to our beta testers:
+
+- [@cyberage](https://twitter.com/cyberage)
+- [@dafisch](https://twitter.com/dafisch)
+- [@fbrem](https://twitter.com/fbrem)
+- [@flowfx](https://twitter.com/flowfx)
+- [@herrvonspeck](https://twitter.com/herrvonspeck)
+- [@hoersuppe](https://twitter.com/hoersuppe)
+- [@klein_p](https://twitter.com/klein_p)
+- [@nitramred](https://twitter.com/nitramred)
+- [@nsonic](https://twitter.com/nsonic)
+- [@timpritlove](https://twitter.com/timpritlove)
+- [@opendev](https://twitter.com/opendev)
+- [@ronbuehler](https://twitter.com/ronbuehler)
+- [@audioponies](https://twitter.com/audioponies)
+- [@pixelpille](https://twitter.com/pixelpille)
+- [@anbru](https://twitter.com/anbru)
+- [@mrtoto](https://twitter.com/mrtoto)
+- [@matthiasfromm](https://twitter.com/matthiasfromm)
+- [@343max](https://twitter.com/343max)
+- [@elicee](https://twitter.com/elicee)
+- [@pkurschildgen](https://twitter.com/pkurschildgen)
+- [@hermes](https://twitter.com/hermes)
+- [@ikari](https://twitter.com/ikari)
+- [@fernsehmuell](https://twitter.com/fernsehmuell)
+- [@vollraute](https://twitter.com/vollraute)
+- [@david_1701](https://twitter.com/david_1701)
+- [@michaelblum](https://twitter.com/michaelblum)
+- [@kleinesp](https://twitter.com/kleinesp)
+- [@KonSciencePod](https://twitter.com/KonSciencePod)
+
 ### Community:
 
 wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
@@ -246,48 +291,3 @@ Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies P
 ### BETA 1 - 21.1.2014
 
 * **Actions** - Actions/Show Action List... - Mousewheel "View:Scroll vertically"  *Schaltet das Zoomen mit Zweifinger-Trackpad rauf/runter ab und ersetzt es durch vertical-Scrolling wie überall unter OSX*
-
-### Credits:
----------------------------------------
-Diese Distribution basiert im Bereich des Designs bis auf wenige Änderungen auf dem Analog Default Theme von lerian <http://lerians.tumblr.com/post/63734186478/analog-default-theme-for-reaper> - seid großzügig und werft dort eine Spende ab. Bedenkt, wie optisch belastend andernfalls noch immer euer Reaperalltag aussähe...
-
-Das grandiose Logodesign stammt von @graphorama
-
-Weiterer Dank geht an die Betatester:
-@cyberage
-@dafisch
-@fbrem
-@flowfx
-@herrvonspeck
-@hoersuppe
-@klein_p
-@nitramred
-@nsonic
-@timpritlove
-@opendev
-@ronbuehler
-@audioponies
-@pixelpille
-@anbru
-@mrtoto
-@matthiasfromm
-@343max
-@elicee
-@pkurschildgen
-@hermes
-@ikari
-@fernsehmuell
-@vollraute
-@david_1701
-@michaelblum
-@kleinesp
-
-###Flattr
----------------------------------------
-Hier könnt ihr Flattr-Liebe loswerden:
-
-Daniel: https://flattr.com/profile/danlin
-Heiko: https://flattr.com/profile/heikopanjas
-Ralf: https://flattr.com/profile/rstockm
-
-Ultraschall insgesamt: https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware
