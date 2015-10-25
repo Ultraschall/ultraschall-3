@@ -19,20 +19,24 @@ if [ -d ./Payload ]; then
 	rm -rf ./Payload
 fi
 mkdir ./Payload
-mkdir ./Payload/Resources
+mkdir ./Payload/Add-ons
 
-# Copy release notes to payload directory
-cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Resources/Rams\ Edition\ Release-Poster.pdf
-cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Resources/Rams\ Edition\ Release-Poster.png
+# Build and copy release notes to payload directory
+pushd ../REAPER/Documentation
+make 
+popd
 cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html ./Payload/Ultraschall\ Install\ and\ Release\ Notes.html
+rm ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html
 
 # Copy uninstall script to payload directory
 cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
 
-# Copy resources to payload directory
-cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Resources/Ultraschall\ Colorset.SWSColor
-cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Resources/Ultraschall\ Microbanner\ 80x15.png
-cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Resources/Ultraschall\ Webbanner.png
+# Copy resources to payload 'Add-ons' directory
+cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Add-ons/Rams\ Edition\ Release-Poster.pdf
+cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Add-ons/Rams\ Edition\ Release-Poster.png
+cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Add-ons/Ultraschall\ Colorset.SWSColor
+cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Add-ons/Ultraschall\ Microbanner\ 80x15.png
+cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\ Webbanner.png
 
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
