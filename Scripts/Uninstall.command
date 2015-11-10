@@ -156,6 +156,13 @@ if [ -f /Library/Application\ Support/REAPER/Scripts/sws_python64.py ]; then
 	sudo rm -f /Library/Application\ Support/REAPER/Scripts/sws_python64.py
 fi
 
+# Uninstall Ultraschall Virtual Audio Devices from system domain
+if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
+	sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+	sudo rm -rf /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver
+	sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+fi
+
 # Uninstall Ultraschall Soundboard from user domain
 if [ -d ~/Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	rm -rf ~/Library/Audio/Plug-Ins/VST/Soundboard.vst
