@@ -21,32 +21,24 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+#include <fstream>
+#include <TextFileReader.h>
 
-#include <ResourceManager.h>
-#include "MessageBox.h"
+namespace ultraschall { namespace framework {
 
-#import "NotificationWindow.h"
-
-namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
+const std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
+   std::vector<std::string> lines;
+   
+   std::ifstream inputStream(filename.c_str());
+   std::string line;
+   while(std::getline(inputStream, line))
+   {
+      lines.push_back(line);
+   }
+   
+   return lines;
 }
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
-   
 }}
 

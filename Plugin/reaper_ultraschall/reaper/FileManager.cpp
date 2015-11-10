@@ -30,12 +30,7 @@
 #include "Application.h"
 #include "FileManager.h"
 
-#ifdef WIN32
-#include <windows.h>
-#include <shobjidl.h>
-#else
 #import <AppKit/AppKit.h>
-#endif
 
 namespace framework = ultraschall::framework;
 
@@ -52,60 +47,6 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
 {
    std::string path;
 
-#ifdef WIN32
-   
-   const bool uninitializeRequired = (CoInitialize(0) == S_OK);
-
-   IFileOpenDialog* pfod = 0;      
-   HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, 0, CLSCTX_INPROC_SERVER, IID_IFileDialog, (void**)&pfod);
-   if(SUCCEEDED(hr))
-   {
-      COMDLG_FILTERSPEC filterSpec[2] = {0};
-      filterSpec[0].pszName = L"MP4CHAPS";
-      filterSpec[0].pszSpec = L"*.mp4chaps";
-      filterSpec[1].pszName = L"TXT";
-      filterSpec[1].pszSpec = L"*.txt";
-
-// TODO: convert title to UTF-16
-      pfod->SetTitle(L"Kapitelmarken laden...");
-      pfod->SetFileTypes(2, &filterSpec);
-      pfod->SetOptions(FOS_FILEMUSTEXIST);
-
-      hr = pfod->Show(Application::Instance().GetMainHwnd());
-      if(SUCCEEDED(hr))
-      {
-         IShellItem* psi = 0;
-         hr = pfod->GetResult(&psi);
-         if(SUCCEEDED(hr))
-         {
-            LPWSTR displayName = 0;
-            hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &displayName);
-            if(SUCCEEDED(hr))
-            {
-               const size_t ansiBufferSize = (2 * (MAX_PATH + 1));
-               char ansiBuffer[ansiBufferSize] = { 0 };
-               size_t noConvertedChars = 0;
-               wcstombs_s(&noConvertedChars, ansiBuffer, displayName, ansiBufferSize);
-               path = ansiBuffer;
-
-               CoTaskMemFree(displayName);
-               displayName = 0;
-            }
-
-            framework::SafeRelease(psi);
-         }
-      }
-
-      framework::SafeRelease(pfod);
-   }
-
-   if(uninitializeRequired == true)
-   {
-      CoUninitialize();
-   }
-
-#else
-   
    NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
    if(nil != fileDialog)
    {
@@ -132,8 +73,6 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
       fileDialog = nil;
    }
    
-#endif
-   
    return path;
 }
 
@@ -148,60 +87,6 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
 {
    std::string path;
    
-#ifdef WIN32
-
-   const bool uninitializeRequired = (CoInitialize(0) == S_OK);
-
-   IFileOpenDialog* pfod = 0;      
-   HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, 0, CLSCTX_INPROC_SERVER, IID_IFileDialog, (void**)&pfod);
-   if(SUCCEEDED(hr))
-   {
-      COMDLG_FILTERSPEC filterSpec[2] = {0};
-      filterSpec[0].pszName = L"MP4CHAPS";
-      filterSpec[0].pszSpec = L"*.mp4chaps";
-      filterSpec[1].pszName = L"TXT";
-      filterSpec[1].pszSpec = L"*.txt";
-
-// TODO: convert title to UTF-16
-      pfod->SetTitle(L"Kapitelmarken speichern...");
-      pfod->SetFileTypes(2, &filterSpec);
-      pfod->SetOptions(FOS_PICKFOLDERS|FOS_PATHMUSTEXIST);
-
-      hr = pfod->Show(Application::Instance().GetMainHwnd());
-      if(SUCCEEDED(hr))
-      {
-         IShellItem* psi = 0;
-         hr = pfod->GetResult(&psi);
-         if(SUCCEEDED(hr))
-         {
-            LPWSTR displayName = 0;
-            hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &displayName);
-            if(SUCCEEDED(hr))
-            {
-               const size_t ansiBufferSize = (2 * (MAX_PATH + 1));
-               char ansiBuffer[ansiBufferSize] = { 0 };
-               size_t noConvertedChars = 0;
-               wcstombs_s(&noConvertedChars, ansiBuffer, displayName, ansiBufferSize);
-               path = ansiBuffer;
-
-               CoTaskMemFree(displayName);
-               displayName = 0;
-            }
-
-            framework::SafeRelease(psi);
-         }
-      }
-
-      framework::SafeRelease(pfod);
-   }
-
-   if(uninitializeRequired == true)
-   {
-      CoUninitialize();
-   }
-
-#else
-   
    NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
    if(nil != fileDialog)
    {
@@ -215,8 +100,6 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
       fileDialog.title = [NSString stringWithUTF8String: title.c_str()];
       
       NSString* initialPath = [NSString stringWithUTF8String: folder.c_str()];
-//      NSArray* fileTypes = [[NSArray alloc] initWithObjects:@"txt", nil];
-//      if([fileDialog runModalForDirectory:initialPath file:nil types:fileTypes] == NSFileHandlingPanelOKButton)
       if([fileDialog runModalForDirectory:initialPath file:nil types:nil] == NSFileHandlingPanelOKButton)
 #pragma clang diagnostic pop
       {
@@ -226,43 +109,35 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
       fileDialog = nil;
    }
    
-#endif
-   
    return path;
 }
    
 const std::string FileManager::AppendPath(const std::string& prefix, const std::string& append)
 {
-#ifdef WIN32
-   const char PATH_DELIMITER_CHAR = '\\';
-#else
-   const char PATH_DELIMITER_CHAR = '/';
-#endif
-   return prefix + PATH_DELIMITER_CHAR + append;
+   return prefix + '/' + append;
 }
  
-const std::string FileManager::ApplicationSupportDirectory()
+const std::string FileManager::UserApplicationSupportDirectory()
 {
-   std::string directory;
-#ifdef WIN32
-#else
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                          inDomains:NSUserDomainMask] firstObject];
-   directory = [applicationSupportDirectory fileSystemRepresentation];
-#endif
+   const std::string directory = [applicationSupportDirectory fileSystemRepresentation];
    return directory;
 }
- 
+
+const std::string FileManager::SystemApplicationSupportDirectory()
+{
+   NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+                                                                                inDomains:NSSystemDomainMask] firstObject];
+   const std::string directory = [applicationSupportDirectory fileSystemRepresentation];
+   return directory;
+}
+   
+
 const bool FileManager::FileExists(const std::string& path)
 {
-   bool fileExists = false;
-
-#ifdef WIN32
-#else
    NSFileManager* fileManager = [NSFileManager defaultManager];
-   fileExists = [fileManager fileExistsAtPath: [NSString stringWithUTF8String: path.c_str()]] == YES;
-#endif
-   
+   const bool fileExists = [fileManager fileExistsAtPath: [NSString stringWithUTF8String: path.c_str()]] == YES;
    return fileExists;
 }
    

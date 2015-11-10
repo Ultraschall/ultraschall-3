@@ -25,37 +25,37 @@
 #include <vector>
 #include <fstream>
 
+#include <TextFileReader.h>
 #include <StringUtilities.h>
 
-#include "AddChaptersAction.h"
+#include "InsertChaptersAction.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "MessageBox.h"
 
 namespace ultraschall { namespace reaper {
 
-static CustomAction<AddChaptersAction> action;
+static DeclareCustomAction<InsertChaptersAction> action;
 
-const char* AddChaptersAction::UniqueId()
+const char* InsertChaptersAction::UniqueId()
 {
-   return "ULTRASCHALL_ADD_CHAPTERS";
+   return "ULTRASCHALL_INSERT_CHAPTERS";
 }
 
-const ServiceStatus AddChaptersAction::Execute()
+const ServiceStatus InsertChaptersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
-   std::string path = FileManager::BrowseForFiles(fileBrowserTitleId_);
+   const std::string path = FileManager::BrowseForFiles(fileBrowserTitleId_);
    PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
-   std::vector<framework::ChapterMarker> chapterMarkers;
    const Application& application = Application::Instance();
+   std::vector<framework::ChapterMarker> chapterMarkers;
 
-   std::ifstream input(path);
-   std::string entry;
-   while(std::getline(input, entry))
+   const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
+   for(const std::string& line : lines)
    {
-      const std::vector<std::string> items = framework::split(entry, ' ');
+      const std::vector<std::string> items = framework::split(line, ' ');
       if(items.size() > 0)
       {
          const double timestamp = application.StringToTimestamp(items[0]);
@@ -69,11 +69,11 @@ const ServiceStatus AddChaptersAction::Execute()
          {
             name += " " + items[i];
          }
-
+         
          chapterMarkers.push_back(framework::ChapterMarker(timestamp, name));
       }
    }
-
+   
    size_t addedChapterMarkers = 0;
    for(size_t i = 0; i < chapterMarkers.size(); i++)
    {
@@ -84,8 +84,6 @@ const ServiceStatus AddChaptersAction::Execute()
       }
    }
 
-   input.close();
-   
    if(chapterMarkers.size() == addedChapterMarkers)
    {
       MessageBox::Show(successMessageId_);

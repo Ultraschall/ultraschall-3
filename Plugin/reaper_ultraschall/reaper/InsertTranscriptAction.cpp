@@ -35,7 +35,7 @@
 
 namespace ultraschall { namespace reaper {
 
-static CustomAction<InsertTranscriptAction> action;
+static DeclareCustomAction<InsertTranscriptAction> action;
 
 const char* InsertTranscriptAction::UniqueId()
 {

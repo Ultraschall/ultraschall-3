@@ -22,30 +22,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
-#include "MessageBox.h"
-
-#import "NotificationWindow.h"
+#include "InvalidEntryPointException.h"
 
 namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
+
+InvalidEntryPointException::InvalidEntryPointException(const std::string& entryPoint) :
+   std::exception(), entryPoint_(entryPoint)
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
 }
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
+const char* InvalidEntryPointException::what() const noexcept 
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
+   return entryPoint_.c_str();
 }
    
 }}

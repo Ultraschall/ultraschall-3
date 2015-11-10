@@ -22,31 +22,45 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
-#include "MessageBox.h"
-
-#import "NotificationWindow.h"
+#include <string>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#include "ReaperVersionCheck.h"
+#include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
+
+const std::string QueryReaperVersion()
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
+   std::string version;
+   
+   if(PlatformCheck() == true)
+   {
+      NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
+      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
+      NSString* value = [plist objectForKey: @"CFBundleVersion"];
+      version = [value UTF8String];
+   }
+   
+   return version;
+}
+   
+const bool VersionCheck()
+{
+   bool result = false;
+   
+   std::string version = QueryReaperVersion();
+   if((version.size() >= 2) && (version[0] == '5') && (version[1] == '.'))
+   {
+      result = true;
+   }
+   
+   return result;
+}
+ 
+const bool PlatformCheck()
+{
+   return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
 }
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
-   
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
-   
 }}
-

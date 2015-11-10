@@ -29,11 +29,11 @@
 
 #include <ResourceManager.h>
 
-#include "ICustomAction.h"
+#include "CustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChaptersToProjectAction : public ICustomAction
+class SaveChaptersToProjectAction : public CustomAction
 {
 public:
    static const char* UniqueId();
@@ -45,13 +45,13 @@ public:
       return SERVICE_SUCCESS;
    }
 
-   virtual const char* LocalizedName() const
+   virtual const char* LocalizedName() const override
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       return resourceManager.GetLocalizedString(actionNameId_);
    }
    
-   virtual const ServiceStatus Execute();
+   virtual const ServiceStatus Execute() override;
 
 protected:
    virtual ~SaveChaptersToProjectAction()

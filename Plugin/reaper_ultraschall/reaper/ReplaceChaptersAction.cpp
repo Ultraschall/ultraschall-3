@@ -25,6 +25,7 @@
 #include <vector>
 #include <fstream>
 
+#include <TextFileReader.h>
 #include <StringUtilities.h>
 
 #include "ReplaceChaptersAction.h"
@@ -34,7 +35,7 @@
 
 namespace ultraschall { namespace reaper {
 
-static CustomAction<ReplaceChaptersAction> action;
+static DeclareCustomAction<ReplaceChaptersAction> action;
 
 const char* ReplaceChaptersAction::UniqueId()
 {
@@ -45,17 +46,16 @@ const ServiceStatus ReplaceChaptersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
-   std::string path = FileManager::BrowseForFiles(fileBrowserTitleId_);
+   const std::string path = FileManager::BrowseForFiles(fileBrowserTitleId_);
    PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
-   std::vector<framework::ChapterMarker> chapterMarkers;
    const Application& application = Application::Instance();
+   std::vector<framework::ChapterMarker> chapterMarkers;
 
-   std::ifstream input(path);
-   std::string entry;
-   while(std::getline(input, entry))
+   const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
+   for(const std::string& line : lines)
    {
-      const std::vector<std::string> items = framework::split(entry, ' ');
+      const std::vector<std::string> items = framework::split(line, ' ');
       if(items.size() > 1)
       {
          const double timestamp = application.StringToTimestamp(items[0]);
@@ -81,8 +81,6 @@ const ServiceStatus ReplaceChaptersAction::Execute()
       }
    }
 
-   input.close();
-   
    if(chapterMarkers.size() == replacedChapterMarkers)
    {
       MessageBox::Show(successMessageId_);

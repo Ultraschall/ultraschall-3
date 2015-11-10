@@ -25,8 +25,6 @@
 #include <vector>
 #include <fstream>
 
-#include <StringUtilities.h>
-
 #include "SaveChaptersToProjectAction.h"
 #include "Application.h"
 #include "FileManager.h"
@@ -34,7 +32,7 @@
 
 namespace ultraschall { namespace reaper {
 
-static CustomAction<SaveChaptersToProjectAction> action;
+static DeclareCustomAction<SaveChaptersToProjectAction> action;
 
 const char* SaveChaptersToProjectAction::UniqueId()
 {

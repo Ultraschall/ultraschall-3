@@ -22,39 +22,39 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ADD_CHAPTERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_ADD_CHAPTERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__
 
 #include <string>
 
 #include <ResourceManager.h>
 
-#include "ICustomAction.h"
+#include "CustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-class AddChaptersAction : public ICustomAction
+class InsertChaptersAction : public CustomAction
 {
 public:
    static const char* UniqueId();
 
    static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
    {
-      pCustomAction = new AddChaptersAction();
+      pCustomAction = new InsertChaptersAction();
       PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
       return SERVICE_SUCCESS;
    }
 
-   virtual const char* LocalizedName() const
+   virtual const char* LocalizedName() const override
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       return resourceManager.GetLocalizedString(actionNameId_);
    }
    
-   virtual const ServiceStatus Execute();
+   virtual const ServiceStatus Execute() override;
 
 protected:
-   virtual ~AddChaptersAction()
+   virtual ~InsertChaptersAction()
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       resourceManager.UnregisterLocalizedString(actionNameId_);
@@ -64,14 +64,14 @@ protected:
    }
 
 private:
-   AddChaptersAction()
+   InsertChaptersAction()
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
       if(ServiceSucceeded(status))
       {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Add chapter markers...");
-         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken hinzufügen...");
+         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Insert chapter markers...");
+         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken einfügen...");
       }
       
       status = resourceManager.RegisterLocalizedString(successMessageId_);
@@ -104,4 +104,4 @@ private:
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_ADD_CHAPTERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__

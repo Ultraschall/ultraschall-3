@@ -22,31 +22,42 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
-#include "MessageBox.h"
+#ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__
 
-#import "NotificationWindow.h"
+#include <string>
+
+#include <ResourceManager.h>
+
+#include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
-   
-void MessageBox::Show(const std::string& message, const bool isError)
-{
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
-}
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
+class CustomAction : public ICustomAction
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
-}
+public:
+   CustomAction()
+   {
+   }
+};
    
-   
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
+template<class CustomActionType> class DeclareCustomAction
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
+public:
+   DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.RegisterCustomAction(CustomActionType::UniqueId(), CustomActionType::CreateCustomAction);
+   }
+   
+   virtual ~DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.UnregisterCustomAction(CustomActionType::UniqueId());
+   }
+};
    
 }}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__
 

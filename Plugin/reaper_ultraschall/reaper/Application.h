@@ -29,8 +29,7 @@
 #include <IActivationService.h>
 #include <IConfigurationService.h>
 #include <ChapterMarker.h>
-#include<TranscriptItem.h>
-#include "Reaper.h"
+#include <TranscriptItem.h>
 
 #include "CustomActionManager.h"
 #include "CustomActionFactory.h"
@@ -39,12 +38,6 @@ namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
 
-struct ApplicationStartupInformation : public framework::StartupInformation
-{
-   REAPER_PLUGIN_HINSTANCE instance;
-   reaper_plugin_info_t* pPluginInfo;
-};
-   
 class Application : public framework::IActivationService,
                     public framework::IConfigurationService
 {
@@ -53,18 +46,15 @@ public:
 
    static Application& Instance();
 
-   const ServiceStatus Start(const framework::StartupInformation& startupInformation);
+   const ServiceStatus Start();
    void Stop();
 
    virtual const ServiceStatus Configure();
    
    template<class CustomActionType> const ServiceStatus RegisterCustomAction() const;
-   static const bool OnCustomAction(const int32_t id, const int16_t flags);
-   static const bool OnCustomAction2(KbdSectionInfo* sec, int cmdId, int val, int valhw, int relmode, HWND hwnd);
+   static const bool OnCustomAction(const int32_t id);
 
    static const size_t MAX_REAPER_STRING_BUFFER_SIZE = 4096;
-
-   HWND GetMainHwnd() const;
 
    const std::string GetExportPathName() const;
    const std::string GetProjectPathName() const;
@@ -84,16 +74,14 @@ public:
    
    const bool InsertTransriptItem(const framework::TranscriptItem transcriptItem) const;
    
+   static std::string ParseReaperVersion();
+    
 private:
    Application();
 
-   REAPER_PLUGIN_HINSTANCE instance_;
-   reaper_plugin_info_t* pPluginInfo_;
-   mutable int (*pPluginRegister_)(const char* name, void* pInfoStruct);
+   static const bool HealthCheck();
 
    const int Register(const char* name, void* pInfoStruct) const;
-   
-   std::string hostLanguage_;
 };
 
 typedef struct
@@ -106,8 +94,6 @@ typedef struct
    
 template<class CustomActionType> const ServiceStatus Application::RegisterCustomAction() const
 {
-   PRECONDITION_RETURN(pPluginInfo_ != 0, SERVICE_FAILURE);
-
    ServiceStatus status = SERVICE_FAILURE;
 
    const char* uniqueId = CustomActionType::UniqueId();
@@ -121,11 +107,9 @@ template<class CustomActionType> const ServiceStatus Application::RegisterCustom
          const char* localisedName = pCustomAction->LocalizedName();
          if(localisedName != 0)
          {
-            static custom_action_register_t action;
-            memset(&action, 0, sizeof(custom_action_register_t));
+            custom_action_register_t action = {0};
             action.idStr = uniqueId;
             action.name = localisedName;
-            action.uniqueSectionId = 0;
             const int32_t id = Register("custom_action", (void*)&action);
             if(id != 0)
             {
