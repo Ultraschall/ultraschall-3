@@ -29,9 +29,9 @@
 
 #include "Application.h"
 #include "ReaperEntryPoints.h"
+#include "ReaperVersionCheck.h"
 #include "FileManager.h"
 #include "MessageBox.h"
-
 namespace ultraschall { namespace reaper {
 
 Application::Application()
@@ -326,21 +326,25 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ");
 
    const std::string information3("\
-The Ultraschall REAPER Extension requires REAPER 5.x.\
+The Ultraschall REAPER Extension requires REAPER 5.\
 ");
 
    const std::string information4("\
-If you want to use the Ultraschall REAPER extension, you must install REAPER 5.x.\
+If you want to use the Ultraschall REAPER extension, you must install REAPER 5.\
 ");
    
    const std::string information5("\
-\
+The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.\
+");
+   
+   const std::string information6("\
+If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.\
 ");
    
    
    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() +
                                               "/REAPER/UserPlugins/reaper_sws_extension.dylib";
-   if(FileManager::FileExists(swsPlugin2_8SystemPath) == true)
+   if((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
    {
       MessageBox::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
       ok = false;
@@ -348,7 +352,7 @@ If you want to use the Ultraschall REAPER extension, you must install REAPER 5.x
    
    const std::string swsPlugin2_7SystemPath = FileManager::SystemApplicationSupportDirectory() +
                                               "/REAPER/UserPlugins/reaper_sws.dylib";
-   if(FileManager::FileExists(swsPlugin2_7SystemPath) == true)
+   if((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
    {
       MessageBox::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
       ok = false;
@@ -356,34 +360,26 @@ If you want to use the Ultraschall REAPER extension, you must install REAPER 5.x
 
    const std::string ultraschallPluginSystemPath = FileManager::SystemApplicationSupportDirectory() +
                                                    "/REAPER/UserPlugins/reaper_ultraschall.dylib";
-   if(FileManager::FileExists(ultraschallPluginSystemPath) == true)
+   if((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
    {
       MessageBox::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
       ok = false;
    }
    
-   const std::string reaperVersionFile = FileManager::UserApplicationSupportDirectory() +
-                                         "/REAPER/reaper-install-rev.txt";
-   if(FileManager::FileExists(reaperVersionFile) == true)
+   if((true == ok) && (PlatformCheck() == false))
    {
-      std::vector<std::string> lines = framework::TextFileReader::ReadLines(reaperVersionFile);
-      if(lines.empty() == false)
-      {
-         if(lines[0][0] != '5')
-         {
-            MessageBox::Show(message, information3 + " " + information4 , true);
-            ok = false;
-         }
-      }
+      MessageBox::Show(message, information5 + " "  + information6, true);
+      ok = false;
    }
-   else
+   
+   if((true == ok) && (VersionCheck() == false))
    {
-      MessageBox::Show(message, information3 + " " + information4 , true);
+      MessageBox::Show(message, information3 + " "  + information4, true);
       ok = false;
    }
    
    return ok;
 }
-    
+
 }}
 

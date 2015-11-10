@@ -68,6 +68,8 @@
 		42F19A7E1ABEE82200231F3D /* SaveChaptersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A6F1ABEE82200231F3D /* SaveChaptersAction.h */; };
 		42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A701ABEE82200231F3D /* ICustomAction.h */; };
 		42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */; };
+		42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */; };
+		42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */; };
 		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 /* End PBXBuildFile section */
@@ -147,6 +149,8 @@
 		42F19A6F1ABEE82200231F3D /* SaveChaptersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveChaptersAction.h; path = reaper/SaveChaptersAction.h; sourceTree = "<group>"; };
 		42F19A701ABEE82200231F3D /* ICustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICustomAction.h; path = reaper/ICustomAction.h; sourceTree = "<group>"; };
 		42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reaper_ultraschall.cpp; path = reaper/reaper_ultraschall.cpp; sourceTree = "<group>"; };
+		42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ReaperVersionCheck.cpp; path = reaper/ReaperVersionCheck.cpp; sourceTree = "<group>"; };
+		42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaperVersionCheck.h; path = reaper/ReaperVersionCheck.h; sourceTree = "<group>"; };
 		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +256,8 @@
 				429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */,
 				42915BD61BDC040A00916876 /* NotificationWindow.h */,
 				42915BD71BDC040A00916876 /* NotificationWindow.mm */,
+				42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */,
+				42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -294,6 +300,7 @@
 				42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
+				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				424C82FD1AC8085D00231F3D /* SharedObject.h in Headers */,
 				42F19A7A1ABEE82200231F3D /* CustomActionManager.h in Headers */,
 				424C82FB1AC8085D00231F3D /* ServiceManager.h in Headers */,
@@ -362,6 +369,7 @@
 				42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */,
 				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
 				42F19A7D1ABEE82200231F3D /* SaveChaptersAction.cpp in Sources */,
+				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
 				4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */,
 				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
 				42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */,

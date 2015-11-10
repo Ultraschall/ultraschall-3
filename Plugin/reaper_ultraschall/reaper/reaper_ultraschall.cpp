@@ -56,10 +56,14 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
                if(ServiceSucceeded(application.Start()))
                {
                   application.RegisterCustomAction<reaper::InsertChaptersAction>();
+#if 0
                   application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
+#endif
                   application.RegisterCustomAction<reaper::SaveChaptersAction>();
                   application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
+#if 0
                   application.RegisterCustomAction<reaper::InsertTranscriptAction>();
+#endif
                }
             }
          }

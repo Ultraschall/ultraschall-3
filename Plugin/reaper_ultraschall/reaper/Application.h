@@ -74,6 +74,8 @@ public:
    
    const bool InsertTransriptItem(const framework::TranscriptItem transcriptItem) const;
    
+   static std::string ParseReaperVersion();
+    
 private:
    Application();
 
