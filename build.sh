@@ -1,11 +1,11 @@
 #!/bin/sh
 
+export ULTRASCHALL_RELEASE=Ultraschall-Echolot-alpha3
+export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
+
 # Cleanup old installer image
-if [ -f ./Ultraschall-2.0.dmg ]; then
-	rm -f ./Ultraschall-2.0.dmg
-fi
-if [ -f ./Ultraschall-2.0.dmg.zip ]; then
-	rm -f ./Ultraschall-2.0.dmg.zip
+if [ -f ./$ULTRASCHALL_RELEASE_DISK1 ]; then
+	rm -f ./$ULTRASCHALL_RELEASE_DISK1
 fi
 
 # Cleanup temporary build directory
@@ -19,20 +19,24 @@ if [ -d ./Payload ]; then
 	rm -rf ./Payload
 fi
 mkdir ./Payload
-mkdir ./Payload/Resources
+mkdir ./Payload/Add-ons
 
-# Copy release notes to payload directory
-cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Resources/Rams\ Edition\ Release-Poster.pdf
-cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Resources/Rams\ Edition\ Release-Poster.png
+# Build and copy release notes to payload directory
+pushd ../REAPER/Documentation
+make 
+popd
 cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html ./Payload/Ultraschall\ Install\ and\ Release\ Notes.html
+rm ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html
 
 # Copy uninstall script to payload directory
 cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
 
-# Copy resources to payload directory
-cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Resources/Ultraschall\ Colorset.SWSColor
-cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Resources/Ultraschall\ Microbanner\ 80x15.png
-cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Resources/Ultraschall\ Webbanner.png
+# Copy resources to payload 'Add-ons' directory
+cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Add-ons/Rams\ Edition\ Release-Poster.pdf
+cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Add-ons/Rams\ Edition\ Release-Poster.png
+cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Add-ons/Ultraschall\ Colorset.SWSColor
+cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Add-ons/Ultraschall\ Microbanner\ 80x15.png
+cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\ Webbanner.png
 
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
@@ -62,6 +66,9 @@ pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources
 # Create Ultraschall Soundflower Uninstaller package
 pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
 
+# Copy Ultraschall Hub package
+cp ./3rdParty/Hub/UltraschallHub-2015-11-09.pkg ./Payload/UltraschallHub.pkg
+
 # Create preliminary unsigned installer package 
 productbuild --distribution ./Scripts/distribution.xml --resources ./Resources --package-path ./Build ./Payload/Ultraschall-unsigned.pkg
 rm -rf ./Build
@@ -71,7 +78,7 @@ productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create installer image
-hdiutil create -srcfolder ./Payload -fs HFS+ -volname "Ultraschall 2.0-alpha1" ./Ultraschall-2.0.dmg
+hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
 rm -rf ./Payload
 
 
