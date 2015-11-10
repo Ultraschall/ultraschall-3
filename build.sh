@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0-alpha2
+export ULTRASCHALL_RELEASE=Ultraschall-Echolot-alpha3
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -65,6 +65,9 @@ pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources
 
 # Create Ultraschall Soundflower Uninstaller package
 pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
+
+# Copy Ultraschall Hub package
+cp ./3rdParty/Hub/UltraschallHub-2015-11-09.pkg ./Payload/UltraschallHub.pkg
 
 # Create preliminary unsigned installer package 
 productbuild --distribution ./Scripts/distribution.xml --resources ./Resources --package-path ./Build ./Payload/Ultraschall-unsigned.pkg
