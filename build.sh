@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-Echolot-alpha3
+export ULTRASCHALL_RELEASE=Ultraschall-Echolot-alpha4
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -41,20 +41,24 @@ cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
 
-# Create Ultraschall REAPER Plugin package
+# Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
-pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Products/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPlugin.pkg
+pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Products/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
 
 # Create Ultraschall REAPER Plugin scripts package
 pkgbuild --root ../REAPER/Plugin/Scripts --scripts ./Scripts/Scripts --identifier fm.ultraschall.Plugin.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/UltraschallPluginScripts.pkg
 
 # Create Ultraschall Soundboard package
-pkgbuild --root ./3rdParty/Soundboard/VST/Payload --identifier fm.ultraschall.Soundboard --install-location /Library/Audio/Plug-ins/VST ./Build/UltraschallSoundboard.pkg
+pushd ../Soundboard
+./Build/build_mac.sh
+popd
 
-# Create Ultraschall Soundboard scripts package
-pkgbuild --root ./3rdParty/Soundboard/Extras/Payload --identifier fm.ultraschall.Soundboard.Scripts --install-location /Library ./Build/UltraschallSoundboardScripts.pkg
+pkgbuild --root ../Soundboard/Files/VST --identifier fm.ultraschall.Soundboard.VST --install-location /Library/Audio/Plug-ins/VST ./Build/UltraschallSoundboardVST.pkg
 
-# Create SWS REAPER Plugin package
+# Create Ultraschall Soundboard extras package
+pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extras --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallSoundboardExtras.pkg
+
+# Create SWS REAPER Plugin Extension package
 pkgbuild --root ./3rdParty/SWS/UserPlugins/Payload --scripts ./3rdParty/SWS/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.1.pkg
 
 # Create SWS REAPER Plugin Scripts package
