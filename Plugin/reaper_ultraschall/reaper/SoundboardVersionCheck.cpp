@@ -25,26 +25,25 @@
 #include <string>
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "HubVersionCheck.h"
+#include "SoundboardVersionCheck.h"
 #include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
    
-const std::string QueryHubVersion()
+const std::string QuerySoundboardVersion()
 {
    std::string version;
    
-   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
+   NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                                     inDomains:NSUserDomainMask] firstObject];
+   NSMutableString* filePath = [NSMutableString stringWithUTF8String: [libraryDirectory fileSystemRepresentation]];
+   [filePath appendString: @"/Audio/Plug-Ins/VST/Soundboard.vst/Contents/Info.plist"];
+   if([[NSFileManager defaultManager] fileExistsAtPath: filePath])
    {
-      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
-
+      
       NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
       version = [value UTF8String];
-      
-      value = [plist objectForKey: @"CFBundleVersion"];
-      version += ".";
-      version += [value UTF8String];
    }
    
    return version;

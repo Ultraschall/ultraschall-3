@@ -31,14 +31,14 @@
 
 namespace ultraschall { namespace reaper {
    
-class AboutUltraschallAction : public CustomAction
+class AboutAction : public CustomAction
 {
 public:
    static const char* UniqueId();
    
    static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
    {
-      pCustomAction = new AboutUltraschallAction();
+      pCustomAction = new AboutAction();
       PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
       return SERVICE_SUCCESS;
    }
@@ -52,14 +52,14 @@ public:
    virtual const ServiceStatus Execute() override;
    
 protected:
-   virtual ~AboutUltraschallAction()
+   virtual ~AboutAction()
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       resourceManager.UnregisterLocalizedString(actionNameId_);
    }
    
 private:
-   AboutUltraschallAction()
+   AboutAction()
    {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
       ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);

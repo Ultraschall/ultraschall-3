@@ -22,32 +22,57 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#include <vector>
+#include <fstream>
+#include "ReaperVersionCheck.h"
 #include "HubVersionCheck.h"
-#include "FileManager.h"
+#include "SoundboardVersionCheck.h"
+#include "AboutAction.h"
+#include "MessageBox.h"
+#include "About.h"
 
 namespace ultraschall { namespace reaper {
    
-const std::string QueryHubVersion()
-{
-   std::string version;
-   
-   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
-   {
-      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
-      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
+static DeclareCustomAction<AboutAction> action;
 
-      NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
-      version = [value UTF8String];
-      
-      value = [plist objectForKey: @"CFBundleVersion"];
-      version += ".";
-      version += [value UTF8String];
+const char* AboutAction::UniqueId()
+{
+   return "ULTRASCHALL_ABOUT_ULTRASCHALL";
+}
+
+const ServiceStatus AboutAction::Execute()
+{
+#if 1
+   std::string message1 = "\
+http://ultraschall.fm\r\n\r\n\
+Copyright (c) 2015 Ralf Stockmann, Malte Dreschert, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Ultraschall REAPER Extension 2.0\r\n";
+   
+   const std::string hubVersion = QueryHubVersion();
+   if(hubVersion.empty() == false)
+   {
+      message1 += "Ultraschall Hub " + hubVersion + "\r\n";
    }
    
-   return version;
+   const std::string soundboardVersion = QuerySoundboardVersion();
+   if(soundboardVersion.empty() == false)
+   {
+      message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
+   }
+   
+   std::string message2 = "\
+SWS REAPER Extension 2.8.2\r\n\
+REAPER ";
+
+   message2 += QueryReaperVersion();
+   message2 += "\r\n";
+   
+   MessageBox::Show("Ultraschall 2.0 \"Echolot\"", message1 + message2);
+#else
+   ShowAbout();
+#endif
+   return SERVICE_SUCCESS;
 }
    
 }}
+

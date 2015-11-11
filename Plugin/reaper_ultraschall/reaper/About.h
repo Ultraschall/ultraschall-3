@@ -22,32 +22,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
-#include "HubVersionCheck.h"
-#include "FileManager.h"
+#ifndef __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__
+#define __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__
 
 namespace ultraschall { namespace reaper {
    
-const std::string QueryHubVersion()
-{
-   std::string version;
-   
-   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
-   {
-      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
-      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
-
-      NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
-      version = [value UTF8String];
-      
-      value = [plist objectForKey: @"CFBundleVersion"];
-      version += ".";
-      version += [value UTF8String];
-   }
-   
-   return version;
-}
+const void ShowAbout();
    
 }}
+
+#endif // __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__

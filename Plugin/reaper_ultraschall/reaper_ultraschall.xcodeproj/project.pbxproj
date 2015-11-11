@@ -31,11 +31,15 @@
 		424C830C1AC8086F00231F3D /* FileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83011AC8086F00231F3D /* FileManager.h */; };
 		424C830E1AC8086F00231F3D /* InsertChaptersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424C83031AC8086F00231F3D /* InsertChaptersAction.cpp */; };
 		424C830F1AC8086F00231F3D /* InsertChaptersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83041AC8086F00231F3D /* InsertChaptersAction.h */; };
+		424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */; };
+		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
+		424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CBB1BF389E0004DBA2F /* About.cpp */; };
+		424F7CBE1BF389E0004DBA2F /* About.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CBC1BF389E0004DBA2F /* About.h */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C98E1BF2911200B1EF1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4254C98D1BF2911200B1EF1F /* libz.tbd */; };
-		4254C9911BF2A7D900B1EF1F /* AboutUltraschallAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutUltraschallAction.cpp */; };
-		4254C9921BF2A7D900B1EF1F /* AboutUltraschallAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C9901BF2A7D900B1EF1F /* AboutUltraschallAction.h */; };
+		4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */; };
+		4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C9901BF2A7D900B1EF1F /* AboutAction.h */; };
 		4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */; };
 		4254C9961BF2BA6400B1EF1F /* HubVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */; };
 		4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */; };
@@ -119,11 +123,15 @@
 		424C83011AC8086F00231F3D /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileManager.h; path = reaper/FileManager.h; sourceTree = "<group>"; };
 		424C83031AC8086F00231F3D /* InsertChaptersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertChaptersAction.cpp; path = reaper/InsertChaptersAction.cpp; sourceTree = "<group>"; };
 		424C83041AC8086F00231F3D /* InsertChaptersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertChaptersAction.h; path = reaper/InsertChaptersAction.h; sourceTree = "<group>"; };
+		424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SoundboardVersionCheck.cpp; path = reaper/SoundboardVersionCheck.cpp; sourceTree = "<group>"; };
+		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
+		424F7CBB1BF389E0004DBA2F /* About.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = About.cpp; path = reaper/About.cpp; sourceTree = "<group>"; };
+		424F7CBC1BF389E0004DBA2F /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = About.h; path = reaper/About.h; sourceTree = "<group>"; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98D1BF2911200B1EF1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		4254C98F1BF2A7D900B1EF1F /* AboutUltraschallAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutUltraschallAction.cpp; path = reaper/AboutUltraschallAction.cpp; sourceTree = "<group>"; };
-		4254C9901BF2A7D900B1EF1F /* AboutUltraschallAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutUltraschallAction.h; path = reaper/AboutUltraschallAction.h; sourceTree = "<group>"; };
+		4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutAction.cpp; path = reaper/AboutAction.cpp; sourceTree = "<group>"; };
+		4254C9901BF2A7D900B1EF1F /* AboutAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutAction.h; path = reaper/AboutAction.h; sourceTree = "<group>"; };
 		4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = HubVersionCheck.cpp; path = reaper/HubVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HubVersionCheck.h; path = reaper/HubVersionCheck.h; sourceTree = "<group>"; };
 		4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryFileReader.cpp; path = framework/BinaryFileReader.cpp; sourceTree = "<group>"; };
@@ -276,10 +284,14 @@
 				42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */,
 				4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */,
 				4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */,
-				4254C98F1BF2A7D900B1EF1F /* AboutUltraschallAction.cpp */,
-				4254C9901BF2A7D900B1EF1F /* AboutUltraschallAction.h */,
+				4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */,
+				4254C9901BF2A7D900B1EF1F /* AboutAction.h */,
 				4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */,
 				4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */,
+				424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */,
+				424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */,
+				424F7CBB1BF389E0004DBA2F /* About.cpp */,
+				424F7CBC1BF389E0004DBA2F /* About.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -296,12 +308,14 @@
 				424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */,
 				424C82FF1AC8085D00231F3D /* SharedObjectManager.h in Headers */,
 				424C830C1AC8086F00231F3D /* FileManager.h in Headers */,
+				424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */,
 				423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */,
 				425A03B81B4047F000231F3D /* ResourceId.h in Headers */,
 				429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */,
 				424C82FE1AC8085D00231F3D /* SharedObjectFactory.h in Headers */,
 				42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */,
-				4254C9921BF2A7D900B1EF1F /* AboutUltraschallAction.h in Headers */,
+				4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */,
+				424F7CBE1BF389E0004DBA2F /* About.h in Headers */,
 				425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */,
 				4254C9961BF2BA6400B1EF1F /* HubVersionCheck.h in Headers */,
 				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
@@ -403,12 +417,14 @@
 				42DC63E81AD0367A00231F3D /* SaveChaptersToProjectAction.cpp in Sources */,
 				425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */,
 				42F19A791ABEE82200231F3D /* CustomActionManager.cpp in Sources */,
+				424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */,
 				424C830E1AC8086F00231F3D /* InsertChaptersAction.cpp in Sources */,
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
+				424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */,
 				4269F9591B221C0E00231F3D /* StringUtilities.cpp in Sources */,
 				4242E97A1BAC99D700382B79 /* TranscriptItem.cpp in Sources */,
 				423F32B71B51877800231F3D /* ServiceFactory.cpp in Sources */,
@@ -420,7 +436,7 @@
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
 				420891491B2492F800231F3D /* Malloc.cpp in Sources */,
 				423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */,
-				4254C9911BF2A7D900B1EF1F /* AboutUltraschallAction.cpp in Sources */,
+				4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
