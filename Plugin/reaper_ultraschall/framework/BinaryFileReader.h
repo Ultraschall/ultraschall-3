@@ -21,46 +21,19 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+#ifndef __ULTRASCHALL_FRAMEWORK_BINARY_FILE_READER_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_BINARY_FILE_READER_H_INCL__
 
-#include <string>
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
-#include "ReaperVersionCheck.h"
-#include "FileManager.h"
+#include <Stream.h>
 
-namespace ultraschall { namespace reaper {
-
-const std::string QueryReaperVersion()
+namespace ultraschall { namespace framework {
+   
+class BinaryFileReader
 {
-   std::string version;
+public:
+   static Stream<uint8_t>* ReadBytes(const std::string& filename);
+};
    
-   if(ReaperPlatformCheck() == true)
-   {
-      NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
-      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
-      NSString* value = [plist objectForKey: @"CFBundleVersion"];
-      version = [value UTF8String];
-   }
-   
-   return version;
-}
-   
-const bool ReaperVersionCheck()
-{
-   bool result = false;
-   
-   std::string version = QueryReaperVersion();
-   if((version.size() >= 2) && (version[0] == '5') && (version[1] == '.'))
-   {
-      result = true;
-   }
-   
-   return result;
-}
- 
-const bool ReaperPlatformCheck()
-{
-   return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
-}
-
 }}
+
+#endif // #ifdef __ULTRASCHALL_FRAMEWORK_BINARY_FILE_READER_H_INCL__

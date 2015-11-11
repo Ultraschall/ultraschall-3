@@ -22,35 +22,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_STRING_TRAITS_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_STRING_TRAITS_H_INCL__
+#include <string>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#include "HubVersionCheck.h"
+#include "FileManager.h"
 
-#include <Framework.h>
-
-namespace ultraschall { namespace framework {
+namespace ultraschall { namespace reaper {
    
-template<typename CharType> class UnicodeStringTraits
+const std::string QueryHubVersion()
 {
-public:
-   typedef CharType char_type;
+   std::string version;
    
-   static const bool Equal(const char_type* lhs, const char_type* rhs);
+   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
+   {
+      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
+      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
+      NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
+      version = [value UTF8String];
+   }
    
-private:
-   static const size_t strlen(const char_type* str);
-
-   static const int strcmp(const char_type* left, const char_type* right);
-   
-   static void strcpy(char_type* target, const char_type* source);
-
-   static const char_type* strdup(const char_type* source);
-};
-   
-template<typename CharacterType> const bool UnicodeStringTraits<CharacterType>::Equal(const CharacterType* lhs, const CharacterType* rhs)
-{
-   return strcmp(lhs, rhs) == 0;
+   return version;
 }
-
+   
 }}
-
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_TRAITS_H_INCL__

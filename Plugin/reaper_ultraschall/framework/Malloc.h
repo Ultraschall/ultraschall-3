@@ -51,6 +51,8 @@ template<typename Type> Type* Malloc<Type>::Alloc(const size_t itemCount)
    {
       std::memset(ptr, 0, Size() * itemCount);
    }
+   
+   return ptr;
 }
    
 template<typename Type> void Malloc<Type>::Free(Type*& ptr)

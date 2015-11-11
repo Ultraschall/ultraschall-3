@@ -27,8 +27,8 @@
 
 @interface NotificationWindow : NSObject
 
-+ (void) showWithMessage:(NSString*)message;
++ (void) showWithMessage:(NSString*)message asError:(BOOL)error;
 
-+ (void) showWithMessage:(NSString*)message info:(NSString*)info;
++ (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
 
 @end

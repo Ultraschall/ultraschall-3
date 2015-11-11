@@ -21,51 +21,45 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-#include <string.h>
-
-#include <UnicodeStringTraits.h>
+#include <fstream>
+#include <Stream.h>
+#include <BinaryFileReader.h>
 
 namespace ultraschall { namespace framework {
-
-template<> const size_t UnicodeStringTraits<char>::strlen(const char* str)
-{
-   return strlen(str);
-}
    
-template<> const size_t UnicodeStringTraits<wchar_t>::strlen(const wchar_t* str)
+Stream<uint8_t>* BinaryFileReader::ReadBytes(const std::string& filename)
 {
-   return wcslen(str);
-}
+   Stream<uint8_t>* pStream = 0;
    
-template<> const int UnicodeStringTraits<char>::strcmp(const char* left, const char* right)
-{
-   return strcmp(left, right);
-}
+   std::ifstream file(filename, std::ios::in | std::ios::binary | std::ios::ate);
+   if(file.is_open() == true)
+   {
+      const std::ifstream::pos_type fileSize = file.tellg();
+      file.seekg(std::ios::beg);
+      uint8_t* buffer = new uint8_t[fileSize];
+      if(buffer != 0)
+      {
+         file.read(reinterpret_cast<char*>(buffer), fileSize);
+         if(file)
+         {
+            pStream = new Stream<uint8_t>(fileSize);
+            if(pStream != 0)
+            {
+               const bool succeeded = pStream->Write(0, buffer, fileSize);
+               if(succeeded == false)
+               {
+                  SafeRelease(pStream);
+               }
+            }
+         }
+         
+         SafeDelete(buffer);
+      }
+      
+      file.close();
+   }
 
-template<> const int UnicodeStringTraits<wchar_t>::strcmp(const wchar_t* left, const wchar_t* right)
-{
-   return wcscmp(left, right);
-}
-
-template<> void UnicodeStringTraits<char>::strcpy(char* target, const char* source)
-{
-   strcpy(target, source);
-}
-
-template<> void UnicodeStringTraits<wchar_t>::strcpy(wchar_t* target, const wchar_t* source)
-{
-   wcscpy(target, source);
-}
-
-template<> const char* UnicodeStringTraits<char>::strdup(const char* source)
-{
-   return strdup(source);
-}
-   
-template<> const wchar_t* UnicodeStringTraits<wchar_t>::strdup(const wchar_t* source)
-{
-   return wcsdup(source);
+   return pStream;
 }
    
 }}

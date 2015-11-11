@@ -22,45 +22,37 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
-#include "ReaperVersionCheck.h"
+#include <zlib.h>
+#include <Stream.h>
+#include <BinaryFileReader.h>
+#include "SWSVersionCheck.h"
 #include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
-
-const std::string QueryReaperVersion()
-{
-   std::string version;
    
-   if(ReaperPlatformCheck() == true)
-   {
-      NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
-      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
-      NSString* value = [plist objectForKey: @"CFBundleVersion"];
-      version = [value UTF8String];
-   }
-   
-   return version;
-}
-   
-const bool ReaperVersionCheck()
+const bool SWSVersionCheck()
 {
    bool result = false;
    
-   std::string version = QueryReaperVersion();
-   if((version.size() >= 2) && (version[0] == '5') && (version[1] == '.'))
+   const std::string swsPlugin2_8UserPath = FileManager::UserApplicationSupportDirectory() +
+                                                "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+   if(FileManager::FileExists(swsPlugin2_8UserPath) == true)
    {
-      result = true;
+      framework::Stream<uint8_t>* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
+      if(pStream != 0)
+      {
+         static const uint64_t originalCrc = 1538196303;
+         const uint64_t crc = pStream->CRC32();
+         if(originalCrc == crc)
+         {
+            result = true;
+         }
+         
+         SafeRelease(pStream);
+      }
    }
    
    return result;
 }
- 
-const bool ReaperPlatformCheck()
-{
-   return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
-}
-
+   
 }}

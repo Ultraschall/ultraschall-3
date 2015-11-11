@@ -21,8 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
-#define __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
+#ifndef __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__
 
 #include <vector>
 #include <string>
@@ -37,4 +37,4 @@ public:
 
 }}
 
-#endif // #ifdef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
+#endif // #ifdef __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__
