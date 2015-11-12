@@ -179,6 +179,14 @@ if [ -d ~/Library/Application\ Support/Ultraschall/TouchOSC ]; then
 	rm -rf ~/Library/Application\ Support/Ultraschall/TouchOSC
 fi
 
+if [ -f ~/Library/Application\ Support/Ultraschall/MIDI.md ]; then
+	rm -f ~/Library/Application\ Support/Ultraschall/MIDI.md
+fi
+
+if [ -f ~/Library/Application\ Support/Ultraschall/OSC.md ]; then
+	rm -f ~/Library/Application\ Support/Ultraschall/OSC.md
+fi
+
 # Uninstall Ultraschall Soundboard Extras from system domain
 if [ -d /Library/Application\ Support/Ultraschall/AudioTemplates ]; then
 	sudo rm -rf /Library/Application\ Support/Ultraschall/AudioTemplates

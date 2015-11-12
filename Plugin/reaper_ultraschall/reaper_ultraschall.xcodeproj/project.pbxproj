@@ -52,6 +52,12 @@
 		425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 425A03B61B4047F000231F3D /* ResourceManager.h */; };
 		4269F9591B221C0E00231F3D /* StringUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4269F9571B221C0E00231F3D /* StringUtilities.cpp */; };
 		4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4269F9581B221C0E00231F3D /* StringUtilities.h */; };
+		4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */; };
+		4284E9F91BF4B58C0056345A /* ThemeVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */; };
+		4284E9FC1BF4C4660056345A /* PatchConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284E9FA1BF4C4660056345A /* PatchConfiguration.cpp */; };
+		4284E9FD1BF4C4660056345A /* PatchConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284E9FB1BF4C4660056345A /* PatchConfiguration.h */; };
+		4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284EA021BF4D0E00056345A /* TextFileWriter.cpp */; };
+		4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284EA031BF4D0E00056345A /* TextFileWriter.h */; };
 		42915BD81BDC040A00916876 /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42915BD61BDC040A00916876 /* NotificationWindow.h */; };
 		42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationWindow.mm */; };
 		429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB0861BDBCDCE005EA658 /* CustomAction.cpp */; };
@@ -144,6 +150,12 @@
 		425A03B61B4047F000231F3D /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResourceManager.h; path = framework/ResourceManager.h; sourceTree = "<group>"; };
 		4269F9571B221C0E00231F3D /* StringUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringUtilities.cpp; path = framework/StringUtilities.cpp; sourceTree = "<group>"; };
 		4269F9581B221C0E00231F3D /* StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtilities.h; path = framework/StringUtilities.h; sourceTree = "<group>"; };
+		4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThemeVersionCheck.cpp; path = reaper/ThemeVersionCheck.cpp; sourceTree = "<group>"; };
+		4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeVersionCheck.h; path = reaper/ThemeVersionCheck.h; sourceTree = "<group>"; };
+		4284E9FA1BF4C4660056345A /* PatchConfiguration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PatchConfiguration.cpp; path = reaper/PatchConfiguration.cpp; sourceTree = "<group>"; };
+		4284E9FB1BF4C4660056345A /* PatchConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatchConfiguration.h; path = reaper/PatchConfiguration.h; sourceTree = "<group>"; };
+		4284EA021BF4D0E00056345A /* TextFileWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileWriter.cpp; path = framework/TextFileWriter.cpp; sourceTree = "<group>"; };
+		4284EA031BF4D0E00056345A /* TextFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileWriter.h; path = framework/TextFileWriter.h; sourceTree = "<group>"; };
 		42915BD61BDC040A00916876 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationWindow.h; path = reaper/NotificationWindow.h; sourceTree = "<group>"; };
 		42915BD71BDC040A00916876 /* NotificationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationWindow.mm; path = reaper/NotificationWindow.mm; sourceTree = "<group>"; };
 		429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = reaper_ultraschall.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +224,8 @@
 		42F19A5E1ABEE7EA00231F3D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				4284EA021BF4D0E00056345A /* TextFileWriter.cpp */,
+				4284EA031BF4D0E00056345A /* TextFileWriter.h */,
 				42FB15761BD65A65004DFF99 /* TextFileReader.cpp */,
 				42FB15771BD65A65004DFF99 /* TextFileReader.h */,
 				4233400C1B51489900231F3D /* ChapterMarker.cpp */,
@@ -292,6 +306,10 @@
 				424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */,
 				424F7CBB1BF389E0004DBA2F /* About.cpp */,
 				424F7CBC1BF389E0004DBA2F /* About.h */,
+				4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */,
+				4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */,
+				4284E9FA1BF4C4660056345A /* PatchConfiguration.cpp */,
+				4284E9FB1BF4C4660056345A /* PatchConfiguration.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -312,6 +330,7 @@
 				423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */,
 				425A03B81B4047F000231F3D /* ResourceId.h in Headers */,
 				429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */,
+				4284E9FD1BF4C4660056345A /* PatchConfiguration.h in Headers */,
 				424C82FE1AC8085D00231F3D /* SharedObjectFactory.h in Headers */,
 				42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */,
 				4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */,
@@ -322,6 +341,7 @@
 				429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */,
 				4242E9771BAC983B00382B79 /* InsertTranscriptAction.h in Headers */,
 				4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */,
+				4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */,
 				42DC63E91AD0367A00231F3D /* SaveChaptersToProjectAction.h in Headers */,
 				4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */,
 				4233400F1B51489900231F3D /* ChapterMarker.h in Headers */,
@@ -335,6 +355,7 @@
 				4208914A1B2492F800231F3D /* Malloc.h in Headers */,
 				42F19A7E1ABEE82200231F3D /* SaveChaptersAction.h in Headers */,
 				42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */,
+				4284E9F91BF4B58C0056345A /* ThemeVersionCheck.h in Headers */,
 				4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
@@ -409,6 +430,7 @@
 				42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */,
 				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
 				42F19A7D1ABEE82200231F3D /* SaveChaptersAction.cpp in Sources */,
+				4284E9FC1BF4C4660056345A /* PatchConfiguration.cpp in Sources */,
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
 				4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */,
 				4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */,
@@ -421,6 +443,7 @@
 				424C830E1AC8086F00231F3D /* InsertChaptersAction.cpp in Sources */,
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
+				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
@@ -431,6 +454,7 @@
 				42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */,
 				42F19A7B1ABEE82200231F3D /* ReaperEntryPoints.cpp in Sources */,
 				429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */,
+				4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */,
 				42A335ED1ACEF9BF00231F3D /* ReplaceChaptersAction.cpp in Sources */,
 				4242E9761BAC983B00382B79 /* InsertTranscriptAction.cpp in Sources */,
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,

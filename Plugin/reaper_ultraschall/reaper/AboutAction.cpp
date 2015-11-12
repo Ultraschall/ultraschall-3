@@ -25,6 +25,7 @@
 #include <vector>
 #include <fstream>
 #include "ReaperVersionCheck.h"
+#include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
 #include "SoundboardVersionCheck.h"
 #include "AboutAction.h"
@@ -47,6 +48,13 @@ const ServiceStatus AboutAction::Execute()
 http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2015 Ralf Stockmann, Malte Dreschert, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension 2.0\r\n";
+
+   const std::string themeVersion = QueryThemeVersion();
+   if(themeVersion.empty() == false)
+   {
+      message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
+   }
+
    
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
@@ -67,7 +75,7 @@ REAPER ";
    message2 += QueryReaperVersion();
    message2 += "\r\n";
    
-   MessageBox::Show("Ultraschall 2.0 \"Echolot\"", message1 + message2);
+   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_1)", message1 + message2);
 #else
    ShowAbout();
 #endif
