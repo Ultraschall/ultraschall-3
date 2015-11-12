@@ -21,8 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
-#define __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
+#ifndef __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__
 
 #include <vector>
 #include <string>
@@ -32,9 +32,10 @@ namespace ultraschall { namespace framework {
 class TextFileReader
 {
 public:
+   static const std::string Read(const std::string& filename);
    static const std::vector<std::string> ReadLines(const std::string& filename);
 };
 
 }}
 
-#endif // #ifdef __ULTRASCHALL_REAPER_TEXT_FILE_READER_H_INCL__
+#endif // #ifdef __ULTRASCHALL_FRAMEWORK_TEXT_FILE_READER_H_INCL__

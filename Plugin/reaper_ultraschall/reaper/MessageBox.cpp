@@ -31,13 +31,15 @@ namespace ultraschall { namespace reaper {
    
 void MessageBox::Show(const std::string& message, const bool isError)
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]];
+   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
+                               asError: isError ? YES : NO];
 }
 
 void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
 {
    [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
-                                  info: [NSString stringWithUTF8String: information.c_str()]];
+                                  info: [NSString stringWithUTF8String: information.c_str()]
+                                  asError: isError ? YES : NO];
 }
    
    

@@ -43,6 +43,7 @@ public:
    
    static const std::string AppendPath(const std::string& prefix, const std::string& append);
    
+   static const std::string UserHomeDirectory();
    static const std::string UserApplicationSupportDirectory();
    static const std::string SystemApplicationSupportDirectory();
    

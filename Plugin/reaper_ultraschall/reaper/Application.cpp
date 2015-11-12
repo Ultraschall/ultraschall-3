@@ -30,6 +30,7 @@
 #include "Application.h"
 #include "ReaperEntryPoints.h"
 #include "ReaperVersionCheck.h"
+#include "SWSVersionCheck.h"
 #include "FileManager.h"
 #include "MessageBox.h"
 namespace ultraschall { namespace reaper {
@@ -340,7 +341,11 @@ The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.\
    const std::string information6("\
 If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.\
 ");
-   
+
+   const std::string information7("\
+The installation of the Ultraschall REAPER extension has been corrupted. \
+Please reinstall the Ultraschall REAPER extension using the original or an updated installer.\
+");
    
    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() +
                                               "/REAPER/UserPlugins/reaper_sws_extension.dylib";
@@ -366,15 +371,21 @@ If you want to use the Ultraschall REAPER extension, you must install the 64-Bit
       ok = false;
    }
    
-   if((true == ok) && (PlatformCheck() == false))
+   if((true == ok) && (ReaperPlatformCheck() == false))
    {
       MessageBox::Show(message, information5 + " "  + information6, true);
       ok = false;
    }
    
-   if((true == ok) && (VersionCheck() == false))
+   if((true == ok) && (ReaperVersionCheck() == false))
    {
       MessageBox::Show(message, information3 + " "  + information4, true);
+      ok = false;
+   }
+   
+   if((true == ok) && (SWSVersionCheck() == false))
+   {
+      MessageBox::Show(message, information7, true);
       ok = false;
    }
    

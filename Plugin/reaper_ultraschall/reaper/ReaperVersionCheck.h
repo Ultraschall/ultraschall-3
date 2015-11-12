@@ -22,14 +22,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_VERSION_CHECK_H_INCL__
-#define __ULTRASCHALL_REAPER_VERSION_CHECK_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
+#define __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
 
 namespace ultraschall { namespace reaper {
    
-const bool VersionCheck();
-const bool PlatformCheck();
+const std::string QueryReaperVersion();
+const bool ReaperVersionCheck();
+const bool ReaperPlatformCheck();
    
 }}
 
-#endif // __ULTRASCHALL_REAPER_VERSION_CHECK_H_INCL__
+#endif // __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__

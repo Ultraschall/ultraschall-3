@@ -22,9 +22,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #include <fstream>
+#include <sstream>
 #include <TextFileReader.h>
 
 namespace ultraschall { namespace framework {
+
+const std::string TextFileReader::Read(const std::string& filename)
+{
+   std::stringstream str;
+   
+   std::ifstream inputStream(filename.c_str());
+   std::string line;
+   while(std::getline(inputStream, line))
+   {
+      str << line << std::endl;
+   }
+   
+   return str.str();
+}
 
 const std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
 {

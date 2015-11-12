@@ -34,7 +34,7 @@ const std::string QueryReaperVersion()
 {
    std::string version;
    
-   if(PlatformCheck() == true)
+   if(ReaperPlatformCheck() == true)
    {
       NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
@@ -45,7 +45,7 @@ const std::string QueryReaperVersion()
    return version;
 }
    
-const bool VersionCheck()
+const bool ReaperVersionCheck()
 {
    bool result = false;
    
@@ -58,7 +58,7 @@ const bool VersionCheck()
    return result;
 }
  
-const bool PlatformCheck()
+const bool ReaperPlatformCheck()
 {
    return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
 }

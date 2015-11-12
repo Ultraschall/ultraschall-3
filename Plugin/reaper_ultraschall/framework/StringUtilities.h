@@ -50,9 +50,6 @@ inline const std::vector<std::string> split(const std::string& input, const char
    return tokens;
 }
    
-const std::wstring to_utf16(const std::string& src);
-const std::string to_utf8(const std::wstring& src);
-   
 // trim from start
 static inline std::string &ltrim(std::string &s) {
    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
@@ -70,6 +67,16 @@ static inline std::string &trim(std::string &s) {
    return ltrim(rtrim(s));
 }
 
+static inline void replace(std::string& str, const std::string& source, const std::string& target)
+{
+   size_t start_pos = 0;
+   while((start_pos = str.find(source, start_pos)) != std::string::npos)
+   {
+      str.replace(start_pos, source.length(), target);
+      start_pos += target.length();
+   }
+}
+   
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__

@@ -116,7 +116,14 @@ const std::string FileManager::AppendPath(const std::string& prefix, const std::
 {
    return prefix + '/' + append;
 }
- 
+
+const std::string FileManager::UserHomeDirectory()
+{
+   NSString* userHomeDirectory = NSHomeDirectory();
+   const std::string directory = [userHomeDirectory UTF8String];
+   return directory;
+}
+   
 const std::string FileManager::UserApplicationSupportDirectory()
 {
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory

@@ -156,6 +156,13 @@ if [ -f /Library/Application\ Support/REAPER/Scripts/sws_python64.py ]; then
 	sudo rm -f /Library/Application\ Support/REAPER/Scripts/sws_python64.py
 fi
 
+# Uninstall Ultraschall Virtual Audio Devices from user domain
+if [ -d ~/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
+	sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+	rm -rf ~/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver
+	sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+fi
+
 # Uninstall Ultraschall Virtual Audio Devices from system domain
 if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
 	sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
@@ -163,20 +170,58 @@ if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
 	sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
 fi
 
+# Uninstall Ultraschall Soundboard Extras from user domain
+if [ -d ~/Library/Application\ Support/Ultraschall/AudioTemplates ]; then
+	rm -rf ~/Library/Application\ Support/Ultraschall/AudioTemplates
+fi
+
+if [ -d ~/Library/Application\ Support/Ultraschall/TouchOSC ]; then
+	rm -rf ~/Library/Application\ Support/Ultraschall/TouchOSC
+fi
+
+if [ -f ~/Library/Application\ Support/Ultraschall/MIDI.md ]; then
+	rm -f ~/Library/Application\ Support/Ultraschall/MIDI.md
+fi
+
+if [ -f ~/Library/Application\ Support/Ultraschall/OSC.md ]; then
+	rm -f ~/Library/Application\ Support/Ultraschall/OSC.md
+fi
+
+# Uninstall Ultraschall Soundboard Extras from system domain
+if [ -d /Library/Application\ Support/Ultraschall/AudioTemplates ]; then
+	sudo rm -rf /Library/Application\ Support/Ultraschall/AudioTemplates
+fi
+
+if [ -d /Library/Application\ Support/Ultraschall/TouchOSC ]; then
+	sudo rm -rf /Library/Application\ Support/Ultraschall/TouchOSC
+fi
+
 # Uninstall Ultraschall Soundboard from user domain
 if [ -d ~/Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	rm -rf ~/Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
-if [ -d ~/Library/Ultraschall ]; then
-	rm -rf ~/Library/Ultraschall
-fi
-
-# Uninstall Ultraschall from system domain
+# Uninstall Ultraschall Soundboard from system domain
 if [ -d /Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	sudo rm -rf /Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
+# Uninstall Ultraschall Add-ons from user domain
+if [ -f ~/Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png ]; then
+	rm -f ~/Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png
+fi
+
+# Uninstall Ultraschall Add-ons from system domain
+if [ -f /Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png ]; then
+	sudo rm -f /Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png
+fi
+
+# Uninstall left-overs from user domain
+if [ -d ~/Library/Ultraschall ]; then
+	rm -rf ~/Library/Ultraschall
+fi
+
+# Uninstall left-overs from system domain
 if [ -d /Library/Ultraschall ]; then
 	sudo rm -rf /Library/Ultraschall
 fi
