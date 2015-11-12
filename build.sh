@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-Echolot-alpha4
+export ULTRASCHALL_RELEASE=Ultraschall-Gropius-prerelease_1
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -43,7 +43,7 @@ cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.Re
 
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
-pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Products/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
+pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
 
 # Create Ultraschall REAPER Plugin scripts package
 pkgbuild --root ../REAPER/Plugin/Scripts --scripts ./Scripts/Scripts --identifier fm.ultraschall.Plugin.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/UltraschallPluginScripts.pkg
@@ -71,7 +71,7 @@ pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources
 pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
 
 # Copy Ultraschall Hub package
-cp ./3rdParty/Hub/UltraschallHub-2015-11-09.pkg ./Payload/UltraschallHub.pkg
+cp ./3rdParty/Hub/UltraschallHub-2015-11-12.pkg ./Payload/UltraschallHub.pkg
 
 # Create preliminary unsigned installer package 
 productbuild --distribution ./Scripts/distribution.xml --resources ./Resources --package-path ./Build ./Payload/Ultraschall-unsigned.pkg
