@@ -75,7 +75,7 @@ REAPER ";
    message2 += QueryReaperVersion();
    message2 += "\r\n";
    
-   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_1)", message1 + message2);
+   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_2)", message1 + message2);
 #else
    ShowAbout();
 #endif
