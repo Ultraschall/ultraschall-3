@@ -1,0 +1,330 @@
+# Ultraschall DR Reaper Theme 2.0
+
+[Podlove](http://podlove.org/) and [Auphonic](https://auphonic.com/) handed us podcast producers powerful tools, but an optimized environment for the actual recording and production of the podcasts was missing.
+
+The various DAWs (digital audio workstations) have their own pros and cons in terms of costs and features. [Reaper](http://www.reaper.fm/) is hitting a widely recognized sweet spot here: for the slim [price of 60 USD](http://www.reaper.fm/purchase.php) one obtains the Swiss army officer's knife of DAWs, developed by audio nerds (the [old Winamp team](https://en.wikipedia.org/wiki/Winamp#History)). One problem, though: [Reaper](http://www.reaper.fm/)'s aesthetics -- rooted in the Windows world -- are a medium impertinence. Additionally, dozens of presets are well-tuned for music production, but out-of-the-box these are nearly **absurdly wrong** for us podcasters, such as the use of musical bars as time units.  
+
+The Ultraschall distribution of presets, layouts and a theme tries to optimize [Reaper](http://www.reaper.fm/) as much as humanly possible for podcast production. This goal is approached from three levels:
+
+- **Design.** A simple, minimalistic impression is aspired to. Distracting ornaments are unwelcome. Superfluous or redundant icons and menu entries are rigorously removed.
+- **Guided by workflow.** Podcasters produce completely differently from musicians. We usually have the three phases of preparation, (live) show and post-production. Ultraschall's program composition is guided by these three phases and one can switch between the respective views back and forth at will.
+- **Rapid access to podcast features.** Functions that are useful for us are prominently placed: setting and naming chapter markers, their export to [Auphonic](https://auphonic.com/) and [Podlove](http://podlove.org/), routing presets for pre-show and (live) show, a Soundboard for audio shorts, as well as ripple edit that keeps tracks in sync, and so much more
+
+Use this distribution **on your own risk, because previous settings are generally overwritten without asking**. It is therefore advisable to back those up via `Preferences | General | Export Configuration…`. 
+
+Our changes are designed to **probably** survive a [version bump by Reaper](http://reaperblog.net/category/reaper-updates/) without restrictions. Our changes affect a lot of different levels: file system (graphics), Walter theming file, project settings, Reaper settings, toolbar settings. All these changes are **open source** ([CC-0](https://creativecommons.org/about/cc0)) and can be adjusted at will. However, one should have a clear concept what one tries to accomplish. A screencast episode that exclusively deals with modding is being planned.
+
+All of the following details are based on the [English 64 bit version of Reaper](http://www.reaper.fm/download.php) on a Mac with OS X 10.11 (El Capitan). Please find an [overview of the PC-compatible features here](http://ultraschall.fm/?page_id=462). 
+
+## Installation instructions for Ultraschall 2.0 (Please follow precisely)
+
+Depending on your previous Reaper and Ultraschall set-up, there are different paths for you to follow: update or clean install.
+
+### Mac (update)
+
+1. **Update Reaper:** Download and install [Reaper 5](http://www.reaper.fm/download-old.php?ver=5x). It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+
+2. **Download [Ultraschall 2](http://url.ultraschall-podcast.de/us2rc1)** and open the `.dmg` file.
+
+3. **Purge the old installation** by running `uninstall.command` (alternative click > Open with > Terminal & confirm with your password). This will remove old entries from `/System/Library`. In order to remove old Soundflower or USH devices, please also download and run our [Soundflower Removal Tool](http://url.ultraschall-podcast.de/soundfloweremovalool).
+
+Continue with the clean install instructions at step 3.
+
+### Mac (clean install)
+
+1. **Download and install [Reaper 5](http://www.reaper.fm/download-old.php?ver=5x)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+
+2. **Download [Ultraschall 2](http://url.ultraschall-podcast.de/us2rc1)** and open the `.dmg` file.
+
+3. **Launch Ultraschall-2.0.pkg** from our `.dmg`. You can deselect components in the installer, but we explicitly recommend against that. In case an error occurs near the end of the installation, please reboot your Mac and rerun our .pkg`.
+
+4. **Optional:** In case you want to use advanced Ultraschall features like purely software-defined N-1 circuits for Skype recording, please install our successor to Soundflower: `Ultraschall Hub.pkg`.
+
+5. Launch Reaper and drag our `Ultraschall_2.0.ReaperConfigZip` into Reaper's main window. The individual images and config files will be automagically written to the correct locations by Reaper. **WARNING:** If you have adjusted settings before, we recommend to export them via the `Preferences | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
+
+6. **Connect the Ultraschall-Soundboard** via `Preferences | Plug-ins | VST` (bottom left): click `Auto-detect` (top right) and `OK`.
+
+7. **Optional:** In case you want to use our hand-crafted color scheme by [@graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
+
+In order to learn more about Ultraschall's functions and usage, we recommend the soon-to-be-published Release Screencast in [our Youtube channel](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG).
+
+### Windows
+
+1. Download and install [Reaper 5 **64bit**](http://www.reaper.fm/download-old.php?ver=5x). It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+2. Download and install the [SWS Extension](http://www.sws-extension.org/). Without this, many Ultraschall features unfortunately won't work.
+3. Launch Reaper and drag our `Ultraschall_2.0.ReaperConfigZip` into Reaper's main window. **WARNING:** If you have adjusted settings before, we recommend to export them via the `Preferences | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
+4. Because we weren't yet able to implement Windows versions of several advanced Ultraschall features (virtual sound cards), the Ultraschall Hub installation can be skipped.
+5. A Windows version of our Soundboard is in the works.
+
+### Donate via Flattr
+
+Daniel: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Daniel!")](https://flattr.com/profile/danlin "Flattr Daniel")
+
+Ralf: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ralf!")](https://flattr.com/profile/rstockm "Flattr Ralf")
+
+Ultraschall generally: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ultraschall!")](https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware "Flattr Ultraschall")
+
+### Credits:
+
+This distribution is based on the [Analog Default Theme by lerian](http://lerians.tumblr.com/post/63734186478/analog-default-theme-for-reaper) with minor changes. Be generous and donate there. Please remember, how optically burdened your Reaper work would still be.
+
+Our logo was designed by [@graphorama](https://twitter.com/graphorama).
+
+Further thanks go out to our beta testers:
+
+- [@cyberage](https://twitter.com/cyberage)
+- [@dafisch](https://twitter.com/dafisch)
+- [@fbrem](https://twitter.com/fbrem)
+- [@flowfx](https://twitter.com/flowfx)
+- [@herrvonspeck](https://twitter.com/herrvonspeck)
+- [@hoersuppe](https://twitter.com/hoersuppe)
+- [@klein_p](https://twitter.com/klein_p)
+- [@nitramred](https://twitter.com/nitramred)
+- [@nsonic](https://twitter.com/nsonic)
+- [@timpritlove](https://twitter.com/timpritlove)
+- [@opendev](https://twitter.com/opendev)
+- [@ronbuehler](https://twitter.com/ronbuehler)
+- [@audioponies](https://twitter.com/audioponies)
+- [@pixelpille](https://twitter.com/pixelpille)
+- [@anbru](https://twitter.com/anbru)
+- [@mrtoto](https://twitter.com/mrtoto)
+- [@matthiasfromm](https://twitter.com/matthiasfromm)
+- [@343max](https://twitter.com/343max)
+- [@elicee](https://twitter.com/elicee)
+- [@pkurschildgen](https://twitter.com/pkurschildgen)
+- [@hermes](https://twitter.com/hermes)
+- [@ikari](https://twitter.com/ikari)
+- [@fernsehmuell](https://twitter.com/fernsehmuell)
+- [@vollraute](https://twitter.com/vollraute)
+- [@david_1701](https://twitter.com/david_1701)
+- [@michaelblum](https://twitter.com/michaelblum)
+- [@kleinesp](https://twitter.com/kleinesp)
+- [@KonSciencePod](https://twitter.com/KonSciencePod)
+
+### Community:
+
+wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
+
+* Die Projektseite - wo ich unter anderem in nunmehr drei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
+
+* Ultraschall-Screencast: Alle Funktionen werden in einem Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
+Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
+
+* Das Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
+
+* Unser Board auf Trello für die Weiterentwicklung: <https://trello.com/b/c1ulqLBu/ultraschall-dr-reaper> derzeit eher stiefmütterlich aktualisiert.
+
+* Unser Dokuwiki, in dem wir gern Stück für Stück eine Dokumentation zusammentragen sowie einzelne Einsatz-Szenarien vorstellen würden: <http://wiki.ultraschall-podcast.de>
+
+Alle Kanäle ist lesend frei geschaltet, wenn du beitragen möchtest: melde dich bei (@rstockm) auf Twitter oder im Sendegate.
+
+
+### Bedienung:
+
+Diese Distribution krempelt viele Bereiche von Reaper um - man muss umlernen, egal ob man von einer anderen DAW oder der Reaper-Originalversion kommt. Ein erster Anlaufpunkt mit kompakter Erklärung der drei Workflow-Views und der Icons findet sich im der Release beiliegenden Release-Poster (zur 1.0 - teilweise überholt, siehe Release-History unten).
+
+Begleitend sei mein Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
+
+### Syntax für das Changelog
+
+**Installer**
+Neuerungen, die den mit der 1.2 eingeführten Installer für den Mac betreffen.
+
+**Preferences**
+Diese Änderungen werden im Preferences-Dialog von Reaper vorgenommen, den man über ⌘, oder im Menü unter Reaper/Preferences... erreicht.
+
+**Theme**
+Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.
+
+**Actions**
+Änderungen, die die Bindung von Aktionen, teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.
+
+**Misc**
+Was sonst noch so anfällt
+
+**Soundboard**
+Features unseres eigenen Soundboards für Einspieler aller Art
+
+**HUB**
+Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies Podcastingerlebnis
+
+---
+
+## Changelog
+
+### Release 2.0 - 14.11.2015
+
+* **Theme** Complete redesign to increase consistency and reduce clutter.
+
+* **Theme** New "Storyboard" view for composition of audio snippets.
+
+* **Actions** New menu entry `Podcast | About Ultraschall…` displays the installed components with version numbers.
+
+* **Theme** All menus were translated into English.
+
+### Release 1.3 - 5.7.2015
+
+* **WICHTIG** Bis auf weiteres ist diese Release nur unter Reaper 4.78 lauffähig. Wir arbeiten an einer Unterstützung der Reaper 5.0 Version, informiert Euch hierzu im <https://sendegate.de/c/ultraschall>.
+
+* **Installer** Der Installer hat ein geschmackvolleres Hintergrundbild bekommen. Die aktuelle stable Version der SWS Extension (2.7) wird installiert.
+
+* **Theme** Überarbeitung des Podcast-Menüs *Viele Begrifflichkeiten wurden klarer gefasst und vereinheitlicht. Track Templates (Einspieler, Audio-Track) werden direkt im Menü angezeigt.*
+
+* **Theme** Größe der Fenster *Die Default-Fenstergröße von Reaper wurde an ein 13" MBP Retina mit Standard-Auflösung optimiert.*
+
+* **Actions** Letzte Kapitelmarke löschen *Neue Funktion im Podcast-Menü und als Shortcut: die erste, sich links vom Edit-Cursor (rote Linie) befindliche Kapitelmarke wird gelöscht. In 99% der Fälle ist dies die zuletzt gesetzte.*
+
+* **Actions** Setze eine Kapitelmarke 2 Minuten in die Vergangenheit *Eine blaue Kapitelmarke mit der Bezeichnung "_Past" wird zwei Minuten VOR der derzeitigen Position des Edit-Markers gesetzt. Die hilft beim Markeiren einer Stelle in der Art von "eigentlich sind wir schon längst beim nächsten Thema". Durch die Farbe und den Bezeichner kann die Marke im Schnitt schnell gefunden und an die exakte Position geschoben werden.*
+
+* **Actoins** Kapitelmarken schreiben und lesen *Das Handling zum Export und Import der Kapitelmarken wurde überarbeitet. Kapitelmarken werden nun im Stil projektname.chapters.txt gespeichert.*
+
+* **Actions** Textelement einfügen *In eine leere Spur kann nun an der Position des Cursors ein Text-Element eingefügt werden, das man mit Klick auf die Sprechblase mit beliebigem Text versehen kann der sich dann wie ein Audio-Element verhält. Diese wenn man eine Folge eher "baut", also aus vielen Sequenzen zusammensetzt bei denen etwa die klassischen Kapitelmarken zu unflexibel sind.* 
+
+* **Presets** Ein neues Einspieler-Track Preset wird mitgeliefert, bei dem bereits ein Ducking voreingestellt ist. *Über die Routing-Matrix werden die Kanäle ausgewählt die das Ducking aktivieren. Die genaue Bediehnung wird im Release-Screencast demonstriert.*
+
+* **Preferences** Die Samplerate wird auf 48KHz gesetzt, die Buffer-Size auf 512. "Ignore running Change Notifications" wird gesetzt. *Bis zur Releasde unseres eigenen Audio-Treibers scheint dies unter OSX die am stabilsten funktionierenden Werte zu sein um Knaksen zu verhindern.*
+
+* **Soundboard** Neuer Grid-View *Die Ansicht des Soundboard lässt sich umschalten zwischen der bekannten Tabellenansicht und einer Grid-Ansicht*
+
+* **Soundboard** Ein- Ausfaden *Das Ein- und Ausfaden wird nun in sämtlichen Play-Modi unterstützt - etwa einfaden aus Pause etc.*
+
+* **Soundboard** Ducking *Es gibt einen neuen Ducking-Schalter der sämtliche gerade laufenden Einspieler sanft auf eine zu definierende, geringere Lautstärke runterregelt über die man gut drübersprechen kann. Ein Ausschalten bewirkt wieder eine Anhebung der Einspieler. Die stärke des Ducking lässt sich in den Soundboard-Settings einstellen.*
+
+* **Soundboard** Master-Volume *Die Gesamtlautstärke des Einspieler-Outputs kann über einen Schieberegler eingestellt werden*
+
+* **Soundboard** Themes *Man kann verschiedene Farbsets für das Soundboard einstellen*
+
+* **Soundboard** Live-Mode *Hat man alle Einstellungen im Soundboard wie Lautstärken einmal eingestellt, kann man diese nun für die Sendung in einen "Lock" Modus versetzen: egal welche Presets verwendet werden, die Soundboard Einstellungen bleiben unberührt.*
+
+* **Misc** Bugfixes in den Plugins *Einige garstige Speicherlecks wurden in unseren Reaper-Plugins geschlossen. Damit sich diese jeh auswirken hätte man aber einige Tage aufnehmen müssen.*
+
+* **HUB** [nur OSX] Die virtuellen Sound-Devices werden umbenannt, um die Zuordnung in SKYPE intuitiver zu gestalten. Stereo-Geräte werden vor Mono-Geräte gesetzt um Verschiebungen in der Routing-Matrix vorzubeugen.
+ 
+ 
+
+### Release 1.2 - 4.1.2015
+
+* **Installer** Unter Mac OSX können weite Teile der Distribution nun über einen einfachen Installer abgewickelt werden *Soundflower Ultraschall-Edition, Startlogo, SWS-Extensions sowie das Ultraschall-Soundboard werden installiert. Manuell muss nur noch einmalig die Theme -Datei in Reaper gezogen werden.*
+
+* **Theme** Neuer Eintrag im Podcast-Menü: Navigation/Springe zu Play-Cursor (#-Taste) *springt zur aktuellen Position des Play-Cursors (Orange)*
+
+* **Theme** Neuer Eintrag im Podcast-Menü: Soundboard Spur anlegen *Legt eine Spur an, in der bereits alle Einstellungen für das Ultraschall Soundboard gesetzt sind. Im sich öffnenden Auswahlfenster muss man einmalig "Soundboard.RTrackTemplate" anwählen. Zur Funktionalität des Soundboard s.U.*
+
+* **Theme** Neues Untermenü im Podcast-Menü: Selection *bieter verschiedene nützliche Aktionen um den Schnitt mittels Selections zu beschleunigen - insbesondere Ripple-Delete zum schnellen Löschen von ganzen Passagen über alle Spuren*
+
+* **Theme** Einheitliche Symbole für Chapters(Dreieck/Strick) *neue Icons für setze Kapitelmarke, Export Chapters und Audiodatei Schreiben*
+
+* **Theme** Mute- und Solo-Buttons *In der Spuranzeige links sind nun immer die jeweiligen Mute- und Solo-Buttons sichtbar.*
+
+* **Actions** Neue Menüpunkte und Kontext-Links für den Umgang mit der Mute-Spur (Räuspertasten) *Separate Mute-Spur für ausgewähltenTrack an/Ausschalten, Sichtbarkeit aler Mute-Spuren an/ausschalten. In der separaten Mute-Spur kann direkt mit dem Mauscursor und der linken Maustaste ein Mute-Bereich gemalt werden*
+
+* **Actions** Verbessertes Audiodatei schreiben *Der Menüpunkt* **Audiodatei Schreiben** *und das entsprechende Icon links unten im Edit-View setzen zunächst die Playrate des Projektes auf 1.0 um dann das Render-Menü zu starten. Ferner werden zuvor sämtliche Spuren ausgewählt, so dass man direkt einen Multifrack Export für Auphonic (Stems Export) starten kann.*
+
+* **Misc** Das Ultraschall-Soundboard feiert seinen Einstand und ist als VST-Effekt-Plugin realisiert. *Für die genaue Bedienung bitte den Release-Screencast schauen. Funktionen: Verwalten von verschiedenen Sets, Play, Pause, Stop, Loop, Fade, einstellbare Fade-Zeit, regelbare Lautstärke pro Einspieler, direkte OSC-Kopplung. Zur OSC-Steuerung - etwas über ein iOS Gerät oder die Wiimotes - kommt in Kürze ein weiterer Screencast*
+
+* **Presets** Ultraschall-Presets für Expander und EQ *als Ergebnis eine kleinen Workshops mit Michael Kummeth gibt es im EQ das "Ultraschall2" Preset, das einen sehr guten Ausgangspunkt für moderate EQ-Einstellungen bietet.*
+
+* **Presets** optimiertes Datei-Handling *Alle Dateien einer Podcast-Folge (Projektdatei, Aufnahmedateien, Peak-Dateien, Kapitelmarken-Datei) werden übersichtlich im Projektordner und mit sinnvollen Unterordnern abgelegt. Details sind dem Screencast zu entnehmen.*
+
+* **Presets** Sinnvolle Presets zur Dateibenamung von Aufnahmen eingestellt (Tracknummer-Trackname-Folgenname)
+
+* **Misc** Für die Verlinkung des Projektes auf der eigenen Podcast-Seite werden zwei unauffällige Badges mitgeliefert.
+
+* **Misc** Für Probleme, Anregungen etc. wurde auf sendegate.de ein Support-Forum eingerichtet das den bisherigen Patter-Raum ersetzt:  <https://sendegate.de/c/ultraschall>
+
+### Release 1.1 - 9.6.2014
+
+* **Theme** Es gibt ein neues Menü "Podcast" in dem nach Workflowschritten unterteilt sämtliche Podcast-Funktionen gesammelt sind. *Die Funktionen gliedern sich nach den drei Workflow-Schritten "Setup, Aufnahme und Produktion" und sind auch innerhalb der Gruppen so angeordnet, dass man sie von oben nach unten durchgehen kann. Jede neue Aufnahme durchläuft somit die Einträge (oder zumindest Teile davon) des Menüs von oben nach unten. Die Details sind dem 1.1 Release-Screencast zu entnehmen*
+
+* **Actions** Import von mp4chaps Kapitelmarken (etwa: Shownotes Export) als Marker
+
+* **Actions** Export von Kapitelmarken als mp4chaps für Podlove und Auphonic
+
+* **Actions** Mit "E" oder dem neuen Icon werden rote Edit-Marken gesetzt
+
+* **Theme** im Edit-View ist ein neues Icon verfügbar, das den aktuellen Projekt-Ordner öffnet. Der Aufnahme-View wurde im unteren Teil erweitert: es sind nun drei Dockbereiche nebeneinader angesiedelt um Spurenaussteuerung, große Uhr sowie Kapitelmarken gleichzeitig im Blick haben zu können.
+
+* **Actions** im Podcast-Menü gibt es den Eintrag "ausgewählte Spuren für Räuspertasten aktivieren". *Hiermit werden für ausgewählte Spuren die Mute-Enveopes aktiviert und die Automation der Spuren auf WRITE gesetzt. Dies beschleunigt den Einsatz von Räuspertasten ganz erheblich, die Hintergründe sind in der Ultrachall-Folge zu Räuspertasten per Wiimote nachzuschauen.*
+
+* **Actions** Alle Spuren für Schnitt vorbereiten *mit diesem Eintrag im Podcast-Menü werden die Recording-Buttons aller Spuren ausgeschaltet und der Mute-Automationsmode auf Trim/Read geschaltet. Sollte nach jeder Aufnahme einmal aktiviert werden.*
+
+* **Theme** mit einem Rechtsklick auf dem Spurbereich können verschiedene geschmackvoll ausgewählte Preset-Farben ausgewählt werden - kreiert von niemand Geringerem als @graphorama!
+
+* **Theme** Legt man Spuren mit den Namen "Einspieler" oder "SKYPE" an so werden diese automagisch mit geschmackvollen Farben versehen.
+
+* **Theme** - Diverse optische Anpassungen *Der Headerbereich ist etwas heller gestaltet. Die Wellenformen werden passend zur Rest-GUI invertiert dargestellt, also hell auf dunkelfarbigem Grund. Die Anzeige, welche Bereiche einer Spur ausgewählt wurden, wurde erheblich klarer gestaltet. .*
+
+* **Theme** Die Icons wurden mit einer tüchtigen Portion Feenstaub überschüttet. *Dies bezieht sich sowohl auf die etwas wertigere Optik, als auch auf den "State" der nun sauber gehalten wird - man hat jederzeit den Überblick, welcher View aktiv ist, welches Routing-Preset, ob Ripple-Edit aktiv ist sowie ob die Mute-Spuren sichtbar/unsichtbar geschaltet sind.*
+
+### Release 1.0 "Rams" - 9.2.2014
+
+* **Theme** - Ultraschall-Logo und Versionsnummer eingebaut *wird in Zukunft wichtig sein um schnell sehen zu können auf welcher Version man unterwegs ist*
+
+* **Actions** Exportformat der Kapitelmarken von .csv auf .txt umgestellt *Damit man Kapitelmarken einfacher per Cut&Paste in Podlove beim Anlegen einer Episode verwenden kann wurde das Dateiformat für den Export von .csv auf .txt geändert. Die Dateien funktionieren wie bisher ebenfalls millisekundengenau in Auphonic.*
+
+* **Preferences** Views speichern nicht mehr die Fensterposition *Wenn man die Views anpasst, wird nicht mehr die Hauptfenster-Position mit gespeichert / verändert. Das sollte nun deutlich weniger verwirrend sein.*
+
+### RC4 - 7.2.2014
+
+
+* **Theme** - Playrate Regler eingebaut *Oben rechts befindet sich nun ein Regler, mit dem man die Abspielgeschwindigkeit des Podcast beschleunigen kann. Faktor 1,5 kann man noch ganz gut hören - diese Funktion kann im Schnitt (Edit View) nützlich sein um sich zügiger durch eine Aufnahme zu arbeiten. Mit Rechtsklick auf dem Regler kann man den Range des Faders einstellen, ferner sollte dort immer "preserve pitch" aktiviert sein (wird beides über Project Templates gespeichert, nicht global)*
+
+* **Actions** Tastatur-Shortcuts für Navigation durch Projekt *um sich flüssiger im Projekt bewegen zu können wurden zwei Tastenbelegungen geändert: alt+links/rechts springt zur vorherigen/nächsten Kapitelmarke, alt+rauf/runter zur jeweils nächsten Itemkante. Letztere Funktion entfaltet großen Charme in Kombination mit "Stile entfernen", da man so schnell die einzelnen Einspieler durchlaufen kann.*
+
+* **Preferences** Master output auch als source in der Routing Matrix *Aus Gründen - die nur die Reaper Entwickler kennen - werden in den famosen neuen Presets zwar die Sends für die Tracks gespeichert, nicht jedoch die Master-Sends. Um dennoch ein 1KlickRouting (tm) umsetzen zu können wandert die Masterspur wieder als Quelle in die Routingmatrix zurück. Das Setting ist damit: Send auf den Master ist immer aktiviert, dieser schickt aber nicht immer zurück in den Mixer. Ich muss dazu mal eine Screencastfolge machen da zu abstrakt, aber es wird alles gut.*
+
+### RC3 - 6.2.2014
+
+* **Preferences** - Menüleiste zeigt verfügbaren Speicher an *in der Menüleiste wird nun angezeigt, wieviel freier Plattenplatz noch auf dem Laufwerk vorhanden ist, auf dem aufgezeichnet wird.*
+
+* **Theme** - Bereichsbeschriftungen *die beiden Icon-Bereiche Views und Routing-Presets haben Beschriftungen bekommen um die Funktionen etwas klarer zu machen. Die Beschriftungen selbst sind sinnvoll mit Links zu Preset-Fenstern belegt.*
+
+* **Actions** - Automagische Kapitelmarkengenerierung *Im Edit-View finden sich links zwei neue Icons: diese können radikal bei der Erstellung von Kapitelmarken helfen. Wenn man eine Spur für Einspieler verwendet und diese die Kapitelübergänge markieren, so kann man diese Spur auswählen und dann das erste Icon "Stille entfernen aktivieren - es startet ein Dialog der relativ lange läuft. Ist er bei 100% kann man mit "Split" die komplette Einspielerspur so zerschneiden lassen, dass nur die einzelnen Einspieler übrig bleiben und Stille komplett entfernt wird. Nun kann man das zweite Icon aktivieren: Kapitelmarken-Foo setzt an den Beginn jeden Einspielers automatisch eine Kapitelmarke. Diese muss man nun nur noch sinnvoll benennen, ein mühsames Marken durch die Gegend schieben ist nicht mehr notwendig (aber natürlich immer noch möglich)"*
+
+* **Theme** - Icon um die Mute-Spur ein- und auszublenden *Ein gängiges Konzept im Podcasting ist die Räuspertaste. Wie in der entsprechenden Ultraschall-Folge erklärt wird diese optimaler Weise über eine Mute-Automation umgesetzt. Da diese Anzeige häufig etwas im Weg ist (besonders beim Schneiden) gibt es nun ein Icon dass die Spuren für alle Tracks ein- oder ausblenden.*
+
+### RC2 - 3.2.2014
+
+* **Preferences** - Menüs angepasst *ein paar sinnvolle Einträge sind wieder zurück gewandert*
+
+* **Preferences** - Diverse Korrekturen *einige Einträge wurden korrigiert: das vertikale Verschieben von Tracks erzeugt keine Automationspuren, Das Verlängern von Tracks loopt nicht den Klanginhalt, ctrl-linke Maus erzeugt einen Maus-Rechtsklick, Es wird wieder nur eine Datei to Spur geschrieben*
+
+* **Theme** - Track-Farbanpassungen *Ein wenig mehr Farbe im Track-Bereich*
+
+### RC1 - 2.2.2014
+
+* **Theme** - Diverse Farbanpassungen *Die Soundspuren haben einen leichten Verlauf erhalten der die Anmutung noch edler macht. Der Hintergrund der großen Zeitanzeige im Aufnahme-View wurde an den Resthintergrund angepasst. Das Icon zur Anzeige des Ripple-Edit Status wurde an die anderen angepasst. Einige Icons wurden für bessere Verständlichkeit ausgetauscht - etwa zum Setzen von Kapitelmarken*
+
+* **Preferences** - Menüs gelichtet *Viele Einträge in den Reaper-Menüs sind für Podcastproduzierende völlig nutzlos und verwirrend. Etliche Einträge wurden daher aus den Menüs entfernt. Die Originalmenüs mit allen Einträgen bleiben dabei als letzter Eintrag in den jeweiligen Menüs erhalten.*
+
+* **Actions** - Ein weiteres Bedienkonzept wird eingeführt: Snapshots zum Speichern und Abrufen von Routing/Mixerpresets *Schon mit den VProdunktions-Views (F7, F8, F9 oder die drei Icons links oben) wurde versucht den klassischen Podcastingworkflow klarer zu unterstützen. Neben diesen Views, die sich auf Fensteraufbau und sichtbare Werkzeuge konzentrieren, tritt nun das Konzept der Snapshots. Diese können im Setup-View (F7 oder Mixer-Icon) rechts unten im Dock als Reiter angesteuert werden und setzen zwingend die SWS-Extension voraus (siehe Installation). Der Ablauf ist simpel: man stellt sich für die verschiedenen Stadien einer Podcastfolge die benötigten Routing-Setups in der Routing-Matrix zusammen und speicher diese in den Snapshots, die sich dann bequem über die Icons links mittig abrufen lassen. Beispiel: während der Preshow können sch bereits alle vor Ort hören, auf den Stream geht aber nur die Fahrstuhlmusik bis die Sendung beginnt. Bevor man das eigentliche Intro abspielt, schaltet man das Preset um auf Produktion (Mikrophon-Icon) und schon gehen alle Sprachkanäle ebenfalls auf den Stream. In der Poshow (Tassebier) kann leise Musik im Hintergrund laufen, im Schnitt-Preset (Schere) ist für das Abhören nur der Kanal hin zur Abhöreinheit (DAW oder lokaler Kopfhörerausgang) aktiviert. Snapshots sind unabhängig von den Views. Man kann also während einer Sendung beliebig in den Views umherschalten. Die Spanshots hingegen greifen direkt in das Routing ein und sollten nur bewusst umgeschaltet werden - sonst ist etwa der Stream tot. Zur Release gibt es eine Ultraschall-Screencast Folge wie man damit produktiv arbeitet.*
+
+* **Misc** - Auphonic verarbeitet nun unser neues Kapitelmarkenformat ohne Frames. *Derzeit rundet Auphonic auf ganze Sekunden ab, man hat also etwas Sicherheitsspielraum nach vorn was eher ein Vorteil ist.*
+
+### BETA 4 - 28.1.2014
+
+* **Theme** - Diverse Farbanpassungen *noch stärker als bisher werden Farben und Formen reduziert. Mit diesem Theme dürfte Reaper die reduzierteste DAW überhaupt sein - selbst die Buttonanmutungen wurden reduziert.*
+
+* **Theme** - Neue Iconleiste *dynamische Iconleisten sind in Reaper nicht vorgesehen, was uns nicht davon abhalten sollte mittels Windows Presets welche zu bauen. Man kann nun links neben den Spuren die drei Views Setup, Sendung und Nachbereitung umschalten und hat sogar eine Rücmeldung in welchem View man sich gerade befindet. Dazu gibt es ein erstes Experiment mit SWS Snapshots: links neben dem Mixerbereich finden sich drei frei belegbare Snapshots, mit denen man sämtliche Mixer- und Routingeinstellungen speichern und abrufen kann - etwa um in der Preshow Musik einzuspielen während die Podcaster sich zwar unterhalten können (auch mit einem Skype-Partner) aber nicht auf den Stream gehen, dann die Sendung und anschließend eine Aftershow mit leisem Musikteppich*
+
+### BETA 3 - aka "Der Zeitvernichter" 25.1.2014
+
+* **Preferences** - File/Project Settings... 50 - "Project Framerate" *sorgt für sauberen Export der Kapitelmarken ohne Zeitversatz über die Projektlänge. UNBEDINGT so einstellen, selbst wenn man die Distribution ansonsten nicht nutzen möchte, Hintergrund: <http://ultraschall.wikigeeks.de/2014/01/25/howto-zeitversatz-bei-kapitelmarken-beheben>*
+
+* **Preferences** - Umstellung der Zeiteinheit auf Minuten:Sekunden *an diversen Stellen. Sorgt nachhaltig dafür, dass Kapitelmarken sauber bis auf die Millisekunde nach Auphonic exportiert werden Teil 2.*
+
+* **Preferences** - Audio/Rendering - 0ms "Tail length when rendering project or stems, or freezing track" *Eine Aufnahme ist nach dem Rendern exakt so lang wie vorher in der Timeline angezeigt. Der bisherige Presetwert von 1.000ms fügt eine stille Sekunde am Ende hinzu und verwirrt vielleicht.*
+
+* **Misc** - Footprint der Distribution auf 1/3 reduziert.
+
+### BETA 2 - 23.1.2014
+
+* **Preferences** - Audio/Recording - OFF "Always show full track control panel on armed track" *ermöglicht auch Spuren die für die Aufnahme scharfgeschaltet sind in der Höhe sehr klein zu schieben. Dieser Schalter hat im Ultraschall-DR Theme generell keine Funktion, da es hier über das Theme deaktiviert wird.*
+
+* **Preferences** - Project/Track-Sends Defaults - Input 1 "Record config" *Sorgt dafür, dass bei jeder neu angelegten Spur das Record Monitoring sofort aktiviert ist.*
+
+* **Theme** - neuer VU-Meter Balken *die Pegelanzeige ist nun dreigeteilt bei Aufnahme (Grün-Gelb-Orange) und Abspielen (Blau - Gelb - Orange) für die bessere Aussteuerung im Setup-View (F7): Grün (Blau) reicht von -60db bis -18, Gelbe von -18 bis -6db (gut gepegelter Durchschnitt) und Orange von -6 db bis 0 db (Headroom für Peaks wie lautes Lachen). Wenn man mit einem Hardware-Limiter arbeitet sollte dieser so konfiguriert werden, dass die Aussteuerung knapp in den Orangenen Bereich (-3db) hineinreicht.*
+
+### BETA 1 - 21.1.2014
+
+* **Actions** - Actions/Show Action List... - Mousewheel "View:Scroll vertically"  *Schaltet das Zoomen mit Zweifinger-Trackpad rauf/runter ab und ersetzt es durch vertical-Scrolling wie überall unter OSX*
