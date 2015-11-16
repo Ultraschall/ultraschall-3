@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-Gropius-prerelease_2
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_3
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -23,7 +23,7 @@ mkdir ./Payload/Add-ons
 
 # Build and copy release notes to payload directory
 pushd ../REAPER/Documentation
-make 
+make
 popd
 cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html ./Payload/Ultraschall\ Install\ and\ Release\ Notes.html
 rm ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html
@@ -73,13 +73,16 @@ pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAP
 # Copy Ultraschall Hub package
 cp ./3rdParty/Hub/UltraschallHub-2015-11-12.pkg ./Payload/UltraschallHub.pkg
 
-# Create preliminary unsigned installer package 
+# Create preliminary unsigned installer package
 productbuild --distribution ./Scripts/distribution.xml --resources ./Resources --package-path ./Build ./Payload/Ultraschall-unsigned.pkg
 rm -rf ./Build
 
 # Create final signed installer package
 productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/Ultraschall-2.0.pkg
 rm -f ./Payload/Ultraschall-unsigned.pkg
+
+# Create signature on uninstall script
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/Uninstall.command
 
 # Create installer image
 hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
