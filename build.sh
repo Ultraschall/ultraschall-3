@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_3
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_4
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -31,12 +31,16 @@ rm ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html
 # Copy uninstall script to payload directory
 cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
 
+# Copy removal script to payload directory
+cp ../REAPER/Scripts/Remove\ legacy\ audio\ devices.command ./Payload/Remove\ legacy\ audio\ devices.command
+
 # Copy resources to payload 'Add-ons' directory
 cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.pdf ./Payload/Add-ons/Rams\ Edition\ Release-Poster.pdf
 cp ../REAPER/Documentation/Rams\ Edition\ Release-Poster.png ./Payload/Add-ons/Rams\ Edition\ Release-Poster.png
 cp ../REAPER/Resources/Ultraschall\ Colorset.SWSColor ./Payload/Add-ons/Ultraschall\ Colorset.SWSColor
 cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Add-ons/Ultraschall\ Microbanner\ 80x15.png
 cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\ Webbanner.png
+cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/Add-ons/Ultraschall\ Reaper\ Splash\ Screen.png
 
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
@@ -83,6 +87,10 @@ rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create signature on uninstall script
 codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/Uninstall.command
+
+# Create signature on removal script
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/Remove\ legacy\ audio\ devices.command
+
 
 # Create installer image
 hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
