@@ -13,7 +13,6 @@
 	<pkg-ref id="fm.ultraschall.Soundboard.Extras" version="2.0">UltraschallSoundboardExtras.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin.Extension" version="2.0">UltraschallPluginExtension.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="2.0">UltraschallPluginScripts.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.SoundflowerUninstaller" version="2.0">UltraschallSoundflowerUninstaller.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Resources" version="2.0">UltraschallResources.pkg</pkg-ref>
 	<pkg-ref id="com.mj-s.sws" version="2.8.1">SWS_Extension-2.8.1.pkg</pkg-ref>
 	<pkg-ref id="com.mj-s.sws.Scripts" version="2.8.1">SWS_ExtensionScripts-2.8.1.pkg</pkg-ref>
@@ -23,7 +22,6 @@
 		<line choice="fm.ultraschall.Soundboard.Extras"/>
 		<line choice="fm.ultraschall.Plugin.Extension"/>
 		<line choice="fm.ultraschall.Plugin.Scripts"/>
-		<line choice="fm.ultraschall.SoundflowerUninstaller"/>
 		<line choice="fm.ultraschall.Resources"/>
 		<line choice="com.mj-s.sws"/>
 		<line choice="com.mj-s.sws.Scripts"/>
@@ -41,9 +39,6 @@
 	<choice id="fm.ultraschall.Plugin.Scripts" visible="true" title="Ultraschall REAPER Extension Scripts" description="Ultraschall REAPER Extension Scripts. Add extended functions for Podcasters to REAPER 5." start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Plugin.Scripts"/>
 	</choice>
-	<choice id="fm.ultraschall.SoundflowerUninstaller" visible="true" title="Remove legacy Soundflower/Ultraschall drivers" description="Remove unsupported Soundflower and Ultraschall drivers." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.SoundflowerUninstaller"/>
-  	</choice>
 	<choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="Additional documents and images." start_selected="true">
 	  <pkg-ref id="fm.ultraschall.Resources"/>
   	</choice>
