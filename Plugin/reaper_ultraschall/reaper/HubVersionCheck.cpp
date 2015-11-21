@@ -34,13 +34,29 @@ const std::string QueryHubVersion()
 {
    std::string version;
    
-   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
+   if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true)
    {
-      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
+      version = "AudioHub ";
+      
+      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist";
       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
 
       NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
-      version = [value UTF8String];
+      version += [value UTF8String];
+      
+      value = [plist objectForKey: @"CFBundleVersion"];
+      version += ".";
+      version += [value UTF8String];
+   }
+   else if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
+   {
+      version = "UltraschallHub ";
+
+      NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
+      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
+      
+      NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
+      version += [value UTF8String];
       
       value = [plist objectForKey: @"CFBundleVersion"];
       version += ".";

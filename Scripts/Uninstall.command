@@ -206,6 +206,66 @@ if [ -d /Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	sudo rm -rf /Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
+# Uninstall Ultraschall track templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
+fi
+
+# Uninstall Ultraschall track templates from system domain
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate
+fi
+
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate
+fi
+
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
+fi
+
+# Uninstall Ultraschall project templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
+fi
+
+# Uninstall Ultraschall project templates from user domain
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
+fi
+
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak
+fi
+
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP
+fi
+
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
+fi
+
 # Uninstall Ultraschall Add-ons from user domain
 if [ -f ~/Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png ]; then
 	rm -f ~/Library/Application\ Support/Ultraschall/Ultraschall\ Reaper\ Splash\ Screen.png
