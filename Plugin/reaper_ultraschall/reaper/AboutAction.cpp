@@ -59,7 +59,7 @@ Ultraschall REAPER Extension 2.0\r\n";
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
    {
-      message1 += "Ultraschall Hub " + hubVersion + "\r\n";
+      message1 += hubVersion + "\r\n";
    }
    
    const std::string soundboardVersion = QuerySoundboardVersion();
@@ -75,7 +75,7 @@ REAPER ";
    message2 += QueryReaperVersion();
    message2 += "\r\n";
    
-   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_3)", message1 + message2);
+   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_4)", message1 + message2);
 #else
    ShowAbout();
 #endif
