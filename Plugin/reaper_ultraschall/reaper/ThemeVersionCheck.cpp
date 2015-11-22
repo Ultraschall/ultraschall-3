@@ -37,37 +37,18 @@ const std::string QueryThemeVersion()
    const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
    if(applicationSupportDirectory.empty() == false)
    {
-      const std::string themeControlFile = applicationSupportDirectory +
-                                           "/REAPER/ColorThemes/Ultraschall_2.ReaperTheme";
-      const std::vector<std::string> lines = framework::TextFileReader::ReadLines(themeControlFile);
-      for(size_t i = 0 ; i < lines.size(); i++)
+      const std::string themeVersionFile = applicationSupportDirectory +
+                                           "/REAPER/ColorThemes/Ultraschall_2/version.txt";
+      const std::string themeVersionString = framework::TextFileReader::Read(themeVersionFile);
+      if(themeVersionString.empty() == false)
       {
-         const std::string& line = lines[i];
-         if(line.empty() == false)
+         const std::vector<std::string> versionTokens = framework::split(themeVersionString, ':');
+         if(versionTokens.size() == 2)
          {
-            const std::vector<std::string> tokens = framework::split(line, '=');
-            if(tokens.size() == 2)
+            std::string version = versionTokens[1];
+            if(version.empty() == false)
             {
-               if(tokens[0] == "ui_img")
-               {
-                  const std::string themeVersionFile = applicationSupportDirectory +
-                                                       "/REAPER/ColorThemes/" +
-                                                       tokens[1] +
-                                                       "/version.txt";
-                  const std::string themeVersionString = framework::TextFileReader::Read(themeVersionFile);
-                  if(themeVersionString.empty() == false)
-                  {
-                     const std::vector<std::string> versionTokens = framework::split(themeVersionString, ':');
-                     if(versionTokens.size() == 2)
-                     {
-                        std::string version = versionTokens[1];
-                        if(version.empty() == false)
-                        {
-                           result = framework::trim(version);
-                        }
-                     }
-                  }
-               }
+               result = framework::trim(version);
             }
          }
       }

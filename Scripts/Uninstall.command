@@ -170,6 +170,59 @@ if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
 	sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
 fi
 
+# Uninstall color themes from user domain
+if [ -d ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2 ]; then
+	rm -rf ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2
+fi
+
+if [ -d ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta2_unpacked ]; then
+	rm -rf ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta2_unpacked
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Classic_4.x.ReaperThemeZip ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Classic_4.x.ReaperThemeZip
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Hindenburg.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Hindenburg.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_1.0.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_1.0.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta2_unpacked.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta2_unpacked.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta3.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta3.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta4.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_beta4.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_RC1.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_RC1.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_RC4.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_RC4.ReaperTheme
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall1_1.ReaperTheme ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall1_1.ReaperTheme
+fi
+
 # Uninstall Ultraschall Soundboard Extras from user domain
 if [ -d ~/Library/Application\ Support/Ultraschall/AudioTemplates ]; then
 	rm -rf ~/Library/Application\ Support/Ultraschall/AudioTemplates
@@ -381,4 +434,3 @@ fi
 if [ -f /var/db/receipts/com.mj-s.sws.Scripts.plist ]; then
 	sudo rm -f /var/db/receipts/com.mj-s.sws.Scripts.plist
 fi
-

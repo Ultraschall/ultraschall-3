@@ -33,7 +33,7 @@
 #include "About.h"
 
 namespace ultraschall { namespace reaper {
-   
+
 static DeclareCustomAction<AboutAction> action;
 
 const char* AboutAction::UniqueId()
@@ -55,32 +55,30 @@ Ultraschall REAPER Extension 2.0\r\n";
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
    }
 
-   
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";
    }
-   
+
    const std::string soundboardVersion = QuerySoundboardVersion();
    if(soundboardVersion.empty() == false)
    {
       message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
    }
-   
+
    std::string message2 = "\
 SWS REAPER Extension 2.8.2\r\n\
 REAPER ";
 
    message2 += QueryReaperVersion();
    message2 += "\r\n";
-   
-   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_4)", message1 + message2);
+
+   MessageBox::Show("Ultraschall 2.0 \"Gropius\" (prerelease_5)", message1 + message2);
 #else
    ShowAbout();
 #endif
    return SERVICE_SUCCESS;
 }
-   
-}}
 
+}}
