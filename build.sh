@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_4
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_5
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -22,11 +22,9 @@ mkdir ./Payload
 mkdir ./Payload/Add-ons
 
 # Build and copy release notes to payload directory
-pushd ../REAPER/Documentation
-make
-popd
-cp ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html ./Payload/Ultraschall\ Install\ and\ Release\ Notes.html
-rm ../REAPER/Documentation/Ultraschall\ Install\ and\ Release\ Notes.html
+pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/README.html ../REAPER/README.md
+pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/INSTALL.html ../REAPER/INSTALL.md
+pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/CHANGELOG.html ../REAPER/CHANGELOG.md
 
 # Copy uninstall script to payload directory
 cp ../REAPER/Scripts/Uninstall.command ./Payload/Uninstall.command
