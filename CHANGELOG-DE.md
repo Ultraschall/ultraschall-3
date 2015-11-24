@@ -24,15 +24,23 @@ Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies P
 
 # Changelog
 
-## Release 2.0 - 14.11.2015
+## Release 2.0 - 24.11.2015
 
-* **Theme** Komplettes redesign des Theme: mehr Konsistenz, weniger Unordnung.
+* **Misc** Reaper 5 und El Capitan *Die Ultraschall ist nun für Reaper 5 und OSX 10.11 El Capitan optimiert. Ältere Versionen werden nicht weiter untertützt.*
 
-* **Theme** Neue Ansicht: das Storyboard für gebaute Beiträge.
+* **Installer** User- statt Systemverzeichnis *Der neue Installer schreibt seine Einträge in das User-Verzeichnis von OSX, nicht mehr nach System.*
 
-* **Actions** Neue Funktion: über einen *about* Screen können die derzeit installierten Komponenten mit ihren Versionsnummern angezeigt werden
+* **Theme** Komplettes Redesign des Theme *Mehr Konsistenz, weniger Unordnung. Alle Icons und Funktionsbereiche wurden überarbeitet, Farben vereinheitlicht.*
+
+* **Theme** Responsiver Mixer *In Abhängigkeit der Dock-Höhe blendet der neue Mixerbereich Bediehnelemente ein und aus.*
+
+* **Theme** Neue Ansicht: das Storyboard für gebaute Beiträge. *Beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - können mit Schlagworten versehen werden, nach denen - auch projektübergreifend - gesucht und gefiltert werden kann. Verwaltung beliebig vieler Clip-Datenbanken. Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Gruppierungsfunktion für fertige Abschnitte und Regionen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten.*
+
+* **Actions** About Screen *Neue Funktion: über einen About-Screen können die derzeit installierten Komponenten mit ihren Versionsnummern angezeigt werden*
 
 * **Theme** Die Menüs wurden ins Englische übersetzt.
+
+* **HUB** Neuer Audiotreiber *Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von grund auf neu geschrieben.*
 
 
 ## Release 1.3 - 5.7.2015

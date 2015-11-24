@@ -1,37 +1,68 @@
-# Ultraschall Podcasting-Erweiterung für die Reaper DAW
+# Ultraschall: Die Podcasting-Erweiterung für Reaper
 
 Mit [Podlove](http://podlove.org/) und [Auphonic](https://auphonic.com/) wurden uns Produzierenden von Podcasts mächtige Werkzeuge an die Hand gegeben. Was jedoch fehlte, war eine für Podcasts optimierte Umgebung für Aufnahme und Produktion der eigentlichen Podcasts.
 
 Die verschiedenen DAWs (Digital Audio Workstations) haben verschiedene Vor- und Nachteile, seien sie finanzieller Natur oder in Bezug auf Features. [Reaper](http://www.reaper.fm/) besetzt hier nach Meinung vieler einen Sweet Spot: für schlanke 44 € erhält man das Schweizer Offiziersmesser unter den DAWs, entwickelt von Audio-Nerds (das alte Winamp-Team). Das Problem: Ästhetisch ist Reaper - in der Windowswelt verankert - eine mittlere Zumutung. Zudem sind dutzende Presets gut für Musikproduktionen eingestellt, out-of-the-box jedoch nahezu **absurd falsch** für uns Podcaster - etwa die Orientierung an Takten statt an Zeiteinheiten.
 
-Diese Distribution von Presets, Layouts und Theme versucht Reaper soweit wie nur irgend möglich für Podcasting zu optimieren. Hierbei werden drei Ebenen angegangen:
+**Ultraschall optimiert Reaper soweit wie nur irgend möglich für Podcasting**. Eine DAW von Podcastern für Podcaster. Hierbei werden drei Ebenen angegangen:
 
 * **Design.** Es wird eine schlichte, minimalistische Anmutung angestrebt. Ornamente die von der Funktion ablenken sind unerwünscht. Überflüssige sowie redundante Icons und Menüeinträge werden rigoros entfernt.
-* **Orientierung am Workflow** Podcaster produzieren komplett anders als Musiker. Bei uns gibt es zumeist die drei Phasen Vorbereitung, (Live-)Sendung und Nachbereitung. An diesen Phasen orientiert sich der Programmaufbau, man kann beliebig zwischen den Views hin- und herschalten.
-* **Podcast-Features im Schnellzugriff** Für uns nützliche Funktionen werden prominent platziert: das Setzen und Benennen von Kapitelmarken, deren Export zu Auphonic oder Podlove, Routing-Presets für Preshow und Sendung, Soundboard-Einspieler oder Ripple-Edit damit die Spuren immer synchron bleiben u.v.A.m
+* **Orientierung am Workflow.** Podcaster produzieren komplett anders als Musiker. Bei uns gibt es zumeist die drei Phasen Vorbereitung, (Live-)Sendung und Nachbereitung. An diesen Phasen orientiert sich der Programmaufbau, man kann beliebig zwischen den Views hin- und herschalten.
+* **Podcast-Features im Schnellzugriff.** Für uns nützliche Funktionen werden prominent platziert. Ultraschall bietet:
 
-Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellungen werden in der Regel ungefragt überschrieben** - es lohnt also, diese vorher zu sichern über Preferences/General/Export Configuration...
 
-Unsere Änderungen sind so angelegt, dass sie **vermutlich** einen Versionssprung von Reaper ohne Einschränkungen überleben. Unsere Änderungen greifen auf sehr vielen verschiedenen Ebenen: Dateisystem (Grafiken), Walter-Themingdatei, Projektsettings, Reaper-Settings, Toolbar-Settings. All diese Änderungen sind **quelloffen** ([CC0](https://creativecommons.org/about/cc0)) und können beliebig angepasst werden - man sollte jedoch eine recht klare Vorstellung haben was man tut. Eine Screencast-Folge, die nur auf das Modding eingeht, ist in Planung.
+## Features
 
-Alle Angaben beziehen sich auf die [englische 64bit-Version von Reaper](http://www.reaper.fm/download-old.php?ver=4x) auf dem MAC (El Capitan). Eine Übersicht, welche der Features auch auf dem PC laufen, findet sich hier: <http://ultraschall.fm/?page_id=462>. 
+Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workflow Einrichtung > Aufnahme > Produktion:
 
-### Community
+### Vorbereitung
 
-Wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstationen:
+* **Mehrspuraufnahme:** Jeder Sprecher bekommt eine eigene Spur (ein passendes Soundinterface vorausgesetzt), ebenso wie Skape/Mumble-Partner oder Einspieler. Dies ermöglicht maximale Freiheit und Kreativität bei der Nachbearbeitung.
+* **Skype N-1:** Binde externe Teilnehmer ein, ohne ein einziges Kabel zu ziehen. Allein in Software wird eine saubere N-1 Schaltung aufgebaut, so dass alle Teilnehmer alles hören und einen perfekten Klang ohne Echos genießen. Die Skype-Teilnehmer landen auf einer separaten Spur, die man zur Not auch durch die Aufnahme eines Double-Enders ersetzen kann. Natürlich funktioniert der Aufbau ebenso mit Mumble.
+* **Eigener HUB-Soundtreiber:** Um komplexere Aufnahmen - etwa Skype N-1 - in Software modelliert durchführen zu können, benötigte man bisher das nicht mehr weiter entwickelte Soundflower. Wir haben entlang der aktuellsten Audio-APIs eine vollständige Neuimplementierung vorgenommen die stabil und zukunftssicher läuft.
+* **Routing:** Das Routing von Spuren kann komfortabel über eine Matrix (Kreuzschiene) verwaltet werden. Die vorbereiteten Routing-Presets werden während der Sendung mit einem Klick abgerufen – ganz wie bei einem digitalen Mischpult. Man schaltet problemlos zwischen Preshow (Nur Musik auf dem Livestream, aber alle PodcasterInnen können sich bereits hören und warmlaufen, Sendung (alles auf dem Stream), Postshow mit leisem Musikteppich und Schnitt (nichts auf dem Stream) hin und her. Beliebige eigene Routing-Presets können abgelegt werden.
+* **Multifunktionsdock** m Dockbereich können verschiedene Werkzeuge abgerufen und geordnet werden: Spurenmixer, Mastermix, Medienbrowser, Navigator, Kapitelmarken, Routingmatrix, Routingpresets, Effekte, Uhr. Der Dockbereich in zwei oder drei Teile gegliedert werden. Über Reiter können wiederum Werkzeuge pro Dock verwaltet werden.
+* **Workflow und variable Nutzeroberfläche:** Für die drei Workflowschritte Vorbereitung, Sendung und Nachbereitung wird je ein Preset für Fensteraufteilung und Werkzeuge angeboten. Die Presets können beliebig angepasst werden. Zusätzliche Presets sind einfach zu definieren und mit Icons oder Shortcuts zu versehen.
+* **Podcast Menü:** Alle für die Produktion eines Podcasts benötigten Funktionen sind übersichtlich in einem Menü zusammengefasst. Die Reihenfolge innerhalb des Menüs entspricht dabei dem Workflow einer Produktion.
 
-* Die Projektseite - wo ich unter anderem in nunmehr drei Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
 
-* Ultraschall-Screencast: Alle Funktionen werden in einem Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
+
+
+### Aufnahme
+
+* **Aufnahme, Schnitt und Export im FLAC-Format:** Das verlustfreie Kompressionsformat FLAC bietet den besten Kompromiss aus Qualität und Speicheranforderung. Standardmäßig ist der komplette Ultraschall-Workflow daher auf dieses Format hin ausgerichtet. Man kann natürlich auf WAV oder MP3 wechseln.
+* **Kapitelmarken:** setze direkt bei der Aufnahme benamte oder unbenamte Kapitelmarken und exportiere sie für eine Weiterverarbeitung in Podlove oder Auphonic.
+* **Editier-Marken:** setze Marker um schnell wichtige Stellen für eine Nachbearbeitung wiederzufinden.
+* **Soundboard:** Spiele direkt aus der Aufnahmesoftware heraus beliebige Einspieler oder Jingles ab. Verwalte Sets von Einspielern über das Dateisystem. Nutze erweiterte Live-Funktionen wie Fade-In/Out, Ducking oder Looping.
+* **Ducking:** Füge eine Spur für Einspieler ein, die sich automatisch in der Lautstärke runterregelt, sobald jemand zu sprechen beginnt, und wieder lauter wird in Pausen.
+* **Räuspertasten:** Pro Teilnehmer können Räuspertasten konfiguriert werden, die die Aufnahmen von ungewollten Störgeräuschen frei halten. Die eigentliche Aufnahme bleibt erhalten, die Stummschalt-Funktion kann also auch im Nachhinein optimiert oder wieder entfernt werden.
+* **Fernsteuerung über MIDI und OSC:** Fast alle Funktionen lassen sich fernsteuern - etwa die Räuspertasten oder das Setzen von Kapitel- und Editiermarken.
+* **Wiimotes und iOS Geräte als Fernsteuerungen:** Wiimotes (oder deren Nachbauten) erfreuen sich als günstige und flexible Fernsteuerungen großer Beliebtheit. Sie können mit beliebigen MIDI- oder OSC-Funktionen belegt werden. Für iOS wird ein Steuer-Interface auf OSC-Basis angeboten.
+* **Aussteuerung:** Große VU-Meter mit Peak-Anzeige (auch numerisch) emöglichen die perfekte Aussteuerung. Der Zielbereich von -18dB bis -6dB ist farblich gesondert gekennzeichnet.
+
+
+### Produktion
+
+* **Nicht-destruktiver Schnitt für mehr Sicherheit und Kreativität:** Gerade AnfängerInnen kommt entgegen, dass sämtliche Änderungen im Schnitt oder beim Einsatz von Effekten jederzeit wieder angepasst oder zurückgenommen werden können - völlig unabhängig von einer linearen Undo-Funktion. Dies ermöglicht einen angstfreien und kreativen Umgang mit dem Audiomaterial.
+* **Ripple-Edit:** Schneide deine mehrspurige Aufnahme ohne dass zwischen den Spuren ein Versatz entsteht. Verwende Ripple-Cut um schnell ganze Abschnitte über alle Spuren hinweg zu schneiden und die Lücke direkt zu schließen.
+* **Variable Abspielgeschwindigkeit:** Die Abhörgeschwindigkeit kann für die Nachproduktion erhöht werden. Die Tonhöhe bleibt dabei konstant.
+* **Storyboard:** Mächtige Funktionen, die dich bei "gebauten Beiträgen" wie Radio-Features unterstützen! Versehe beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - mit Schlagworten, nach denen du - auch projektübergreifend - suchen und filtern kannst. Verwalte so beliebig viele Clip-Datenbanken. Verwende Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Verbinde fertige Abschnitte mit Regionen oder Gruppen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten. Im Navigator behält man - unabhängig vom Zoom-Faktor - jederzeit den Überblick über das gesamte Projekt. 
+* **Effekte:** Die für Podcasts essentiellen Effekte sind direkt eingebunden: Expander (bestehend aus weichem Gate, Kompressor, Limiter) und parametrischer EQ. Die Effekte sind nicht-destruktiv und können jederzeit pro Spur angepasst werden. Für Podcasts sinnvolle Einstellungen der Filter werden mitgeliefert.
+* **Multitrack-Export:** Exportiere dein fertiges Projekt entweder als Mono- Stereo- oder Mehrkanal Datei. Im letzteren Fall kann jede einzelne Sprechspur beispielsweise von Auphic optimiert werden.
+
+
+## Community
+
+Wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstellen:
+
+* Die Projektseite - wo ich unter anderem in nunmehr vier Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
+
+* Ultraschall-Screencast: Alle Funktionen werden in einer Serie von Screencast auf Youtube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
 Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
 
 * Das Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
 
-* Unser Board auf Trello für die Weiterentwicklung: <https://trello.com/b/c1ulqLBu/ultraschall-dr-reaper> derzeit eher stiefmütterlich aktualisiert.
-
-* Unser Dokuwiki, in dem wir gern Stück für Stück eine Dokumentation zusammentragen sowie einzelne Einsatz-Szenarien vorstellen würden: <http://wiki.ultraschall-podcast.de>
-
-Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich bei @[rstockm](https://twitter.com/rstockm) oder im [Sendegate](https://sendegate.de/users/rstockm/activity).
+Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich bei [@ultraschall_fm](https://twitter.com/ultraschall_fm) oder im [Sendegate](https://sendegate.de/users/rstockm/activity).
 
 
 ### Bedienung
@@ -44,17 +75,13 @@ Begleitend sei mein Screencast empfohlen, in dem ich auf Details eingehe. Fragen
 
 Hier könnt ihr Flattr-Liebe loswerden:
 
-Daniel: https://flattr.com/profile/danlin
-Heiko: https://flattr.com/profile/heikopanjas
-Ralf: https://flattr.com/profile/rstockm
-
-Ultraschall insgesamt: https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware
+* Daniel: <https://flattr.com/profile/danlin>
+* Ralf: <https://flattr.com/profile/rstockm>
+* Ultraschall insgesamt: <https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware>
 
 ### Credits:
 
-Diese Distribution basiert im Bereich des Designs bis auf wenige Änderungen auf dem Analog Default Theme von lerian <http://lerians.tumblr.com/post/63734186478/analog-default-theme-for-reaper> - seid großzügig und werft dort eine Spende ab. Bedenkt, wie optisch belastend andernfalls noch immer euer Reaperalltag aussähe...
-
-Das grandiose Logodesign stammt von @graphorama
+Das grandiose Logodesign stammt von [@graphorama](https://twitter.com/graphorama)
 
 Weiterer Dank geht an die Betatester:
 
