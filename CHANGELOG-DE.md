@@ -24,7 +24,7 @@ Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies P
 
 # Changelog
 
-## Release 2.0 - 24.11.2015
+## Release 2.0 "Gropius" - 24.11.2015
 
 * **Misc** Reaper 5 und El Capitan *Die Ultraschall ist nun für Reaper 5 und OSX 10.11 El Capitan optimiert. Ältere Versionen werden nicht weiter untertützt.*
 
