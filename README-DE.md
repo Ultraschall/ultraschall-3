@@ -39,6 +39,7 @@ Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workfl
 * **Fernsteuerung über MIDI und OSC:** Fast alle Funktionen lassen sich fernsteuern - etwa die Räuspertasten oder das Setzen von Kapitel- und Editiermarken.
 * **Wiimotes und iOS Geräte als Fernsteuerungen:** Wiimotes (oder deren Nachbauten) erfreuen sich als günstige und flexible Fernsteuerungen großer Beliebtheit. Sie können mit beliebigen MIDI- oder OSC-Funktionen belegt werden. Für iOS wird ein Steuer-Interface auf OSC-Basis angeboten.
 * **Aussteuerung:** Große VU-Meter mit Peak-Anzeige (auch numerisch) emöglichen die perfekte Aussteuerung. Der Zielbereich von -18dB bis -6dB ist farblich gesondert gekennzeichnet.
+* **Navigation:** Wo auch immer man sich gerade zur Kontrolle im Projekt oder im Kapitelmarken-Editor bewegt: mit einem Druck auf `Y` gelangt man verlässlich wieder zu aktuellen Aufnahmeposition.
 
 
 ### Produktion
@@ -46,6 +47,7 @@ Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workfl
 * **Nicht-destruktiver Schnitt für mehr Sicherheit und Kreativität:** Gerade AnfängerInnen kommt entgegen, dass sämtliche Änderungen im Schnitt oder beim Einsatz von Effekten jederzeit wieder angepasst oder zurückgenommen werden können - völlig unabhängig von einer linearen Undo-Funktion. Dies ermöglicht einen angstfreien und kreativen Umgang mit dem Audiomaterial.
 * **Ripple-Edit:** Schneide deine mehrspurige Aufnahme ohne dass zwischen den Spuren ein Versatz entsteht. Verwende Ripple-Cut um schnell ganze Abschnitte über alle Spuren hinweg zu schneiden und die Lücke direkt zu schließen.
 * **Variable Abspielgeschwindigkeit:** Die Abhörgeschwindigkeit kann für die Nachproduktion erhöht werden. Die Tonhöhe bleibt dabei konstant.
+* **Navigation:** Viele Shortcuts vereinfachen die Orientierung und Navigation im Projekt - etwa das direkte Anspringen der nächsten Schnittmarken oder Objekte.
 * **Storyboard:** Mächtige Funktionen, die dich bei "gebauten Beiträgen" wie Radio-Features unterstützen! Versehe beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - mit Schlagworten, nach denen du - auch projektübergreifend - suchen und filtern kannst. Verwalte so beliebig viele Clip-Datenbanken. Verwende Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Verbinde fertige Abschnitte mit Regionen oder Gruppen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten. Im Navigator behält man - unabhängig vom Zoom-Faktor - jederzeit den Überblick über das gesamte Projekt. 
 * **Effekte:** Die für Podcasts essentiellen Effekte sind direkt eingebunden: Expander (bestehend aus weichem Gate, Kompressor, Limiter) und parametrischer EQ. Die Effekte sind nicht-destruktiv und können jederzeit pro Spur angepasst werden. Für Podcasts sinnvolle Einstellungen der Filter werden mitgeliefert.
 * **Multitrack-Export:** Exportiere dein fertiges Projekt entweder als Mono- Stereo- oder Mehrkanal Datei. Im letzteren Fall kann jede einzelne Sprechspur beispielsweise von Auphic optimiert werden.
