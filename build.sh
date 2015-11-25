@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_5
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_6
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -93,6 +93,3 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/
 # Create installer image
 hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
 rm -rf ./Payload
-
-
-
