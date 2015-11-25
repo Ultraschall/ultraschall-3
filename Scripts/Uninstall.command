@@ -195,6 +195,10 @@ if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTh
 	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTheme
 fi
 
+#if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip ]; then
+#	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip
+#fi
+
 if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip ]; then
 	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip
 fi
@@ -282,6 +286,10 @@ fi
 
 if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate ]; then
 	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Ultraschall\ Colors.SWSColor ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Ultraschall\ Colors.SWSColor
 fi
 
 # Uninstall Ultraschall track templates from system domain
