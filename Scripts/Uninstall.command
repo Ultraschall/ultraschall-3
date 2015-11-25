@@ -9,6 +9,10 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_ma
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.lua
+fi
+
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_einspieler.py
 fi
@@ -25,8 +29,16 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.py
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.lua
+fi
+
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.py ]; then
