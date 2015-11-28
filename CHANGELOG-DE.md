@@ -40,7 +40,7 @@ Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies P
 
 * **Theme** Die Menüs wurden ins Englische übersetzt.
 
-* **HUB** Neuer Audiotreiber *Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von grund auf neu geschrieben.*
+* **HUB** Neuer Audiotreiber *Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
 
 
 ## Release 1.3 - 5.7.2015
