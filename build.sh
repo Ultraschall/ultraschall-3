@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_7
+export ULTRASCHALL_RELEASE=Ultraschall-2.0-Gropius-prerelease_8
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
