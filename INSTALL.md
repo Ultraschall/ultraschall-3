@@ -1,3 +1,9 @@
+## The basics
+
+Use of this distribution is **on your own risk. Previous settings are usually overwritten without further prompts.** It is therefore advised to save your existing settings via `Preferences | General | Export Configuration…`.
+
+Our changes affect many levels: file system (graphics), Walter theming file, project settings, Reaper settings, toolbar settings, etc. All changes are **open source** ([CC0](https://creativecommons.org/about/cc0)) an can be adapted as you wish. But you should have a clear idea of what your are doing.
+
 ## Installation instructions for Ultraschall 2.0 (Please follow precisely!)
 
 Depending on your previous Reaper and Ultraschall set-up, there are different paths for you to follow: update or clean install.

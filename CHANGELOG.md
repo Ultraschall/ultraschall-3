@@ -21,16 +21,23 @@ Features of our own Soundboard for audio snippets/shorts/inserts.
 **Hub**
 Our project to replace Soundflower, and to provide a stable, crackle-free podcasting experience.
 
+
 # Changelog
 
-## Release 2.0 (14. Nov. 2015)
+## Release 2.0 "Gropius" - 24.11.2015
 
-* **Theme** Complete redesign to increase consistency and reduce clutter.
+* **Misc** Reaper 5 and El Capitan *Ultraschall is now optimised for Reaper 5 and OSX 10.11 El Capitan. Older version are not be supported any more.*
 
-* **Theme** New "Storyboard" view for composition of audio snippets.
+* **Installer** User, instead of system, library *The new installer writes its entries into the user library of OS X, instead of the system library.**
 
-* **Actions** New menu entry `Podcast | About Ultraschall…` displays the installed components with version numbers.
+* **Theme** Complete redesign *More consistency, less clutter. All icons and functional elements have been reworked and colours were harmonized*
 
-* **Theme** All menus were translated into English.
+* **Theme** Responsive mixer *Depending on the dock's height, the new mixer panel shows or hides some control elements.*
+
+* **Theme** New "Storyboard" view for audio compositions. *You can now tag areas in your recording -- such as individual answers in an interview -- and later search and filter, also from different projects. Any number of clip databases can be managed. Colours and comments are available, to keep the overview in complex projects. Finished sections and regions can be grouped. Text elements can be distributed freely in the cutting area, in order to manage show notes or comments.*
+
+* **Actions** About Screen *A new menu entry `Podcast | About Ultraschall…` displays the installed components and their version numbers.**
+
+* **HUB** New audio driver *Soundflower is a thing of the past: following the new CoreAudio APIs in OSX 10.11 El Capitan, the audio engine for virtual sound devices has been revised from the ground up.*
 
 *Older, untranslated changes are listed [in German only](CHANGELOG-DE.md), because Ultraschall was not available in English back then. Please let us know if you really want to have the old changes translated.*
