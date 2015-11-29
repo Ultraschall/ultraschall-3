@@ -4,7 +4,7 @@
 Neuerungen, die den mit der 1.2 eingeführten Installer für den Mac betreffen.
 
 **Preferences**
-Diese Änderungen werden im Preferences-Dialog von Reaper vorgenommen, den man über ⌘, oder im Menü unter Reaper/Preferences... erreicht.
+Diese Änderungen werden im Preferences-Dialog von Reaper vorgenommen, den man über `⌘`, oder im Menü unter `Reaper | Preferences…` erreicht.
 
 **Theme**
 Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.
@@ -13,13 +13,13 @@ Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Ano
 Änderungen, die die Bindung von Aktionen, teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.
 
 **Misc**
-Was sonst noch so anfällt
+Was sonst noch so anfällt.
 
 **Soundboard**
-Features unseres eigenen Soundboards für Einspieler aller Art
+Features unseres eigenen Soundboards für Einspieler aller Art.
 
 **HUB**
-Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies Podcastingerlebnis
+Unser Projekt zur Ablösung von [Soundflower](https://rogueamoeba.com/freebies/soundflower/) für ein stabiles und knacksfreies Podcastingerlebnis.
 
 
 # Changelog
@@ -40,7 +40,7 @@ Unser Projekt zur Ablösung von Soundflower für ein stabiles und knacksfreies P
 
 * **Theme** Die Menüs wurden ins Englische übersetzt.
 
-* **HUB** Neuer Audiotreiber *Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
+* **HUB** Neuer Audiotreiber *[Soundflower](https://rogueamoeba.com/freebies/soundflower/) gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
 
 
 ## Release 1.3 - 5.7.2015

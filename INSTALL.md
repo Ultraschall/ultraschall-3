@@ -14,7 +14,7 @@ Depending on your previous Reaper and Ultraschall set-up, there are different pa
 
 2. **Download [Ultraschall 2](http://url.ultraschall-podcast.de/us2rc1)** and open the `.dmg` file.
 
-3. **Purge the old installation** by running `uninstall.command` (alternative click > Open with > Terminal & confirm with your password). This will remove old entries from `/System/Library`. In order to remove old Soundflower or USH devices, please also download and run our [Soundflower Removal Tool](http://url.ultraschall-podcast.de/soundfloweremovalool).
+3. **Purge the old installation** by running `uninstall.command` (alternative click > Open with > Terminal & confirm with your password). This will remove old entries from `/System/Library`. In order to remove old [Soundflower](https://rogueamoeba.com/freebies/soundflower/) or USH devices, please also download and run our [Soundflower Removal Tool](http://url.ultraschall-podcast.de/soundfloweremovalool).
 
 Continue with the clean install instructions at step 3.
 
@@ -34,7 +34,7 @@ Continue with the clean install instructions at step 3.
 
 7. **Optional:** In case you want to use our hand-crafted color scheme by [@graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
 
-In order to learn more about Ultraschall's functions and usage, we recommend the soon-to-be-published Release Screencast in [our Youtube channel](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG).
+In order to learn more about Ultraschall's functions and usage, we recommend the soon-to-be-published Release Screencast in [our YouTube channel](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG).
 
 ### Windows
 

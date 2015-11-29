@@ -16,7 +16,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 
 * **Multitrack recording:** Assuming a sound interface that offers multiple tracks, every speaker, Skype/Mumble partners and the soundboard gets her/his own track in Ultraschall.
 * **Skype N-1:** Record external speakers without switching a single cable. A clean N-1 circuit can be built purely in software, so that all participants can hear everything and enjoy a clear sound without echoes. Skype callers are recorded on a separate track. If necessary, that can also be replaced with a double-ender recording. The same works with Mumble as well, of course.
-* **Custom HUB sound driver:** In order to model complex tasks -- such as Skype N-1 -- in software, one previously needed the abandoned Soundflower. Following the latest CoreAudio APIs, we have reimplemented it in a stable and future-proof manner.*
+* **Custom HUB sound driver:** In order to model complex tasks -- such as Skype N-1 -- in software, one previously needed the abandoned [Soundflower](https://rogueamoeba.com/freebies/soundflower/). Following the latest CoreAudio APIs, we have reimplemented it in a stable and future-proof manner.*
 * **Routing:** Track routing can be managed comfortably via a matrix/switchboard. The preset routing can be activated during a show with a single click -- just as on a digital mixing panel. One can switch effortlessly between preshow (only music to the stream, but the podcasts hear each other already and can warm themselves up), show (everything to the stream) and postshow with light background music and cutting (nothing to the stream). You can create and save your own routing presets as well.
 * **Multifunctional dock:** You can place and recall different tool in the dock area: track mixer, master mix, media browser, navigator, chapter marks, routing matrix, routing presets, effects, clock. The dock can be split into two or three parts, which can be individually managed via tabs. 
 * **Workflow and variable user interface:** We offer one preset with custom window arrangement and tools for each of the three workflow steps preparation, show and post-production 
@@ -53,9 +53,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 
 ### Credits:
 
-Our grandiose logo was designed by [@graphorama](https://twitter.com/graphorama).
-
-Further thanks go out to our beta testers:
+Our grandiose logo was designed by [@graphorama](https://twitter.com/graphorama). Further thanks go out to our beta testers:
 
 - [@cyberage](https://twitter.com/cyberage)
 - [@dafisch](https://twitter.com/dafisch)
