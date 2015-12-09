@@ -1,46 +1,40 @@
-# Syntax für das Changelog
-
-**Installer**
-Neuerungen, die den mit der 1.2 eingeführten Installer für den Mac betreffen.
-
-**Preferences**
-Diese Änderungen werden im Preferences-Dialog von Reaper vorgenommen, den man über `⌘`, oder im Menü unter `Reaper | Preferences…` erreicht.
-
-**Theme**
-Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.
-
-**Actions**
-Änderungen, die die Bindung von Aktionen, teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.
-
-**Misc**
-Was sonst noch so anfällt.
-
-**Soundboard**
-Features unseres eigenen Soundboards für Einspieler aller Art.
-
-**HUB**
-Unser Projekt zur Ablösung von [Soundflower](https://rogueamoeba.com/freebies/soundflower/) für ein stabiles und knacksfreies Podcastingerlebnis.
-
-
 # Changelog
 
-## Release 2.0 "Gropius" - 24.11.2015
+## Syntax für das Changelog
 
-* **Misc** Reaper 5 und El Capitan *Die Ultraschall ist nun für Reaper 5 und OSX 10.11 El Capitan optimiert. Ältere Versionen werden nicht weiter untertützt.*
 
-* **Installer** User- statt Systemverzeichnis *Der neue Installer schreibt seine Einträge in das User-Verzeichnis von OSX, nicht mehr nach System.*
+* **Preferences:** Diese Änderungen werden im Preferences-Dialog von Reaper vorgenommen, den man über `⌘`+`,` oder im Menü unter `Reaper | Preferences…` erreicht.
+* **Theme:** Diese Änderungen betreffen das mitgelieferte Theme und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.
+* **Actions:** Änderungen, die die Bindung von Aktionen, teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.
+* **Soundboard [Derzeit nur Mac]:** Features unseres eigenen Soundboards für Einspieler aller Art.
+* **Installer [Nur Mac]:** Neuerungen, die den mit der 1.2 eingeführten Installer für den Mac betreffen.
+* **HUB [Nur Mac]:** Unser Projekt zur Ablösung von [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2) für ein stabiles und knacksfreies Podcastingerlebnis.
+* **Misc:** Was sonst noch so anfällt.
 
-* **Theme** Komplettes Redesign des Theme *Mehr Konsistenz, weniger Unordnung. Alle Icons und Funktionsbereiche wurden überarbeitet, Farben vereinheitlicht.*
 
-* **Theme** Responsiver Mixer *In Abhängigkeit der Dock-Höhe blendet der neue Mixerbereich Bediehnelemente ein und aus.*
+## 2.0 Gropius - 9.12.2015
 
-* **Theme** Neue Ansicht: das Storyboard für gebaute Beiträge. *Beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - können mit Schlagworten versehen werden, nach denen - auch projektübergreifend - gesucht und gefiltert werden kann. Verwaltung beliebig vieler Clip-Datenbanken. Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Gruppierungsfunktion für fertige Abschnitte und Regionen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten.*
+* Misc: **Reaper 5 und OS X 10.11 El Capitan**  
+*Die Ultraschall ist nun für Reaper 5 und OSX 10.11 El Capitan optimiert. Ältere Versionen werden nicht weiter untertützt.*
 
-* **Actions** About Screen *Neue Funktion: über einen About-Screen können die derzeit installierten Komponenten mit ihren Versionsnummern angezeigt werden*
+* Installer [Nur Mac]: **User- statt Systemverzeichnis**  
+*Der neue Installer schreibt seine Einträge in das User-Verzeichnis von OSX, nicht mehr nach System.*
 
-* **Theme** Die Menüs wurden ins Englische übersetzt.
+* Theme: **Komplettes Redesign des Theme**  
+*Mehr Konsistenz, weniger Unordnung. Alle Icons und Funktionsbereiche wurden überarbeitet, Farben vereinheitlicht.*
 
-* **HUB** Neuer Audiotreiber *[Soundflower](https://rogueamoeba.com/freebies/soundflower/) gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
+* Theme: **Responsiver Mixer**  
+*In Abhängigkeit der Dock-Höhe blendet der neue Mixerbereich Bediehnelemente ein und aus.*
+
+* Theme: **Neue Ansicht: das Storyboard für gebaute Beiträge.**   *Beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - können mit Schlagworten versehen werden, nach denen - auch projektübergreifend - gesucht und gefiltert werden kann. Verwaltung beliebig vieler Clip-Datenbanken. Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Gruppierungsfunktion für fertige Abschnitte und Regionen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten.*
+
+* Actions [Nur Mac]: **About Screen**  
+*Neue Funktion: über einen About-Screen können die derzeit installierten Komponenten mit ihren Versionsnummern angezeigt werden*
+
+* Theme: **Die Menüs wurden ins Englische übersetzt.**
+
+* HUB [Nur Mac]: **Neuer Audiotreiber**  
+*Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
 
 
 ## Release 1.3 - 5.7.2015
