@@ -50,9 +50,13 @@ const bool ReaperVersionCheck()
    bool result = false;
    
    std::string version = QueryReaperVersion();
-   if((version.size() >= 2) && (version[0] == '5') && (version[1] == '.'))
+   if((version.size() >= 3) && (version[0] == '5') && (version[1] == '.'))
    {
-      result = true;
+      const int minorVersion = atoi(&version[2]);
+      if(minorVersion >= 1)
+      {
+         result = true;
+      }
    }
    
    return result;
