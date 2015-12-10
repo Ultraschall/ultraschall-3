@@ -22,7 +22,7 @@ Continue with the clean install instructions at step 3.
 
 ### Mac O SX 10.11 (clean install)
 
-1. **Download and install [Reaper 5](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+1. **Download and install [Reaper 5.1](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
 
 2. **Download** [Ultraschall 2](http://url.ultraschall-podcast.de/us2) and open the `.dmg` file.
 
