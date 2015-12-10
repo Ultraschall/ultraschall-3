@@ -13,7 +13,7 @@ Die verschiedenen DAWs (Digital Audio Workstations) haben verschiedene Vor- und 
 
 ## Features
 
-Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workflow Einrichtung > Aufnahme > Produktion:
+Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workflow Vorbereitung > Aufnahme > Produktion:
 
 ### Vorbereitung
 
@@ -53,11 +53,11 @@ Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workfl
 * **Multitrack-Export:** Exportiere dein fertiges Projekt entweder als Mono- Stereo- oder Mehrkanal Datei. Im letzteren Fall kann jede einzelne Sprechspur beispielsweise von [Auphonic](https://auphonic.com/) optimiert werden.
 
 
-## Community
+## Community und Kontakt
 
-Wie unter <http://ultraschall.wikigeeks.de/2014/01/21/gesucht-betatester-fuer-ultraschall-dr-edition-von-reaper/> beschrieben, versuchen wir die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstellen:
+Wir versuchen die Weiterentwicklung von Reaper mit Unterstützung der PodcasterInnen-Community voranzutreiben. Hierzu gibt es diese Anlaufstellen:
 
-* Die Projektseite - wo ich unter anderem in nunmehr vier Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
+* Die Projektseite - wo wir unter anderem in nunmehr vier Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
 
 * Ultraschall-Screencast: Alle Funktionen werden in einer Serie von Screencast auf YouTube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
 Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
@@ -71,7 +71,7 @@ Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich
 
 Diese Distribution krempelt viele Bereiche von Reaper um - man muss umlernen, egal ob man von einer anderen DAW oder der Reaper-Originalversion kommt. Ein erster Anlaufpunkt mit kompakter Erklärung der drei Workflow-Views und der Icons findet sich im der Release beiliegenden Release-Poster (zur 1.0 - teilweise überholt, siehe Release-History unten).
 
-Begleitend sei mein Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
+Begleitend sei unser Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
 
 ### Flattr
 
@@ -92,6 +92,7 @@ Das grandiose Logodesign stammt von [@graphorama](https://twitter.com/graphorama
 - [@herrvonspeck](https://twitter.com/herrvonspeck)
 - [@hoersuppe](https://twitter.com/hoersuppe)
 - [@klein_p](https://twitter.com/klein_p)
+- [@macsnider](https://twitter.com/macsnider)
 - [@nitramred](https://twitter.com/nitramred)
 - [@nsonic](https://twitter.com/nsonic)
 - [@timpritlove](https://twitter.com/timpritlove)

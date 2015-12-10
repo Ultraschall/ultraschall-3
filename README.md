@@ -45,6 +45,17 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Effects:** The essential effects for podcasts are integrated directly: expander (composed of soft gate, compressor and limiter) and parametric EQ. The effects are Non-destructive and can be adjusted for each track at any time. Useful settings for these filters are included.
 : **Multitrack export:** Export your finished project either as mono, stereo or multitrack file. In the latter case, each speaker track can be optimized by [Auphonic](https://auphonic.com/).
 
+### Contact us
+
+Ultraschall is Open Source.
+
+- Twitter: [@ultraschall_fm](https://twitter.com/ultraschall_fm)
+- GitHub: <https://github.com/Ultraschall/REAPER>
+- Support Forum: <https://sendegate.de/c/ultraschall>
+- Project Website, download and blog: <http:ultraschall.fm>
+- Tutorial Screencast on [Youtube](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG)
+
+
 ### Donate via Flattr
 
 - Daniel: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Daniel!")](https://flattr.com/profile/danlin "Flattr Daniel")
@@ -53,12 +64,13 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 
 ### Credits:
 
-Our grandiose logo was designed by [@graphorama](https://twitter.com/graphorama). Further thanks go out to our beta testers:
+Our grandiose logo and color scheme was designed by [@graphorama](https://twitter.com/graphorama). Further thanks go out to our beta testers:
 
 - [@cyberage](https://twitter.com/cyberage)
 - [@dafisch](https://twitter.com/dafisch)
 - [@fbrem](https://twitter.com/fbrem)
 - [@flowfx](https://twitter.com/flowfx)
+- [@mcsnider](https://twitter.com/macsnider)
 - [@herrvonspeck](https://twitter.com/herrvonspeck)
 - [@hoersuppe](https://twitter.com/hoersuppe)
 - [@klein_p](https://twitter.com/klein_p)
