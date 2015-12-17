@@ -50,7 +50,7 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 2. Die [SWS Extensions](http://www.sws-extension.org) laden und installieren. Ohne diesen Schritt funktionieren viele Features von Ultraschall nicht.
 
-3. Die [Ultraschall_2.ReaperConfigZip](url.ultraschall-podcast.de/us2bwin) Datei laden.
+3. Die [Ultraschall_2.ReaperConfigZip](url.ultraschall-podcast.de/us2win) Datei laden.
 
 4. Reaper starten und die `Ultraschall_2.ReaperConfigZip` Datei in das geöffnete Fenster fallen lassen.
 
