@@ -44,6 +44,6 @@ In order to learn more about Ultraschall's functions and usage, we recommend the
 
 1. **Download and install** [Reaper 5.1 **64bit**](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
 2. **Download and install** the [SWS Extension](http://www.sws-extension.org/). Without this, many Ultraschall features unfortunately won't work.
-3. **Launch Reaper and drag** our `Ultraschall_2.0.ReaperConfigZip` into Reaper's main window. **WARNING:** If you have adjusted settings before, we recommend to export them via the `Preferences | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
+3. **Launch Reaper and drag** our [Ultraschall_2.0.ReaperConfigZip](http://url.ultraschall-podcast.de/us2win) into Reaper's main window. **WARNING:** If you have adjusted settings before, we recommend to export them via the `Preferences | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
 4. Because we weren't yet able to implement Windows versions of several advanced Ultraschall features (virtual sound cards), the Ultraschall Hub installation can be skipped.
 5. A Windows version of our Soundboard is in the works.
