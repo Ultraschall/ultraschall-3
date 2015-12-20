@@ -83,7 +83,7 @@ Hier könnt ihr Flattr-Liebe loswerden:
 
 ### Credits:
 
-Das grandiose Logodesign stammt von [@graphorama](https://twitter.com/graphorama). Weiterer Dank geht an die Betatester:
+Das grandiose Logodesign und das Farbset stammen von [@graphorama](https://twitter.com/graphorama). Weiterer Dank geht an die Betatester:
 
 - [@cyberage](https://twitter.com/cyberage)
 - [@dafisch](https://twitter.com/dafisch)

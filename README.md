@@ -98,4 +98,4 @@ Our grandiose logo and color scheme was designed by [@graphorama](https://twitte
 
 ### Tasks for later in the i18n process
 
-- [ ] translate [community section](/README-DE.md/#Community)
+- [ ] translate [community section](/README-DE.md/#community-und-kontakt)

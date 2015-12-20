@@ -20,7 +20,7 @@ Depending on your previous Reaper and Ultraschall set-up, there are different pa
 
 Continue with the clean install instructions at step 3.
 
-### Mac O SX 10.11 (clean install)
+### Mac OS X 10.11 (clean install)
 
 1. **Download and install [Reaper 5.1](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
 
@@ -32,7 +32,7 @@ Continue with the clean install instructions at step 3.
 
 5. **Launch Reaper and drag** our `Ultraschall_2.0.ReaperConfigZip` into Reaper's main window. The individual images and config files will be automagically written to the correct locations by Reaper. **WARNING:** If you have adjusted settings before, we recommend to export them via the `REAPER | Preferences… | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
 
-6. **Connect the integrated Ultraschall-Soundboard** via `Preferences | Plug-ins | VST` (bottom left): click `Auto-detect` (top right) and `OK`.
+6. **Connect the integrated Ultraschall-Soundboard** via `REAPER | Preferences | Plug-ins | VST` (bottom left): click `Auto-detect` (top right) and `OK`.
 
 7. **Optional:** In case you want to use our hand-crafted color scheme by [@graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
 
