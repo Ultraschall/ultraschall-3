@@ -43,7 +43,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Variable playback speed:** The playback speed for post-production can be increased. Tone pitch remains constant, of course.
 * **Storyboard:** Powerful function that helps you compose audio pieces such as radio features. You can tag areas in your recording -- such as individual answers in an interview -- and later search and filter, also from different projects. Any number of clip databases can be managed. Colors and comments are available, to keep the overview in complex projects. Finished sections and regions can be grouped. Text elements can be distributed freely in the cutting area, in order to manage show notes or comments. The navigator helps you -- independent of the zoom factor -- keep the overview over the whole project.*
 * **Effects:** The essential effects for podcasts are integrated directly: expander (composed of soft gate, compressor and limiter) and parametric EQ. The effects are Non-destructive and can be adjusted for each track at any time. Useful settings for these filters are included.
-: **Multitrack export:** Export your finished project either as mono, stereo or multitrack file. In the latter case, each speaker track can be optimized by [Auphonic](https://auphonic.com/).
+* **Multitrack export:** Export your finished project either as mono, stereo or multitrack file. In the latter case, each speaker track can be optimized by [Auphonic](https://auphonic.com/).
 
 ### Contact us
 
