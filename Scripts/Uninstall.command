@@ -195,10 +195,6 @@ if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTh
 	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperTheme
 fi
 
-#if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip ]; then
-#	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip
-#fi
-
 if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip ]; then
 	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Black-2.ReaperThemeZip
 fi
