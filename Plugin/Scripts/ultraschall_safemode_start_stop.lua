@@ -48,9 +48,9 @@ if state == 5 then -- is recording
  	4=YESNO,
  	5=RETRYCANCEL]]
 
-	type = 4
-	title = "Recording Safemode Warning"
-	msg = "Are you shure you want to stop the recording?"
+	type = 1
+	title = "Stop Recording?"
+	msg = "Stop the currently running recording. No more audio will be recorded to disk."
  
 	result = reaper.ShowMessageBox( msg, title, type )
 
@@ -64,7 +64,7 @@ if state == 5 then -- is recording
  	7=NO
 	]]
 
-	if result == 6 then -- it's ok to stop the recording
+	if result == 1 then -- it's ok to stop the recording
 		reaper.OnStopButton()
 	end
 
