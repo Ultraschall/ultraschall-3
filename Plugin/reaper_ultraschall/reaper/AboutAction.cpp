@@ -46,7 +46,7 @@ const ServiceStatus AboutAction::Execute()
 #if 1
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Malte Dreschert, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension 2.1\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
