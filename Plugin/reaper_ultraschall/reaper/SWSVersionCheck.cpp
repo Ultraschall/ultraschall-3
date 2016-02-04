@@ -41,7 +41,7 @@ const bool SWSVersionCheck()
       framework::Stream<uint8_t>* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
       if(pStream != 0)
       {
-         static const uint64_t originalCrc = 1538196303;
+         static const uint64_t originalCrc = 749893719;
          const uint64_t crc = pStream->CRC32();
          if(originalCrc == crc)
          {
