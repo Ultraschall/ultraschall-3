@@ -68,6 +68,10 @@
 		42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A335EA1ACEF9BF00231F3D /* ReplaceChaptersAction.h */; };
 		42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* MessageBox.cpp */; };
 		42A988CB1AF286D500231F3D /* MessageBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* MessageBox.h */; };
+		42C224D81C64CDB5009D1C68 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 42C224D61C64CDB5009D1C68 /* unzip.c */; };
+		42C224D91C64CDB5009D1C68 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 42C224D71C64CDB5009D1C68 /* unzip.h */; };
+		42C224DC1C64CE2A009D1C68 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 42C224DA1C64CE2A009D1C68 /* ioapi.c */; };
+		42C224DD1C64CE2A009D1C68 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 42C224DB1C64CE2A009D1C68 /* ioapi.h */; };
 		42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */; };
 		42DC63E81AD0367A00231F3D /* SaveChaptersToProjectAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42DC63E61AD0367A00231F3D /* SaveChaptersToProjectAction.cpp */; };
 		42DC63E91AD0367A00231F3D /* SaveChaptersToProjectAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42DC63E71AD0367A00231F3D /* SaveChaptersToProjectAction.h */; };
@@ -167,6 +171,10 @@
 		42A335EA1ACEF9BF00231F3D /* ReplaceChaptersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReplaceChaptersAction.h; path = reaper/ReplaceChaptersAction.h; sourceTree = "<group>"; };
 		42A988C81AF286D500231F3D /* MessageBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MessageBox.cpp; path = reaper/MessageBox.cpp; sourceTree = "<group>"; };
 		42A988C91AF286D500231F3D /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageBox.h; path = reaper/MessageBox.h; sourceTree = "<group>"; };
+		42C224D61C64CDB5009D1C68 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = ../../minizip/unzip.c; sourceTree = "<group>"; };
+		42C224D71C64CDB5009D1C68 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = ../../minizip/unzip.h; sourceTree = "<group>"; };
+		42C224DA1C64CE2A009D1C68 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ../../minizip/ioapi.c; sourceTree = "<group>"; };
+		42C224DB1C64CE2A009D1C68 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = ../../minizip/ioapi.h; sourceTree = "<group>"; };
 		42DC63E61AD0367A00231F3D /* SaveChaptersToProjectAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveChaptersToProjectAction.cpp; path = reaper/SaveChaptersToProjectAction.cpp; sourceTree = "<group>"; };
 		42DC63E71AD0367A00231F3D /* SaveChaptersToProjectAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveChaptersToProjectAction.h; path = reaper/SaveChaptersToProjectAction.h; sourceTree = "<group>"; };
 		42E655011ACEE32A00231F3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -205,6 +213,7 @@
 		429A7C501ABEE63B00231F3D = {
 			isa = PBXGroup;
 			children = (
+				42C224D41C64CD87009D1C68 /* Submodules */,
 				4254C98D1BF2911200B1EF1F /* libz.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
@@ -219,6 +228,25 @@
 				429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		42C224D41C64CD87009D1C68 /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				42C224D51C64CD95009D1C68 /* minizip */,
+			);
+			name = Submodules;
+			sourceTree = "<group>";
+		};
+		42C224D51C64CD95009D1C68 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				42C224DA1C64CE2A009D1C68 /* ioapi.c */,
+				42C224DB1C64CE2A009D1C68 /* ioapi.h */,
+				42C224D61C64CDB5009D1C68 /* unzip.c */,
+				42C224D71C64CDB5009D1C68 /* unzip.h */,
+			);
+			name = minizip;
 			sourceTree = "<group>";
 		};
 		42F19A5E1ABEE7EA00231F3D /* Framework */ = {
@@ -327,6 +355,7 @@
 				424C82FF1AC8085D00231F3D /* SharedObjectManager.h in Headers */,
 				424C830C1AC8086F00231F3D /* FileManager.h in Headers */,
 				424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */,
+				42C224D91C64CDB5009D1C68 /* unzip.h in Headers */,
 				423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */,
 				425A03B81B4047F000231F3D /* ResourceId.h in Headers */,
 				429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */,
@@ -355,6 +384,7 @@
 				4208914A1B2492F800231F3D /* Malloc.h in Headers */,
 				42F19A7E1ABEE82200231F3D /* SaveChaptersAction.h in Headers */,
 				42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */,
+				42C224DD1C64CE2A009D1C68 /* ioapi.h in Headers */,
 				4284E9F91BF4B58C0056345A /* ThemeVersionCheck.h in Headers */,
 				4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
@@ -409,7 +439,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				de,
 			);
 			mainGroup = 429A7C501ABEE63B00231F3D;
 			productRefGroup = 429A7C5A1ABEE63B00231F3D /* Products */;
@@ -444,6 +473,7 @@
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
+				42C224D81C64CDB5009D1C68 /* unzip.c in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
@@ -457,6 +487,7 @@
 				4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */,
 				42A335ED1ACEF9BF00231F3D /* ReplaceChaptersAction.cpp in Sources */,
 				4242E9761BAC983B00382B79 /* InsertTranscriptAction.cpp in Sources */,
+				42C224DC1C64CE2A009D1C68 /* ioapi.c in Sources */,
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
 				420891491B2492F800231F3D /* Malloc.cpp in Sources */,
 				423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */,
@@ -503,11 +534,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -546,11 +578,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SYMROOT = Build;

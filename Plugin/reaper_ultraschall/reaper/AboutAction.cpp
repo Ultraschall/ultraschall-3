@@ -49,7 +49,7 @@ http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension 2.1\r\n";
 
-   const std::string themeVersion = QueryThemeVersion();
+   const std::string themeVersion = QueryThemeVersion2();
    if(themeVersion.empty() == false)
    {
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";

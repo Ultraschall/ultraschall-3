@@ -1,30 +1,30 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1F8B9147BDDD45ADCB4FABA9143D42D3A26E3C6F",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AE58BE75536FEE9F7B4CB3934D3B27F2960D85E3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "1F8B9147BDDD45ADCB4FABA9143D42D3A26E3C6F" : 0,
-    "20CBA22595A4DEA441C57375012322902336CC6F" : 0
+    "AE58BE75536FEE9F7B4CB3934D3B27F2960D85E3" : 0,
+    "8DA5B175D3FDB92A3B3CCBD4109A734F1316A3DD" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E50A6BDB-52BA-4045-B3E1-198F97347871",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "1F8B9147BDDD45ADCB4FABA9143D42D3A26E3C6F" : "reaper_ultraschall",
-    "20CBA22595A4DEA441C57375012322902336CC6F" : ""
+    "AE58BE75536FEE9F7B4CB3934D3B27F2960D85E3" : "REAPER\/",
+    "8DA5B175D3FDB92A3B3CCBD4109A734F1316A3DD" : "REAPER\/minizip\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "reaper_ultraschall",
-  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "reaper_ultraschall.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Plugin\/reaper_ultraschall\/reaper_ultraschall.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/heikopanjas\/reaper_ultraschall.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nmoinvaz\/minizip.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F8B9147BDDD45ADCB4FABA9143D42D3A26E3C6F"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8DA5B175D3FDB92A3B3CCBD4109A734F1316A3DD"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/heikopanjas\/Ultraschall.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Ultraschall\/REAPER.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "20CBA22595A4DEA441C57375012322902336CC6F"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AE58BE75536FEE9F7B4CB3934D3B27F2960D85E3"
     }
   ]
 }
