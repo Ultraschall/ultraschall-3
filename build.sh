@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.1
+export ULTRASCHALL_RELEASE=Ultraschall-2.1_prerelase_1
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -80,7 +80,7 @@ productbuild --distribution ./Scripts/distribution.xml --resources ./Resources -
 rm -rf ./Build
 
 # Create final signed installer package
-productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/Ultraschall-2.1.pkg
+productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create signature on uninstall script
