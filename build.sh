@@ -70,7 +70,7 @@ pkgbuild --root ./3rdParty/SWS/Scripts/Payload --scripts ./3rdParty/SWS/Scripts/
 pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallResources.pkg
 
 # Create Ultraschall Soundflower Uninstaller package
-pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
+pkgbuild --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
 
 # Copy Ultraschall Hub package
 cp ./3rdParty/Hub/UltraschallHub-2015-11-12.pkg ./Payload/UltraschallHub.pkg
