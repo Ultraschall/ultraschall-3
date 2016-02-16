@@ -11,6 +11,19 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.  
 * **Misc:** Anything that is left.
 
+## 2.1 Gropius - 2.19.2016
+
+* Theme: **FIXME**
+
+* Misc: **SWS/S&M Extension 2.8.3**
+*Ultraschall now comes with the SWS/S&M Extension 2.8.3.*
+
+* Soundboard [Mac only]: **Bugfix**
+*REAPER crashes when the folder that is to be loaded into the soundboard contains only one audio file. Thanks to Sven Wiegand for reporting this bug.*
+
+* Soundboard: **Bugfix**
+*REAPER crashes when the folder that is to be loaded into the soundboard contains an audio file that can't be decoded. Thanks to René Kurfürst for reporting this bug.*
+
 ## 2.0 Gropius - 9.12.2015
 
 * Misc:  **Reaper 5 and OS X 10.11 El Capitan**  
