@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.1_prerelase_3
+export ULTRASCHALL_RELEASE=Ultraschall-2.1_prerelase_4
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
