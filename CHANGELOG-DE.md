@@ -20,8 +20,8 @@
 * Theme: **Routing Matrix enthält Anzeige über Eingangszuordnungen**  
 *Im unteren Bereich der Routing-Matrix können nun die Zuordnungen der Input-Kanäle zu den Spuren vorgenommen werden. Somit können nun wirklch alle relevanten Zuordnungen übersichtlich an einer einzigen Stelle erfolgen.*
 
-* Misc: **SWS/S&M Extension 2.8.3**
-*Ultraschall wird nun mit der SWS/S&M Extension 2.8.3. ausgeliefert*
+* Misc: **SWS/S&M Extension 2.8.3**  
+*Ultraschall wird nun mit der [SWS/S&M Extension 2.8.3](http://www.sws-extension.org/) ausgeliefert*
 
 * Actions: **Neue Shortcuts für flüssiges Editing mit der Tastatur**  
 *Mit den Tasten `i` und `o` können Anfang und Ende einer Zeitselektion gesetzt werden - analog zu vielen Videoschnittprogrammen. Mit den Tasten `1` und `2` können Anfang und Ende der Selektion angesprungen werden. Die Tastaturzuordnungen für das Springen zwischen Kapitelmarken wurde geändert, um nicht Kollisionen beim wortweisen Springen in Textabschnitten zu provozieren.*
