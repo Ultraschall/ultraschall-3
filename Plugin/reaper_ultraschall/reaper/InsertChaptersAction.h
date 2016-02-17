@@ -70,8 +70,8 @@ private:
       ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
       if(ServiceSucceeded(status))
       {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Insert chapter markers...");
-         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken einfügen...");
+         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Import chapter markers...");
+         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken importieren...");
       }
       
       status = resourceManager.RegisterLocalizedString(successMessageId_);
@@ -91,8 +91,8 @@ private:
       status  = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
       if(ServiceSucceeded(status))
       {
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Add chapter markers...");
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken hinzufügen...");
+         resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Import chapter markers...");
+         resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken importieren...");
       }
    }
 
