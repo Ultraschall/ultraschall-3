@@ -12,6 +12,36 @@
 * **Misc:** Was sonst noch so anfällt.
 
 
+## 2.1 Gropius - 2.19.2016
+
+* Theme: **Umfangreiches Feintuning des neuen Themes**  
+*Der Kontrast von nahezu allen Elementen wurde hoch gesetzt, um die Bediehnbarkeit auch in ungünstigen Lichtsituationen zu verbessern. Gruppen von Icons werden optisch zusammengefasst. Einzelne Icons wurden neu gezeichnet um die Funktion klarer werden zu lassen. Die Anmutung aller Buttons wurde vereinheitlicht. Feintuning vieler Farbwerte, um sie der Reaper Farbpalette anzupassen.*
+
+* Theme: **Routing Matrix enthält Anzeige über Eingangszuordnungen**  
+*Im unteren Bereich der Routing-Matrix können nun die Zuordnungen der Input-Kanäle zu den Spuren vorgenommen werden. Somit können nun wirklch alle relevanten Zuordnungen übersichtlich an einer einzigen Stelle erfolgen.*
+
+* Misc: **SWS/S&M Extension 2.8.3**
+*Ultraschall wird nun mit der SWS/S&M Extension 2.8.3. ausgeliefert*
+
+* Actions: **Neue Shortcuts für flüssiges Editing mit der Tastatur**  
+*Mit den Tasten `i` und `o` können Anfang und Ende einer Zeitselektion gesetzt werden - analog zu vielen Videoschnittprogrammen. Mit den Tasten `1` und `2` können Anfang und Ende der Selektion angesprungen werden. Die Tastaturzuordnungen für das Springen zwischen Kapitelmarken wurde geändert, um nicht Kollisionen beim wortweisen Springen in Textabschnitten zu provozieren.*
+
+* Actions: **Start/Stop/Pause-Safemode für die Tastatur**  
+*Um das unbeabsichtigte Beenden einer laufenden Aufnahme zu verhindern, werden die Tasten `RETURN` und `SPACE` während einer Aufnahme abgefangen. Es erscheint ein Dialog, ob die Aufnahme wirklich gestoppt werden soll.*
+
+* Actions: **Robustheit der Kapitelmarken-Funktionen**  
+*Sämtliche Kapitelmarkenfunktionen wurden neu in Lua implementiert und interpretieren nun, ob a) eine Aufnahme läuft oder b) eine Aufnahme abgespielt wird oder c) keine Aktion stattfindet. Im Falle von a werden die Marken an die aktuelle Aufnahmeposition gesetzt, bei b) an die aktuelle Abspielposition und bei c) an die aktuelle Position des Edit-Cursors. Die Midi-Ansteuerung wurde so robust gestaltet, dass Kapitelmarken über Midi in jedem Zustand des Programmes gesetzt werden können - selbst während bestehende Marken editiert werden.*
+
+* Actions: **Benamung der Ultraschall-Actions**  
+*Im über die Taste `?` zu erreichenden Actions-Dialog - in dem sich auch Tastatur-Zuordnungen editieren lassen - sind nun alle Ultraschall-Funktionen einheitlich mit dem Präfix `ULTRASCHALL:` benamst und verständlicher formuliert.*
+
+* Soundboard [Mac only]: **Bugfix**
+*REAPER stürzt nicht mehr ab, wenn der ins Soundboard zu importierende Ordner nur eine Datei enthält. Vielen Dank an Sven Wiegand für den Bugreport.*
+
+* Soundboard: **Bugfix**
+*REAPER stürzt nicht mehr ab, wenn eine der zu importierenden Sounddateien nicht decodiert werden kann. Danke an René Kurfürst für den Bugreport.*
+
+
 ## 2.0 Gropius - 9.12.2015
 
 * Misc: **Reaper 5 und OS X 10.11 El Capitan**  
