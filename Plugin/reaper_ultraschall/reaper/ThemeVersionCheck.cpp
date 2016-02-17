@@ -88,7 +88,7 @@ const std::string QueryThemeVersion2()
    if(applicationSupportDirectory.empty() == false)
    {
       const std::string themeControlFile = applicationSupportDirectory +
-                                           "/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip";
+                                           "/REAPER/ColorThemes/Ultraschall_2.1.ReaperThemeZip";
       
       unzFile themeFile = unzOpen(themeControlFile.c_str());
       if(themeFile != 0)
