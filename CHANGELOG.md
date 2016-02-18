@@ -13,8 +13,8 @@
 
 ## 2.1 Gropius - 2.19.2016
 
-* Theme: **Comprehensive fine-tuning of the new themes**  
-*The contrast of nearly all elements was increased in order to enhance usability -- also in suboptimal lighting conditions. Groups of icons are now visually encapsulated. Individual icons were redesigned in order to clarify their function. The appeal of all buttons was harmonised. Many colors were fine-tuned in order to match Reaper's palette. Cuts within a track item are now marked by a clearer line.*
+* Theme: **Comprehensive fine-tuning of the new theme**  
+*The contrast of nearly all elements was increased in order to enhance usability -- also in suboptimal lighting conditions. Groups of icons are now visually encapsulated. Individual icons were redesigned in order to clarify their function. The appeal of all buttons was harmonised. Many colors were fine-tuned in order to match Ultraschall's palette. Cuts within a track item are now marked by a clearer line.*
 
 * Theme: **Routing matrix contains display of input assignments**  
 *In the lower area of the routing matrix, input channels can now be assigned to tracks. Thus, really all relevant assignments happen at a single site.*
