@@ -7,7 +7,7 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 Unsere Änderungen greifen auf sehr vielen verschiedenen Ebenen: Dateisystem (Grafiken), Walter-Themingdatei, Projektsettings, Reaper-Settings, Toolbar-Settings. All diese Änderungen sind **quelloffen** ([CC0](https://creativecommons.org/about/cc0)) und können beliebig angepasst werden - man sollte jedoch eine recht klare Vorstellung haben was man tut.
 
 
-## Installation der 2.0 (Bitte aufmerksam befolgen!)
+## Installation der 2.1 (Bitte aufmerksam befolgen!)
 
 
 Je nachdem, ob man bereits eine vorherige Version von Ultraschall im Einsatz hat, unterscheidet sich die Installation: Update oder Clean Install.
@@ -16,7 +16,7 @@ Je nachdem, ob man bereits eine vorherige Version von Ultraschall im Einsatz hat
 
 1. **Reaper aktualisieren:** [Reaper 5.1](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 54€ Kosten an. Man kann Reaper 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
 
-2. **Ultraschall 2 laden:** [unsere 2.0 Distribution](http://url.ultraschall-podcast.de/us2) laden und das `.dmg` starten
+2. **Ultraschall 2.1 laden:** [unsere 2.1 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
 
 3. **Alte Installation bereinigen:** In dem sich öffnenden Finder-Fenster einmalig `uninstall.command` aus dem `.dmg` durchlaufen lassen. Hiermit werden die alten Einträge aus system/library entfernt. Um alte Soundflower oder USH Geräteeinträge zu entfernen einmalig das Script `Remove legacy audio devices.command`, ebenfalls im `.dmg` zu finden, durchlaufen lassen.
 
@@ -27,13 +27,13 @@ Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 
 1. **Reaper installieren:** [Reaper 5.1](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 54€ Kosten an.
 
-2. **Ultraschall 2 laden:** [unsere 2.0 Distribution](http://url.ultraschall-podcast.de/us2) laden und das `.dmg` starten
+2. **Ultraschall 2.1 laden:** [unsere 2.1 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
 
-3. Unser Installationsprogramm `Ultraschall-2.0.pkg` starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. Unser Installationsprogramm `Ultraschall-2.1.pkg` starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
 
 4. **Optional - UltraschallHub installieren:** Wenn man in Ultraschall erweiterte Features wie eine rein in Software modellierte Skype N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices (ehemals: [Soundflower](https://rogueamoeba.com/freebies/soundflower/)) Voraussetzung. Hierzu das `UltraschallHub.pkg` durchlaufen lassen.
 
-5. **Die Reaper-Ultraschall Konfiguration laden**: Reaper starten. Die Datei `Ultraschall_2.0.ReaperConfigZip` in das geöffnete Reaper Hauptfenster ziehen. Die einzelnen Images und Konfigurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren – es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
+5. **Die Reaper-Ultraschall Konfiguration laden**: Reaper starten. Die Datei `Ultraschall_2.1.ReaperConfigZip` in das geöffnete Reaper Hauptfenster ziehen. Die einzelnen Images und Konfigurationsdateien werden automagisch von Reaper an die richtigen Stellen geschrieben. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, ebendiese **ZUVOR** an gleicher Stelle zu exportieren – es werden von dieser Distribution erhebliche Bereiche ungefragt überschrieben.
 
 6. **Das Ultraschall-Soundboard verbinden:** Unser direkt in die Recordingsoftware integriertes Soundboard zum Einspielen von Jingles und Ähnlichem wird automatisch installiert. Man muss dies jedoch einmalig nach der Installation Reaper mitteilen: Im Menü `Reaper | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
 
@@ -50,10 +50,10 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 2. Die [SWS Extensions](http://www.sws-extension.org) laden und installieren. Ohne diesen Schritt funktionieren viele Features von Ultraschall nicht.
 
-3. Die [Ultraschall_2.ReaperConfigZip](http://url.ultraschall-podcast.de/us2win) Datei laden.
+3. Die [Ultraschall_2.1.ReaperConfigZip](http://url.ultraschall-podcast.de/us21win) Datei laden.
 
-4. Reaper starten und die `Ultraschall_2.ReaperConfigZip` Datei in das geöffnete Fenster fallen lassen.
+4. Reaper starten und die `Ultraschall_2.1.ReaperConfigZip` Datei in das geöffnete Fenster fallen lassen.
 
 5. Da einige der erweiterten Reaper-Features unter Windows leider nicht umsetzbar sind (virtuelle Soundkarten) entfällt die Installation des HUB.
 
-5. Wir arbeiten an einer Windows-Version des Soundboards.
+5. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
