@@ -47,7 +47,7 @@ const std::wstring to_utf16(const std::string& src)
 const std::string to_utf8(const std::wstring& src)
 {
    std::string result;
-   
+
    try
    {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;

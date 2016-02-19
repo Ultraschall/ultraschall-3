@@ -74,8 +74,8 @@ private:
       ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
       if(ServiceSucceeded(status))
       {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Save chapter markers");
-         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken speichern");
+         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Export chapter markers...");
+         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken exportieren...");
       }
       
       status = resourceManager.RegisterLocalizedString(successMessageId_);
@@ -102,8 +102,8 @@ private:
       status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
       if(ServiceSucceeded(status))
       {
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Save chapter markers...");
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken speichern...");
+         resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Export chapter markers...");
+         resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken exportieren...");
       }
 
       status = resourceManager.RegisterLocalizedString(noProjectNameMessageId_);

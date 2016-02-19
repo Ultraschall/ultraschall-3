@@ -46,10 +46,10 @@ const ServiceStatus AboutAction::Execute()
 #if 1
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2015 Ralf Stockmann, Malte Dreschert, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension 2.0\r\n";
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Ultraschall REAPER Extension 2.1\r\n";
 
-   const std::string themeVersion = QueryThemeVersion();
+   const std::string themeVersion = QueryThemeVersion2();
    if(themeVersion.empty() == false)
    {
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
@@ -68,13 +68,13 @@ Ultraschall REAPER Extension 2.0\r\n";
    }
 
    std::string message2 = "\
-SWS REAPER Extension 2.8.2\r\n\
+SWS REAPER Extension 2.8.3\r\n\
 REAPER ";
 
    message2 += QueryReaperVersion();
    message2 += "\r\n";
 
-   MessageBox::Show("Ultraschall 2.0 \"Gropius\"", message1 + message2);
+   MessageBox::Show("Ultraschall 2.1 \"Gropius\"", message1 + message2);
 #else
    ShowAbout();
 #endif

@@ -37,10 +37,6 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py ];
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.py
 fi
 
-if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua ]; then
-	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua
-fi
-
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.py
 fi
@@ -55,6 +51,34 @@ fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/debug.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/debug.py
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_safemode_start_pause.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_safemode_start_pause.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_safemode_start_stop.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_safemode_start_stop.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit_past.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua
+fi
+
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
 fi
 
 # Uninstall SWS REAPER Extension from user domain

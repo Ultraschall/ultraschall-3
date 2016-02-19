@@ -11,6 +11,10 @@
 		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
 		4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4233400C1B51489900231F3D /* ChapterMarker.cpp */; };
 		4233400F1B51489900231F3D /* ChapterMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4233400D1B51489900231F3D /* ChapterMarker.h */; };
+		423430EB1C668E4800CC2DE4 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 423430E71C668E4800CC2DE4 /* ioapi.c */; };
+		423430EC1C668E4800CC2DE4 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 423430E81C668E4800CC2DE4 /* ioapi.h */; };
+		423430ED1C668E4800CC2DE4 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 423430E91C668E4800CC2DE4 /* unzip.c */; };
+		423430EE1C668E4800CC2DE4 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 423430EA1C668E4800CC2DE4 /* unzip.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
 		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
 		423F32B31B51509D00231F3D /* IActivationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B21B51509D00231F3D /* IActivationService.h */; };
@@ -109,6 +113,10 @@
 		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
 		4233400C1B51489900231F3D /* ChapterMarker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChapterMarker.cpp; path = framework/ChapterMarker.cpp; sourceTree = "<group>"; };
 		4233400D1B51489900231F3D /* ChapterMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChapterMarker.h; path = framework/ChapterMarker.h; sourceTree = "<group>"; };
+		423430E71C668E4800CC2DE4 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = Submodules/minizip/ioapi.c; sourceTree = "<group>"; };
+		423430E81C668E4800CC2DE4 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = Submodules/minizip/ioapi.h; sourceTree = "<group>"; };
+		423430E91C668E4800CC2DE4 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = Submodules/minizip/unzip.c; sourceTree = "<group>"; };
+		423430EA1C668E4800CC2DE4 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = Submodules/minizip/unzip.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
 		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
 		423F32B21B51509D00231F3D /* IActivationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IActivationService.h; path = framework/IActivationService.h; sourceTree = "<group>"; };
@@ -202,9 +210,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		423430E61C668E3000CC2DE4 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				423430E71C668E4800CC2DE4 /* ioapi.c */,
+				423430E81C668E4800CC2DE4 /* ioapi.h */,
+				423430E91C668E4800CC2DE4 /* unzip.c */,
+				423430EA1C668E4800CC2DE4 /* unzip.h */,
+			);
+			name = minizip;
+			sourceTree = "<group>";
+		};
 		429A7C501ABEE63B00231F3D = {
 			isa = PBXGroup;
 			children = (
+				42C224D41C64CD87009D1C68 /* Submodules */,
 				4254C98D1BF2911200B1EF1F /* libz.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
@@ -219,6 +239,14 @@
 				429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		42C224D41C64CD87009D1C68 /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				423430E61C668E3000CC2DE4 /* minizip */,
+			);
+			name = Submodules;
 			sourceTree = "<group>";
 		};
 		42F19A5E1ABEE7EA00231F3D /* Framework */ = {
@@ -360,11 +388,13 @@
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
+				423430EC1C668E4800CC2DE4 /* ioapi.h in Headers */,
 				424C82FD1AC8085D00231F3D /* SharedObject.h in Headers */,
 				42F19A7A1ABEE82200231F3D /* CustomActionManager.h in Headers */,
 				424C82FB1AC8085D00231F3D /* ServiceManager.h in Headers */,
 				4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */,
 				423A5A481B518AAB00231F3D /* IApplication.h in Headers */,
+				423430EE1C668E4800CC2DE4 /* unzip.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +439,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				de,
 			);
 			mainGroup = 429A7C501ABEE63B00231F3D;
 			productRefGroup = 429A7C5A1ABEE63B00231F3D /* Products */;
@@ -432,6 +461,7 @@
 				42F19A7D1ABEE82200231F3D /* SaveChaptersAction.cpp in Sources */,
 				4284E9FC1BF4C4660056345A /* PatchConfiguration.cpp in Sources */,
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
+				423430EB1C668E4800CC2DE4 /* ioapi.c in Sources */,
 				4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */,
 				4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */,
 				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
@@ -444,6 +474,7 @@
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
+				423430ED1C668E4800CC2DE4 /* unzip.c in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
@@ -503,11 +534,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					Submodule/minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -546,11 +578,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					Submodule/minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SYMROOT = Build;
