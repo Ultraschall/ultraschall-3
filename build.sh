@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.0
+export ULTRASCHALL_RELEASE=Ultraschall-2.1
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -41,7 +41,7 @@ cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\
 cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/Add-ons/Ultraschall\ Reaper\ Splash\ Screen.png
 
 # Copy REAPER theme to payload directory
-cp ../REAPER/Themes/Ultraschall_2.0.ReaperConfigZip ./Payload/Ultraschall_2.0.ReaperConfigZip
+cp ../REAPER/Themes/Ultraschall_2.1.ReaperConfigZip ./Payload/Ultraschall_2.1.ReaperConfigZip
 
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
@@ -52,7 +52,7 @@ pkgbuild --root ../REAPER/Plugin/Scripts --scripts ./Scripts/Scripts --identifie
 
 # Create Ultraschall Soundboard package
 pushd ../Soundboard
-./Build/build_mac.sh
+./Build/build_mac_plugin.sh
 popd
 
 pkgbuild --root ../Soundboard/Files/VST --identifier fm.ultraschall.Soundboard.VST --install-location /Library/Audio/Plug-ins/VST ./Build/UltraschallSoundboardVST.pkg
@@ -61,16 +61,16 @@ pkgbuild --root ../Soundboard/Files/VST --identifier fm.ultraschall.Soundboard.V
 pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extras --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallSoundboardExtras.pkg
 
 # Create SWS REAPER Plugin Extension package
-pkgbuild --root ./3rdParty/SWS/UserPlugins/Payload --scripts ./3rdParty/SWS/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.1.pkg
+pkgbuild --root ./3rdParty/SWS/UserPlugins/Payload --scripts ./3rdParty/SWS/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.3.pkg
 
 # Create SWS REAPER Plugin Scripts package
-pkgbuild --root ./3rdParty/SWS/Scripts/Payload --scripts ./3rdParty/SWS/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.1.pkg
+pkgbuild --root ./3rdParty/SWS/Scripts/Payload --scripts ./3rdParty/SWS/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.3.pkg
 
 # Create Ultraschall Resources package
 pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallResources.pkg
 
 # Create Ultraschall Soundflower Uninstaller package
-pkgbuild --root ../REAPER/Tools/SoundflowerUninstaller/Payload --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
+pkgbuild --scripts ../REAPER/Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./Build/UltraschallSoundflowerUninstaller.pkg
 
 # Copy Ultraschall Hub package
 cp ./3rdParty/Hub/UltraschallHub-2015-11-12.pkg ./Payload/UltraschallHub.pkg
@@ -80,7 +80,7 @@ productbuild --distribution ./Scripts/distribution.xml --resources ./Resources -
 rm -rf ./Build
 
 # Create final signed installer package
-productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/Ultraschall-2.0.pkg
+productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create signature on uninstall script
