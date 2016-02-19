@@ -12,7 +12,7 @@
 * **Misc:** Was sonst noch so anfällt.
 
 
-## 2.1 Gropius - 2.19.2016
+## 2.1 Gropius - 19.2.2016
 
 * Theme: **Umfangreiches Feintuning des neuen Themes**  
 *Der Kontrast von nahezu allen Elementen wurde hoch gesetzt, um die Bedienbarkeit auch in ungünstigen Lichtsituationen zu verbessern. Gruppen von Icons werden optisch zusammengefasst. Einzelne Icons wurden neu gezeichnet um die Funktion klarer werden zu lassen. Die Anmutung aller Buttons wurde vereinheitlicht. Feintuning vieler Farbwerte, um sie der Ultraschall Farbpalette anzupassen. Die Farbpalette ist nun logisch entlang des Regenbogens angeordnet. Schnitte innerhalb eines Items sind durch abgerundete Kanten und eine feine Linie jetzt deutlicher zu erkennen.*
