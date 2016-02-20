@@ -47,7 +47,7 @@ const ServiceStatus AboutAction::Execute()
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension 2.1\r\n";
+Ultraschall REAPER Extension 2.1.1\r\n";
 
    const std::string themeVersion = QueryThemeVersion2();
    if(themeVersion.empty() == false)
@@ -74,7 +74,7 @@ REAPER ";
    message2 += QueryReaperVersion();
    message2 += "\r\n";
 
-   MessageBox::Show("Ultraschall 2.1 \"Gropius\"", message1 + message2);
+   MessageBox::Show("Ultraschall 2.1.1 \"Gropius\"", message1 + message2);
 #else
    ShowAbout();
 #endif
