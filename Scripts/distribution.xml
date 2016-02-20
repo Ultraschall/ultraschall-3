@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-	<title>Ultraschall 2.1</title>
+	<title>Ultraschall 2.1.1</title>
 	<organization>fm.ultraschall</organization>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
 	<domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
@@ -9,11 +9,11 @@
 	<!-- Define documents displayed at various steps -->
 	<license file="license.html" mime-type="text/html"/>
 	<!-- List all component packages -->
-	<pkg-ref id="fm.ultraschall.Soundboard.VST" version="2.1">UltraschallSoundboardVST.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Soundboard.Extras" version="2.1">UltraschallSoundboardExtras.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Extension" version="2.1">UltraschallPluginExtension.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="2.1">UltraschallPluginScripts.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Resources" version="2.1">UltraschallResources.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.VST" version="2.1.1">UltraschallSoundboardVST.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Soundboard.Extras" version="2.1.1">UltraschallSoundboardExtras.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Extension" version="2.1.1">UltraschallPluginExtension.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="2.1.1">UltraschallPluginScripts.pkg</pkg-ref>
+	<pkg-ref id="fm.ultraschall.Resources" version="2.1.1">UltraschallResources.pkg</pkg-ref>
 	<pkg-ref id="com.mj-s.sws" version="2.8.3">SWS_Extension-2.8.3.pkg</pkg-ref>
 	<pkg-ref id="com.mj-s.sws.Scripts" version="2.8.3">SWS_ExtensionScripts-2.8.3.pkg</pkg-ref>
 	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
