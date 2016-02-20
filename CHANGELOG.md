@@ -11,7 +11,7 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.  
 * **Misc:** Anything that is left.
 
-## 2.1 Gropius - 2.19.2016
+## 2.1 Gropius - 2016-Feb-19
 
 * Theme: **Comprehensive fine-tuning of the new theme**  
 *The contrast of nearly all elements was increased in order to enhance usability -- also in suboptimal lighting conditions. Groups of icons are now visually encapsulated. Individual icons were redesigned in order to clarify their function. The appeal of all buttons was harmonised. Many colors were fine-tuned in order to match Ultraschall's palette. Cuts within a track item are now marked by a clearer line.*
@@ -40,7 +40,7 @@
 * Soundboard: **Bugfix**  
 *REAPER crashed when the folder that is to be loaded into the soundboard contained an audio file that can't be decoded. Thanks to René Kurfürst for reporting this bug.*
 
-## 2.0 Gropius - 9.12.2015
+## 2.0 Gropius - 2015-Dec-09
 
 * Misc:  **Reaper 5 and OS X 10.11 El Capitan**  
 *Ultraschall is now optimized for Reaper 5 and OSX 10.11 El Capitan. Older version are not be supported any more.*

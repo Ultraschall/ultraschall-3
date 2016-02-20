@@ -12,7 +12,7 @@
 * **Misc:** Was sonst noch so anfällt.
 
 
-## 2.1 Gropius - 19.2.2016
+## 2.1 Gropius - 2016-Feb-19
 
 * Theme: **Umfangreiches Feintuning des neuen Themes**  
 *Der Kontrast von nahezu allen Elementen wurde hoch gesetzt, um die Bedienbarkeit auch in ungünstigen Lichtsituationen zu verbessern. Gruppen von Icons werden optisch zusammengefasst. Einzelne Icons wurden neu gezeichnet um die Funktion klarer werden zu lassen. Die Anmutung aller Buttons wurde vereinheitlicht. Feintuning vieler Farbwerte, um sie der Ultraschall Farbpalette anzupassen. Die Farbpalette ist nun logisch entlang des Regenbogens angeordnet. Schnitte innerhalb eines Items sind durch abgerundete Kanten und eine feine Linie jetzt deutlicher zu erkennen.*
@@ -45,7 +45,7 @@
 *REAPER stürzt nicht mehr ab, wenn eine der zu importierenden Sounddateien nicht decodiert werden kann. Danke an René Kurfürst für den Bugreport.*
 
 
-## 2.0 Gropius - 9.12.2015
+## 2.0 Gropius - 2015-Dec-09
 
 * Misc: **Reaper 5 und OS X 10.11 El Capitan**  
 *Die Ultraschall ist nun für Reaper 5 und OSX 10.11 El Capitan optimiert. Ältere Versionen werden nicht weiter untertützt.*
@@ -70,7 +70,7 @@
 *Soundflower gehört der Vergangenheit an: entlang der neuen CoreAudio APIs von OSX 10.11 El Capitan wurde die Audio-Engine für virtuelle Soundkomponenten von Grund auf neu geschrieben.*
 
 
-## Release 1.3 - 5.7.2015
+## Release 1.3 - 2015-Jul-05
 
 * **WICHTIG** Bis auf weiteres ist diese Release nur unter Reaper 4.78 lauffähig. Wir arbeiten an einer Unterstützung der Reaper 5.0 Version, informiert Euch hierzu im <https://sendegate.de/c/ultraschall>.
 
@@ -110,7 +110,7 @@
 
 
 
-## Release 1.2 - 4.1.2015
+## Release 1.2 - 2015-Jan-04
 
 * **Installer** Unter Mac OSX können weite Teile der Distribution nun über einen einfachen Installer abgewickelt werden *Soundflower Ultraschall-Edition, Startlogo, SWS-Extensions sowie das Ultraschall-Soundboard werden installiert. Manuell muss nur noch einmalig die Theme -Datei in Reaper gezogen werden.*
 
@@ -141,7 +141,7 @@
 * **Misc** Für Probleme, Anregungen etc. wurde auf sendegate.de ein Support-Forum eingerichtet das den bisherigen Patter-Raum ersetzt:  <https://sendegate.de/c/ultraschall>
 
 
-## Release 1.1 - 9.6.2014
+## Release 1.1 - 2014-Jun-09
 
 * **Theme** Es gibt ein neues Menü "Podcast" in dem nach Workflowschritten unterteilt sämtliche Podcast-Funktionen gesammelt sind. *Die Funktionen gliedern sich nach den drei Workflow-Schritten "Setup, Aufnahme und Produktion" und sind auch innerhalb der Gruppen so angeordnet, dass man sie von oben nach unten durchgehen kann. Jede neue Aufnahme durchläuft somit die Einträge (oder zumindest Teile davon) des Menüs von oben nach unten. Die Details sind dem 1.1 Release-Screencast zu entnehmen*
 
@@ -166,7 +166,7 @@
 * **Theme** Die Icons wurden mit einer tüchtigen Portion Feenstaub überschüttet. *Dies bezieht sich sowohl auf die etwas wertigere Optik, als auch auf den "State" der nun sauber gehalten wird - man hat jederzeit den Überblick, welcher View aktiv ist, welches Routing-Preset, ob Ripple-Edit aktiv ist sowie ob die Mute-Spuren sichtbar/unsichtbar geschaltet sind.*
 
 
-## Release 1.0 "Rams" - 9.2.2014
+## Release 1.0 "Rams" - 2014-Feb-09
 
 * **Theme** - Ultraschall-Logo und Versionsnummer eingebaut *wird in Zukunft wichtig sein um schnell sehen zu können auf welcher Version man unterwegs ist*
 
@@ -175,7 +175,7 @@
 * **Preferences** Views speichern nicht mehr die Fensterposition *Wenn man die Views anpasst, wird nicht mehr die Hauptfenster-Position mit gespeichert / verändert. Das sollte nun deutlich weniger verwirrend sein.*
 
 
-## RC4 - 7.2.2014
+## RC4 - 2014-Feb-07
 
 * **Theme** - Playrate Regler eingebaut *Oben rechts befindet sich nun ein Regler, mit dem man die Abspielgeschwindigkeit des Podcast beschleunigen kann. Faktor 1,5 kann man noch ganz gut hören - diese Funktion kann im Schnitt (Edit View) nützlich sein um sich zügiger durch eine Aufnahme zu arbeiten. Mit Rechtsklick auf dem Regler kann man den Range des Faders einstellen, ferner sollte dort immer "preserve pitch" aktiviert sein (wird beides über Project Templates gespeichert, nicht global)*
 
@@ -184,7 +184,7 @@
 * **Preferences** Master output auch als source in der Routing Matrix *Aus Gründen - die nur die Reaper Entwickler kennen - werden in den famosen neuen Presets zwar die Sends für die Tracks gespeichert, nicht jedoch die Master-Sends. Um dennoch ein 1KlickRouting (tm) umsetzen zu können wandert die Masterspur wieder als Quelle in die Routingmatrix zurück. Das Setting ist damit: Send auf den Master ist immer aktiviert, dieser schickt aber nicht immer zurück in den Mixer. Ich muss dazu mal eine Screencastfolge machen da zu abstrakt, aber es wird alles gut.*
 
 
-## RC3 - 6.2.2014
+## RC3 - 2014-Feb-06
 
 
 * **Preferences** - Menüleiste zeigt verfügbaren Speicher an *in der Menüleiste wird nun angezeigt, wieviel freier Plattenplatz noch auf dem Laufwerk vorhanden ist, auf dem aufgezeichnet wird.*
@@ -196,7 +196,7 @@
 * **Theme** - Icon um die Mute-Spur ein- und auszublenden *Ein gängiges Konzept im Podcasting ist die Räuspertaste. Wie in der entsprechenden Ultraschall-Folge erklärt wird diese optimaler Weise über eine Mute-Automation umgesetzt. Da diese Anzeige häufig etwas im Weg ist (besonders beim Schneiden) gibt es nun ein Icon dass die Spuren für alle Tracks ein- oder ausblenden.*
 
 
-## RC2 - 3.2.2014
+## RC2 - 2014-Feb-03
 
 * **Preferences** - Menüs angepasst *ein paar sinnvolle Einträge sind wieder zurück gewandert*
 
@@ -205,7 +205,7 @@
 * **Theme** - Track-Farbanpassungen *Ein wenig mehr Farbe im Track-Bereich*
 
 
-## RC1 - 2.2.2014
+## RC1 - 2014-Feb-02
 
 * **Theme** - Diverse Farbanpassungen *Die Soundspuren haben einen leichten Verlauf erhalten der die Anmutung noch edler macht. Der Hintergrund der großen Zeitanzeige im Aufnahme-View wurde an den Resthintergrund angepasst. Das Icon zur Anzeige des Ripple-Edit Status wurde an die anderen angepasst. Einige Icons wurden für bessere Verständlichkeit ausgetauscht - etwa zum Setzen von Kapitelmarken*
 
@@ -216,13 +216,13 @@
 * **Misc** - Auphonic verarbeitet nun unser neues Kapitelmarkenformat ohne Frames. *Derzeit rundet Auphonic auf ganze Sekunden ab, man hat also etwas Sicherheitsspielraum nach vorn was eher ein Vorteil ist.*
 
 
-## BETA 4 - 28.1.2014
+## BETA 4 - 2014-Jan-28
 
 * **Theme** - Diverse Farbanpassungen *noch stärker als bisher werden Farben und Formen reduziert. Mit diesem Theme dürfte Reaper die reduzierteste DAW überhaupt sein - selbst die Buttonanmutungen wurden reduziert.*
 
 * **Theme** - Neue Iconleiste *dynamische Iconleisten sind in Reaper nicht vorgesehen, was uns nicht davon abhalten sollte mittels Windows Presets welche zu bauen. Man kann nun links neben den Spuren die drei Views Setup, Sendung und Nachbereitung umschalten und hat sogar eine Rücmeldung in welchem View man sich gerade befindet. Dazu gibt es ein erstes Experiment mit SWS Snapshots: links neben dem Mixerbereich finden sich drei frei belegbare Snapshots, mit denen man sämtliche Mixer- und Routingeinstellungen speichern und abrufen kann - etwa um in der Preshow Musik einzuspielen während die Podcaster sich zwar unterhalten können (auch mit einem Skype-Partner) aber nicht auf den Stream gehen, dann die Sendung und anschließend eine Aftershow mit leisem Musikteppich*
 
-## BETA 3 - aka "Der Zeitvernichter" 25.1.2014
+## BETA 3 - aka "Der Zeitvernichter" 2014-Jan-25
 
 * **Preferences** - File/Project Settings... 50 - "Project Framerate" *sorgt für sauberen Export der Kapitelmarken ohne Zeitversatz über die Projektlänge. UNBEDINGT so einstellen, selbst wenn man die Distribution ansonsten nicht nutzen möchte, Hintergrund: <http://ultraschall.wikigeeks.de/2014/01/25/howto-zeitversatz-bei-kapitelmarken-beheben>*
 
@@ -233,7 +233,7 @@
 * **Misc** - Footprint der Distribution auf 1/3 reduziert.
 
 
-## BETA 2 - 23.1.2014
+## BETA 2 - 2014-Jan-23
 
 * **Preferences** - Audio/Recording - OFF "Always show full track control panel on armed track" *ermöglicht auch Spuren die für die Aufnahme scharfgeschaltet sind in der Höhe sehr klein zu schieben. Dieser Schalter hat im Ultraschall-DR Theme generell keine Funktion, da es hier über das Theme deaktiviert wird.*
 
@@ -242,6 +242,6 @@
 * **Theme** - neuer VU-Meter Balken *die Pegelanzeige ist nun dreigeteilt bei Aufnahme (Grün-Gelb-Orange) und Abspielen (Blau - Gelb - Orange) für die bessere Aussteuerung im Setup-View (F7): Grün (Blau) reicht von -60db bis -18, Gelbe von -18 bis -6db (gut gepegelter Durchschnitt) und Orange von -6 db bis 0 db (Headroom für Peaks wie lautes Lachen). Wenn man mit einem Hardware-Limiter arbeitet sollte dieser so konfiguriert werden, dass die Aussteuerung knapp in den Orangenen Bereich (-3db) hineinreicht.*
 
 
-## BETA 1 - 21.1.2014
+## BETA 1 - 2014-Jan-21
 
 * **Actions** - Actions/Show Action List... - Mousewheel "View:Scroll vertically"  *Schaltet das Zoomen mit Zweifinger-Trackpad rauf/runter ab und ersetzt es durch vertical-Scrolling wie überall unter OSX*
