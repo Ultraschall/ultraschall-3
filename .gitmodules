@@ -1,1 +1,4 @@
 
+[submodule "Plugin/reaper_ultraschall/Submodules/minizip"]
+	path = Plugin/reaper_ultraschall/Submodules/minizip
+	url = https://github.com/nmoinvaz/minizip.git
