@@ -2,6 +2,3 @@
 [submodule "Plugin/reaper_ultraschall/Submodules/minizip"]
 	path = Plugin/reaper_ultraschall/Submodules/minizip
 	url = https://github.com/nmoinvaz/minizip.git
-[submodule "zlib"]
-	path = zlib
-	url = https://github.com/madler/zlib.git
