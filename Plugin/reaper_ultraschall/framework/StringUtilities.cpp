@@ -22,13 +22,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <codecvt>
 
 #include "StringUtilities.h"
+#include <codecvt>
 
 namespace ultraschall { namespace framework {
 
-const std::wstring to_utf16(const std::string& src)
+std::wstring MakeUTF16String(const std::string& src)
 {
    std::wstring result;
    
@@ -44,7 +44,7 @@ const std::wstring to_utf16(const std::string& src)
    return result;
 }
 
-const std::string to_utf8(const std::wstring& src)
+std::string MakeUTF8String(const std::wstring& src)
 {
    std::string result;
 

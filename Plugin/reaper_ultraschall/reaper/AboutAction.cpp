@@ -22,6 +22,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
 #include "ReaperVersionCheck.h"
@@ -74,7 +75,7 @@ REAPER ";
    message2 += QueryReaperVersion();
    message2 += "\r\n";
 
-   MessageBox::Show("Ultraschall 2.1.1 \"Gropius\"", message1 + message2);
+   NotificationWindow::Show("Ultraschall 2.1.1 \"Gropius\"", message1 + message2);
 #else
    ShowAbout();
 #endif

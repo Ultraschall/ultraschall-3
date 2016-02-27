@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
 
@@ -68,27 +69,27 @@ const ServiceStatus SaveChaptersAction::Execute()
                output.close();
                
                status = SERVICE_SUCCESS;
-               MessageBox::Show(successMessageId_);
+               NotificationWindow::Show(successMessageId_);
             }
             
             if(ServiceFailed(status))
             {
-               MessageBox::Show(failureMessageId_);
+               NotificationWindow::Show(failureMessageId_);
             }
          }
          else
          {
-            MessageBox::Show(noProjectNameMessageId_);
+            NotificationWindow::Show(noProjectNameMessageId_);
          }
       }
       else
       {
-         MessageBox::Show(noProjectNameMessageId_);
+         NotificationWindow::Show(noProjectNameMessageId_);
       }
    }
    else
    {
-      MessageBox::Show(notFoundMessageId_);
+      NotificationWindow::Show(notFoundMessageId_);
    }
    
    return status;

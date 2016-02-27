@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <string>
 #include <fstream>
 #include <Stream.h>
 #include <BinaryFileReader.h>

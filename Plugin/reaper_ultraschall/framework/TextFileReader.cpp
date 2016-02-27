@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+#include <string>
 #include <fstream>
 #include <sstream>
 #include <TextFileReader.h>

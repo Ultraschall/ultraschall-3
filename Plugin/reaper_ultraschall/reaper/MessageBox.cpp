@@ -25,25 +25,31 @@
 #include <ResourceManager.h>
 #include "MessageBox.h"
 
+#ifndef WIN32
 #import "NotificationWindow.h"
+#endif // #ifndef WIN32
 
 namespace ultraschall { namespace reaper {
    
-void MessageBox::Show(const std::string& message, const bool isError)
+void NotificationWindow::Show(const std::string& message, const bool isError)
 {
+#ifndef WIN32
    [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
                                asError: isError ? YES : NO];
+#endif // #ifndef WIN32
 }
 
-void MessageBox::Show(const std::string& message, const std::string& information, const bool isError)
+void NotificationWindow::Show(const std::string& message, const std::string& information, const bool isError)
 {
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
+#ifndef WIN32
+    [NotificationWindow showWithMessage : [NSString stringWithUTF8String : message.c_str()]
                                   info: [NSString stringWithUTF8String: information.c_str()]
                                   asError: isError ? YES : NO];
+#endif // #ifndef WIN32
 }
    
    
-void MessageBox::Show(const framework::ResourceId id, const bool isError)
+void NotificationWindow::Show(const framework::ResourceId id, const bool isError)
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    std::string message = resourceManager.GetLocalizedString(id);

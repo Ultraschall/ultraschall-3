@@ -23,8 +23,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+
+#ifndef WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#endif // #ifndef WIN32
+
 #include "ReaperVersionCheck.h"
 #include "FileManager.h"
 
@@ -34,6 +38,7 @@ const std::string QueryReaperVersion()
 {
    std::string version;
    
+#ifndef WIN32
    if(ReaperPlatformCheck() == true)
    {
       NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
@@ -41,6 +46,7 @@ const std::string QueryReaperVersion()
       NSString* value = [plist objectForKey: @"CFBundleVersion"];
       version = [value UTF8String];
    }
+#endif // #ifndef WIN32
    
    return version;
 }

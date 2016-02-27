@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <fstream>
 
 #include <Framework.h>
@@ -30,7 +31,9 @@
 #include "Application.h"
 #include "FileManager.h"
 
+#ifndef WIN32
 #import <AppKit/AppKit.h>
+#endif // #ifndef WIN32
 
 namespace framework = ultraschall::framework;
 
@@ -47,6 +50,7 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
 {
    std::string path;
 
+#ifndef WIN32
    NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
    if(nil != fileDialog)
    {
@@ -72,7 +76,8 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
       
       fileDialog = nil;
    }
-   
+#endif // #ifndef WIN32
+  
    return path;
 }
 
@@ -86,7 +91,8 @@ const std::string FileManager::BrowseForFolder(const framework::ResourceId id, c
 const std::string FileManager::BrowseForFolder(const std::string& title, const std::string& folder)
 {
    std::string path;
-   
+
+#ifndef WIN32   
    NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
    if(nil != fileDialog)
    {
@@ -108,7 +114,8 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
       
       fileDialog = nil;
    }
-   
+#endif // #ifndef WIN32
+
    return path;
 }
    
@@ -119,32 +126,52 @@ const std::string FileManager::AppendPath(const std::string& prefix, const std::
 
 const std::string FileManager::UserHomeDirectory()
 {
+   std::string directory;
+
+#ifndef WIN32
    NSString* userHomeDirectory = NSHomeDirectory();
-   const std::string directory = [userHomeDirectory UTF8String];
+   directory = [userHomeDirectory UTF8String];
+#endif // #ifndef WIN32
+
    return directory;
 }
    
 const std::string FileManager::UserApplicationSupportDirectory()
 {
+    std::string directory;
+
+#ifndef WIN32
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                          inDomains:NSUserDomainMask] firstObject];
-   const std::string directory = [applicationSupportDirectory fileSystemRepresentation];
+   directory = [applicationSupportDirectory fileSystemRepresentation];
+#endif // #ifndef WIN32
+
    return directory;
 }
 
 const std::string FileManager::SystemApplicationSupportDirectory()
 {
+    std::string directory;
+
+#ifndef WIN32
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                                 inDomains:NSSystemDomainMask] firstObject];
-   const std::string directory = [applicationSupportDirectory fileSystemRepresentation];
+   directory = [applicationSupportDirectory fileSystemRepresentation];
+#endif // #ifndef WIN32
+
    return directory;
 }
    
 
 const bool FileManager::FileExists(const std::string& path)
 {
+    bool fileExists = false;
+
+#ifndef WIN32
    NSFileManager* fileManager = [NSFileManager defaultManager];
-   const bool fileExists = [fileManager fileExistsAtPath: [NSString stringWithUTF8String: path.c_str()]] == YES;
+   fileExists = [fileManager fileExistsAtPath: [NSString stringWithUTF8String: path.c_str()]] == YES;
+#endif // #ifndef WIN32
+
    return fileExists;
 }
    

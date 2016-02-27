@@ -22,63 +22,14 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_H_INCL__
+#ifndef __ULTRASCHALL_PLATOFRM_H_INCL__
+#define __ULTRASCHALL_PLATOFRM_H_INCL__
 
-#include <Platform.h>
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#else
+#include <zlib.h>
+#endif // #ifdef WIN32
 
-#include <cstdint>
-#include <string>
-#include <vector>
-#include <map>
-
-namespace ultraschall { namespace framework {
-
-#define PRECONDITION(a) \
-{ \
-   if((a) == 0) \
-   { \
-      return; \
-   } \
-}
-
-#define PRECONDITION_RETURN(a, b) \
-{ \
-   if((a) == 0) \
-      { \
-      return (b); \
-      } \
-}
-
-template<class PointerType> inline static void SafeDelete(PointerType*& ptr)
-{
-   delete ptr;
-   ptr = 0;
-}
-
-template<class PointerType> inline static void SafeDeleteArray(PointerType*& ptr)
-{
-   delete [] ptr;
-   ptr = 0;
-}
-
-template<class ReferenceCountedType> inline static void SafeRelease(ReferenceCountedType*& ptr)
-{
-   if(ptr != 0)
-   {
-      ptr->Release();
-      ptr = 0;
-   }
-}
-
-template<class ReferenceCountedType> inline static void SafeRetain(ReferenceCountedType* ptr)
-{
-   if(ptr != 0)
-   {
-      ptr->AddRef();
-   }
-}
-   
-}}
-
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__
+#endif // #ifndef __ULTRASCHALL_PLATOFRM_H_INCL__

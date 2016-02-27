@@ -22,6 +22,9 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
+#include <iomanip>
+
 #include <ServiceManager.h>
 #include <ResourceManager.h>
 #include <StringUtilities.h>
@@ -351,7 +354,7 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
                                               "/REAPER/UserPlugins/reaper_sws_extension.dylib";
    if((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
    {
-      MessageBox::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
+      NotificationWindow::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
       ok = false;
    }
    
@@ -359,7 +362,7 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
                                               "/REAPER/UserPlugins/reaper_sws.dylib";
    if((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
    {
-      MessageBox::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
+      NotificationWindow::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
       ok = false;
    }
 
@@ -367,25 +370,25 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
                                                    "/REAPER/UserPlugins/reaper_ultraschall.dylib";
    if((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
    {
-      MessageBox::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
+      NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
       ok = false;
    }
    
    if((true == ok) && (ReaperPlatformCheck() == false))
    {
-      MessageBox::Show(message, information5 + " "  + information6, true);
+      NotificationWindow::Show(message, information5 + " "  + information6, true);
       ok = false;
    }
    
    if((true == ok) && (ReaperVersionCheck() == false))
    {
-      MessageBox::Show(message, information3 + " "  + information4, true);
+      NotificationWindow::Show(message, information3 + " "  + information4, true);
       ok = false;
    }
    
    if((true == ok) && (SWSVersionCheck() == false))
    {
-      MessageBox::Show(message, information7, true);
+      NotificationWindow::Show(message, information7, true);
       ok = false;
    }
    

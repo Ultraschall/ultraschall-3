@@ -31,7 +31,7 @@
 
 namespace ultraschall { namespace reaper {
    
-class MessageBox
+class NotificationWindow
 {
 public:
    static void Show(const std::string& message, const bool isError = false);

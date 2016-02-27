@@ -23,8 +23,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+
+#ifndef WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#endif // #ifndef WIN32
+
 #include "SoundboardVersionCheck.h"
 #include "FileManager.h"
 
@@ -34,6 +38,7 @@ const std::string QuerySoundboardVersion()
 {
    std::string version;
    
+#ifndef WIN32
    NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
                                                                      inDomains:NSUserDomainMask] firstObject];
    NSMutableString* filePath = [NSMutableString stringWithUTF8String: [libraryDirectory fileSystemRepresentation]];
@@ -45,7 +50,9 @@ const std::string QuerySoundboardVersion()
       NSString* value = [plist objectForKey: @"CFBundleShortVersionString"];
       version = [value UTF8String];
    }
-   
+#else
+#endif // #ifndef WIN32
+
    return version;
 }
    

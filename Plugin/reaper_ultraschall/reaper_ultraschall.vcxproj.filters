@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Submodules">
+      <UniqueIdentifier>{2d1cbca2-6446-4c68-87f1-244f4c7a0809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submodules\minizip">
+      <UniqueIdentifier>{72479dae-8fd7-4142-bb17-8466eaee1d31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp">
@@ -119,6 +125,15 @@
     </ClCompile>
     <ClCompile Include="reaper\ThemeVersionCheck.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Submodules\minizip\ioapi.c">
+      <Filter>Submodules\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="Submodules\minizip\iowin32.c">
+      <Filter>Submodules\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="Submodules\minizip\unzip.c">
+      <Filter>Submodules\minizip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,8 +272,14 @@
     <ClInclude Include="reaper\ThemeVersionCheck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="reaper\NotificationWindow.mm" />
+    <ClInclude Include="Submodules\minizip\ioapi.h">
+      <Filter>Submodules\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="Submodules\minizip\iowin32.h">
+      <Filter>Submodules\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="Submodules\minizip\unzip.h">
+      <Filter>Submodules\minizip</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

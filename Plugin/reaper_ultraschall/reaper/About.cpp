@@ -22,21 +22,25 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <Framework.h>
 #include "About.h"
+
+#ifndef WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import <Cocoa/Cocoa.h>
-
-//@interface AppDelegate : NSObject <NSApplicationDelegate>
-//@end
+#endif // #ifndef WIN32
 
 namespace ultraschall { namespace reaper {
    
+#ifndef WIN32
 static NSWindow* g_window = nil;
+#endif // #ifndef WIN32
 
-const void ShowAbout()
+void ShowAbout()
 {
-   if(nil == g_window)
+#ifndef WIN32
+    if(nil == g_window)
    {
       NSRect frame = NSMakeRect(100, 100, 800, 600);
       NSWindow* window  = [[NSWindow alloc] initWithContentRect: frame
@@ -50,6 +54,7 @@ const void ShowAbout()
       [window makeKeyAndOrderFront:NSApp];
       g_window = window;
    }
+#endif // #ifndef WIN32
 }
    
 }}

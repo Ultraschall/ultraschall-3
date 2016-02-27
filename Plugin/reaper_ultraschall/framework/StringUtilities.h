@@ -26,11 +26,10 @@
 #define __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
 
 #include <string>
-#include <vector>
+#include <sstream>
 #include <algorithm>
 #include <functional>
 #include <cctype>
-#include <locale>
 
 #include <Framework.h>
 
@@ -76,7 +75,11 @@ static inline void replace(std::string& str, const std::string& source, const st
       start_pos += target.length();
    }
 }
-   
+ 
+std::wstring MakeUTF16String(const std::string& src);
+
+std::string MakeUTF8String(const std::wstring& src);
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__

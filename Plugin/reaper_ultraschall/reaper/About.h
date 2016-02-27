@@ -27,7 +27,7 @@
 
 namespace ultraschall { namespace reaper {
    
-const void ShowAbout();
+void ShowAbout();
    
 }}
 

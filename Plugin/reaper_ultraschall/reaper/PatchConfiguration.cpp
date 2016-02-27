@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <string>
 #include <vector>
 #include <StringUtilities.h>
 #include <TextFileReader.h>

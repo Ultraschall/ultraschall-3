@@ -63,7 +63,7 @@ public:
       PRECONDITION_RETURN(dataSize_ > 0, -1);
       
       uint64_t crc = crc32(0, Z_NULL, 0);
-      return crc32(crc, data_, static_cast<uint32_t>(dataSize_));
+      return crc32(static_cast<uLong>(crc), data_, static_cast<uInt>(dataSize_));
    }
    
 protected:

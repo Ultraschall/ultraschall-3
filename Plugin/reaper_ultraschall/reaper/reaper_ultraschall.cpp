@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <ServiceStatus.h>
-#include <MessageBox.h>
 
 #include "Application.h"
+#include "MessageBox.h"
 #include "ReaperEntryPoints.h"
 #include "InvalidEntryPointException.h"
 #include "InsertChaptersAction.h"
@@ -69,12 +69,12 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
                }
             }
          }
-         catch(reaper::InvalidEntryPointException& e)
+         catch(reaper::InvalidEntryPointException&)
          {
             std::string errorReason = "\
 You are trying to load a version of REAPER that is not compatible to Ultraschall 2.";
             
-            reaper::MessageBox::Show("Ultraschall failed to load!", errorReason, true);
+            reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
             return 0;
          }
          

@@ -57,6 +57,7 @@ void ResourceManager::SetLanguage(const std::string& id)
    
 void ResourceManager::SetOperatingSystemLanguage()
 {
+#ifndef WIN32
    currentLanguage_ = "en-EN";
 
    NSLocale *locale = [NSLocale currentLocale];
@@ -72,6 +73,7 @@ void ResourceManager::SetOperatingSystemLanguage()
          }
       }
    }
+#endif // #ifdef WIN32
 }
    
 const char* ResourceManager::GetLocalizedString(const ResourceId& id) const
