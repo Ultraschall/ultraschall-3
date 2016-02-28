@@ -79,7 +79,7 @@ const ServiceStatus SaveChaptersAction::Execute()
          }
          else
          {
-            NotificationWindow::Show(noProjectNameMessageId_);
+            NotificationWindow::Show(saveOperationCanceledId_);
          }
       }
       else
