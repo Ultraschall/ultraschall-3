@@ -37,6 +37,8 @@ void NotificationWindow::Show(const std::string& message, const bool isError)
 #ifndef WIN32
    [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
                                asError: isError ? YES : NO];
+#else
+    MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
 #endif // #ifndef WIN32
 }
 

@@ -129,7 +129,11 @@ namespace ultraschall {
             const std::string projectPath = GetProjectPathName();
             if(projectPath.empty() == false)
             {
+#ifndef WIN32
                 const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
+#else
+                const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
+#endif // #ifndef WIN32
                 if(pathComponents.empty() == false)
                 {
                     result = pathComponents[pathComponents.size() - 1];
@@ -146,12 +150,25 @@ namespace ultraschall {
             const std::string projectPath = GetProjectPathName();
             if(projectPath.empty() == false)
             {
+#ifndef WIN32
                 const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
+#else
+                const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
+#endif // #ifndef WIN32
+
                 if(pathComponents.empty() == false)
                 {
                     for(size_t i = 0; i < pathComponents.size() - 1; i++)
                     {
-                        result += pathComponents[i] + '/';
+                        result += pathComponents[i];
+                        if(i < pathComponents.size() - 2)
+                        {
+#ifndef WIN32
+                            result += '/';
+#else
+                            result += '\\';
+#endif // #ifndef WIN32
+                        }
                     }
                 }
             }
