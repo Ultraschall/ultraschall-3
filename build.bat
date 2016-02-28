@@ -1,6 +1,8 @@
 rem @echo off
 
-del /f /q Ultraschall_2.2.msi 2> nul
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall_2.2_prerelease2
+
+del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
 rem clean-up payload folder in case something went wrong before
 rd /s /q Payload 2> nul
@@ -63,8 +65,8 @@ copy ..\Soundboard\Extras\TouchOSC\Soundboard.touchosc Payload\Soundboard\Extras
 copy ..\Soundboard\Extras\MIDI.md Payload\Soundboard\Extras
 copy ..\Soundboard\Extras\OSC.md Payload\Soundboard\Extras
 
-candle -nologo -arch x64 -out Build\Ultraschall_2.2.wixobj Scripts\distribution.wxs
-light -nologo -spdb Build\Ultraschall_2.2.wixobj -out Ultraschall_2.2.msi 
+candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
+light -nologo -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
 
 rd /s /q Build > nul
 rd /s /q Payload > nul
