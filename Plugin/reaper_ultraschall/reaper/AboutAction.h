@@ -69,6 +69,8 @@ private:
       }
    }
    
+   static std::string QueryPluginVersion();
+
    framework::ResourceId actionNameId_;
 };
    

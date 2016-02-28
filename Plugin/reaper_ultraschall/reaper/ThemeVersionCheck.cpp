@@ -84,12 +84,22 @@ const std::string QueryThemeVersion2()
    
    std::string versionString;
    
+#ifndef WIN32
    const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
+#else
+   const std::string applicationSupportDirectory = FileManager::RoamingAppDataDirectory();
+#endif // #ifndef WIN32
+
    if(applicationSupportDirectory.empty() == false)
    {
+#ifndef WIN32
       const std::string themeControlFile = applicationSupportDirectory +
-                                           "/REAPER/ColorThemes/Ultraschall_2.1.ReaperThemeZip";
-      
+        "/REAPER/ColorThemes/Ultraschall_2.1.ReaperThemeZip";
+#else
+       const std::string themeControlFile = applicationSupportDirectory +
+           "\\REAPER\\ColorThemes\\Ultraschall_2.1.ReaperThemeZip";
+#endif // #ifndef WIN32
+
       unzFile themeFile = unzOpen(themeControlFile.c_str());
       if(themeFile != 0)
       {
@@ -111,7 +121,7 @@ const std::string QueryThemeVersion2()
                      const size_t fileBufferSize = fileInfo.uncompressed_size;
                      if(fileBufferSize > 0)
                      {
-                        char* fileBuffer = (char*)calloc(fileBufferSize, sizeof(char));
+                        char* fileBuffer = (char*)calloc(fileBufferSize + 1, sizeof(char));
                         if(fileBuffer != 0)
                         {
                            const int readResult = unzReadCurrentFile(themeFile, fileBuffer, (unsigned int)fileBufferSize);

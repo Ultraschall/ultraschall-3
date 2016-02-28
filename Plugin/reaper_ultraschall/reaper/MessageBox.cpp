@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <ResourceManager.h>
+#include "ReaperEntryPoints.h"
 #include "MessageBox.h"
 
 #ifndef WIN32
@@ -45,6 +46,8 @@ void NotificationWindow::Show(const std::string& message, const std::string& inf
     [NotificationWindow showWithMessage : [NSString stringWithUTF8String : message.c_str()]
                                   info: [NSString stringWithUTF8String: information.c_str()]
                                   asError: isError ? YES : NO];
+#else
+    MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
 #endif // #ifndef WIN32
 }
    

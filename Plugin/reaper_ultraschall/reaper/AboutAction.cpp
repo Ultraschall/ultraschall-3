@@ -29,9 +29,12 @@
 #include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
 #include "SoundboardVersionCheck.h"
+#include "StudioLinkVersionCheck.h"
+#include "SWSVersionCheck.h"
 #include "AboutAction.h"
 #include "MessageBox.h"
 #include "About.h"
+#include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -48,7 +51,7 @@ const ServiceStatus AboutAction::Execute()
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension 2.1.1\r\n";
+Ultraschall REAPER Extension " + QueryPluginVersion() + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion2();
    if(themeVersion.empty() == false)
@@ -56,11 +59,13 @@ Ultraschall REAPER Extension 2.1.1\r\n";
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
    }
 
+#ifndef WIN32
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";
    }
+#endif // #ifndef WIN32
 
    const std::string soundboardVersion = QuerySoundboardVersion();
    if(soundboardVersion.empty() == false)
@@ -68,18 +73,34 @@ Ultraschall REAPER Extension 2.1.1\r\n";
       message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
    }
 
+   const std::string studioLinkVersion = QueryStudioLinkVersion();
+   if(studioLinkVersion.empty() == false)
+   {
+       message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
+   }
+
    std::string message2 = "\
-SWS REAPER Extension 2.8.3\r\n\
+SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
 REAPER ";
 
    message2 += QueryReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("Ultraschall 2.1.1 \"Gropius\"", message1 + message2);
+   NotificationWindow::Show("About Ultraschall \"Gropius\"...", message1 + message2);
 #else
    ShowAbout();
 #endif
    return SERVICE_SUCCESS;
+}
+
+std::string AboutAction::QueryPluginVersion()
+{
+#ifdef WIN32
+    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
+    return FileManager::ReadVersionFromFile(path);
+#else
+    return "2.2";
+#endif // #ifdef WIN32
 }
 
 }}

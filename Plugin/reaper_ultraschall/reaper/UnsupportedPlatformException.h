@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +22,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
-#define __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UNSUPPORTED_PLATFORM_EXCEPTION_H_INCL__
+#define __ULTRASCHALL_REAPER_UNSUPPORTED_PLATFORM_EXCEPTION_H_INCL__
+
+#include <string>
+#include <exception>
 
 namespace ultraschall {
     namespace reaper {
 
-        const bool SWSVersionCheck();
+        class UnsupportedPlatformException : public std::exception
+        {
+        public:
+            UnsupportedPlatformException(const std::string& expectedPlatform);
 
-        std::string QuerySWSVersion();
+            virtual const char* what() const noexcept override;
+
+        private:
+            std::string expectedPlatform_;
+        };
     }
 }
 
-#endif // __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UNSUPPORTED_PLATFORM_EXCEPTION_H_INCL__
+

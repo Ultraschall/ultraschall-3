@@ -23,16 +23,22 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+#include <sstream>
 #include <fstream>
 
 #include <Framework.h>
 #include <ResourceManager.h>
+#include <StringUtilities.h>
 
 #include "Application.h"
 #include "FileManager.h"
+#include "UnsupportedPlatformException.h"
 
 #ifndef WIN32
 #import <AppKit/AppKit.h>
+#else
+#include <windows.h>
+#include <shlobj.h>
 #endif // #ifndef WIN32
 
 namespace framework = ultraschall::framework;
@@ -76,6 +82,8 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
       
       fileDialog = nil;
    }
+#else
+
 #endif // #ifndef WIN32
   
    return path;
@@ -121,7 +129,11 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
    
 const std::string FileManager::AppendPath(const std::string& prefix, const std::string& append)
 {
+#ifndef WIN32 
    return prefix + '/' + append;
+#else
+    return prefix + '\\' + append;
+#endif // #ifndef WIN32
 }
 
 const std::string FileManager::UserHomeDirectory()
@@ -144,6 +156,8 @@ const std::string FileManager::UserApplicationSupportDirectory()
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                          inDomains:NSUserDomainMask] firstObject];
    directory = [applicationSupportDirectory fileSystemRepresentation];
+#else
+    throw UnsupportedPlatformException("Apple Macintosh");
 #endif // #ifndef WIN32
 
    return directory;
@@ -157,11 +171,50 @@ const std::string FileManager::SystemApplicationSupportDirectory()
    NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                                 inDomains:NSSystemDomainMask] firstObject];
    directory = [applicationSupportDirectory fileSystemRepresentation];
+#else
+    throw UnsupportedPlatformException("Apple Macintosh");
 #endif // #ifndef WIN32
 
    return directory;
 }
    
+const std::string FileManager::ProgramFilesDirectory()
+{
+    std::string directory;
+
+#ifdef WIN32
+    PWSTR unicodeString = 0;
+    HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, 0, &unicodeString);
+    if(SUCCEEDED(hr))
+    {
+        directory = framework::MakeUTF8String(unicodeString);
+        CoTaskMemFree(unicodeString);
+    }
+#else
+    throw UnsupportedPlatformException("Microsoft Windows");
+#endif // #ifndef WIN32
+
+    return directory;
+}
+
+const std::string FileManager::RoamingAppDataDirectory()
+{
+    std::string directory;
+
+#ifdef WIN32
+    PWSTR unicodeString = 0;
+    HRESULT hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, 0, &unicodeString);
+    if(SUCCEEDED(hr))
+    {
+        directory = framework::MakeUTF8String(unicodeString);
+        CoTaskMemFree(unicodeString);
+    }
+#else
+    throw UnsupportedPlatformException("Microsoft Windows");
+#endif // #ifndef WIN32
+
+    return directory;
+}
 
 const bool FileManager::FileExists(const std::string& path)
 {
@@ -170,6 +223,13 @@ const bool FileManager::FileExists(const std::string& path)
 #ifndef WIN32
    NSFileManager* fileManager = [NSFileManager defaultManager];
    fileExists = [fileManager fileExistsAtPath: [NSString stringWithUTF8String: path.c_str()]] == YES;
+#else
+    HANDLE fileHandle = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+    if(INVALID_HANDLE_VALUE != fileHandle)
+    {
+        fileExists = true;
+        CloseHandle(fileHandle);
+    }
 #endif // #ifndef WIN32
 
    return fileExists;
@@ -190,6 +250,58 @@ const std::vector<std::string> FileManager::ReadFile(const std::string& filename
    input.close();
    
    return lines;
+}
+
+std::string FileManager::ReadVersionFromFile(const std::string& path)
+{
+    std::string version;
+
+    if(path.empty() == false)
+    {
+#ifdef WIN32
+        DWORD fileVersionInfoHandle = 0;
+        const DWORD fileVersionInfoSize = GetFileVersionInfoSize(path.c_str(), &fileVersionInfoHandle);
+        if(fileVersionInfoSize > 0)
+        {
+            uint8_t* fileVersionInfo = new uint8_t[fileVersionInfoSize];
+            if(fileVersionInfo != 0)
+            {
+                if(GetFileVersionInfo(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
+                {
+                    uint8_t* versionDataPtr = 0;
+                    uint32_t versionDataSize = 0;
+                    if(VerQueryValue(fileVersionInfo, "\\", (void**)&versionDataPtr, &versionDataSize))
+                    {
+                        if(versionDataSize > 0)
+                        {
+                            const VS_FIXEDFILEINFO* fileInfo = reinterpret_cast<VS_FIXEDFILEINFO*>(versionDataPtr);
+                            if(fileInfo->dwSignature == 0xfeef04bd)
+                            {
+                                std::stringstream str;
+                                str << ((fileInfo->dwFileVersionMS >> 16) & 0xffff) << "."; 
+                                str << ((fileInfo->dwFileVersionMS >> 0) & 0xffff) << ".";
+                                str << ((fileInfo->dwFileVersionLS >> 16) & 0xffff) << ".";
+                                str << ((fileInfo->dwFileVersionLS >> 0) & 0xffff);
+                                version = str.str();
+                            }
+                        }
+                    }
+                }
+                    
+                framework::SafeDelete(fileVersionInfo);
+            }
+        }
+#else
+        throw UnsupportedPlatformException("Microsoft Windows");
+#endif
+    }
+
+    if(version.empty() == true)
+    {
+        version = "<Unknown>";
+    }
+
+    return version;
 }
 
 }}

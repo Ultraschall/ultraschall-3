@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,56 +29,34 @@
 #import <AppKit/AppKit.h>
 #endif // #ifndef WIN32
 
-#include "ReaperVersionCheck.h"
+#include "StudioLinkVersionCheck.h"
 #include "FileManager.h"
 
 namespace ultraschall {
     namespace reaper {
 
-        const std::string QueryReaperVersion()
+        const std::string QueryStudioLinkVersion()
         {
             std::string version;
 
-            if(ReaperPlatformCheck() == true)
-            {
 #ifndef WIN32
-                NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
+            NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                inDomains : NSUserDomainMask] firstObject];
+            NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
+            [filePath appendString : @"/Audio/Plug-Ins/VST/StudioLink.vst/Contents/Info.plist"];
+                if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+                {
                     NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-                NSString* value = [plist objectForKey : @"CFBundleVersion"];
-                version = [value UTF8String];
+
+                    NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
+                    version = [value UTF8String];
+                }
 #else
-                const std::string reaperPath = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\reaper.exe";
-                version = FileManager::ReadVersionFromFile(reaperPath);
+            const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link.dll";
+            version = FileManager::ReadVersionFromFile(path);
 #endif // #ifndef WIN32
-            }
 
             return version;
-        }
-
-        const bool ReaperVersionCheck()
-        {
-            bool result = false;
-
-            std::string version = QueryReaperVersion();
-            if((version.size() >= 3) && (version[0] == '5') && (version[1] == '.'))
-            {
-                const int minorVersion = atoi(&version[2]);
-                if(minorVersion >= 1)
-                {
-                    result = true;
-                }
-            }
-
-            return result;
-        }
-
-        const bool ReaperPlatformCheck()
-        {
-#ifndef WIN32
-            return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
-#else
-            return FileManager::FileExists(FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\reaper.exe");
-#endif // #ifndef WIN32
         }
     }
 }
