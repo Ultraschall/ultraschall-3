@@ -28,27 +28,31 @@
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
 {
-   NSAlert *alert = [[NSAlert alloc] init];
-   [alert addButtonWithTitle: @"Dismiss"];
-   [alert setMessageText: message];
-   [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
-                     modalDelegate: nil
-                    didEndSelector: nil
-                       contextInfo: nil];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle: @"Dismiss"];
+        [alert setMessageText: message];
+        [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
+                         modalDelegate: nil
+                        didEndSelector: nil
+                           contextInfo: nil];
+    }];
 }
 
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error
 {
-   NSAlert *alert = [[NSAlert alloc] init];
-   [alert addButtonWithTitle: @"Dismiss"];
-   [alert setMessageText: message];
-   [alert setInformativeText: info];
-   [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
-                     modalDelegate: nil
-                    didEndSelector: nil
-                       contextInfo: nil];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle: @"Dismiss"];
+        [alert setMessageText: message];
+        [alert setInformativeText: info];
+        [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
+                         modalDelegate: nil
+                        didEndSelector: nil
+                           contextInfo: nil];
+    }];
 }
 
 @end

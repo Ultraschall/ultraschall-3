@@ -5,3 +5,6 @@
 [submodule "Plugin/reaper_ultraschall/Submodules/zlib"]
 	path = Plugin/reaper_ultraschall/Submodules/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "Plugin/reaper_ultraschall/Submodules/cpr"]
+	path = Plugin/reaper_ultraschall/Submodules/cpr
+	url = https://github.com/whoshuu/cpr.git

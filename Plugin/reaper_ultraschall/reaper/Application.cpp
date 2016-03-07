@@ -24,6 +24,7 @@
 
 #include <string>
 #include <iomanip>
+#include <cpr/cpr.h>
 
 #include <ServiceManager.h>
 #include <ResourceManager.h>
@@ -57,7 +58,8 @@ namespace ultraschall {
         const ServiceStatus Application::Start()
         {
             PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-
+            VersionCheck();
+          
             return SERVICE_SUCCESS;
         }
 
@@ -413,6 +415,13 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
             }
 
             return ok;
+        }
+      
+        const void Application::VersionCheck()
+        {
+            auto future_text = cpr::GetCallback([](cpr::Response r) {
+                NotificationWindow::Show("Version Check", r.text, true);
+            }, cpr::Url{"http://www.httpbin.org/get"});
         }
     }
 }
