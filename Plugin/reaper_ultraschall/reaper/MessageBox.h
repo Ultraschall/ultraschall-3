@@ -26,19 +26,18 @@
 #define __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
 
 #include <string>
-
 #include <ResourceId.h>
 
 namespace ultraschall { namespace reaper {
-   
+    
 class NotificationWindow
 {
 public:
-   static void Show(const std::string& message, const bool isError = false);
-   static void Show(const std::string& message, const std::string& info, const bool isError = false);
-   static void Show(const framework::ResourceId id, const bool isError = false);
+    static void Show(const std::string& message, const bool isError = false);
+    static void Show(const std::string& message, const std::string& info, const bool isError = false);
+    static void Show(const framework::ResourceId id, const bool isError = false);
 };
-   
+    
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__

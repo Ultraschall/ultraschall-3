@@ -25,10 +25,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-@interface NotificationWindow : NSObject
-
+@interface NotificationPanel : NSObject
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error;
-
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
-
 @end

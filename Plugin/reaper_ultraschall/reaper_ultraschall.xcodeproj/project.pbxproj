@@ -35,6 +35,10 @@
 		424C830C1AC8086F00231F3D /* FileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83011AC8086F00231F3D /* FileManager.h */; };
 		424C830E1AC8086F00231F3D /* InsertChaptersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424C83031AC8086F00231F3D /* InsertChaptersAction.cpp */; };
 		424C830F1AC8086F00231F3D /* InsertChaptersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83041AC8086F00231F3D /* InsertChaptersAction.h */; };
+		424DB57F1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */; };
+		424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */; };
+		424DB5811C8507FB00656ED2 /* UnsupportedPlatformException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424DB57D1C8507FB00656ED2 /* UnsupportedPlatformException.cpp */; };
+		424DB5821C8507FB00656ED2 /* UnsupportedPlatformException.h in Headers */ = {isa = PBXBuildFile; fileRef = 424DB57E1C8507FB00656ED2 /* UnsupportedPlatformException.h */; };
 		424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */; };
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
 		424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CBB1BF389E0004DBA2F /* About.cpp */; };
@@ -137,6 +141,10 @@
 		424C83011AC8086F00231F3D /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileManager.h; path = reaper/FileManager.h; sourceTree = "<group>"; };
 		424C83031AC8086F00231F3D /* InsertChaptersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertChaptersAction.cpp; path = reaper/InsertChaptersAction.cpp; sourceTree = "<group>"; };
 		424C83041AC8086F00231F3D /* InsertChaptersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertChaptersAction.h; path = reaper/InsertChaptersAction.h; sourceTree = "<group>"; };
+		424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = StudioLinkVersionCheck.cpp; path = reaper/StudioLinkVersionCheck.cpp; sourceTree = "<group>"; };
+		424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudioLinkVersionCheck.h; path = reaper/StudioLinkVersionCheck.h; sourceTree = "<group>"; };
+		424DB57D1C8507FB00656ED2 /* UnsupportedPlatformException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UnsupportedPlatformException.cpp; path = reaper/UnsupportedPlatformException.cpp; sourceTree = "<group>"; };
+		424DB57E1C8507FB00656ED2 /* UnsupportedPlatformException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnsupportedPlatformException.h; path = reaper/UnsupportedPlatformException.h; sourceTree = "<group>"; };
 		424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SoundboardVersionCheck.cpp; path = reaper/SoundboardVersionCheck.cpp; sourceTree = "<group>"; };
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
 		424F7CBB1BF389E0004DBA2F /* About.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = About.cpp; path = reaper/About.cpp; sourceTree = "<group>"; };
@@ -292,6 +300,10 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */,
+				424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */,
+				424DB57D1C8507FB00656ED2 /* UnsupportedPlatformException.cpp */,
+				424DB57E1C8507FB00656ED2 /* UnsupportedPlatformException.h */,
 				4242E9741BAC983B00382B79 /* InsertTranscriptAction.cpp */,
 				4242E9751BAC983B00382B79 /* InsertTranscriptAction.h */,
 				42DC63E61AD0367A00231F3D /* SaveChaptersToProjectAction.cpp */,
@@ -350,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A988CB1AF286D500231F3D /* MessageBox.h in Headers */,
+				424DB5821C8507FB00656ED2 /* UnsupportedPlatformException.h in Headers */,
 				4242E97B1BAC99D700382B79 /* TranscriptItem.h in Headers */,
 				424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */,
 				424C82FF1AC8085D00231F3D /* SharedObjectManager.h in Headers */,
@@ -372,6 +385,7 @@
 				4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */,
 				42DC63E91AD0367A00231F3D /* SaveChaptersToProjectAction.h in Headers */,
 				4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */,
+				424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */,
 				4233400F1B51489900231F3D /* ChapterMarker.h in Headers */,
 				42F19A631ABEE81500231F3D /* Framework.h in Headers */,
 				42F19A761ABEE82200231F3D /* Application.h in Headers */,
@@ -463,9 +477,11 @@
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
 				423430EB1C668E4800CC2DE4 /* ioapi.c in Sources */,
 				4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */,
+				424DB5811C8507FB00656ED2 /* UnsupportedPlatformException.cpp in Sources */,
 				4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */,
 				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
 				42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */,
+				424DB57F1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp in Sources */,
 				42DC63E81AD0367A00231F3D /* SaveChaptersToProjectAction.cpp in Sources */,
 				425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */,
 				42F19A791ABEE82200231F3D /* CustomActionManager.cpp in Sources */,

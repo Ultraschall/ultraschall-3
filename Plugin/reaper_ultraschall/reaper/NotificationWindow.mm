@@ -24,7 +24,7 @@
 
 #import "NotificationWindow.h"
 
-@implementation NotificationWindow
+@implementation NotificationPanel
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
 {

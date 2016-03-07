@@ -35,7 +35,7 @@ namespace ultraschall { namespace reaper {
 void NotificationWindow::Show(const std::string& message, const bool isError)
 {
 #ifndef WIN32
-   [NotificationWindow showWithMessage: [NSString stringWithUTF8String: message.c_str()]
+   [NotificationPanel showWithMessage: [NSString stringWithUTF8String: message.c_str()]
                                asError: isError ? YES : NO];
 #else
     MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
@@ -45,7 +45,7 @@ void NotificationWindow::Show(const std::string& message, const bool isError)
 void NotificationWindow::Show(const std::string& message, const std::string& information, const bool isError)
 {
 #ifndef WIN32
-    [NotificationWindow showWithMessage : [NSString stringWithUTF8String : message.c_str()]
+    [NotificationPanel showWithMessage : [NSString stringWithUTF8String : message.c_str()]
                                   info: [NSString stringWithUTF8String: information.c_str()]
                                   asError: isError ? YES : NO];
 #else
