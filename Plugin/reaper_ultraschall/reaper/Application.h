@@ -80,7 +80,6 @@ private:
    Application();
 
    static const bool HealthCheck();
-   static const void VersionCheck();
 
    const int Register(const char* name, void* pInfoStruct) const;
 };

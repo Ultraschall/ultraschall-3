@@ -109,6 +109,7 @@
 		A9BEA4FF1C8E24C7003F2B84 /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4F41C8E24C7003F2B84 /* session.cpp */; };
 		A9BEA5001C8E24C7003F2B84 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4F51C8E24C7003F2B84 /* util.cpp */; };
 		A9BEA5281C8E262D003F2B84 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BEA5271C8E262D003F2B84 /* libcurl.tbd */; };
+		A9BEA52A1C90CA7C003F2B84 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BEA5291C90CA7B003F2B84 /* libxml2.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -227,6 +228,7 @@
 		A9BEA4F41C8E24C7003F2B84 /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = Submodules/cpr/cpr/session.cpp; sourceTree = "<group>"; };
 		A9BEA4F51C8E24C7003F2B84 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = Submodules/cpr/cpr/util.cpp; sourceTree = "<group>"; };
 		A9BEA5271C8E262D003F2B84 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		A9BEA5291C90CA7B003F2B84 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BEA52A1C90CA7C003F2B84 /* libxml2.tbd in Frameworks */,
 				A9BEA5281C8E262D003F2B84 /* libcurl.tbd in Frameworks */,
 				4254C98E1BF2911200B1EF1F /* libz.tbd in Frameworks */,
 				42E655021ACEE32A00231F3D /* AppKit.framework in Frameworks */,
@@ -257,6 +260,7 @@
 		429A7C501ABEE63B00231F3D = {
 			isa = PBXGroup;
 			children = (
+				A9BEA5291C90CA7B003F2B84 /* libxml2.tbd */,
 				42C224D41C64CD87009D1C68 /* Submodules */,
 				4254C98D1BF2911200B1EF1F /* libz.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
@@ -679,7 +683,8 @@
 					Submodule/minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
-					"\"$(SRCROOT)/Submodules/cpr/include\"/**",
+					"\"$(SRCROOT)/Submodules/cpr/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -701,7 +706,8 @@
 					Submodule/minizip,
 					../reaper_extension_sdk/jmde,
 					framework,
-					"\"$(SRCROOT)/Submodules/cpr/include\"/**",
+					"\"$(SRCROOT)/Submodules/cpr/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

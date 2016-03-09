@@ -50,7 +50,9 @@ public:
    }
    
    virtual const ServiceStatus Execute() override;
-   
+  
+   static const void VersionCheck();
+  
 protected:
    virtual ~AboutAction()
    {

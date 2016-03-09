@@ -25,6 +25,14 @@
 #include <string>
 #include <vector>
 #include <fstream>
+
+#include <cpr/cpr.h>
+
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
+
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
@@ -102,5 +110,60 @@ std::string AboutAction::QueryPluginVersion()
     return "2.2";
 #endif // #ifdef WIN32
 }
+  
+const void AboutAction::VersionCheck()
+{
+  auto future_text = cpr::GetCallback([](cpr::Response r) {
+    if (!r.error && r.status_code == 200) {
+      xmlInitParser();
+      xmlDocPtr doc;
+      xmlXPathContextPtr xpathCtx;
+      xmlXPathObjectPtr xpathObj;
+      xmlNodeSetPtr nodeset;
+
+      doc = xmlParseDoc((xmlChar *)r.text.c_str());
+      if (doc == NULL) {
+        return;
+      }
+      
+      xpathCtx = xmlXPathNewContext(doc);
+      if(xpathCtx == NULL) {
+        xmlFreeDoc(doc);
+        return;
+      }
+      
+      const xmlChar* ns = (xmlChar *)"sparkle";
+      const xmlChar* href = (xmlChar *)"http://www.andymatuschak.org/xml-namespaces/sparkle";
+      
+      if(xmlXPathRegisterNs(xpathCtx, ns, href) != 0) {
+        xmlXPathFreeContext(xpathCtx);
+        xmlFreeDoc(doc);
+        return;
+      }
+      
+      xpathObj = xmlXPathEvalExpression((xmlChar*)"//channel/item/enclosure/@sparkle:version", xpathCtx);
+      if(xpathObj == NULL) {
+        xmlXPathFreeContext(xpathCtx);
+        xmlFreeDoc(doc);
+        return;
+      }
+      
+      nodeset = xpathObj->nodesetval;
+
+      const std::string net_version((char*)nodeset->nodeTab[0]->children[0].content);
+
+      xmlXPathFreeObject(xpathObj);
+      xmlXPathFreeContext(xpathCtx);
+      xmlFreeDoc(doc);
+      xmlCleanupParser();
+      
+      const std::string local_version = "2.2"; // TODO: consolidate with private AboutAction::QueryPluginVersion()
+      if (local_version.compare(net_version) != 0) {
+        NotificationWindow::Show("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available. You are currently running version " + local_version, true);
+      }
+    }
+  }, cpr::Url{"https://archive-andi-pieper.s3.amazonaws.com/ultraschall_version.xml"});
+}
+
 
 }}

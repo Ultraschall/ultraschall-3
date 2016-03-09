@@ -24,7 +24,6 @@
 
 #include <string>
 #include <iomanip>
-#include <cpr/cpr.h>
 
 #include <ServiceManager.h>
 #include <ResourceManager.h>
@@ -37,6 +36,7 @@
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
 #include "MessageBox.h"
+#include "AboutAction.h"
 
 namespace ultraschall {
     namespace reaper {
@@ -58,7 +58,7 @@ namespace ultraschall {
         const ServiceStatus Application::Start()
         {
             PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-            VersionCheck();
+            AboutAction::VersionCheck();
           
             return SERVICE_SUCCESS;
         }
@@ -415,19 +415,6 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
             }
 
             return ok;
-        }
-      
-        const void Application::VersionCheck()
-        {
-            auto future_text = cpr::GetCallback([](cpr::Response r) {
-                if (!r.error && r.status_code == 200) {
-                    const std::string net_version = r.text;
-                    const std::string local_version = "2.2"; // TODO: consolidate with private AboutAction::QueryPluginVersion()
-                    if (local_version.compare(net_version) != 0) {
-                        NotificationWindow::Show("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available. You are currently running version " + local_version, true);
-                    }
-                }
-            }, cpr::Url{"http://archive-andi-pieper.s3.amazonaws.com/ultraschall_version.txt"});
         }
     }
 }
