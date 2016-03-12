@@ -58,16 +58,9 @@ echo %BUILD_TARGET%ing zlib library... (%BUILD_CONFIG%, %BUILD_PLATFORM_NAME%)
 pushd Plugin\reaper_ultraschall\Submodules\zlib\contrib\vstudio\vc11
 git checkout --quiet master > nul
 git pull > nul
-msbuild /maxcpucount /target:%BUILD_TARGET% /property:configuration=%ZLIB_BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /clp:ErrorsOnly;ShowTimestamp /m /nologo zlibstat.vcxproj  
+msbuild /nologo /maxcpucount /target:%BUILD_TARGET% /property:configuration=%ZLIB_BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /property:platformtoolset=v140 /clp:ErrorsOnly;ShowTimestamp zlibstat.vcxproj  
 popd
 
-pushd Plugin\reaper_ultraschall\Submodules\minizip
-git checkout --quiet master > nul
-git pull > nul
-popd
-echo Done.
-
-:build_curl
 echo %BUILD_TARGET%ing curl library... (%BUILD_CONFIG%, %BUILD_PLATFORM_NAME%)
 pushd Plugin\reaper_ultraschall\Submodules\curl
 git checkout --quiet master > nul
@@ -75,17 +68,16 @@ git pull > nul
 pushd projects
 call generate.bat vc14 > nul
 pushd Windows\VC14\lib
-msbuild /maxcpucount /target:%BUILD_TARGET% /property:configuration=%CURL_BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /clp:ErrorsOnly;ShowTimestamp /m /nologo libcurl.vcxproj   
+msbuild /nologo /maxcpucount /target:%BUILD_TARGET% /property:configuration=%CURL_BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /clp:ErrorsOnly;ShowTimestamp libcurl.vcxproj   
 popd
 call generate -clean > nul
 popd
 popd
 echo Done.
 
-:build_modules
 echo %BUILD_TARGET%ing Ultraschall REAPER Plugin... (%BUILD_CONFIG%, %BUILD_PLATFORM_NAME%)
 pushd Plugin\reaper_ultraschall
-msbuild /target:%BUILD_TARGET% /property:configuration=%BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /clp:ErrorsOnly;ShowTimestamp /m /nologo reaper_ultraschall.vcxproj
+msbuild /nologo /maxcpucount /target:%BUILD_TARGET% /property:configuration=%BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /clp:ErrorsOnly;ShowTimestamp reaper_ultraschall.vcxproj
 popd
 echo Done.
 
