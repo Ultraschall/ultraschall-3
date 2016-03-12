@@ -102,7 +102,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;NOCRYPT;NOUNCRYPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -193,9 +193,9 @@
     <ClCompile Include="reaper\SWSVersionCheck.cpp" />
     <ClCompile Include="reaper\ThemeVersionCheck.cpp" />
     <ClCompile Include="reaper\UnsupportedPlatformException.cpp" />
-    <ClCompile Include="Submodules\minizip\ioapi.c" />
-    <ClCompile Include="Submodules\minizip\iowin32.c" />
-    <ClCompile Include="Submodules\minizip\unzip.c" />
+    <ClCompile Include="Submodules\zlib\contrib\minizip\ioapi.c" />
+    <ClCompile Include="Submodules\zlib\contrib\minizip\iowin32.c" />
+    <ClCompile Include="Submodules\zlib\contrib\minizip\unzip.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h" />
@@ -245,9 +245,9 @@
     <ClInclude Include="reaper\ThemeVersionCheck.h" />
     <ClInclude Include="reaper\UnsupportedPlatformException.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Submodules\minizip\ioapi.h" />
-    <ClInclude Include="Submodules\minizip\iowin32.h" />
-    <ClInclude Include="Submodules\minizip\unzip.h" />
+    <ClInclude Include="Submodules\zlib\contrib\minizip\ioapi.h" />
+    <ClInclude Include="Submodules\zlib\contrib\minizip\iowin32.h" />
+    <ClInclude Include="Submodules\zlib\contrib\minizip\unzip.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="reaper_ultraschall.rc" />
