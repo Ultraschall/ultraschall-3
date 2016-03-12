@@ -26,11 +26,9 @@
 #define __ULTRASCHALL_REAPER_THEME_VERSION_CHECK_H_INCL__
 
 namespace ultraschall { namespace reaper {
-#if 0
+
 const std::string QueryThemeVersion();
-#else
-const std::string QueryThemeVersion2();
-#endif
+
 }}
 
 #endif // __ULTRASCHALL_REAPER_THEME_VERSION_CHECK_H_INCL__
