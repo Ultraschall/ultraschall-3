@@ -5,6 +5,4 @@
 [submodule "Plugin/reaper_ultraschall/Submodules/curl"]
 	path = Plugin/reaper_ultraschall/Submodules/curl
 	url = https://github.com/curl/curl.git
-[submodule "Plugin/reaper_ultraschall/Submodules/minizip"]
-	path = Plugin/reaper_ultraschall/Submodules/minizip
-	url = https://github.com/Ultraschall/minizip.git
+
