@@ -60,6 +60,7 @@ git checkout --quiet master > nul
 git pull > nul
 msbuild /nologo /maxcpucount /target:%BUILD_TARGET% /property:configuration=%ZLIB_BUILD_CONFIG% /property:platform=%BUILD_PLATFORM_NAME% /property:platformtoolset=v140 /clp:ErrorsOnly;ShowTimestamp zlibstat.vcxproj  
 popd
+echo Done.
 
 echo %BUILD_TARGET%ing curl library... (%BUILD_CONFIG%, %BUILD_PLATFORM_NAME%)
 pushd Plugin\reaper_ultraschall\Submodules\curl
