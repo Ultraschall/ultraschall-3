@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.1.1
+export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease_4
 export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
 
 # Cleanup old installer image
@@ -55,10 +55,14 @@ pushd ../Soundboard
 ./Build/build_mac_plugin.sh
 popd
 
-pkgbuild --root ../Soundboard/Files/VST --identifier fm.ultraschall.Soundboard.VST --install-location /Library/Audio/Plug-ins/VST ./Build/UltraschallSoundboardVST.pkg
+# Create Ultraschall Soundboard package
+pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-ins/Components ./Build/UltraschallSoundboard.pkg
 
 # Create Ultraschall Soundboard extras package
 pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extras --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallSoundboardExtras.pkg
+
+# Create Ultraschall StudioLink package
+pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-ins/Components ./Build/StudioLink.pkg
 
 # Create SWS REAPER Plugin Extension package
 pkgbuild --root ./3rdParty/SWS/UserPlugins/Payload --scripts ./3rdParty/SWS/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.3.pkg
