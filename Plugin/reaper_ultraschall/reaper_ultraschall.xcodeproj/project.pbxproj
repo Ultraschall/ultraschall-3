@@ -99,6 +99,7 @@
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 		A9B92D1D1C95B78800D6B1AE /* libcurl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9B92D1E1C95B8F900D6B1AE /* libcurl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */; };
+		A9B92D201C95C8EF00D6B1AE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */; };
 		A9BEA4F61C8E24C7003F2B84 /* auth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */; };
 		A9BEA4F71C8E24C7003F2B84 /* cookies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EC1C8E24C7003F2B84 /* cookies.cpp */; };
 		A9BEA4F81C8E24C7003F2B84 /* cprtypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4ED1C8E24C7003F2B84 /* cprtypes.cpp */; };
@@ -228,6 +229,7 @@
 		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 		A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libcurl.framework; path = Submodules/curl/libcurl.framework; sourceTree = "<group>"; };
+		A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = auth.cpp; path = Submodules/cpr/cpr/auth.cpp; sourceTree = "<group>"; };
 		A9BEA4EC1C8E24C7003F2B84 /* cookies.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cookies.cpp; path = Submodules/cpr/cpr/cookies.cpp; sourceTree = "<group>"; };
 		A9BEA4ED1C8E24C7003F2B84 /* cprtypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cprtypes.cpp; path = Submodules/cpr/cpr/cprtypes.cpp; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B92D201C95C8EF00D6B1AE /* WebKit.framework in Frameworks */,
 				A9B92D1E1C95B8F900D6B1AE /* libcurl.framework in Frameworks */,
 				A9BEA52A1C90CA7C003F2B84 /* libxml2.tbd in Frameworks */,
 				4254C98E1BF2911200B1EF1F /* libz.tbd in Frameworks */,
@@ -284,6 +287,7 @@
 				428241F91C94D3A00043568F /* Submodules */,
 				A9BEA5291C90CA7B003F2B84 /* libxml2.tbd */,
 				A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */,
+				A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
 				42F19A5E1ABEE7EA00231F3D /* Framework */,

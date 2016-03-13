@@ -120,6 +120,7 @@ const void AboutAction::VersionCheck()
       xmlXPathContextPtr xpathCtx;
       xmlXPathObjectPtr xpathObj;
       xmlNodeSetPtr nodeset;
+      xmlChar *textContent;
 
       doc = xmlParseDoc((xmlChar *)r.text.c_str());
       if (doc == NULL) {
@@ -147,19 +148,29 @@ const void AboutAction::VersionCheck()
         xmlFreeDoc(doc);
         return;
       }
-      
+      nodeset = xpathObj->nodesetval;
+      const std::string net_version((char*)nodeset->nodeTab[0]->children[0].content);
+
+      xpathObj = xmlXPathEvalExpression((xmlChar*)"//channel/item/description", xpathCtx);
+      if(xpathObj == NULL) {
+        xmlXPathFreeContext(xpathCtx);
+        xmlFreeDoc(doc);
+        return;
+      }
       nodeset = xpathObj->nodesetval;
 
-      const std::string net_version((char*)nodeset->nodeTab[0]->children[0].content);
+      textContent = xmlNodeListGetString(doc, nodeset->nodeTab[0]->xmlChildrenNode, 1);
+      std::string html_info((char*) textContent);
+      xmlFree(textContent);
 
       xmlXPathFreeObject(xpathObj);
       xmlXPathFreeContext(xpathCtx);
       xmlFreeDoc(doc);
       xmlCleanupParser();
       
-      const std::string local_version = "2.2"; // TODO: consolidate with private AboutAction::QueryPluginVersion()
+      const std::string local_version = QueryPluginVersion();
       if (local_version.compare(net_version) != 0) {
-        NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available. You are currently running version " + local_version);
+        NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
       }
     }
   }, cpr::Url{"https://uschalltest.s3.amazonaws.com/ultraschall_version.xml"});

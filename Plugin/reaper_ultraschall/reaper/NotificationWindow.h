@@ -28,4 +28,5 @@
 @interface NotificationPanel : NSObject
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error;
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
++ (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString*)changeLog;
 @end
