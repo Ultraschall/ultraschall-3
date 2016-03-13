@@ -36,8 +36,9 @@ public:
     static void Show(const std::string& message, const bool isError = false);
     static void Show(const std::string& message, const std::string& info, const bool isError = false);
     static void Show(const framework::ResourceId id, const bool isError = false);
+    static void ShowUpdateAvailable(const std::string& message, const std::string& info);
 };
-    
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__

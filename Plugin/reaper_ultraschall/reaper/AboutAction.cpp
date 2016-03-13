@@ -159,10 +159,10 @@ const void AboutAction::VersionCheck()
       
       const std::string local_version = "2.2"; // TODO: consolidate with private AboutAction::QueryPluginVersion()
       if (local_version.compare(net_version) != 0) {
-        NotificationWindow::Show("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available. You are currently running version " + local_version, true);
+        NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available. You are currently running version " + local_version);
       }
     }
-  }, cpr::Url{"https://archive-andi-pieper.s3.amazonaws.com/ultraschall_version.xml"});
+  }, cpr::Url{"https://uschalltest.s3.amazonaws.com/ultraschall_version.xml"});
 }
 
 
