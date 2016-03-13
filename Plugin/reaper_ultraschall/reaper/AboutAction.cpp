@@ -38,6 +38,7 @@
 #include "HubVersionCheck.h"
 #include "SoundboardVersionCheck.h"
 #include "StudioLinkVersionCheck.h"
+#include "PluginVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "AboutAction.h"
 #include "MessageBox.h"
@@ -56,10 +57,13 @@ const char* AboutAction::UniqueId()
 const ServiceStatus AboutAction::Execute()
 {
 #if 1
+
+   const std::string pluginVersion = QueryPluginVersion();
+  
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension " + QueryPluginVersion() + "\r\n";
+Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
    if(themeVersion.empty() == false)
@@ -99,81 +103,6 @@ REAPER ";
    ShowAbout();
 #endif
    return SERVICE_SUCCESS;
-}
-
-std::string AboutAction::QueryPluginVersion()
-{
-#ifdef WIN32
-    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
-    return FileManager::ReadVersionFromFile(path);
-#else
-    return "2.2";
-#endif // #ifdef WIN32
-}
-  
-const void AboutAction::VersionCheck()
-{
-  auto future_text = cpr::GetCallback([](cpr::Response r) {
-    if (!r.error && r.status_code == 200) {
-      xmlInitParser();
-      xmlDocPtr doc;
-      xmlXPathContextPtr xpathCtx;
-      xmlXPathObjectPtr xpathObj;
-      xmlNodeSetPtr nodeset;
-      xmlChar *textContent;
-
-      doc = xmlParseDoc((xmlChar *)r.text.c_str());
-      if (doc == NULL) {
-        return;
-      }
-      
-      xpathCtx = xmlXPathNewContext(doc);
-      if(xpathCtx == NULL) {
-        xmlFreeDoc(doc);
-        return;
-      }
-      
-      const xmlChar* ns = (xmlChar *)"sparkle";
-      const xmlChar* href = (xmlChar *)"http://www.andymatuschak.org/xml-namespaces/sparkle";
-      
-      if(xmlXPathRegisterNs(xpathCtx, ns, href) != 0) {
-        xmlXPathFreeContext(xpathCtx);
-        xmlFreeDoc(doc);
-        return;
-      }
-      
-      xpathObj = xmlXPathEvalExpression((xmlChar*)"//channel/item/enclosure/@sparkle:version", xpathCtx);
-      if(xpathObj == NULL) {
-        xmlXPathFreeContext(xpathCtx);
-        xmlFreeDoc(doc);
-        return;
-      }
-      nodeset = xpathObj->nodesetval;
-      const std::string net_version((char*)nodeset->nodeTab[0]->children[0].content);
-
-      xpathObj = xmlXPathEvalExpression((xmlChar*)"//channel/item/description", xpathCtx);
-      if(xpathObj == NULL) {
-        xmlXPathFreeContext(xpathCtx);
-        xmlFreeDoc(doc);
-        return;
-      }
-      nodeset = xpathObj->nodesetval;
-
-      textContent = xmlNodeListGetString(doc, nodeset->nodeTab[0]->xmlChildrenNode, 1);
-      std::string html_info((char*) textContent);
-      xmlFree(textContent);
-
-      xmlXPathFreeObject(xpathObj);
-      xmlXPathFreeContext(xpathCtx);
-      xmlFreeDoc(doc);
-      xmlCleanupParser();
-      
-      const std::string local_version = QueryPluginVersion();
-      if (local_version.compare(net_version) != 0) {
-        NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
-      }
-    }
-  }, cpr::Url{"https://raw.githubusercontent.com/Ultraschall/REAPER/version_check/ultraschall_version.xml"});
 }
 
 

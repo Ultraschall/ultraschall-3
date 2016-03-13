@@ -98,6 +98,8 @@
 		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 		A9B2A10E1C9613480049E984 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B2A10D1C9613480049E984 /* libcurl.tbd */; };
+		A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */; };
+		A9B2A1181C961CE50049E984 /* UpdateCheckAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B2A10F1C9616D60049E984 /* UpdateCheckAction.cpp */; };
 		A9B92D201C95C8EF00D6B1AE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */; };
 		A9BEA4F61C8E24C7003F2B84 /* auth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */; };
 		A9BEA4F71C8E24C7003F2B84 /* cookies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EC1C8E24C7003F2B84 /* cookies.cpp */; };
@@ -218,6 +220,10 @@
 		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 		A9B2A10D1C9613480049E984 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		A9B2A10F1C9616D60049E984 /* UpdateCheckAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheckAction.cpp; path = reaper/UpdateCheckAction.cpp; sourceTree = "<group>"; };
+		A9B2A1101C9616D60049E984 /* UpdateCheckAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheckAction.h; path = reaper/UpdateCheckAction.h; sourceTree = "<group>"; };
+		A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = PluginVersionCheck.cpp; path = reaper/PluginVersionCheck.cpp; sourceTree = "<group>"; };
+		A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginVersionCheck.h; path = reaper/PluginVersionCheck.h; sourceTree = "<group>"; };
 		A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libcurl.framework; path = Submodules/curl/libcurl.framework; sourceTree = "<group>"; };
 		A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = auth.cpp; path = Submodules/cpr/cpr/auth.cpp; sourceTree = "<group>"; };
@@ -387,6 +393,10 @@
 				4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */,
 				4284E9FA1BF4C4660056345A /* PatchConfiguration.cpp */,
 				4284E9FB1BF4C4660056345A /* PatchConfiguration.h */,
+				A9B2A10F1C9616D60049E984 /* UpdateCheckAction.cpp */,
+				A9B2A1101C9616D60049E984 /* UpdateCheckAction.h */,
+				A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */,
+				A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -525,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4255EB4D1BF27E1C001CC39E /* Stream.cpp in Sources */,
+				A9B2A1181C961CE50049E984 /* UpdateCheckAction.cpp in Sources */,
 				A9BEA4F91C8E24C7003F2B84 /* digest.cpp in Sources */,
 				42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */,
 				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
@@ -550,6 +561,7 @@
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
 				428241FF1C94D3D20043568F /* ioapi.c in Sources */,
+				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
 				A9BEA4FC1C8E24C7003F2B84 /* parameters.cpp in Sources */,

@@ -34,6 +34,7 @@
 #include "SaveChaptersToProjectAction.h"
 #include "InsertTranscriptAction.h"
 #include "AboutAction.h"
+#include "UpdateCheckAction.h"
 
 namespace reaper = ultraschall::reaper;
 
@@ -65,7 +66,8 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 #if 0
                   application.RegisterCustomAction<reaper::InsertTranscriptAction>();
 #endif
-                  application.RegisterCustomAction<reaper::AboutAction>();
+                   application.RegisterCustomAction<reaper::AboutAction>();
+                   application.RegisterCustomAction<reaper::UpdateCheckAction>();
                }
             }
          }
