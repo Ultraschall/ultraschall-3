@@ -173,7 +173,7 @@ const void AboutAction::VersionCheck()
         NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
       }
     }
-  }, cpr::Url{"https://uschalltest.s3.amazonaws.com/ultraschall_version.xml"});
+  }, cpr::Url{"https://raw.githubusercontent.com/Ultraschall/REAPER/version_check/ultraschall_version.xml"});
 }
 
 
