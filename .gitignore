@@ -457,3 +457,4 @@ _Pvt_Extensions
 .fake/
 
 Plugin/reaper_ultraschall/Submodules/cpr
+Plugin/reaper_ultraschall/Submodules/curl

@@ -97,6 +97,8 @@
 		42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */; };
 		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
+		A9B92D1D1C95B78800D6B1AE /* libcurl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B92D1E1C95B8F900D6B1AE /* libcurl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */; };
 		A9BEA4F61C8E24C7003F2B84 /* auth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */; };
 		A9BEA4F71C8E24C7003F2B84 /* cookies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4EC1C8E24C7003F2B84 /* cookies.cpp */; };
 		A9BEA4F81C8E24C7003F2B84 /* cprtypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BEA4ED1C8E24C7003F2B84 /* cprtypes.cpp */; };
@@ -119,6 +121,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B92D1C1C95B76B00D6B1AE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A9B92D1D1C95B78800D6B1AE /* libcurl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +227,7 @@
 		42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaperVersionCheck.h; path = reaper/ReaperVersionCheck.h; sourceTree = "<group>"; };
 		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
+		A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libcurl.framework; path = Submodules/curl/libcurl.framework; sourceTree = "<group>"; };
 		A9BEA4EA1C8E24C7003F2B84 /* auth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = auth.cpp; path = Submodules/cpr/cpr/auth.cpp; sourceTree = "<group>"; };
 		A9BEA4EC1C8E24C7003F2B84 /* cookies.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cookies.cpp; path = Submodules/cpr/cpr/cookies.cpp; sourceTree = "<group>"; };
 		A9BEA4ED1C8E24C7003F2B84 /* cprtypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cprtypes.cpp; path = Submodules/cpr/cpr/cprtypes.cpp; sourceTree = "<group>"; };
@@ -234,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B92D1E1C95B8F900D6B1AE /* libcurl.framework in Frameworks */,
 				A9BEA52A1C90CA7C003F2B84 /* libxml2.tbd in Frameworks */,
 				4254C98E1BF2911200B1EF1F /* libz.tbd in Frameworks */,
 				42E655021ACEE32A00231F3D /* AppKit.framework in Frameworks */,
@@ -269,6 +283,7 @@
 			children = (
 				428241F91C94D3A00043568F /* Submodules */,
 				A9BEA5291C90CA7B003F2B84 /* libxml2.tbd */,
+				A9B92D1A1C95B6EF00D6B1AE /* libcurl.framework */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
 				42F19A5E1ABEE7EA00231F3D /* Framework */,
@@ -468,6 +483,7 @@
 				429A7C561ABEE63B00231F3D /* Frameworks */,
 				429A7C571ABEE63B00231F3D /* Headers */,
 				42DBC68F1ACEE91A00231F3D /* CopyFiles */,
+				A9B92D1C1C95B76B00D6B1AE /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -670,6 +686,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Submodules/curl",
+				);
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
@@ -693,6 +713,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Submodules/curl",
+				);
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
