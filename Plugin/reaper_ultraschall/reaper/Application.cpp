@@ -36,6 +36,7 @@
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
 #include "MessageBox.h"
+#include "CustomActionManager.h"
 
 namespace ultraschall {
     namespace reaper {
@@ -57,7 +58,6 @@ namespace ultraschall {
         const ServiceStatus Application::Start()
         {
             PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-            reaper::Application& application = reaper::Application::Instance();
           
             return SERVICE_SUCCESS;
         }
