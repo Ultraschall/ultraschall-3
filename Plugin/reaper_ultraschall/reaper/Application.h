@@ -73,8 +73,6 @@ public:
    void DeleteAllChapterMarkers() const;
    
    const bool InsertTransriptItem(const framework::TranscriptItem transcriptItem) const;
-   
-   static std::string ParseReaperVersion();
     
 private:
    Application();
@@ -87,7 +85,7 @@ private:
 typedef struct
 {
    int uniqueSectionId; // 0/100=main/main alt, 32063=media explorer, 32060=midi editor, 32061=midi event list editor, 32062=midi inline editor, etc
-   const char* idStr; // must be unique accross all sections
+   const char* idStr; // must be unique across all sections
    const char* name;
    void *extra; // reserved for future use
 } custom_action_register_t;
@@ -114,7 +112,7 @@ template<class CustomActionType> const ServiceStatus Application::RegisterCustom
             if(id != 0)
             {
                CustomActionManager& manager = CustomActionManager::Instance();
-               status = manager.RegisterCustomAction(id, pCustomAction);
+               status = manager.RegisterCustomAction(uniqueId, id, pCustomAction);
             }
          }
          else

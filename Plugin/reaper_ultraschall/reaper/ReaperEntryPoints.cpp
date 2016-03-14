@@ -26,7 +26,8 @@
 #include "Application.h"
 #include "InvalidEntryPointException.h"
 
-namespace reaper_api {
+namespace reaper_api 
+{
    HWND (*GetMainHwnd)();
    int (*plugin_register)(const char* name, void* infostruct);
    
