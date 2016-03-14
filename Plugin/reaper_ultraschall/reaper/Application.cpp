@@ -37,6 +37,7 @@
 #include "FileManager.h"
 #include "MessageBox.h"
 #include "CustomActionManager.h"
+#include "UpdateCheckAction.h"
 
 namespace ultraschall {
     namespace reaper {
@@ -58,7 +59,7 @@ namespace ultraschall {
         const ServiceStatus Application::Start()
         {
             PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-          
+
             return SERVICE_SUCCESS;
         }
 

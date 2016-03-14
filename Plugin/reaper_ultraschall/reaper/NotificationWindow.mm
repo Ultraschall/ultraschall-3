@@ -60,6 +60,7 @@
         [alert setAccessoryView:webView];
         [alert setAlertStyle: NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+
     }];
 }
 
