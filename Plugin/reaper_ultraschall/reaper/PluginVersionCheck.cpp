@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
+
+#ifndef WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#endif // #ifndef WIN32
 
-@interface NotificationPanel : NSObject
-+ (void) showWithMessage:(NSString*)message asError:(BOOL)error;
-+ (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
-+ (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString*)changeLog;
-@end
+#include "PluginVersionCheck.h"
+#include "FileManager.h"
+
+namespace ultraschall {
+  namespace reaper {
+    
+    const std::string QueryPluginVersion()
+    {
+#ifdef WIN32
+      const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
+      return FileManager::ReadVersionFromFile(path);
+#else
+      return "2.2";
+#endif // #ifdef WIN32
+    }
+  }
+}

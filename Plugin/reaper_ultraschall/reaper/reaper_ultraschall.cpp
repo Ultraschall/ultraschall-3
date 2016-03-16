@@ -34,6 +34,9 @@
 #include "SaveChaptersToProjectAction.h"
 #include "InsertTranscriptAction.h"
 #include "AboutAction.h"
+#include "UpdateCheckAction.h"
+#include "CustomActionManager.h"
+#include "ICustomAction.h"
 
 namespace reaper = ultraschall::reaper;
 
@@ -65,7 +68,19 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 #if 0
                   application.RegisterCustomAction<reaper::InsertTranscriptAction>();
 #endif
-                  application.RegisterCustomAction<reaper::AboutAction>();
+                   application.RegisterCustomAction<reaper::AboutAction>();
+                   application.RegisterCustomAction<reaper::UpdateCheckAction>();
+                 
+                   // run the update action on startup
+                   reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
+                   reaper::ICustomAction* pCustomAction = 0;
+                   ServiceStatus status = manager.LookupCustomAction(reaper::UpdateCheckAction::UniqueId(), pCustomAction);
+                   if(ServiceSucceeded(status) && (pCustomAction != 0))
+                   {
+                     pCustomAction->Execute();
+                     framework::SafeRelease(pCustomAction);
+                   }
+                 
                }
             }
          }

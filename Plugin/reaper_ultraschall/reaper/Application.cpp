@@ -36,6 +36,8 @@
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
 #include "MessageBox.h"
+#include "CustomActionManager.h"
+#include "UpdateCheckAction.h"
 
 namespace ultraschall {
     namespace reaper {

@@ -6,3 +6,6 @@
 	path = Plugin/reaper_ultraschall/Submodules/curl
 	url = https://github.com/curl/curl.git
 
+[submodule "Plugin/reaper_ultraschall/Submodules/cpr"]
+	path = Plugin/reaper_ultraschall/Submodules/cpr
+	url = https://github.com/whoshuu/cpr.git

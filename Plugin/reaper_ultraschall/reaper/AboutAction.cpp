@@ -25,11 +25,20 @@
 #include <string>
 #include <vector>
 #include <fstream>
+
+#include <cpr/cpr.h>
+
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
+
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
 #include "SoundboardVersionCheck.h"
 #include "StudioLinkVersionCheck.h"
+#include "PluginVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "AboutAction.h"
 #include "MessageBox.h"
@@ -48,10 +57,13 @@ const char* AboutAction::UniqueId()
 const ServiceStatus AboutAction::Execute()
 {
 #if 1
+
+   const std::string pluginVersion = QueryPluginVersion();
+  
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
 Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension " + QueryPluginVersion() + "\r\n";
+Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
    if(themeVersion.empty() == false)
@@ -93,14 +105,5 @@ REAPER ";
    return SERVICE_SUCCESS;
 }
 
-std::string AboutAction::QueryPluginVersion()
-{
-#ifdef WIN32
-    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
-    return FileManager::ReadVersionFromFile(path);
-#else
-    return "2.2";
-#endif // #ifdef WIN32
-}
 
 }}

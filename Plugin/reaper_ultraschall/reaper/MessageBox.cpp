@@ -60,6 +60,18 @@ void NotificationWindow::Show(const framework::ResourceId id, const bool isError
    std::string message = resourceManager.GetLocalizedString(id);
    Show(message, isError);
 }
-   
+
+void NotificationWindow::ShowUpdateAvailable(const std::string& message, const std::string& info, const std::string& changelog)
+{
+#ifndef WIN32
+  [NotificationPanel showUpdateMessage: [NSString stringWithUTF8String : message.c_str()]
+                                  info: [NSString stringWithUTF8String: info.c_str()]
+                             changeLog: [NSString stringWithUTF8String: changelog.c_str()]];
+#else
+  // TODO: Make a proper windows dialog
+  MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+#endif
+}
+
 }}
 

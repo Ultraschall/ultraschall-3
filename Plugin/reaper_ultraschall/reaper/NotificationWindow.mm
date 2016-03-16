@@ -23,32 +23,52 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import "NotificationWindow.h"
+#import <WebKit/WebKit.h>
 
 @implementation NotificationPanel
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
 {
-   NSAlert *alert = [[NSAlert alloc] init];
-   [alert addButtonWithTitle: @"Dismiss"];
-   [alert setMessageText: message];
-   [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
-                     modalDelegate: nil
-                    didEndSelector: nil
-                       contextInfo: nil];
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle: @"Dismiss"];
+    [alert setMessageText: message];
+    [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
 }
 
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error
 {
-   NSAlert *alert = [[NSAlert alloc] init];
-   [alert addButtonWithTitle: @"Dismiss"];
-   [alert setMessageText: message];
-   [alert setInformativeText: info];
-   [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-   [alert beginSheetModalForWindow: [[NSApplication sharedApplication] mainWindow]
-                     modalDelegate: nil
-                    didEndSelector: nil
-                       contextInfo: nil];
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle: @"Dismiss"];
+    [alert setMessageText: message];
+    [alert setInformativeText: info];
+    [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
 }
+
++ (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString *)changeLog
+{
+    // Be sure to run dialog on the main thread
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        WebView* webView = [[WebView alloc] initWithFrame:NSMakeRect(0,0,400,300)];
+        [[webView mainFrame] loadHTMLString:changeLog baseURL:[NSURL URLWithString:@"http://ultraschall.fm/"]];
+        [webView setFrameLoadDelegate:self];
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle: @"Dismiss"];
+        [alert setMessageText: message];
+        [alert setInformativeText: info];
+        [alert setAccessoryView:webView];
+        [alert setAlertStyle: NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+
+    }];
+}
+
++ (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {
+    NSString* url = sender.mainFrameURL;
+    [sender stopLoading:nil];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
+
 
 @end

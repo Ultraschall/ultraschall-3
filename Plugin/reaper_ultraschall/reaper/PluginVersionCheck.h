@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#ifndef __ULTRASCHALL_REAPER_PLUGIN_VERSION_CHECK_H_INCL__
+#define __ULTRASCHALL_REAPER_PLUGIN_VERSION_CHECK_H_INCL__
 
-@interface NotificationPanel : NSObject
-+ (void) showWithMessage:(NSString*)message asError:(BOOL)error;
-+ (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
-+ (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString*)changeLog;
-@end
+namespace ultraschall { namespace reaper {
+  
+  const std::string QueryPluginVersion();
+  
+}}
+
+#endif // __ULTRASCHALL_REAPER_PLUGIN_VERSION_CHECK_H_INCL__
