@@ -456,5 +456,3 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-Plugin/reaper_ultraschall/Submodules/cpr
-Plugin/reaper_ultraschall/Submodules/curl
