@@ -32,14 +32,14 @@ namespace ultraschall { namespace framework {
 template<typename Type> class Malloc
 {
 public:
-   static const size_t Size();
+   static size_t Size();
 
    static Type* Alloc(const size_t itemCount = 1);
    
    static void Free(Type*& ptr);
 };
    
-template<typename Type> const size_t Malloc<Type>::Size()
+template<typename Type> size_t Malloc<Type>::Size()
 {
    return sizeof(Type);
 }

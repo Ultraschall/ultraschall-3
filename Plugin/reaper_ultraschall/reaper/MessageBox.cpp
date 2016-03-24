@@ -69,7 +69,7 @@ void NotificationWindow::ShowUpdateAvailable(const std::string& message, const s
                              changeLog: [NSString stringWithUTF8String: changelog.c_str()]];
 #else
   // TODO: Make a proper windows dialog
-  MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+  MessageBox(reaper_api::GetMainHwnd(), info.c_str(), message.c_str(), MB_ICONINFORMATION);
 #endif
 }
 
