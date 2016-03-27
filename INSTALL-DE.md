@@ -56,4 +56,4 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 5. Da einige der erweiterten Reaper-Features unter Windows leider nicht umsetzbar sind (virtuelle Soundkarten) entfällt die Installation des HUB.
 
-5. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
+6. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
