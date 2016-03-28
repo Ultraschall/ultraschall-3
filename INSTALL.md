@@ -12,7 +12,7 @@ Depending on your previous Reaper and Ultraschall set-up, there are different pa
 
 ### Mac OS X 10.11 (update)
 
-1. **Update Reaper:** Download and install [Reaper 5.1](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+1. **Update Reaper:** Download and install [Reaper 5.1 64Bit](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
 
 2. **Download** [Ultraschall 2.1](http://url.ultraschall-podcast.de/us21) and open the `.dmg` file.
 
@@ -22,7 +22,7 @@ Continue with the clean install instructions at step 3.
 
 ### Mac OS X 10.11 (clean install)
 
-1. **Download and install [Reaper 5.1](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+1. **Download and install [Reaper 5.1 64Bit](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
 
 2. **Download** [Ultraschall 2.1](http://url.ultraschall-podcast.de/us21) and open the `.dmg` file.
 
