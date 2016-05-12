@@ -26,6 +26,29 @@
 
 #### Last Changelog:
 
+## 2.2 Gropius - 2016-Mai-xx
+
+* Theme: **Weiteres Feintuning des neuen Themes**  
+*Die Scrollbalken sowie Zoom-Icons wurden vereinfacht, ebenso Schieberegler in AU/VST-Effekten.*
+
+* Actions: **Räuspertaste und Mute-Spur**  
+*Komplette Neukonzeption der Räuspertasten- und Mute-Funktion. Der editierbare Mute-Envelope wird nun immer in einer Separaten Spur angezeigt und farblich besser hervorgehoben. Der Mute-Button in der Iconleiste funktioniert nun kontexabhängig: vor einer Aufnahme können ausgewählte Spuren für die Räuspertaste aktiviert werden. Während und nach der Aufnahme schaltet er die Sichtbarkeit der Mute-Spuren ein oder aus.*
+
+* Actions: **Auswahl von Spuren über Tastatur**  
+*Über die Zahlentasten 1 bis 8 können die jeweiligen Spuren markiert oder unmarkiert werden. 9 markeirt sämtliche Spuren, 0 hebt die Markeirung sämtlicher Spuren auf.*
+
+* Actions: **Alle Spuren für Schnitt vorbereiten**  
+*Die Befelsfolge "Prepare all tracks for editing", die nach jeder Aufnahme aufgerufen werden sollte, wurde verbessert und stellt weitere Parameter für den Schnitt um.*
+
+* Actions: **Neuer Menü-Eintrag "Customize"**  
+*Im Podcast-Menü sind unter dem neuen Eintrag "Customize" folgende Funktionen zusammengefasst: 'Shortcuts and action list' um Tastaturkürzel neu definieren zu können und neue Funktionen hinzuzufügen, 'Track: set track icon' um Spuren mit einem Symbol verzieren zu können, 'Show theme configuration window' um Farben des Theme anzupassen, 'Show theme element finder' um die Benamung von einzelnen Elementen der GUI zu finden sowie 'Auto color' um die Standardfarben von Spuren in Abhängigkeit ihres Namens festzulegen. Weitere Hinweise über die Anpassbarkeit von Ultraschall/Reaper zeigt dieser Vortrag:*
+
+* StudioLink: **Vollständige Integration des StudioLink Plugins**  
+*Als qualitativ in Bezug auf Stabilität, Konstanz und Klangqualität weit überlegene Alternative zu Skype unterstützt Ultraschall nun StudioLink. Ohne den Aufbau einer N-1 Schaltung über die Routingmatrix ist es damit möglich, Ferngespräche mit bis zu 8 PartnerInnen zu führen, die in jeweils separaten (!) Spuren aufgezeichnet werden. Die PartnerInnen können dabei die schlanke Standalone-Version von StudioLink nutzen und benötigen keine eigene DAW. Die Einrichtung einer StudioLink-Schaltung wird im Release-Video erläutert.*
+
+* Installer: **StudioLink Plugin und standalone**  
+*Ultraschall liefert im Installer sowohl die (dann bereits installierte) Version des Plugins, als auch der Standalone-Version von StudioLink aus.*
+
 ## 2.1 Gropius - 2016-Feb-19
 
 * Theme: **Umfangreiches Feintuning des neuen Themes**  
