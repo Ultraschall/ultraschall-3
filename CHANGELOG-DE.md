@@ -49,6 +49,9 @@
 * Installer: **StudioLink Plugin und standalone**  
 *Ultraschall liefert im Installer sowohl die (dann bereits installierte) Version des Plugins, als auch der Standalone-Version von StudioLink aus.*
 
+* Misc: **Ultraschall 3 Preset für ReaEQ**  
+*Standardmäßig wird bei Aktivierung des ReaEQ Equalizers das Preset Ultraschall 3 aktiviert, dass deutlich weniger Bassanhebung und damit Poltern mit sich bring.*
+
 ## 2.1 Gropius - 2016-Feb-19
 
 * Theme: **Umfangreiches Feintuning des neuen Themes**  
