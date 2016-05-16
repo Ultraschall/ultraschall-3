@@ -456,3 +456,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+reaper_ultraschall.VC.db
+.vscode
