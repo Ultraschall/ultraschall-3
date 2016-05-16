@@ -129,6 +129,18 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.lua
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.eel ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.eel
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua
+fi
+
 # Uninstall SWS REAPER Extension from user domain
 if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws.dylib ]; then
 	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws.dylib
