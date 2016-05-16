@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		420891491B2492F800231F3D /* Malloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420891471B2492F800231F3D /* Malloc.cpp */; };
 		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
+		4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4215FEFE1CEA687400CCA10C /* VersionString.cpp */; };
+		4215FF011CEA687400CCA10C /* VersionString.h in Headers */ = {isa = PBXBuildFile; fileRef = 4215FEFF1CEA687400CCA10C /* VersionString.h */; };
 		4233400E1B51489900231F3D /* ChapterMarker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4233400C1B51489900231F3D /* ChapterMarker.cpp */; };
 		4233400F1B51489900231F3D /* ChapterMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4233400D1B51489900231F3D /* ChapterMarker.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
@@ -131,6 +133,8 @@
 /* Begin PBXFileReference section */
 		420891471B2492F800231F3D /* Malloc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Malloc.cpp; path = framework/Malloc.cpp; sourceTree = "<group>"; };
 		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
+		4215FEFE1CEA687400CCA10C /* VersionString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VersionString.cpp; path = reaper/VersionString.cpp; sourceTree = "<group>"; };
+		4215FEFF1CEA687400CCA10C /* VersionString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionString.h; path = reaper/VersionString.h; sourceTree = "<group>"; };
 		4233400C1B51489900231F3D /* ChapterMarker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChapterMarker.cpp; path = framework/ChapterMarker.cpp; sourceTree = "<group>"; };
 		4233400D1B51489900231F3D /* ChapterMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChapterMarker.h; path = framework/ChapterMarker.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				4215FEFE1CEA687400CCA10C /* VersionString.cpp */,
+				4215FEFF1CEA687400CCA10C /* VersionString.h */,
 				424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */,
 				424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */,
 				424DB57D1C8507FB00656ED2 /* UnsupportedPlatformException.cpp */,
@@ -454,6 +460,7 @@
 				424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */,
 				4233400F1B51489900231F3D /* ChapterMarker.h in Headers */,
 				42F19A631ABEE81500231F3D /* Framework.h in Headers */,
+				4215FF011CEA687400CCA10C /* VersionString.h in Headers */,
 				428242001C94D3D20043568F /* ioapi.h in Headers */,
 				42F19A761ABEE82200231F3D /* Application.h in Headers */,
 				42F19A781ABEE82200231F3D /* CustomActionFactory.h in Headers */,
@@ -561,6 +568,7 @@
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
 				428241FF1C94D3D20043568F /* ioapi.c in Sources */,
+				4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
