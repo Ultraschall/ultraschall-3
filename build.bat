@@ -1,6 +1,6 @@
-rem @echo off
+@echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2-prerelease_4
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2-prerelease-8
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -20,7 +20,7 @@ rem Resources
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\README.html ..\REAPER\README.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\INSTALL.html ..\REAPER\INSTALL.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\CHANGELOG.html ..\REAPER\CHANGELOG.md
-copy ..\REAPER\Themes\Ultraschall_2.1.1.ReaperConfigZip Payload\Ultraschall_2.1.1.ReaperConfigZip
+copy ..\REAPER\Themes\Ultraschall_2.2.ReaperConfigZip Payload\Ultraschall_2.2.ReaperConfigZip
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
@@ -30,13 +30,13 @@ copy "..\REAPER\Documentation\Rams Edition Release-Poster.png" "Payload\Addons\R
 copy "..\REAPER\Resources\Ultraschall Colorset.SWSColor" "Payload\Addons\Ultraschall Colorset.SWSColor"
 copy "..\REAPER\Resources\Ultraschall Microbanner 80x15.png" "Payload\Addons\Ultraschall Microbanner 80x15.png"
 copy "..\REAPER\Resources\Ultraschall Webbanner.png" "Payload\Addons\Ultraschall Webbanner.png"
-copy "..\REAPER\Resources\Reaper Splashscreen 2.png" "Payload\Addons\Ultraschall Reaper Splash Screen.png"
+copy "..\REAPER\Plugin\Resources\Ultraschall Reaper Splash Screen.png" "Payload\Addons\Ultraschall Reaper Splash Screen.png"
 
 rem Build Ultraschall REAPER Plug-in
 md Payload\Plugin > nul
 
 pushd ..\REAPER\ 
-call build.bat rebuild release x64
+call build.bat build release x64
 popd
 
 copy ..\REAPER\Plugin\reaper_ultraschall\x64\Release\reaper_ultraschall.dll Payload\Plugin
@@ -47,26 +47,36 @@ copy ..\REAPER\Plugin\Scripts\ultraschall_set_edit.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\ultraschall_set_edit_past.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\ultraschall_set_marker.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\ultraschall_set_namedmarker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_mute_envelope.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_studiolink.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track1.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track2.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track3.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track4.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track5.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track6.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track7.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\ultraschall_select_track8.lua Payload\Plugin
 
 rem Build Ultraschall Soundboard
-md Payload\Soundboard > nul
-md Payload\Soundboard\Vst > nul
-md Payload\Soundboard\Extras > nul
-md Payload\Soundboard\Extras\AudioTemplates > nul
-md Payload\Soundboard\Extras\TouchOSC > nul
+rem md Payload\Soundboard > nul
+rem md Payload\Soundboard\Vst > nul
+rem md Payload\Soundboard\Extras > nul
+rem md Payload\Soundboard\Extras\AudioTemplates > nul
+rem md Payload\Soundboard\Extras\TouchOSC > nul
 
-pushd ..\Soundboard
-call Build\build_win2.1.cmd rebuild release x64
-popd
+rem pushd ..\Soundboard
+rem call Build\build_win2.1.cmd rebuild release x64
+rem popd
 
-copy ..\Soundboard\Projects\Plugin\Builds\VisualStudio2015\x64\Release\Soundboard.dll Payload\Soundboard\Vst
-copy ..\Soundboard\Extras\AudioTemplates\Off.wav Payload\Soundboard\Extras
-copy ..\Soundboard\Extras\TouchOSC\Soundboard.touchosc Payload\Soundboard\Extras
-copy ..\Soundboard\Extras\MIDI.md Payload\Soundboard\Extras
-copy ..\Soundboard\Extras\OSC.md Payload\Soundboard\Extras
+rem copy ..\Soundboard\Projects\Plugin\Builds\VisualStudio2015\x64\Release\Soundboard.dll Payload\Soundboard\Vst
+rem copy ..\Soundboard\Extras\AudioTemplates\Off.wav Payload\Soundboard\Extras
+rem copy ..\Soundboard\Extras\TouchOSC\Soundboard.touchosc Payload\Soundboard\Extras
+rem copy ..\Soundboard\Extras\MIDI.md Payload\Soundboard\Extras
+rem copy ..\Soundboard\Extras\OSC.md Payload\Soundboard\Extras
 
 candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
-light -nologo -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
+light -nologo -ext WixUIExtension -cultures:en-us -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
 
 rd /s /q Build > nul
 rd /s /q Payload > nul

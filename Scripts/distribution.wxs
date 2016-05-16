@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-    <Product Name="Ultraschall REAPER Extension 2.2" Manufacturer="ultraschall.fm" Id="DB9AF717-CB92-44DB-9484-BBD725880AB4" UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" Version="2.2" Language="1033">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Name="Ultraschall REAPER Extension 2.2 prerelease 8" Manufacturer="ultraschall.fm" Id="DB9AF717-CB92-44DB-9484-BBD725880AB4" UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" Version="2.2" Language="1033">
         <Package Id="*" Keywords="Installer" Description="Ultraschall 2.2 Installer" Manufacturer="ultraschall.fm" InstallerVersion="301" Compressed="yes" Platform="x64"/>
 
         <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
@@ -15,22 +15,29 @@
                         </Component>
                         <Component Id="ReaperScripts" Guid="63EF4775-EBCD-46B9-9527-741489E5EB0D" Win64="yes">
                             <File Id="UltraschallDeleteLastMarker" Name="ultraschall_delete_last_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_delete_last_marker.lua"/>
-                            <File Id='UltraschallSafeModeStartPause' Name='ultraschall_safemode_start_pause.lua' DiskId='1' Source='Payload\Plugin\ultraschall_safemode_start_pause.lua'/>
-                            <File Id='UltraschallSafeModeStartStop' Name='ultraschall_safemode_start_stop.lua' DiskId='1' Source='Payload\Plugin\ultraschall_safemode_start_stop.lua'/>
-                            <File Id='UltraschallSetEdit' Name='ultraschall_set_edit.lua' DiskId='1' Source='Payload\\Plugin\ultraschall_set_edit.lua'/>
-                            <File Id='UltraschallSetEditPast' Name='ultraschall_set_edit_past.lua' DiskId='1' Source='Payload\\Plugin\ultraschall_set_edit_past.lua'/>
-                            <File Id='UltraschallSetMarker' Name='ultraschall_set_marker.lua' DiskId='1' Source='Payload\\Plugin\ultraschall_set_marker.lua'/>
-                            <File Id='UltraschallSetNamedMarker' Name='ultraschall_set_namedmarker.lua' DiskId='1' Source='Payload\\Plugin\ultraschall_set_namedmarker.lua'/>
+                            <File Id="UltraschallSafeModeStartPause" Name="ultraschall_safemode_start_pause.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_pause.lua"/>
+                            <File Id="UltraschallSafeModeStartStop" Name="ultraschall_safemode_start_stop.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_stop.lua"/>
+                            <File Id="UltraschallSetEdit" Name="ultraschall_set_edit.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit.lua"/>
+                            <File Id="UltraschallSetEditPast" Name="ultraschall_set_edit_past.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit_past.lua"/>
+                            <File Id="UltraschallSetMarker" Name="ultraschall_set_marker.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_marker.lua"/>
+                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_namedmarker.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_namedmarker.lua"/>
+                            <File Id="UltraschallMuteEnvelope" Name="ultraschall_mute_envelope.lua" DiskId="1" Source="Payload\Plugin\ultraschall_mute_envelope.lua"/>
+                            <File Id="UltraschallSelectStudioLink" Name="ultraschall_select_studiolink.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_studiolink.lua"/>
+                            <File Id="UltraschallSelectTrack1" Name="ultraschall_select_track1.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track1.lua"/>
+                            <File Id="UltraschallSelectTrack2" Name="ultraschall_select_track2.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track2.lua"/>
+                            <File Id="UltraschallSelectTrack3" Name="ultraschall_select_track3.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track3.lua"/>
+                            <File Id="UltraschallSelectTrack4" Name="ultraschall_select_track4.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track4.lua"/>
+                            <File Id="UltraschallSelectTrack5" Name="ultraschall_select_track5.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track5.lua"/>
+                            <File Id="UltraschallSelectTrack6" Name="ultraschall_select_track6.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track6.lua"/>
+                            <File Id="UltraschallSelectTrack7" Name="ultraschall_select_track7.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track7.lua"/>
+                            <File Id="UltraschallSelectTrack8" Name="ultraschall_select_track8.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track8.lua"/>
                         </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
                     <Directory Id="SteinbergVstFolder" Name="VstPlugins">
-                        <Component Id="SoundboardVst" Guid="DA0B64BE-C143-4226-99F1-F56609ED7E0F" Win64="yes">
-                            <File Id="SoundboardVstDll" Name="Soundboard.dll" DiskId="1" Source="Payload\Soundboard\Vst\Soundboard.dll"/>
-                        </Component>
                         <Component Id="StudioLinkVst" Guid="A22C272D-F6F2-4564-B9DD-BF385A80F5B3" Win64="yes">
-                            <File Id="StudioLinkVstDll" Name="studio-link.dll" DiskId="1" Source="3rdParty\StudioLink\studio-link.dll"/>
+                            <File Id="StudioLinkVstDll" Name="studio-link.dll" DiskId="1" Source="3rdParty\StudioLink\Windows\studio-link.dll"/>
                         </Component>
                     </Directory>
                 </Directory>
@@ -39,7 +46,7 @@
                             <File Id="ReadMeHtml" Name="README.html" DiskId="1" Source="Payload\README.html"/>
                             <File Id="ChangelogHtml" Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html"/>
                             <File Id="InstallHtml" Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html"/>
-                            <File Id="ReaperTheme" Name="Ultraschall_2.1.1.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.1.1.ReaperConfigZip"/>
+                            <File Id="ReaperTheme" Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip"/>
                     </Component>
                     <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                         <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
@@ -51,27 +58,24 @@
                             <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
                         </Component>
                     </Directory>
-                    <Directory Id="SoundboardExtrasFolder" Name="Soundboard Extras">
-                        <Component Id="SoundboardExtras" Guid="FDB073F9-AD91-40CB-8691-E720670507F3" Win64="yes">
-                            <File Id="AudioTemplate" Name="Off.wav" DiskId="1" Source="Payload\Soundboard\Extras\Off.wav"/>
-                            <File Id="TouchOSCTemplate" Name="Soundboard.touchosc" DiskId="1" Source="Payload\Soundboard\Extras\Soundboard.touchosc"/>
-                            <File Id="MIDICommands" Name="MIDI.md" DiskId="1" Source="Payload\Soundboard\Extras\MIDI.md"/>
-                            <File Id="OSCCommands" Name="OSC.md" DiskId="1" Source="Payload\Soundboard\Extras\OSC.md"/>
-                        </Component>
-                    </Directory>
                 </Directory>
             </Directory>
         </Directory>
-        
+        <DirectoryRef Id="TARGETDIR">
+            <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
+        </DirectoryRef>
+        <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+            <MergeRef Id="VCRedist"/>
+        </Feature>
         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
             <ComponentRef Id="ReaperScripts"/>
-            <ComponentRef Id="SoundboardVst"/>
-            <ComponentRef Id="SoundboardExtras"/>
             <ComponentRef Id="StudioLinkVst"/>
             <ComponentRef Id="UltraschallRelease"/>
             <ComponentRef Id="UltraschallReleaseAddons"/>
         </Feature>
 
+        <UIRef Id="WixUI_Minimal" />
+        <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
     </Product>
 </Wix>
