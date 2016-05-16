@@ -39,7 +39,7 @@
                             <File Id="ReadMeHtml" Name="README.html" DiskId="1" Source="Payload\README.html"/>
                             <File Id="ChangelogHtml" Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html"/>
                             <File Id="InstallHtml" Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html"/>
-                            <File Id="ReaperTheme" Name="Ultraschall_2.1.1.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.1.1.ReaperConfigZip"/>
+                            <File Id="ReaperTheme" Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip"/>
                     </Component>
                     <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                         <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">

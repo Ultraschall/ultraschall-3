@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-	<title>Ultraschall-2.2-prerelease_4</title>
+	<title>Ultraschall-2.2-prerelease-6</title>
 	<organization>fm.ultraschall</organization>
 	<options customize="allow" require-scripts="true" rootVolumeOnly="true"/>
 	<domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
@@ -11,7 +11,7 @@
 	<!-- List all component packages -->
 	<pkg-ref id="fm.ultraschall.Soundboard.Component" version="2.1.1">UltraschallSoundboard.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Soundboard.Extras" version="2.1.1">UltraschallSoundboardExtras.pkg</pkg-ref>
-	<pkg-ref id="com.itsr.StudioLink.Component" version="16.2.2">StudioLink.pkg</pkg-ref>
+	<pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin.Extension" version="2.1.1">UltraschallPluginExtension.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="2.1.1">UltraschallPluginScripts.pkg</pkg-ref>
 	<pkg-ref id="fm.ultraschall.Resources" version="2.1.1">UltraschallResources.pkg</pkg-ref>

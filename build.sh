@@ -1,11 +1,13 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease_4
-export ULTRASCHALL_RELEASE_DISK1=$ULTRASCHALL_RELEASE.dmg
+export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease-6
+export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
+export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
+export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
 
 # Cleanup old installer image
-if [ -f ./$ULTRASCHALL_RELEASE_DISK1 ]; then
-	rm -f ./$ULTRASCHALL_RELEASE_DISK1
+if [ -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ]; then
+	rm -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY
 fi
 
 # Cleanup temporary build directory
@@ -41,7 +43,7 @@ cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\
 cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/Add-ons/Ultraschall\ Reaper\ Splash\ Screen.png
 
 # Copy REAPER theme to payload directory
-cp ../REAPER/Themes/Ultraschall_2.1.1.ReaperConfigZip ./Payload/Ultraschall_2.1.1.ReaperConfigZip
+cp ../REAPER/Themes/Ultraschall_2.2.ReaperConfigZip ./Payload/Ultraschall_2.2.ReaperConfigZip
 
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
@@ -87,13 +89,26 @@ rm -rf ./Build
 productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
+# Create installer image
+hdiutil create -format UDRW -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
+
+# Mount installer image
+mkdir -p ./$ULTRASCHALL_RELEASE_INTERMEDIATE
+hdiutil attach -mountpoint ./$ULTRASCHALL_RELEASE_INTERMEDIATE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
+
 # Create signature on uninstall script
-codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/Uninstall.command
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Uninstall.command
 
 # Create signature on removal script
-codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./Payload/Remove\ legacy\ audio\ devices.command
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Remove\ legacy\ audio\ devices.command
 
+# Unmount installer image
+hdiutil detach ./$ULTRASCHALL_RELEASE_INTERMEDIATE  
 
-# Create installer image
-hdiutil create -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK1
+# Convert installer image
+hdiutil convert -format UDRO -o ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE   
+
+# Clean-up
+rm -rf ./$ULTRASCHALL_RELEASE_INTERMEDIATE
+Rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 rm -rf ./Payload
