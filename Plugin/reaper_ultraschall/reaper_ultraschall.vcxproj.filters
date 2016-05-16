@@ -141,6 +141,15 @@
     <ClCompile Include="Submodules\zlib\contrib\minizip\unzip.c">
       <Filter>Submodules\zlib</Filter>
     </ClCompile>
+    <ClCompile Include="reaper\UpdateCheckAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\PluginVersionCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\VersionString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h">
@@ -292,6 +301,15 @@
     </ClInclude>
     <ClInclude Include="Submodules\zlib\contrib\minizip\unzip.h">
       <Filter>Submodules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\UpdateCheckAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\PluginVersionCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\VersionString.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

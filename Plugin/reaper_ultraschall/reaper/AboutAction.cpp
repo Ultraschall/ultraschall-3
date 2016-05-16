@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +26,6 @@
 #include <vector>
 #include <fstream>
 
-#include <cpr/cpr.h>
-
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/xpath.h>
-#include <libxml/xpathInternals.h>
-
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
@@ -56,13 +49,13 @@ const char* AboutAction::UniqueId()
 
 const ServiceStatus AboutAction::Execute()
 {
-#if 1
-
    const std::string pluginVersion = QueryPluginVersion();
   
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser,\r\n\
+Katrin Leinweber, Andreas Pieper, Artur Kordowski,\r\n\
+Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
@@ -95,15 +88,11 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
 REAPER ";
 
-   message2 += QueryReaperVersion();
+   message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall \"Gropius\" PR5...", message1 + message2);
-#else
-   ShowAbout();
-#endif
+   NotificationWindow::Show("About Ultraschall \"Gropius\" prerelease 5...", message1 + message2);
    return SERVICE_SUCCESS;
 }
-
 
 }}

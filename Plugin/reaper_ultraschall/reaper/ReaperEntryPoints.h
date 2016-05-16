@@ -37,6 +37,7 @@
 #define REAPERAPI_MINIMAL
 #define REAPERAPI_WANT_GetMainHwnd
 #define REAPERAPI_WANT_plugin_register
+#define REAPERAPI_WANT_GetAppVersion
 #define REAPERAPI_WANT_GetProjectPath
 #define REAPERAPI_WANT_EnumProjects
 #define REAPERAPI_WANT_format_timestr_pos

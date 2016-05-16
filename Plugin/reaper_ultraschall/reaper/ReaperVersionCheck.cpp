@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,61 +24,78 @@
 
 #include <string>
 
-#ifndef WIN32
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
-#endif // #ifndef WIN32
-
 #include "ReaperVersionCheck.h"
+#include "ReaperEntryPoints.h"
 #include "FileManager.h"
+#include "StringUtilities.h"
+#include "VersionString.h"
 
-namespace ultraschall {
-    namespace reaper {
+namespace ultraschall { namespace reaper {
 
-        const std::string QueryReaperVersion()
+std::string QueryRawReaperVersion()
+{
+    std::string version;
+    
+    const std::vector<std::string> versionTokens = framework::split(reaper_api::GetAppVersion(), '/');
+    const size_t MIN_VERSION_TOKEN_COUNT = 1;
+    if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
+    {
+        version = versionTokens[0];
+    }
+
+    return version;
+}
+
+VersionString QueryReaperVersion()
+{
+    VersionString versionString = VersionString::Invalid();
+
+    const std::string version = QueryRawReaperVersion();
+    if(version.empty() == false)
+    {
+        const std::vector<std::string> versionTokens = framework::split(version, '/');
+        const size_t MIN_VERSION_TOKEN_COUNT = 1;
+        if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
         {
-            std::string version;
-
-            if(ReaperPlatformCheck() == true)
-            {
-#ifndef WIN32
-                NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
-                    NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-                NSString* value = [plist objectForKey : @"CFBundleVersion"];
-                version = [value UTF8String];
-#else
-                const std::string reaperPath = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\reaper.exe";
-                version = FileManager::ReadVersionFromFile(reaperPath);
-#endif // #ifndef WIN32
-            }
-
-            return version;
-        }
-
-        const bool ReaperVersionCheck()
-        {
-            bool result = false;
-
-            std::string version = QueryReaperVersion();
-            if((version.size() >= 3) && (version[0] == '5') && (version[1] == '.'))
-            {
-                const int minorVersion = atoi(&version[2]);
-                if(minorVersion >= 1)
-                {
-                    result = true;
-                }
-            }
-
-            return result;
-        }
-
-        const bool ReaperPlatformCheck()
-        {
-#ifndef WIN32
-            return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
-#else
-            return FileManager::FileExists(FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\reaper.exe");
-#endif // #ifndef WIN32
+            versionString = VersionString::FromString(versionTokens[0]);
         }
     }
+
+    return versionString;
 }
+
+bool ReaperVersionCheck()
+{
+    bool result = false;
+
+    VersionString versionString = QueryReaperVersion();
+    if(versionString.IsValid() == true)
+    {
+        const uint8_t MIN_REQUIRED_REAPER_MAJOR_VERSION = 5;
+        const uint8_t MIN_REQUIRED_REAPER_MINOR_VERSION = 1;
+        if((versionString.MajorVersion() >= MIN_REQUIRED_REAPER_MAJOR_VERSION) &&
+           (versionString.MinorVersion() >= MIN_REQUIRED_REAPER_MINOR_VERSION))
+        {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+bool ReaperPlatformCheck()
+{
+    bool supported = false;
+    const std::string version = reaper_api::GetAppVersion();
+    const std::vector<std::string> versionTokens = framework::split(version, '/');
+    const size_t MIN_VERSION_TOKENS_COUNT = 2;
+    if(versionTokens.size() >= MIN_VERSION_TOKENS_COUNT)
+    {
+        const std::string platform = versionTokens[1];
+        supported = (platform == "x64");
+    }
+
+    return supported;
+}
+
+}}

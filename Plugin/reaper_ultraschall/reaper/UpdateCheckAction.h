@@ -29,10 +29,9 @@
 #include <ResourceManager.h>
 #include "CustomAction.h"
 
-
 namespace ultraschall { namespace reaper {
   
-  class UpdateCheckAction : public CustomAction
+  class UpdateCheckAction : public CustomAction 
   {
   public:
     static const char* UniqueId();
@@ -51,8 +50,6 @@ namespace ultraschall { namespace reaper {
     }
     
     virtual const ServiceStatus Execute() override;
-    
-//    static const void VersionCheck();
     
   protected:
     virtual ~UpdateCheckAction()
@@ -73,6 +70,8 @@ namespace ultraschall { namespace reaper {
     }
         
     framework::ResourceId actionNameId_;
+
+    static bool IsUpdatedVersion(const std::string& updatedVersionString);
   };
   
 }}

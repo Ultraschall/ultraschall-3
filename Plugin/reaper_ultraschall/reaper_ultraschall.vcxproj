@@ -100,10 +100,10 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;Submodules\curl\include;Submodules\cpr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,14 +137,15 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;Submodules\curl\include;Submodules\cpr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,6 +155,10 @@
       <AdditionalLibraryDirectories>Submodules\zlib\contrib\vstudio\vc11\x64\ZlibStatReleaseWithoutAsm;Submodules\curl\build\Win64\VC14\LIB Release - DLL Windows SSPI</AdditionalLibraryDirectories>
       <AdditionalDependencies>version.lib;zlibstat.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp" />
@@ -182,6 +187,7 @@
     <ClCompile Include="reaper\InvalidEntryPointException.cpp" />
     <ClCompile Include="reaper\MessageBox.cpp" />
     <ClCompile Include="reaper\PatchConfiguration.cpp" />
+    <ClCompile Include="reaper\PluginVersionCheck.cpp" />
     <ClCompile Include="reaper\ReaperEntryPoints.cpp" />
     <ClCompile Include="reaper\ReaperVersionCheck.cpp" />
     <ClCompile Include="reaper\reaper_ultraschall.cpp" />
@@ -193,6 +199,8 @@
     <ClCompile Include="reaper\SWSVersionCheck.cpp" />
     <ClCompile Include="reaper\ThemeVersionCheck.cpp" />
     <ClCompile Include="reaper\UnsupportedPlatformException.cpp" />
+    <ClCompile Include="reaper\UpdateCheckAction.cpp" />
+    <ClCompile Include="reaper\VersionString.cpp" />
     <ClCompile Include="Submodules\zlib\contrib\minizip\ioapi.c" />
     <ClCompile Include="Submodules\zlib\contrib\minizip\iowin32.c" />
     <ClCompile Include="Submodules\zlib\contrib\minizip\unzip.c" />
@@ -234,6 +242,7 @@
     <ClInclude Include="reaper\InvalidEntryPointException.h" />
     <ClInclude Include="reaper\MessageBox.h" />
     <ClInclude Include="reaper\PatchConfiguration.h" />
+    <ClInclude Include="reaper\PluginVersionCheck.h" />
     <ClInclude Include="reaper\ReaperEntryPoints.h" />
     <ClInclude Include="reaper\ReaperVersionCheck.h" />
     <ClInclude Include="reaper\ReplaceChaptersAction.h" />
@@ -244,6 +253,8 @@
     <ClInclude Include="reaper\SWSVersionCheck.h" />
     <ClInclude Include="reaper\ThemeVersionCheck.h" />
     <ClInclude Include="reaper\UnsupportedPlatformException.h" />
+    <ClInclude Include="reaper\UpdateCheckAction.h" />
+    <ClInclude Include="reaper\VersionString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Submodules\zlib\contrib\minizip\ioapi.h" />
     <ClInclude Include="Submodules\zlib\contrib\minizip\iowin32.h" />

@@ -31,6 +31,8 @@ namespace reaper_api
    HWND (*GetMainHwnd)();
    int (*plugin_register)(const char* name, void* infostruct);
    
+   const char* (*GetAppVersion)();
+
    void (*GetProjectPath)(char* buf, int buf_sz);
    ReaProject* (*EnumProjects)(int idx, char* projfn, int projfn_sz);
 
@@ -44,7 +46,7 @@ namespace reaper_api
 
 namespace ultraschall { namespace reaper {
 
-static const bool OnCustomAction(KbdSectionInfo* sec, int cmdId, int val, int valhw, int relmode, HWND hwnd)
+static const bool OnCustomAction(KbdSectionInfo*, int cmdId, int, int, int, HWND)
 {
    return Application::OnCustomAction(cmdId);
 }
@@ -62,6 +64,8 @@ ReaperEntryPoints::ReaperEntryPoints(reaper_plugin_info_t* ppi)
 {
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetMainHwnd, "GetMainHwnd");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::plugin_register, "plugin_register");
+
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetAppVersion, "GetAppVersion");
 
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjectPath, "GetProjectPath");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjects, "EnumProjects");

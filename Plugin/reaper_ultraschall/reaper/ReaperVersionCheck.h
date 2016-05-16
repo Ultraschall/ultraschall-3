@@ -25,11 +25,14 @@
 #ifndef __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
 #define __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
 
+#include "VersionString.h"
+
 namespace ultraschall { namespace reaper {
    
-const std::string QueryReaperVersion();
-const bool ReaperVersionCheck();
-const bool ReaperPlatformCheck();
+std::string QueryRawReaperVersion();
+VersionString QueryReaperVersion();
+bool ReaperVersionCheck();
+bool ReaperPlatformCheck();
    
 }}
 

@@ -42,7 +42,7 @@ namespace reaper = ultraschall::reaper;
 
 extern "C"
 {
-REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t *pPluginInfo)
+REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, reaper_plugin_info_t *pPluginInfo)
 {
    reaper::Application& application = reaper::Application::Instance();
     

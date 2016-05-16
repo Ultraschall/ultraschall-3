@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -73,9 +73,10 @@ void ServiceManager::ReleaseAllServices()
 const ServiceStatus ServiceManager::AcquireService(const std::string& name, IService*& pService) const
 {
    PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
-   
+
    ServiceStatus status = SERVICE_FAILURE;
-   
+   pService = 0;
+
    const std::lock_guard<std::recursive_mutex> lock(servicesLock_);
    
    return status;
