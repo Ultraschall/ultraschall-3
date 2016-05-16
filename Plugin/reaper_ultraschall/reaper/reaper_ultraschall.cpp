@@ -71,6 +71,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
                    application.RegisterCustomAction<reaper::AboutAction>();
                    application.RegisterCustomAction<reaper::UpdateCheckAction>();
                  
+#if 0
                    // run the update action on startup
                    reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
                    reaper::ICustomAction* pCustomAction = 0;
@@ -80,7 +81,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
                      pCustomAction->Execute();
                      framework::SafeRelease(pCustomAction);
                    }
-                 
+#endif
                }
             }
          }
