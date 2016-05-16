@@ -48,10 +48,10 @@ const std::string QueryThemeVersion()
    {
 #ifndef WIN32
       const std::string themeControlFile = applicationSupportDirectory +
-        "/REAPER/ColorThemes/Ultraschall_2.1.ReaperThemeZip";
+        "/REAPER/ColorThemes/Ultraschall_2.2.ReaperThemeZip";
 #else
        const std::string themeControlFile = applicationSupportDirectory +
-           "\\REAPER\\ColorThemes\\Ultraschall_2.1.ReaperThemeZip";
+           "\\REAPER\\ColorThemes\\Ultraschall_2.2.ReaperThemeZip";
 #endif // #ifndef WIN32
 
       unzFile themeFile = unzOpen(themeControlFile.c_str());

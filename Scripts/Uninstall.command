@@ -89,6 +89,58 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarke
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_mute_envelope.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_mute_envelope.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_studiolink.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_studiolink.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track1.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track1.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track2.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track2.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track3.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track3.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track4.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track4.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track5.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track5.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track6.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track6.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track7.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track7.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.eel ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.eel
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua
+fi
+
 # Uninstall SWS REAPER Extension from user domain
 if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws.dylib ]; then
 	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_sws.dylib
@@ -381,6 +433,16 @@ if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-
 	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
 fi
 
+# Uninstall StudioLink track templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate
+fi
+
+# Uninstall StudioLink track templates from system domain
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate
+fi
+
 # Uninstall Ultraschall project templates from user domain
 if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
 	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
@@ -398,7 +460,7 @@ if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Duck
 	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
 fi
 
-# Uninstall Ultraschall project templates from user domain
+# Uninstall Ultraschall project templates from system domain
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
 	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
 fi
@@ -413,6 +475,16 @@ fi
 
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak ]; then
 	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
+fi
+
+# Uninstall StudioLink project templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
+fi
+
+# Uninstall StudioLink project templates from system domain
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
 fi
 
 # Uninstall Ultraschall Add-ons from user domain

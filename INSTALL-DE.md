@@ -14,7 +14,7 @@ Je nachdem, ob man bereits eine vorherige Version von Ultraschall im Einsatz hat
 
 ### Mac OS X 10.11 (Update)
 
-1. **Reaper aktualisieren:** [Reaper 5.1](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 54€ Kosten an. Man kann Reaper 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
+1. **Reaper aktualisieren:** [Reaper 5.1 64Bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 54€ Kosten an. Man kann Reaper 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
 
 2. **Ultraschall 2.1 laden:** [unsere 2.1 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
 
@@ -25,7 +25,7 @@ Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 ### Mac OS X 10.11 (Neuinstallation)
 
 
-1. **Reaper installieren:** [Reaper 5.1](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 54€ Kosten an.
+1. **Reaper installieren:** [Reaper 5.1 64Bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 54€ Kosten an.
 
 2. **Ultraschall 2.1 laden:** [unsere 2.1 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
 
@@ -50,10 +50,10 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 2. Die [SWS Extensions](http://www.sws-extension.org) laden und installieren. Ohne diesen Schritt funktionieren viele Features von Ultraschall nicht.
 
-3. Die [Ultraschall_2.1.ReaperConfigZip](http://url.ultraschall-podcast.de/us21win) Datei laden.
+3. Die [Ultraschall_2.1.1win.zip (24.1 MB)](http://url.ultraschall-podcast.de/us21win) Datei laden. Das .ZIP Archiv entpacken und die Datei `Ultraschall_2.1.ReaperConfigZip` suchen.
 
 4. Reaper starten und die `Ultraschall_2.1.ReaperConfigZip` Datei in das geöffnete Fenster fallen lassen.
 
 5. Da einige der erweiterten Reaper-Features unter Windows leider nicht umsetzbar sind (virtuelle Soundkarten) entfällt die Installation des HUB.
 
-5. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
+6. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
