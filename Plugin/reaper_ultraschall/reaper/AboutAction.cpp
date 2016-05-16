@@ -28,10 +28,12 @@
 
 #include <cpr/cpr.h>
 
+#ifndef _WIN32
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
+#endif
 
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
@@ -95,7 +97,7 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
 REAPER ";
 
-   message2 += QueryReaperVersion();
+   message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
    NotificationWindow::Show("About Ultraschall \"Gropius\" pre-release 8...", message1 + message2);
