@@ -35,7 +35,7 @@
 #include "ReaperVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 #include "CustomActionManager.h"
 #include "UpdateCheckAction.h"
 
@@ -395,12 +395,6 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
                 ok = false;
             }
 #endif
-
-            if((true == ok) && (ReaperPlatformCheck() == false))
-            {
-                NotificationWindow::Show(message, information5 + " " + information6, true);
-                ok = false;
-            }
 
             if((true == ok) && (ReaperVersionCheck() == false))
             {

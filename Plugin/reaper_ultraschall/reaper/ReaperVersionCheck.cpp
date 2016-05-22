@@ -83,19 +83,4 @@ bool ReaperVersionCheck()
     return result;
 }
 
-bool ReaperPlatformCheck()
-{
-    bool supported = false;
-    const std::string version = reaper_api::GetAppVersion();
-    const std::vector<std::string> versionTokens = framework::split(version, '/');
-    const size_t MIN_VERSION_TOKENS_COUNT = 2;
-    if(versionTokens.size() >= MIN_VERSION_TOKENS_COUNT)
-    {
-        const std::string platform = versionTokens[1];
-        supported = (platform == "x64");
-    }
-
-    return supported;
-}
-
 }}

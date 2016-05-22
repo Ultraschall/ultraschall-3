@@ -42,7 +42,7 @@
 
 #include "UpdateCheckAction.h"
 #include "PluginVersionCheck.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -122,7 +122,7 @@ const ServiceStatus UpdateCheckAction::Execute()
 			const std::string local_version = QueryPluginVersion();
 			if(local_version.compare(net_version) != 0)
 			{
-				NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
+				MessageBox::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
 			}
 		}
 	}, cpr::Url{"https://raw.githubusercontent.com/Ultraschall/REAPER/version_check/ultraschall_version.xml"});

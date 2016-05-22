@@ -22,28 +22,32 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "NotificationWindow.h"
+#import "NotificationPanel.h"
 #import <WebKit/WebKit.h>
 
 @implementation NotificationPanel
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
 {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle: @"Dismiss"];
-    [alert setMessageText: message];
-    [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle: @"Dismiss"];
+        [alert setMessageText: message];
+        [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+    }];
 }
 
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error
 {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle: @"Dismiss"];
-    [alert setMessageText: message];
-    [alert setInformativeText: info];
-    [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle: @"Dismiss"];
+        [alert setMessageText: message];
+        [alert setInformativeText: info];
+        [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+    }];
 }
 
 + (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString *)changeLog
@@ -60,7 +64,6 @@
         [alert setAccessoryView:webView];
         [alert setAlertStyle: NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
-
     }];
 }
 

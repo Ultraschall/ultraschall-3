@@ -22,11 +22,23 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
+#define __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
 
-@interface NotificationPanel : NSObject
-+ (void) showWithMessage:(NSString*)message asError:(BOOL)error;
-+ (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error;
-+ (void) showUpdateMessage:(NSString*)message info:(NSString*)info changeLog:(NSString*)changeLog;
-@end
+#include <string>
+#include <ResourceId.h>
+
+namespace ultraschall { namespace reaper {
+    
+class NotificationWindow
+{
+public:
+    static void Show(const std::string& message, const bool isError = false);
+    static void Show(const std::string& message, const std::string& info, const bool isError = false);
+    static void Show(const framework::ResourceId id, const bool isError = false);
+    static void ShowUpdateAvailable(const std::string& message, const std::string& info, const std::string& changelog);
+};
+
+}}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__

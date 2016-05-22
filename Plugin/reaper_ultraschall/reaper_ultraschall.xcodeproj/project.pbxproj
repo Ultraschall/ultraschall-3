@@ -68,16 +68,16 @@
 		4284E9FD1BF4C4660056345A /* PatchConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284E9FB1BF4C4660056345A /* PatchConfiguration.h */; };
 		4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284EA021BF4D0E00056345A /* TextFileWriter.cpp */; };
 		4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284EA031BF4D0E00056345A /* TextFileWriter.h */; };
-		42915BD81BDC040A00916876 /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42915BD61BDC040A00916876 /* NotificationWindow.h */; };
-		42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationWindow.mm */; };
+		42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 42915BD61BDC040A00916876 /* NotificationPanel.h */; };
+		42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationPanel.mm */; };
 		429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB0861BDBCDCE005EA658 /* CustomAction.cpp */; };
 		429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EB0871BDBCDCE005EA658 /* CustomAction.h */; };
 		429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB08A1BDBD69F005EA658 /* InvalidEntryPointException.cpp */; };
 		429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */; };
 		42A335ED1ACEF9BF00231F3D /* ReplaceChaptersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A335E91ACEF9BF00231F3D /* ReplaceChaptersAction.cpp */; };
 		42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A335EA1ACEF9BF00231F3D /* ReplaceChaptersAction.h */; };
-		42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* MessageBox.cpp */; };
-		42A988CB1AF286D500231F3D /* MessageBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* MessageBox.h */; };
+		42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* NotificationWindow.cpp */; };
+		42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* NotificationWindow.h */; };
 		42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */; };
 		42DC63E81AD0367A00231F3D /* SaveChaptersToProjectAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42DC63E61AD0367A00231F3D /* SaveChaptersToProjectAction.cpp */; };
 		42DC63E91AD0367A00231F3D /* SaveChaptersToProjectAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 42DC63E71AD0367A00231F3D /* SaveChaptersToProjectAction.h */; };
@@ -192,8 +192,8 @@
 		4284E9FB1BF4C4660056345A /* PatchConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatchConfiguration.h; path = reaper/PatchConfiguration.h; sourceTree = "<group>"; };
 		4284EA021BF4D0E00056345A /* TextFileWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileWriter.cpp; path = framework/TextFileWriter.cpp; sourceTree = "<group>"; };
 		4284EA031BF4D0E00056345A /* TextFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileWriter.h; path = framework/TextFileWriter.h; sourceTree = "<group>"; };
-		42915BD61BDC040A00916876 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationWindow.h; path = reaper/NotificationWindow.h; sourceTree = "<group>"; };
-		42915BD71BDC040A00916876 /* NotificationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationWindow.mm; path = reaper/NotificationWindow.mm; sourceTree = "<group>"; };
+		42915BD61BDC040A00916876 /* NotificationPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationPanel.h; path = reaper/NotificationPanel.h; sourceTree = "<group>"; };
+		42915BD71BDC040A00916876 /* NotificationPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationPanel.mm; path = reaper/NotificationPanel.mm; sourceTree = "<group>"; };
 		429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = reaper_ultraschall.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		429EB0861BDBCDCE005EA658 /* CustomAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomAction.cpp; path = reaper/CustomAction.cpp; sourceTree = "<group>"; };
 		429EB0871BDBCDCE005EA658 /* CustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAction.h; path = reaper/CustomAction.h; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 		429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvalidEntryPointException.h; path = reaper/InvalidEntryPointException.h; sourceTree = "<group>"; };
 		42A335E91ACEF9BF00231F3D /* ReplaceChaptersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReplaceChaptersAction.cpp; path = reaper/ReplaceChaptersAction.cpp; sourceTree = "<group>"; };
 		42A335EA1ACEF9BF00231F3D /* ReplaceChaptersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReplaceChaptersAction.h; path = reaper/ReplaceChaptersAction.h; sourceTree = "<group>"; };
-		42A988C81AF286D500231F3D /* MessageBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MessageBox.cpp; path = reaper/MessageBox.cpp; sourceTree = "<group>"; };
-		42A988C91AF286D500231F3D /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageBox.h; path = reaper/MessageBox.h; sourceTree = "<group>"; };
+		42A988C81AF286D500231F3D /* NotificationWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = NotificationWindow.cpp; path = reaper/NotificationWindow.cpp; sourceTree = "<group>"; };
+		42A988C91AF286D500231F3D /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationWindow.h; path = reaper/NotificationWindow.h; sourceTree = "<group>"; };
 		42DC63E61AD0367A00231F3D /* SaveChaptersToProjectAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveChaptersToProjectAction.cpp; path = reaper/SaveChaptersToProjectAction.cpp; sourceTree = "<group>"; };
 		42DC63E71AD0367A00231F3D /* SaveChaptersToProjectAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveChaptersToProjectAction.h; path = reaper/SaveChaptersToProjectAction.h; sourceTree = "<group>"; };
 		42E655011ACEE32A00231F3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -375,14 +375,14 @@
 				42F19A6F1ABEE82200231F3D /* SaveChaptersAction.h */,
 				42F19A701ABEE82200231F3D /* ICustomAction.h */,
 				42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */,
-				42A988C81AF286D500231F3D /* MessageBox.cpp */,
-				42A988C91AF286D500231F3D /* MessageBox.h */,
+				42A988C81AF286D500231F3D /* NotificationWindow.cpp */,
+				42A988C91AF286D500231F3D /* NotificationWindow.h */,
 				429EB0861BDBCDCE005EA658 /* CustomAction.cpp */,
 				429EB0871BDBCDCE005EA658 /* CustomAction.h */,
 				429EB08A1BDBD69F005EA658 /* InvalidEntryPointException.cpp */,
 				429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */,
-				42915BD61BDC040A00916876 /* NotificationWindow.h */,
-				42915BD71BDC040A00916876 /* NotificationWindow.mm */,
+				42915BD61BDC040A00916876 /* NotificationPanel.h */,
+				42915BD71BDC040A00916876 /* NotificationPanel.mm */,
 				42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */,
 				42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */,
 				4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */,
@@ -432,7 +432,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42A988CB1AF286D500231F3D /* MessageBox.h in Headers */,
+				42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */,
 				424DB5821C8507FB00656ED2 /* UnsupportedPlatformException.h in Headers */,
 				4242E97B1BAC99D700382B79 /* TranscriptItem.h in Headers */,
 				428242021C94D3D20043568F /* unzip.h in Headers */,
@@ -464,7 +464,7 @@
 				428242001C94D3D20043568F /* ioapi.h in Headers */,
 				42F19A761ABEE82200231F3D /* Application.h in Headers */,
 				42F19A781ABEE82200231F3D /* CustomActionFactory.h in Headers */,
-				42915BD81BDC040A00916876 /* NotificationWindow.h in Headers */,
+				42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */,
 				424C830F1AC8086F00231F3D /* InsertChaptersAction.h in Headers */,
 				42F19A7C1ABEE82200231F3D /* ReaperEntryPoints.h in Headers */,
 				424C82F91AC8085D00231F3D /* ServiceFactory.h in Headers */,
@@ -544,7 +544,7 @@
 				4255EB4D1BF27E1C001CC39E /* Stream.cpp in Sources */,
 				A9B2A1181C961CE50049E984 /* UpdateCheckAction.cpp in Sources */,
 				A9BEA4F91C8E24C7003F2B84 /* digest.cpp in Sources */,
-				42915BD91BDC040A00916876 /* NotificationWindow.mm in Sources */,
+				42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */,
 				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
 				A9BEA4F61C8E24C7003F2B84 /* auth.cpp in Sources */,
 				42F19A7D1ABEE82200231F3D /* SaveChaptersAction.cpp in Sources */,
@@ -571,7 +571,7 @@
 				4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
-				42A988CA1AF286D500231F3D /* MessageBox.cpp in Sources */,
+				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,
 				A9BEA4FC1C8E24C7003F2B84 /* parameters.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
 				424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */,

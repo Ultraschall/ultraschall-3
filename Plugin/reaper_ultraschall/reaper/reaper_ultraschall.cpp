@@ -25,7 +25,7 @@
 #include <ServiceStatus.h>
 
 #include "Application.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
 #include "InvalidEntryPointException.h"
 #include "InsertChaptersAction.h"

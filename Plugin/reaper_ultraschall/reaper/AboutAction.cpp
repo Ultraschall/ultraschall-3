@@ -43,7 +43,7 @@
 #include "PluginVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "AboutAction.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 #include "About.h"
 #include "FileManager.h"
 
@@ -64,7 +64,7 @@ const ServiceStatus AboutAction::Execute()
   
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
@@ -100,7 +100,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall \"Gropius\" pre-release 8...", message1 + message2);
+   NotificationWindow::Show("About Ultraschall \"Gropius\" pre-release 9...", message1 + message2);
 #else
    ShowAbout();
 #endif

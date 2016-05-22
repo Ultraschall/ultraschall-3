@@ -29,7 +29,7 @@
 #include "SaveChaptersAction.h"
 #include "Application.h"
 #include "FileManager.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 

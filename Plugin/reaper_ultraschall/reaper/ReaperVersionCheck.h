@@ -32,7 +32,6 @@ namespace ultraschall { namespace reaper {
 std::string QueryRawReaperVersion();
 VersionString QueryReaperVersion();
 bool ReaperVersionCheck();
-bool ReaperPlatformCheck();
    
 }}
 

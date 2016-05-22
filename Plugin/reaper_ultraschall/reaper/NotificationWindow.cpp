@@ -24,10 +24,10 @@
 
 #include <ResourceManager.h>
 #include "ReaperEntryPoints.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 #ifndef WIN32
-#import "NotificationWindow.h"
+#import "NotificationPanel.h"
 #endif // #ifndef WIN32
 
 namespace ultraschall { namespace reaper {
