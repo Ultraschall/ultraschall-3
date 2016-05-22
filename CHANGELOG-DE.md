@@ -49,6 +49,9 @@
 * Installer: **StudioLink Plugin und standalone**  
 *Ultraschall liefert im Installer sowohl die (dann bereits installierte) Version des Plugins, als auch der Standalone-Version von StudioLink aus.*
 
+* Preferences: **Stop Funktion überarbeitet**  
+*Die Stop Funktion bei Aufnahmen wurde so überarbeitet, dass der Aufnahme-Cursor nach Stop an das Ende der bisherigen Aufnahme gesetzt wird. Dies verhindert, dass bei einem erneuten Start der Aufnahme kein alternativer Take angelegt wird, sondern die eigentliche Aufnahme fortgesetzt wird.*
+
 * Misc: **Ultraschall 3 Preset für ReaEQ**  
 *Standardmäßig wird bei Aktivierung des ReaEQ Equalizers das Preset Ultraschall 3 aktiviert, dass deutlich weniger Bassanhebung und damit Poltern mit sich bring.*
 
