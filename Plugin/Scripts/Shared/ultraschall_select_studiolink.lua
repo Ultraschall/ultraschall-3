@@ -42,7 +42,7 @@ function selectStudiolinkTracks() -- local (tracks_count, i, j, track, fx_name, 
 			count_fx = reaper.TrackFX_GetCount(track)
 			for j = 0, count_fx - 1 do				
 				fx_name_retval, fx_name = reaper.TrackFX_GetFXName(track, j, "")
-				if (fx_name) == "AU: ITSR: StudioLink" then			-- this is a track with StudioLink Plugin
+				if ((fx_name) == "AU: ITSR: StudioLink") or ((fx_name) == "VST: StudioLink (IT-Service Sebastian Reimers)") then			-- this is a track with StudioLink Plugin
 					reaper.SetTrackSelected(track, true)         	--select track
 				end
 			end	

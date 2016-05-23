@@ -434,13 +434,13 @@ if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-
 fi
 
 # Uninstall StudioLink track templates from user domain
-if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate ]; then
-	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
 fi
 
 # Uninstall StudioLink track templates from system domain
-if [ -f /Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate ]; then
-	rm -f /Library/Application\ Support/REAPER/TrackTemplates/StudioLink.RTRackTemplate
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
 fi
 
 # Uninstall Ultraschall project templates from user domain
