@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease-9
+export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease-10
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -9,6 +9,12 @@ export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
 if [ -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ]; then
 	rm -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY
 fi
+
+# Cleanup temporary intermediate directory
+if [ -d ./Intermediate ]; then
+	rm -rf .Intermediate
+fi
+mkdir ./Intermediate
 
 # Cleanup temporary build directory
 if [ -d ./Build ]; then
@@ -50,7 +56,26 @@ xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcode
 pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
 
 # Create Ultraschall REAPER Plugin scripts package
-pkgbuild --root ../REAPER/Plugin/Scripts --scripts ./Scripts/Scripts --identifier fm.ultraschall.Plugin.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/UltraschallPluginScripts.pkg
+mkdir -p ./Intermediate/Plugin/Scripts
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_delete_last_marker.lua ./Intermediate/Plugin/Scripts/ultraschall_delete_last_marker.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_mute_envelope.lua ./Intermediate/Plugin/Scripts/ultraschall_mute_envelope.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_safemode_start_pause.lua ./Intermediate/Plugin/Scripts/ultraschall_safemode_start_pause.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_safemode_start_stop.lua ./Intermediate/Plugin/Scripts/ultraschall_safemode_start_stop.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track1.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track1.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track2.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track2.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track3.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track3.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track4.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track4.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track5.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track5.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track6.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track6.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track7.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track7.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track8.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track8.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_edit.lua ./Intermediate/Plugin/Scripts/ultraschall_set_edit.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_edit_past.lua ./Intermediate/Plugin/Scripts/ultraschall_set_edit_past.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_marker.lua ./Intermediate/Plugin/Scripts/ultraschall_set_marker.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_namedmarker.lua ./Intermediate/Plugin/Scripts/ultraschall_set_namedmarker.lua
+cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_studiolink.lua ./Intermediate/Plugin/Scripts/ultraschall_select_studiolink.lua
+
+pkgbuild --root ./Intermediate/Plugin/Scripts --scripts ./Scripts/Scripts --identifier fm.ultraschall.Plugin.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/UltraschallPluginScripts.pkg
 
 # Create Ultraschall Soundboard package
 pushd ../Soundboard
@@ -112,3 +137,4 @@ hdiutil convert -format UDRO -o ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ./$ULTRASC
 rm -rf ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 Rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 rm -rf ./Payload
+rm -rf ./Intermediate
