@@ -58,6 +58,12 @@
 * Misc: **Ultraschall Presets für gebaute Beiträge**  
 *Folgende Effekte werden als Ultraschall-Presets für die Verfremdung von Stimmen für gebaute Beiträge angeboten: Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate)*
 
+## 2.1.1 Gropius - 2016-Feb-27
+
+* Theme: **Weiteres Feintuning des neuen Themes**  
+* Windows: **Anpassung der Farbwerte für die Audiospuren**  
+*Auch unter Windows stimmen nun die Zuordnungen von Bezeichnungen und Farbwerte*
+
 ## 2.1 Gropius - 2016-Feb-19
 
 * Theme: **Umfangreiches Feintuning des neuen Themes**  
