@@ -46,17 +46,29 @@
 * StudioLink: **Vollständige Integration des StudioLink Plugins**  
 *Als qualitativ in Bezug auf Stabilität, Konstanz und Klangqualität weit überlegene Alternative zu Skype unterstützt Ultraschall nun StudioLink. Ohne den Aufbau einer N-1 Schaltung über die Routingmatrix ist es damit möglich, Ferngespräche mit bis zu 8 PartnerInnen zu führen, die in jeweils separaten (!) Spuren aufgezeichnet werden. Die PartnerInnen können dabei die schlanke Standalone-Version von StudioLink nutzen und benötigen keine eigene DAW. Die Einrichtung einer StudioLink-Schaltung wird im Release-Video erläutert.*
 
+* Soundboard: **Soundboard nun auch für Windows und als AU Version für den Mac**  
+*Das Ultraschall-Spundboard steht nun mit vollem Funktionsumfang auch unter Windows zur Vefügung. Bei der Mac-Version wurde von VST auf AU Technik umgestellt.*
+
 * Installer: **StudioLink Plugin und standalone**  
-*Ultraschall liefert im Installer sowohl die (dann bereits installierte) Version des Plugins, als auch der Standalone-Version von StudioLink aus.*
+*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.studio-link.de/standalone/installation-standalone.html) laden.*
 
 * Preferences: **Stop Funktion überarbeitet**  
 *Die Stop Funktion bei Aufnahmen wurde so überarbeitet, dass der Aufnahme-Cursor nach Stop an das Ende der bisherigen Aufnahme gesetzt wird. Dies verhindert, dass bei einem erneuten Start der Aufnahme kein alternativer Take angelegt wird, sondern die eigentliche Aufnahme fortgesetzt wird.*
+
+* Preferences: **Neue Spuren werden direkt für die Aufnahme aktiviert**  
+*Alle neu angelegten Spuren werden direkt auf "Record Arm" geschaltet und sind bereit für die Aufnahme - der zusätzliche Klick auf den roten Arm-Knopf kann damit oft entfallen.*
 
 * Misc: **Ultraschall 3 Preset für ReaEQ**  
 *Standardmäßig wird bei Aktivierung des ReaEQ Equalizers das Preset Ultraschall 3 aktiviert, dass deutlich weniger Bassanhebung und damit Poltern mit sich bring.*
 
 * Misc: **Ultraschall Presets für gebaute Beiträge**  
 *Folgende Effekte werden als Ultraschall-Presets für die Verfremdung von Stimmen für gebaute Beiträge angeboten: Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate)*
+
+## 2.1.1 Gropius - 2016-Feb-27
+
+* Theme: **Weiteres Feintuning des neuen Themes**  
+* Windows: **Anpassung der Farbwerte für die Audiospuren**  
+*Auch unter Windows stimmen nun die Zuordnungen von Bezeichnungen und Farbwerte*
 
 ## 2.1 Gropius - 2016-Feb-19
 
