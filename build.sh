@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.2-prerelease-10
+export ULTRASCHALL_RELEASE=Ultraschall-2.2-PRE-RELEASE-10
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -49,7 +49,7 @@ cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\
 cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/Add-ons/Ultraschall\ Reaper\ Splash\ Screen.png
 
 # Copy REAPER theme to payload directory
-cp ../REAPER/Themes/Ultraschall_2.2.ReaperConfigZip ./Payload/Ultraschall_2.2.ReaperConfigZip
+cp ../REAPER/Themes/Ultraschall_2.2_MAC.ReaperConfigZip ./Payload/Ultraschall_2.2.ReaperConfigZip
 
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
