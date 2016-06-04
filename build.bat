@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2-prerelease-8
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2-PRE-RELEASE-10
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -20,7 +20,7 @@ rem Resources
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\README.html ..\REAPER\README.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\INSTALL.html ..\REAPER\INSTALL.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\CHANGELOG.html ..\REAPER\CHANGELOG.md
-copy ..\REAPER\Themes\Ultraschall_2.2.ReaperConfigZip Payload\Ultraschall_2.2.ReaperConfigZip
+copy ..\REAPER\Themes\Ultraschall_2.2_WIN.ReaperConfigZip Payload\Ultraschall_2.2.ReaperConfigZip
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
@@ -58,25 +58,15 @@ copy ..\REAPER\Plugin\Scripts\ultraschall_select_track6.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\ultraschall_select_track7.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\ultraschall_select_track8.lua Payload\Plugin
 
-rem Build Ultraschall Soundboard
-rem md Payload\Soundboard > nul
-rem md Payload\Soundboard\Vst > nul
-rem md Payload\Soundboard\Extras > nul
-rem md Payload\Soundboard\Extras\AudioTemplates > nul
-rem md Payload\Soundboard\Extras\TouchOSC > nul
+pushd ..\Soundboard\ 
+call Build\build_win.cmd
+popd
 
-rem pushd ..\Soundboard
-rem call Build\build_win2.1.cmd rebuild release x64
-rem popd
-
-rem copy ..\Soundboard\Projects\Plugin\Builds\VisualStudio2015\x64\Release\Soundboard.dll Payload\Soundboard\Vst
-rem copy ..\Soundboard\Extras\AudioTemplates\Off.wav Payload\Soundboard\Extras
-rem copy ..\Soundboard\Extras\TouchOSC\Soundboard.touchosc Payload\Soundboard\Extras
-rem copy ..\Soundboard\Extras\MIDI.md Payload\Soundboard\Extras
-rem copy ..\Soundboard\Extras\OSC.md Payload\Soundboard\Extras
+md Payload\Soundboard > nul
+copy ..\Soundboard\Projects\Installer\bin\Release\Soundboard.msm Payload\Soundboard
 
 candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
-light -nologo -ext WixUIExtension -cultures:en-us -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
+light -nologo -ext WixUIExtension -cultures:en-us -loc Scripts\distribution_en-us.wxl -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
 
 rd /s /q Build > nul
 rd /s /q Payload > nul

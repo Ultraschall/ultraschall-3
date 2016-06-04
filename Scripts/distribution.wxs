@@ -1,7 +1,35 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Name="Ultraschall REAPER Extension 2.2 prerelease 8" Manufacturer="ultraschall.fm" Id="DB9AF717-CB92-44DB-9484-BBD725880AB4" UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" Version="2.2" Language="1033">
-        <Package Id="*" Keywords="Installer" Description="Ultraschall 2.2 Installer" Manufacturer="ultraschall.fm" InstallerVersion="301" Compressed="yes" Platform="x64"/>
+
+    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
+ 
+    <!--
+    Upgrade code HAS to be the same for all updates.
+    Once you've chosen it don't change it.
+    -->
+    <?define UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" ?>
+    
+    <!-- The URL for add/remove programs -->
+    <?define InfoURL="http://ultraschall.fm/" ?>
+
+    <Product Id="*" Name="!(loc.ApplicationName)" Language="!(loc.Language)" Version="$(var.VersionNumber)" Manufacturer="!(loc.ManufacturerFullName)" UpgradeCode="$(var.UpgradeCode)">
+        <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="!(loc.ProductDescription)" Comments="!(loc.Comments) $(var.VersionNumber)" />
+
+        <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
+        
+        <WixVariable Id="WixUIDialogBmp" Value="Resources\background.bmp"/>
+        <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.bmp"/>
+        
+        <Icon Id="Icon.exe" SourceFile="Resources\ultraschall.ico" />
+        
+        <Property Id="ARPPRODUCTICON" Value="Icon.exe" />
+        <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />      <!-- Remove repair -->
+        
+        <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" AllowSameVersionUpgrades="yes" />
+
+        <Condition Message="!(loc.OS2Old)">
+            <![CDATA[Installed OR (VersionNT >= 601)]]>
+        </Condition>
 
         <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
         <Property Id="DiskPrompt" Value="Ultraschall 2.2 Installation [1]" />
@@ -18,9 +46,9 @@
                             <File Id="UltraschallSafeModeStartPause" Name="ultraschall_safemode_start_pause.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_pause.lua"/>
                             <File Id="UltraschallSafeModeStartStop" Name="ultraschall_safemode_start_stop.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_stop.lua"/>
                             <File Id="UltraschallSetEdit" Name="ultraschall_set_edit.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit.lua"/>
-                            <File Id="UltraschallSetEditPast" Name="ultraschall_set_edit_past.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit_past.lua"/>
-                            <File Id="UltraschallSetMarker" Name="ultraschall_set_marker.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_marker.lua"/>
-                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_namedmarker.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_namedmarker.lua"/>
+                            <File Id="UltraschallSetEditPast" Name="ultraschall_set_edit_past.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_edit_past.lua"/>
+                            <File Id="UltraschallSetMarker" Name="ultraschall_set_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_marker.lua"/>
+                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_namedmarker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_namedmarker.lua"/>
                             <File Id="UltraschallMuteEnvelope" Name="ultraschall_mute_envelope.lua" DiskId="1" Source="Payload\Plugin\ultraschall_mute_envelope.lua"/>
                             <File Id="UltraschallSelectStudioLink" Name="ultraschall_select_studiolink.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_studiolink.lua"/>
                             <File Id="UltraschallSelectTrack1" Name="ultraschall_select_track1.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track1.lua"/>
@@ -43,10 +71,17 @@
                 </Directory>
                 <Directory Id="UltraschallApplicationFolder" Name="Ultraschall">
                     <Component Id="UltraschallRelease" Guid="9F68E7D5-9D8E-45B9-9AED-3E1137F2466C" Win64="yes">
-                            <File Id="ReadMeHtml" Name="README.html" DiskId="1" Source="Payload\README.html"/>
-                            <File Id="ChangelogHtml" Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html"/>
+                            <File Name="README.html" DiskId="1" Source="Payload\README.html">
+                                <Shortcut Id="ReadmeStartMenuShortcut" Directory="ProgramMenuDir" Name="README.html" />
+                            </File>
+                            <File Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html">
+                                <Shortcut Id="ChangelogStartMenuShortcut" Directory="ProgramMenuDir" Name="CHANGELOG.html"/>
+                            </File>
                             <File Id="InstallHtml" Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html"/>
-                            <File Id="ReaperTheme" Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip"/>
+                            <File Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip" >
+                                <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
+                                <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe"/>
+                            </File>
                     </Component>
                     <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                         <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
@@ -60,13 +95,32 @@
                     </Directory>
                 </Directory>
             </Directory>
+ 
+            <Directory Id="DesktopFolder" />
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ProgramMenuDir" Name="Ultraschall">
+                <Component Id="StartMenuShortcuts" Guid="B7597C7E-0F99-4B16-BF1E-3EC0DAE08664">
+                    <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                    <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
+                </Component>
+                </Directory>
+            </Directory>
+
         </Directory>
+        
         <DirectoryRef Id="TARGETDIR">
             <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
+            <Merge Id="SoundboardRedist" SourceFile="Payload\Soundboard\Soundboard.msm" DiskId="1" Language="1033"/>
         </DirectoryRef>
+        
         <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist"/>
         </Feature>
+        
+        <Feature Id="SoundboardRedist" Title="Ultraschall Soundboard" AllowAdvertise="no" Display="hidden" Level="1">
+            <MergeRef Id="SoundboardRedist"/>
+        </Feature>
+        
         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
             <ComponentRef Id="ReaperScripts"/>
@@ -76,6 +130,6 @@
         </Feature>
 
         <UIRef Id="WixUI_Minimal" />
-        <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
+
     </Product>
 </Wix>
