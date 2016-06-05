@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2-PRE-RELEASE-12
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
