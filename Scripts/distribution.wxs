@@ -60,6 +60,11 @@
                             <File Id="UltraschallSelectTrack7" Name="ultraschall_select_track7.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track7.lua"/>
                             <File Id="UltraschallSelectTrack8" Name="ultraschall_select_track8.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track8.lua"/>
                         </Component>
+                        <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
+                            <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
+                            <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
+                            <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
+                        </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
@@ -124,6 +129,7 @@
         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
             <ComponentRef Id="ReaperScripts"/>
+            <ComponentRef Id="SWSExtension"/>
             <ComponentRef Id="StudioLinkVst"/>
             <ComponentRef Id="UltraschallRelease"/>
             <ComponentRef Id="UltraschallReleaseAddons"/>
