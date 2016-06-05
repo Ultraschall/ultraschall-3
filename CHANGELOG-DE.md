@@ -26,7 +26,7 @@
 
 #### Last Changelog:
 
-## 2.2 Gropius - 2016-Mai-31
+## 2.2 Gropius - 2016-Jun-05
 
 * Theme: **Weiteres Feintuning des neuen Themes**
 *Die Scrollbalken sowie Zoom-Icons wurden vereinfacht, ebenso Schieberegler in AU/VST-Effekten.*

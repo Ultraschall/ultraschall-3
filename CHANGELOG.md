@@ -10,7 +10,7 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
 * **Misc:** Anything that is left.
 
-## 2.2 Gropius - 2016-June-07
+## 2.2 Gropius - 2016-June-05
 
 * Theme: **Theme fine-tuning**
 *Beautification of scroll bars, zoom icons and sliders in VST/AU effect displays*
