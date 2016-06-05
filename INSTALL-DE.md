@@ -16,9 +16,9 @@ Je nachdem, ob man bereits eine vorherige Version von Ultraschall im Einsatz hat
 
 1. **REAPER aktualisieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 54€ Kosten an. Man kann REAPER 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
 
-2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
+2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us22) laden und das `.dmg` starten
 
-3. **Alte Installation bereinigen:** In dem sich öffnenden Finder-Fenster einmalig `uninstall.command` aus dem `.dmg` durchlaufen lassen. Hiermit werden die alten Einträge aus system/library entfernt. Um alte Soundflower oder USH Geräteeinträge zu entfernen einmalig das Script `Remove legacy audio devices.command`, ebenfalls im `.dmg` zu finden, durchlaufen lassen.
+3. **Alte Installation bereinigen:** In dem sich öffnenden Finder-Fenster einmalig `Uninstall.command` aus dem `.dmg` durchlaufen lassen. Hiermit werden die alten Einträge aus system/library entfernt. Um alte Soundflower oder USH Geräteeinträge zu entfernen einmalig das Script `Remove legacy audio devices.command`, ebenfalls im `.dmg` zu finden, durchlaufen lassen.
 
 Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 
@@ -27,9 +27,9 @@ Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 
 1. **REAPER installieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 54€ Kosten an.
 
-2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us21) laden und das `.dmg` starten
+2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us22) laden und das `.dmg` starten
 
-3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-2.2.pkg` starten und durchlaufen lassen. Man kann einzelne Komponenten abwählen, das wird jedoch explizit nicht empfohlen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-2.2.pkg` starten und durchlaufen lassen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal OSX neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
 
 4. **Optional - UltraschallHub installieren:** Wenn man in Ultraschall erweiterte Features wie eine rein in Software modellierte Skype N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices (ehemals: [Soundflower](https://rogueamoeba.com/freebies/soundflower/)) Voraussetzung. Hierzu das `UltraschallHub.pkg` durchlaufen lassen. Für den Einsatz von StudioLink oder Soundboard in Ultraschall ist dieser Schritt *nicht* notwendig und kann übersprungen werden.
 
@@ -48,9 +48,9 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 1. **REAPER installieren:** [REAPER v5.201 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren - eine **Vollversion ist für 60 Tage kostenlos** testbar, danach werden 54 € fällig. Für Windows unterstützen wir nur die **64 Bit** Version.
 
-2. **Ultraschall laden:** Die [Ultraschall_2.2win.msi (24.1 MB)](http://url.ultraschall-podcast.de/us21win) Datei laden. Den Installer mit Standardeinstellungen durchlaufen lassen.
+2. **Ultraschall laden:** Die [Ultraschall-2.2.msi (24.1 MB)](http://url.ultraschall-podcast.de/us22win) Datei laden. Den Installer starten und durchlaufen lassen.
 
-3. **Die REAPER-Ultraschall Konfiguration installieren:** REAPER starten und die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete REAPER-Fenster fallen lassen. Den Import durchlaufen lassen.
+3. **Die REAPER-Ultraschall Konfiguration installieren:** REAPER starten und die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete REAPER-Fenster fallen lassen. Den Import durchlaufen lassen. Danach kann die Datei vom Desktop gelöscht werden.
 
 4. **StudioLink und das Ultraschall-Soundboard verbinden:** Unser direkt in die Recordingsoftware integriertes Soundboard zum Einspielen von Jingles und Ähnlichem sowie StudioLink als Alternative zu Skype-Remoterecordings wird automatisch installiert. Man muss dies jedoch einmalig nach der Installation REAPER mitteilen: Im Menü `Options | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
 
