@@ -40,23 +40,23 @@ call build.bat build release x64
 popd
 
 copy ..\REAPER\Plugin\reaper_ultraschall\x64\Release\reaper_ultraschall.dll Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_delete_last_marker.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_safemode_start_pause.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_safemode_start_stop.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_set_edit.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_set_edit_past.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_set_marker.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_set_namedmarker.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_mute_envelope.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_studiolink.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track1.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track2.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track3.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track4.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track5.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track6.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track7.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\ultraschall_select_track8.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_delete_last_marker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_safemode_start_pause.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_safemode_start_stop.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_edit.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_edit_past.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_marker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_namedmarker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_mute_envelope.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_studiolink.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track1.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track2.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track3.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track4.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track5.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track6.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track7.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track8.lua Payload\Plugin
 
 pushd ..\Soundboard\ 
 call Build\build_win.cmd
