@@ -82,7 +82,9 @@
                             <File Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html">
                                 <Shortcut Id="ChangelogStartMenuShortcut" Directory="ProgramMenuDir" Name="CHANGELOG.html"/>
                             </File>
-                            <File Id="InstallHtml" Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html"/>
+                            <File Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html">
+                                <Shortcut Id="InstallStartMenuShortcut" Directory="ProgramMenuDir" Name="INSTALL.html" />
+                            </File>
                             <File Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip" >
                                 <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
                                 <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0"/>
