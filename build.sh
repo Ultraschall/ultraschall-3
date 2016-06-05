@@ -83,6 +83,7 @@ pushd ../Soundboard
 popd
 
 # Create Ultraschall Soundboard package
+# mv ../Soundboard/Files/AudioUnit/
 pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-ins/Components ./Build/UltraschallSoundboard.pkg
 
 # Create Ultraschall Soundboard extras package
@@ -92,10 +93,12 @@ pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extr
 pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-ins/Components ./Build/StudioLink.pkg
 
 # Create SWS REAPER Plugin Extension package
-pkgbuild --root ./3rdParty/SWS/UserPlugins/Payload --scripts ./3rdParty/SWS/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.3.pkg
+chmod 766 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
+pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.3.pkg
 
 # Create SWS REAPER Plugin Scripts package
-pkgbuild --root ./3rdParty/SWS/Scripts/Payload --scripts ./3rdParty/SWS/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.3.pkg
+chmod 766 ./3rdParty/SWS/Macintosh/Scripts/Scripts/preinstall
+pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.3.pkg
 
 # Create Ultraschall Resources package
 pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallResources.pkg
