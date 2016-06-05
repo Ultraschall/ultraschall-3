@@ -10,52 +10,54 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
 * **Misc:** Anything that is left.
 
-## 2.2 Gropius - 2016-Mai-xx
+## 2.2 Gropius - 2016-June-07
 
-* Theme: **Weiteres Feintuning des neuen Themes**
-*Die Scrollbalken sowie Zoom-Icons wurden vereinfacht, ebenso Schieberegler in AU/VST-Effekten.*
+* Theme: **Theme fine-tuning**
+*Beautification of scroll bars, zoom icons and sliders in VST/AU effect displays*
 
-* Actions: **Räuspertaste und Mute-Spur**
-*Komplette Neukonzeption der Räuspertasten- und Mute-Funktion. Der editierbare Mute-Envelope wird nun immer in einer Separaten Spur angezeigt und farblich besser hervorgehoben. Der Mute-Button in der Iconleiste funktioniert nun kontexabhängig: vor einer Aufnahme können ausgewählte Spuren für die Räuspertaste aktiviert werden. Während und nach der Aufnahme schaltet er die Sichtbarkeit der Mute-Spuren ein oder aus.*
+* Actions: **Cough button and mute track**
+*Complete rework of the cough button und mute button feature. Before you start your recording session, the mute button toggles cough button activation. When your recording session is complete, the mute button toggles the display ot the mute track.*
 
-* Actions: **Auswahl von Spuren über Tastatur**
-*Über die Zahlentasten 1 bis 8 können die jeweiligen Spuren markiert oder unmarkiert werden. 9 markiert sämtliche Spuren, 0 hebt die Markeirung sämtlicher Spuren auf.*
+* Actions: **Track selection using the keyboard**
+*You can now toggle the selection of each track by using the numerical keys on your keyboard. Use '1' to '8' to toggle the selection of the respective track. Pressing '9' selects all tracks, '0' deselects all tracks.*
 
-* Actions: **Alle Spuren für Schnitt vorbereiten**
-*Die Befelsfolge "Prepare all tracks for editing", die nach jeder Aufnahme aufgerufen werden sollte, wurde verbessert und stellt weitere Parameter für den Schnitt um.*
+* Actions: **Prepare all tracks for editing**
+*The script "Prepare all tracks for editing" for completing a recording session has been improved and more parameters have been added*
 
-* Actions: **Neuer Menü-Eintrag "Customise"**
-*Im Podcast-Menü sind unter dem neuen Eintrag "Customise" folgende Funktionen zusammengefasst: 'Shortcuts and action list' um Tastaturkürzel neu definieren zu können und neue Funktionen hinzuzufügen, 'Track: set track icon' um Spuren mit einem Symbol verzieren zu können, 'Show theme configuration window' um Farben des Theme anzupassen, 'Show theme element finder' um die Benamung von einzelnen Elementen der GUI zu finden sowie 'Auto color' um die Standardfarben von Spuren in Abhängigkeit ihres Namens festzulegen. Weitere Hinweise über die Anpassbarkeit von Ultraschall/Reaper zeigt dieser Vortrag:*
+* Actions: **New menu item "Customize"**
+*Ultraschall 2.2 introduces the "Customize" menu item. You can use 'Shortcuts and action list' to change keyboard shortcuts and add new scripts to Ultraschall. Use 'Track: set track icon' and 'Show theme configuration window' to change the icons, colors and names of each track.
 
-* StudioLink: **Vollständige Integration des StudioLink Plugins**
-*Als qualitativ in Bezug auf Stabilität, Konstanz und Klangqualität weit überlegene Alternative zu Skype unterstützt Ultraschall nun StudioLink. Ohne den Aufbau einer N-1 Schaltung über die Routingmatrix ist es damit möglich, Ferngespräche mit bis zu 8 PartnerInnen zu führen, die in jeweils separaten (!) Spuren aufgezeichnet werden. Die PartnerInnen können dabei die schlanke Standalone-Version von StudioLink nutzen und benötigen keine eigene DAW. Die Einrichtung einer StudioLink-Schaltung wird im Release-Video erläutert.*
+* StudioLink: **Full integration of the StudioLink plugin**
+*Ultraschall now supports the StudioLink plugin. With StudioLink you can record remote calls on up to 8 individual tracks without the need to setup the notorious 'N-1 Schalte'. Remote attendees are not required to use REAPER. They can download the StudioLink Standalone-App (see https://doku.studio-link.de/standalone/installation-standalone.html). 
 
-* Soundboard: **Soundboard nun auch für Windows und als AU Version für den Mac**
-*Das Ultraschall-Spundboard steht nun mit vollem Funktionsumfang auch unter Windows zur Vefügung. Bei der Mac-Version wurde von VST auf AU Technik umgestellt.*
+* Soundboard: **Soundboard for Windows**
+*The Ultraschall Soundboard now runs on Windows as a VST.*
 
-* Installer: **StudioLink Plugin und standalone**
-*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.studio-link.de/standalone/installation-standalone.html) laden.*
+* Soundboard: **Soundboard audio unit for Mac**
+*The Ultraschall Soundboard for Mac is now an audio unit.*
 
-* Preferences: **Stop Funktion überarbeitet**
-*Die Stop Funktion bei Aufnahmen wurde so überarbeitet, dass der Aufnahme-Cursor nach Stop an das Ende der bisherigen Aufnahme gesetzt wird. Dies verhindert, dass bei einem erneuten Start der Aufnahme kein alternativer Take angelegt wird, sondern die eigentliche Aufnahme fortgesetzt wird.*
+* Installer: **StudioLink Plugin**
+*The Ultraschall installer now includes the StudioLink plugin.*
 
-* Preferences: **Neue Spuren werden direkt für die Aufnahme aktiviert**
-*Alle neu angelegten Spuren werden direkt auf "Record Arm" geschaltet und sind bereit für die Aufnahme - der zusätzliche Klick auf den roten Arm-Knopf kann damit oft entfallen.*
+* Preferences: **Improved Stop Function**
+*The stop function has been reworked in such a way that the cursor in recording mode is set to the end of the current recording. This is to prevent the creation of further takes if the recording session continues.
 
-* Misc: **Ultraschall 3 Preset für ReaEQ**
-*Standardmäßig wird bei Aktivierung des ReaEQ Equalizers das Preset Ultraschall 3 aktiviert, dass deutlich weniger Bassanhebung und damit Poltern mit sich bring.*
+* Preferences: **Automatic Record Arm for newly inserted tracks**
+*Tracks are now set to 'Record Arm' after they have been inserted into the REAPER project. You are not any longer required to press the red 'Record Arm'-button.
 
-* Misc: **Ultraschall Presets für gebaute Beiträge**
-*Folgende Effekte werden als Ultraschall-Presets für die Verfremdung von Stimmen für gebaute Beiträge angeboten: Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate)*
+* Misc: **Ultraschall 3 Preset for ReaEQ**
+*The preset Ultraschall 3 is automatically activated if you insert the ReaEQ Equaliyer into the tracks effect chain. This results in less rumble and less boost of lower frequencies.    
+
+* Misc: **Ultraschall Presets for audio compoitions**
+*The effect presets Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate) may be used for voice colorization in audio compositions* 
 
 * Installer: **Bugfix**
-*The code signature of Uninstall.command was corrupted on image creation. Thanks to Arnd Layer for reporting this bug.*
+*The code signature of Uninstall.command was corrupted. Thanks to Arnd Layer for reporting this bug.*
 
 ## 2.1.1 Gropius - 2016-Feb-27
 
-* Theme: **More fine-tuning of the new theme**
-* Windows: **Anpassung der Farbwerte für die Audiospuren**
-*Auch unter Windows stimmen nun die Zuordnungen von Bezeichnungen und Farbwerte*
+* Theme: **Further fine-tuning of the new theme**
+* Windows: **Corrected color adjustments for audio tracks on Windows**
 
 ## 2.1 Gropius - 2016-Feb-19
 
