@@ -60,5 +60,3 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 7. **Loslegen:** REAPER starten und unter "Podcast"- `About Ultraschall` kontrollieren, dass alle Komponenten richtig installiert sind. 
 
-
-
