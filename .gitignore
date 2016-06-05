@@ -20,4 +20,5 @@ profile
 *.dmg
 *.dmg.gz
 *.dmg.zip
-
+*.msi
+.vscode/

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AudioComponents</key>
+	<array>
+		<dict>
+			<key>description</key>
+			<string>StudioLink</string>
+			<key>factoryFunction</key>
+			<string>StudioLinkAUFactory</string>
+			<key>manufacturer</key>
+			<string>ITSR</string>
+			<key>name</key>
+			<string>ITSR: StudioLink</string>
+			<key>subtype</key>
+			<string>Ypss</string>
+			<key>type</key>
+			<string>aufx</string>
+			<key>version</key>
+			<integer>1049600</integer>
+		</dict>
+	</array>
+	<key>BuildMachineOSBuild</key>
+	<string>13F34</string>
+	<key>CFBundleExecutable</key>
+	<string>StudioLink</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.itsr.StudioLink</string>
+	<key>CFBundleName</key>
+	<string>StudioLink</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>16.04.0</string>
+	<key>CFBundleSignature</key>
+	<string>PTul</string>
+	<key>CFBundleVersion</key>
+	<string>16.04.0</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>6A1052c</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>14A382</string>
+	<key>DTSDKName</key>
+	<string>macosx10.10</string>
+	<key>DTXcode</key>
+	<string>0610</string>
+	<key>DTXcodeBuild</key>
+	<string>6A1052c</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>IT-Service Sebastian Reimers</string>
+</dict>
+</plist>
