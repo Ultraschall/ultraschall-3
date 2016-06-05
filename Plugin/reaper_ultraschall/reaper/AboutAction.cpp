@@ -100,7 +100,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 2.2 \"Gropius\" PRE-RELEASE 12...", message1 + message2);
+   NotificationWindow::Show("About Ultraschall 2.2 \"Gropius\" PRE-RELEASE 13...", message1 + message2);
 #else
    ShowAbout();
 #endif
