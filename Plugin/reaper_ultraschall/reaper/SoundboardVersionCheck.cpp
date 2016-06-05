@@ -52,7 +52,7 @@ namespace ultraschall {
                     version = [value UTF8String];
                 }
 #else
-            const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard.dll";
+            const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
             version = FileManager::ReadVersionFromFile(path);
 #endif // #ifndef WIN32
 

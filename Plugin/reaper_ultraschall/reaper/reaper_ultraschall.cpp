@@ -69,8 +69,10 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, r
                   application.RegisterCustomAction<reaper::InsertTranscriptAction>();
 #endif
                    application.RegisterCustomAction<reaper::AboutAction>();
+#if 0
                    application.RegisterCustomAction<reaper::UpdateCheckAction>();
-                 
+#endif
+
 #if 0
                    // run the update action on startup
                    reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
