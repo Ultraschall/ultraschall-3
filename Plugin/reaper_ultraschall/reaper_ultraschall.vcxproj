@@ -185,7 +185,7 @@
     <ClCompile Include="reaper\InsertChaptersAction.cpp" />
     <ClCompile Include="reaper\InsertTranscriptAction.cpp" />
     <ClCompile Include="reaper\InvalidEntryPointException.cpp" />
-    <ClCompile Include="reaper\MessageBox.cpp" />
+    <ClCompile Include="reaper\NotificationWindow.cpp" />
     <ClCompile Include="reaper\PatchConfiguration.cpp" />
     <ClCompile Include="reaper\PluginVersionCheck.cpp" />
     <ClCompile Include="reaper\ReaperEntryPoints.cpp" />
@@ -240,7 +240,7 @@
     <ClInclude Include="reaper\InsertChaptersAction.h" />
     <ClInclude Include="reaper\InsertTranscriptAction.h" />
     <ClInclude Include="reaper\InvalidEntryPointException.h" />
-    <ClInclude Include="reaper\MessageBox.h" />
+    <ClInclude Include="reaper\NotificationWindow.h" />
     <ClInclude Include="reaper\PatchConfiguration.h" />
     <ClInclude Include="reaper\PluginVersionCheck.h" />
     <ClInclude Include="reaper\ReaperEntryPoints.h" />

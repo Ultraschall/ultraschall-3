@@ -93,9 +93,6 @@
     <ClCompile Include="reaper\InvalidEntryPointException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\MessageBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\PatchConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reaper\VersionString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\NotificationWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -254,9 +254,6 @@
     <ClInclude Include="reaper\InvalidEntryPointException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\MessageBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\PatchConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -309,6 +306,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\VersionString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\NotificationWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
