@@ -52,11 +52,13 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 3. **Die REAPER-Ultraschall Konfiguration installieren:** REAPER starten und die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete REAPER-Fenster fallen lassen. Den Import durchlaufen lassen.
 
-4. **Startscreen anpassen:** Damit man beim Starten der Software direkt mit dem Ultraschall-Logo begrüßt wird, startet man in REAPER aus dem Menü `Options | Preferences… | General` und dann unten `Advanced UI/system tweaks…`. Dort aktualsiert man den Pfad unter `Custom splash screen image` zur Datei `Ultraschall Reaper Splash Screen.png`, die man im Verzeichnis `Ultraschall` im Ordner `Programme` auf der Festplatte findet.
+4. **StudioLink und das Ultraschall-Soundboard verbinden:** Unser direkt in die Recordingsoftware integriertes Soundboard zum Einspielen von Jingles und Ähnlichem sowie StudioLink als Alternative zu Skype-Remoterecordings wird automatisch installiert. Man muss dies jedoch einmalig nach der Installation REAPER mitteilen: Im Menü `Options | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
 
-5. **Aufräumen:** Die Verknüpfung `Ultraschall REAPER Theme` wieder vom Desktop löschen.
+5. **Startscreen anpassen:** Damit man beim Starten der Software direkt mit dem Ultraschall-Logo begrüßt wird, startet man in REAPER aus dem Menü `Options | Preferences… | General` und dann unten `Advanced UI/system tweaks…`. Dort aktualsiert man den Pfad unter `Custom splash screen image` zur Datei `Ultraschall Reaper Splash Screen.png`, die man im Verzeichnis `Ultraschall` im Ordner `Programme` auf der Festplatte findet.
 
-6. **Loslegen:** REAPER starten und unter "Podcast"- `About Ultraschall` kontrollieren, dass alle Komponenten richtig installiert sind. 
+6. **Aufräumen:** Die Verknüpfung `Ultraschall REAPER Theme` wieder vom Desktop löschen.
+
+7. **Loslegen:** REAPER starten und unter "Podcast"- `About Ultraschall` kontrollieren, dass alle Komponenten richtig installiert sind. 
 
 
 
