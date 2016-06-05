@@ -25,9 +25,8 @@
 #ifndef __ULTRASCHALL_FRAMEWORK_RESOURCE_ID_H_INCL__
 #define __ULTRASCHALL_FRAMEWORK_RESOURCE_ID_H_INCL__
 
-#include <atomic>
-
 #include <Framework.h>
+#include <atomic>
 
 namespace ultraschall { namespace framework {
    

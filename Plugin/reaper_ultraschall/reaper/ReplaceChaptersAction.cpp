@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
 
@@ -31,7 +32,7 @@
 #include "ReplaceChaptersAction.h"
 #include "Application.h"
 #include "FileManager.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -83,12 +84,12 @@ const ServiceStatus ReplaceChaptersAction::Execute()
 
    if(chapterMarkers.size() == replacedChapterMarkers)
    {
-      MessageBox::Show(successMessageId_);
+      NotificationWindow::Show(successMessageId_);
       status = SERVICE_SUCCESS;
    }
    else
    {
-      MessageBox::Show(failureMessageId_);
+      NotificationWindow::Show(failureMessageId_);
    }
    
    return status;

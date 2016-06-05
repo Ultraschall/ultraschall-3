@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
 
@@ -31,7 +32,7 @@
 #include "InsertTranscriptAction.h"
 #include "Application.h"
 #include "FileManager.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -85,12 +86,12 @@ const ServiceStatus InsertTranscriptAction::Execute()
    
    if(items.size() == addedItemCount)
    {
-      MessageBox::Show(successMessageId_);
+      NotificationWindow::Show(successMessageId_);
       status = SERVICE_SUCCESS;
    }
    else
    {
-      MessageBox::Show(failureMessageId_);
+      NotificationWindow::Show(failureMessageId_);
    }
    
    return status;

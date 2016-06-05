@@ -23,8 +23,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+
+#ifndef WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#endif // #ifndef WIN32
+
 #include "HubVersionCheck.h"
 #include "FileManager.h"
 
@@ -34,6 +38,7 @@ const std::string QueryHubVersion()
 {
    std::string version;
    
+#ifndef WIN32
    if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true)
    {
       version = "AudioHub ";
@@ -62,7 +67,8 @@ const std::string QueryHubVersion()
       version += ".";
       version += [value UTF8String];
    }
-   
+#endif // #ifndef WIN32   
+
    return version;
 }
    

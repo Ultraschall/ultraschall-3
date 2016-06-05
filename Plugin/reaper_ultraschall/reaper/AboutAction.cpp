@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +22,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
+
+#include <cpr/cpr.h>
+
+#ifndef _WIN32
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
+#endif
+
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "HubVersionCheck.h"
 #include "SoundboardVersionCheck.h"
+#include "StudioLinkVersionCheck.h"
+#include "PluginVersionCheck.h"
+#include "SWSVersionCheck.h"
 #include "AboutAction.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 #include "About.h"
+#include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -44,22 +59,27 @@ const char* AboutAction::UniqueId()
 const ServiceStatus AboutAction::Execute()
 {
 #if 1
+
+   const std::string pluginVersion = QueryPluginVersion();
+  
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension 2.1.1\r\n";
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
-   const std::string themeVersion = QueryThemeVersion2();
+   const std::string themeVersion = QueryThemeVersion();
    if(themeVersion.empty() == false)
    {
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
    }
 
+#ifndef WIN32
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";
    }
+#endif // #ifndef WIN32
 
    const std::string soundboardVersion = QuerySoundboardVersion();
    if(soundboardVersion.empty() == false)
@@ -67,18 +87,25 @@ Ultraschall REAPER Extension 2.1.1\r\n";
       message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
    }
 
+   const std::string studioLinkVersion = QueryStudioLinkVersion();
+   if(studioLinkVersion.empty() == false)
+   {
+       message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
+   }
+
    std::string message2 = "\
-SWS REAPER Extension 2.8.3\r\n\
+SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
 REAPER ";
 
-   message2 += QueryReaperVersion();
+   message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   MessageBox::Show("Ultraschall 2.1.1 \"Gropius\"", message1 + message2);
+   NotificationWindow::Show("About Ultraschall 2.2 \"Gropius\"...", message1 + message2);
 #else
    ShowAbout();
 #endif
    return SERVICE_SUCCESS;
 }
+
 
 }}

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,48 +23,64 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+
 #include "ReaperVersionCheck.h"
+#include "ReaperEntryPoints.h"
 #include "FileManager.h"
+#include "StringUtilities.h"
+#include "VersionString.h"
 
 namespace ultraschall { namespace reaper {
 
-const std::string QueryReaperVersion()
+std::string QueryRawReaperVersion()
 {
-   std::string version;
-   
-   if(ReaperPlatformCheck() == true)
-   {
-      NSString* filePath = @"/Applications/REAPER64.app/Contents/Info.plist";
-      NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile: filePath];
-      NSString* value = [plist objectForKey: @"CFBundleVersion"];
-      version = [value UTF8String];
-   }
-   
-   return version;
+    std::string version;
+    
+    const std::vector<std::string> versionTokens = framework::split(reaper_api::GetAppVersion(), '/');
+    const size_t MIN_VERSION_TOKEN_COUNT = 1;
+    if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
+    {
+        version = versionTokens[0];
+    }
+
+    return version;
 }
-   
-const bool ReaperVersionCheck()
+
+VersionString QueryReaperVersion()
 {
-   bool result = false;
-   
-   std::string version = QueryReaperVersion();
-   if((version.size() >= 3) && (version[0] == '5') && (version[1] == '.'))
-   {
-      const int minorVersion = atoi(&version[2]);
-      if(minorVersion >= 1)
-      {
-         result = true;
-      }
-   }
-   
-   return result;
+    VersionString versionString = VersionString::Invalid();
+
+    const std::string version = QueryRawReaperVersion();
+    if(version.empty() == false)
+    {
+        const std::vector<std::string> versionTokens = framework::split(version, '/');
+        const size_t MIN_VERSION_TOKEN_COUNT = 1;
+        if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
+        {
+            versionString = VersionString::FromString(versionTokens[0]);
+        }
+    }
+
+    return versionString;
 }
- 
-const bool ReaperPlatformCheck()
+
+bool ReaperVersionCheck()
 {
-   return FileManager::FileExists("/Applications/REAPER64.app/Contents/Info.plist");
+    bool result = false;
+
+    VersionString versionString = QueryReaperVersion();
+    if(versionString.IsValid() == true)
+    {
+        const uint8_t MIN_REQUIRED_REAPER_MAJOR_VERSION = 5;
+        const uint8_t MIN_REQUIRED_REAPER_MINOR_VERSION = 1;
+        if((versionString.MajorVersion() >= MIN_REQUIRED_REAPER_MAJOR_VERSION) &&
+           (versionString.MinorVersion() >= MIN_REQUIRED_REAPER_MINOR_VERSION))
+        {
+            result = true;
+        }
+    }
+
+    return result;
 }
 
 }}

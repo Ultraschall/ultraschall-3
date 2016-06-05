@@ -23,10 +23,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <Malloc.h>
+#include <cstdlib>
 
 namespace ultraschall { namespace framework {
    
-template<> const size_t Malloc<void>::Size()
+template<> size_t Malloc<void>::Size()
 {
    return 1;
 }

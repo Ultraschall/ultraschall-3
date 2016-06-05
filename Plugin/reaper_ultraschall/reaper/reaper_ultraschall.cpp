@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <ServiceStatus.h>
-#include <MessageBox.h>
 
 #include "Application.h"
+#include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
 #include "InvalidEntryPointException.h"
 #include "InsertChaptersAction.h"
@@ -34,12 +34,15 @@
 #include "SaveChaptersToProjectAction.h"
 #include "InsertTranscriptAction.h"
 #include "AboutAction.h"
+#include "UpdateCheckAction.h"
+#include "CustomActionManager.h"
+#include "ICustomAction.h"
 
 namespace reaper = ultraschall::reaper;
 
 extern "C"
 {
-REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t *pPluginInfo)
+REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, reaper_plugin_info_t *pPluginInfo)
 {
    reaper::Application& application = reaper::Application::Instance();
     
@@ -65,16 +68,31 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 #if 0
                   application.RegisterCustomAction<reaper::InsertTranscriptAction>();
 #endif
-                  application.RegisterCustomAction<reaper::AboutAction>();
+                   application.RegisterCustomAction<reaper::AboutAction>();
+#if 0
+                   application.RegisterCustomAction<reaper::UpdateCheckAction>();
+#endif
+
+#if 0
+                   // run the update action on startup
+                   reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
+                   reaper::ICustomAction* pCustomAction = 0;
+                   ServiceStatus status = manager.LookupCustomAction(reaper::UpdateCheckAction::UniqueId(), pCustomAction);
+                   if(ServiceSucceeded(status) && (pCustomAction != 0))
+                   {
+                     pCustomAction->Execute();
+                     framework::SafeRelease(pCustomAction);
+                   }
+#endif
                }
             }
          }
-         catch(reaper::InvalidEntryPointException& e)
+         catch(reaper::InvalidEntryPointException&)
          {
             std::string errorReason = "\
 You are trying to load a version of REAPER that is not compatible to Ultraschall 2.";
             
-            reaper::MessageBox::Show("Ultraschall failed to load!", errorReason, true);
+            reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
             return 0;
          }
          

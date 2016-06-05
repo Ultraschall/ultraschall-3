@@ -25,12 +25,12 @@
 #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__
 #define __ULTRASCHALL_FRAMEWORK_H_INCL__
 
+#include <Platform.h>
+
 #include <cstdint>
 #include <string>
 #include <vector>
 #include <map>
-#include <sstream>
-#include <iomanip>
 
 namespace ultraschall { namespace framework {
 

@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <string>
 #include <fstream>
 #include <Stream.h>
 #include <BinaryFileReader.h>
@@ -53,7 +55,7 @@ Stream<uint8_t>* BinaryFileReader::ReadBytes(const std::string& filename)
             }
          }
          
-         SafeDelete(buffer);
+         SafeDeleteArray(buffer);
       }
       
       file.close();

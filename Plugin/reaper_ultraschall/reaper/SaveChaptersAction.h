@@ -63,6 +63,7 @@ protected:
       resourceManager.UnregisterLocalizedString(notFoundMessageId_);
       resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
       resourceManager.UnregisterLocalizedString(noProjectNameMessageId_);
+      resourceManager.UnregisterLocalizedString(saveOperationCanceledId_);
    }
 
    static const std::string Path();
@@ -112,6 +113,13 @@ private:
          resourceManager.SetLocalizedString(noProjectNameMessageId_, "en-EN", "The project has no name yet. Please save the project and try again.");
          resourceManager.SetLocalizedString(noProjectNameMessageId_, "de-DE", "Das Projekt hat noch keinen Namen und muss zuerst gespeichert werden");
       }
+
+      status = resourceManager.RegisterLocalizedString(saveOperationCanceledId_);
+      if(ServiceSucceeded(status))
+      {
+          resourceManager.SetLocalizedString(saveOperationCanceledId_, "en-EN", "The save operation has been canceled.");
+          resourceManager.SetLocalizedString(saveOperationCanceledId_, "de-DE", "Der Speichervorgang wurde abgebrochen.");
+      }
    }
    
    framework::ResourceId actionNameId_;
@@ -120,6 +128,7 @@ private:
    framework::ResourceId notFoundMessageId_;
    framework::ResourceId fileBrowserTitleId_;
    framework::ResourceId noProjectNameMessageId_;
+   framework::ResourceId saveOperationCanceledId_;
 };
 
 }}

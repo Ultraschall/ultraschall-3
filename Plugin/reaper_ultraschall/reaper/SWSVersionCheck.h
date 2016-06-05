@@ -25,10 +25,13 @@
 #ifndef __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
 #define __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
 
-namespace ultraschall { namespace reaper {
-   
-const bool SWSVersionCheck();
-   
-}}
+namespace ultraschall {
+    namespace reaper {
+
+        const bool SWSVersionCheck();
+
+        std::string QuerySWSVersion();
+    }
+}
 
 #endif // __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__

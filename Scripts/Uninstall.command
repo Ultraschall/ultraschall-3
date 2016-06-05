@@ -73,12 +73,72 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua ]
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua
 fi
 
+if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua ]; then
+	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua
+fi
+
 if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
 	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_mute_envelope.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_mute_envelope.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_studiolink.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_studiolink.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track1.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track1.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track2.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track2.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track3.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track3.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track4.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track4.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track5.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track5.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track6.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track6.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track7.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track7.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_select_track8.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.eel ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.eel
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/test.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/test.lua
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua ]; then
+	rm -f ~/Library/Application\ Support/REAPER/Scripts/testing.lua
 fi
 
 # Uninstall SWS REAPER Extension from user domain
@@ -207,6 +267,14 @@ if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
 fi
 
 # Uninstall color themes from user domain
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.ReaperThemeZip
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.1.SWSColor ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2.1.SWSColor
+fi
+
 if [ -d ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2 ]; then
 	rm -rf ~/Library/Application\ Support/REAPER/ColorThemes/Ultraschall_2
 fi
@@ -285,14 +353,54 @@ if [ -d /Library/Application\ Support/Ultraschall/TouchOSC ]; then
 	sudo rm -rf /Library/Application\ Support/Ultraschall/TouchOSC
 fi
 
-# Uninstall Ultraschall Soundboard from user domain
+# Uninstall Ultraschall StudioLink Audio Unit from user domain
+if [ -d ~/Library/Audio/Plug-Ins/Components/StudioLink.component ]; then
+	rm -rf ~/Library/Audio/Plug-Ins/Components/StudioLink.component
+fi
+
+# Uninstall Ultraschall StudioLink Audio Unit from system domain
+if [ -d /Library/Audio/Plug-Ins/Components/StudioLink.component ]; then
+	sudo rm -rf /Library/Audio/Plug-Ins/Components/StudioLink.component
+fi
+
+# Uninstall Ultraschall Soundboard Audio Unit from user domain
+if [ -d ~/Library/Audio/Plug-Ins/Components/Soundboard.component ]; then
+	rm -rf ~/Library/Audio/Plug-Ins/Components/Soundboard.component
+fi
+
+# Uninstall Ultraschall Soundboard Audio Unit from system domain
+if [ -d /Library/Audio/Plug-Ins/Components/Soundboard.component ]; then
+	sudo rm -rf /Library/Audio/Plug-Ins/Components/Soundboard.component
+fi
+
+# Uninstall Ultraschall Soundboard VST from user domain
 if [ -d ~/Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	rm -rf ~/Library/Audio/Plug-Ins/VST/Soundboard.vst
 fi
 
-# Uninstall Ultraschall Soundboard from system domain
+# Uninstall Ultraschall Soundboard VST from system domain
 if [ -d /Library/Audio/Plug-Ins/VST/Soundboard.vst ]; then
 	sudo rm -rf /Library/Audio/Plug-Ins/VST/Soundboard.vst
+fi
+
+# Uninstall Ultraschall Soundboard settings from user domain
+if [ -f ~/Library/Application\ Support/REAPER/presets/vst-Soundboard.ini ]; then
+	rm -f ~/Library/Application\ Support/REAPER/presets/vst-Soundboard.ini
+fi
+
+# Uninstall Ultraschall Soundboard settings from system domain
+if [ -f /Library/Application\ Support/REAPER/presets/vst-Soundboard.ini ]; then
+	sudo rm -f /Library/Application\ Support/REAPER/presets/vst-Soundboard.ini
+fi
+
+# Uninstall Ultraschall FXChain settings from user domain
+if [ -f ~/Library/Application\ Support/REAPER/FXChains/Wikigeeks.RfxChain ]; then
+	rm -f ~/Library/Application\ Support/REAPER/FXChains/Wikigeeks.RfxChain
+fi
+
+# Uninstall Ultraschall FXChain settings from system domain
+if [ -f /Library/Application\ Support/REAPER/FXChains/Wikigeeks.RfxChain ]; then
+	sudo rm -f /Library/Application\ Support/REAPER/FXChains/Wikigeeks.RfxChain
 fi
 
 # Uninstall Ultraschall track templates from user domain
@@ -325,6 +433,16 @@ if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-
 	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
 fi
 
+# Uninstall StudioLink track templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate ]; then
+	rm -f ~/Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
+fi
+
+# Uninstall StudioLink track templates from system domain
+if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate ]; then
+	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
+fi
+
 # Uninstall Ultraschall project templates from user domain
 if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
 	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
@@ -342,7 +460,7 @@ if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Duck
 	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
 fi
 
-# Uninstall Ultraschall project templates from user domain
+# Uninstall Ultraschall project templates from system domain
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
 	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
 fi
@@ -357,6 +475,16 @@ fi
 
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak ]; then
 	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
+fi
+
+# Uninstall StudioLink project templates from user domain
+if [ -f ~/Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP ]; then
+	rm -f ~/Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
+fi
+
+# Uninstall StudioLink project templates from system domain
+if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP ]; then
+	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
 fi
 
 # Uninstall Ultraschall Add-ons from user domain
@@ -387,6 +515,14 @@ if [ -d /Library/Extensions/UltraschallHub.kext ]; then
 fi
 
 # Remove installer receipts
+if [ -f /var/db/receipts/com.itsr.StudioLink.bom ]; then
+	sudo rm -f /var/db/receipts/com.itsr.StudioLink.bom
+fi
+
+if [ -f /var/db/receipts/com.itsr.StudioLink.plist ]; then
+	sudo rm -f /var/db/receipts/com.itsr.StudioLink.plist
+fi
+
 if [ -f /var/db/receipts/fm.ultraschall.Soundboard.bom ]; then
 	sudo rm -f /var/db/receipts/fm.ultraschall.Soundboard.bom
 fi
@@ -441,6 +577,14 @@ fi
 
 if [ -f /var/db/receipts/fm.ultraschall.UltraschallHub.plist ]; then
 	sudo rm -f /var/db/receipts/fm.ultraschall.UltraschallHub.plist
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.UltraschallHubDriver.bom ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.UltraschallHubDriver.bom
+fi
+
+if [ -f /var/db/receipts/fm.ultraschall.UltraschallHubDriver.plist ]; then
+	sudo rm -f /var/db/receipts/fm.ultraschall.UltraschallHubDriver.plist
 fi
 
 if [ -f /var/db/receipts/fm.ultraschall.Ultraschall.bom ]; then

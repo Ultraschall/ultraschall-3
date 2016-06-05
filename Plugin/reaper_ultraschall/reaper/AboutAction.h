@@ -50,7 +50,7 @@ public:
    }
    
    virtual const ServiceStatus Execute() override;
-   
+
 protected:
    virtual ~AboutAction()
    {
@@ -68,7 +68,7 @@ private:
          resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: About Ultraschall...");
       }
    }
-   
+
    framework::ResourceId actionNameId_;
 };
    

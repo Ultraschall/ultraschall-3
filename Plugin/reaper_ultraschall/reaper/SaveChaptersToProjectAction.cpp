@@ -22,13 +22,14 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
 #include <vector>
 #include <fstream>
 
 #include "SaveChaptersToProjectAction.h"
 #include "Application.h"
 #include "FileManager.h"
-#include "MessageBox.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -61,16 +62,16 @@ const ServiceStatus SaveChaptersToProjectAction::Execute()
          output.close();
          
          status = SERVICE_SUCCESS;
-         MessageBox::Show(successMessageId_);
+         NotificationWindow::Show(successMessageId_);
       }
       else
       {
-         MessageBox::Show(noProjectNameMessageId_);
+         NotificationWindow::Show(noProjectNameMessageId_);
       }
    }
    else
    {
-      MessageBox::Show(notFoundMessageId_);
+      NotificationWindow::Show(notFoundMessageId_);
    }
    
    return status;

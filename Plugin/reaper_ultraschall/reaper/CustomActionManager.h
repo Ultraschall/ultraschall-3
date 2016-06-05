@@ -43,11 +43,13 @@ public:
 
    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
    
-   const ServiceStatus RegisterCustomAction(const int32_t id, ICustomAction* pCustomAction);
+   const ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
    void UnregisterCustomAction(const int32_t id);
+   void UnregisterCustomAction(const std::string& name);
    void UnregisterAllCustomActions();
 
    const ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
+   const ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
 
 protected:
    virtual ~CustomActionManager();
@@ -59,6 +61,7 @@ private:
    CustomActionManager& operator=(const CustomActionManager&);
 
    std::map<int32_t, ICustomAction*> customActions_;
+   std::map<std::string, int32_t> customActionIds_;
    mutable std::recursive_mutex customActionsLock_;
 };
 
