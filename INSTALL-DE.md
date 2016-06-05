@@ -46,14 +46,15 @@ Zur Handhabung der neuen Funktionen wird der demnächst erscheinende Release Scr
 
 ##Windows: Installation##
 
-1. **Reaper installieren:** [Reaper 5.1](http://www.reaper.fm/download.php) laden und installieren - eine **Vollversion ist für 60 Tage kostenlos** testbar, danach werden 54 € fällig. Für Windows unterstützen wir nur die **64 Bit** Version.
+1. **Reaper installieren:** [REAPER v5.201 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren - eine **Vollversion ist für 60 Tage kostenlos** testbar, danach werden 54 € fällig. Für Windows unterstützen wir nur die **64 Bit** Version.
 
-2. Die [SWS Extensions](http://www.sws-extension.org) laden und installieren. Ohne diesen Schritt funktionieren viele Features von Ultraschall nicht.
+2. Die [Ultraschall_2.2win.msi (24.1 MB)](http://url.ultraschall-podcast.de/us21win) Datei laden. Den Installer mit Standardeinstellungen durchlaufen lassen.
 
-3. Die [Ultraschall_2.1.1win.zip (24.1 MB)](http://url.ultraschall-podcast.de/us21win) Datei laden. Das .ZIP Archiv entpacken und die Datei `Ultraschall_2.1.ReaperConfigZip` suchen.
+3. Reaper starten und die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete Reaper-Fenster fallen lassen. Den Import durchlaufen lassen.
 
-4. Reaper starten und die `Ultraschall_2.1.ReaperConfigZip` Datei in das geöffnete Fenster fallen lassen.
+4. Die Verknüpfung `Ultraschall REAPER Theme` wieder vom Desktop löschen.
 
-5. Da einige der erweiterten Reaper-Features unter Windows leider nicht umsetzbar sind (virtuelle Soundkarten) entfällt die Installation des HUB.
+5. Reaper starten und unter "Podcast"- `About Ultraschall` kontrollieren, dass alle Komponenten richtig installiert sind. 
 
-6. Wir arbeiten weiterhin an einer stabilen Windows-Version des Soundboards und freuen uns über TesterInnen.
+
+
