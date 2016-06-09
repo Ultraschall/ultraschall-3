@@ -26,6 +26,14 @@
 
 #### Last Changelog:
 
+## 2.2.1 Gropius - 2016-June-09
+
+* Installer: **Bugfix**
+*Bugfix: Löschen von alten Dateien schlägt fehl. Danke an Marcus Schwarz für den Bugreport.*
+
+* Installer: **Bugfix**
+*Bugfix: Löschen von anderen alten Dateien schlägt fehl. Danke an Wolfgang Schulz für den Bugreport.*
+
 ## 2.2 Gropius - 2016-Jun-05
 
 * Theme: **Weiteres Feintuning des neuen Themes**
@@ -64,6 +72,8 @@
 * Misc: **Ultraschall Presets für gebaute Beiträge**
 *Folgende Effekte werden als Ultraschall-Presets für die Verfremdung von Stimmen für gebaute Beiträge angeboten: Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate)*
 
+* Installer: **Bugfix**
+*Fehlerhafte Code-Signatur in Uninstall.command. Vielen Dank an Arnd Layer für den Bugreport.*
 
 ## 2.1.1 Gropius - 2016-Feb-27
 

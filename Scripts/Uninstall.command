@@ -74,7 +74,7 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_edit.lua ]
 fi
 
 if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua ]; then
-	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua
+	sudo rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua ]; then
@@ -82,7 +82,7 @@ if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_marker.lua
 fi
 
 if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
-	rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
+	sudo rm -f /Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_set_namedmarker.lua ]; then
@@ -422,15 +422,15 @@ fi
 
 # Uninstall Ultraschall track templates from system domain
 if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate ]; then
-	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate
+	sudo rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard\ Spur\ anlegen.RTRackTemplate
 fi
 
 if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate ]; then
-	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate
+	sudo rm -f /Library/Application\ Support/REAPER/TrackTemplates/Soundboard.RTRackTemplate
 fi
 
 if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate ]; then
-	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
+	sudo rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ Ultraschall-Soundboard\ track.RTrackTemplate
 fi
 
 # Uninstall StudioLink track templates from user domain
@@ -440,7 +440,7 @@ fi
 
 # Uninstall StudioLink track templates from system domain
 if [ -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate ]; then
-	rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
+	sudo rm -f /Library/Application\ Support/REAPER/TrackTemplates/Insert\ StudioLink\ track.RTrackTemplate
 fi
 
 # Uninstall Ultraschall project templates from user domain
@@ -462,19 +462,19 @@ fi
 
 # Uninstall Ultraschall project templates from system domain
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP ]; then
-	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
+	sudo rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP
 fi
 
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak ]; then
-	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak
+	sudo rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall.RPP-bak
 fi
 
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP ]; then
-	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP
+	sudo rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP
 fi
 
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak ]; then
-	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
+	sudo rm -f /Library/Application\ Support/REAPER/ProjectTemplates/Ultraschall\ Ducking.RPP-bak
 fi
 
 # Uninstall StudioLink project templates from user domain
@@ -484,7 +484,7 @@ fi
 
 # Uninstall StudioLink project templates from system domain
 if [ -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP ]; then
-	rm -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
+	sudo rm -f /Library/Application\ Support/REAPER/ProjectTemplates/StudioLink.RPP
 fi
 
 # Uninstall Ultraschall Add-ons from user domain
