@@ -13,7 +13,11 @@
 ## 2.2.1 Gropius - 2016-June-05
 
 * Installer: **Bugfix**
-*Fixed a bug that prevented the Uninstall script to delete legacy files from the system.*
+*Fixed a bug that prevented the Uninstall script to delete legacy files from the system. Thanks to vananderen for reporting this bug.*
+
+* Installer: **Bugfix**
+*Fixed another a bug that prevented the Uninstall script to delete legacy files from the system. Thanks to Wolfgang Schulz for reporting this bug.*
+
 
 ## 2.2 Gropius - 2016-June-05
 
