@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.2
+export ULTRASCHALL_RELEASE=Ultraschall-2.2.1
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -93,11 +93,11 @@ pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extr
 pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-ins/Components ./Build/StudioLink.pkg
 
 # Create SWS REAPER Plugin Extension package
-chmod 766 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
+chmod 755 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
 pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.3.pkg
 
 # Create SWS REAPER Plugin Scripts package
-chmod 766 ./3rdParty/SWS/Macintosh/Scripts/Scripts/preinstall
+chmod 755 ./3rdParty/SWS/Macintosh/Scripts/Scripts/preinstall
 pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.3.pkg
 
 # Create Ultraschall Resources package
