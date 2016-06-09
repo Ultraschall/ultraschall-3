@@ -1,5 +1,5 @@
 #!/bin/sh
 
-if [ -f /Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib ]; then
-	rm -f /Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib
+if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib ]; then
+	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib
 fi
