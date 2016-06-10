@@ -64,7 +64,7 @@ Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich n
 
 * Das Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
 
-Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich bei [@ultraschall_fm](https://twitter.com/ultraschall_fm) oder im [Sendegate](https://sendegate.de/users/rstockm/activity).
+Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich bei @[ultraschall_fm](https://twitter.com/ultraschall_fm) oder im [Sendegate](https://sendegate.de/users/rstockm/activity).
 
 
 ### Bedienung
@@ -83,34 +83,34 @@ Hier könnt ihr Flattr-Liebe loswerden:
 
 ### Credits:
 
-Das grandiose Logodesign und das Farbset stammen von [@graphorama](https://twitter.com/graphorama). Weiterer Dank geht an die Betatester:
+Das grandiose Logodesign und das Farbset stammen von @[graphorama](https://twitter.com/graphorama). Weiterer Dank geht an die Betatester:
 
-- [@cyberage](https://twitter.com/cyberage)
-- [@dafisch](https://twitter.com/dafisch)
-- [@fbrem](https://twitter.com/fbrem)
-- [@flowfx](https://twitter.com/flowfx)
-- [@herrvonspeck](https://twitter.com/herrvonspeck)
-- [@hoersuppe](https://twitter.com/hoersuppe)
-- [@klein_p](https://twitter.com/klein_p)
-- [@macsnider](https://twitter.com/macsnider)
-- [@nitramred](https://twitter.com/nitramred)
-- [@nsonic](https://twitter.com/nsonic)
-- [@timpritlove](https://twitter.com/timpritlove)
-- [@opendev](https://twitter.com/opendev)
-- [@ronbuehler](https://twitter.com/ronbuehler)
-- [@audioponies](https://twitter.com/audioponies)
-- [@pixelpille](https://twitter.com/pixelpille)
-- [@anbru](https://twitter.com/anbru)
-- [@mrtoto](https://twitter.com/mrtoto)
-- [@matthiasfromm](https://twitter.com/matthiasfromm)
-- [@343max](https://twitter.com/343max)
-- [@elicee](https://twitter.com/elicee)
-- [@pkurschildgen](https://twitter.com/pkurschildgen)
-- [@hermes](https://twitter.com/hermes)
-- [@ikari](https://twitter.com/ikari)
-- [@fernsehmuell](https://twitter.com/fernsehmuell)
-- [@vollraute](https://twitter.com/vollraute)
-- [@david_1701](https://twitter.com/david_1701)
-- [@michaelblum](https://twitter.com/michaelblum)
-- [@kleinesp](https://twitter.com/kleinesp)
-- [@KonSciencePod](https://twitter.com/KonSciencePod)
+- @[343max](https://twitter.com/343max)
+- @[anbru](https://twitter.com/anbru)
+- @[audioponies](https://twitter.com/audioponies)
+- @[cyberage](https://twitter.com/cyberage)
+- @[dafisch](https://twitter.com/dafisch)
+- @[david_1701](https://twitter.com/david_1701)
+- @[elicee](https://twitter.com/elicee)
+- @[fbrem](https://twitter.com/fbrem)
+- @[fernsehmuell](https://twitter.com/fernsehmuell)
+- @[flowfx](https://twitter.com/flowfx)
+- @[hermes](https://twitter.com/hermes)
+- @[herrvonspeck](https://twitter.com/herrvonspeck)
+- @[hoersuppe](https://twitter.com/hoersuppe)
+- @[ikari](https://twitter.com/ikari)
+- @[klein_p](https://twitter.com/klein_p)
+- @[kleinesp](https://twitter.com/kleinesp)
+- @[KonSciencePod](https://twitter.com/KonSciencePod)
+- @[macsnider](https://twitter.com/macsnider)
+- @[matthiasfromm](https://twitter.com/matthiasfromm)
+- @[michaelblum](https://twitter.com/michaelblum)
+- @[mrtoto](https://twitter.com/mrtoto)
+- @[nitramred](https://twitter.com/nitramred)
+- @[nsonic](https://twitter.com/nsonic)
+- @[opendev](https://twitter.com/opendev)
+- @[pixelpille](https://twitter.com/pixelpille)
+- @[pkurschildgen](https://twitter.com/pkurschildgen)
+- @[ronbuehler](https://twitter.com/ronbuehler)
+- @[timpritlove](https://twitter.com/timpritlove)
+- @[vollraute](https://twitter.com/vollraute)
