@@ -266,7 +266,7 @@
 *mit diesem Eintrag im Podcast-Menü werden die Recording-Buttons aller Spuren ausgeschaltet und der Mute-Automationsmode auf Trim/Read geschaltet. Sollte nach jeder Aufnahme einmal aktiviert werden.*
 
 * Theme: **mit einem Rechtsklick auf dem Spurbereich können verschiedene geschmackvoll ausgewählte Preset-Farben ausgewählt werden**
-*kreiert von niemand Geringerem als @graphorama!*
+*kreiert von niemand Geringerem als @[graphorama](https://twitter.com/graphorama)!*
 
 * Theme: **Legt man Spuren mit den Namen "Einspieler" oder "SKYPE" an so werden diese automagisch mit geschmackvollen Farben versehen.**
 
