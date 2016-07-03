@@ -24,7 +24,6 @@
 ################################################################################
 ]]
 
-
 --[[reaper.GetPlayState()
 
 0=stop,
@@ -34,11 +33,12 @@
 6=record paused
 ]]
 
-state = reaper.GetPlayState()
+function main()
+	state = reaper.GetPlayState()
 
 -- reaper.ShowConsoleMsg(state)
 
-if state == 5 then -- is recording
+	if state == 5 then -- is recording
 
 	--[[type:
 	0=OK,
@@ -48,11 +48,11 @@ if state == 5 then -- is recording
  	4=YESNO,
  	5=RETRYCANCEL]]
 
-	type = 1
-	title = "Stop Recording?"
-	msg = "Stop the currently running recording. No more audio will be recorded to disk."
+		type = 1
+		title = "Stop Recording?"
+		msg = "Stop the currently running recording. No more audio will be recorded to disk."
  
-	result = reaper.ShowMessageBox( msg, title, type )
+		result = reaper.ShowMessageBox( msg, title, type )
 
 	--[[result:
 	1=OK,
@@ -64,14 +64,15 @@ if state == 5 then -- is recording
  	7=NO
 	]]
 
-	if result == 1 then -- it's ok to stop the recording
+		if result == 1 then -- it's ok to stop the recording
+			reaper.OnPauseButton()
+		end
+
+	elseif state == 1 then -- playing
 		reaper.OnPauseButton()
+
+	else -- pause or stop
+		reaper.OnPlayButton()
 	end
-
-elseif state == 1 then -- playing
-	reaper.OnPauseButton()
-
-else -- pause or stop
-	reaper.OnPlayButton()
-
 end
+reaper.defer(main)
