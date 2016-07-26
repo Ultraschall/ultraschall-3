@@ -32,7 +32,7 @@
         </Condition>
 
         <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
-        <Property Id="DiskPrompt" Value="Ultraschall 2.2.2 Installation [1]" />
+        <Property Id="DiskPrompt" Value="Ultraschall 2.2.2 PRE-RELEASE 1 Installation [1]" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFiles64Folder" Name="Program Files">
