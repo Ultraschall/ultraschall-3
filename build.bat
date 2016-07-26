@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2.2-PRE-RELEASE-1
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -62,8 +62,8 @@ pushd ..\Soundboard\
 call Build\build_win.cmd
 popd
 
-md Payload\Soundboard > nul
-copy ..\Soundboard\Projects\Installer\bin\Release\Soundboard.msm Payload\Soundboard
+rem md Payload\Soundboard > nul
+rem copy ..\Soundboard\Projects\Installer\bin\Release\Soundboard.msm Payload\Soundboard
 
 candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
 light -nologo -ext WixUIExtension -cultures:en-us -loc Scripts\distribution_en-us.wxl -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
