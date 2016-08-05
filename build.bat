@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2.2-PRE-RELEASE-1
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2.2-PRE-RELEASE-2
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -59,7 +59,7 @@ copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track7.lua Payload\Plugi
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track8.lua Payload\Plugin
 
 pushd ..\Soundboard\ 
-call Build\build_win.cmd
+call Build\build_win_plugin64.cmd
 popd
 
 rem md Payload\Soundboard > nul
