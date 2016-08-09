@@ -39,8 +39,6 @@
 		424DB5821C8507FB00656ED2 /* UnsupportedPlatformException.h in Headers */ = {isa = PBXBuildFile; fileRef = 424DB57E1C8507FB00656ED2 /* UnsupportedPlatformException.h */; };
 		424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */; };
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
-		424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CBB1BF389E0004DBA2F /* About.cpp */; };
-		424F7CBE1BF389E0004DBA2F /* About.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CBC1BF389E0004DBA2F /* About.h */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C98E1BF2911200B1EF1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4254C98D1BF2911200B1EF1F /* libz.tbd */; };
@@ -163,8 +161,6 @@
 		424DB57E1C8507FB00656ED2 /* UnsupportedPlatformException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnsupportedPlatformException.h; path = reaper/UnsupportedPlatformException.h; sourceTree = "<group>"; };
 		424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SoundboardVersionCheck.cpp; path = reaper/SoundboardVersionCheck.cpp; sourceTree = "<group>"; };
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
-		424F7CBB1BF389E0004DBA2F /* About.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = About.cpp; path = reaper/About.cpp; sourceTree = "<group>"; };
-		424F7CBC1BF389E0004DBA2F /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = About.h; path = reaper/About.h; sourceTree = "<group>"; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98D1BF2911200B1EF1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -393,8 +389,6 @@
 				4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */,
 				424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */,
 				424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */,
-				424F7CBB1BF389E0004DBA2F /* About.cpp */,
-				424F7CBC1BF389E0004DBA2F /* About.h */,
 				4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */,
 				4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */,
 				4284E9FA1BF4C4660056345A /* PatchConfiguration.cpp */,
@@ -447,7 +441,6 @@
 				424C82FE1AC8085D00231F3D /* SharedObjectFactory.h in Headers */,
 				42A335EE1ACEF9BF00231F3D /* ReplaceChaptersAction.h in Headers */,
 				4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */,
-				424F7CBE1BF389E0004DBA2F /* About.h in Headers */,
 				425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */,
 				4254C9961BF2BA6400B1EF1F /* HubVersionCheck.h in Headers */,
 				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
@@ -574,7 +567,6 @@
 				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,
 				A9BEA4FC1C8E24C7003F2B84 /* parameters.cpp in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
-				424F7CBD1BF389E0004DBA2F /* About.cpp in Sources */,
 				A9BEA4FD1C8E24C7003F2B84 /* payload.cpp in Sources */,
 				4269F9591B221C0E00231F3D /* StringUtilities.cpp in Sources */,
 				4242E97A1BAC99D700382B79 /* TranscriptItem.cpp in Sources */,

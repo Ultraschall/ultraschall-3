@@ -35,6 +35,9 @@
 
 namespace ultraschall { namespace framework {
    
+#define _MAKE_TEXT(str) #str
+#define MAKE_TEXT(str) _MAKE_TEXT(str)
+
 inline const std::vector<std::string> split(const std::string& input, const char delimiter)
 {
    std::vector<std::string> tokens;
