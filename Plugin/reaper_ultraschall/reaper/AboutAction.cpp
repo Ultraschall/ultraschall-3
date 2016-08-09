@@ -44,7 +44,6 @@
 #include "SWSVersionCheck.h"
 #include "AboutAction.h"
 #include "NotificationWindow.h"
-#include "About.h"
 #include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
@@ -58,8 +57,6 @@ const char* AboutAction::UniqueId()
 
 const ServiceStatus AboutAction::Execute()
 {
-#if 1
-
    const std::string pluginVersion = QueryPluginVersion();
   
    std::string message1 = "\
@@ -100,12 +97,9 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 2.2.2 PRE-RELEASE-2 \"Gropius\"...", message1 + message2);
-#else
-   ShowAbout();
-#endif
+   NotificationWindow::Show("About Ultraschall 2.2.2 PRE-RELEASE-3 \"Gropius\"...", message1 + message2);
+
    return SERVICE_SUCCESS;
 }
-
 
 }}

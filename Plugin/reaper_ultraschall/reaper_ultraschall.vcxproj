@@ -173,7 +173,6 @@
     <ClCompile Include="framework\TextFileReader.cpp" />
     <ClCompile Include="framework\TextFileWriter.cpp" />
     <ClCompile Include="framework\TranscriptItem.cpp" />
-    <ClCompile Include="reaper\About.cpp" />
     <ClCompile Include="reaper\AboutAction.cpp" />
     <ClCompile Include="reaper\Application.cpp" />
     <ClCompile Include="reaper\Configuration.cpp" />
@@ -227,7 +226,6 @@
     <ClInclude Include="framework\TextFileReader.h" />
     <ClInclude Include="framework\TextFileWriter.h" />
     <ClInclude Include="framework\TranscriptItem.h" />
-    <ClInclude Include="reaper\About.h" />
     <ClInclude Include="reaper\AboutAction.h" />
     <ClInclude Include="reaper\Application.h" />
     <ClInclude Include="reaper\Configuration.h" />
