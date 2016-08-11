@@ -29,7 +29,7 @@
 ## 2.2.2 Gropius - 2016-August-19
 
 * Soundboard: **Bugfix**
-*Bugfix: Das Soundboard spielt jetzt weiter ab, wenn eine Aufnahme beendet oder unterbrochen wurde.*
+*Bugfix: Das Soundboard spielt jetzt eine aufgenommene Spur korrekt ab.*
 
 ## 2.2.1 Gropius - 2016-June-09
 
