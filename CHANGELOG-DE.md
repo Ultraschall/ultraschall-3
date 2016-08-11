@@ -28,8 +28,11 @@
 
 ## 2.2.2 Gropius - 2016-August-19
 
-* Soundboard: **Bugfix**
-*Bugfix: Das Soundboard spielt jetzt eine aufgenommene Spur korrekt ab.*
+* Soundboard [Mac]: **Bugfix**
+*Bugfix: Aufgenommene Soundbooard-Spuren werdem jetzt abgespielt.*
+
+* Misc [Windows]:
+*Updates für Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
 
 ## 2.2.1 Gropius - 2016-June-09
 

@@ -12,8 +12,11 @@
 
 ## 2.2.2 Gropius - 2016-August-19
 
-* Soundboard: **Bugfix**
+* Soundboard [Mac]: **Bugfix**
 *Fixed a bug that prevented a recorded soundboard-track from playing.*
+
+* Misc [Windows]:
+*Updates for Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
 
 ## 2.2.1 Gropius - 2016-June-09
 
