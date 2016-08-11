@@ -13,7 +13,7 @@
 ## 2.2.2 Gropius - 2016-August-19
 
 * Soundboard: **Bugfix**
-*Fixed a bug that prevented the soundboard from playing while a recording is stopped or paused.*
+*Fixed a bug that prevented a recordet soundboard track from playing.*
 
 ## 2.2.1 Gropius - 2016-June-09
 
