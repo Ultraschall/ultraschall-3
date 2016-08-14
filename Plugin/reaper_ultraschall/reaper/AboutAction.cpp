@@ -97,7 +97,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 2.2.2 PRE-RELEASE-4 \"Gropius\"...", message1 + message2);
+   NotificationWindow::Show("About Ultraschall 2.2.2 \"Gropius\"...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }
