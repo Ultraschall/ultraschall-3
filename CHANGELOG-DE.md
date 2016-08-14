@@ -31,8 +31,11 @@
 * Soundboard [Mac]: **Bugfix**
 *Bugfix: Aufgenommene Soundbooard-Spuren werdem jetzt abgespielt.*
 
-* Misc [Windows]:
+* Misc [Windows]: **Kompatibilität**
 *Updates für Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall enthält jetzt die neue StudioLink-Version 16.04.1.*
 
 ## 2.2.1 Gropius - 2016-June-09
 

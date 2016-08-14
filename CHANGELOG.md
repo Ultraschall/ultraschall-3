@@ -15,8 +15,11 @@
 * Soundboard [Mac]: **Bugfix**
 *Fixed a bug that prevented a recorded soundboard-track from playing.*
 
-* Misc [Windows]:
+* Misc [Windows]: **Compatability**
 *Updates for Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall now includes the updated StudioLink version 16.04.1.*
 
 ## 2.2.1 Gropius - 2016-June-09
 
@@ -41,10 +44,10 @@
 *The script "Prepare all tracks for editing" for completing a recording session has been improved and more parameters have been added*
 
 * Actions: **New menu item "Customize"**
-*Ultraschall 2.2 introduces the "Customize" menu item. You can use 'Shortcuts and action list' to change keyboard shortcuts and add new scripts to Ultraschall. Use 'Track: set track icon' and 'Show theme configuration window' to change the icons, colors and names of each track.
+*Ultraschall 2.2 introduces the "Customize" menu item. You can use 'Shortcuts and action list' to change keyboard shortcuts and add new scripts to Ultraschall. Use 'Track: set track icon' and 'Show theme configuration window' to change the icons, colors and names of each track.*
 
 * StudioLink: **Full integration of the StudioLink plugin**
-*Ultraschall now supports the StudioLink plugin. With StudioLink you can record remote calls on up to 8 individual tracks without the need to setup the notorious 'N-1 Schalte'. Remote attendees are not required to use REAPER. They can download the StudioLink Standalone-App (see https://doku.studio-link.de/standalone/installation-standalone.html). 
+*Ultraschall now supports the StudioLink plugin. With StudioLink you can record remote calls on up to 8 individual tracks without the need to setup the notorious 'N-1 Schalte'. Remote attendees are not required to use REAPER. They can download the StudioLink Standalone-App (see https://doku.studio-link.de/standalone/installation-standalone.html).*
 
 * Soundboard: **Soundboard for Windows**
 *The Ultraschall Soundboard now runs on Windows as a VST.*
