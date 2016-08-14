@@ -41,7 +41,7 @@ namespace ultraschall {
       const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
       return FileManager::ReadVersionFromFile(path);
 #else
-      return "2.2.1";
+      return "2.2.2";
 #endif // #ifdef WIN32
     }
   }

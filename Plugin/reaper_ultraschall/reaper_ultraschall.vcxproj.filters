@@ -57,9 +57,6 @@
     <ClCompile Include="framework\TranscriptItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\About.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\AboutAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -213,9 +210,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework\TranscriptItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\About.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\AboutAction.h">

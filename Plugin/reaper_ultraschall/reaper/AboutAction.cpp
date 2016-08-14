@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,6 @@
 #include "SWSVersionCheck.h"
 #include "AboutAction.h"
 #include "NotificationWindow.h"
-#include "About.h"
 #include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
@@ -58,13 +57,11 @@ const char* AboutAction::UniqueId()
 
 const ServiceStatus AboutAction::Execute()
 {
-#if 1
-
    const std::string pluginVersion = QueryPluginVersion();
   
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Tim Pritlove, Heiko Panjas\r\n\r\n\
+Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Mich\u00E9l Knecht, Tim Pritlove, Heiko Panjas\r\n\r\n\
 Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
@@ -100,12 +97,9 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 2.2.1 \"Gropius\"...", message1 + message2);
-#else
-   ShowAbout();
-#endif
+   NotificationWindow::Show("About Ultraschall 2.2.2 \"Gropius\"...", message1 + message2);
+
    return SERVICE_SUCCESS;
 }
-
 
 }}

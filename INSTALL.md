@@ -32,7 +32,7 @@ Continue with the clean install instructions at step 3.
 
 5. **Launch Reaper and drag** our `Ultraschall_2.2.ReaperConfigZip` into Reaper's main window. The individual images and config files will be automagically written to the correct locations by Reaper. **WARNING:** If you have adjusted settings before, we recommend to export them via the `REAPER | Preferences… | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
 
-6. **Optional:** In case you want to use our hand-crafted color scheme by [@graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
+6. **Optional:** In case you want to use our hand-crafted color scheme by [graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
 
 7. **Optional:** You may change the Reaper start splash animation with a Ultraschall logo: copy `Ultraschall Reaper Splash Screen.png` from the `Add-ons` folder in our `.dmg` anywhere on your Filesystem. Point to this image via `REAPER | Preferences… | General | Advanced UI/System tweaks… |` and `Custom splash screen image:`.
 

@@ -458,3 +458,5 @@ _Pvt_Extensions
 
 reaper_ultraschall.VC.db
 .vscode
+
+Plugin/reaper_ultraschall/reaper/About.h
