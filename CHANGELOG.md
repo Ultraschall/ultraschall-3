@@ -15,7 +15,7 @@
 * Soundboard [Mac]: **Bugfix**
 *Fixed a bug that prevented a recorded soundboard-track from playing.*
 
-* Misc [Windows]: **Compatability**
+* Misc [Windows]: **Compatibility**
 *Updates for Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
 
 * StudioLink: **Update**
