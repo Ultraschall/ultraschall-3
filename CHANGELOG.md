@@ -10,7 +10,7 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
 * **Misc:** Anything that is left.
 
-## 2.2.2 Gropius - 2016-August-19
+## 2.2.2 Gropius - 2016-August-14
 
 * Soundboard [Mac]: **Bugfix**
 *Fixed a bug that prevented a recorded soundboard-track from playing.*
