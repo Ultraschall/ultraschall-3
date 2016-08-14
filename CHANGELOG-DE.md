@@ -26,7 +26,7 @@
 
 #### Last Changelog:
 
-## 2.2.2 Gropius - 2016-August-19
+## 2.2.2 Gropius - 2016-August-14
 
 * Soundboard [Mac]: **Bugfix**
 *Bugfix: Aufgenommene Soundbooard-Spuren werdem jetzt abgespielt.*
