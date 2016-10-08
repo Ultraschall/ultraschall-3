@@ -30,6 +30,7 @@
 #include <ResourceManager.h>
 
 #include "ICustomAction.h"
+#include "CustomActionFactory.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -41,19 +42,21 @@ public:
    }
 };
    
-template<class CustomActionType> class DeclareCustomAction
+template<class C> class DeclareCustomAction
 {
 public:
+   typedef typename C custom_action_type; 
+
    DeclareCustomAction()
    {
       CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.RegisterCustomAction(CustomActionType::UniqueId(), CustomActionType::CreateCustomAction);
+      factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
    }
    
    virtual ~DeclareCustomAction()
    {
       CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.UnregisterCustomAction(CustomActionType::UniqueId());
+      factory.UnregisterCustomAction(custom_action_type::UniqueId());
    }
 };
    

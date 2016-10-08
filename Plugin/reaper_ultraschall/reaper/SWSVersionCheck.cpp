@@ -31,7 +31,7 @@
 namespace ultraschall {
     namespace reaper {
 
-        const bool SWSVersionCheck()
+bool SWSVersionCheck()
         {
             bool result = false;
 
@@ -39,8 +39,7 @@ namespace ultraschall {
             const std::string swsPlugin2_8UserPath = FileManager::UserApplicationSupportDirectory() +
                 "/REAPER/UserPlugins/reaper_sws_extension.dylib";
 #else
-            const std::string swsPlugin2_8UserPath = FileManager::ProgramFilesDirectory() + 
-                "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
+   const std::string swsPlugin2_8UserPath = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
 #endif // #ifndef WIN32 
 
             if(FileManager::FileExists(swsPlugin2_8UserPath) == true)

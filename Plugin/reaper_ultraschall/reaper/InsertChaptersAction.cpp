@@ -38,12 +38,66 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<InsertChaptersAction> action;
 
+InsertChaptersAction::InsertChaptersAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Import chapter markers...");
+      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken importieren...");
+   }
+
+   status = resourceManager.RegisterLocalizedString(successMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been added successfully.");
+      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich hinzugefügt.");
+   }
+
+   status = resourceManager.RegisterLocalizedString(failureMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be added.");
+      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht hinzugefügt werden.");
+   }
+
+   status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Import chapter markers...");
+      resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken importieren...");
+   }
+}
+
+InsertChaptersAction::~InsertChaptersAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   resourceManager.UnregisterLocalizedString(actionNameId_);
+   resourceManager.UnregisterLocalizedString(successMessageId_);
+   resourceManager.UnregisterLocalizedString(failureMessageId_);
+   resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
+}
+
 const char* InsertChaptersAction::UniqueId()
 {
    return "ULTRASCHALL_INSERT_CHAPTERS";
 }
 
-const ServiceStatus InsertChaptersAction::Execute()
+ServiceStatus InsertChaptersAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new InsertChaptersAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* InsertChaptersAction::LocalizedName() const
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   return resourceManager.GetLocalizedString(actionNameId_);
+}
+
+ServiceStatus InsertChaptersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    

@@ -38,89 +38,19 @@ class SaveChaptersAction : public CustomAction
 public:
    static const char* UniqueId();
 
-   static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
-   {
-      pCustomAction = new SaveChaptersAction();
-      PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-      return SERVICE_SUCCESS;
-   }
+   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
 
-   virtual const char* LocalizedName() const override
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      return resourceManager.GetLocalizedString(actionNameId_);
-   }
+   virtual const char* LocalizedName() const override;
    
-   virtual const ServiceStatus Execute() override;
+   virtual ServiceStatus Execute() override;
 
 protected:
-   virtual ~SaveChaptersAction()
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      resourceManager.UnregisterLocalizedString(actionNameId_);
-      resourceManager.UnregisterLocalizedString(successMessageId_);
-      resourceManager.UnregisterLocalizedString(failureMessageId_);
-      resourceManager.UnregisterLocalizedString(notFoundMessageId_);
-      resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
-      resourceManager.UnregisterLocalizedString(noProjectNameMessageId_);
-      resourceManager.UnregisterLocalizedString(saveOperationCanceledId_);
-   }
+   virtual ~SaveChaptersAction();
 
-   static const std::string Path();
+   static std::string Path();
 
 private:
-   SaveChaptersAction()
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Export chapter markers...");
-         resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken exportieren...");
-      }
-      
-      status = resourceManager.RegisterLocalizedString(successMessageId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been saved successfully.");
-         resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich gespeichert.");
-      }
-      
-      status = resourceManager.RegisterLocalizedString(failureMessageId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be saved.");
-         resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht gespeichert werden.");
-      }
-      
-      status = resourceManager.RegisterLocalizedString(notFoundMessageId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(notFoundMessageId_, "en-EN", "No chapter markers have been found.");
-         resourceManager.SetLocalizedString(notFoundMessageId_, "de-DE", "Es wurden keine Kapitelmarken gefunden.");
-      }
-      
-      status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Export chapter markers...");
-         resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken exportieren...");
-      }
-
-      status = resourceManager.RegisterLocalizedString(noProjectNameMessageId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(noProjectNameMessageId_, "en-EN", "The project has no name yet. Please save the project and try again.");
-         resourceManager.SetLocalizedString(noProjectNameMessageId_, "de-DE", "Das Projekt hat noch keinen Namen und muss zuerst gespeichert werden");
-      }
-
-      status = resourceManager.RegisterLocalizedString(saveOperationCanceledId_);
-      if(ServiceSucceeded(status))
-      {
-          resourceManager.SetLocalizedString(saveOperationCanceledId_, "en-EN", "The save operation has been canceled.");
-          resourceManager.SetLocalizedString(saveOperationCanceledId_, "de-DE", "Der Speichervorgang wurde abgebrochen.");
-      }
-   }
+   SaveChaptersAction();
    
    framework::ResourceId actionNameId_;
    framework::ResourceId successMessageId_;

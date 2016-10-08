@@ -60,8 +60,10 @@ void ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const 
    }
 }
    
-ReaperEntryPoints::ReaperEntryPoints(reaper_plugin_info_t* ppi)
+ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* ppi)
 {
+   instance_ = instance;
+
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetMainHwnd, "GetMainHwnd");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::plugin_register, "plugin_register");
 
@@ -80,9 +82,11 @@ ReaperEntryPoints::ReaperEntryPoints(reaper_plugin_info_t* ppi)
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
 }
 
-void ReaperEntryPoints::Setup(reaper_plugin_info_t* pPluginInfo)
+REAPER_PLUGIN_HINSTANCE ReaperEntryPoints::instance_ = 0;
+
+void ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
-   static ReaperEntryPoints entryPoints(pPluginInfo);
+   static ReaperEntryPoints entryPoints(instance, pPluginInfo);
 }
 
 }}

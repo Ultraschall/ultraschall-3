@@ -26,12 +26,12 @@
 #define __ULTRASCHALL_FRAMEWORK_ISERVICE_H_INCL__
 
 #include <Framework.h>
-#include <SharedObject.h>
+#include <IUnknown.h>
 #include <ServiceStatus.h>
 
 namespace ultraschall { namespace framework {
 
-class IService : public SharedObject
+class IService : public IUnknown
 {
 protected:
    virtual ~IService()

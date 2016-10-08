@@ -99,7 +99,7 @@ const char* ResourceManager::GetLocalizedString(const ResourceId& id) const
    return result;
 }
 
-const ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& id)
+ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& id)
 {
    ServiceStatus status = SERVICE_FAILURE;
    
@@ -117,7 +117,7 @@ const ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& i
    return status;
 }
    
-const ServiceStatus ResourceManager::SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str)
+ServiceStatus ResourceManager::SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str)
 {
    ServiceStatus status = SERVICE_FAILURE;
    

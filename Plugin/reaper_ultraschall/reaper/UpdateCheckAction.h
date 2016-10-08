@@ -29,14 +29,15 @@
 #include <ResourceManager.h>
 #include "CustomAction.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+namespace reaper {
   
   class UpdateCheckAction : public CustomAction 
   {
   public:
     static const char* UniqueId();
     
-    static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
+	static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
     {
       pCustomAction = new UpdateCheckAction();
       PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
@@ -49,7 +50,7 @@ namespace ultraschall { namespace reaper {
       return resourceManager.GetLocalizedString(actionNameId_);
     }
     
-    virtual const ServiceStatus Execute() override;
+	virtual ServiceStatus Execute() override;
     
   protected:
     virtual ~UpdateCheckAction()
@@ -59,6 +60,9 @@ namespace ultraschall { namespace reaper {
     }
     
   private:
+	static const size_t MAX_VERSION_LENGTH = 4;
+	static const char* UPDATE_FILE_URL;
+
     UpdateCheckAction()
     {
       framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
@@ -69,11 +73,21 @@ namespace ultraschall { namespace reaper {
       }
     }
         
-    framework::ResourceId actionNameId_;
+	static std::string QueryUpdatedVersion();
 
-    static bool IsUpdatedVersion(const std::string& updatedVersionString);
+	static std::vector<int> NormalizeVersionString(const std::string& version);
+
+	static int CompareVersions(const std::string& lhs, const std::string& rhs);
+
+	static std::string DownloadVersionFile();
+	static void DownloadVersionFileCallback();
+
+	static std::string ParseVersionFile(const std::string& versionFile);
+
+    framework::ResourceId actionNameId_;
   };
   
-}}
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__

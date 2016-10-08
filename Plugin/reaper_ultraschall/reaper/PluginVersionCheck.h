@@ -27,7 +27,7 @@
 
 namespace ultraschall { namespace reaper {
   
-  const std::string QueryPluginVersion();
+std::string QueryPluginVersion();
   
 }}
 

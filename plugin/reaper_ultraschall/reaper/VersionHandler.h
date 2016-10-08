@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,25 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__
-#define __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__
+#define __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__
 
-namespace ultraschall { namespace reaper {
-   
-void ShowAbout();
-   
-}}
+#include <string>
 
-#endif // __ULTRASCHALL_REAPER_ABOUT_CHECK_H_INCL__
+namespace ultraschall {
+namespace reaper {
+
+class VersionHandler
+{
+public:
+#ifndef WIN32
+	static std::string HubVersion();
+#endif // #ifndef WIN32
+
+	static std::string PluginVersion();
+};
+
+}
+}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__

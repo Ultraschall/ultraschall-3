@@ -14,7 +14,7 @@ Je nachdem, ob man bereits eine vorherige Version von Ultraschall im Einsatz hat
 
 ### Mac OS X 10.11 (Update)
 
-1. **REAPER aktualisieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 54€ Kosten an. Man kann REAPER 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
+1. **REAPER aktualisieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist uneingeschränkt 60 Tage lauffähig, danach fallen einmalig 65 € Kosten an. Man kann REAPER 5 problemlos über die 4er Version installieren, alle eigenen Presets bleiben erhalten.
 
 2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us22) laden und das `.dmg` starten
 
@@ -25,7 +25,7 @@ Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 ### Mac OS X 10.11 (Neuinstallation)
 
 
-1. **REAPER installieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 54€ Kosten an.
+1. **REAPER installieren:** [REAPER v5.201 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
 2. **Ultraschall laden:** [unsere 2.2 Distribution](http://url.ultraschall-podcast.de/us22) laden und das `.dmg` starten
 
@@ -37,7 +37,7 @@ Der weitere Verlauf entsprich der Neuinstallation ab Schritt 3:
 
 6. **Startscreen anpassen:** Damit man beim Starten der Software direkt mit dem Ultraschall-Logo begrüßt wird, legt man die Bilddatei `Ultraschall Reaper Splash Screen.png` aus dem Ordner `Add-ons`an einen beliebigen Ort im Dateisystem ab. In REAPER startet man aus dem Menü `REAPER | Preferences… | General` und dann unten `Advanced UI/system tweaks…`. Dort aktualsiert man den Pfad unter `Custom splash screen image` zur Datei.
 
-7. **Nur bei Neuinstallation - Ultraschall-Farbset installieren:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt `Extensions` den Punkt `Auto Color/Icon` aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster `Show Color Management Window` aufrufen. Dort den Punkt `Load color set from file...` auswählen und die in dieser Distribution (Ordner `Add-ons`) mitgelieferte Datei `Ultraschall Colorset.SWSColor` laden. Nun stehen alle 11 von @graphorama handgeklöppelten Ultraschall-Farben zur Verfügung.
+7. **Nur bei Neuinstallation - Ultraschall-Farbset installieren:** Damit das neue Ultraschall-Farbset funktioniert, muss anschließend die Preset-Palette des MAC/PC überschrieben werden. **WARNUNG**: wenn bereits mit liebgewonnenen Farb-Presets arbeitet sollte man diesen Import überspringen und sich die Farbwerte lieber manuell einstellen. Der Import funktioniert so: Im Menüpunkt `Extensions` den Punkt `Auto Color/Icon` aufrufen. Hier kann auch die automagische Zuordnung von Farben und Spurnamen erweitert/angepasst werden. Mit einem Rechtsklick in diesem Fenster `Show Color Management Window` aufrufen. Dort den Punkt `Load color set from file...` auswählen und die in dieser Distribution (Ordner `Add-ons`) mitgelieferte Datei `Ultraschall Colorset.SWSColor` laden. Nun stehen alle 11 von @[graphorama](https://twitter.com/graphorama) handgeklöppelten Ultraschall-Farben zur Verfügung.
  
 8. **Loslegen:** REAPER starten und unter "Podcast"- `About Ultraschall` kontrollieren, dass alle Komponenten richtig installiert sind. 
 

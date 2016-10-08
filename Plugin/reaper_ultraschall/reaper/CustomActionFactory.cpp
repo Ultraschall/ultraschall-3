@@ -43,7 +43,7 @@ CustomActionFactory& CustomActionFactory::Instance()
    return self;
 }
 
-const ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
+ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
 {
    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
    PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
@@ -96,7 +96,7 @@ void CustomActionFactory::UnregisterAllCustomActions()
    }
 }
 
-const ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
+ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
 {
    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
 

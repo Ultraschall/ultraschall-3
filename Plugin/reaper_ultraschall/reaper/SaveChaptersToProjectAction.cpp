@@ -35,12 +35,74 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SaveChaptersToProjectAction> action;
 
+SaveChaptersToProjectAction::SaveChaptersToProjectAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Save chapter markers to project folder");
+      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken im Projektverzeichnis speichern");
+   }
+
+   status = resourceManager.RegisterLocalizedString(successMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been saved successfully.");
+      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich gespeichert.");
+   }
+
+   status = resourceManager.RegisterLocalizedString(failureMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be saved.");
+      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht gespeichert werden.");
+   }
+
+   status = resourceManager.RegisterLocalizedString(notFoundMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(notFoundMessageId_, "en-EN", "No chapter markers have been found.");
+      resourceManager.SetLocalizedString(notFoundMessageId_, "de-DE", "Es wurden keine Kapitelmarken gefunden.");
+   }
+
+   status = resourceManager.RegisterLocalizedString(noProjectNameMessageId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(noProjectNameMessageId_, "en-EN", "The project has no name yet. Please save the project and try again.");
+      resourceManager.SetLocalizedString(noProjectNameMessageId_, "de-DE", "Das Projekt hat noch keinen Namen und muss zuerst gespeichert werden");
+   }
+}
+
+SaveChaptersToProjectAction::~SaveChaptersToProjectAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   resourceManager.UnregisterLocalizedString(actionNameId_);
+   resourceManager.UnregisterLocalizedString(successMessageId_);
+   resourceManager.UnregisterLocalizedString(failureMessageId_);
+   resourceManager.UnregisterLocalizedString(notFoundMessageId_);
+   resourceManager.UnregisterLocalizedString(noProjectNameMessageId_);
+}
+
 const char* SaveChaptersToProjectAction::UniqueId()
 {
    return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
 }
 
-const ServiceStatus SaveChaptersToProjectAction::Execute()
+ServiceStatus SaveChaptersToProjectAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new SaveChaptersToProjectAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* SaveChaptersToProjectAction::LocalizedName() const
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   return resourceManager.GetLocalizedString(actionNameId_);
+}
+
+ServiceStatus SaveChaptersToProjectAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
@@ -77,7 +139,7 @@ const ServiceStatus SaveChaptersToProjectAction::Execute()
    return status;
 }
 
-const std::string SaveChaptersToProjectAction::Path()
+std::string SaveChaptersToProjectAction::Path()
 {
    std::string path;
 

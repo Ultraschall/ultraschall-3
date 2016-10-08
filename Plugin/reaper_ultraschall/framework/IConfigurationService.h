@@ -32,7 +32,7 @@ namespace ultraschall { namespace framework {
 class IConfigurationService : public IService
 {
 public:
-   virtual const ServiceStatus Configure() = 0;
+   virtual ServiceStatus Configure() = 0;
 };
    
 }}

@@ -36,26 +36,25 @@ namespace ultraschall {
         class FileManager
         {
         public:
-            static const std::string BrowseForFiles(const framework::ResourceId id);
-            static const std::string BrowseForFiles(const std::string& title);
+            static std::string BrowseForFiles(const framework::ResourceId id);
+            static std::string BrowseForFiles(const std::string& title);
 
-            static const std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
-            static const std::string BrowseForFolder(const std::string& title, const std::string& folder);
+            static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
+            static std::string BrowseForFolder(const std::string& title, const std::string& folder);
 
-            static const std::string AppendPath(const std::string& prefix, const std::string& append);
+            static std::string AppendPath(const std::string& prefix, const std::string& append);
 
-            static const std::string UserHomeDirectory();
-            static const std::string UserApplicationSupportDirectory();
-            static const std::string SystemApplicationSupportDirectory();
+            static std::string UserHomeDirectory();
+            static std::string UserApplicationSupportDirectory();
+            static std::string SystemApplicationSupportDirectory();
 
-            static const std::string ProgramFilesDirectory();
-            static const std::string RoamingAppDataDirectory();
+            static std::string ProgramFilesDirectory();
+            static std::string RoamingAppDataDirectory();
 
-            static const bool FileExists(const std::string& path);
-            static const std::vector<std::string> ReadFile(const std::string& filename);
+            static bool FileExists(const std::string& path);
+            static std::vector<std::string> ReadFile(const std::string& filename);
 
             static std::string ReadVersionFromFile(const std::string& path);
-        private:
         };
 
     }

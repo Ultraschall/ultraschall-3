@@ -39,12 +39,12 @@ class CustomActionFactory
 public:
    static CustomActionFactory& Instance();
 
-   typedef const ServiceStatus (*CREATE_CUSTOM_ACTION_FUNCTION)(ICustomAction*&);
-   const ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+   typedef ServiceStatus (*CREATE_CUSTOM_ACTION_FUNCTION)(ICustomAction*&);
+   ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
    void UnregisterCustomAction(const std::string& id);
    void UnregisterAllCustomActions();
 
-   const ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
+   ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
 
 protected:
    virtual ~CustomActionFactory();

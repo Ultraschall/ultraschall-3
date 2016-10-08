@@ -46,7 +46,7 @@ namespace ultraschall {
             return self;
         }
 
-        const ServiceStatus CustomActionManager::RegisterCustomAction(const std::string& name, int32_t id, ICustomAction* pCustomAction)
+        ServiceStatus CustomActionManager::RegisterCustomAction(const std::string& name, int32_t id, ICustomAction* pCustomAction)
         {
             PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
             PRECONDITION_RETURN(id != INVALID_CUSTOM_ACTION_ID, SERVICE_INVALID_ARGUMENT);
@@ -155,7 +155,7 @@ namespace ultraschall {
             }
         }
 
-        const ServiceStatus CustomActionManager::LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const
+        ServiceStatus CustomActionManager::LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const
         {
             PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
             PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);
@@ -188,7 +188,7 @@ namespace ultraschall {
             return status;
         }
 
-        const ServiceStatus CustomActionManager::LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const
+        ServiceStatus CustomActionManager::LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const
         {
             PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
             PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);

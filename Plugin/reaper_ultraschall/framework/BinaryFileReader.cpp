@@ -24,7 +24,6 @@
 
 #include <string>
 #include <fstream>
-#include <Stream.h>
 #include <BinaryFileReader.h>
 
 namespace ultraschall { namespace framework {

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,32 +32,31 @@
 
 #include "Application.h"
 #include "FileManager.h"
-#include "UnsupportedPlatformException.h"
 #include "ReaperEntryPoints.h"
 
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
 #import <AppKit/AppKit.h>
 #else
 #include <windows.h>
 #include <shlobj.h>
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
 namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
 
-const std::string FileManager::BrowseForFiles(const framework::ResourceId id)
+std::string FileManager::BrowseForFiles(const framework::ResourceId id)
 {
     framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
     const std::string message = resourceManager.GetLocalizedString(id);
     return BrowseForFiles(message);
 }
 
-const std::string FileManager::BrowseForFiles(const std::string& title)
+std::string FileManager::BrowseForFiles(const std::string& title)
 {
     std::string path;
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
     NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
     if(nil != fileDialog)
     {
@@ -88,7 +87,7 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if(SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+        pfod->SetTitle(framework::MakeUtf16String(title).c_str());
 
         COMDLG_FILTERSPEC filters[3] = {0};
         filters[0].pszName = L"MP4 chapters";
@@ -113,7 +112,7 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
                 hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
                 if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
                 {
-                    path = framework::MakeUTF8String(fileSystemPath);
+                    path = framework::MakeUtf8String(fileSystemPath);
                     CoTaskMemFree(fileSystemPath);
                 }
 
@@ -124,23 +123,23 @@ const std::string FileManager::BrowseForFiles(const std::string& title)
 
         framework::SafeRelease(pfod);
     }
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
     return path;
 }
 
-const std::string FileManager::BrowseForFolder(const framework::ResourceId id, const std::string& folder)
+std::string FileManager::BrowseForFolder(const framework::ResourceId id, const std::string& folder)
 {
     framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
     const std::string message = resourceManager.GetLocalizedString(id);
     return BrowseForFolder(message, folder);
 }
 
-const std::string FileManager::BrowseForFolder(const std::string& title, const std::string& folder)
+std::string FileManager::BrowseForFolder(const std::string& title, const std::string& folder)
 {
     std::string path;
 
-#ifndef WIN32   
+#ifdef ULTRASCHALL_PLATFORM_MACOS   
     NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
     if(nil != fileDialog)
     {
@@ -167,11 +166,11 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if(SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+        pfod->SetTitle(framework::MakeUtf16String(title).c_str());
         if(folder.empty() == false)
         {
             IShellItem* psi = nullptr;
-            hr = SHCreateItemFromParsingName(framework::MakeUTF16String(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
+            hr = SHCreateItemFromParsingName(framework::MakeUtf16String(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
             if(SUCCEEDED(hr))
             {
                 pfod->SetFolder(psi);
@@ -202,7 +201,7 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
                     hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
                     if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
                     {
-                        path = framework::MakeUTF8String(fileSystemPath);
+                        path = framework::MakeUtf8String(fileSystemPath);
                         CoTaskMemFree(fileSystemPath);
                     }
 
@@ -214,104 +213,98 @@ const std::string FileManager::BrowseForFolder(const std::string& title, const s
 
         framework::SafeRelease(pfod);
     }
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
     return path;
 }
 
-const std::string FileManager::AppendPath(const std::string& prefix, const std::string& append)
+std::string FileManager::AppendPath(const std::string& prefix, const std::string& append)
 {
-#ifndef WIN32 
+#ifdef ULTRASCHALL_PLATFORM_MACOS 
     return prefix + '/' + append;
 #else
     return prefix + '\\' + append;
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
 
-const std::string FileManager::UserHomeDirectory()
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+std::string FileManager::UserHomeDirectory()
 {
     std::string directory;
 
-#ifndef WIN32
     NSString* userHomeDirectory = NSHomeDirectory();
     directory = [userHomeDirectory UTF8String];
+    
     return directory;
-#else
-    throw UnsupportedPlatformException("Apple Macintosh");
-#endif // #ifndef WIN32
 }
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-const std::string FileManager::UserApplicationSupportDirectory()
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+std::string FileManager::UserApplicationSupportDirectory()
 {
     std::string directory;
 
-#ifndef WIN32
     NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
         inDomains : NSUserDomainMask] firstObject];
     directory = [applicationSupportDirectory fileSystemRepresentation];
+    
     return directory;
-#else
-    throw UnsupportedPlatformException("Apple Macintosh");
-#endif // #ifndef WIN32
 }
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-const std::string FileManager::SystemApplicationSupportDirectory()
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+std::string FileManager::SystemApplicationSupportDirectory()
 {
     std::string directory;
 
-#ifndef WIN32
     NSURL* applicationSupportDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
         inDomains : NSSystemDomainMask] firstObject];
     directory = [applicationSupportDirectory fileSystemRepresentation];
+    
     return directory;
-#else
-    throw UnsupportedPlatformException("Apple Macintosh");
-#endif // #ifndef WIN32
 }
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-const std::string FileManager::ProgramFilesDirectory()
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+std::string FileManager::ProgramFilesDirectory()
 {
     std::string directory;
 
-#ifdef WIN32
     PWSTR unicodeString = 0;
     HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, 0, &unicodeString);
     if(SUCCEEDED(hr))
     {
-        directory = framework::MakeUTF8String(unicodeString);
+        directory = framework::MakeUtf8String(unicodeString);
         CoTaskMemFree(unicodeString);
     }
-#else
-    throw UnsupportedPlatformException("Microsoft Windows");
-#endif // #ifndef WIN32
 
     return directory;
     }
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
-const std::string FileManager::RoamingAppDataDirectory()
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+std::string FileManager::RoamingAppDataDirectory()
 {
     std::string directory;
 
-#ifdef WIN32
     PWSTR unicodeString = 0;
     HRESULT hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, 0, &unicodeString);
     if(SUCCEEDED(hr))
     {
-        directory = framework::MakeUTF8String(unicodeString);
+        directory = framework::MakeUtf8String(unicodeString);
         CoTaskMemFree(unicodeString);
+		unicodeString = 0;
     }
-#else
-    throw UnsupportedPlatformException("Microsoft Windows");
-#endif // #ifndef WIN32
 
     return directory;
     }
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
-const bool FileManager::FileExists(const std::string& path)
+bool FileManager::FileExists(const std::string& path)
 {
     bool fileExists = false;
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
     NSFileManager* fileManager = [NSFileManager defaultManager];
     fileExists = [fileManager fileExistsAtPath : [NSString stringWithUTF8String : path.c_str()]] == YES;
 #else
@@ -321,12 +314,12 @@ const bool FileManager::FileExists(const std::string& path)
         fileExists = true;
         CloseHandle(fileHandle);
     }
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
     return fileExists;
 }
 
-const std::vector<std::string> FileManager::ReadFile(const std::string& filename)
+std::vector<std::string> FileManager::ReadFile(const std::string& filename)
 {
     std::vector<std::string> lines;
 
@@ -343,13 +336,13 @@ const std::vector<std::string> FileManager::ReadFile(const std::string& filename
     return lines;
 }
 
+#ifdef ULTRASCHALL_PLATFORM_WIN32
 std::string FileManager::ReadVersionFromFile(const std::string& path)
 {
     std::string version;
 
     if(path.empty() == false)
     {
-#ifdef WIN32
         DWORD fileVersionInfoHandle = 0;
         const DWORD fileVersionInfoSize = GetFileVersionInfoSize(path.c_str(), &fileVersionInfoHandle);
         if(fileVersionInfoSize > 0)
@@ -382,18 +375,11 @@ std::string FileManager::ReadVersionFromFile(const std::string& path)
                 framework::SafeDelete(fileVersionInfo);
             }
         }
-#else
-        throw UnsupportedPlatformException("Microsoft Windows");
-#endif
     }
-
-    //if(version.empty() == true)
-    //{
-    //    version = "<Unknown>";
-    //}
 
     return version;
 }
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 }}
 

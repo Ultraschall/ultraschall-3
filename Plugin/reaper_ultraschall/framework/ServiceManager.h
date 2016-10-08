@@ -38,11 +38,11 @@ class ServiceManager
 public:
    static ServiceManager& Instance();
 
-   const ServiceStatus RegisterService(const std::string& name);
+   ServiceStatus RegisterService(const std::string& name);
    void ReleaseService(const std::string& name);
    void ReleaseAllServices();
 
-   const ServiceStatus AcquireService(const std::string& name, IService*& pService) const;
+   ServiceStatus AcquireService(const std::string& name, IService*& pService) const;
 
 protected:
    virtual ~ServiceManager();

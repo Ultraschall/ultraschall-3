@@ -1,0 +1,19 @@
+version: Build {build}
+configuration: Release
+platform: x64
+before_build:
+- cmd: >-
+    git submodule update --init
+
+    call .\Plugin\reaper_ultraschall\Submodules\curl\projects\generate.bat vc14
+build:
+  project: .\Plugin\reaper_ultraschall\reaper_ultraschall.sln
+  parallel: true
+  verbosity: normal
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: true
+  

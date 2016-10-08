@@ -39,7 +39,7 @@ public:
         return speaker_;
     }
     
-    inline const double Position() const
+    inline double Position() const
     {
         return position_;
     }

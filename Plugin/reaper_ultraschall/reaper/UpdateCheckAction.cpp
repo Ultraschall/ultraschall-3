@@ -27,10 +27,9 @@
 #include <vector>
 #include <fstream>
 
-#include <cpr/cpr.h>
-
 #include <Framework.h>
 #include <StringUtilities.h>
+#include "VersionHandler.h"
 
 #ifndef WIN32
 #include <libxml/tree.h>
@@ -38,8 +37,27 @@
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 #else
-#endif // #ifdef WIN32
+#include <windows.h>
+#include "..\resource.h"
+BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+   UNREFERENCED_PARAMETER(lParam);
 
+   switch(message)
+   {
+   case WM_COMMAND:
+      switch(LOWORD(wParam))
+      {
+      case IDOK:
+         EndDialog(hwndDlg, wParam);
+         return TRUE;
+      }
+   }
+   return FALSE;
+}
+#endif // #ifndef WIN32
+
+#include "ReaperEntryPoints.h"
 #include "UpdateCheckAction.h"
 #include "PluginVersionCheck.h"
 #include "NotificationWindow.h"
@@ -49,14 +67,16 @@ namespace reaper {
 
 static DeclareCustomAction<UpdateCheckAction> action;
 
+const char* UpdateCheckAction::UPDATE_FILE_URL = "http://url.ultraschall-podcast.de/version";
+
 const char* UpdateCheckAction::UniqueId()
 {
 	return "ULTRASCHALL_UPDATE_CHECK";
 }
 
-const ServiceStatus UpdateCheckAction::Execute()
+ServiceStatus UpdateCheckAction::Execute()
 {
-#if 0
+#ifndef WIN32
 	auto future_text = cpr::GetCallback([](cpr::Response r)
 	{
 		if(!r.error && r.status_code == 200)
@@ -122,56 +142,99 @@ const ServiceStatus UpdateCheckAction::Execute()
 			const std::string local_version = QueryPluginVersion();
 			if(local_version.compare(net_version) != 0)
 			{
-				MessageBox::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
+            NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
 			}
+			}
+	}, cpr::Url{UPDATE_FILE_URL});
+#else
+
+   const std::string currentVersion = QueryPluginVersion();
+   const std::string updatedVersion = QueryUpdatedVersion();
+   if(CompareVersions(currentVersion, updatedVersion) < 0)
+   {
+      DialogBox(ReaperEntryPoints::instance_, MAKEINTRESOURCE(IDD_UPDATE_DIALOG), reaper_api::GetMainHwnd(), (DLGPROC)DialogProc);
 		}
-	}, cpr::Url{"https://raw.githubusercontent.com/Ultraschall/REAPER/version_check/ultraschall_version.xml"});
-#endif // #if 0
+
+#endif // #ifndef WIN32
 
 	return SERVICE_SUCCESS;
 }
 
-bool UpdateCheckAction::IsUpdatedVersion(const std::string& updatedVersionString)
+std::string UpdateCheckAction::QueryUpdatedVersion()
 {
-	PRECONDITION_RETURN(updatedVersionString.empty() == false, false);
+	std::string updatedVersion;
 
-	bool result = false;
+   std::string versionfile = DownloadVersionFile();
+   if(versionfile.empty() == false)
+   {
+	   updatedVersion = ParseVersionFile(versionfile);
+   }
 
-	static const size_t MIN_VERSION_PARTS_COUNT = 3;
-	static const char VERSION_STRING_SEPARATOR = '.';
-	const std::vector<std::string> updatedVersion = framework::split(updatedVersionString,
-																	 VERSION_STRING_SEPARATOR);
-	if(updatedVersion.size() >= MIN_VERSION_PARTS_COUNT)
+   return updatedVersion;
+}
+
+std::vector<int> UpdateCheckAction::NormalizeVersionString(const std::string& version)
 	{
-		const std::string installedVersionString = QueryPluginVersion();
-		if(installedVersionString.empty() == false)
+   std::vector<int> result(MAX_VERSION_LENGTH);
+
+   const std::vector<std::string> versionParts = framework::split(version, '.');
+   for(size_t i = 0; i < MAX_VERSION_LENGTH; i++)
 		{
-			const std::vector<std::string> installedVersion = framework::split(installedVersionString,
-																			   VERSION_STRING_SEPARATOR);
-			if(installedVersion.size() >= MIN_VERSION_PARTS_COUNT)
+      if(i < versionParts.size())
 			{
-				if(updatedVersion[0] > installedVersion[0])
+         std::stringstream str(versionParts[i]);
+         str >> result[i];
+      }
+      else
 				{
-					result = true;
+         result[i] = 0;
+      }
+   }
+
+   return result;
 				}
-				else if(updatedVersion[1] > installedVersion[1])
+
+int UpdateCheckAction::CompareVersions(const std::string& lhs, const std::string& rhs)
+{
+   int result = 0;
+   const std::vector<int> left = NormalizeVersionString(lhs);
+   const std::vector<int> right = NormalizeVersionString(rhs);
+
+   for(size_t i = 0; (i < MAX_VERSION_LENGTH) && (0 == result); i++)
 				{
-					result = true;
+      if(left[i] < right[i])
+      {
+         result = -1;
 				}
-				else if(updatedVersion[2] > installedVersion[2])
+      else if(left[i] < right[i])
 				{
-					result = true;
+         result = 1;
 				}
 				else
 				{
-					result = false;
+         result = 0;
 				}
 			}
+
+   return result;
 		}
+
+std::string UpdateCheckAction::DownloadVersionFile()
+{
+	std::string file;
+	return file;
 	}
 
-	return result;
-}
+void UpdateCheckAction::DownloadVersionFileCallback()
+{
 
 }
+
+std::string UpdateCheckAction::ParseVersionFile(const std::string& versionFile)
+{
+	std::string version;
+
+	return version;
 }
+
+}}

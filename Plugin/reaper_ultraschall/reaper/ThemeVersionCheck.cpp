@@ -30,9 +30,10 @@
 #include "ThemeVersionCheck.h"
 #include "FileManager.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+namespace reaper {
 
-const std::string QueryThemeVersion()
+std::string QueryThemeVersion()
 {
    std::string result;
    
@@ -119,4 +120,5 @@ const std::string QueryThemeVersion()
    return result;
 }
 
-}}
+}
+}

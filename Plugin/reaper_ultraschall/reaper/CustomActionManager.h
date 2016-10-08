@@ -34,8 +34,6 @@
 
 namespace ultraschall { namespace reaper {
 
-class ICustomAction;
-
 class CustomActionManager
 {
 public:
@@ -43,13 +41,13 @@ public:
 
    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
    
-   const ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
+   ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
    void UnregisterCustomAction(const int32_t id);
    void UnregisterCustomAction(const std::string& name);
    void UnregisterAllCustomActions();
 
-   const ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
-   const ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
+   ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
+   ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
 
 protected:
    virtual ~CustomActionManager();

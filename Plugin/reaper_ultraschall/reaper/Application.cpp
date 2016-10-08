@@ -56,7 +56,7 @@ namespace ultraschall {
             return self;
         }
 
-        const ServiceStatus Application::Start()
+ServiceStatus Application::Start()
         {
             PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
 
@@ -67,12 +67,12 @@ namespace ultraschall {
         {
         }
 
-        const int32_t Application::Register(const char* name, void* pInfoStruct) const
+int32_t Application::Register(const char* name, void* pInfoStruct) const
         {
             return reaper_api::plugin_register(name, pInfoStruct);
         }
 
-        const bool Application::OnCustomAction(const int32_t id)
+bool Application::OnCustomAction(const int32_t id)
         {
             PRECONDITION_RETURN(id != 0, false);
 
@@ -91,12 +91,12 @@ namespace ultraschall {
             return executed;
         }
 
-        const intptr_t Application::GetCurrentProject() const
+intptr_t Application::GetCurrentProject() const
         {
             return (intptr_t)reaper_api::EnumProjects(-1, 0, 0);
         }
 
-        const std::string Application::GetExportPathName() const
+std::string Application::GetExportPathName() const
         {
             std::string projectPath;
 
@@ -110,7 +110,7 @@ namespace ultraschall {
             return projectPath;
         }
 
-        const std::string Application::GetProjectPathName() const
+std::string Application::GetProjectPathName() const
         {
             std::string result;
 
@@ -124,7 +124,7 @@ namespace ultraschall {
             return result;
         }
 
-        const std::string Application::GetProjectFileName() const
+std::string Application::GetProjectFileName() const
         {
             std::string result;
 
@@ -145,7 +145,7 @@ namespace ultraschall {
             return result;
         }
 
-        const std::string Application::GetProjectFolderName() const
+std::string Application::GetProjectFolderName() const
         {
             std::string result;
 
@@ -178,7 +178,7 @@ namespace ultraschall {
             return result;
         }
 
-        const std::string Application::GetProjectName() const
+std::string Application::GetProjectName() const
         {
             std::string result;
 
@@ -213,7 +213,8 @@ namespace ultraschall {
                 std::vector<std::string> buffer = framework::split(items[0], '.');
                 for(size_t i = 0; i < buffer.size(); ++i)
                 {
-                    switch(i) {
+         switch(i)
+         {
                     case 0:
                         timestamp.seconds = std::atoi(buffer[0].c_str());
                         break;
@@ -229,7 +230,8 @@ namespace ultraschall {
 
                 for(size_t i = 0; i < items.size(); ++i)
                 {
-                    switch(i) {
+         switch(i)
+         {
                     case 1:
                         timestamp.minutes = std::atoi(items[1].c_str());
                         break;
@@ -259,7 +261,7 @@ namespace ultraschall {
             }
         };
 
-        const std::string Application::TimestampToString(const double timestamp) const
+std::string Application::TimestampToString(const double timestamp) const
         {
             std::string result;
 
@@ -273,13 +275,13 @@ namespace ultraschall {
             return result;
         }
 
-        const double Application::StringToTimestamp(const std::string& input) const
+double Application::StringToTimestamp(const std::string& input) const
         {
             PRECONDITION_RETURN(input.empty() == false, -1);
             return reaper_api::parse_timestr(input.c_str());
         }
 
-        const std::vector<framework::ChapterMarker> Application::ChapterMarkers() const
+std::vector<framework::ChapterMarker> Application::ChapterMarkers() const
         {
             std::vector<framework::ChapterMarker> chapterMarkers;
 
@@ -298,17 +300,18 @@ namespace ultraschall {
                     const framework::ChapterMarker chapterMarker(position, buffer, index);
                     chapterMarkers.push_back(chapterMarker);
                 }
-            } while(nextOffset > 0);
+   }
+   while(nextOffset > 0);
 
             return chapterMarkers;
         }
 
-        const int32_t Application::SetChapterMarker(const framework::ChapterMarker& projectMarker) const
+int32_t Application::SetChapterMarker(const framework::ChapterMarker& projectMarker) const
         {
             return reaper_api::AddProjectMarker2(0, false, projectMarker.Position(), 10, projectMarker.Name().c_str(), 0, 0xffff00);
         }
 
-        const bool Application::DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const
+bool Application::DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const
         {
             return reaper_api::DeleteProjectMarker(0, chapterMarker.Index(), chapterMarker.IsRegion());
         }
@@ -323,19 +326,14 @@ namespace ultraschall {
             }
         }
 
-        const ServiceStatus Application::Configure()
+ServiceStatus Application::Configure()
         {
             framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
             resourceManager.SetLanguage("en-EN");
             return SERVICE_SUCCESS;
         }
 
-        const bool Application::InsertTransriptItem(const framework::TranscriptItem transcriptItem) const
-        {
-            return true;
-        }
-
-        const bool Application::HealthCheck()
+bool Application::HealthCheck()
         {
             bool ok = true;
 
@@ -410,6 +408,16 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
             return ok;
         }
+
+void Application::CustomActionThreadProc(void* args)
+{
+   ICustomAction* pCustomAction = reinterpret_cast<ICustomAction*>(args);
+   if(pCustomAction != 0)
+   {
+      pCustomAction->Execute();
+   }
+}
+
     }
 }
 

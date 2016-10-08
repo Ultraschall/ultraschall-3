@@ -28,7 +28,7 @@
 namespace ultraschall {
     namespace reaper {
 
-        const bool SWSVersionCheck();
+bool SWSVersionCheck();
 
         std::string QuerySWSVersion();
     }

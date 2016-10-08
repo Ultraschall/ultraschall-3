@@ -35,7 +35,7 @@ ServiceFactory::~ServiceFactory()
    UnregisterAllServices();
 }
 
-const ServiceStatus ServiceFactory::RegisterService(const std::string& name, const CREATE_SERVICE_FUNCTION pfn)
+ServiceStatus ServiceFactory::RegisterService(const std::string& name, const CREATE_SERVICE_FUNCTION pfn)
 {
    PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
    PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
@@ -84,7 +84,7 @@ void ServiceFactory::UnregisterAllServices()
    }
 }
 
-const ServiceStatus ServiceFactory::CreateService(const std::string& name, IService*& pService) const
+ServiceStatus ServiceFactory::CreateService(const std::string& name, IService*& pService) const
 {
    PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
    

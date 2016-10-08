@@ -32,17 +32,15 @@
 #include "ReplaceChaptersAction.h"
 #include "SaveChaptersAction.h"
 #include "SaveChaptersToProjectAction.h"
-#include "InsertTranscriptAction.h"
 #include "AboutAction.h"
 #include "UpdateCheckAction.h"
 #include "CustomActionManager.h"
-#include "ICustomAction.h"
 
 namespace reaper = ultraschall::reaper;
 
 extern "C"
 {
-REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, reaper_plugin_info_t *pPluginInfo)
+   REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t *pPluginInfo)
 {
    reaper::Application& application = reaper::Application::Instance();
     
@@ -53,7 +51,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, r
       {
          try
          {
-            reaper::ReaperEntryPoints::Setup(pPluginInfo);
+               reaper::ReaperEntryPoints::Setup(instance, pPluginInfo);
 
             if(ServiceSucceeded(application.Configure()))
             {
@@ -61,29 +59,16 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE, r
                {
                   application.RegisterCustomAction<reaper::InsertChaptersAction>();
 #if 0
+                     // this action is considered harmful. so don't activate
                   application.RegisterCustomAction<reaper::ReplaceChaptersAction>();
 #endif
                   application.RegisterCustomAction<reaper::SaveChaptersAction>();
                   application.RegisterCustomAction<reaper::SaveChaptersToProjectAction>();
-#if 0
-                  application.RegisterCustomAction<reaper::InsertTranscriptAction>();
-#endif
                    application.RegisterCustomAction<reaper::AboutAction>();
-#if 0
                    application.RegisterCustomAction<reaper::UpdateCheckAction>();
-#endif
 
-#if 0
                    // run the update action on startup
-                   reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
-                   reaper::ICustomAction* pCustomAction = 0;
-                   ServiceStatus status = manager.LookupCustomAction(reaper::UpdateCheckAction::UniqueId(), pCustomAction);
-                   if(ServiceSucceeded(status) && (pCustomAction != 0))
-                   {
-                     pCustomAction->Execute();
-                     framework::SafeRelease(pCustomAction);
-                   }
-#endif
+                     application.InvokeCustomAction<reaper::UpdateCheckAction>();
                }
             }
          }

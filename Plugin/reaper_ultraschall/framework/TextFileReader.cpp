@@ -28,7 +28,7 @@
 
 namespace ultraschall { namespace framework {
 
-const std::string TextFileReader::Read(const std::string& filename)
+std::string TextFileReader::Read(const std::string& filename)
 {
    std::stringstream str;
    
@@ -42,7 +42,7 @@ const std::string TextFileReader::Read(const std::string& filename)
    return str.str();
 }
 
-const std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
+std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
 {
    std::vector<std::string> lines;
    

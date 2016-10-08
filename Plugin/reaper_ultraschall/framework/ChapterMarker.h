@@ -38,11 +38,11 @@ public:
    {
    }
 
-   inline const bool IsRegion() const;
-   inline const double Position() const;
-   inline const double EndOfRegion() const;
+   inline bool IsRegion() const;
+   inline double Position() const;
+   inline double EndOfRegion() const;
    inline const std::string& Name() const;
-   inline const int Index() const;
+   inline int Index() const;
 
 protected:
    inline void IsRegion(const bool isRegion);
@@ -59,7 +59,7 @@ private:
    int index_;
 };
 
-inline const bool ChapterMarker::IsRegion() const
+inline bool ChapterMarker::IsRegion() const
 {
    return isRegion_;
 }
@@ -69,7 +69,7 @@ inline void ChapterMarker::IsRegion(const bool isRegion)
    isRegion_ = isRegion;
 }
 
-inline const double ChapterMarker::Position() const
+inline double ChapterMarker::Position() const
 {
    return position_;
 }
@@ -79,7 +79,7 @@ inline void ChapterMarker::Position(const double position)
    position_ = position;
 }
 
-inline const double ChapterMarker::EndOfRegion() const
+inline double ChapterMarker::EndOfRegion() const
 {
    return endOfRegion_;
 }
@@ -99,7 +99,7 @@ inline void ChapterMarker::Name(const std::string& name)
    name_ = name;
 }
 
-inline const int ChapterMarker::Index() const
+inline int ChapterMarker::Index() const
 {
    return index_;
 }

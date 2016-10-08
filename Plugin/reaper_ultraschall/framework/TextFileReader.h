@@ -32,8 +32,8 @@ namespace ultraschall { namespace framework {
 class TextFileReader
 {
 public:
-   static const std::string Read(const std::string& filename);
-   static const std::vector<std::string> ReadLines(const std::string& filename);
+   static std::string Read(const std::string& filename);
+   static std::vector<std::string> ReadLines(const std::string& filename);
 };
 
 }}

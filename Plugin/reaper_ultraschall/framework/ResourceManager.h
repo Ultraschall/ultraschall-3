@@ -45,8 +45,8 @@ public:
    void SetLanguage(const std::string& id);
    void SetOperatingSystemLanguage();
    
-   const ServiceStatus RegisterLocalizedString(const ResourceId& id);
-   const ServiceStatus SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str);
+   ServiceStatus RegisterLocalizedString(const ResourceId& id);
+   ServiceStatus SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str);
    void UnregisterLocalizedString(const ResourceId& id);
    
    const char* GetLocalizedString(const ResourceId& id) const;
@@ -61,7 +61,6 @@ private:
    
    std::string currentLanguage_;
    std::map<std::string, std::map<ResourceId, std::string>> localizedStrings_;
-   
 };
     
 }}

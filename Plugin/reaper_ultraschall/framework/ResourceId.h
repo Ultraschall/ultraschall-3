@@ -39,19 +39,19 @@ public:
    ResourceId(const ResourceId& rhs);
    ResourceId& operator=(const ResourceId& rhs);
    
-   const bool operator==(const ResourceId& rhs) const;
-   const bool operator!=(const ResourceId& rhs) const;
+   bool operator==(const ResourceId& rhs) const;
+   bool operator!=(const ResourceId& rhs) const;
    
-   const bool operator<(const ResourceId& rhs) const;
+   bool operator<(const ResourceId& rhs) const;
 
-   static const ResourceId Invalid();
+   static ResourceId Invalid();
 
 private:
    uint32_t id_;
 
    static std::atomic<uint32_t> nextId_;
 
-   static const uint32_t NextId();
+   static uint32_t NextId();
 
    explicit ResourceId(uint32_t id);
 };

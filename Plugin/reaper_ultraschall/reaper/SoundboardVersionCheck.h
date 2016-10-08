@@ -27,7 +27,7 @@
 
 namespace ultraschall { namespace reaper {
    
-const std::string QuerySoundboardVersion();
+std::string QuerySoundboardVersion();
    
 }}
 

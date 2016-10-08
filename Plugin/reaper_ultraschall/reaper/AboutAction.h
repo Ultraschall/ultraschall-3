@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,38 +36,17 @@ class AboutAction : public CustomAction
 public:
    static const char* UniqueId();
    
-   static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
-   {
-      pCustomAction = new AboutAction();
-      PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-      return SERVICE_SUCCESS;
-   }
+   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
    
-   virtual const char* LocalizedName() const override
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      return resourceManager.GetLocalizedString(actionNameId_);
-   }
+   virtual const char* LocalizedName() const override;
    
-   virtual const ServiceStatus Execute() override;
+   virtual ServiceStatus Execute() override;
 
 protected:
-   virtual ~AboutAction()
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      resourceManager.UnregisterLocalizedString(actionNameId_);
-   }
+   virtual ~AboutAction();
    
 private:
-   AboutAction()
-   {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: About Ultraschall...");
-      }
-   }
+   AboutAction();
 
    framework::ResourceId actionNameId_;
 };

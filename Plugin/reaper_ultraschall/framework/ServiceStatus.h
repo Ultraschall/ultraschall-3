@@ -30,7 +30,7 @@
 typedef uint32_t ServiceStatus;
 
 #define SERVICE_STATUS_CODE(facility, code) ((facility) | (code))  
-#define DEFINE_SERVICE_STATUS(status, facility, code) extern const ServiceStatus (status) = SERVICE_STATUS_CODE((facility), (code))
+#define DEFINE_SERVICE_STATUS(status, facility, code) extern ServiceStatus (status) = SERVICE_STATUS_CODE((facility), (code))
 
 // General status codes
 #define SERVICE_FRAMEWORK_FACILITY 0x00000000

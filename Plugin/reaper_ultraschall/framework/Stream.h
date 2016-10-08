@@ -25,21 +25,21 @@
 #define __ULTRASCHALL_FRAMEWORK_STREAM_H_INCL__
 
 #include <zlib.h>
-#include <SharedObject.h>
+#include <IUnknown.h>
 #include <Malloc.h>
 
 namespace ultraschall { namespace framework {
    
 
-template <typename ItemType> class Stream : public SharedObject
+template <typename ItemType> class Stream : public IUnknown
 {
 public:
-   Stream(const size_t dataSize) : dataSize_(dataSize)
+   Stream(const size_t dataSize) : 
+      dataSize_(dataSize), data_(Malloc<ItemType>::Alloc(dataSize_))
    {
-      data_ = Malloc<ItemType>::Alloc(dataSize_);
    }
    
-   const bool Write(const size_t offset, const ItemType* buffer, const size_t bufferSize)
+   bool Write(const size_t offset, const ItemType* buffer, const size_t bufferSize)
    {
       PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
       PRECONDITION_RETURN(buffer != 0, false);
@@ -48,7 +48,7 @@ public:
       return true;
    }
    
-   const bool Read(const size_t offset, ItemType* buffer, const size_t bufferSize)
+   bool Read(const size_t offset, ItemType* buffer, const size_t bufferSize)
    {
       PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
       PRECONDITION_RETURN(buffer != 0, false);
@@ -57,7 +57,7 @@ public:
       return true;
    }
    
-   const uint64_t CRC32() const
+   uint64_t CRC32() const
    {
       PRECONDITION_RETURN(data_ != 0, UINT64_MAX);
       PRECONDITION_RETURN(dataSize_ > 0, UINT64_MAX);
@@ -69,13 +69,13 @@ public:
 protected:
    virtual ~Stream()
    {
-      Malloc<ItemType>::Free(data_);
       dataSize_ = 0;
+      Malloc<ItemType>::Free(data_);
    }
    
 private:
-   ItemType* data_;
    size_t dataSize_;
+   ItemType* data_;
 };
    
 }}

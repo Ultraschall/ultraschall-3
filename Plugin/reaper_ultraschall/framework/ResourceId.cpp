@@ -53,27 +53,27 @@ ResourceId& ResourceId::operator=(const ResourceId& rhs)
    return *this;
 }
       
-const bool ResourceId::operator==(const ResourceId& rhs) const
+bool ResourceId::operator==(const ResourceId& rhs) const
 {
    return rhs.id_ == id_;
 }
       
-const bool ResourceId::operator!=(const ResourceId& rhs) const
+bool ResourceId::operator!=(const ResourceId& rhs) const
 {
    return (operator==(rhs) == false);
 }
       
-const bool ResourceId::operator<(const ResourceId& rhs) const
+bool ResourceId::operator<(const ResourceId& rhs) const
 {
    return id_ < rhs.id_;
 }
       
-const ResourceId ResourceId::Invalid()
+ResourceId ResourceId::Invalid()
 {
    return ResourceId(static_cast<uint32_t>(-1));
 }
 
-const uint32_t ResourceId::NextId()
+uint32_t ResourceId::NextId()
 {
    return ++nextId_;
 }

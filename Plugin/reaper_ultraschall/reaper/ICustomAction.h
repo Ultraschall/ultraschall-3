@@ -25,18 +25,17 @@
 #ifndef __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
-#include <SharedObject.h>
-#include "CustomActionFactory.h"
+#include <IUnknown.h>
 
 namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
 
-class ICustomAction : public framework::SharedObject
+class ICustomAction : public framework::IUnknown
 {
 public:
    virtual const char* LocalizedName() const = 0;
-   virtual const ServiceStatus Execute() = 0;
+   virtual ServiceStatus Execute() = 0;
    
 protected:
    ICustomAction()
