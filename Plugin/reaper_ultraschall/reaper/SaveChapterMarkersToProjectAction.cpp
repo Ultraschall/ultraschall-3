@@ -26,16 +26,18 @@
 #include <vector>
 #include <fstream>
 
-#include "SaveChaptersToProjectAction.h"
+#include <ResourceManager.h>
+
+#include "SaveChapterMarkersToProjectAction.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
-static DeclareCustomAction<SaveChaptersToProjectAction> action;
+static DeclareCustomAction<SaveChapterMarkersToProjectAction> action;
 
-SaveChaptersToProjectAction::SaveChaptersToProjectAction()
+SaveChapterMarkersToProjectAction::SaveChapterMarkersToProjectAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
@@ -74,7 +76,7 @@ SaveChaptersToProjectAction::SaveChaptersToProjectAction()
    }
 }
 
-SaveChaptersToProjectAction::~SaveChaptersToProjectAction()
+SaveChapterMarkersToProjectAction::~SaveChapterMarkersToProjectAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    resourceManager.UnregisterLocalizedString(actionNameId_);
@@ -84,25 +86,25 @@ SaveChaptersToProjectAction::~SaveChaptersToProjectAction()
    resourceManager.UnregisterLocalizedString(noProjectNameMessageId_);
 }
 
-const char* SaveChaptersToProjectAction::UniqueId()
+const char* SaveChapterMarkersToProjectAction::UniqueId()
 {
    return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
 }
 
-ServiceStatus SaveChaptersToProjectAction::CreateCustomAction(ICustomAction*& pCustomAction)
+ServiceStatus SaveChapterMarkersToProjectAction::CreateCustomAction(ICustomAction*& pCustomAction)
 {
-   pCustomAction = new SaveChaptersToProjectAction();
+   pCustomAction = new SaveChapterMarkersToProjectAction();
    PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
    return SERVICE_SUCCESS;
 }
 
-const char* SaveChaptersToProjectAction::LocalizedName() const
+const char* SaveChapterMarkersToProjectAction::LocalizedName() const
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    return resourceManager.GetLocalizedString(actionNameId_);
 }
 
-ServiceStatus SaveChaptersToProjectAction::Execute()
+ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
@@ -139,7 +141,7 @@ ServiceStatus SaveChaptersToProjectAction::Execute()
    return status;
 }
 
-std::string SaveChaptersToProjectAction::Path()
+std::string SaveChapterMarkersToProjectAction::Path()
 {
    std::string path;
 

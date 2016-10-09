@@ -34,6 +34,9 @@
 #include "CustomActionManager.h"
 #include "CustomActionFactory.h"
 
+#include "CommandManager.h"
+#include "CommandFactory.h"
+
 namespace framework = ultraschall::framework;
 
 namespace ultraschall {
@@ -52,12 +55,14 @@ public:
 
    virtual ServiceStatus Configure();
    
-   template<class C> ServiceStatus RegisterCustomAction() const;
+   template<class CustomActionType> ServiceStatus RegisterCustomAction() const;
+   template<class CommandType> ServiceStatus RegisterCommand(const int32_t commandId) const;
+
    static bool OnCustomAction(const int32_t id);
+   static bool OnStartCommand(const int32_t id);
+   static bool OnStopCommand(const int32_t id);
 
-   template<class C> void InvokeCustomAction() const;
-
-   template<class C> bool InvokeCustomActionAsync() const;
+   template<class CustomActionType> void InvokeCustomAction() const;
 
    static const size_t MAX_REAPER_STRING_BUFFER_SIZE = 4096;
 
@@ -83,8 +88,6 @@ private:
    static bool HealthCheck();
 
    int Register(const char* name, void* pInfoStruct) const;
-
-   static void CustomActionThreadProc(void* args);
 };
 
 typedef struct
@@ -95,9 +98,9 @@ typedef struct
    void *extra; // reserved for future use
 } custom_action_register_t;
    
-template<class C> ServiceStatus Application::RegisterCustomAction() const
+template<class CustomActionType> ServiceStatus Application::RegisterCustomAction() const
 {
-   typedef typename C custom_action_type;
+   typedef typename CustomActionType custom_action_type;
 
    ServiceStatus status = SERVICE_FAILURE;
 
@@ -134,46 +137,37 @@ template<class C> ServiceStatus Application::RegisterCustomAction() const
    return status;
 }
 
-template<class C> void Application::InvokeCustomAction() const
+template<class CommandType> ServiceStatus Application::RegisterCommand(const int32_t commandId) const
 {
-   typedef typename C custom_action_type;
+   PRECONDITION_RETURN(ICommand::ValidateCommandId(commandId) != false, SERVICE_INVALID_ARGUMENT);
 
-   reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
-   reaper::ICustomAction* pCustomAction = 0;
-   ServiceStatus status = manager.LookupCustomAction(custom_action_type::UniqueId(), pCustomAction);
-   if(ServiceSucceeded(status) && (pCustomAction != 0))
+   ServiceStatus status = SERVICE_FAILURE;
+
+   ICommand* pCommand = 0;
+   status = CommandType::CreateCommand(pCommand);
+   if(ServiceSucceeded(status) && (pCommand != 0))
    {
-      pCustomAction->Execute();
-      framework::SafeRelease(pCustomAction);
+      CommandManager& manager = CommandManager::Instance();
+      status = manager.RegisterCommand(commandId, pCommand);
+
+      framework::SafeRelease(pCommand);
    }
+
+   return status;
 }
 
-template<class C> bool Application::InvokeCustomActionAsync() const
+template<class CustomActionType> void Application::InvokeCustomAction() const
 {
-   typedef typename C custom_action_type;
+   typedef typename CustomActionType custom_action_type;
 
-   bool result = false;
-
-   reaper::CustomActionManager& manager = reaper::CustomActionManager::Instance();
-   reaper::ICustomAction* pCustomAction = 0;
+   CustomActionManager& manager = CustomActionManager::Instance();
+   ICustomAction* pCustomAction = 0;
    ServiceStatus status = manager.LookupCustomAction(custom_action_type::UniqueId(), pCustomAction);
    if(ServiceSucceeded(status) && (pCustomAction != 0))
    {
-#ifdef WIN32
-      uintptr_t result = _beginthread(CustomActionThreadProc, 0, reinterpret_cast<void*>(pCustomAction));
-      if(result != -1)
-      {
-         result = true;
-      }
-#else
       pCustomAction->Execute();
-      result = true;
-#endif
-
       framework::SafeRelease(pCustomAction);
    }
-
-   return result;
 }
 
 }

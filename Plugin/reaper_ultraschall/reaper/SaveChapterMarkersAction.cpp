@@ -26,16 +26,18 @@
 #include <vector>
 #include <fstream>
 
-#include "SaveChaptersAction.h"
+#include <ResourceManager.h>
+
+#include "SaveChapterMarkersAction.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
-static DeclareCustomAction<SaveChaptersAction> action;
+static DeclareCustomAction<SaveChapterMarkersAction> action;
 
-SaveChaptersAction::SaveChaptersAction()
+SaveChapterMarkersAction::SaveChapterMarkersAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
@@ -88,7 +90,7 @@ SaveChaptersAction::SaveChaptersAction()
    }
 }
 
-SaveChaptersAction::~SaveChaptersAction()
+SaveChapterMarkersAction::~SaveChapterMarkersAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    resourceManager.UnregisterLocalizedString(actionNameId_);
@@ -100,25 +102,25 @@ SaveChaptersAction::~SaveChaptersAction()
    resourceManager.UnregisterLocalizedString(saveOperationCanceledId_);
 }
 
-const char* SaveChaptersAction::UniqueId()
+const char* SaveChapterMarkersAction::UniqueId()
 {
    return "ULTRASCHALL_SAVE_CHAPTERS";
 }
 
-ServiceStatus SaveChaptersAction::CreateCustomAction(ICustomAction*& pCustomAction)
+ServiceStatus SaveChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
 {
-   pCustomAction = new SaveChaptersAction();
+   pCustomAction = new SaveChapterMarkersAction();
    PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
    return SERVICE_SUCCESS;
 }
 
-const char* SaveChaptersAction::LocalizedName() const
+const char* SaveChapterMarkersAction::LocalizedName() const
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    return resourceManager.GetLocalizedString(actionNameId_);
 }
 
-ServiceStatus SaveChaptersAction::Execute()
+ServiceStatus SaveChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    

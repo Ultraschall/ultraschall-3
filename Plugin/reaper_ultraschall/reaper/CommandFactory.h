@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,40 +22,44 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_COMMAND_FACTORY_H_INCL__
+#define __ULTRASCHALL_REAPER_COMMAND_FACTORY_H_INCL__
 
-#include <string>
+#include <mutex>
+#include <map>
 
-#include <ResourceManager.h>
+#include <ServiceStatus.h>
 
-#include "CustomAction.h"
+#include "ICommand.h"
 
 namespace ultraschall { namespace reaper {
 
-class InsertChaptersAction : public CustomAction
+class CommandFactory
 {
 public:
-   static const char* UniqueId();
+   static CommandFactory& Instance();
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+   typedef ServiceStatus (*CREATE_COMMAND_FUNCTION)(ICommand*&);
 
-   virtual const char* LocalizedName() const override;
-   
-   virtual ServiceStatus Execute() override;
+   ServiceStatus RegisterCommand(const int32_t id, CREATE_COMMAND_FUNCTION pfn);
+   void UnregisterCommand(const int32_t id);
+   void UnregisterAllCommands();
+
+   ServiceStatus CreateCommand(const int32_t id, ICommand*& pCommand) const;
 
 protected:
-   virtual ~InsertChaptersAction();
+   virtual ~CommandFactory();
 
 private:
-   InsertChaptersAction();
+   CommandFactory();
 
-   framework::ResourceId actionNameId_;
-   framework::ResourceId successMessageId_;
-   framework::ResourceId failureMessageId_;
-   framework::ResourceId fileBrowserTitleId_;
+   CommandFactory(const CommandFactory&);
+   CommandFactory& operator=(const CommandFactory&);
+
+   std::map<int32_t, CREATE_COMMAND_FUNCTION> factoryFunctions_;
+   mutable std::recursive_mutex factoryFunctionsLock_;
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_COMMAND_FACTORY_H_INCL__

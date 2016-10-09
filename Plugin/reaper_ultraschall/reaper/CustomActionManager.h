@@ -39,9 +39,8 @@ class CustomActionManager
 public:
    static CustomActionManager& Instance();
 
-   static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
-   
    ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
+   
    void UnregisterCustomAction(const int32_t id);
    void UnregisterCustomAction(const std::string& name);
    void UnregisterAllCustomActions();

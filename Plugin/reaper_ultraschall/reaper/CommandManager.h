@@ -1,17 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
-//
+// 
 // Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
-//
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,39 +19,47 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
+// 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_COMMAND_MANAGER_H_INCL__
+#define __ULTRASCHALL_REAPER_COMMAND_MANAGER_H_INCL__
 
-#include <string>
-#include <ResourceId.h>
+#include <mutex>
+#include <map>
 
-#include "ICustomAction.h"
+#include <ServiceStatus.h>
+
+#include "ICommand.h"
 
 namespace ultraschall { namespace reaper {
-   
-class AboutAction : public ICustomAction
+
+class CommandManager
 {
 public:
-   static const char* UniqueId();
+   static CommandManager& Instance();
+
+   ServiceStatus RegisterCommand(const int32_t id, ICommand* pCommand);
    
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-   
-   virtual const char* LocalizedName() const override;
-   
-   virtual ServiceStatus Execute() override;
+   void UnregisterCommand(const int32_t id);
+   void UnregisterAllCommands();
+
+   ServiceStatus LookupCommand(const int32_t id, ICommand*& pCommand) const;
 
 protected:
-   virtual ~AboutAction();
-   
-private:
-   AboutAction();
+   virtual ~CommandManager();
 
-   framework::ResourceId actionNameId_;
+private:
+   CommandManager();
+
+   CommandManager(const CommandManager&);
+   CommandManager& operator=(const CommandManager&);
+
+   std::map<int32_t, ICommand*> commands_;
+   mutable std::recursive_mutex commandsLock_;
 };
-   
+
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_COMMAND_MANAGER_H_INCL__
+

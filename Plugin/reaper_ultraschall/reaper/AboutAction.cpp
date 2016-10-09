@@ -26,20 +26,23 @@
 #include <vector>
 #include <fstream>
 
-#ifndef _WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
-#endif
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
+#include <ResourceManager.h>
+
+#include "AboutAction.h"
+#include "CustomActionFactory.h"
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "VersionHandler.h"
 #include "SoundboardVersionCheck.h"
 #include "StudioLinkVersionCheck.h"
 #include "SWSVersionCheck.h"
-#include "AboutAction.h"
 #include "NotificationWindow.h"
 #include "FileManager.h"
 
@@ -84,7 +87,7 @@ const char* AboutAction::LocalizedName() const
 
 ServiceStatus AboutAction::Execute()
 {
-   const std::string pluginVersion = QueryPluginVersion();
+   const std::string pluginVersion = VersionHandler::PluginVersion();
   
    std::string message1 = "\
 http://ultraschall.fm\r\n\r\n\
@@ -97,13 +100,13 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
    }
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
    const std::string hubVersion = QueryHubVersion();
    if(hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";
    }
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
    const std::string soundboardVersion = QuerySoundboardVersion();
    if(soundboardVersion.empty() == false)
@@ -124,7 +127,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 2.2.3 \"Gropius\"...", message1 + message2);
+   NotificationWindow::Show("About Ultraschall 3.0 \"Rothko\"...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }

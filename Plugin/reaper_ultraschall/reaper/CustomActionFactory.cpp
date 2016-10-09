@@ -73,25 +73,23 @@ void CustomActionFactory::UnregisterCustomAction(const std::string& id)
 
    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.find(id);
-   if (functions_.end() != i)
+   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.find(id);
+   if (functions_.end() != functionIterator)
    {
-      functions_.erase(i);
+      functions_.erase(functionIterator);
    }
 }
 
 void CustomActionFactory::UnregisterAllCustomActions()
 {
-   PRECONDITION(functions_.empty() == false);
-
    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
    while(functions_.empty() == false)
    {
-      const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.begin();
-      if(functions_.end() != i)
+      const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.begin();
+      if(functions_.end() != functionIterator)
       {
-         functions_.erase(i);
+         functions_.erase(functionIterator);
       }
    }
 }

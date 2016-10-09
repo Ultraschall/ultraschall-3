@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 #
-# Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,5 +31,5 @@ else
 	current_position = reaper.GetPlayPosition() -- Position of play-cursor
 end
 
-reaper.AddProjectMarker2(0, false, current_position, 0, "<Edit>", 0, 0xFF0000|0x1000000) -- set red edit-marker
+reaper.AddProjectMarker2(0, false, current_position, 0, "<Shownote>", 0, 0x0000FF|0x1000000) -- set blue shownote marker
 

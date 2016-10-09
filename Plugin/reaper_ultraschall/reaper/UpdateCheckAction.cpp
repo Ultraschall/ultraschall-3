@@ -27,10 +27,6 @@
 #include <vector>
 #include <fstream>
 
-#include <Framework.h>
-#include <StringUtilities.h>
-#include "VersionHandler.h"
-
 #ifndef WIN32
 #include <libxml/tree.h>
 #include <libxml/parser.h>
@@ -41,24 +37,30 @@
 #include "..\resource.h"
 BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
-   UNREFERENCED_PARAMETER(lParam);
+	UNREFERENCED_PARAMETER(lParam);
 
-   switch(message)
-   {
-   case WM_COMMAND:
-      switch(LOWORD(wParam))
-      {
-      case IDOK:
-         EndDialog(hwndDlg, wParam);
-         return TRUE;
-      }
-   }
-   return FALSE;
+	switch(message)
+	{
+	case WM_COMMAND:
+		switch(LOWORD(wParam))
+		{
+		case IDOK:
+			EndDialog(hwndDlg, wParam);
+			return TRUE;
+		}
+	}
+	return FALSE;
 }
 #endif // #ifndef WIN32
 
-#include "ReaperEntryPoints.h"
+#include <ResourceManager.h>
+#include <Framework.h>
+#include <StringUtilities.h>
+
 #include "UpdateCheckAction.h"
+#include "CustomActionFactory.h"
+#include "VersionHandler.h"
+#include "ReaperEntryPoints.h"
 #include "PluginVersionCheck.h"
 #include "NotificationWindow.h"
 
@@ -68,6 +70,35 @@ namespace reaper {
 static DeclareCustomAction<UpdateCheckAction> action;
 
 const char* UpdateCheckAction::UPDATE_FILE_URL = "http://url.ultraschall-podcast.de/version";
+
+UpdateCheckAction::UpdateCheckAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
+   if(ServiceSucceeded(status))
+   {
+      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Check for Updates...");
+   }
+}
+
+UpdateCheckAction::~UpdateCheckAction()
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   resourceManager.UnregisterLocalizedString(actionNameId_);
+}
+
+ServiceStatus UpdateCheckAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new UpdateCheckAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* UpdateCheckAction::LocalizedName() const
+{
+   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
+   return resourceManager.GetLocalizedString(actionNameId_);
+}
 
 const char* UpdateCheckAction::UniqueId()
 {
@@ -142,18 +173,17 @@ ServiceStatus UpdateCheckAction::Execute()
 			const std::string local_version = QueryPluginVersion();
 			if(local_version.compare(net_version) != 0)
 			{
-            NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
+				NotificationWindow::ShowUpdateAvailable("Ultraschall Version Check", "Version " + net_version + " of Ultraschall is available.\nYou are currently running version " + local_version, html_info);
 			}
-			}
+		}
 	}, cpr::Url{UPDATE_FILE_URL});
 #else
 
-   const std::string currentVersion = QueryPluginVersion();
-   const std::string updatedVersion = QueryUpdatedVersion();
-   if(CompareVersions(currentVersion, updatedVersion) < 0)
-   {
-      DialogBox(ReaperEntryPoints::instance_, MAKEINTRESOURCE(IDD_UPDATE_DIALOG), reaper_api::GetMainHwnd(), (DLGPROC)DialogProc);
-		}
+	const std::string currentVersion = VersionHandler::PluginVersion();
+	const std::string updatedVersion = QueryUpdatedVersion();
+	if(CompareVersions(currentVersion, updatedVersion) < 0)
+	{
+	}
 
 #endif // #ifndef WIN32
 
@@ -164,66 +194,66 @@ std::string UpdateCheckAction::QueryUpdatedVersion()
 {
 	std::string updatedVersion;
 
-   std::string versionfile = DownloadVersionFile();
-   if(versionfile.empty() == false)
-   {
-	   updatedVersion = ParseVersionFile(versionfile);
-   }
+	std::string versionfile = DownloadVersionFile();
+	if(versionfile.empty() == false)
+	{
+		updatedVersion = ParseVersionFile(versionfile);
+	}
 
-   return updatedVersion;
+	return updatedVersion;
 }
 
 std::vector<int> UpdateCheckAction::NormalizeVersionString(const std::string& version)
+{
+	std::vector<int> result(MAX_VERSION_LENGTH);
+
+	const std::vector<std::string> versionParts = framework::split(version, '.');
+	for(size_t i = 0; i < MAX_VERSION_LENGTH; i++)
 	{
-   std::vector<int> result(MAX_VERSION_LENGTH);
-
-   const std::vector<std::string> versionParts = framework::split(version, '.');
-   for(size_t i = 0; i < MAX_VERSION_LENGTH; i++)
+		if(i < versionParts.size())
 		{
-      if(i < versionParts.size())
-			{
-         std::stringstream str(versionParts[i]);
-         str >> result[i];
-      }
-      else
-				{
-         result[i] = 0;
-      }
-   }
+			std::stringstream str(versionParts[i]);
+			str >> result[i];
+		}
+		else
+		{
+			result[i] = 0;
+		}
+	}
 
-   return result;
-				}
+	return result;
+}
 
 int UpdateCheckAction::CompareVersions(const std::string& lhs, const std::string& rhs)
 {
-   int result = 0;
-   const std::vector<int> left = NormalizeVersionString(lhs);
-   const std::vector<int> right = NormalizeVersionString(rhs);
+	int result = 0;
+	const std::vector<int> left = NormalizeVersionString(lhs);
+	const std::vector<int> right = NormalizeVersionString(rhs);
 
-   for(size_t i = 0; (i < MAX_VERSION_LENGTH) && (0 == result); i++)
-				{
-      if(left[i] < right[i])
-      {
-         result = -1;
-				}
-      else if(left[i] < right[i])
-				{
-         result = 1;
-				}
-				else
-				{
-         result = 0;
-				}
-			}
-
-   return result;
+	for(size_t i = 0; (i < MAX_VERSION_LENGTH) && (0 == result); i++)
+	{
+		if(left[i] < right[i])
+		{
+			result = -1;
 		}
+		else if(left[i] < right[i])
+		{
+			result = 1;
+		}
+		else
+		{
+			result = 0;
+		}
+	}
+
+	return result;
+}
 
 std::string UpdateCheckAction::DownloadVersionFile()
 {
 	std::string file;
 	return file;
-	}
+}
 
 void UpdateCheckAction::DownloadVersionFileCallback()
 {
@@ -237,4 +267,5 @@ std::string UpdateCheckAction::ParseVersionFile(const std::string& versionFile)
 	return version;
 }
 
-}}
+}
+}

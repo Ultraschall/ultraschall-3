@@ -34,32 +34,14 @@
 
 namespace ultraschall { namespace reaper {
 
-class CustomAction : public ICustomAction
-{
-public:
-   CustomAction()
-   {
-   }
-};
-   
-template<class C> class DeclareCustomAction
-{
-public:
-   typedef typename C custom_action_type; 
+//class CustomAction : public ICustomAction
+//{
+//public:
+//   CustomAction()
+//   {
+//   }
+//};
 
-   DeclareCustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
-   }
-   
-   virtual ~DeclareCustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.UnregisterCustomAction(custom_action_type::UniqueId());
-   }
-};
-   
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__

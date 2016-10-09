@@ -43,7 +43,10 @@
 #define REAPERAPI_WANT_format_timestr_pos
 #define REAPERAPI_WANT_parse_timestr
 #define REAPERAPI_WANT_EnumProjectMarkers
+#define REAPERAPI_WANT_EnumProjectMarkers2
+#define REAPERAPI_WANT_EnumProjectMarkers3
 #define REAPERAPI_WANT_AddProjectMarker2
+#define REAPERAPI_WANT_SetProjectMarker3
 #define REAPERAPI_WANT_DeleteProjectMarker
 
 namespace reaper_api {

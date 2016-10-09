@@ -30,9 +30,9 @@
 
 #include <ServiceStatus.h>
 
-namespace ultraschall { namespace reaper {
+#include "ICustomAction.h"
 
-class ICustomAction;
+namespace ultraschall { namespace reaper {
 
 class CustomActionFactory
 {
@@ -40,7 +40,9 @@ public:
    static CustomActionFactory& Instance();
 
    typedef ServiceStatus (*CREATE_CUSTOM_ACTION_FUNCTION)(ICustomAction*&);
+
    ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+
    void UnregisterCustomAction(const std::string& id);
    void UnregisterAllCustomActions();
 
@@ -57,6 +59,24 @@ private:
 
    std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION> functions_;
    mutable std::recursive_mutex functionsLock_;
+};
+
+template<class C> class DeclareCustomAction
+{
+public:
+   typedef typename C custom_action_type;
+
+   DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
+   }
+
+   virtual ~DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.UnregisterCustomAction(custom_action_type::UniqueId());
+   }
 };
 
 }}

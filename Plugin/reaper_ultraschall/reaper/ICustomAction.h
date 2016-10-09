@@ -26,6 +26,7 @@
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
 #include <IUnknown.h>
+#include <ServiceStatus.h>
 
 namespace framework = ultraschall::framework;
 
@@ -34,6 +35,11 @@ namespace ultraschall { namespace reaper {
 class ICustomAction : public framework::IUnknown
 {
 public:
+   static bool ValidateCustomActionId(const int32_t id)
+   {
+      return id != INVALID_CUSTOM_ACTION_ID;
+   }
+
    virtual const char* LocalizedName() const = 0;
    virtual ServiceStatus Execute() = 0;
    
@@ -49,6 +55,8 @@ protected:
 private:
    ICustomAction(const ICustomAction&);
    ICustomAction& operator=(const ICustomAction&);
+
+   static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
 }}

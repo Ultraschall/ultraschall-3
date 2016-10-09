@@ -22,18 +22,18 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_REPLACE_CHAPTER_MARKERS_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_REPLACE_CHAPTER_MARKERS_ACTION_H_INCL__
 
 #include <string>
 
-#include <ResourceManager.h>
+#include <ResourceId.h>
 
-#include "CustomAction.h"
+#include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChaptersToProjectAction : public CustomAction
+class ReplaceChapterMarkersAction : public ICustomAction
 {
 public:
    static const char* UniqueId();
@@ -45,20 +45,17 @@ public:
    virtual ServiceStatus Execute() override;
 
 protected:
-   virtual ~SaveChaptersToProjectAction();
-
-   static const std::string Path();
+   virtual ~ReplaceChapterMarkersAction();
 
 private:
-   SaveChaptersToProjectAction();
+	ReplaceChapterMarkersAction();
    
    framework::ResourceId actionNameId_;
    framework::ResourceId successMessageId_;
    framework::ResourceId failureMessageId_;
-   framework::ResourceId notFoundMessageId_;
-   framework::ResourceId noProjectNameMessageId_;
+   framework::ResourceId fileBrowserTitleId_;
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_REPLACE_CHAPTER_MARKERS_ACTION_H_INCL__

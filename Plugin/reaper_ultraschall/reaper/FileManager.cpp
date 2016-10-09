@@ -87,7 +87,7 @@ std::string FileManager::BrowseForFiles(const std::string& title)
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if(SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUtf16String(title).c_str());
+        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
 
         COMDLG_FILTERSPEC filters[3] = {0};
         filters[0].pszName = L"MP4 chapters";
@@ -112,7 +112,7 @@ std::string FileManager::BrowseForFiles(const std::string& title)
                 hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
                 if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
                 {
-                    path = framework::MakeUtf8String(fileSystemPath);
+                    path = framework::MakeUTF8String(fileSystemPath);
                     CoTaskMemFree(fileSystemPath);
                 }
 
@@ -166,11 +166,11 @@ std::string FileManager::BrowseForFolder(const std::string& title, const std::st
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if(SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUtf16String(title).c_str());
+        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
         if(folder.empty() == false)
         {
             IShellItem* psi = nullptr;
-            hr = SHCreateItemFromParsingName(framework::MakeUtf16String(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
+            hr = SHCreateItemFromParsingName(framework::MakeUTF16String(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
             if(SUCCEEDED(hr))
             {
                 pfod->SetFolder(psi);
@@ -201,7 +201,7 @@ std::string FileManager::BrowseForFolder(const std::string& title, const std::st
                     hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
                     if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
                     {
-                        path = framework::MakeUtf8String(fileSystemPath);
+                        path = framework::MakeUTF8String(fileSystemPath);
                         CoTaskMemFree(fileSystemPath);
                     }
 
@@ -274,7 +274,7 @@ std::string FileManager::ProgramFilesDirectory()
     HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, 0, &unicodeString);
     if(SUCCEEDED(hr))
     {
-        directory = framework::MakeUtf8String(unicodeString);
+        directory = framework::MakeUTF8String(unicodeString);
         CoTaskMemFree(unicodeString);
     }
 
@@ -291,7 +291,7 @@ std::string FileManager::RoamingAppDataDirectory()
     HRESULT hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, 0, &unicodeString);
     if(SUCCEEDED(hr))
     {
-        directory = framework::MakeUtf8String(unicodeString);
+        directory = framework::MakeUTF8String(unicodeString);
         CoTaskMemFree(unicodeString);
 		unicodeString = 0;
     }

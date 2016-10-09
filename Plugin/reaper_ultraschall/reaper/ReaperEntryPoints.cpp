@@ -40,17 +40,30 @@ namespace reaper_api
    double (*parse_timestr)(const char* buf);
 
    int (*EnumProjectMarkers)(int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut);
+   int (*EnumProjectMarkers2)(ReaProject* proj, int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut);
+   int (*EnumProjectMarkers3)(ReaProject* proj, int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut, int* colorOut);
    int (*AddProjectMarker2)(ReaProject* proj, bool isrgn, double pos, double rgnend, const char* name, int wantidx, int color);
+   bool (*SetProjectMarker3)(ReaProject* proj, int markrgnindexnumber, bool isrgn, double pos, double rgnend, const char* name, int color);
    bool (*DeleteProjectMarker)(ReaProject* proj, int markrgnindexnumber, bool isrgn);
 }
 
 namespace ultraschall { namespace reaper {
 
-static const bool OnCustomAction(KbdSectionInfo*, int cmdId, int, int, int, HWND)
+static bool OnCustomAction(KbdSectionInfo*, int commandId, int, int, int, HWND)
 {
-   return Application::OnCustomAction(cmdId);
+   return Application::OnCustomAction(commandId);
+}
+
+static bool OnStartCommand(int commandId, int)
+{
+   return Application::OnStartCommand(commandId);
 }
    
+static bool OnStopCommand(int commandId, int)
+{
+   return Application::OnStopCommand(commandId);
+}
+
 void ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const char* entryPointName)
 {
    (*((void **)&(entryPoint)) = (void *)ppi->GetFunc(entryPointName));
@@ -76,10 +89,14 @@ ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_pl
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::parse_timestr, "parse_timestr");
 
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers, "EnumProjectMarkers");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers2, "EnumProjectMarkers2");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers3, "EnumProjectMarkers3");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::AddProjectMarker2, "AddProjectMarker2");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteProjectMarker, "DeleteProjectMarker");
    
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
+   reaper_api::plugin_register("hookcommand", (void*)OnStartCommand);
+   reaper_api::plugin_register("hookpostcommand", (void*)OnStopCommand);
 }
 
 REAPER_PLUGIN_HINSTANCE ReaperEntryPoints::instance_ = 0;

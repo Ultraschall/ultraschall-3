@@ -28,49 +28,50 @@
 
 #include <TextFileReader.h>
 #include <StringUtilities.h>
+#include <ResourceManager.h>
 
-#include "InsertChaptersAction.h"
+#include "ReplaceChapterMarkersAction.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
 namespace ultraschall { namespace reaper {
 
-static DeclareCustomAction<InsertChaptersAction> action;
+static DeclareCustomAction<ReplaceChapterMarkersAction> action;
 
-InsertChaptersAction::InsertChaptersAction()
+ReplaceChapterMarkersAction::ReplaceChapterMarkersAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
    if(ServiceSucceeded(status))
    {
-      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Import chapter markers...");
-      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken importieren...");
+      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Replace chapter markers...");
+      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken ersetzen...");
    }
 
    status = resourceManager.RegisterLocalizedString(successMessageId_);
    if(ServiceSucceeded(status))
    {
-      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been added successfully.");
-      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich hinzugefügt.");
+      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been replaced successfully.");
+      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich ersetzt.");
    }
 
    status = resourceManager.RegisterLocalizedString(failureMessageId_);
    if(ServiceSucceeded(status))
    {
-      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be added.");
-      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht hinzugefügt werden.");
+      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be replaced.");
+      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht ersetzt werden.");
    }
 
    status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
    if(ServiceSucceeded(status))
    {
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Import chapter markers...");
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken importieren...");
+      resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Replace chapter markers...");
+      resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken ersetzen...");
    }
 }
 
-InsertChaptersAction::~InsertChaptersAction()
+ReplaceChapterMarkersAction::~ReplaceChapterMarkersAction()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    resourceManager.UnregisterLocalizedString(actionNameId_);
@@ -79,25 +80,25 @@ InsertChaptersAction::~InsertChaptersAction()
    resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
 }
 
-const char* InsertChaptersAction::UniqueId()
+const char* ReplaceChapterMarkersAction::UniqueId()
 {
-   return "ULTRASCHALL_INSERT_CHAPTERS";
+   return "ULTRASCHALL_REPLACE_CHAPTERS";
 }
 
-ServiceStatus InsertChaptersAction::CreateCustomAction(ICustomAction*& pCustomAction)
+ServiceStatus ReplaceChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
 {
-   pCustomAction = new InsertChaptersAction();
+   pCustomAction = new ReplaceChapterMarkersAction();
    PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
    return SERVICE_SUCCESS;
 }
 
-const char* InsertChaptersAction::LocalizedName() const
+const char* ReplaceChapterMarkersAction::LocalizedName() const
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
    return resourceManager.GetLocalizedString(actionNameId_);
 }
 
-ServiceStatus InsertChaptersAction::Execute()
+ServiceStatus ReplaceChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
@@ -111,35 +112,32 @@ ServiceStatus InsertChaptersAction::Execute()
    for(const std::string& line : lines)
    {
       const std::vector<std::string> items = framework::split(line, ' ');
-      if(items.size() > 0)
+      if(items.size() > 1)
       {
          const double timestamp = application.StringToTimestamp(items[0]);
-         std::string name;
-         if(items.size() > 1)
-         {
-            name = items[1];
-         }
-         
+         std::string name = items[1];
          for(size_t i = 2; i < items.size(); i++)
          {
             name += " " + items[i];
          }
-         
+
          chapterMarkers.push_back(framework::ChapterMarker(timestamp, name));
       }
    }
+
+   application.DeleteAllChapterMarkers();
    
-   size_t addedChapterMarkers = 0;
+   size_t replacedChapterMarkers = 0;
    for(size_t i = 0; i < chapterMarkers.size(); i++)
    {
       const int32_t index = application.SetChapterMarker(chapterMarkers[i]);
       if(index > -1)
       {
-         addedChapterMarkers++;
+         replacedChapterMarkers++;
       }
    }
 
-   if(chapterMarkers.size() == addedChapterMarkers)
+   if(chapterMarkers.size() == replacedChapterMarkers)
    {
       NotificationWindow::Show(successMessageId_);
       status = SERVICE_SUCCESS;
