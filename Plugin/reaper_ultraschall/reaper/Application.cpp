@@ -107,7 +107,8 @@ bool Application::OnStartCommand(const int32_t id)
       executed = true;
    }
 
-   return executed;
+   //return executed;
+   return false;
 }
 
 bool Application::OnStopCommand(const int32_t id)
@@ -126,12 +127,8 @@ bool Application::OnStopCommand(const int32_t id)
       executed = true;
    }
 
-   return executed;
-}
-
-intptr_t Application::GetCurrentProject() const
-{
-   return (intptr_t)reaper_api::EnumProjects(-1, 0, 0);
+   //return executed;
+   return false;
 }
 
 std::string Application::GetExportPathName() const
@@ -351,7 +348,7 @@ int32_t Application::SetChapterMarker(const framework::ChapterMarker& projectMar
 
 bool Application::DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const
 {
-   return reaper_api::DeleteProjectMarker(0, chapterMarker.Index(), chapterMarker.IsRegion());
+   return reaper_api::DeleteProjectMarker(0, chapterMarker.Index(), false);
 }
 
 void Application::DeleteAllChapterMarkers() const

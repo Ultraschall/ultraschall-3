@@ -18,9 +18,6 @@
     <ClCompile Include="framework\BinaryFileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\ChapterMarker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="framework\ResourceId.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -138,12 +135,30 @@
     <ClCompile Include="reaper\CommandManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reaper\ProjectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\Project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\NewProjectCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Annotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\ChapterMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\EditMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\ShownoteMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework\ChapterMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework\Framework.h">
@@ -306,6 +321,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\CommandManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ProjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\NewProjectCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Annotation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\ChapterMarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\EditMarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\ShownoteMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

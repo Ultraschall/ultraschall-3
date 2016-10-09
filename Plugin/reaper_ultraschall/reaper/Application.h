@@ -75,8 +75,6 @@ public:
    std::string TimestampToString(const double timestamp) const;
    double StringToTimestamp(const std::string& input) const;
 
-   intptr_t GetCurrentProject() const;
-   
    std::vector<framework::ChapterMarker> ChapterMarkers() const;
    int32_t SetChapterMarker(const framework::ChapterMarker& chapterMarker) const;
    bool DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const;

@@ -22,17 +22,17 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#include "EditMarker.h"
 
 namespace ultraschall { namespace framework {
 
-ChapterMarker::ChapterMarker() :
+EditMarker::EditMarker() :
    Annotation()
 {
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
+EditMarker::EditMarker(const double position, const std::string& name, const int index) :
+   Annotation(position, name, 0x000000ff, index)
 {
 }
 

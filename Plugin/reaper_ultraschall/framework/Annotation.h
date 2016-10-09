@@ -22,19 +22,78 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_FRAMEWORK_ANNOTATION_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_ANNOTATION_H_INCL__
+
+#include <string>
 
 namespace ultraschall { namespace framework {
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+class Annotation
 {
+public:
+   inline double Position() const;
+   inline const std::string& Name() const;
+   inline int Color() const;
+   inline int Index() const;
+
+protected:
+   Annotation();
+   Annotation(const double position, const std::string& name, const int32_t color, const int index = -1);
+
+   inline void Position(const double position);
+   inline void Name(const std::string& name);
+   inline void Color(const int color);
+   inline void Index(const int index);
+   
+private:
+   double position_;
+   std::string name_;
+   int index_;
+   int color_;
+};
+
+inline double Annotation::Position() const
+{
+   return position_;
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
+inline void Annotation::Position(const double position)
 {
+   position_ = position;
+}
+
+inline const std::string& Annotation::Name() const
+{
+   return name_;
+}
+
+inline void Annotation::Name(const std::string& name)
+{
+   name_ = name;
+}
+
+inline int Annotation::Index() const
+{
+   return index_;
+}
+   
+inline void Annotation::Index(const int index)
+{
+   index_ = index;
+}
+
+inline int Annotation::Color() const
+{
+   return color_;
+}
+
+inline void Annotation::Color(const int color)
+{
+   color_ = color;
 }
 
 }}
+
+#endif // #ifndef __ULTRASCHALL_FRAMEWORK_ANNOTATION_H_INCL__
 

@@ -25,6 +25,7 @@
 #include <Framework.h>
 
 #include "OpenProjectCommand.h"
+#include "ProjectManager.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -46,14 +47,30 @@ ServiceStatus OpenProjectCommand::CreateCommand(ICommand*& pCommand)
 
 ServiceStatus OpenProjectCommand::StartCommand()
 {
-   ServiceStatus status = SERVICE_SUCCESS;
-   return status;
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(Project::Validate(currentProject) == true)
+   {
+      initialProjectPath_ = currentProject.FullPathName();
+   }
+
+   return SERVICE_SUCCESS;
 }
 
 ServiceStatus OpenProjectCommand::StopCommand()
 {
-   ServiceStatus status = SERVICE_SUCCESS;
-   return status;
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(Project::Validate(currentProject) == true)
+   {
+      resultProjectPath_ = currentProject.FullPathName();
+      if(initialProjectPath_ != resultProjectPath_)
+      {
+         projectManager.AddProject(currentProject);
+      }
+   }
+
+   return SERVICE_SUCCESS;
 }
 
 }

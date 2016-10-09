@@ -42,9 +42,10 @@
 #include "ToggleEditMarkersAction.h"
 #include "ToggleShownoteMarkersAction.h"
 
-#include "CloseProjectCommand.h"
+#include "NewProjectCommand.h"
 #include "OpenProjectCommand.h"
 #include "SaveProjectCommand.h"
+#include "CloseProjectCommand.h"
 
 namespace reaper = ultraschall::reaper;
 
@@ -78,9 +79,10 @@ extern "C"
 							application.RegisterCustomAction<reaper::ToggleEditMarkersAction>();
 							application.RegisterCustomAction<reaper::ToggleShownoteMarkersAction>();
 
-                     application.RegisterCommand<reaper::CloseProjectCommand>(40860);
+                     application.RegisterCommand<reaper::NewProjectCommand>(40023);
                      application.RegisterCommand<reaper::OpenProjectCommand>(40025);
                      application.RegisterCommand<reaper::SaveProjectCommand>(40026);
+                     application.RegisterCommand<reaper::CloseProjectCommand>(40860);
 
 							// run the update action on startup
 							application.InvokeCustomAction<reaper::UpdateCheckAction>();

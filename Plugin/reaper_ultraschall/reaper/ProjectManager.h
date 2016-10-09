@@ -22,19 +22,43 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
+#define __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
 
-namespace ultraschall { namespace framework {
+#include <mutex>
+#include <map>
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+#include "Project.h"
+
+namespace ultraschall {
+namespace reaper {
+
+class ProjectManager
 {
+public:
+   static ProjectManager& Instance();
+
+   Project CurrentProject() const;
+   std::string CurrentProjectName() const;
+
+   void AddProject(const Project& project);
+   void RemoveProject(const Project& project);
+
+protected:
+   virtual ~ProjectManager();
+
+private:
+   ProjectManager();
+
+   ProjectManager(const ProjectManager&);
+   ProjectManager& operator=(const ProjectManager&);
+
+   std::map<std::string, Project> projects_;
+   mutable std::recursive_mutex projectsLock_;
+};
+
+}
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
-{
-}
-
-}}
+#endif // #ifndef __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
 

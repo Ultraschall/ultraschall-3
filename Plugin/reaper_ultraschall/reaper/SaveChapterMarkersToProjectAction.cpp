@@ -30,6 +30,7 @@
 
 #include "SaveChapterMarkersToProjectAction.h"
 #include "Application.h"
+#include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
@@ -112,21 +113,31 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
    const std::vector<framework::ChapterMarker> chapterMarkers = application.ChapterMarkers();
    if(chapterMarkers.empty() == false)
    {
-      const std::string path = Path();
-      if(path.empty() == false)
+      Project currentProject = ProjectManager::Instance().CurrentProject();
+      const std::string projectFolder = currentProject.FolderName();
+      if(projectFolder.empty() == false)
       {
-         std::ofstream output(path, std::ios::out);
-         for(size_t i = 0; i < chapterMarkers.size(); i++)
+         const std::string projectName = currentProject.Name();
+         if(projectName.empty() == false)
          {
-            const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
-            const std::string entry = timestamp + " " + chapterMarkers[i].Name();
-            output << entry << std::endl;
-         }
+            const std::string fullPath = FileManager::AppendPath(projectFolder, projectName + ".chapters.txt");
+            std::ofstream output(fullPath, std::ios::out);
+            for(size_t i = 0; i < chapterMarkers.size(); i++)
+            {
+               const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
+               const std::string entry = timestamp + " " + chapterMarkers[i].Name();
+               output << entry << std::endl;
+            }
 
-         output.close();
-         
-         status = SERVICE_SUCCESS;
-         NotificationWindow::Show(successMessageId_);
+            output.close();
+
+            status = SERVICE_SUCCESS;
+            NotificationWindow::Show(successMessageId_);
+         }
+         else
+         {
+            NotificationWindow::Show(noProjectNameMessageId_);
+         }
       }
       else
       {
@@ -141,23 +152,6 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
    return status;
 }
 
-std::string SaveChapterMarkersToProjectAction::Path()
-{
-   std::string path;
-
-   const Application& application = Application::Instance();
-   const std::string projectFolder = application.GetProjectFolderName();
-   if(projectFolder.empty() == false)
-   {
-      const std::string projectName = application.GetProjectName();
-      if(projectName.empty() == false)
-      {
-         path = FileManager::AppendPath(projectFolder, projectName + ".chapters.txt");
-      }
-   }
-
-   return path;
 }
-
-}}
+}
 

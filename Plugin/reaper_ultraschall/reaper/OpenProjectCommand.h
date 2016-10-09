@@ -25,6 +25,8 @@
 #ifndef __ULTRASCHALL_REAPER_OPEN_PROJECT_COMMAND_H_INCL__
 #define __ULTRASCHALL_REAPER_OPEN_PROJECT_COMMAND_H_INCL__
 
+#include <string>
+
 #include "ICommand.h"
 
 namespace ultraschall {
@@ -44,6 +46,9 @@ protected:
 
 private:
    OpenProjectCommand();
+
+   std::string initialProjectPath_;
+   std::string resultProjectPath_;
 };
 
 }

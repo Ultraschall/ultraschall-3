@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,17 +22,17 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#include "Annotation.h"
 
 namespace ultraschall { namespace framework {
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+Annotation::Annotation() :
+   position_(-1), color_(-1), index_(-1)
 {
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
+Annotation::Annotation(const double position, const std::string& name, const int color, const int index) :
+   position_(position), name_(name), color_(color), index_(index)
 {
 }
 

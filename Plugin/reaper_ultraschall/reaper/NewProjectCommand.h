@@ -22,19 +22,31 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_REAPER_NEW_PROJECT_COMMAND_H_INCL__
+#define __ULTRASCHALL_REAPER_NEW_PROJECT_COMMAND_H_INCL__
 
-namespace ultraschall { namespace framework {
+#include "ICommand.h"
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+namespace ultraschall {
+namespace reaper {
+
+class NewProjectCommand : public ICommand
 {
+public:
+   static ServiceStatus CreateCommand(ICommand*& pCustomAction);
+
+   virtual ServiceStatus StartCommand() override;
+
+   virtual ServiceStatus StopCommand() override;
+
+protected:
+   virtual ~NewProjectCommand();
+
+private:
+   NewProjectCommand();
+};
+
+}
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
-{
-}
-
-}}
-
+#endif // #ifndef __ULTRASCHALL_REAPER_NEW_PROJECT_COMMAND_H_INCL__

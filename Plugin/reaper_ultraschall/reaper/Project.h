@@ -22,19 +22,54 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_REAPER_PROJECT_H_INCL__
+#define __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 
-namespace ultraschall { namespace framework {
+#include <string>
+#include <mutex>
+#include <vector>
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+#include <ChapterMarker.h>
+#include <EditMarker.h>
+#include <ShownoteMarker.h>
+
+namespace framework = ultraschall::framework;
+
+namespace ultraschall {
+namespace reaper {
+
+class Project
 {
+public:
+   Project();
+   Project(void* externalReference);
+   virtual ~Project();
+
+   Project(const Project& rhs);
+   Project& operator=(const Project& rhs);
+
+   static bool Validate(const Project& project);
+
+   std::string FullPathName() const;
+   std::string FolderName() const;
+   std::string FileName() const;
+   std::string Name() const;
+
+private:
+   void* externalReference_;
+
+   std::vector<framework::ChapterMarker> chapterMarkers_;
+   mutable std::recursive_mutex chapterMarkersLock_;
+
+   std::vector<framework::EditMarker> editMarkers_;
+   mutable std::recursive_mutex editMarkersLock_;
+
+   std::vector<framework::ShownoteMarker> shownoteMarkers_;
+   mutable std::recursive_mutex shownoteMarkersLock_;
+};
+
+}
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
-{
-}
-
-}}
+#endif // #ifndef __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 

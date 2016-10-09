@@ -31,33 +31,35 @@
 #include <ResourceId.h>
 
 namespace ultraschall {
-    namespace reaper {
+namespace reaper {
 
-        class FileManager
-        {
-        public:
-            static std::string BrowseForFiles(const framework::ResourceId id);
-            static std::string BrowseForFiles(const std::string& title);
+class FileManager
+{
+public:
+   static char PathSeparator();
 
-            static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
-            static std::string BrowseForFolder(const std::string& title, const std::string& folder);
+   static std::string BrowseForFiles(const framework::ResourceId id);
+   static std::string BrowseForFiles(const std::string& title);
 
-            static std::string AppendPath(const std::string& prefix, const std::string& append);
+   static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
+   static std::string BrowseForFolder(const std::string& title, const std::string& folder);
 
-            static std::string UserHomeDirectory();
-            static std::string UserApplicationSupportDirectory();
-            static std::string SystemApplicationSupportDirectory();
+   static std::string AppendPath(const std::string& prefix, const std::string& append);
 
-            static std::string ProgramFilesDirectory();
-            static std::string RoamingAppDataDirectory();
+   static std::string UserHomeDirectory();
+   static std::string UserApplicationSupportDirectory();
+   static std::string SystemApplicationSupportDirectory();
 
-            static bool FileExists(const std::string& path);
-            static std::vector<std::string> ReadFile(const std::string& filename);
+   static std::string ProgramFilesDirectory();
+   static std::string RoamingAppDataDirectory();
 
-            static std::string ReadVersionFromFile(const std::string& path);
-        };
+   static bool FileExists(const std::string& path);
+   static std::vector<std::string> ReadFile(const std::string& filename);
 
-    }
+   static std::string ReadVersionFromFile(const std::string& path);
+};
+
+}
 }
 
 #endif // #ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__

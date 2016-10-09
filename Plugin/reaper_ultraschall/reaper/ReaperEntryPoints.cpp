@@ -34,6 +34,7 @@ namespace reaper_api
    const char* (*GetAppVersion)();
 
    void (*GetProjectPath)(char* buf, int buf_sz);
+   void (*GetProjectPathEx)(ReaProject* proj, char* buf, int buf_sz);
    ReaProject* (*EnumProjects)(int idx, char* projfn, int projfn_sz);
 
    void (*format_timestr_pos)(double tpos, char* buf, int buf_sz, int modeoverride);
@@ -83,6 +84,7 @@ ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_pl
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetAppVersion, "GetAppVersion");
 
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjectPath, "GetProjectPath");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjectPathEx, "GetProjectPathEx");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjects, "EnumProjects");
 
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::format_timestr_pos, "format_timestr_pos");

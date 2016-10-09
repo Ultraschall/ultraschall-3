@@ -22,19 +22,21 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
+
+#include <Annotation.h>
 
 namespace ultraschall { namespace framework {
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+class ShownoteMarker : public Annotation
 {
-}
-
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
-{
-}
+public:
+   ShownoteMarker();
+   ShownoteMarker(const double position, const std::string& name, const int index = -1);
+};
 
 }}
+
+#endif // #ifndef __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
 

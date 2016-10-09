@@ -22,19 +22,40 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#include <Framework.h>
 
-namespace ultraschall { namespace framework {
+#include "NewProjectCommand.h"
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+namespace ultraschall {
+namespace reaper {
+
+NewProjectCommand::NewProjectCommand()
 {
 }
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
+NewProjectCommand::~NewProjectCommand()
 {
 }
 
-}}
+ServiceStatus NewProjectCommand::CreateCommand(ICommand*& pCommand)
+{
+   pCommand = new NewProjectCommand();
+   PRECONDITION_RETURN(pCommand != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+ServiceStatus NewProjectCommand::StartCommand()
+{
+   ServiceStatus status = SERVICE_SUCCESS;
+   return status;
+}
+
+ServiceStatus NewProjectCommand::StopCommand()
+{
+   ServiceStatus status = SERVICE_SUCCESS;
+   return status;
+}
+
+}
+}
 

@@ -39,6 +39,7 @@
 #define REAPERAPI_WANT_plugin_register
 #define REAPERAPI_WANT_GetAppVersion
 #define REAPERAPI_WANT_GetProjectPath
+#define REAPERAPI_WANT_GetProjectPathEx
 #define REAPERAPI_WANT_EnumProjects
 #define REAPERAPI_WANT_format_timestr_pos
 #define REAPERAPI_WANT_parse_timestr

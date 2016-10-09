@@ -165,11 +165,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp" />
+    <ClCompile Include="framework\Annotation.cpp" />
     <ClCompile Include="framework\ChapterMarker.cpp" />
+    <ClCompile Include="framework\EditMarker.cpp" />
     <ClCompile Include="framework\ResourceId.cpp" />
     <ClCompile Include="framework\ResourceManager.cpp" />
     <ClCompile Include="framework\ServiceFactory.cpp" />
     <ClCompile Include="framework\ServiceManager.cpp" />
+    <ClCompile Include="framework\ShownoteMarker.cpp" />
     <ClCompile Include="framework\StringUtilities.cpp" />
     <ClCompile Include="framework\TextFileReader.cpp" />
     <ClCompile Include="framework\TextFileWriter.cpp" />
@@ -186,8 +189,11 @@
     <ClCompile Include="reaper\FileManager.cpp" />
     <ClCompile Include="reaper\InsertChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\InvalidEntryPointException.cpp" />
+    <ClCompile Include="reaper\NewProjectCommand.cpp" />
     <ClCompile Include="reaper\NotificationWindow.cpp" />
     <ClCompile Include="reaper\OpenProjectCommand.cpp" />
+    <ClCompile Include="reaper\Project.cpp" />
+    <ClCompile Include="reaper\ProjectManager.cpp" />
     <ClCompile Include="reaper\ReaperEntryPoints.cpp" />
     <ClCompile Include="reaper\ReaperVersionCheck.cpp" />
     <ClCompile Include="reaper\reaper_ultraschall.cpp" />
@@ -208,7 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h" />
+    <ClInclude Include="framework\Annotation.h" />
     <ClInclude Include="framework\ChapterMarker.h" />
+    <ClInclude Include="framework\EditMarker.h" />
     <ClInclude Include="framework\FileUtilities.h" />
     <ClInclude Include="framework\Framework.h" />
     <ClInclude Include="framework\IActivationService.h" />
@@ -224,6 +232,7 @@
     <ClInclude Include="framework\SharedObject.h" />
     <ClInclude Include="framework\SharedObjectFactory.h" />
     <ClInclude Include="framework\SharedObjectManager.h" />
+    <ClInclude Include="framework\ShownoteMarker.h" />
     <ClInclude Include="framework\Stream.h" />
     <ClInclude Include="framework\StringDefs.h" />
     <ClInclude Include="framework\StringUtilities.h" />
@@ -244,8 +253,11 @@
     <ClInclude Include="reaper\ICommand.h" />
     <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
     <ClInclude Include="reaper\InvalidEntryPointException.h" />
+    <ClInclude Include="reaper\NewProjectCommand.h" />
     <ClInclude Include="reaper\NotificationWindow.h" />
     <ClInclude Include="reaper\OpenProjectCommand.h" />
+    <ClInclude Include="reaper\Project.h" />
+    <ClInclude Include="reaper\ProjectManager.h" />
     <ClInclude Include="reaper\ReaperEntryPoints.h" />
     <ClInclude Include="reaper\ReaperVersionCheck.h" />
     <ClInclude Include="reaper\ReplaceChapterMarkersAction.h" />

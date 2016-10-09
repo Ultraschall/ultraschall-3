@@ -45,6 +45,15 @@ namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
 
+char FileManager::PathSeparator()
+{
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+   return '/'
+#else
+   return '\\';
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+}
+
 std::string FileManager::BrowseForFiles(const framework::ResourceId id)
 {
     framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();

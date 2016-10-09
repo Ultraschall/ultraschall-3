@@ -47,8 +47,6 @@ public:
 protected:
    virtual ~SaveChapterMarkersToProjectAction();
 
-   std::string Path();
-
 private:
 	SaveChapterMarkersToProjectAction();
    

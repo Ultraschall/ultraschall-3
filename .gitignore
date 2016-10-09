@@ -6,4 +6,5 @@ plugin/*/[R|r]elease/
 x64/
 *.user
 *.VC.db
+*VC.opendb
 *.aps
