@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ CustomActionFactory& CustomActionFactory::Instance()
    return self;
 }
 
-const ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
+ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
 {
    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
    PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
@@ -73,30 +73,28 @@ void CustomActionFactory::UnregisterCustomAction(const std::string& id)
 
    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.find(id);
-   if (functions_.end() != i)
+   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.find(id);
+   if (functions_.end() != functionIterator)
    {
-      functions_.erase(i);
+      functions_.erase(functionIterator);
    }
 }
 
 void CustomActionFactory::UnregisterAllCustomActions()
 {
-   PRECONDITION(functions_.empty() == false);
-
    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
    while(functions_.empty() == false)
    {
-      const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.begin();
-      if(functions_.end() != i)
+      const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.begin();
+      if(functions_.end() != functionIterator)
       {
-         functions_.erase(i);
+         functions_.erase(functionIterator);
       }
    }
 }
 
-const ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
+ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
 {
    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
 

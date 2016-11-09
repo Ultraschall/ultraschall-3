@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,34 +31,35 @@
 #include <ResourceId.h>
 
 namespace ultraschall {
-    namespace reaper {
+namespace reaper {
 
-        class FileManager
-        {
-        public:
-            static const std::string BrowseForFiles(const framework::ResourceId id);
-            static const std::string BrowseForFiles(const std::string& title);
+class FileManager
+{
+public:
+   static char PathSeparator();
 
-            static const std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
-            static const std::string BrowseForFolder(const std::string& title, const std::string& folder);
+   static std::string BrowseForFiles(const framework::ResourceId id);
+   static std::string BrowseForFiles(const std::string& title);
 
-            static const std::string AppendPath(const std::string& prefix, const std::string& append);
+   static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
+   static std::string BrowseForFolder(const std::string& title, const std::string& folder);
 
-            static const std::string UserHomeDirectory();
-            static const std::string UserApplicationSupportDirectory();
-            static const std::string SystemApplicationSupportDirectory();
+   static std::string AppendPath(const std::string& prefix, const std::string& append);
 
-            static const std::string ProgramFilesDirectory();
-            static const std::string RoamingAppDataDirectory();
+   static std::string UserHomeDirectory();
+   static std::string UserApplicationSupportDirectory();
+   static std::string SystemApplicationSupportDirectory();
 
-            static const bool FileExists(const std::string& path);
-            static const std::vector<std::string> ReadFile(const std::string& filename);
+   static std::string ProgramFilesDirectory();
+   static std::string RoamingAppDataDirectory();
 
-            static std::string ReadVersionFromFile(const std::string& path);
-        private:
-        };
+   static bool FileExists(const std::string& path);
+   static std::vector<std::string> ReadFile(const std::string& filename);
 
-    }
+   static std::string ReadVersionFromFile(const std::string& path);
+};
+
+}
 }
 
 #endif // #ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__

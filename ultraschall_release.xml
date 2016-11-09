@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Ultraschall REAPER Extension</title>
+    <link>https://ultraschall.io/ultraschall_release.xml</link>
+    <description>Most recent changes.</description>
+    <language>en</language>
+      <item>
+        <title>Version 2.3 "Verner Panton"</title>
+        <description>
+          <![CDATA[
+            <html>
+            <head>
+            <style>
+              html, body {
+                font-family: "Helvetica Neue", Arial, sans-serif;
+                font-size: 11px;
+              }
+            </style>
+            </head>
+            <body>
+              <h2>Changelog for Version 2.3:</h2>
+              <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                <li>Suspendisse sed felis ac ante ultrices rhoncus. Etiam quis elit vel nibh placerat facilisis in id leo.</li>
+                <li>Vestibulum nec tortor odio, nec malesuada libero. Cras vel convallis nunc.</li>
+                <li>Suspendisse tristique massa eget velit consequat tincidunt. Praesent sodales hendrerit pretium.</li>
+              </ul>
+              <p>
+                <a href="http://ultraschall.fm/">Download here</a>
+              </p>
+            </body>
+            </html>
+          ]]>
+        </description>
+        <pubDate>Wed, 9 Mar 2016 12:00:00 +0000</pubDate>
+        <enclosure url="" sparkle:version="2.3" length="" type="application/octet-stream" sparkle:dsaSignature="" />
+      </item>
+  </channel>
+</rss>

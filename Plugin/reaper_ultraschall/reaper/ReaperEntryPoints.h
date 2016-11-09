@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,17 @@
 #define REAPERAPI_WANT_plugin_register
 #define REAPERAPI_WANT_GetAppVersion
 #define REAPERAPI_WANT_GetProjectPath
+#define REAPERAPI_WANT_GetProjectPathEx
 #define REAPERAPI_WANT_EnumProjects
 #define REAPERAPI_WANT_format_timestr_pos
 #define REAPERAPI_WANT_parse_timestr
 #define REAPERAPI_WANT_EnumProjectMarkers
+#define REAPERAPI_WANT_EnumProjectMarkers2
+#define REAPERAPI_WANT_EnumProjectMarkers3
 #define REAPERAPI_WANT_AddProjectMarker2
+#define REAPERAPI_WANT_SetProjectMarker3
 #define REAPERAPI_WANT_DeleteProjectMarker
+
 namespace reaper_api {
 #include <reaper_plugin_functions.h>
 }
@@ -54,10 +59,11 @@ namespace ultraschall { namespace reaper {
 class ReaperEntryPoints
 {
 public:
-   static void Setup(reaper_plugin_info_t* pPluginInfo);
+   static REAPER_PLUGIN_HINSTANCE instance_;
    
+   static void Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 private:
-   ReaperEntryPoints(reaper_plugin_info_t* pPluginInfo);
+   ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 };
 
 }}

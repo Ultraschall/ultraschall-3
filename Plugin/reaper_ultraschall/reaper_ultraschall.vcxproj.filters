@@ -13,21 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Submodules">
-      <UniqueIdentifier>{2d1cbca2-6446-4c68-87f1-244f4c7a0809}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Submodules\zlib">
-      <UniqueIdentifier>{d7eb355e-f90c-4115-ada7-4df2b39ff6b7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="framework\ChapterMarker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="framework\Malloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="framework\ResourceId.cpp">
@@ -42,9 +30,6 @@
     <ClCompile Include="framework\ServiceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\Stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="framework\StringUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,9 +40,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="framework\TranscriptItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\About.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reaper\AboutAction.cpp">
@@ -81,19 +63,7 @@
     <ClCompile Include="reaper\FileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\HubVersionCheck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\InsertChaptersAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\InsertTranscriptAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\InvalidEntryPointException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\PatchConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reaper\reaper_ultraschall.cpp">
@@ -105,15 +75,6 @@
     <ClCompile Include="reaper\ReaperVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\ReplaceChaptersAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\SaveChaptersAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\SaveChaptersToProjectAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\SoundboardVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,25 +84,10 @@
     <ClCompile Include="reaper\ThemeVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\UnsupportedPlatformException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\StudioLinkVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Submodules\zlib\contrib\minizip\ioapi.c">
-      <Filter>Submodules\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Submodules\zlib\contrib\minizip\iowin32.c">
-      <Filter>Submodules\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Submodules\zlib\contrib\minizip\unzip.c">
-      <Filter>Submodules\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\UpdateCheckAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\PluginVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reaper\VersionString.cpp">
@@ -150,12 +96,69 @@
     <ClCompile Include="reaper\NotificationWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reaper\VersionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\ToggleChapterMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\ToggleEditMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\ToggleShownoteMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SaveChapterMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SaveChapterMarkersToProjectAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\InsertChapterMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\ReplaceChapterMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\CloseProjectCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\OpenProjectCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SaveProjectCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\CommandFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\CommandManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\ProjectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\Project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\NewProjectCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Annotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\ChapterMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\EditMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\ShownoteMarker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework\ChapterMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework\Framework.h">
@@ -191,15 +194,6 @@
     <ClInclude Include="framework\ServiceStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\SharedObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework\SharedObjectFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework\SharedObjectManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="framework\Stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -213,9 +207,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework\TranscriptItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\About.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\AboutAction.h">
@@ -239,37 +230,16 @@
     <ClInclude Include="reaper\FileManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\HubVersionCheck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\ICustomAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\InsertChaptersAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\InsertTranscriptAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\InvalidEntryPointException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\PatchConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\ReaperEntryPoints.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\ReaperVersionCheck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\ReplaceChaptersAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\SaveChaptersAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\SaveChaptersToProjectAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\SoundboardVersionCheck.h">
@@ -284,31 +254,94 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\UnsupportedPlatformException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\StudioLinkVersionCheck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Submodules\zlib\contrib\minizip\ioapi.h">
-      <Filter>Submodules\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="Submodules\zlib\contrib\minizip\iowin32.h">
-      <Filter>Submodules\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="Submodules\zlib\contrib\minizip\unzip.h">
-      <Filter>Submodules\zlib</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\UpdateCheckAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\PluginVersionCheck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\VersionString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\NotificationWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\VersionHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\FileUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\StringDefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\SharedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\SharedObjectFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\SharedObjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ToggleChapterMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ToggleEditMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ToggleShownoteMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\InsertChapterMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ReplaceChapterMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SaveChapterMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SaveChapterMarkersToProjectAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ICommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\CloseProjectCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\OpenProjectCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SaveProjectCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\CommandFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\CommandManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ProjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\NewProjectCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Annotation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\ChapterMarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\EditMarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\ShownoteMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -49,7 +49,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 
 Ultraschall is Open Source.
 
-- Twitter: [@ultraschall_fm](https://twitter.com/ultraschall_fm)
+- Twitter: @[ultraschall_fm](https://twitter.com/ultraschall_fm)
 - GitHub: <https://github.com/Ultraschall/REAPER>
 - Support Forum: <https://sendegate.de/c/ultraschall>
 - Project Website, download and blog: <http:ultraschall.fm>
@@ -64,37 +64,37 @@ Ultraschall is Open Source.
 
 ### Credits:
 
-Our grandiose logo and color scheme was designed by [@graphorama](https://twitter.com/graphorama). Further thanks go out to our beta testers:
+Our grandiose logo and color scheme was designed by @[graphorama](https://twitter.com/graphorama). Further thanks go out to our beta testers:
 
-- [@cyberage](https://twitter.com/cyberage)
-- [@dafisch](https://twitter.com/dafisch)
-- [@fbrem](https://twitter.com/fbrem)
-- [@flowfx](https://twitter.com/flowfx)
-- [@mcsnider](https://twitter.com/macsnider)
-- [@herrvonspeck](https://twitter.com/herrvonspeck)
-- [@hoersuppe](https://twitter.com/hoersuppe)
-- [@klein_p](https://twitter.com/klein_p)
-- [@nitramred](https://twitter.com/nitramred)
-- [@nsonic](https://twitter.com/nsonic)
-- [@timpritlove](https://twitter.com/timpritlove)
-- [@opendev](https://twitter.com/opendev)
-- [@ronbuehler](https://twitter.com/ronbuehler)
-- [@audioponies](https://twitter.com/audioponies)
-- [@pixelpille](https://twitter.com/pixelpille)
-- [@anbru](https://twitter.com/anbru)
-- [@mrtoto](https://twitter.com/mrtoto)
-- [@matthiasfromm](https://twitter.com/matthiasfromm)
-- [@343max](https://twitter.com/343max)
-- [@elicee](https://twitter.com/elicee)
-- [@pkurschildgen](https://twitter.com/pkurschildgen)
-- [@hermes](https://twitter.com/hermes)
-- [@ikari](https://twitter.com/ikari)
-- [@fernsehmuell](https://twitter.com/fernsehmuell)
-- [@vollraute](https://twitter.com/vollraute)
-- [@david_1701](https://twitter.com/david_1701)
-- [@michaelblum](https://twitter.com/michaelblum)
-- [@kleinesp](https://twitter.com/kleinesp)
-- [@KonSciencePod](https://twitter.com/KonSciencePod)
+- @[cyberage](https://twitter.com/cyberage)
+- @[dafisch](https://twitter.com/dafisch)
+- @[fbrem](https://twitter.com/fbrem)
+- @[flowfx](https://twitter.com/flowfx)
+- @[mcsnider](https://twitter.com/macsnider)
+- @[herrvonspeck](https://twitter.com/herrvonspeck)
+- @[hoersuppe](https://twitter.com/hoersuppe)
+- @[klein_p](https://twitter.com/klein_p)
+- @[nitramred](https://twitter.com/nitramred)
+- @[nsonic](https://twitter.com/nsonic)
+- @[timpritlove](https://twitter.com/timpritlove)
+- @[opendev](https://twitter.com/opendev)
+- @[ronbuehler](https://twitter.com/ronbuehler)
+- @[audioponies](https://twitter.com/audioponies)
+- @[pixelpille](https://twitter.com/pixelpille)
+- @[anbru](https://twitter.com/anbru)
+- @[mrtoto](https://twitter.com/mrtoto)
+- @[matthiasfromm](https://twitter.com/matthiasfromm)
+- @[343max](https://twitter.com/343max)
+- @[elicee](https://twitter.com/elicee)
+- @[pkurschildgen](https://twitter.com/pkurschildgen)
+- @[hermes](https://twitter.com/hermes)
+- @[ikari](https://twitter.com/ikari)
+- @[fernsehmuell](https://twitter.com/fernsehmuell)
+- @[vollraute](https://twitter.com/vollraute)
+- @[david_1701](https://twitter.com/david_1701)
+- @[michaelblum](https://twitter.com/michaelblum)
+- @[kleinesp](https://twitter.com/kleinesp)
+- @[KonSciencePod](https://twitter.com/KonSciencePod)
 
 ### Tasks for later in the i18n process
 

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,13 @@
 #include "CustomActionManager.h"
 #include "CustomActionFactory.h"
 
+#include "CommandManager.h"
+#include "CommandFactory.h"
+
 namespace framework = ultraschall::framework;
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+namespace reaper {
 
 class Application : public framework::IActivationService,
                     public framework::IConfigurationService
@@ -46,40 +50,42 @@ public:
 
    static Application& Instance();
 
-   const ServiceStatus Start();
+   ServiceStatus Start();
    void Stop();
 
-   virtual const ServiceStatus Configure();
+   virtual ServiceStatus Configure();
    
-   template<class CustomActionType> const ServiceStatus RegisterCustomAction() const;
-   static const bool OnCustomAction(const int32_t id);
+   template<class CustomActionType> ServiceStatus RegisterCustomAction() const;
+   template<class CommandType> ServiceStatus RegisterCommand(const int32_t commandId) const;
+
+   static bool OnCustomAction(const int32_t id);
+   static bool OnStartCommand(const int32_t id);
+   static bool OnStopCommand(const int32_t id);
+
+   template<class CustomActionType> void InvokeCustomAction() const;
 
    static const size_t MAX_REAPER_STRING_BUFFER_SIZE = 4096;
 
-   const std::string GetExportPathName() const;
-   const std::string GetProjectPathName() const;
-   const std::string GetProjectFileName() const;
-   const std::string GetProjectFolderName() const;
-   const std::string GetProjectName() const;
+   std::string GetExportPathName() const;
+   std::string GetProjectPathName() const;
+   std::string GetProjectFileName() const;
+   std::string GetProjectFolderName() const;
+   std::string GetProjectName() const;
    
-   const std::string TimestampToString(const double timestamp) const;
-   const double StringToTimestamp(const std::string& input) const;
+   std::string TimestampToString(const double timestamp) const;
+   double StringToTimestamp(const std::string& input) const;
 
-   const intptr_t GetCurrentProject() const;
-   
-   const std::vector<framework::ChapterMarker> ChapterMarkers() const;
-   const int32_t SetChapterMarker(const framework::ChapterMarker& chapterMarker) const;
-   const bool DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const;
+   std::vector<framework::ChapterMarker> ChapterMarkers() const;
+   int32_t SetChapterMarker(const framework::ChapterMarker& chapterMarker) const;
+   bool DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const;
    void DeleteAllChapterMarkers() const;
    
-   const bool InsertTransriptItem(const framework::TranscriptItem transcriptItem) const;
-    
 private:
    Application();
 
-   static const bool HealthCheck();
+   static bool HealthCheck();
 
-   const int Register(const char* name, void* pInfoStruct) const;
+   int Register(const char* name, void* pInfoStruct) const;
 };
 
 typedef struct
@@ -90,11 +96,13 @@ typedef struct
    void *extra; // reserved for future use
 } custom_action_register_t;
    
-template<class CustomActionType> const ServiceStatus Application::RegisterCustomAction() const
+template<class CustomActionType> ServiceStatus Application::RegisterCustomAction() const
 {
+   typedef typename CustomActionType custom_action_type;
+
    ServiceStatus status = SERVICE_FAILURE;
 
-   const char* uniqueId = CustomActionType::UniqueId();
+   const char* uniqueId = custom_action_type::UniqueId();
    if(uniqueId != 0)
    {
       CustomActionFactory& factory = CustomActionFactory::Instance();
@@ -127,6 +135,40 @@ template<class CustomActionType> const ServiceStatus Application::RegisterCustom
    return status;
 }
 
-}}
+template<class CommandType> ServiceStatus Application::RegisterCommand(const int32_t commandId) const
+{
+   PRECONDITION_RETURN(ICommand::ValidateCommandId(commandId) != false, SERVICE_INVALID_ARGUMENT);
+
+   ServiceStatus status = SERVICE_FAILURE;
+
+   ICommand* pCommand = 0;
+   status = CommandType::CreateCommand(pCommand);
+   if(ServiceSucceeded(status) && (pCommand != 0))
+   {
+      CommandManager& manager = CommandManager::Instance();
+      status = manager.RegisterCommand(commandId, pCommand);
+
+      framework::SafeRelease(pCommand);
+   }
+
+   return status;
+}
+
+template<class CustomActionType> void Application::InvokeCustomAction() const
+{
+   typedef typename CustomActionType custom_action_type;
+
+   CustomActionManager& manager = CustomActionManager::Instance();
+   ICustomAction* pCustomAction = 0;
+   ServiceStatus status = manager.LookupCustomAction(custom_action_type::UniqueId(), pCustomAction);
+   if(ServiceSucceeded(status) && (pCustomAction != 0))
+   {
+      pCustomAction->Execute();
+      framework::SafeRelease(pCustomAction);
+   }
+}
+
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_APPLICATION_H_INCL__

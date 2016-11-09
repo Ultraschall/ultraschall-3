@@ -34,7 +34,7 @@
 
 namespace ultraschall { namespace reaper {
    
-const std::string QueryHubVersion()
+std::string QueryHubVersion()
 {
    std::string version;
    

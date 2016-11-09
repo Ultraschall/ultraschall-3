@@ -34,6 +34,7 @@
 6=record paused
 ]]
 
+function main()
 state = reaper.GetPlayState()
 
 --reaper.ShowConsoleMsg(state)
@@ -75,3 +76,5 @@ else -- pause or stop
 	reaper.OnPlayButton()
 
 end
+end
+reaper.defer(main)

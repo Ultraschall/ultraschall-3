@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 typedef uint32_t ServiceStatus;
 
 #define SERVICE_STATUS_CODE(facility, code) ((facility) | (code))  
-#define DEFINE_SERVICE_STATUS(status, facility, code) extern const ServiceStatus (status) = SERVICE_STATUS_CODE((facility), (code))
+#define DEFINE_SERVICE_STATUS(status, facility, code) extern ServiceStatus (status) = SERVICE_STATUS_CODE((facility), (code))
 
 // General status codes
 #define SERVICE_FRAMEWORK_FACILITY 0x00000000

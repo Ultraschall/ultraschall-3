@@ -26,6 +26,22 @@
 
 #### Last Changelog:
 
+## 2.2.3 Gropius - 2016-August-25
+
+* Soundboard: **Bugfix**
+*Bugfix: Mit OSC kann das Abspielen von Sounds nicht angehalten werden. Danke an Bastian Boessl für den Bugreport.*
+
+## 2.2.2 Gropius - 2016-August-14
+
+* Soundboard [Mac]: **Bugfix**
+*Bugfix: Aufgenommene Soundboard-Spuren werden jetzt abgespielt.*
+
+* Misc [Windows]: **Kompatibilität**
+*Updates für Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall enthält jetzt die neue StudioLink-Version 16.04.1.*
+
 ## 2.2.1 Gropius - 2016-June-09
 
 * Installer: **Bugfix**
@@ -266,7 +282,7 @@
 *mit diesem Eintrag im Podcast-Menü werden die Recording-Buttons aller Spuren ausgeschaltet und der Mute-Automationsmode auf Trim/Read geschaltet. Sollte nach jeder Aufnahme einmal aktiviert werden.*
 
 * Theme: **mit einem Rechtsklick auf dem Spurbereich können verschiedene geschmackvoll ausgewählte Preset-Farben ausgewählt werden**
-*kreiert von niemand Geringerem als @graphorama!*
+*kreiert von niemand Geringerem als @[graphorama](https://twitter.com/graphorama)!*
 
 * Theme: **Legt man Spuren mit den Namen "Einspieler" oder "SKYPE" an so werden diese automagisch mit geschmackvollen Farben versehen.**
 

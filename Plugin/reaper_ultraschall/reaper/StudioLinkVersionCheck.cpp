@@ -35,7 +35,7 @@
 namespace ultraschall {
     namespace reaper {
 
-        const std::string QueryStudioLinkVersion()
+std::string QueryStudioLinkVersion()
         {
             std::string version;
 

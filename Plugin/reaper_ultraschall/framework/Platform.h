@@ -22,14 +22,30 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_PLATOFRM_H_INCL__
-#define __ULTRASCHALL_PLATOFRM_H_INCL__
+#ifndef __ULTRASCHALL_PLATFORM_H_INCL__
+#define __ULTRASCHALL_PLATFORM_H_INCL__
 
-#ifdef WIN32
+#ifndef _WIN32
+#define ULTRASCHALL_PLATFORM_MACOS
+//todo:macos
+#else
+#define ULTRASCHALL_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#else
-#include <zlib.h>
-#endif // #ifdef WIN32
+#endif // #ifndef _WIN32
 
-#endif // #ifndef __ULTRASCHALL_PLATOFRM_H_INCL__
+namespace ultraschall {
+namespace framework {
+
+class PlatformException
+{
+public:
+	PlatformException(const char* expectedPlatform)
+	{
+	}
+};
+
+}
+}
+
+#endif // #ifndef __ULTRASCHALL_PLATFORM_H_INCL__
