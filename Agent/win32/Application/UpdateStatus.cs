@@ -30,8 +30,7 @@ namespace Ultraschall {
          request = (HttpWebRequest)WebRequest.Create(url);
          request.KeepAlive = false;
          DateTime buildDate = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
-         request.UserAgent = @"UltraschallAgent " + QueryLocalVersion() + ", " + 
-                             buildDate.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+         request.UserAgent = @"Ultraschall_Agent " + QueryLocalVersion() + " (" + System.Environment.OSVersion + ")";
          ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // this is crucial, don't ask
 
          IWebProxy proxy = request.Proxy;

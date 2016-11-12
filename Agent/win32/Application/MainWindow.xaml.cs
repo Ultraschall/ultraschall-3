@@ -29,15 +29,15 @@ namespace Ultraschall {
       }
 
       private void Window_Loaded(object sender, RoutedEventArgs e) {
-         //UpdateStatus updateStatus = new UpdateStatus();
-         //if(updateStatus.UpdateRequired == true) {
-         //   no_update_available.Visibility = Visibility.Hidden;
-         //   update_available.Visibility = Visibility.Visible;
-         //}
-         //else {
-         //   no_update_available.Visibility = Visibility.Visible;
-         //   update_available.Visibility = Visibility.Hidden;
-         //}
+         UpdateStatus updateStatus = new UpdateStatus();
+         if(updateStatus.UpdateRequired == true) {
+            no_update_available.Visibility = Visibility.Hidden;
+            update_available.Visibility = Visibility.Visible;
+         }
+         else {
+            no_update_available.Visibility = Visibility.Visible;
+            update_available.Visibility = Visibility.Hidden;
+         }
       }
 
    }

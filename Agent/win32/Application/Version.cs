@@ -54,10 +54,7 @@ namespace Ultraschall {
 
       private static bool Equal(Version lhs, Version rhs) {
          bool equal = false;
-         if((Version.IsNullOrEmpty(lhs) == true) && (Version.IsNullOrEmpty(rhs) == true)) {
-            equal = true;
-         }
-         else if((Version.IsNullOrEmpty(lhs) == false) && (Version.IsNullOrEmpty(rhs) == false)) {
+         if((Version.IsNullOrEmpty(lhs) == false) && (Version.IsNullOrEmpty(rhs) == false)) {
             bool[] flags = new bool[MAX_TOKEN_COUNT] { false, false, false, false };
             for(int i = 0; (i < MAX_TOKEN_COUNT) && (equal == false); i++) {
                if(lhs.numbers_[i] == rhs.numbers_[i]) {
@@ -74,21 +71,18 @@ namespace Ultraschall {
          return equal;
       }
 
-      public static bool operator==(Version lhs, Version rhs) {
-         return Version.Equal(lhs, rhs) == true;
-      }
+      //public static bool operator==(Version lhs, Version rhs) {
+      //   return Version.Equal(lhs, rhs) == true;
+      //}
 
-      public static bool operator !=(Version lhs, Version rhs) {
-         return (lhs == rhs) == false;
-      }
+      //public static bool operator !=(Version lhs, Version rhs) {
+      //   return (lhs == rhs) == false;
+      //}
 
-      private static bool? LessThan(Version lhs, Version rhs) {
-         bool? less = null;
+      private static bool LessThan(Version lhs, Version rhs) {
+         bool less = false;
 
-         if((Version.IsNullOrEmpty(lhs) == true) && (Version.IsNullOrEmpty(rhs) == true)) {
-            less = false;
-         }
-         else if((Version.IsNullOrEmpty(lhs) == false) && (Version.IsNullOrEmpty(rhs) == false)) {
+         if((Version.IsNullOrEmpty(lhs) == false) && (Version.IsNullOrEmpty(rhs) == false)) {
             for(int i = 0; (i < MAX_TOKEN_COUNT) && (less == false); i++) {
                if(lhs.numbers_[i] < rhs.numbers_[i]) {
                   less = true;
@@ -99,11 +93,11 @@ namespace Ultraschall {
          return less;
       }
 
-      public static bool? operator<(Version lhs, Version rhs) {
+      public static bool operator<(Version lhs, Version rhs) {
          return LessThan(lhs, rhs) == true;
       }
 
-      public static bool? operator>(Version lhs, Version rhs) {
+      public static bool operator>(Version lhs, Version rhs) {
          return (lhs != rhs) && ((lhs < rhs) == false);
       }
    }
