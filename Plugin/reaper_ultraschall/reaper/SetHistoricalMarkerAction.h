@@ -22,21 +22,33 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_SET_HISTORICAL_MARKER_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_SET_HISTORICAL_MARKER_ACTION_H_INCL__
 
-#include <Annotation.h>
+#include <string>
 
-namespace ultraschall { namespace framework {
+#include "ICustomAction.h"
 
-class ShownoteMarker : public Annotation
+namespace ultraschall { namespace reaper {
+
+class SetHistoricalMarkerAction : public ICustomAction
 {
 public:
-   ShownoteMarker();
-   ShownoteMarker(const double position, const std::string& name, const int index = -1);
+   static const char* UniqueId();
+
+   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+
+   virtual const char* LocalizedName() const override;
+   
+   virtual ServiceStatus Execute() override;
+
+protected:
+   virtual ~SetHistoricalMarkerAction();
+
+private:
+   SetHistoricalMarkerAction();
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_SHOWNOTE_MARKER_H_INCL__
-
+#endif // #ifndef __ULTRASCHALL_REAPER_SET_HISTORICAL_MARKER_ACTION_H_INCL__

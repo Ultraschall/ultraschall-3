@@ -22,6 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <TraceUtilities.h>
 #include <ServiceStatus.h>
 
 #include "Application.h"
@@ -37,6 +38,12 @@
 #include "InsertChapterMarkersAction.h"
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
+
+#include "SetChapterMarkerAction.h"
+#include "SetEditMarkerAction.h"
+#include "SetShownoteMarkerAction.h"
+#include "SetHistoricalMarkerAction.h"
+#include "UndoMarkerAction.h"
 
 #include "ToggleChapterMarkersAction.h"
 #include "ToggleEditMarkersAction.h"
@@ -57,6 +64,8 @@ extern "C"
 
 		if(pPluginInfo != 0)
 		{
+         Trace0(TRACE_LEVEL_INFO, "Ultraschall is starting-up...");
+
 			static bool started = false;
 			if(false == started)
 			{
@@ -69,24 +78,51 @@ extern "C"
 						if(ServiceSucceeded(application.Start()))
 						{
                      application.RegisterCustomAction<reaper::AboutAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
+
                      application.RegisterCustomAction<reaper::UpdateCheckAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'UpdateCheckAction' activated.");
 
 							application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
-							application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
-							application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
+                     application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersAction' activated.");
+                     application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
 
-							application.RegisterCustomAction<reaper::ToggleChapterMarkersAction>();
-							application.RegisterCustomAction<reaper::ToggleEditMarkersAction>();
-							application.RegisterCustomAction<reaper::ToggleShownoteMarkersAction>();
+                     application.RegisterCustomAction<reaper::SetChapterMarkerAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SetChapterMarkerAction' activated.");
+                     application.RegisterCustomAction<reaper::SetEditMarkerAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SetEditMarkerAction' activated.");
+                     application.RegisterCustomAction<reaper::SetShownoteMarkerAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SetShownoteMarkerAction' activated.");
+
+                     application.RegisterCustomAction<reaper::SetHistoricalMarkerAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'SetHistoricalChapterMarkerAction' activated.");
+                     application.RegisterCustomAction<reaper::UndoMarkerAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'UndoMarkerAction' activated.");
+                     
+                     application.RegisterCustomAction<reaper::ToggleChapterMarkersAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'ToggleChapterMarkersAction' activated.");
+                     application.RegisterCustomAction<reaper::ToggleEditMarkersAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'ToggleEditMarkersAction' activated.");
+                     application.RegisterCustomAction<reaper::ToggleShownoteMarkersAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'ToggleShownoteMarkersAction' activated.");
 
                      application.RegisterCommand<reaper::NewProjectCommand>(40023);
+                     Trace0(TRACE_LEVEL_INFO, "'NewProjectCommand' activated.");
                      application.RegisterCommand<reaper::OpenProjectCommand>(40025);
+                     Trace0(TRACE_LEVEL_INFO, "'OpenProjectCommand' activated.");
                      application.RegisterCommand<reaper::SaveProjectCommand>(40026);
+                     Trace0(TRACE_LEVEL_INFO, "'SaveProjectCommand' activated.");
                      application.RegisterCommand<reaper::CloseProjectCommand>(40860);
+                     Trace0(TRACE_LEVEL_INFO, "'CloseProjectCommand' activated.");
 
 							// run the update action on startup
+                     Trace0(TRACE_LEVEL_INFO, "Running 'UpdateCheckAction'...");
 							application.InvokeCustomAction<reaper::UpdateCheckAction>();
-						}
+                     Trace0(TRACE_LEVEL_INFO, "'UpdateCheckAction' done.");
+                  }
 					}
 				}
 				catch(reaper::InvalidEntryPointException&)
@@ -98,21 +134,29 @@ You are trying to load a version of REAPER that is not compatible to Ultraschall
 					return 0;
 				}
 
+            Trace0(TRACE_LEVEL_INFO, "Ultraschall is running.");
+
 				started = true;
 			}
 
-			return 1;
+         Trace0(TRACE_LEVEL_INFO, "done.");
+         
+         return 1;
 		}
 		else
 		{
-			static bool stopped = false;
+         Trace0(TRACE_LEVEL_INFO, "Ultraschall is shutting down...");
+         
+         static bool stopped = false;
 			if(false == stopped)
 			{
 				application.Stop();
 				stopped = true;
 			}
 
-			return 0;
+         Trace0(TRACE_LEVEL_INFO, "done.");
+         
+         return 0;
 		}
 	}
 }

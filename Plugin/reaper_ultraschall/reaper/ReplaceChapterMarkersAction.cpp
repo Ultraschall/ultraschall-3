@@ -31,7 +31,9 @@
 #include <ResourceManager.h>
 
 #include "ReplaceChapterMarkersAction.h"
-#include "Application.h"
+#include "CustomActionFactory.h"
+#include "Marker.h"
+#include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
@@ -41,43 +43,10 @@ static DeclareCustomAction<ReplaceChapterMarkersAction> action;
 
 ReplaceChapterMarkersAction::ReplaceChapterMarkersAction()
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Replace chapter markers...");
-      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken ersetzen...");
-   }
-
-   status = resourceManager.RegisterLocalizedString(successMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been replaced successfully.");
-      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich ersetzt.");
-   }
-
-   status = resourceManager.RegisterLocalizedString(failureMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be replaced.");
-      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht ersetzt werden.");
-   }
-
-   status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Replace chapter markers...");
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken ersetzen...");
-   }
 }
 
 ReplaceChapterMarkersAction::~ReplaceChapterMarkersAction()
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   resourceManager.UnregisterLocalizedString(actionNameId_);
-   resourceManager.UnregisterLocalizedString(successMessageId_);
-   resourceManager.UnregisterLocalizedString(failureMessageId_);
-   resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
 }
 
 const char* ReplaceChapterMarkersAction::UniqueId()
@@ -94,19 +63,19 @@ ServiceStatus ReplaceChapterMarkersAction::CreateCustomAction(ICustomAction*& pC
 
 const char* ReplaceChapterMarkersAction::LocalizedName() const
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   return resourceManager.GetLocalizedString(actionNameId_);
+   return "ULTRASCHALL: Replace chapter markers...";
 }
 
 ServiceStatus ReplaceChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
-   const std::string path = FileManager::BrowseForFiles(fileBrowserTitleId_);
+   const std::string path = FileManager::BrowseForFiles("Replace chapter markers...");
    PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
-   const Application& application = Application::Instance();
-   std::vector<framework::ChapterMarker> chapterMarkers;
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   std::vector<Marker> chapterMarkers;
 
    const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
    for(const std::string& line : lines)
@@ -114,37 +83,40 @@ ServiceStatus ReplaceChapterMarkersAction::Execute()
       const std::vector<std::string> items = framework::split(line, ' ');
       if(items.size() > 1)
       {
-         const double timestamp = application.StringToTimestamp(items[0]);
-         std::string name = items[1];
-         for(size_t i = 2; i < items.size(); i++)
-         {
-            name += " " + items[i];
-         }
+         // TODO
+         //const double timestamp = application.StringToTimestamp(items[0]);
+         //std::string name = items[1];
+         //for(size_t i = 2; i < items.size(); i++)
+         //{
+         //   name += " " + items[i];
+         //}
 
-         chapterMarkers.push_back(framework::ChapterMarker(timestamp, name));
+         //chapterMarkers.push_back(Marker(timestamp, name, Project::CHAPTER_MARKER_COLOR));
       }
    }
 
-   application.DeleteAllChapterMarkers();
+   // TODO
+   //project.DeleteAllChapterMarkers();
    
    size_t replacedChapterMarkers = 0;
    for(size_t i = 0; i < chapterMarkers.size(); i++)
    {
-      const int32_t index = application.SetChapterMarker(chapterMarkers[i]);
-      if(index > -1)
-      {
-         replacedChapterMarkers++;
-      }
+      // TODO
+      //const int32_t index = project.SetChapterMarker(chapterMarkers[i].Position());
+      //if(index > -1)
+      //{
+      //   replacedChapterMarkers++;
+      //}
    }
 
    if(chapterMarkers.size() == replacedChapterMarkers)
    {
-      NotificationWindow::Show(successMessageId_);
+      NotificationWindow::Show("The chapter markers have been replaced successfully.");
       status = SERVICE_SUCCESS;
    }
    else
    {
-      NotificationWindow::Show(failureMessageId_);
+      NotificationWindow::Show("The chapter markers could not be replaced.");
    }
    
    return status;

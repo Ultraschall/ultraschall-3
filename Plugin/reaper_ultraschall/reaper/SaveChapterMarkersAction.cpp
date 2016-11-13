@@ -22,14 +22,14 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
+#include <sstream>
 #include <vector>
 #include <fstream>
 
-#include <ResourceManager.h>
-
 #include "SaveChapterMarkersAction.h"
-#include "Application.h"
+#include "CustomActionFactory.h"
+#include "Marker.h"
+#include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
 
@@ -39,67 +39,10 @@ static DeclareCustomAction<SaveChapterMarkersAction> action;
 
 SaveChapterMarkersAction::SaveChapterMarkersAction()
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Export chapter markers...");
-      resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken exportieren...");
-   }
-
-   status = resourceManager.RegisterLocalizedString(successMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(successMessageId_, "en-EN", "The chapter markers have been saved successfully.");
-      resourceManager.SetLocalizedString(successMessageId_, "de-DE", "Die Kapitelmarken wurden erfolgreich gespeichert.");
-   }
-
-   status = resourceManager.RegisterLocalizedString(failureMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(failureMessageId_, "en-EN", "The chapter markers could not be saved.");
-      resourceManager.SetLocalizedString(failureMessageId_, "de-DE", "Die Kapitelmarken konnten nicht gespeichert werden.");
-   }
-
-   status = resourceManager.RegisterLocalizedString(notFoundMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(notFoundMessageId_, "en-EN", "No chapter markers have been found.");
-      resourceManager.SetLocalizedString(notFoundMessageId_, "de-DE", "Es wurden keine Kapitelmarken gefunden.");
-   }
-
-   status = resourceManager.RegisterLocalizedString(fileBrowserTitleId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "en-EN", "Export chapter markers...");
-      resourceManager.SetLocalizedString(fileBrowserTitleId_, "de-DE", "Kapitelmarken exportieren...");
-   }
-
-   status = resourceManager.RegisterLocalizedString(noProjectNameMessageId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(noProjectNameMessageId_, "en-EN", "The project has no name yet. Please save the project and try again.");
-      resourceManager.SetLocalizedString(noProjectNameMessageId_, "de-DE", "Das Projekt hat noch keinen Namen und muss zuerst gespeichert werden");
-   }
-
-   status = resourceManager.RegisterLocalizedString(saveOperationCanceledId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(saveOperationCanceledId_, "en-EN", "The save operation has been canceled.");
-      resourceManager.SetLocalizedString(saveOperationCanceledId_, "de-DE", "Der Speichervorgang wurde abgebrochen.");
-   }
 }
 
 SaveChapterMarkersAction::~SaveChapterMarkersAction()
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   resourceManager.UnregisterLocalizedString(actionNameId_);
-   resourceManager.UnregisterLocalizedString(successMessageId_);
-   resourceManager.UnregisterLocalizedString(failureMessageId_);
-   resourceManager.UnregisterLocalizedString(notFoundMessageId_);
-   resourceManager.UnregisterLocalizedString(fileBrowserTitleId_);
-   resourceManager.UnregisterLocalizedString(noProjectNameMessageId_);
-   resourceManager.UnregisterLocalizedString(saveOperationCanceledId_);
 }
 
 const char* SaveChapterMarkersAction::UniqueId()
@@ -116,32 +59,34 @@ ServiceStatus SaveChapterMarkersAction::CreateCustomAction(ICustomAction*& pCust
 
 const char* SaveChapterMarkersAction::LocalizedName() const
 {
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   return resourceManager.GetLocalizedString(actionNameId_);
+   return "ULTRASCHALL: Export chapter markers...";
 }
 
 ServiceStatus SaveChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
-   const Application& application = Application::Instance();
-   const std::vector<framework::ChapterMarker> chapterMarkers = application.ChapterMarkers();
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   const std::vector<Marker> chapterMarkers = currentProject.ChapterMarkers();
    if(chapterMarkers.empty() == false)
    {
-      const std::string projectFolder = application.GetProjectFolderName();
+      const std::string projectFolder = currentProject.FolderName();
       if(projectFolder.empty() == false)
       {
-         std::string targetPath = FileManager::BrowseForFolder(fileBrowserTitleId_, projectFolder);
+         std::string targetPath = FileManager::BrowseForFolder("Export chapter markers...", projectFolder);
          if(targetPath.empty() == false)
          {
-            const std::string projectName = application.GetProjectName();
+            const std::string projectName = currentProject.Name();
             if(projectName.empty() == false)
             {
                targetPath = FileManager::AppendPath(targetPath, projectName + ".chapters.txt");
                std::ofstream output(targetPath, std::ios::out);
                for(size_t i = 0; i < chapterMarkers.size(); i++)
                {
-                  const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
+                  std::ostringstream os;
+                  os << chapterMarkers[i].Position();
+                  const std::string timestamp = os.str();
                   const std::string entry = timestamp + " " + chapterMarkers[i].Name();
                   output << entry << std::endl;
                }
@@ -149,27 +94,27 @@ ServiceStatus SaveChapterMarkersAction::Execute()
                output.close();
                
                status = SERVICE_SUCCESS;
-               NotificationWindow::Show(successMessageId_);
+               NotificationWindow::Show("The chapter markers have been saved successfully.");
             }
             
             if(ServiceFailed(status))
             {
-               NotificationWindow::Show(failureMessageId_);
+               NotificationWindow::Show("The chapter markers could not be saved.");
             }
          }
          else
          {
-            NotificationWindow::Show(saveOperationCanceledId_);
+            NotificationWindow::Show("The save operation has been canceled.");
          }
       }
       else
       {
-         NotificationWindow::Show(noProjectNameMessageId_);
+         NotificationWindow::Show("The project has no name yet. Please save the project and try again.");
       }
    }
    else
    {
-      NotificationWindow::Show(notFoundMessageId_);
+      NotificationWindow::Show("No chapter markers have been found.");
    }
    
    return status;

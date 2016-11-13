@@ -144,16 +144,25 @@
     <ClCompile Include="reaper\NewProjectCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\Annotation.cpp">
+    <ClCompile Include="framework\TraceUltilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\ChapterMarker.cpp">
+    <ClCompile Include="reaper\ProjectCallback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\EditMarker.cpp">
+    <ClCompile Include="reaper\SetChapterMarkerAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\ShownoteMarker.cpp">
+    <ClCompile Include="reaper\SetEditMarkerAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SetShownoteMarkerAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\UndoMarkerAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SetHistoricalMarkerAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -332,16 +341,28 @@
     <ClInclude Include="reaper\NewProjectCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\Annotation.h">
+    <ClInclude Include="framework\TraceUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\ChapterMarker.h">
+    <ClInclude Include="reaper\ProjectCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\EditMarker.h">
+    <ClInclude Include="reaper\SetChapterMarkerAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\ShownoteMarker.h">
+    <ClInclude Include="reaper\SetEditMarkerAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SetShownoteMarkerAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\UndoMarkerAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SetHistoricalMarkerAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\Marker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,31 +22,51 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
+#include <string>
 
-#include "ICustomAction.h"
+#include "SetEditMarkerAction.h"
+#include "Application.h"
+#include "ProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersAction : public ICustomAction
+static DeclareCustomAction<SetEditMarkerAction> action;
+
+SetEditMarkerAction::SetEditMarkerAction()
 {
-public:
-   static const char* UniqueId();
+}
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+SetEditMarkerAction::~SetEditMarkerAction()
+{
+}
 
-   virtual const char* LocalizedName() const override;
+const char* SetEditMarkerAction::UniqueId()
+{
+   return "ULTRASCHALL_SET_EDIT_MARKER";
+}
+
+ServiceStatus SetEditMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new SetEditMarkerAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* SetEditMarkerAction::LocalizedName() const
+{
+   return "ULTRASCHALL: Set edit marker";
+}
+
+ServiceStatus SetEditMarkerAction::Execute()
+{
+   ServiceStatus status = SERVICE_FAILURE;
    
-   virtual ServiceStatus Execute() override;
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   currentProject.InsertEditMarker();
+   return status;
+}
 
-protected:
-   virtual ~SaveChapterMarkersAction();
+}
+}
 
-private:
-	SaveChapterMarkersAction();
-};
-
-}}
-
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__

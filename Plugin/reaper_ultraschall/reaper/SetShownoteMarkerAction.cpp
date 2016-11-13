@@ -22,21 +22,51 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_EDIT_MARKER_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_EDIT_MARKER_H_INCL__
+#include <string>
 
-#include <Annotation.h>
+#include "SetShownoteMarkerAction.h"
+#include "Application.h"
+#include "ProjectManager.h"
 
-namespace ultraschall { namespace framework {
+namespace ultraschall { namespace reaper {
 
-class EditMarker : public Annotation
+static DeclareCustomAction<SetShownoteMarkerAction> action;
+
+SetShownoteMarkerAction::SetShownoteMarkerAction()
 {
-public:
-   EditMarker();
-   EditMarker(const double position, const std::string& name, const int index = -1);
-};
+}
 
-}}
+SetShownoteMarkerAction::~SetShownoteMarkerAction()
+{
+}
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_EDIT_MARKER_H_INCL__
+const char* SetShownoteMarkerAction::UniqueId()
+{
+   return "ULTRASCHALL_SET_SHOWNOTE_MARKER";
+}
+
+ServiceStatus SetShownoteMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new SetShownoteMarkerAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* SetShownoteMarkerAction::LocalizedName() const
+{
+   return "ULTRASCHALL: Set shownote marker";
+}
+
+ServiceStatus SetShownoteMarkerAction::Execute()
+{
+   ServiceStatus status = SERVICE_FAILURE;
+   
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   currentProject.InsertShownoteMarker();
+   return status;
+}
+
+}
+}
 

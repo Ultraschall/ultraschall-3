@@ -33,30 +33,7 @@
 #include "FileManager.h"
 
 namespace ultraschall {
-    namespace reaper {
+namespace reaper {
 
-std::string QuerySoundboardVersion()
-        {
-            std::string version;
-
-#ifndef WIN32
-            NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
-                inDomains : NSUserDomainMask] firstObject];
-            NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
-            [filePath appendString : @"/Audio/Plug-Ins/Components/Soundboard.component/Contents/Info.plist"];
-                if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-                {
-                    NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-
-                    NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
-                    version = [value UTF8String];
-                }
-#else
-            const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
-            version = FileManager::ReadVersionFromFile(path);
-#endif // #ifndef WIN32
-
-            return version;
-        }
-    }
+}
 }

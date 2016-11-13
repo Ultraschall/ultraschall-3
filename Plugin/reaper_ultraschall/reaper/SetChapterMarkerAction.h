@@ -22,19 +22,33 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ChapterMarker.h"
+#ifndef __ULTRASCHALL_REAPER_SET_CHAPTER_MARKER_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_SET_CHAPTER_MARKER_ACTION_H_INCL__
 
-namespace ultraschall { namespace framework {
+#include <string>
 
-ChapterMarker::ChapterMarker() :
-   Annotation()
+#include "ICustomAction.h"
+
+namespace ultraschall { namespace reaper {
+
+class SetChapterMarkerAction : public ICustomAction
 {
-}
+public:
+   static const char* UniqueId();
 
-ChapterMarker::ChapterMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00808080, index)
-{
-}
+   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+
+   virtual const char* LocalizedName() const override;
+   
+   virtual ServiceStatus Execute() override;
+
+protected:
+   virtual ~SetChapterMarkerAction();
+
+private:
+   SetChapterMarkerAction();
+};
 
 }}
 
+#endif // #ifndef __ULTRASCHALL_REAPER_SET_CHAPTER_MARKER_ACTION_H_INCL__

@@ -40,9 +40,7 @@
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "VersionHandler.h"
-#include "SoundboardVersionCheck.h"
 #include "StudioLinkVersionCheck.h"
-#include "SWSVersionCheck.h"
 #include "NotificationWindow.h"
 #include "FileManager.h"
 
@@ -90,8 +88,8 @@ ServiceStatus AboutAction::Execute()
    const std::string pluginVersion = VersionHandler::PluginVersion();
   
    std::string message1 = "\
-http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Mich\u00E9l Knecht, Tim Pritlove, Heiko Panjas\r\n\r\n\
+ULTRASCHALL Podcasting Extension for REAPER\r\n\r\n\
+Copyright (c) 2016 ultraschall.fm\r\n\r\n\
 Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
@@ -108,26 +106,30 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
    }
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-   const std::string soundboardVersion = QuerySoundboardVersion();
+   const std::string soundboardVersion = VersionHandler::SoundboardVersion();
    if(soundboardVersion.empty() == false)
    {
       message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
    }
 
-   const std::string studioLinkVersion = QueryStudioLinkVersion();
+   const std::string studioLinkVersion = VersionHandler::StudioLinkVersion();
    if(studioLinkVersion.empty() == false)
    {
        message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
    }
 
    std::string message2 = "\
-SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
+SWS REAPER Extension " + VersionHandler::SWSVersion() + "\r\n\
 REAPER ";
 
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 3.0 \"Rothko\"...", message1 + message2);
+   std::string message3 = "\
+LAME MP3 Encoder " + VersionHandler::LAMEVersion() + "\r\n\
+REAPER ";
+
+   NotificationWindow::Show("About Ultraschall 3.0 \"Feldman\"...", message1 + message2 + message3);
 
    return SERVICE_SUCCESS;
 }

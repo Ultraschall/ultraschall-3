@@ -28,7 +28,6 @@
 #include <Framework.h>
 #include <IActivationService.h>
 #include <IConfigurationService.h>
-#include <ChapterMarker.h>
 #include <TranscriptItem.h>
 
 #include "CustomActionManager.h"
@@ -75,11 +74,6 @@ public:
    std::string TimestampToString(const double timestamp) const;
    double StringToTimestamp(const std::string& input) const;
 
-   std::vector<framework::ChapterMarker> ChapterMarkers() const;
-   int32_t SetChapterMarker(const framework::ChapterMarker& chapterMarker) const;
-   bool DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const;
-   void DeleteAllChapterMarkers() const;
-   
 private:
    Application();
 

@@ -43,12 +43,19 @@
 #define REAPERAPI_WANT_EnumProjects
 #define REAPERAPI_WANT_format_timestr_pos
 #define REAPERAPI_WANT_parse_timestr
+#define REAPERAPI_WANT_PreventUIRefresh
+#define REAPERAPI_WANT_CountProjectMarkers
 #define REAPERAPI_WANT_EnumProjectMarkers
 #define REAPERAPI_WANT_EnumProjectMarkers2
 #define REAPERAPI_WANT_EnumProjectMarkers3
 #define REAPERAPI_WANT_AddProjectMarker2
 #define REAPERAPI_WANT_SetProjectMarker3
 #define REAPERAPI_WANT_DeleteProjectMarker
+#define REAPERAPI_WANT_GetPlayStateEx
+#define REAPERAPI_WANT_GetCursorPositionEx
+#define REAPERAPI_WANT_GetPlayPositionEx
+#define REAPERAPI_WANT_GetLastMarkerAndCurRegion
+#define REAPERAPI_WANT_DeleteProjectMarkerByIndex
 
 namespace reaper_api {
 #include <reaper_plugin_functions.h>
@@ -64,6 +71,15 @@ public:
    static void Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 private:
    ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+};
+
+class ReaperProjectEntryPoints
+{
+public:
+   ReaperProjectEntryPoints();
+
+private:
+   static project_config_extension_t projectConfigExtension_;
 };
 
 }}

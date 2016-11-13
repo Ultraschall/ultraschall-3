@@ -81,5 +81,73 @@ std::string VersionHandler::PluginVersion()
 #endif // #ifdef WIN32
 }
 
+std::string VersionHandler::SoundboardVersion()
+{
+   std::string version;
+
+#ifndef WIN32
+   NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+      inDomains : NSUserDomainMask] firstObject];
+   NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
+   [filePath appendString : @"/Audio / Plug - Ins / Components / Soundboard.component / Contents / Info.plist"];
+      if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+      {
+         NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+
+         NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
+         version = [value UTF8String];
+      }
+#else
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
+   version = FileManager::ReadVersionFromFile(path);
+#endif // #ifndef WIN32
+
+   return version;
+}
+
+std::string VersionHandler::StudioLinkVersion()
+{
+   std::string version;
+
+#ifndef WIN32
+   NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+      inDomains : NSUserDomainMask] firstObject];
+   NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
+   [filePath appendString : @"/Audio / Plug - Ins / Components / StudioLink.component / Contents / Info.plist"];
+      if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+      {
+         NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+
+         NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
+         version = [value UTF8String];
+      }
+#else
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link.dll";
+   version = FileManager::ReadVersionFromFile(path);
+#endif // #ifndef WIN32
+
+   return version;
+}
+
+std::string VersionHandler::SWSVersion()
+{
+#ifdef WIN32
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
+   return FileManager::ReadVersionFromFile(path);
+#else
+   return "2.8.3";
+#endif // #ifdef WIN32
+}
+
+std::string VersionHandler::LAMEVersion()
+{
+#ifdef WIN32
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
+   return FileManager::ReadVersionFromFile(path);
+#else
+   return "3.99.2.5";
+#endif // #ifdef WIN32
+}
+
 }
 }

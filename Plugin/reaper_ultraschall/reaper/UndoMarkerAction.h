@@ -22,14 +22,16 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UNDO_MARKER_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_UNDO_MARKER_ACTION_H_INCL__
+
+#include <string>
 
 #include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersAction : public ICustomAction
+class UndoMarkerAction : public ICustomAction
 {
 public:
    static const char* UniqueId();
@@ -41,12 +43,12 @@ public:
    virtual ServiceStatus Execute() override;
 
 protected:
-   virtual ~SaveChapterMarkersAction();
+   virtual ~UndoMarkerAction();
 
 private:
-	SaveChapterMarkersAction();
+   UndoMarkerAction();
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_UNDO_MARKER_ACTION_H_INCL__

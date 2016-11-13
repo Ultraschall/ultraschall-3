@@ -102,7 +102,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -145,7 +145,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -165,17 +165,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp" />
-    <ClCompile Include="framework\Annotation.cpp" />
-    <ClCompile Include="framework\ChapterMarker.cpp" />
-    <ClCompile Include="framework\EditMarker.cpp" />
     <ClCompile Include="framework\ResourceId.cpp" />
     <ClCompile Include="framework\ResourceManager.cpp" />
     <ClCompile Include="framework\ServiceFactory.cpp" />
     <ClCompile Include="framework\ServiceManager.cpp" />
-    <ClCompile Include="framework\ShownoteMarker.cpp" />
     <ClCompile Include="framework\StringUtilities.cpp" />
     <ClCompile Include="framework\TextFileReader.cpp" />
     <ClCompile Include="framework\TextFileWriter.cpp" />
+    <ClCompile Include="framework\TraceUltilities.cpp" />
     <ClCompile Include="framework\TranscriptItem.cpp" />
     <ClCompile Include="reaper\AboutAction.cpp" />
     <ClCompile Include="reaper\Application.cpp" />
@@ -193,6 +190,7 @@
     <ClCompile Include="reaper\NotificationWindow.cpp" />
     <ClCompile Include="reaper\OpenProjectCommand.cpp" />
     <ClCompile Include="reaper\Project.cpp" />
+    <ClCompile Include="reaper\ProjectCallback.cpp" />
     <ClCompile Include="reaper\ProjectManager.cpp" />
     <ClCompile Include="reaper\ReaperEntryPoints.cpp" />
     <ClCompile Include="reaper\ReaperVersionCheck.cpp" />
@@ -201,6 +199,10 @@
     <ClCompile Include="reaper\SaveChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\SaveChapterMarkersToProjectAction.cpp" />
     <ClCompile Include="reaper\SaveProjectCommand.cpp" />
+    <ClCompile Include="reaper\SetChapterMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetEditMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetHistoricalMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetShownoteMarkerAction.cpp" />
     <ClCompile Include="reaper\SoundboardVersionCheck.cpp" />
     <ClCompile Include="reaper\StudioLinkVersionCheck.cpp" />
     <ClCompile Include="reaper\SWSVersionCheck.cpp" />
@@ -208,15 +210,13 @@
     <ClCompile Include="reaper\ToggleChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\ToggleEditMarkersAction.cpp" />
     <ClCompile Include="reaper\ToggleShownoteMarkersAction.cpp" />
+    <ClCompile Include="reaper\UndoMarkerAction.cpp" />
     <ClCompile Include="reaper\UpdateCheckAction.cpp" />
     <ClCompile Include="reaper\VersionHandler.cpp" />
     <ClCompile Include="reaper\VersionString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h" />
-    <ClInclude Include="framework\Annotation.h" />
-    <ClInclude Include="framework\ChapterMarker.h" />
-    <ClInclude Include="framework\EditMarker.h" />
     <ClInclude Include="framework\FileUtilities.h" />
     <ClInclude Include="framework\Framework.h" />
     <ClInclude Include="framework\IActivationService.h" />
@@ -232,12 +232,12 @@
     <ClInclude Include="framework\SharedObject.h" />
     <ClInclude Include="framework\SharedObjectFactory.h" />
     <ClInclude Include="framework\SharedObjectManager.h" />
-    <ClInclude Include="framework\ShownoteMarker.h" />
     <ClInclude Include="framework\Stream.h" />
     <ClInclude Include="framework\StringDefs.h" />
     <ClInclude Include="framework\StringUtilities.h" />
     <ClInclude Include="framework\TextFileReader.h" />
     <ClInclude Include="framework\TextFileWriter.h" />
+    <ClInclude Include="framework\TraceUtilities.h" />
     <ClInclude Include="framework\TranscriptItem.h" />
     <ClInclude Include="reaper\AboutAction.h" />
     <ClInclude Include="reaper\Application.h" />
@@ -253,10 +253,12 @@
     <ClInclude Include="reaper\ICommand.h" />
     <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
     <ClInclude Include="reaper\InvalidEntryPointException.h" />
+    <ClInclude Include="reaper\Marker.h" />
     <ClInclude Include="reaper\NewProjectCommand.h" />
     <ClInclude Include="reaper\NotificationWindow.h" />
     <ClInclude Include="reaper\OpenProjectCommand.h" />
     <ClInclude Include="reaper\Project.h" />
+    <ClInclude Include="reaper\ProjectCallback.h" />
     <ClInclude Include="reaper\ProjectManager.h" />
     <ClInclude Include="reaper\ReaperEntryPoints.h" />
     <ClInclude Include="reaper\ReaperVersionCheck.h" />
@@ -264,6 +266,10 @@
     <ClInclude Include="reaper\SaveChapterMarkersAction.h" />
     <ClInclude Include="reaper\SaveChapterMarkersToProjectAction.h" />
     <ClInclude Include="reaper\SaveProjectCommand.h" />
+    <ClInclude Include="reaper\SetChapterMarkerAction.h" />
+    <ClInclude Include="reaper\SetEditMarkerAction.h" />
+    <ClInclude Include="reaper\SetHistoricalMarkerAction.h" />
+    <ClInclude Include="reaper\SetShownoteMarkerAction.h" />
     <ClInclude Include="reaper\SoundboardVersionCheck.h" />
     <ClInclude Include="reaper\StudioLinkVersionCheck.h" />
     <ClInclude Include="reaper\SWSVersionCheck.h" />
@@ -271,6 +277,7 @@
     <ClInclude Include="reaper\ToggleChapterMarkersAction.h" />
     <ClInclude Include="reaper\ToggleEditMarkersAction.h" />
     <ClInclude Include="reaper\ToggleShownoteMarkersAction.h" />
+    <ClInclude Include="reaper\UndoMarkerAction.h" />
     <ClInclude Include="reaper\UpdateCheckAction.h" />
     <ClInclude Include="reaper\VersionHandler.h" />
     <ClInclude Include="reaper\VersionString.h" />

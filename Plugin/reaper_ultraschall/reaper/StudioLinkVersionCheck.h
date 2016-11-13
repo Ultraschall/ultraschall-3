@@ -27,8 +27,6 @@
 
 namespace ultraschall { namespace reaper {
    
-std::string QueryStudioLinkVersion();
-   
 }}
 
 #endif // __ULTRASCHALL_REAPER_STUDIO_LINK_VERSION_CHECK_H_INCL__

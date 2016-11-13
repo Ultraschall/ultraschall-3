@@ -30,7 +30,8 @@
 
 #include "ICustomAction.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall { 
+namespace reaper {
    
 class AboutAction : public ICustomAction
 {
@@ -52,6 +53,7 @@ private:
    framework::ResourceId actionNameId_;
 };
    
-}}
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__

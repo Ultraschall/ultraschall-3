@@ -22,10 +22,9 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
-
 #include "ToggleChapterMarkersAction.h"
 #include "CustomActionFactory.h"
+#include "ProjectManager.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -34,19 +33,10 @@ static DeclareCustomAction<ToggleChapterMarkersAction> action;
 
 ToggleChapterMarkersAction::ToggleChapterMarkersAction()
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-	if(ServiceSucceeded(status))
-	{
-		resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Toggle chapter markers");
-		resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Kapitelmarken an- und ausschalten");
-	}
 }
 
 ToggleChapterMarkersAction::~ToggleChapterMarkersAction()
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	resourceManager.UnregisterLocalizedString(actionNameId_);
 }
 
 const char* ToggleChapterMarkersAction::UniqueId()
@@ -63,14 +53,26 @@ ServiceStatus ToggleChapterMarkersAction::CreateCustomAction(ICustomAction*& pCu
 
 const char* ToggleChapterMarkersAction::LocalizedName() const
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	return resourceManager.GetLocalizedString(actionNameId_);
+	return "ULTRASCHALL: Toggle chapter markers";
 }
 
 ServiceStatus ToggleChapterMarkersAction::Execute()
 {
-	ServiceStatus status = SERVICE_SUCCESS;
-	return status;
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   uint32_t markerStatus = currentProject.MarkerStatus();
+   if(markerStatus & Project::SHOW_CHAPTER_MARKERS)
+   {
+      markerStatus &= ~Project::SHOW_CHAPTER_MARKERS;
+   }
+   else
+   {
+      markerStatus |= Project::SHOW_CHAPTER_MARKERS;
+   }
+
+   currentProject.UpdateMarkers(markerStatus);
+
+   return SERVICE_SUCCESS;
 }
 
 }

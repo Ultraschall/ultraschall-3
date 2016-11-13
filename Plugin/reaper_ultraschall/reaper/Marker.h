@@ -22,31 +22,48 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_MARKER_H_INCL__
+#define __ULTRASCHALL_REAPER_MARKER_H_INCL__
 
-#include "ICustomAction.h"
+#include <string>
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersAction : public ICustomAction
+class Marker
 {
 public:
-   static const char* UniqueId();
+   Marker() :
+      position_(-1), color_(0xffffffff)
+   {
+   }
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+   Marker(const double position, const std::string& name, const int color) :
+      position_(position), name_(name), color_(color)
+   {
+   }
 
-   virtual const char* LocalizedName() const override;
-   
-   virtual ServiceStatus Execute() override;
+   double Position() const
+   {
+      return position_;
+   }
 
-protected:
-   virtual ~SaveChapterMarkersAction();
+   const std::string& Name() const
+   {
+      return name_;
+   }
+
+   int Color() const
+   {
+      return color_;
+   }
 
 private:
-	SaveChapterMarkersAction();
+   double position_;
+   std::string name_;
+   int color_;
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_MARKER_H_INCL__
+

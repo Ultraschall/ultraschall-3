@@ -109,11 +109,11 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
    
-   const Application& application = Application::Instance();
-   const std::vector<framework::ChapterMarker> chapterMarkers = application.ChapterMarkers();
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   const std::vector<Marker> chapterMarkers = currentProject.ChapterMarkers();
    if(chapterMarkers.empty() == false)
    {
-      Project currentProject = ProjectManager::Instance().CurrentProject();
       const std::string projectFolder = currentProject.FolderName();
       if(projectFolder.empty() == false)
       {
@@ -124,9 +124,10 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
             std::ofstream output(fullPath, std::ios::out);
             for(size_t i = 0; i < chapterMarkers.size(); i++)
             {
-               const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
-               const std::string entry = timestamp + " " + chapterMarkers[i].Name();
-               output << entry << std::endl;
+               // TODO
+               //const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
+               //const std::string entry = timestamp + " " + chapterMarkers[i].Name();
+               //output << entry << std::endl;
             }
 
             output.close();

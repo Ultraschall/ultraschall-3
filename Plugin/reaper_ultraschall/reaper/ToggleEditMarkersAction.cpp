@@ -22,10 +22,9 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ResourceManager.h>
-
 #include "ToggleEditMarkersAction.h"
 #include "CustomActionFactory.h"
+#include "ProjectManager.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -34,19 +33,10 @@ static DeclareCustomAction<ToggleEditMarkersAction> action;
 
 ToggleEditMarkersAction::ToggleEditMarkersAction()
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-	if(ServiceSucceeded(status))
-	{
-		resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: Toggle edit markers");
-		resourceManager.SetLocalizedString(actionNameId_, "de-DE", "ULTRASCHALL: Editiermarken an- und ausschalten");
-	}
 }
 
 ToggleEditMarkersAction::~ToggleEditMarkersAction()
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	resourceManager.UnregisterLocalizedString(actionNameId_);
 }
 
 const char* ToggleEditMarkersAction::UniqueId()
@@ -63,14 +53,26 @@ ServiceStatus ToggleEditMarkersAction::CreateCustomAction(ICustomAction*& pCusto
 
 const char* ToggleEditMarkersAction::LocalizedName() const
 {
-	framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-	return resourceManager.GetLocalizedString(actionNameId_);
+	return "ULTRASCHALL: Toggle edit markers";
 }
 
 ServiceStatus ToggleEditMarkersAction::Execute()
 {
-	ServiceStatus status = SERVICE_SUCCESS;
-	return status;
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   uint32_t markerStatus = currentProject.MarkerStatus();
+   if(markerStatus & Project::SHOW_EDIT_MARKERS)
+   {
+      markerStatus &= ~Project::SHOW_EDIT_MARKERS;
+   }
+   else
+   {
+      markerStatus |= Project::SHOW_EDIT_MARKERS;
+   }
+
+   currentProject.UpdateMarkers(markerStatus);
+
+   return SERVICE_SUCCESS;
 }
 
 }

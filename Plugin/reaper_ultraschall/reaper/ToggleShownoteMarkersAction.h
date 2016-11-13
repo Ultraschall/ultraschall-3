@@ -25,10 +25,6 @@
 #ifndef __ULTRASCHALL_REAPER_TOGGLE_SHOWNOTE_MARKERS_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_TOGGLE_SHOWNOTE_MARKERS_ACTION_H_INCL__
 
-#include <string>
-
-#include <ResourceId.h>
-
 #include "ICustomAction.h"
 
 namespace ultraschall {
@@ -50,8 +46,6 @@ protected:
 
 private:
 	ToggleShownoteMarkersAction();
-
-	framework::ResourceId actionNameId_;
 };
 
 }

@@ -30,8 +30,7 @@ namespace ultraschall {
 
 bool SWSVersionCheck();
 
-        std::string QuerySWSVersion();
-    }
+}
 }
 
 #endif // __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__

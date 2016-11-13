@@ -22,19 +22,50 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ShownoteMarker.h"
+#include <string>
 
-namespace ultraschall { namespace framework {
+#include "SetChapterMarkerAction.h"
+#include "CustomActionFactory.h"
+#include "ProjectManager.h"
 
-ShownoteMarker::ShownoteMarker() :
-   Annotation()
+namespace ultraschall { namespace reaper {
+
+static DeclareCustomAction<SetChapterMarkerAction> action;
+
+SetChapterMarkerAction::SetChapterMarkerAction()
 {
 }
 
-ShownoteMarker::ShownoteMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x00ff0000, index)
+SetChapterMarkerAction::~SetChapterMarkerAction()
 {
 }
 
-}}
+const char* SetChapterMarkerAction::UniqueId()
+{
+   return "ULTRASCHALL_SET_CHAPTER_MARKER";
+}
+
+ServiceStatus SetChapterMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new SetChapterMarkerAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* SetChapterMarkerAction::LocalizedName() const
+{
+   return "ULTRASCHALL: Set chapter marker";
+}
+
+ServiceStatus SetChapterMarkerAction::Execute()
+{
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   currentProject.InsertChapterMarker("<Insert chapter here>");
+
+   return SERVICE_SUCCESS;
+}
+
+}
+}
 

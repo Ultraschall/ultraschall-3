@@ -38,6 +38,15 @@ public:
 #endif // #ifndef WIN32
 
 	static std::string PluginVersion();
+
+   static std::string SoundboardVersion();
+
+   static std::string StudioLinkVersion();
+
+   static std::string SWSVersion();
+
+   static std::string LAMEVersion();
+
 };
 
 }

@@ -23,8 +23,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ReaperEntryPoints.h"
-#include "Application.h"
 #include "InvalidEntryPointException.h"
+
+#include "Application.h"
+#include "ProjectManager.h"
+#include "ProjectCallback.h"
 
 namespace reaper_api 
 {
@@ -40,12 +43,21 @@ namespace reaper_api
    void (*format_timestr_pos)(double tpos, char* buf, int buf_sz, int modeoverride);
    double (*parse_timestr)(const char* buf);
 
+   void(*PreventUIRefresh)(int prevent_count);
+
+   int(*CountProjectMarkers)(ReaProject* proj, int* num_markersOut, int* num_regionsOut);
    int (*EnumProjectMarkers)(int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut);
    int (*EnumProjectMarkers2)(ReaProject* proj, int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut);
    int (*EnumProjectMarkers3)(ReaProject* proj, int idx, bool* isrgnOut, double* posOut, double* rgnendOut, const char** nameOut, int* markrgnindexnumberOut, int* colorOut);
    int (*AddProjectMarker2)(ReaProject* proj, bool isrgn, double pos, double rgnend, const char* name, int wantidx, int color);
    bool (*SetProjectMarker3)(ReaProject* proj, int markrgnindexnumber, bool isrgn, double pos, double rgnend, const char* name, int color);
    bool (*DeleteProjectMarker)(ReaProject* proj, int markrgnindexnumber, bool isrgn);
+   void(*GetLastMarkerAndCurRegion)(ReaProject* proj, double time, int* markeridxOut, int* regionidxOut);
+   bool(*DeleteProjectMarkerByIndex)(ReaProject* proj, int markrgnidx);
+
+   int(*GetPlayStateEx)(ReaProject* proj);
+   double(*GetCursorPositionEx)(ReaProject* proj);
+   double(*GetPlayPositionEx)(ReaProject* proj);
 }
 
 namespace ultraschall { namespace reaper {
@@ -90,12 +102,21 @@ ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_pl
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::format_timestr_pos, "format_timestr_pos");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::parse_timestr, "parse_timestr");
 
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::PreventUIRefresh, "PreventUIRefresh");
+
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::CountProjectMarkers, "CountProjectMarkers");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers, "EnumProjectMarkers");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers2, "EnumProjectMarkers2");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers3, "EnumProjectMarkers3");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::AddProjectMarker2, "AddProjectMarker2");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteProjectMarker, "DeleteProjectMarker");
-   
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetLastMarkerAndCurRegion, "GetLastMarkerAndCurRegion");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteProjectMarkerByIndex, "DeleteProjectMarkerByIndex");
+
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayStateEx, "GetPlayStateEx");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetCursorPositionEx, "GetCursorPositionEx");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayPositionEx, "GetPlayPositionEx");
+
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
    reaper_api::plugin_register("hookcommand", (void*)OnStartCommand);
    reaper_api::plugin_register("hookpostcommand", (void*)OnStopCommand);
@@ -106,6 +127,62 @@ REAPER_PLUGIN_HINSTANCE ReaperEntryPoints::instance_ = 0;
 void ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
    static ReaperEntryPoints entryPoints(instance, pPluginInfo);
+   static ReaperProjectEntryPoints projectEntryPointes;
+}
+
+static bool ProcessExtensionLine(const char *line, ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
+{
+   PRECONDITION_RETURN(line != 0, false);
+   PRECONDITION_RETURN(ctx != 0, false);
+   PRECONDITION_RETURN(false == isUndo, false);
+
+   bool processed = false;
+
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(Project::Validate(currentProject) == true)
+   {
+      processed = ProjectCallback::ProcessExtensionLine(currentProject, line, *ctx);
+   }
+
+   return processed;
+}
+
+static void SaveExtensionConfig(ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
+{
+   PRECONDITION(ctx != 0);
+   PRECONDITION(false == isUndo);
+
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(Project::Validate(currentProject) == true)
+   {
+      ProjectCallback::SaveExtensionConfig(currentProject, *ctx);
+   }
+}
+
+static void BeginLoadProjectState(bool isUndo, struct project_config_extension_t*)
+{
+   PRECONDITION(false == isUndo);
+
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(Project::Validate(currentProject) == true)
+   {
+      ProjectCallback::BeginLoadProjectState(currentProject);
+   }
+}
+
+project_config_extension_t ReaperProjectEntryPoints::projectConfigExtension_ = { 0 };
+
+ReaperProjectEntryPoints::ReaperProjectEntryPoints()
+{
+   projectConfigExtension_.BeginLoadProjectState = BeginLoadProjectState;
+   projectConfigExtension_.ProcessExtensionLine = ProcessExtensionLine;
+   projectConfigExtension_.SaveExtensionConfig = SaveExtensionConfig;
+   projectConfigExtension_.userData = 0;
+
+   reaper_api::plugin_register("projectconfig", (void*)&projectConfigExtension_);
 }
 
 }}

@@ -47,21 +47,22 @@ ProjectManager& ProjectManager::Instance()
 
 Project ProjectManager::CurrentProject() const
 {
-   std::lock_guard<std::recursive_mutex> lock(projectsLock_);
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   return Project(reaper_api::EnumProjects(-1, 0, 0));
+   ReaProject* projectReference = reaper_api::EnumProjects(-1, 0, 0);
+   return Project(projectReference);
 }
 
 std::string ProjectManager::CurrentProjectName() const
 {
    std::string result;
 
-   std::lock_guard<std::recursive_mutex> lock(projectsLock_);
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   Project currentProject = CurrentProject();
+   const Project& currentProject = CurrentProject();
    if(Project::Validate(currentProject) == true)
    {
-      return currentProject.Name();
+      result = currentProject.Name();
    }
 
    return result;
@@ -71,21 +72,19 @@ void ProjectManager::AddProject(const Project& project)
 {
    PRECONDITION(Project::Validate(project) == true);
 
-   std::lock_guard<std::recursive_mutex> lock(projectsLock_);
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   const std::string projectPath = project.FullPathName();
-   if(projectPath.empty() == false)
+   void* projectReference = project.ProjectReference();
+   if(projectReference != nullptr)
    {
-      if(projects_.empty() == false)
+      if(projectReferences_.empty() == false)
       {
-         std::map<std::string, Project>::const_iterator projectIterator = projects_.find(projectPath);
-         if(projects_.end() != projectIterator)
+         std::map<void*, Project>::const_iterator projectIterator = projectReferences_.find(projectReference);
+         if(projectReferences_.end() != projectIterator)
          {
-            projects_.erase(projectPath);
+            projectReferences_.erase(projectReference);
          }
       }
-
-//      projects_.insert(std::pair<std::string, Project>(projectPath, project));
    }
 }
 
@@ -93,17 +92,17 @@ void ProjectManager::RemoveProject(const Project& project)
 {
    PRECONDITION(Project::Validate(project) == true);
 
-   std::lock_guard<std::recursive_mutex> lock(projectsLock_);
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   if(projects_.empty() == false)
+   if(projectReferences_.empty() == false)
    {
-      const std::string projectPath = project.FullPathName();
-      if(projectPath.empty() == false)
+      void* projectReference = project.ProjectReference();
+      if(projectReference != nullptr)
       {
-         std::map<std::string, Project>::const_iterator projectIterator = projects_.find(projectPath);
-         if(projects_.end() != projectIterator)
+         std::map<void*, Project>::const_iterator projectIterator = projectReferences_.find(projectReference);
+         if(projectReferences_.end() != projectIterator)
          {
-            projects_.erase(projectPath);
+            projectReferences_.erase(projectReference);
          }
       }
    }

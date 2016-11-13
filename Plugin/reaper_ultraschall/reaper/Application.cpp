@@ -316,51 +316,6 @@ double Application::StringToTimestamp(const std::string& input) const
    return reaper_api::parse_timestr(input.c_str());
 }
 
-std::vector<framework::ChapterMarker> Application::ChapterMarkers() const
-{
-   std::vector<framework::ChapterMarker> chapterMarkers;
-
-   int nextOffset = 0;
-   bool isRegion = false;
-   double position = 0;
-   double endOfRegion = false;
-   const char* buffer = 0;
-   int index = 0;
-
-   do
-   {
-      nextOffset = reaper_api::EnumProjectMarkers(nextOffset, &isRegion, &position, &endOfRegion, &buffer, &index);
-      if(nextOffset > 0)
-      {
-         const framework::ChapterMarker chapterMarker(position, buffer, index);
-         chapterMarkers.push_back(chapterMarker);
-      }
-   }
-   while(nextOffset > 0);
-
-   return chapterMarkers;
-}
-
-int32_t Application::SetChapterMarker(const framework::ChapterMarker& projectMarker) const
-{
-   return reaper_api::AddProjectMarker2(0, false, projectMarker.Position(), 10, projectMarker.Name().c_str(), 0, 0xffff00);
-}
-
-bool Application::DeleteChapterMarker(const framework::ChapterMarker& chapterMarker) const
-{
-   return reaper_api::DeleteProjectMarker(0, chapterMarker.Index(), false);
-}
-
-void Application::DeleteAllChapterMarkers() const
-{
-   std::vector<framework::ChapterMarker> chapterMarkers = ChapterMarkers();
-   const size_t numberOfChapterMarkers = chapterMarkers.size();
-   for(size_t i = 0; i < numberOfChapterMarkers; i++)
-   {
-      DeleteChapterMarker(chapterMarkers[(numberOfChapterMarkers - 1) - i]);
-   }
-}
-
 ServiceStatus Application::Configure()
 {
    framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();

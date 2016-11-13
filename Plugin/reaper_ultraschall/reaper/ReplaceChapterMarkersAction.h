@@ -25,10 +25,6 @@
 #ifndef __ULTRASCHALL_REAPER_REPLACE_CHAPTER_MARKERS_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_REPLACE_CHAPTER_MARKERS_ACTION_H_INCL__
 
-#include <string>
-
-#include <ResourceId.h>
-
 #include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
@@ -49,11 +45,6 @@ protected:
 
 private:
 	ReplaceChapterMarkersAction();
-   
-   framework::ResourceId actionNameId_;
-   framework::ResourceId successMessageId_;
-   framework::ResourceId failureMessageId_;
-   framework::ResourceId fileBrowserTitleId_;
 };
 
 }}

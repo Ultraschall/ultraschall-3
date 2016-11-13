@@ -53,8 +53,8 @@ private:
    ProjectManager(const ProjectManager&);
    ProjectManager& operator=(const ProjectManager&);
 
-   std::map<std::string, Project> projects_;
-   mutable std::recursive_mutex projectsLock_;
+   std::map<void*, Project> projectReferences_;
+   mutable std::recursive_mutex projectReferencesLock_;
 };
 
 }

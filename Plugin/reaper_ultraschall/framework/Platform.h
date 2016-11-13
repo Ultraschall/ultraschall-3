@@ -26,10 +26,8 @@
 #define __ULTRASCHALL_PLATFORM_H_INCL__
 
 #ifndef _WIN32
-#define ULTRASCHALL_PLATFORM_MACOS
 //todo:macos
 #else
-#define ULTRASCHALL_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif // #ifndef _WIN32
@@ -40,9 +38,13 @@ namespace framework {
 class PlatformException
 {
 public:
-	PlatformException(const char* expectedPlatform)
+	PlatformException(const char* expectedPlatform) :
+      expectedPlatform_(expectedPlatform)
 	{
 	}
+
+private:
+   const char* expectedPlatform_;
 };
 
 }

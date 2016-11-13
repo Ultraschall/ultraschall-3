@@ -22,19 +22,55 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "EditMarker.h"
+#include <string>
 
-namespace ultraschall { namespace framework {
+#include "UndoMarkerAction.h"
+#include "CustomActionFactory.h"
+#include "ProjectManager.h"
 
-EditMarker::EditMarker() :
-   Annotation()
+namespace ultraschall { namespace reaper {
+
+static DeclareCustomAction<UndoMarkerAction> action;
+
+UndoMarkerAction::UndoMarkerAction()
 {
 }
 
-EditMarker::EditMarker(const double position, const std::string& name, const int index) :
-   Annotation(position, name, 0x000000ff, index)
+UndoMarkerAction::~UndoMarkerAction()
 {
 }
 
-}}
+const char* UndoMarkerAction::UniqueId()
+{
+   return "ULTRASCHALL_UNDO_MARKER";
+}
+
+ServiceStatus UndoMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
+{
+   pCustomAction = new UndoMarkerAction();
+   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
+   return SERVICE_SUCCESS;
+}
+
+const char* UndoMarkerAction::LocalizedName() const
+{
+   return "ULTRASCHALL: Delete last marker";
+}
+
+ServiceStatus UndoMarkerAction::Execute()
+{
+   ServiceStatus status = SERVICE_FAILURE;
+
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   if(currentProject.UndoMarker() == true)
+   {
+      status = SERVICE_SUCCESS;
+   }
+
+   return status;
+}
+
+}
+}
 

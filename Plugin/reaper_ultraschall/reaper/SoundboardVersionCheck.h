@@ -27,8 +27,6 @@
 
 namespace ultraschall { namespace reaper {
    
-std::string QuerySoundboardVersion();
-   
 }}
 
 #endif // __ULTRASCHALL_REAPER_SOUNDBOARD_VERSION_CHECK_H_INCL__

@@ -22,21 +22,35 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_CHAPTER_MARKER_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_CHAPTER_MARKER_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_PROJECT_CALLBACK_H_INCL__
+#define __ULTRASCHALL_REAPER_PROJECT_CALLBACK_H_INCL__
 
-#include <Annotation.h>
+#include <string>
 
-namespace ultraschall { namespace framework {
+#include "ReaperEntryPoints.h"
+#include "Project.h"
 
-class ChapterMarker : public Annotation
+namespace ultraschall {
+namespace reaper {
+
+class Project;
+
+class ProjectCallback
 {
 public:
-   ChapterMarker();
-   ChapterMarker(const double position, const std::string& name, const int index = -1);
+   static bool ProcessExtensionLine(Project& projectReference, const std::string& line, ProjectStateContext& readContext);
+
+   static void SaveExtensionConfig(const Project& projectReference, ProjectStateContext& writeContext);
+
+   static void BeginLoadProjectState(Project&);
+
+private:
+   static std::pair<uint8_t, uint8_t> ParseVersion(const std::string& line);
+   static uint32_t ParseMarkerStatus(const std::string& line);
 };
 
-}}
+}
+}
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_CHAPTER_MARKER_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_PROJECT_CALLBACK_H_INCL__
 
