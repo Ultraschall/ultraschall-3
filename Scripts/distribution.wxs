@@ -2,13 +2,13 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
     <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
- 
+
     <!--
     Upgrade code HAS to be the same for all updates.
     Once you've chosen it don't change it.
     -->
     <?define UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" ?>
-    
+
     <!-- The URL for add/remove programs -->
     <?define InfoURL="http://ultraschall.fm/" ?>
 
@@ -16,15 +16,15 @@
         <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="!(loc.ProductDescription)" Comments="!(loc.Comments) $(var.VersionNumber)" />
 
         <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
-        
+
         <WixVariable Id="WixUIDialogBmp" Value="Resources\background.bmp"/>
         <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.bmp"/>
-        
+
         <Icon Id="Icon.exe" SourceFile="Resources\ultraschall.ico" />
-        
+
         <Property Id="ARPPRODUCTICON" Value="Icon.exe" />
         <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />      <!-- Remove repair -->
-        
+
         <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" AllowSameVersionUpgrades="yes" />
 
         <Condition Message="!(loc.OS2Old)">
@@ -32,7 +32,7 @@
         </Condition>
 
         <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
-        <Property Id="DiskPrompt" Value="Ultraschall 2.2 Installation [1]" />
+        <Property Id="DiskPrompt" Value="Ultraschall 3.0 Installation [1]" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFiles64Folder" Name="Program Files">
@@ -48,7 +48,9 @@
                             <File Id="UltraschallSetEdit" Name="ultraschall_set_edit.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit.lua"/>
                             <File Id="UltraschallSetEditPast" Name="ultraschall_set_edit_past.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_edit_past.lua"/>
                             <File Id="UltraschallSetMarker" Name="ultraschall_set_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_marker.lua"/>
-                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_namedmarker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_namedmarker.lua"/>
+                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_named_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_named_marker.lua"/>
+                            <File Id="UltraschallSetShownote" Name="ultraschall_set_shownote.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_shownote.lua"/>
+                            <File Id="UltraschallSetNamedShownote" Name="ultraschall_set_named_shownote.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_named_shownote.lua"/>
                             <File Id="UltraschallMuteEnvelope" Name="ultraschall_mute_envelope.lua" DiskId="1" Source="Payload\Plugin\ultraschall_mute_envelope.lua"/>
                             <File Id="UltraschallSelectStudioLink" Name="ultraschall_select_studiolink.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_studiolink.lua"/>
                             <File Id="UltraschallSelectTrack1" Name="ultraschall_select_track1.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track1.lua"/>
@@ -92,8 +94,6 @@
                     </Component>
                     <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                         <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
-                            <File Id="ReleasePosterPdf" Name="Rams Edition Release-Poster.pdf" DiskId="1" Source="Payload\Addons\Rams Edition Release-Poster.pdf"/>
-                            <File Id="ReleasePosterPng" Name="Rams Edition Release-Poster.png" DiskId="1" Source="Payload\Addons\Rams Edition Release-Poster.png"/>
                             <File Id="ColorSet" Name="Ultraschall Colorset.SWSColor" DiskId="1" Source="Payload\Addons\Ultraschall Colorset.SWSColor"/>
                             <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
                             <File Id="SplashScreen" Name="Ultraschall Reaper Splash Screen.png" DiskId="1" Source="Payload\Addons\Ultraschall Reaper Splash Screen.png"/>
@@ -102,7 +102,7 @@
                     </Directory>
                 </Directory>
             </Directory>
- 
+
             <Directory Id="DesktopFolder" />
             <Directory Id="ProgramMenuFolder">
                 <Directory Id="ProgramMenuDir" Name="Ultraschall">
@@ -114,20 +114,22 @@
             </Directory>
 
         </Directory>
-        
+
         <DirectoryRef Id="TARGETDIR">
             <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
+<!--
             <Merge Id="SoundboardRedist" SourceFile="Payload\Soundboard\Soundboard.msm" DiskId="1" Language="1033"/>
+-->
         </DirectoryRef>
-        
+
         <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist"/>
         </Feature>
-        
+<!--
         <Feature Id="SoundboardRedist" Title="Ultraschall Soundboard" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="SoundboardRedist"/>
         </Feature>
-        
+-->
         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
             <ComponentRef Id="ReaperScripts"/>

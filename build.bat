@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-2.2
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.0
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -35,7 +35,7 @@ copy "..\REAPER\Plugin\Resources\Ultraschall Reaper Splash Screen.png" "Payload\
 rem Build Ultraschall REAPER Plug-in
 md Payload\Plugin > nul
 
-pushd ..\REAPER\ 
+pushd ..\REAPER\
 call build.bat build release x64
 popd
 
@@ -46,7 +46,9 @@ copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_safemode_start_stop.lua Payload
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_edit.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_edit_past.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_marker.lua Payload\Plugin
-copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_namedmarker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_named_marker.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_shownote.lua Payload\Plugin
+copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_set_named_shownote.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_mute_envelope.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_studiolink.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track1.lua Payload\Plugin
@@ -58,15 +60,15 @@ copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track6.lua Payload\Plugi
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track7.lua Payload\Plugin
 copy ..\REAPER\Plugin\Scripts\Shared\ultraschall_select_track8.lua Payload\Plugin
 
-pushd ..\Soundboard\ 
-call Build\build_win.cmd
-popd
+rem pushd ..\Soundboard\
+rem call Build\build_win.cmd
+rem popd
 
-md Payload\Soundboard > nul
-copy ..\Soundboard\Projects\Installer\bin\Release\Soundboard.msm Payload\Soundboard
+rem md Payload\Soundboard > nul
+rem copy ..\Soundboard\Projects\Installer\bin\Release\Soundboard.msm Payload\Soundboard
 
 candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
-light -nologo -ext WixUIExtension -cultures:en-us -loc Scripts\distribution_en-us.wxl -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi 
+light -nologo -ext WixUIExtension -cultures:en-us -loc Scripts\distribution_en-us.wxl -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi
 
 rd /s /q Build > nul
 rd /s /q Payload > nul
