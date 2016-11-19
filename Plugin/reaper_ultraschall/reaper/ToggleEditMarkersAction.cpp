@@ -70,7 +70,7 @@ ServiceStatus ToggleEditMarkersAction::Execute()
       markerStatus |= Project::SHOW_EDIT_MARKERS;
    }
 
-   currentProject.UpdateMarkers(markerStatus);
+   currentProject.UpdateVisibleMarkers(markerStatus);
 
    return SERVICE_SUCCESS;
 }

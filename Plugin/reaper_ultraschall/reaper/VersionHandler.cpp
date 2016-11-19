@@ -89,7 +89,7 @@ std::string VersionHandler::SoundboardVersion()
    NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
       inDomains : NSUserDomainMask] firstObject];
    NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
-   [filePath appendString : @"/Audio / Plug - Ins / Components / Soundboard.component / Contents / Info.plist"];
+   [filePath appendString : @"/Audio/Plug-Ins/Components/Soundboard.component/Contents/Info.plist"];
       if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
       {
          NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
@@ -113,7 +113,7 @@ std::string VersionHandler::StudioLinkVersion()
    NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
       inDomains : NSUserDomainMask] firstObject];
    NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
-   [filePath appendString : @"/Audio / Plug - Ins / Components / StudioLink.component / Contents / Info.plist"];
+   [filePath appendString : @"/Audio/Plug-Ins/Components/StudioLink.component/Contents/Info.plist"];
       if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
       {
          NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];

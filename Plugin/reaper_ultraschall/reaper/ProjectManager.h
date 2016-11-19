@@ -36,13 +36,18 @@ namespace reaper {
 class ProjectManager
 {
 public:
+   static const Project INVALID_PROJECT;
+
    static ProjectManager& Instance();
 
-   Project CurrentProject() const;
+   const Project& CurrentProject() const;
+   ProjectHandle CurrentProjectReference() const;
    std::string CurrentProjectName() const;
 
-   void AddProject(const Project& project);
-   void RemoveProject(const Project& project);
+   bool InsertProject(ProjectHandle projectReference);
+   const Project& LookupProject(ProjectHandle projectReference) const;
+   void RemoveProject(ProjectHandle projectReference);
+   void RemoveAllProjects();
 
 protected:
    virtual ~ProjectManager();
@@ -53,7 +58,8 @@ private:
    ProjectManager(const ProjectManager&);
    ProjectManager& operator=(const ProjectManager&);
 
-   std::map<void*, Project> projectReferences_;
+   typedef std::map<void*, Project> ProjectReferenceDictionary;
+   ProjectReferenceDictionary projectReferences_;
    mutable std::recursive_mutex projectReferencesLock_;
 };
 

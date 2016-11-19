@@ -70,7 +70,7 @@ ServiceStatus ToggleShownoteMarkersAction::Execute()
       markerStatus |= Project::SHOW_SHOWNOTE_MARKERS;
    }
 
-   currentProject.UpdateMarkers(markerStatus);
+   currentProject.UpdateVisibleMarkers(markerStatus);
     
 	return SERVICE_SUCCESS;
 }

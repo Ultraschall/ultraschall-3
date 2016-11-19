@@ -31,6 +31,8 @@ namespace framework = ultraschall::framework;
 namespace ultraschall {
 namespace reaper {
 
+const Project ProjectManager::INVALID_PROJECT;
+
 ProjectManager::ProjectManager()
 {
 }
@@ -45,12 +47,19 @@ ProjectManager& ProjectManager::Instance()
    return self;
 }
 
-Project ProjectManager::CurrentProject() const
+const Project& ProjectManager::CurrentProject() const
 {
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   ReaProject* projectReference = reaper_api::EnumProjects(-1, 0, 0);
-   return Project(projectReference);
+   ProjectHandle currentProjectReference = CurrentProjectReference();
+   return LookupProject(currentProjectReference);
+}
+
+ProjectHandle ProjectManager::CurrentProjectReference() const
+{
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+
+   return reaper_api::EnumProjects(-1, 0, 0);
 }
 
 std::string ProjectManager::CurrentProjectName() const
@@ -68,44 +77,56 @@ std::string ProjectManager::CurrentProjectName() const
    return result;
 }
 
-void ProjectManager::AddProject(const Project& project)
+bool ProjectManager::InsertProject(ProjectHandle projectReference)
 {
-   PRECONDITION(Project::Validate(project) == true);
+   PRECONDITION_RETURN(projectReference != nullptr, false);
 
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   void* projectReference = project.ProjectReference();
-   if(projectReference != nullptr)
-   {
-      if(projectReferences_.empty() == false)
-      {
-         std::map<void*, Project>::const_iterator projectIterator = projectReferences_.find(projectReference);
-         if(projectReferences_.end() != projectIterator)
-         {
-            projectReferences_.erase(projectReference);
-         }
-      }
-   }
+   return projectReferences_.insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference))).second;
 }
 
-void ProjectManager::RemoveProject(const Project& project)
+const Project& ProjectManager::LookupProject(ProjectHandle projectReference) const
 {
-   PRECONDITION(Project::Validate(project) == true);
+   PRECONDITION_RETURN(projectReference != nullptr, INVALID_PROJECT);
+
+   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+   const ProjectReferenceDictionary::const_iterator projectReferenceIterator = projectReferences_.find(projectReference);
+   if(projectReferenceIterator != projectReferences_.end())
+   {
+      return projectReferenceIterator->second;
+   }
+
+   return INVALID_PROJECT;
+}
+
+void ProjectManager::RemoveProject(ProjectHandle projectReference)
+{
+   PRECONDITION(projectReference != nullptr);
 
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
    if(projectReferences_.empty() == false)
    {
-      void* projectReference = project.ProjectReference();
-      if(projectReference != nullptr)
+      ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.find(projectReference);
+      if(projectReferences_.end() != projectIterator)
       {
-         std::map<void*, Project>::const_iterator projectIterator = projectReferences_.find(projectReference);
-         if(projectReferences_.end() != projectIterator)
-         {
-            projectReferences_.erase(projectReference);
-         }
+         projectReferences_.erase(projectReference);
       }
    }
+}
+
+void ProjectManager::RemoveAllProjects()
+{
+   while(projectReferences_.empty() == false)
+   {
+      ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.begin();
+      if(projectReferences_.end() != projectIterator)
+      {
+         projectReferences_.erase(projectIterator);
+      }
+   }
+
 }
 
 }

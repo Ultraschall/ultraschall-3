@@ -26,7 +26,7 @@
 #define __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 
 #include <vector>
-
+#include "ReaperEntryPoints.h"
 #include "Marker.h"
 
 namespace framework = ultraschall::framework;
@@ -34,11 +34,13 @@ namespace framework = ultraschall::framework;
 namespace ultraschall {
 namespace reaper {
 
+typedef ReaProject* ProjectHandle;
+
 class Project
 {
 public:
    Project();
-   Project(void* projectReference);
+   Project(ProjectHandle projectReference);
    virtual ~Project();
 
    Project(const Project& rhs);
@@ -51,7 +53,7 @@ public:
    std::string FileName() const;
    std::string Name() const;
 
-   inline void* ProjectReference() const;
+   inline ProjectHandle ProjectReference() const;
 
    static const uint32_t INVALID_MARKER_MASK       = 0xffffffff;
    static const uint32_t SHOW_CHAPTER_MARKERS      = 0x00000001;
@@ -77,9 +79,12 @@ public:
    inline bool InsertHistoricalMarker();
    bool UndoMarker();
 
-   void UpdateMarkers(const uint32_t mask);
-   void DeleteAllMarkers();
+   size_t CountVisibleMarkers() const;
+   void UpdateVisibleMarkers(const uint32_t mask);
    void DeleteVisibleMarkers();
+
+   void UpdateAllMarkers();
+   void DeleteAllMarkers();
 
    inline uint32_t MarkerStatus() const;
 
@@ -88,10 +93,11 @@ public:
    inline std::vector<Marker> ShownoteMarkers() const;
 
 private:
-   void* projectReference_;
+   ProjectHandle projectReference_;
    uint32_t markerStatus_;
 
-   std::vector<Marker> allMarkers_;
+   typedef std::vector<Marker> MarkerArray;
+   MarkerArray allMarkers_;
 
    bool InsertMarker(const Marker& marker);
    bool InsertMarker(const std::string& name, const int color, const double position = INVALID_POSITION);
@@ -103,7 +109,7 @@ inline uint32_t Project::MarkerStatus() const
    return markerStatus_;
 }
 
-inline void* Project::ProjectReference() const
+inline ProjectHandle Project::ProjectReference() const
 {
    return projectReference_;
 }

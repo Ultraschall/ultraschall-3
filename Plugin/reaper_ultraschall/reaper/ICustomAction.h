@@ -28,6 +28,8 @@
 #include <IUnknown.h>
 #include <ServiceStatus.h>
 
+#include "ProjectManager.h"
+
 namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
@@ -42,7 +44,29 @@ public:
 
    virtual const char* LocalizedName() const = 0;
    virtual ServiceStatus Execute() = 0;
-   
+
+   static bool RegisterProject()
+   {
+      bool registered = false;
+
+      ProjectManager& projectManager = ProjectManager::Instance();
+      ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
+      if(currentProjectReference != nullptr)
+      {
+         const Project& currentProject = projectManager.LookupProject(currentProjectReference);
+         if(Project::Validate(currentProject) == false)
+         {
+            registered = projectManager.InsertProject(currentProjectReference);
+         }
+         else
+         {
+            registered = true;
+         }
+      }
+
+      return registered;
+   }
+
 protected:
    ICustomAction()
    {

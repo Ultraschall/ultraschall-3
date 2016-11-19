@@ -38,11 +38,11 @@ class Project;
 class ProjectCallback
 {
 public:
-   static bool ProcessExtensionLine(Project& projectReference, const std::string& line, ProjectStateContext& readContext);
+   static bool ProcessExtensionLine(ProjectHandle projectReference, const std::string& line, ProjectStateContext& readContext);
 
-   static void SaveExtensionConfig(const Project& projectReference, ProjectStateContext& writeContext);
+   static void SaveExtensionConfig(ProjectHandle projectReference, ProjectStateContext& writeContext);
 
-   static void BeginLoadProjectState(Project&);
+   static void BeginLoadProjectState(ProjectHandle);
 
 private:
    static std::pair<uint8_t, uint8_t> ParseVersion(const std::string& line);

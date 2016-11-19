@@ -70,7 +70,7 @@ ServiceStatus ToggleChapterMarkersAction::Execute()
       markerStatus |= Project::SHOW_CHAPTER_MARKERS;
    }
 
-   currentProject.UpdateMarkers(markerStatus);
+   currentProject.UpdateVisibleMarkers(markerStatus);
 
    return SERVICE_SUCCESS;
 }

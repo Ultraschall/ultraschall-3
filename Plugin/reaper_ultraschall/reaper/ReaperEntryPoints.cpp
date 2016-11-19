@@ -138,11 +138,11 @@ static bool ProcessExtensionLine(const char *line, ProjectStateContext *ctx, boo
 
    bool processed = false;
 
-   ProjectManager& projectManager = ProjectManager::Instance();
-   Project currentProject = projectManager.CurrentProject();
-   if(Project::Validate(currentProject) == true)
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
+   if(currentProjectReference != nullptr)
    {
-      processed = ProjectCallback::ProcessExtensionLine(currentProject, line, *ctx);
+      processed = ProjectCallback::ProcessExtensionLine(currentProjectReference, line, *ctx);
    }
 
    return processed;
@@ -153,11 +153,11 @@ static void SaveExtensionConfig(ProjectStateContext *ctx, bool isUndo, struct pr
    PRECONDITION(ctx != 0);
    PRECONDITION(false == isUndo);
 
-   ProjectManager& projectManager = ProjectManager::Instance();
-   Project currentProject = projectManager.CurrentProject();
-   if(Project::Validate(currentProject) == true)
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
+   if(currentProjectReference != nullptr)
    {
-      ProjectCallback::SaveExtensionConfig(currentProject, *ctx);
+      ProjectCallback::SaveExtensionConfig(currentProjectReference, *ctx);
    }
 }
 
@@ -165,11 +165,11 @@ static void BeginLoadProjectState(bool isUndo, struct project_config_extension_t
 {
    PRECONDITION(false == isUndo);
 
-   ProjectManager& projectManager = ProjectManager::Instance();
-   Project currentProject = projectManager.CurrentProject();
-   if(Project::Validate(currentProject) == true)
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
+   if(currentProjectReference != nullptr)
    {
-      ProjectCallback::BeginLoadProjectState(currentProject);
+      ProjectCallback::BeginLoadProjectState(currentProjectReference);
    }
 }
 

@@ -83,9 +83,12 @@ bool Application::OnCustomAction(const int32_t id)
    ServiceStatus status = manager.LookupCustomAction(id, pCustomAction);
    if(ServiceSucceeded(status) && (pCustomAction != 0))
    {
-      pCustomAction->Execute();
-      framework::SafeRelease(pCustomAction);
-      executed = true;
+      if(ICustomAction::RegisterProject() == true) 
+      {
+         pCustomAction->Execute();
+         framework::SafeRelease(pCustomAction);
+         executed = true;
+      }
    }
 
    return executed;

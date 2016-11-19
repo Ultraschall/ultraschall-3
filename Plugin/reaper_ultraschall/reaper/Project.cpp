@@ -41,14 +41,15 @@ Project::Project() :
 {
 }
 
-Project::Project(void* projectReference) :
+Project::Project(ProjectHandle projectReference) :
    projectReference_(projectReference)
 {
+   UpdateAllMarkers();
 }
 
 Project::~Project()
 {
-   projectReference_ = 0;
+   projectReference_ = nullptr;
 }
 
 Project::Project(const Project& rhs)
@@ -68,7 +69,7 @@ Project& Project::operator=(const Project& rhs)
 
 bool Project::Validate(const Project& project)
 {
-   return project.projectReference_ != 0;
+   return project.projectReference_ != nullptr;
 }
 
 std::string Project::FullPathName() const
@@ -155,7 +156,7 @@ std::string Project::Name() const
 inline bool Project::InsertMarker(const Marker& marker)
 {
    allMarkers_.push_back(marker);
-   UpdateMarkers(MarkerStatus());
+   UpdateVisibleMarkers(MarkerStatus());
    return false;
 }
 
@@ -164,9 +165,6 @@ bool Project::InsertMarker(const std::string& name, const int color, const doubl
    PRECONDITION_RETURN(projectReference_ != 0, false);
    PRECONDITION_RETURN(name.empty() == false, false);
 
-   bool success = false;
-
-   ReaProject* projectReference = reinterpret_cast<ReaProject*>(projectReference_);
    double actualPosition = position;
    if(actualPosition == INVALID_POSITION)
    {
@@ -243,12 +241,45 @@ public:
    }
 };
 
+void Project::UpdateAllMarkers()
+{
+   PRECONDITION(projectReference_ != nullptr);
+   
+   DeleteAllMarkers();
+
+   const size_t noMarkers = CountVisibleMarkers();
+   if(noMarkers > 0)
+   {
+      bool isRegion = false;
+      double position = 0;
+      double duration = 0;
+      const char* name = nullptr;
+      int number = 0;
+      int color = 0;
+
+      int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
+      while(nextIndex > 0)
+      {
+         allMarkers_.push_back(Marker(position, name, color));
+         nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
+      }
+   }
+}
+
+
 void Project::DeleteAllMarkers()
 {
-   AutoPreventUIRefresh();
-
-   DeleteVisibleMarkers();
    allMarkers_.clear();
+}
+
+size_t Project::CountVisibleMarkers() const
+{
+   PRECONDITION_RETURN(projectReference_ != 0, static_cast<size_t>(-1));
+
+   ReaProject* projectReference = reinterpret_cast<ReaProject*>(projectReference_);
+   int numProjectMarkers = 0;
+   reaper_api::CountProjectMarkers(projectReference, &numProjectMarkers, 0);
+   return static_cast<size_t>(numProjectMarkers);
 }
 
 void Project::DeleteVisibleMarkers()
@@ -258,15 +289,14 @@ void Project::DeleteVisibleMarkers()
    AutoPreventUIRefresh();
 
    ReaProject* projectReference = reinterpret_cast<ReaProject*>(projectReference_);
-   int numProjectMarkers = 0;
-   reaper_api::CountProjectMarkers(projectReference, &numProjectMarkers, 0);
-   for(int i = 0; i < numProjectMarkers; i++)
+   const size_t numProjectMarkers = CountVisibleMarkers();
+   for(size_t i = 0; i < numProjectMarkers; i++)
    {
-      reaper_api::DeleteProjectMarkerByIndex(projectReference, i);
+      reaper_api::DeleteProjectMarkerByIndex(projectReference, static_cast<int>(i));
    }
 }
 
-void Project::UpdateMarkers(const uint32_t mask)
+void Project::UpdateVisibleMarkers(const uint32_t mask)
 {
    AutoPreventUIRefresh();
 

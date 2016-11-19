@@ -64,10 +64,6 @@ ServiceStatus OpenProjectCommand::StopCommand()
    if(Project::Validate(currentProject) == true)
    {
       resultProjectPath_ = currentProject.FullPathName();
-      if(initialProjectPath_ != resultProjectPath_)
-      {
-         projectManager.AddProject(currentProject);
-      }
    }
 
    return SERVICE_SUCCESS;

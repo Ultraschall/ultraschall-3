@@ -28,57 +28,60 @@
 namespace ultraschall {
 namespace reaper {
 
-bool ProjectCallback::ProcessExtensionLine(Project& projectReference, const std::string& line, ProjectStateContext& readContext)
+bool ProjectCallback::ProcessExtensionLine(ProjectHandle projectReference, const std::string& line, ProjectStateContext& readContext)
 {
+   PRECONDITION_RETURN(projectReference != nullptr, false);
+
    bool processed = false;
 
-   if(Project::Validate(projectReference) == true)
+   if(line.empty() == false)
    {
-      if(line.empty() == false)
+      if(line.find("<ULTRASCHALL_VERSION:") != std::string::npos)
       {
-         if(line.find("<ULTRASCHALL_VERSION:") != std::string::npos)
+         std::pair<uint8_t, uint8_t> projectVersion = ParseVersion(line);
+         if(projectVersion.first == 3)
          {
-            std::pair<uint8_t, uint8_t> projectVersion = ParseVersion(line);
-            if(projectVersion.first == 3)
+            static const int MAX_BUFFER_LENGTH = 4096;
+            char nextLineBuffer[MAX_BUFFER_LENGTH] = { 0 };
+            int readLength = readContext.GetLine(nextLineBuffer, MAX_BUFFER_LENGTH);
+            if(readLength >= 0)
             {
-               static const int MAX_BUFFER_LENGTH = 4096;
-               char nextLineBuffer[MAX_BUFFER_LENGTH] = { 0 };
-               int readLength = readContext.GetLine(nextLineBuffer, MAX_BUFFER_LENGTH);
-               if(readLength >= 0)
+               const std::string buffer = nextLineBuffer;
+               if(buffer.find("<ULTRASCHALL_ANNOTATION_STATUS:") != std::string::npos)
                {
-                  const std::string buffer = nextLineBuffer;
-                  if(buffer.find("<ULTRASCHALL_ANNOTATION_STATUS:") != std::string::npos)
+                  const uint32_t markerStatus = ParseMarkerStatus(buffer);
+                  if(markerStatus != Project::INVALID_MARKER_MASK)
                   {
-                     const uint32_t markerStatus = ParseMarkerStatus(buffer);
-                     if(markerStatus != Project::INVALID_MARKER_MASK)
-                     {
-                        const ProjectManager& projectManager = ProjectManager::Instance();
-                        Project currentProject = projectManager.CurrentProject();
-                        currentProject.UpdateMarkers(markerStatus);
-                     }
+                     ProjectManager& projectManager = ProjectManager::Instance();
+                     projectManager.InsertProject(projectReference);
                   }
                }
             }
-
-            processed = true;
          }
+
+         processed = true;
       }
    }
 
    return processed;
 }
 
-void ProjectCallback::SaveExtensionConfig(const Project& projectReference, ProjectStateContext& writeContext)
+void ProjectCallback::SaveExtensionConfig(ProjectHandle projectReference, ProjectStateContext& writeContext) 
 {
-   const uint32_t markerStatus = projectReference.MarkerStatus();
-   if(markerStatus != Project::INVALID_MARKER_MASK)
-   {
-      writeContext.AddLine("<ULTRASCHALL_VERSION:3.0>");
-      writeContext.AddLine("<ULTRASCHALL_ANNOTATION_STATUS:%d>", markerStatus);
+   PRECONDITION(projectReference != nullptr);
+
+   const ProjectManager& projectManager = ProjectManager::Instance();
+   const Project& project = projectManager.LookupProject(projectReference);
+   if(Project::Validate(project) == true) {
+      const uint32_t markerStatus = project.MarkerStatus();
+      if(markerStatus != Project::INVALID_MARKER_MASK) {
+         writeContext.AddLine("<ULTRASCHALL_VERSION:3.0>");
+         writeContext.AddLine("<ULTRASCHALL_ANNOTATION_STATUS:%d>", markerStatus);
+      }
    }
 }
 
-void ProjectCallback::BeginLoadProjectState(Project&)
+void ProjectCallback::BeginLoadProjectState(ProjectHandle)
 {
 }
 
