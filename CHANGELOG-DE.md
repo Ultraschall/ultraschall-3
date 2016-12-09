@@ -26,6 +26,17 @@
 
 #### Last Changelog:
 
+## 3.0 - 2016-Dezember-XX
+* Theme: **Wellenform**
+*Ausgewählte Items werden in der Helligkeit klarer hervorgehoben* 
+
+* Theme: **User Interface**
+*Einzelne Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit*
+
+* Streaming **StudioLink Live Streaming**
+* Durch die Unterstützung von StudioLink Live kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.* 
+
+
 ## 2.2.3 Gropius - 2016-August-25
 
 * Soundboard: **Bugfix**
