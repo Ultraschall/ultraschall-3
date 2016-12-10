@@ -27,15 +27,28 @@
 #### Last Changelog:
 
 ## 3.0 - 2016-Dezember-XX
+
+
 * Theme: **Wellenform**
 *Ausgewählte Items werden in der Helligkeit klarer hervorgehoben* 
 
 * Theme: **User Interface**
 *Einzelne Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit*
 
-* Streaming **StudioLink Live Streaming**
-* Durch die Unterstützung von StudioLink Live kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.* 
+* Theme: **Auswahlwerkzeug**
+*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cur) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand.*
 
+* Mastering: **Ultraschall Dynamics**
+*Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
+
+* Mastering: **Kapitelmarken in MP3**
+*Die Kapitelmarken eines Projektes können einfach in eine bestehende MP3 Datei hineingerendert werden.*
+
+* Streaming **StudioLink Live Streaming**
+*Durch die Unterstützung von StudioLink Live kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
+
+* Installer: **Update Check**
+*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt.*
 
 ## 2.2.3 Gropius - 2016-August-25
 
