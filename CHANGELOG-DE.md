@@ -38,6 +38,12 @@
 * Theme: **Auswahlwerkzeug**
 *Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cur) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand.*
 
+* Theme: **Hervorhebung 'Prepare all tracks...'**
+*Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen*
+
+* Actions: **Import von Kapitelmarken aus WAV Datein**
+*Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
+
 * Mastering: **Ultraschall Dynamics**
 *Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
 
