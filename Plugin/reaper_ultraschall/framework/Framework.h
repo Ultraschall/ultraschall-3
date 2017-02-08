@@ -28,6 +28,8 @@
 #include <Platform.h>
 
 #include <cstdint>
+#include <cstdlib>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -71,14 +73,6 @@ template<class ReferenceCountedType> inline static void SafeRelease(ReferenceCou
    }
 }
 
-template<class ReferenceCountedType> inline static void SafeRetain(ReferenceCountedType* ptr)
-{
-   if(ptr != 0)
-   {
-      ptr->AddRef();
-   }
-}
-   
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__

@@ -92,7 +92,7 @@ typedef struct
    
 template<class CustomActionType> ServiceStatus Application::RegisterCustomAction() const
 {
-   typedef typename CustomActionType custom_action_type;
+   typedef CustomActionType custom_action_type;
 
    ServiceStatus status = SERVICE_FAILURE;
 
@@ -150,7 +150,7 @@ template<class CommandType> ServiceStatus Application::RegisterCommand(const int
 
 template<class CustomActionType> void Application::InvokeCustomAction() const
 {
-   typedef typename CustomActionType custom_action_type;
+   typedef CustomActionType custom_action_type;
 
    CustomActionManager& manager = CustomActionManager::Instance();
    ICustomAction* pCustomAction = 0;

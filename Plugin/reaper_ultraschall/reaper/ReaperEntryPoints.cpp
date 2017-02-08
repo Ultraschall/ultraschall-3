@@ -177,12 +177,14 @@ project_config_extension_t ReaperProjectEntryPoints::projectConfigExtension_ = {
 
 ReaperProjectEntryPoints::ReaperProjectEntryPoints()
 {
+#if 0
    projectConfigExtension_.BeginLoadProjectState = BeginLoadProjectState;
    projectConfigExtension_.ProcessExtensionLine = ProcessExtensionLine;
    projectConfigExtension_.SaveExtensionConfig = SaveExtensionConfig;
    projectConfigExtension_.userData = 0;
 
    reaper_api::plugin_register("projectconfig", (void*)&projectConfigExtension_);
+#endif
 }
 
 }}

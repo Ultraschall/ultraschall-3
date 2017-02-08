@@ -24,6 +24,8 @@
 
 #include <string>
 
+#include <Framework.h>
+
 #include "UndoMarkerAction.h"
 #include "CustomActionFactory.h"
 #include "ProjectManager.h"

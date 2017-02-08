@@ -48,7 +48,7 @@ namespace ultraschall { namespace reaper {
 char FileManager::PathSeparator()
 {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-   return '/'
+   return '/';
 #else
    return '\\';
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS

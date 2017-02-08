@@ -33,9 +33,9 @@ namespace reaper {
 class VersionHandler
 {
 public:
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 	static std::string HubVersion();
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 	static std::string PluginVersion();
 
@@ -46,7 +46,6 @@ public:
    static std::string SWSVersion();
 
    static std::string LAMEVersion();
-
 };
 
 }

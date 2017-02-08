@@ -64,7 +64,7 @@ private:
 template<class C> class DeclareCustomAction
 {
 public:
-   typedef typename C custom_action_type;
+   typedef C custom_action_type;
 
    DeclareCustomAction()
    {

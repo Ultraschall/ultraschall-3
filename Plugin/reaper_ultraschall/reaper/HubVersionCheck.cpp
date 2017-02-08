@@ -38,7 +38,7 @@ std::string QueryHubVersion()
 {
    std::string version;
    
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
    if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true)
    {
       version = "AudioHub ";
@@ -67,7 +67,7 @@ std::string QueryHubVersion()
       version += ".";
       version += [value UTF8String];
    }
-#endif // #ifndef WIN32   
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
    return version;
 }

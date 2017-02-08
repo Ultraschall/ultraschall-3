@@ -25,8 +25,8 @@
 #ifndef __ULTRASCHALL_PLATFORM_H_INCL__
 #define __ULTRASCHALL_PLATFORM_H_INCL__
 
-#ifndef _WIN32
-//todo:macos
+#ifndef ULTRASCHALL_PLATFORM_WIN32
+#define NOMINMAX
 #else
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

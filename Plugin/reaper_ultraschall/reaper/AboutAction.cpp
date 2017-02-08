@@ -99,7 +99,7 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
    }
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-   const std::string hubVersion = QueryHubVersion();
+   const std::string hubVersion = VersionHandler::HubVersion();
    if(hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";

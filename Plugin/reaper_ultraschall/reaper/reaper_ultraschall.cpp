@@ -33,7 +33,6 @@
 #include "CustomActionManager.h"
 
 #include "AboutAction.h"
-#include "UpdateCheckAction.h"
 
 #include "InsertChapterMarkersAction.h"
 #include "SaveChapterMarkersAction.h"
@@ -80,9 +79,6 @@ extern "C"
                      application.RegisterCustomAction<reaper::AboutAction>();
                      Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
 
-                     application.RegisterCustomAction<reaper::UpdateCheckAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'UpdateCheckAction' activated.");
-
 							application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
                      Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
                      application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
@@ -108,20 +104,6 @@ extern "C"
                      Trace0(TRACE_LEVEL_INFO, "'ToggleEditMarkersAction' activated.");
                      application.RegisterCustomAction<reaper::ToggleShownoteMarkersAction>();
                      Trace0(TRACE_LEVEL_INFO, "'ToggleShownoteMarkersAction' activated.");
-
-                     application.RegisterCommand<reaper::NewProjectCommand>(40023);
-                     Trace0(TRACE_LEVEL_INFO, "'NewProjectCommand' activated.");
-                     application.RegisterCommand<reaper::OpenProjectCommand>(40025);
-                     Trace0(TRACE_LEVEL_INFO, "'OpenProjectCommand' activated.");
-                     application.RegisterCommand<reaper::SaveProjectCommand>(40026);
-                     Trace0(TRACE_LEVEL_INFO, "'SaveProjectCommand' activated.");
-                     application.RegisterCommand<reaper::CloseProjectCommand>(40860);
-                     Trace0(TRACE_LEVEL_INFO, "'CloseProjectCommand' activated.");
-
-							// run the update action on startup
-                     Trace0(TRACE_LEVEL_INFO, "Running 'UpdateCheckAction'...");
-							application.InvokeCustomAction<reaper::UpdateCheckAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'UpdateCheckAction' done.");
                   }
 					}
 				}

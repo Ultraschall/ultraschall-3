@@ -37,7 +37,7 @@ static const size_t MAX_TRACE_MESSAGE_SIZE = 1024;
 
 void Trace_0(const TraceLevel level, const char* format, ...)
 {
-   va_list args = 0;
+   va_list args = {0};
    va_start(args, format);
    TraceVa_0(level, format, args);
    va_end(args);
@@ -63,7 +63,7 @@ void TraceVa_0(const TraceLevel level, const char* format, va_list args)
 
 void Trace_1(const TraceLevel level, const char* file, const int line, const char* format, ...)
 {
-   va_list args = 0;
+   va_list args = {0};
    va_start(args, format);
    TraceVa_1(level, file, line, format, args);
    va_end(args);

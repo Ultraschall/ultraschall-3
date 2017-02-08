@@ -29,10 +29,10 @@
 
 namespace ultraschall { namespace framework {
 
-template<class I> class CAllocator
+template<typename I> class CAllocator
 {
 public:
-   typedef typename I item_type;
+   typedef I item_type;
 
    static item_type* Alloc(const size_t itemCount)
    {
@@ -58,13 +58,13 @@ public:
    }
 };
    
-template<class I> class CppAllocator
+template<typename I> class CppAllocator
 {
 public:
-   typedef typename I item_type;
+   typedef I item_type;
 
    static item_type* Alloc(const size_t itemCount)
-{
+   {
       PRECONDITION_RETURN(itemCount > 0, 0);
 
       item_type* ptr = new item_type[itemCount];
@@ -74,11 +74,11 @@ public:
       }
 
       return ptr;
-}
+   }
    
    static item_type* Realloc(item_type*, const size_t)
-{
-      reutrn 0;
+   {
+      return 0;
    }
 
    static void Free(item_type*& ptr)
@@ -96,14 +96,14 @@ public:
    
 
    static item_type* Alloc(const size_t itemCount)
-{
+   {
       PRECONDITION_RETURN(itemCount > 0, 0);
 
       void *ptr = CoTaskMemAlloc(sizeof(item_type) * itemCount);
-   if(ptr != 0)
-   {
+      if(ptr != 0)
+      {
          std::memset(ptr, 0, sizeof(item_type) * itemCount);
-   }
+      }
    
       return reinterpret_cast<I>(ptr);
    }
@@ -128,8 +128,8 @@ public:
 template<class I, class A = CAllocator<I>> class Malloc
 {
 public:
-   typedef typename I item_type;
-   typedef typename A allocator_type;
+   typedef I item_type;
+   typedef A allocator_type;
 
    static size_t Size()
    {
@@ -144,12 +144,12 @@ public:
    static item_type* Realloc(item_type* ptr, const size_t itemCount)
    {
       return allocator_type::Realloc(ptr, itemCount);
-}
+   }
    
    static void Free(item_type*& ptr)
-{
-      allocator_type::Free(reinterpret_cast<I*>(ptr));
-}
+   {
+      allocator_type::Free(ptr);
+   }
 };
    
 }}

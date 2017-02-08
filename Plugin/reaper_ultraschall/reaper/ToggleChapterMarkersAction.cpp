@@ -22,6 +22,8 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <Framework.h>
+
 #include "ToggleChapterMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "ProjectManager.h"

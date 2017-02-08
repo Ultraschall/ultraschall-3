@@ -25,15 +25,15 @@
 #include "VersionHandler.h"
 #include "FileManager.h"
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_MACOS
 
 namespace ultraschall {
 namespace reaper {
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 std::string VersionHandler::HubVersion()
 {
 	std::string version;
@@ -69,23 +69,23 @@ std::string VersionHandler::HubVersion()
 
 	return version;
 }
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 std::string VersionHandler::PluginVersion()
 {
-#ifdef WIN32
+#ifdef ULTRASCHALL_PLATFORM_WIN32
 	const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
 	return FileManager::ReadVersionFromFile(path);
 #else
 	return "2.2.3";
-#endif // #ifdef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 std::string VersionHandler::SoundboardVersion()
 {
    std::string version;
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
    NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
       inDomains : NSUserDomainMask] firstObject];
    NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
@@ -100,7 +100,7 @@ std::string VersionHandler::SoundboardVersion()
 #else
    const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
    version = FileManager::ReadVersionFromFile(path);
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
    return version;
 }
@@ -109,7 +109,7 @@ std::string VersionHandler::StudioLinkVersion()
 {
    std::string version;
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
    NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
       inDomains : NSUserDomainMask] firstObject];
    NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
@@ -124,19 +124,19 @@ std::string VersionHandler::StudioLinkVersion()
 #else
    const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link.dll";
    version = FileManager::ReadVersionFromFile(path);
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
    return version;
 }
 
 std::string VersionHandler::SWSVersion()
 {
-#ifdef WIN32
+#ifdef ULTRASCHALL_PLATFORM_WIN32
    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
    return FileManager::ReadVersionFromFile(path);
 #else
    return "2.8.3";
-#endif // #ifdef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 std::string VersionHandler::LAMEVersion()

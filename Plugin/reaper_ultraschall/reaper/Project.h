@@ -26,6 +26,9 @@
 #define __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 
 #include <vector>
+
+#include <Framework.h>
+
 #include "ReaperEntryPoints.h"
 #include "Marker.h"
 
