@@ -80,6 +80,8 @@
 		424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */; };
 		424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */; };
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
+		4252BB5D1E4BB20F0051CAB4 /* UpdateCheckAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */; };
+		4252BB5E1E4BB20F0051CAB4 /* UpdateCheckAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */; };
@@ -215,6 +217,8 @@
 		424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudioLinkVersionCheck.h; path = reaper/StudioLinkVersionCheck.h; sourceTree = "<group>"; };
 		424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SoundboardVersionCheck.cpp; path = reaper/SoundboardVersionCheck.cpp; sourceTree = "<group>"; };
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
+		4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheckAction.cpp; path = reaper/UpdateCheckAction.cpp; sourceTree = "<group>"; };
+		4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheckAction.h; path = reaper/UpdateCheckAction.h; sourceTree = "<group>"; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutAction.cpp; path = reaper/AboutAction.cpp; sourceTree = "<group>"; };
@@ -348,6 +352,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */,
+				4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */,
 				422A06CB1E4B69F100D758FE /* ICommand.h */,
 				422A06CC1E4B69F100D758FE /* InsertChapterMarkersAction.cpp */,
 				422A06CD1E4B69F100D758FE /* InsertChapterMarkersAction.h */,
@@ -497,6 +503,7 @@
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
 				422A070E1E4B69F100D758FE /* SetShownoteMarkerAction.h in Headers */,
+				4252BB5E1E4BB20F0051CAB4 /* UpdateCheckAction.h in Headers */,
 				422A07041E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h in Headers */,
 				422A07001E4B69F100D758FE /* ReplaceChapterMarkersAction.h in Headers */,
 				42F19A7A1ABEE82200231F3D /* CustomActionManager.h in Headers */,
@@ -618,6 +625,7 @@
 				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */,
+				4252BB5D1E4BB20F0051CAB4 /* UpdateCheckAction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
