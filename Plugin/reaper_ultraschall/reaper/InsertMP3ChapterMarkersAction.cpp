@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,41 +22,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
+#include <string>
+#include <vector>
+#include <fstream>
 
-#include "ICustomAction.h"
+#include <Framework.h>
+#include <StringUtilities.h>
+
+#include "InsertMP3ChapterMarkersAction.h"
+#include "CustomActionFactory.h"
 
 namespace ultraschall {
-namespace reaper {
+   namespace reaper {
+      
+static DeclareCustomAction<InsertMP3ChapterMarkersAction> action;
 
-class UpdateCheckAction : public ICustomAction
+ServiceStatus InsertMP3ChapterMarkersAction::Execute()
 {
-public:
-   static const char* UniqueId()
-   {
-      return "ULTRASCHALL_UPDATE_CHECK";
-   }
-   
-   static const char* UniqueName()
-   {
-      return "ULTRASCHALL: Check for Updates...";
-   }
-   
-   static ICustomAction* CreateCustomAction()
-   {
-      return new UpdateCheckAction();
-   }
-
-   virtual ServiceStatus Execute() override;
-
-private:
-   UpdateCheckAction()
-   {
-   }
-};
-
+   return SERVICE_SUCCESS;
 }
-}
+      
+}}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
+

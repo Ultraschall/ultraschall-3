@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
+		420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */; };
+		420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */; };
 		4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4215FEFE1CEA687400CCA10C /* VersionString.cpp */; };
 		4215FF011CEA687400CCA10C /* VersionString.h in Headers */ = {isa = PBXBuildFile; fileRef = 4215FEFF1CEA687400CCA10C /* VersionString.h */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
@@ -145,6 +147,8 @@
 
 /* Begin PBXFileReference section */
 		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
+		420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMP3ChapterMarkersAction.cpp; path = reaper/InsertMP3ChapterMarkersAction.cpp; sourceTree = "<group>"; };
+		420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMP3ChapterMarkersAction.h; path = reaper/InsertMP3ChapterMarkersAction.h; sourceTree = "<group>"; };
 		4215FEFE1CEA687400CCA10C /* VersionString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VersionString.cpp; path = reaper/VersionString.cpp; sourceTree = "<group>"; };
 		4215FEFF1CEA687400CCA10C /* VersionString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionString.h; path = reaper/VersionString.h; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
@@ -282,6 +286,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420E078F1E4F25E600FEF003 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				422A07241E4B6E4F00D758FE /* ioapi.c */,
+				422A07221E4B6E1500D758FE /* unzip.c */,
+			);
+			name = 3rdParty;
+			sourceTree = "<group>";
+		};
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,8 +306,7 @@
 		429A7C501ABEE63B00231F3D = {
 			isa = PBXGroup;
 			children = (
-				422A07241E4B6E4F00D758FE /* ioapi.c */,
-				422A07221E4B6E1500D758FE /* unzip.c */,
+				420E078F1E4F25E600FEF003 /* 3rdParty */,
 				A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
@@ -438,6 +450,8 @@
 				4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */,
 				A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */,
 				A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */,
+				420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */,
+				420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -499,6 +513,7 @@
 				422A07161E4B69F100D758FE /* UndoMarkerAction.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
+				420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
@@ -599,6 +614,7 @@
 				422A07251E4B6E4F00D758FE /* ioapi.c in Sources */,
 				422A07071E4B69F100D758FE /* SetChapterMarkerAction.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
+				420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */,
 				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				422A06F51E4B69F100D758FE /* NewProjectCommand.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,

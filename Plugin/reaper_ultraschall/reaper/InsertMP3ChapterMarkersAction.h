@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,41 +22,40 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
 
 #include "ICustomAction.h"
 
 namespace ultraschall {
-namespace reaper {
-
-class UpdateCheckAction : public ICustomAction
+   namespace reaper {
+      
+class InsertMP3ChapterMarkersAction : public ICustomAction
 {
 public:
    static const char* UniqueId()
    {
-      return "ULTRASCHALL_UPDATE_CHECK";
+      return "ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS";
    }
    
    static const char* UniqueName()
    {
-      return "ULTRASCHALL: Check for Updates...";
+      return "ULTRASCHALL: Insert chapters markers into MP3 target...";
    }
    
    static ICustomAction* CreateCustomAction()
    {
-      return new UpdateCheckAction();
+      return new InsertMP3ChapterMarkersAction();
    }
-
+   
    virtual ServiceStatus Execute() override;
-
+   
 private:
-   UpdateCheckAction()
+   InsertMP3ChapterMarkersAction()
    {
    }
 };
+      
+}}
 
-}
-}
-
-#endif // #ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
