@@ -34,19 +34,27 @@ namespace ultraschall { namespace reaper {
 class SetHistoricalMarkerAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
-
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_SET_HISTORICAL_CHAPTER_MARKER";
+   }
    
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Set chapter marker back in time (2 min)";
+   }
+   
+   static ICustomAction* CreateCustomAction()
+   {
+      return new SetHistoricalMarkerAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~SetHistoricalMarkerAction();
-
 private:
-   SetHistoricalMarkerAction();
+   SetHistoricalMarkerAction()
+   {
+   }
 };
 
 }}

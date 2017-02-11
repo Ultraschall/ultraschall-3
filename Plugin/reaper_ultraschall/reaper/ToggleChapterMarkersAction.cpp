@@ -33,31 +33,6 @@ namespace reaper {
 
 static DeclareCustomAction<ToggleChapterMarkersAction> action;
 
-ToggleChapterMarkersAction::ToggleChapterMarkersAction()
-{
-}
-
-ToggleChapterMarkersAction::~ToggleChapterMarkersAction()
-{
-}
-
-const char* ToggleChapterMarkersAction::UniqueId()
-{
-	return "ULTRASCHALL_TOGGLE_CHAPTER_MARKERS";
-}
-
-ServiceStatus ToggleChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-	pCustomAction = new ToggleChapterMarkersAction();
-	PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-	return SERVICE_SUCCESS;
-}
-
-const char* ToggleChapterMarkersAction::LocalizedName() const
-{
-	return "ULTRASCHALL: Toggle chapter markers";
-}
-
 ServiceStatus ToggleChapterMarkersAction::Execute()
 {
    const ProjectManager& projectManager = ProjectManager::Instance();

@@ -33,19 +33,27 @@ namespace reaper {
 class ToggleShownoteMarkersAction : public ICustomAction
 {
 public:
-	static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_TOGGLE_SHOWNOTE_MARKERS";
+   }
 
-	static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-	virtual const char* LocalizedName() const override;
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Toggle shownote markers";
+   }
+   
+	static ICustomAction* CreateCustomAction()
+   {
+      return new ToggleShownoteMarkersAction();
+   }
 
 	virtual ServiceStatus Execute() override;
 
-protected:
-	virtual ~ToggleShownoteMarkersAction();
-
 private:
-	ToggleShownoteMarkersAction();
+	ToggleShownoteMarkersAction()
+   {
+   }
 };
 
 }

@@ -32,31 +32,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SetShownoteMarkerAction> action;
 
-SetShownoteMarkerAction::SetShownoteMarkerAction()
-{
-}
-
-SetShownoteMarkerAction::~SetShownoteMarkerAction()
-{
-}
-
-const char* SetShownoteMarkerAction::UniqueId()
-{
-   return "ULTRASCHALL_SET_SHOWNOTE_MARKER";
-}
-
-ServiceStatus SetShownoteMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new SetShownoteMarkerAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* SetShownoteMarkerAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Set shownote marker";
-}
-
 ServiceStatus SetShownoteMarkerAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;

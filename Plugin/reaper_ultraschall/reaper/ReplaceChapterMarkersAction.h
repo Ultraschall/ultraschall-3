@@ -32,19 +32,27 @@ namespace ultraschall { namespace reaper {
 class ReplaceChapterMarkersAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
-
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_REPLACE_CHAPTERS";
+   }
    
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Replace chapter markers...";
+   }
+
+   static ICustomAction* CreateCustomAction()
+   {
+      return new ReplaceChapterMarkersAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~ReplaceChapterMarkersAction();
-
 private:
-	ReplaceChapterMarkersAction();
+	ReplaceChapterMarkersAction()
+   {
+   }
 };
 
 }}

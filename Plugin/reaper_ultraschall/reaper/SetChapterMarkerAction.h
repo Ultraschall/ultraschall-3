@@ -29,24 +29,33 @@
 
 #include "ICustomAction.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+   namespace reaper {
 
 class SetChapterMarkerAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_SET_CHAPTER_MARKER";
+   }
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Set chapter marker";
+   }
 
-   virtual const char* LocalizedName() const override;
-   
+   static ICustomAction* CreateCustomAction()
+   {
+      return new SetChapterMarkerAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~SetChapterMarkerAction();
-
 private:
-   SetChapterMarkerAction();
+   SetChapterMarkerAction()
+   {
+   }
 };
 
 }}

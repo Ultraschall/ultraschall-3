@@ -25,36 +25,35 @@
 #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
 
-#include <string>
-
-#include <ResourceId.h>
-
 #include "ICustomAction.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+   namespace reaper {
 
 class SaveChapterMarkersToProjectAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
+   }
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Save chapter markers to project folder";
+   }
 
-   virtual const char* LocalizedName() const override;
-   
+   static ICustomAction* CreateCustomAction()
+   {
+      return new SaveChapterMarkersToProjectAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~SaveChapterMarkersToProjectAction();
-
 private:
-	SaveChapterMarkersToProjectAction();
-   
-   framework::ResourceId actionNameId_;
-   framework::ResourceId successMessageId_;
-   framework::ResourceId failureMessageId_;
-   framework::ResourceId notFoundMessageId_;
-   framework::ResourceId noProjectNameMessageId_;
+	SaveChapterMarkersToProjectAction()
+   {
+   }
 };
 
 }}

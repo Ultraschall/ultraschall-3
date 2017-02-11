@@ -37,35 +37,27 @@ namespace reaper {
 class UpdateCheckAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
-
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_UPDATE_CHECK";
+   }
+   
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Check for Updates...";
+   }
+   
+   static ICustomAction* CreateCustomAction()
+   {
+      return new UpdateCheckAction();
+   }
 
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~UpdateCheckAction();
-
 private:
-   static const size_t MAX_VERSION_LENGTH = 4;
-   static const char* UPDATE_FILE_URL;
-
-   UpdateCheckAction();
-
-   static std::string QueryUpdatedVersion();
-
-   static std::vector<int> NormalizeVersionString(const std::string& version);
-
-   static int CompareVersions(const std::string& lhs, const std::string& rhs);
-
-   static std::string DownloadVersionFile();
-   static void DownloadVersionFileCallback();
-
-   static std::string ParseVersionFile(const std::string& versionFile);
-
-   framework::ResourceId actionNameId_;
+   UpdateCheckAction()
+   {
+   }
 };
 
 }

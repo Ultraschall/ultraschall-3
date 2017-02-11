@@ -36,21 +36,27 @@ namespace reaper {
 class AboutAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_ABOUT_ULTRASCHALL";
+   }
    
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-   
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: About Ultraschall...";
+   }
+
+   static ICustomAction* CreateCustomAction()
+   {
+      return new AboutAction();
+   }
    
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~AboutAction();
-   
 private:
-   AboutAction();
-
-   framework::ResourceId actionNameId_;
+   AboutAction()
+   {
+   }
 };
    
 }

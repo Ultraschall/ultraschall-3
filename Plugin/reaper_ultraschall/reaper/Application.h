@@ -104,12 +104,12 @@ template<class CustomActionType> ServiceStatus Application::RegisterCustomAction
       status = factory.CreateCustomAction(uniqueId, pCustomAction);
       if(ServiceSucceeded(status) && (pCustomAction != 0))
       {
-         const char* localisedName = pCustomAction->LocalizedName();
-         if(localisedName != 0)
+         const char* uniqueName = custom_action_type::UniqueName();
+         if(uniqueName != 0)
          {
             custom_action_register_t action = {0};
             action.idStr = uniqueId;
-            action.name = localisedName;
+            action.name = uniqueName;
             const int32_t id = Register("custom_action", (void*)&action);
             if(id != 0)
             {

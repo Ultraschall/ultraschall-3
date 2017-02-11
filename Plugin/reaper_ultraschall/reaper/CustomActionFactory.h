@@ -39,7 +39,7 @@ class CustomActionFactory
 public:
    static CustomActionFactory& Instance();
 
-   typedef ServiceStatus (*CREATE_CUSTOM_ACTION_FUNCTION)(ICustomAction*&);
+   typedef ICustomAction* (*CREATE_CUSTOM_ACTION_FUNCTION)();
 
    ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
 

@@ -41,31 +41,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<ReplaceChapterMarkersAction> action;
 
-ReplaceChapterMarkersAction::ReplaceChapterMarkersAction()
-{
-}
-
-ReplaceChapterMarkersAction::~ReplaceChapterMarkersAction()
-{
-}
-
-const char* ReplaceChapterMarkersAction::UniqueId()
-{
-   return "ULTRASCHALL_REPLACE_CHAPTERS";
-}
-
-ServiceStatus ReplaceChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new ReplaceChapterMarkersAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* ReplaceChapterMarkersAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Replace chapter markers...";
-}
-
 ServiceStatus ReplaceChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;

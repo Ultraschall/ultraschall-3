@@ -32,31 +32,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SetEditMarkerAction> action;
 
-SetEditMarkerAction::SetEditMarkerAction()
-{
-}
-
-SetEditMarkerAction::~SetEditMarkerAction()
-{
-}
-
-const char* SetEditMarkerAction::UniqueId()
-{
-   return "ULTRASCHALL_SET_EDIT_MARKER";
-}
-
-ServiceStatus SetEditMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new SetEditMarkerAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* SetEditMarkerAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Set edit marker";
-}
-
 ServiceStatus SetEditMarkerAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;

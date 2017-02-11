@@ -42,7 +42,6 @@ public:
       return id != INVALID_CUSTOM_ACTION_ID;
    }
 
-   virtual const char* LocalizedName() const = 0;
    virtual ServiceStatus Execute() = 0;
 
    static bool RegisterProject()

@@ -32,31 +32,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SetChapterMarkerAction> action;
 
-SetChapterMarkerAction::SetChapterMarkerAction()
-{
-}
-
-SetChapterMarkerAction::~SetChapterMarkerAction()
-{
-}
-
-const char* SetChapterMarkerAction::UniqueId()
-{
-   return "ULTRASCHALL_SET_CHAPTER_MARKER";
-}
-
-ServiceStatus SetChapterMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new SetChapterMarkerAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* SetChapterMarkerAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Set chapter marker";
-}
-
 ServiceStatus SetChapterMarkerAction::Execute()
 {
    ProjectManager& projectManager = ProjectManager::Instance();

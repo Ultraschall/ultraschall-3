@@ -26,15 +26,6 @@
 #include <vector>
 #include <fstream>
 
-#ifdef ULTRASCHALL_PLATFORM_MACOS
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/xpath.h>
-#include <libxml/xpathInternals.h>
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
-
-#include <ResourceManager.h>
-
 #include "AboutAction.h"
 #include "CustomActionFactory.h"
 #include "ReaperVersionCheck.h"
@@ -48,40 +39,6 @@ namespace ultraschall {
 namespace reaper {
 
 static DeclareCustomAction<AboutAction> action;
-
-AboutAction::AboutAction()
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-   if(ServiceSucceeded(status))
-   {
-      resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: About Ultraschall...");
-   }
-}
-
-AboutAction::~AboutAction()
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   resourceManager.UnregisterLocalizedString(actionNameId_);
-}
-
-const char* AboutAction::UniqueId()
-{
-   return "ULTRASCHALL_ABOUT_ULTRASCHALL";
-}
-
-ServiceStatus AboutAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new AboutAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* AboutAction::LocalizedName() const
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   return resourceManager.GetLocalizedString(actionNameId_);
-}
 
 ServiceStatus AboutAction::Execute()
 {

@@ -31,31 +31,6 @@ namespace reaper {
 
 static DeclareCustomAction<ToggleShownoteMarkersAction> action;
 
-ToggleShownoteMarkersAction::ToggleShownoteMarkersAction()
-{
-}
-
-ToggleShownoteMarkersAction::~ToggleShownoteMarkersAction()
-{
-}
-
-const char* ToggleShownoteMarkersAction::UniqueId()
-{
-	return "ULTRASCHALL_TOGGLE_SHOWNOTE_MARKERS";
-}
-
-ServiceStatus ToggleShownoteMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-	pCustomAction = new ToggleShownoteMarkersAction();
-	PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-	return SERVICE_SUCCESS;
-}
-
-const char* ToggleShownoteMarkersAction::LocalizedName() const
-{
-	return "ULTRASCHALL: Toggle shownote markers";
-}
-
 ServiceStatus ToggleShownoteMarkersAction::Execute()
 {
    const ProjectManager& projectManager = ProjectManager::Instance();

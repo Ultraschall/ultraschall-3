@@ -98,7 +98,7 @@ ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICu
 {
    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FAILURE;
+   ServiceStatus status = SERVICE_FACTORY_CREATE_FAILED;
     
    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
@@ -109,15 +109,11 @@ ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICu
       CREATE_CUSTOM_ACTION_FUNCTION pfn = i->second;
       if(pfn != 0)
       {
-         status = (*pfn)(pCustomAction);
-         if(ServiceSucceeded(status) && (0 == pCustomAction))
+         pCustomAction = (*pfn)();
+         if(pCustomAction != nullptr)
          {
-            status = SERVICE_FACTORY_CREATE_FAILED;
+            status = SERVICE_SUCCESS;
          }
-      }
-      else
-      {
-         status = SERVICE_FACTORY_CREATE_FAILED;
       }
    }
    else

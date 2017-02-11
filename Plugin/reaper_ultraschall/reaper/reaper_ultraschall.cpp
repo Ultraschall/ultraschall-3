@@ -33,25 +33,10 @@
 #include "CustomActionManager.h"
 
 #include "AboutAction.h"
-
+#include "UpdateCheckAction.h"
 #include "InsertChapterMarkersAction.h"
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
-
-#include "SetChapterMarkerAction.h"
-#include "SetEditMarkerAction.h"
-#include "SetShownoteMarkerAction.h"
-#include "SetHistoricalMarkerAction.h"
-#include "UndoMarkerAction.h"
-
-#include "ToggleChapterMarkersAction.h"
-#include "ToggleEditMarkersAction.h"
-#include "ToggleShownoteMarkersAction.h"
-
-#include "NewProjectCommand.h"
-#include "OpenProjectCommand.h"
-#include "SaveProjectCommand.h"
-#include "CloseProjectCommand.h"
 
 namespace reaper = ultraschall::reaper;
 
@@ -79,31 +64,17 @@ extern "C"
                      application.RegisterCustomAction<reaper::AboutAction>();
                      Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
 
+                     application.RegisterCustomAction<reaper::UpdateCheckAction>();
+                     Trace0(TRACE_LEVEL_INFO, "'UpdateCheckAction' activated.");
+
 							application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
                      Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
+
                      application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
                      Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersAction' activated.");
+                     
                      application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
                      Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
-
-                     application.RegisterCustomAction<reaper::SetChapterMarkerAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SetChapterMarkerAction' activated.");
-                     application.RegisterCustomAction<reaper::SetEditMarkerAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SetEditMarkerAction' activated.");
-                     application.RegisterCustomAction<reaper::SetShownoteMarkerAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SetShownoteMarkerAction' activated.");
-
-                     application.RegisterCustomAction<reaper::SetHistoricalMarkerAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SetHistoricalChapterMarkerAction' activated.");
-                     application.RegisterCustomAction<reaper::UndoMarkerAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'UndoMarkerAction' activated.");
-                     
-                     application.RegisterCustomAction<reaper::ToggleChapterMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'ToggleChapterMarkersAction' activated.");
-                     application.RegisterCustomAction<reaper::ToggleEditMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'ToggleEditMarkersAction' activated.");
-                     application.RegisterCustomAction<reaper::ToggleShownoteMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'ToggleShownoteMarkersAction' activated.");
                   }
 					}
 				}
@@ -143,7 +114,7 @@ You are trying to load a version of REAPER that is not compatible to Ultraschall
 	}
 }
 
-#ifdef WIN32
+#ifdef ULTRASCHALL_PLATFORM_WIN32
 BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
 {
 	switch(ul_reason_for_call)

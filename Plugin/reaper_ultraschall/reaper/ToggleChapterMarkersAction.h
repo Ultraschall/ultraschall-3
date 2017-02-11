@@ -33,19 +33,27 @@ namespace reaper {
 class ToggleChapterMarkersAction : public ICustomAction
 {
 public:
-	static const char* UniqueId();
-
-	static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-	virtual const char* LocalizedName() const override;
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_TOGGLE_CHAPTER_MARKERS";
+   }
+   
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Toggle chapter markers";
+   }
+   
+	static ICustomAction* CreateCustomAction()
+   {
+      return new ToggleChapterMarkersAction();
+   }
 
 	virtual ServiceStatus Execute() override;
 
-protected:
-	virtual ~ToggleChapterMarkersAction();
-
 private:
-	ToggleChapterMarkersAction();
+	ToggleChapterMarkersAction()
+   {
+   }
 };
 
 }

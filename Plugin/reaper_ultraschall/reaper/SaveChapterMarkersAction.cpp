@@ -37,31 +37,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SaveChapterMarkersAction> action;
 
-SaveChapterMarkersAction::SaveChapterMarkersAction()
-{
-}
-
-SaveChapterMarkersAction::~SaveChapterMarkersAction()
-{
-}
-
-const char* SaveChapterMarkersAction::UniqueId()
-{
-   return "ULTRASCHALL_SAVE_CHAPTERS";
-}
-
-ServiceStatus SaveChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new SaveChapterMarkersAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* SaveChapterMarkersAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Export chapter markers...";
-}
-
 ServiceStatus SaveChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;

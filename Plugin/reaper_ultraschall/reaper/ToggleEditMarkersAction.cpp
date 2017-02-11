@@ -31,31 +31,6 @@ namespace reaper {
 
 static DeclareCustomAction<ToggleEditMarkersAction> action;
 
-ToggleEditMarkersAction::ToggleEditMarkersAction()
-{
-}
-
-ToggleEditMarkersAction::~ToggleEditMarkersAction()
-{
-}
-
-const char* ToggleEditMarkersAction::UniqueId()
-{
-	return "ULTRASCHALL_TOGGLE_EDIT_MARKERS";
-}
-
-ServiceStatus ToggleEditMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-	pCustomAction = new ToggleEditMarkersAction();
-	PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-	return SERVICE_SUCCESS;
-}
-
-const char* ToggleEditMarkersAction::LocalizedName() const
-{
-	return "ULTRASCHALL: Toggle edit markers";
-}
-
 ServiceStatus ToggleEditMarkersAction::Execute()
 {
    const ProjectManager& projectManager = ProjectManager::Instance();

@@ -32,31 +32,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<SetHistoricalMarkerAction> action;
 
-SetHistoricalMarkerAction::SetHistoricalMarkerAction()
-{
-}
-
-SetHistoricalMarkerAction::~SetHistoricalMarkerAction()
-{
-}
-
-const char* SetHistoricalMarkerAction::UniqueId()
-{
-   return "ULTRASCHALL_SET_HISTORICAL_CHAPTER_MARKER";
-}
-
-ServiceStatus SetHistoricalMarkerAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new SetHistoricalMarkerAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* SetHistoricalMarkerAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Set chapter marker back in time (2 min)";
-}
-
 ServiceStatus SetHistoricalMarkerAction::Execute()
 {
    ProjectManager& projectManager = ProjectManager::Instance();

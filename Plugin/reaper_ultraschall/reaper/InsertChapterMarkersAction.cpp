@@ -41,31 +41,6 @@ namespace ultraschall { namespace reaper {
 
 static DeclareCustomAction<InsertChapterMarkersAction> action;
 
-InsertChapterMarkersAction::InsertChapterMarkersAction()
-{
-}
-
-InsertChapterMarkersAction::~InsertChapterMarkersAction()
-{
-}
-
-const char* InsertChapterMarkersAction::UniqueId()
-{
-   return "ULTRASCHALL_INSERT_CHAPTERS";
-}
-
-ServiceStatus InsertChapterMarkersAction::CreateCustomAction(ICustomAction*& pCustomAction)
-{
-   pCustomAction = new InsertChapterMarkersAction();
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-   return SERVICE_SUCCESS;
-}
-
-const char* InsertChapterMarkersAction::LocalizedName() const
-{
-   return "ULTRASCHALL: Import chapter markers...";
-}
-
 ServiceStatus InsertChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;

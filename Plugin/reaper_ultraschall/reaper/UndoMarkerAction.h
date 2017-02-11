@@ -34,19 +34,27 @@ namespace ultraschall { namespace reaper {
 class UndoMarkerAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
-
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_UNDO_MARKER";
+   }
    
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Delete last marker";
+   }
+
+   static ICustomAction* CreateCustomAction()
+   {
+      return new UndoMarkerAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~UndoMarkerAction();
-
 private:
-   UndoMarkerAction();
+   UndoMarkerAction()
+   {
+   }
 };
 
 }}

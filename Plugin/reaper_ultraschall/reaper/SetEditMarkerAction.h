@@ -34,19 +34,27 @@ namespace ultraschall { namespace reaper {
 class SetEditMarkerAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_SET_EDIT_MARKER";
+   }
 
-   static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-   virtual const char* LocalizedName() const override;
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Set edit marker";
+   }
    
+   static ICustomAction* CreateCustomAction()
+   {
+      return new SetEditMarkerAction();
+   }
+
    virtual ServiceStatus Execute() override;
 
-protected:
-   virtual ~SetEditMarkerAction();
-
 private:
-   SetEditMarkerAction();
+   SetEditMarkerAction()
+   {
+   }
 };
 
 }}

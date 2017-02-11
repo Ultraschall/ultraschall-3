@@ -37,21 +37,27 @@ namespace reaper {
 class ToggleEditMarkersAction : public ICustomAction
 {
 public:
-	static const char* UniqueId();
+   static const char* UniqueId()
+   {
+      return "ULTRASCHALL_TOGGLE_EDIT_MARKERS";
+   }
 
-	static ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction);
-
-	virtual const char* LocalizedName() const override;
+   static const char* UniqueName()
+   {
+      return "ULTRASCHALL: Toggle edit markers";
+   }
+   
+	static ICustomAction* CreateCustomAction()
+   {
+      return new ToggleEditMarkersAction();
+   }
 
 	virtual ServiceStatus Execute() override;
 
-protected:
-	virtual ~ToggleEditMarkersAction();
-
 private:
-	ToggleEditMarkersAction();
-
-	framework::ResourceId actionNameId_;
+	ToggleEditMarkersAction()
+   {
+   }
 };
 
 }
