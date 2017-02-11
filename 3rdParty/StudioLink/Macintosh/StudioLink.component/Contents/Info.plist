@@ -18,11 +18,13 @@
 			<key>type</key>
 			<string>aufx</string>
 			<key>version</key>
-			<integer>1049600</integer>
+			<integer>1051648</integer>
 		</dict>
 	</array>
 	<key>BuildMachineOSBuild</key>
-	<string>13F34</string>
+	<string>14F1808</string>
+	<key>CFBundleDisplayName</key>
+	<string>StudioLink</string>
 	<key>CFBundleExecutable</key>
 	<string>StudioLink</string>
 	<key>CFBundleIdentifier</key>
@@ -32,25 +34,25 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>16.04.0</string>
+	<string>16.12.0</string>
 	<key>CFBundleSignature</key>
-	<string>PTul</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>16.04.0</string>
+	<string>16.12.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>6A1052c</string>
+	<string>6E35b</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>14A382</string>
+	<string>14D125</string>
 	<key>DTSDKName</key>
 	<string>macosx10.10</string>
 	<key>DTXcode</key>
-	<string>0610</string>
+	<string>0640</string>
 	<key>DTXcodeBuild</key>
-	<string>6A1052c</string>
+	<string>6E35b</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
