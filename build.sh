@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-2.2.1
+export ULTRASCHALL_RELEASE=Ultraschall-3.0.0
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -131,13 +131,13 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Remove\ legacy\ audio\ devices.command
 
 # Unmount installer image
-hdiutil detach ./$ULTRASCHALL_RELEASE_INTERMEDIATE  
+hdiutil detach ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 
 # Convert installer image
-hdiutil convert -format UDRO -o ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE   
+hdiutil convert -format UDRO -o ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 
 # Clean-up
 rm -rf ./$ULTRASCHALL_RELEASE_INTERMEDIATE
-Rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
+rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 rm -rf ./Payload
 rm -rf ./Intermediate
