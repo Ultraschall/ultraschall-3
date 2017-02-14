@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,6 @@ ServiceStatus SetHistoricalMarkerAction::Execute()
 {
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   const double currentPosition = currentProject.CurrentPosition();
    currentProject.InsertHistoricalMarker();
 
    return SERVICE_SUCCESS;
