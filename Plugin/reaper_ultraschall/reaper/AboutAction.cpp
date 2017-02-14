@@ -31,7 +31,6 @@
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
 #include "VersionHandler.h"
-#include "StudioLinkVersionCheck.h"
 #include "NotificationWindow.h"
 #include "FileManager.h"
 
@@ -46,7 +45,7 @@ ServiceStatus AboutAction::Execute()
   
    std::string message1 = "\
 ULTRASCHALL Podcasting Extension for REAPER\r\n\r\n\
-Copyright (c) 2016 ultraschall.fm\r\n\r\n\
+Copyright (c) 2017 ultraschall.fm\r\n\r\n\
 Ultraschall REAPER Extension " + pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
@@ -75,6 +74,12 @@ Ultraschall REAPER Extension " + pluginVersion + "\r\n";
        message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
    }
 
+   const std::string lameVersion = VersionHandler::LAMEVersion();
+   if(lameVersion.empty() == false)
+   {
+      message1 += "LAME MP3 Encoder " + lameVersion + "\r\n";
+   }
+   
    std::string message2 = "\
 SWS REAPER Extension " + VersionHandler::SWSVersion() + "\r\n\
 REAPER ";
@@ -82,11 +87,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   std::string message3 = "\
-LAME MP3 Encoder " + VersionHandler::LAMEVersion() + "\r\n\
-REAPER ";
-
-   NotificationWindow::Show("About Ultraschall 3.0 \"Feldman\"...", message1 + message2 + message3);
+   NotificationWindow::Show("About Ultraschall 3.0 \"Miedinger\"...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }
