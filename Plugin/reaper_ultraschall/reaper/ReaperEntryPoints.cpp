@@ -58,6 +58,15 @@ namespace reaper_api
    int(*GetPlayStateEx)(ReaProject* proj);
    double(*GetCursorPositionEx)(ReaProject* proj);
    double(*GetPlayPositionEx)(ReaProject* proj);
+   
+   void (*GetSetProjectNotes)(ReaProject* proj, bool set, char* notesNeedBig, int notesNeedBig_sz);
+   int (*SetProjExtState)(ReaProject* proj, const char* extname, const char* key, const char* value);
+   int (*GetProjExtState)(ReaProject* proj, const char* extname, const char* key, char* valOutNeedBig, int valOutNeedBig_sz);
+   
+   bool (*HasExtState)(const char* section, const char* key);
+   void (*SetExtState)(const char* section, const char* key, const char* value, bool persist);
+   const char* (*GetExtState)(const char* section, const char* key);
+   void (*DeleteExtState)(const char* section, const char* key, bool persist);
 }
 
 namespace ultraschall { namespace reaper {
@@ -116,6 +125,15 @@ ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_pl
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayStateEx, "GetPlayStateEx");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetCursorPositionEx, "GetCursorPositionEx");
    ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayPositionEx, "GetPlayPositionEx");
+
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetSetProjectNotes, "GetSetProjectNotes");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::SetProjExtState, "SetProjExtState");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjExtState, "GetProjExtState");
+
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::HasExtState, "HasExtState");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::SetExtState, "SetExtState");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetExtState, "GetExtState");
+   ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteExtState, "DeleteExtState");
 
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
    reaper_api::plugin_register("hookcommand", (void*)OnStartCommand);

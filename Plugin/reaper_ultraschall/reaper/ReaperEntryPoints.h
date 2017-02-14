@@ -56,9 +56,16 @@
 #define REAPERAPI_WANT_GetPlayPositionEx
 #define REAPERAPI_WANT_GetLastMarkerAndCurRegion
 #define REAPERAPI_WANT_DeleteProjectMarkerByIndex
+#define REAPERAPI_WANT_GetSetProjectNotes
+#define REAPERAPI_WANT_SetProjExtState
+#define REAPERAPI_WANT_GetProjExtState
+#define REAPERAPI_WANT_HasExtState
+#define REAPERAPI_WANT_SetExtState
+#define REAPERAPI_WANT_GetExtState
+#define REAPERAPI_WANT_DeleteExtState
 
 namespace reaper_api {
-#include <reaper_plugin_functions.h>
+#include "reaper_plugin_functions.h"
 }
 
 namespace ultraschall { namespace reaper {
