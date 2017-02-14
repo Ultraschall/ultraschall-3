@@ -65,6 +65,13 @@
 		422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 422A07201E4B6D5E00D758FE /* libz.tbd */; };
 		422A07231E4B6E1500D758FE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 422A07221E4B6E1500D758FE /* unzip.c */; };
 		422A07251E4B6E4F00D758FE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 422A07241E4B6E4F00D758FE /* ioapi.c */; };
+		42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42327A621E53A04B00092214 /* libcurl.tbd */; };
+		42327A651E53A05700092214 /* libexpat.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42327A641E53A05700092214 /* libexpat.tbd */; };
+		42327A661E53A0D000092214 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E655011ACEE32A00231F3D /* AppKit.framework */; };
+		42327A691E53ACC900092214 /* SystemProperties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A671E53ACC900092214 /* SystemProperties.cpp */; };
+		42327A6A1E53ACC900092214 /* SystemProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A681E53ACC900092214 /* SystemProperties.h */; };
+		42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A6B1E53B21900092214 /* TimeUtilities.cpp */; };
+		42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A6C1E53B21900092214 /* TimeUtilities.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
 		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
 		423F32B31B51509D00231F3D /* IActivationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B21B51509D00231F3D /* IActivationService.h */; };
@@ -78,18 +85,14 @@
 		424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C82F31AC8085D00231F3D /* ServiceStatus.h */; };
 		424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424C83001AC8086F00231F3D /* FileManager.cpp */; };
 		424C830C1AC8086F00231F3D /* FileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83011AC8086F00231F3D /* FileManager.h */; };
-		424DB57F1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */; };
-		424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */; };
 		424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */; };
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
-		4252BB5D1E4BB20F0051CAB4 /* UpdateCheckAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */; };
-		4252BB5E1E4BB20F0051CAB4 /* UpdateCheckAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */; };
+		4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */; };
+		4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */; };
 		4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C9901BF2A7D900B1EF1F /* AboutAction.h */; };
-		4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */; };
-		4254C9961BF2BA6400B1EF1F /* HubVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */; };
 		4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */; };
 		4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4255EB481BF27C1F001CC39E /* BinaryFileReader.h */; };
 		4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4255EB4C1BF27E1C001CC39E /* Stream.h */; };
@@ -112,7 +115,6 @@
 		42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* NotificationWindow.cpp */; };
 		42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* NotificationWindow.h */; };
 		42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */; };
-		42E655021ACEE32A00231F3D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E655011ACEE32A00231F3D /* AppKit.framework */; };
 		42F19A631ABEE81500231F3D /* Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A601ABEE81500231F3D /* Framework.h */; };
 		42F19A751ABEE82200231F3D /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F19A661ABEE82200231F3D /* Application.cpp */; };
 		42F19A761ABEE82200231F3D /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F19A671ABEE82200231F3D /* Application.h */; };
@@ -129,7 +131,6 @@
 		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 		A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */; };
-		A9B92D201C95C8EF00D6B1AE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -204,6 +205,12 @@
 		422A07201E4B6D5E00D758FE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		422A07221E4B6E1500D758FE /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = ../3rd_party/zlib/src/unzip.c; sourceTree = "<group>"; };
 		422A07241E4B6E4F00D758FE /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ../3rd_party/zlib/src/ioapi.c; sourceTree = "<group>"; };
+		42327A621E53A04B00092214 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		42327A641E53A05700092214 /* libexpat.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libexpat.tbd; path = usr/lib/libexpat.tbd; sourceTree = SDKROOT; };
+		42327A671E53ACC900092214 /* SystemProperties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SystemProperties.cpp; path = reaper/SystemProperties.cpp; sourceTree = "<group>"; };
+		42327A681E53ACC900092214 /* SystemProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemProperties.h; path = reaper/SystemProperties.h; sourceTree = "<group>"; };
+		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
+		42327A6C1E53B21900092214 /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtilities.h; path = framework/TimeUtilities.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
 		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
 		423F32B21B51509D00231F3D /* IActivationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IActivationService.h; path = framework/IActivationService.h; sourceTree = "<group>"; };
@@ -217,18 +224,14 @@
 		424C82F31AC8085D00231F3D /* ServiceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceStatus.h; path = framework/ServiceStatus.h; sourceTree = "<group>"; };
 		424C83001AC8086F00231F3D /* FileManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = FileManager.cpp; path = reaper/FileManager.cpp; sourceTree = "<group>"; };
 		424C83011AC8086F00231F3D /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileManager.h; path = reaper/FileManager.h; sourceTree = "<group>"; };
-		424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = StudioLinkVersionCheck.cpp; path = reaper/StudioLinkVersionCheck.cpp; sourceTree = "<group>"; };
-		424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudioLinkVersionCheck.h; path = reaper/StudioLinkVersionCheck.h; sourceTree = "<group>"; };
 		424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SoundboardVersionCheck.cpp; path = reaper/SoundboardVersionCheck.cpp; sourceTree = "<group>"; };
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
-		4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheckAction.cpp; path = reaper/UpdateCheckAction.cpp; sourceTree = "<group>"; };
-		4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheckAction.h; path = reaper/UpdateCheckAction.h; sourceTree = "<group>"; };
+		4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheck.cpp; path = reaper/UpdateCheck.cpp; sourceTree = "<group>"; };
+		4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheck.h; path = reaper/UpdateCheck.h; sourceTree = "<group>"; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutAction.cpp; path = reaper/AboutAction.cpp; sourceTree = "<group>"; };
 		4254C9901BF2A7D900B1EF1F /* AboutAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutAction.h; path = reaper/AboutAction.h; sourceTree = "<group>"; };
-		4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = HubVersionCheck.cpp; path = reaper/HubVersionCheck.cpp; sourceTree = "<group>"; };
-		4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HubVersionCheck.h; path = reaper/HubVersionCheck.h; sourceTree = "<group>"; };
 		4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryFileReader.cpp; path = framework/BinaryFileReader.cpp; sourceTree = "<group>"; };
 		4255EB481BF27C1F001CC39E /* BinaryFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryFileReader.h; path = framework/BinaryFileReader.h; sourceTree = "<group>"; };
 		4255EB4C1BF27E1C001CC39E /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stream.h; path = framework/Stream.h; sourceTree = "<group>"; };
@@ -277,9 +280,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
+				42327A651E53A05700092214 /* libexpat.tbd in Frameworks */,
+				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
 				422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */,
-				A9B92D201C95C8EF00D6B1AE /* WebKit.framework in Frameworks */,
-				42E655021ACEE32A00231F3D /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +302,8 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42327A641E53A05700092214 /* libexpat.tbd */,
+				42327A621E53A04B00092214 /* libcurl.tbd */,
 				422A07201E4B6D5E00D758FE /* libz.tbd */,
 			);
 			name = Frameworks;
@@ -327,6 +333,8 @@
 		42F19A5E1ABEE7EA00231F3D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				42327A6B1E53B21900092214 /* TimeUtilities.cpp */,
+				42327A6C1E53B21900092214 /* TimeUtilities.h */,
 				422A07171E4B6B7000D758FE /* IUnknown.h */,
 				422A07181E4B6B7000D758FE /* Platform.h */,
 				422A07191E4B6B7000D758FE /* TraceUltilities.cpp */,
@@ -364,8 +372,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
-				4252BB5B1E4BB20F0051CAB4 /* UpdateCheckAction.cpp */,
-				4252BB5C1E4BB20F0051CAB4 /* UpdateCheckAction.h */,
+				4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */,
+				4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */,
 				422A06CB1E4B69F100D758FE /* ICommand.h */,
 				422A06CC1E4B69F100D758FE /* InsertChapterMarkersAction.cpp */,
 				422A06CD1E4B69F100D758FE /* InsertChapterMarkersAction.h */,
@@ -414,8 +422,6 @@
 				422A06BC1E4B683C00D758FE /* VersionHandler.h */,
 				4215FEFE1CEA687400CCA10C /* VersionString.cpp */,
 				4215FEFF1CEA687400CCA10C /* VersionString.h */,
-				424DB57B1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp */,
-				424DB57C1C8507FB00656ED2 /* StudioLinkVersionCheck.h */,
 				424C83001AC8086F00231F3D /* FileManager.cpp */,
 				424C83011AC8086F00231F3D /* FileManager.h */,
 				42F19A661ABEE82200231F3D /* Application.cpp */,
@@ -442,8 +448,6 @@
 				4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */,
 				4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */,
 				4254C9901BF2A7D900B1EF1F /* AboutAction.h */,
-				4254C9931BF2BA6400B1EF1F /* HubVersionCheck.cpp */,
-				4254C9941BF2BA6400B1EF1F /* HubVersionCheck.h */,
 				424F7CB11BF3631D004DBA2F /* SoundboardVersionCheck.cpp */,
 				424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */,
 				4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */,
@@ -452,6 +456,8 @@
 				A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */,
 				420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */,
 				420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */,
+				42327A671E53ACC900092214 /* SystemProperties.cpp */,
+				42327A681E53ACC900092214 /* SystemProperties.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -485,7 +491,6 @@
 				422A071B1E4B6B7000D758FE /* IUnknown.h in Headers */,
 				422A06CA1E4B69C100D758FE /* CommandManager.h in Headers */,
 				425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */,
-				4254C9961BF2BA6400B1EF1F /* HubVersionCheck.h in Headers */,
 				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
 				429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */,
 				4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */,
@@ -494,13 +499,13 @@
 				422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */,
 				4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */,
 				4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */,
-				424DB5801C8507FB00656ED2 /* StudioLinkVersionCheck.h in Headers */,
 				42F19A631ABEE81500231F3D /* Framework.h in Headers */,
 				4215FF011CEA687400CCA10C /* VersionString.h in Headers */,
 				42F19A761ABEE82200231F3D /* Application.h in Headers */,
 				422A07021E4B69F100D758FE /* SaveChapterMarkersAction.h in Headers */,
 				42F19A781ABEE82200231F3D /* CustomActionFactory.h in Headers */,
 				42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */,
+				42327A6A1E53ACC900092214 /* SystemProperties.h in Headers */,
 				42F19A7C1ABEE82200231F3D /* ReaperEntryPoints.h in Headers */,
 				424C82F91AC8085D00231F3D /* ServiceFactory.h in Headers */,
 				4208914A1B2492F800231F3D /* Malloc.h in Headers */,
@@ -512,13 +517,14 @@
 				4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */,
 				422A07161E4B69F100D758FE /* UndoMarkerAction.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
+				42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
 				420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
 				422A070E1E4B69F100D758FE /* SetShownoteMarkerAction.h in Headers */,
-				4252BB5E1E4BB20F0051CAB4 /* UpdateCheckAction.h in Headers */,
+				4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */,
 				422A07041E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h in Headers */,
 				422A07001E4B69F100D758FE /* ReplaceChapterMarkersAction.h in Headers */,
 				42F19A7A1ABEE82200231F3D /* CustomActionManager.h in Headers */,
@@ -589,6 +595,7 @@
 			files = (
 				42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */,
 				422A06FD1E4B69F100D758FE /* ProjectManager.cpp in Sources */,
+				42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */,
 				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
 				422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */,
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
@@ -600,7 +607,6 @@
 				422A07031E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp in Sources */,
 				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
 				42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */,
-				424DB57F1C8507FB00656ED2 /* StudioLinkVersionCheck.cpp in Sources */,
 				425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */,
 				42F19A791ABEE82200231F3D /* CustomActionManager.cpp in Sources */,
 				424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */,
@@ -611,11 +617,11 @@
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
 				4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */,
 				422A06F71E4B69F100D758FE /* OpenProjectCommand.cpp in Sources */,
+				42327A691E53ACC900092214 /* SystemProperties.cpp in Sources */,
 				422A07251E4B6E4F00D758FE /* ioapi.c in Sources */,
 				422A07071E4B69F100D758FE /* SetChapterMarkerAction.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
 				420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */,
-				4254C9951BF2BA6400B1EF1F /* HubVersionCheck.cpp in Sources */,
 				422A06F51E4B69F100D758FE /* NewProjectCommand.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,
 				422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */,
@@ -641,7 +647,7 @@
 				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */,
-				4252BB5D1E4BB20F0051CAB4 /* UpdateCheckAction.cpp in Sources */,
+				4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
