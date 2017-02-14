@@ -77,7 +77,7 @@ std::string VersionHandler::PluginVersion()
 	const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
 	return FileManager::ReadVersionFromFile(path);
 #else
-	return "2.2.3";
+	return "3.0.0";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
@@ -93,7 +93,6 @@ std::string VersionHandler::SoundboardVersion()
       if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
       {
          NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-
          NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
          version = [value UTF8String];
       }
@@ -117,7 +116,6 @@ std::string VersionHandler::StudioLinkVersion()
       if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
       {
          NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-
          NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
          version = [value UTF8String];
       }
@@ -141,12 +139,12 @@ std::string VersionHandler::SWSVersion()
 
 std::string VersionHandler::LAMEVersion()
 {
-#ifdef WIN32
+#ifdef ULTRASCHALL_PLATFORM_WIN32
    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
    return FileManager::ReadVersionFromFile(path);
 #else
-   return "3.99.2.5";
-#endif // #ifdef WIN32
+   return "3.98.3";
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 }
