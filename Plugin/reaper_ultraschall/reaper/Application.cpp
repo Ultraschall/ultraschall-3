@@ -38,6 +38,7 @@
 #include "NotificationWindow.h"
 #include "CustomActionManager.h"
 #include "CommandManager.h"
+#include "UpdateCheck.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -59,7 +60,8 @@ Application& Application::Instance()
 ServiceStatus Application::Start()
 {
    PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
-
+   UpdateCheck();
+   
    return SERVICE_SUCCESS;
 }
 
