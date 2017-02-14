@@ -31,6 +31,7 @@
 
 #include "InsertMP3ChapterMarkersAction.h"
 #include "CustomActionFactory.h"
+#include "FileManager.h"
 
 namespace ultraschall {
    namespace reaper {
@@ -39,6 +40,33 @@ static DeclareCustomAction<InsertMP3ChapterMarkersAction> action;
 
 ServiceStatus InsertMP3ChapterMarkersAction::Execute()
 {
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   
+   const std::string projectName = currentProject.Name();
+   if(projectName.empty() == false)
+   {
+      std::vector<Marker> tags = currentProject.QueryAllMarkers();
+      if(tags.empty() == false)
+      {
+         std::string targetName = projectName + ".mp3";
+         if(FileManager::FileExists(targetName) == false)
+         {
+            targetName = FileManager::BrowseForMP3Files("Open MP3 File...");
+         }
+         
+         if(targetName.empty() == false)
+         {
+            const std::string projectNotes = currentProject.Notes();
+            if(projectNotes.empty() == false)
+            {
+               
+            }
+         }
+      }
+
+   }
+   
    return SERVICE_SUCCESS;
 }
       
