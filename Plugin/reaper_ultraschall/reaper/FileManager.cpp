@@ -61,6 +61,80 @@ std::string FileManager::BrowseForFiles(const framework::ResourceId id)
     return BrowseForFiles(message);
 }
 
+std::string FileManager::BrowseForMP3Files(const std::string& title)
+   {
+      std::string path;
+      
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+      NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
+      if(nil != fileDialog)
+      {
+         fileDialog.canChooseFiles = YES;
+         fileDialog.canChooseDirectories = NO;
+         fileDialog.canCreateDirectories = NO;
+         fileDialog.allowsMultipleSelection = NO;
+         fileDialog.title = [NSString stringWithUTF8String : title.c_str()];
+         
+#if 0 // can't use recent APIs. REAPER builds with an OS version less than 10.6
+         fileDialog.allowedFileTypes = [[NSArray alloc] initWithObjects:@"mp3", nil];
+         fileDialog.allowsOtherFileTypes = NO;
+         if([fileDialog runModal] == NSFileHandlingPanelOKButton)
+#endif
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            if([fileDialog runModalForTypes : [[NSArray alloc] initWithObjects:@"mp3", nil]] == NSFileHandlingPanelOKButton)
+#pragma clang diagnostic pop
+            {
+               path = [[fileDialog URL] fileSystemRepresentation];
+            }
+         
+         fileDialog = nil;
+      }
+#else
+      IFileOpenDialog* pfod = nullptr;
+      HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
+      if(SUCCEEDED(hr))
+      {
+         pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+         
+         COMDLG_FILTERSPEC filters[2] = {0};
+         filters[0].pszName = L"MP3 file";
+         filters[0].pszSpec = L"*.mp3";
+         filters[2].pszName = L"All files";
+         filters[2].pszSpec = L"*.*";
+         pfod->SetFileTypes(2, filters);
+         
+         FILEOPENDIALOGOPTIONS fos = FOS_STRICTFILETYPES | FOS_FILEMUSTEXIST;
+         pfod->SetOptions(fos);
+         
+         hr = pfod->Show(reaper_api::GetMainHwnd());
+         if(SUCCEEDED(hr))
+         {
+            IShellItem* psi = nullptr;
+            hr = pfod->GetResult(&psi);
+            if(SUCCEEDED(hr))
+            {
+               LPWSTR fileSystemPath = nullptr;
+               hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
+               if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
+               {
+                  path = framework::MakeUTF8String(fileSystemPath);
+                  CoTaskMemFree(fileSystemPath);
+               }
+               
+               framework::SafeRelease(psi);
+            }
+            
+         }
+         
+         framework::SafeRelease(pfod);
+      }
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+      
+      return path;
+   }
+   
 std::string FileManager::BrowseForFiles(const std::string& title)
 {
     std::string path;
