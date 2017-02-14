@@ -152,8 +152,20 @@ std::string Project::Name() const
 
    return result;
 }
+   
+std::string Project::Notes() const
+{
+   ReaProject* projectReference = reinterpret_cast<ReaProject*>(projectReference_);
+   
+   static const size_t MAX_PROJECT_NOTES_SIZE = 4096;
+   char projectNotes[MAX_PROJECT_NOTES_SIZE] = {0};
+   reaper_api::GetSetProjectNotes(projectReference, false, projectNotes, (int)MAX_PROJECT_NOTES_SIZE);
+   std::string notes = projectNotes;
+   
+   return notes;
+}
 
-inline bool Project::InsertMarker(const Marker& marker)
+bool Project::InsertMarker(const Marker& marker)
 {
    allMarkers_.push_back(marker);
    UpdateVisibleMarkers(MarkerStatus());
@@ -241,6 +253,29 @@ public:
    }
 };
 
+std::vector<Marker> Project::QueryAllMarkers() const
+{
+   PRECONDITION_RETURN(projectReference_ != nullptr, std::vector<Marker>());
+
+   std::vector<Marker> allMarkers;
+   
+   bool isRegion = false;
+   double position = 0;
+   double duration = 0;
+   const char* name = nullptr;
+   int number = 0;
+   int color = 0;
+   
+   int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
+   while(nextIndex > 0)
+   {
+      allMarkers.push_back(Marker(position, name, color));
+      nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
+   }
+
+   return allMarkers;
+}
+   
 void Project::UpdateAllMarkers()
 {
    PRECONDITION(projectReference_ != nullptr);

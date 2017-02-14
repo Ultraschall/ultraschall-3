@@ -86,6 +86,7 @@ public:
    void UpdateVisibleMarkers(const uint32_t mask);
    void DeleteVisibleMarkers();
 
+   std::vector<Marker> QueryAllMarkers() const;
    void UpdateAllMarkers();
    void DeleteAllMarkers();
 
@@ -95,6 +96,8 @@ public:
    inline std::vector<Marker> EditMarkers() const;
    inline std::vector<Marker> ShownoteMarkers() const;
 
+   std::string Notes() const;
+   
 private:
    ProjectHandle projectReference_;
    uint32_t markerStatus_;
