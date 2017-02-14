@@ -26,52 +26,32 @@
 #include "ReaperEntryPoints.h"
 #include "NotificationWindow.h"
 
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 #import "NotificationPanel.h"
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 namespace ultraschall { namespace reaper {
    
 void NotificationWindow::Show(const std::string& message, const bool isError)
 {
-#ifndef WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
    [NotificationPanel showWithMessage: [NSString stringWithUTF8String: message.c_str()]
                                asError: isError ? YES : NO];
 #else
     MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
 
 void NotificationWindow::Show(const std::string& message, const std::string& information, const bool isError)
 {
-#ifndef WIN32
-    [NotificationPanel showWithMessage : [NSString stringWithUTF8String : message.c_str()]
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+   [NotificationPanel showWithMessage : [NSString stringWithUTF8String : message.c_str()]
                                   info: [NSString stringWithUTF8String: information.c_str()]
                                   asError: isError ? YES : NO];
 #else
     MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
    
-   
-void NotificationWindow::Show(const framework::ResourceId id, const bool isError)
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   std::string message = resourceManager.GetLocalizedString(id);
-   Show(message, isError);
-}
-
-void NotificationWindow::ShowUpdateAvailable(const std::string& message, const std::string& info, const std::string& changelog)
-{
-#ifndef WIN32
-  [NotificationPanel showUpdateMessage: [NSString stringWithUTF8String : message.c_str()]
-                                  info: [NSString stringWithUTF8String: info.c_str()]
-                             changeLog: [NSString stringWithUTF8String: changelog.c_str()]];
-#else
-  // TODO: Make a proper windows dialog
-  MessageBox(reaper_api::GetMainHwnd(), info.c_str(), message.c_str(), MB_ICONINFORMATION);
-#endif
-}
-
 }}
 

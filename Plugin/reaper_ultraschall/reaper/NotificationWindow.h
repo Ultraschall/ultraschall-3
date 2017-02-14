@@ -35,8 +35,6 @@ class NotificationWindow
 public:
     static void Show(const std::string& message, const bool isError = false);
     static void Show(const std::string& message, const std::string& info, const bool isError = false);
-    static void Show(const framework::ResourceId id, const bool isError = false);
-    static void ShowUpdateAvailable(const std::string& message, const std::string& info, const std::string& changelog);
 };
 
 }}
