@@ -26,10 +26,36 @@
 
 #include "SystemProperties.h"
 #include "ReaperEntryPoints.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall {
 namespace reaper {
 
+static const char* VERSIONS_SECTION_NAME = "ultraschall_versions";
+static const char* THEME_VERSION_KEY_NAME = "theme";
+static const char* PLUGIN_VERSION_KEY_NAME = "plugin";
+static const char* VERSION_VALUE_NAME = "20170215";
+   
+void SetPluginVersion()
+{
+   if(reaper_api::HasExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
+   {
+      const std::string themeVersion = reaper_api::GetExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
+      if(themeVersion == VERSION_VALUE_NAME)
+      {
+         reaper_api::SetExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
+      }
+      else
+      {
+         NotificationWindow::Show("INVALID_THEME");
+      }
+   }
+   else
+   {
+      NotificationWindow::Show("MISSING_THEME");
+   }
+}
+  
 static const char* GLOBAL_SECTION_NAME = "ultraschall";
    
 bool HasSystemProperty(const std::string& key)
