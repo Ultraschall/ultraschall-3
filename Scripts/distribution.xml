@@ -12,6 +12,7 @@
    <pkg-ref id="fm.ultraschall.Soundboard.Component" version="3.0.0">UltraschallSoundboard.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Soundboard.Extras" version="3.0.0">UltraschallSoundboardExtras.pkg</pkg-ref>
    <pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
+   <pkg-ref id="net.sf.lame.Encoder" version="3.98.3">LAME.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.0.0">UltraschallPluginExtension.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Plugin.Scripts" version="3.0.0">UltraschallPluginScripts.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Resources" version="3.0.0">UltraschallResources.pkg</pkg-ref>
@@ -22,6 +23,7 @@
       <line choice="fm.ultraschall.Soundboard.Component"/>
       <line choice="fm.ultraschall.Soundboard.Extras"/>
       <line choice="com.itsr.StudioLink.Component"/>
+      <line choice="net.sf.lame.Encoder"/>
       <line choice="fm.ultraschall.Plugin.Extension"/>
       <line choice="fm.ultraschall.Plugin.Scripts"/>
       <line choice="fm.ultraschall.Resources"/>
@@ -37,6 +39,9 @@
    </choice>
    <choice id="com.itsr.StudioLink.Component" visible="true" title="StudioLink" description="StudioLink Plug-in." start_selected="true">
       <pkg-ref id="com.itsr.StudioLink.Component"/>
+   </choice>
+   <choice id="net.sf.lame.Encoder" visible="true" title="LAME MP3 Encoder" description="LAME MP3 Encoder." start_selected="true">
+      <pkg-ref id="net.sf.lame.Encoder"/>
    </choice>
    <choice id="fm.ultraschall.Plugin.Extension" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension. Adds import and export of chapter markers to REAPER 5." start_selected="true">
       <pkg-ref id="fm.ultraschall.Plugin.Extension"/>

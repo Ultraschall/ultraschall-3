@@ -49,7 +49,7 @@ cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\
 cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/Add-ons/Ultraschall\ Reaper\ Splash\ Screen.png
 
 # Copy REAPER theme to payload directory
-cp ../REAPER/Themes/Ultraschall_2.2_MAC.ReaperConfigZip ./Payload/Ultraschall_2.2.ReaperConfigZip
+cp ../REAPER/Themes/Ultraschall_3.0_MAC.ReaperConfigZip ./Payload/Ultraschall_3.0.ReaperConfigZip
 
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
@@ -89,8 +89,11 @@ pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundb
 # Create Ultraschall Soundboard extras package
 pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extras --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallSoundboardExtras.pkg
 
-# Create Ultraschall StudioLink package
+# Create ITSR StudioLink package
 pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-ins/Components ./Build/StudioLink.pkg
+
+# Create LAME package
+pkgbuild --root ./3rdParty/LAME/Macintosh --identifier net.sf.lame.Encoder --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/LAME.pkg
 
 # Create SWS REAPER Plugin Extension package
 chmod 755 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
