@@ -62,7 +62,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
          }
          else
          {
-            NotificationWindow::Show("The save operation has been canceled.");
+            NotificationWindow::Show("The export operation has been canceled.");
             status = SERVICE_FAILURE;
          }
       }

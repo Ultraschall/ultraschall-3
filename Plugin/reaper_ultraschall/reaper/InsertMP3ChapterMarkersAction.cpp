@@ -33,6 +33,7 @@
 #include "CustomActionFactory.h"
 #include "FileManager.h"
 #include "MP3Properties.h"
+#include "NotificationWindow.h"
 
 namespace ultraschall {
    namespace reaper {
@@ -44,13 +45,15 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
    
-   const std::string projectName = currentProject.Name();
-   if(projectName.empty() == false)
+   std::vector<Marker> tags = currentProject.QueryAllMarkers();
+   if(tags.empty() == false)
    {
-      std::vector<Marker> tags = currentProject.QueryAllMarkers();
-      if(tags.empty() == false)
+      const std::string projectFolder = currentProject.FolderName();
+      const std::string projectName = currentProject.Name();
+      if((projectFolder.empty() == false) && (projectName.empty() == false))
       {
-         std::string targetName = projectName + ".mp3";
+         std::string targetName = FileManager::AppendPath(projectFolder, projectName);
+         targetName += ".mp3";
          if(FileManager::FileExists(targetName) == false)
          {
             targetName = FileManager::BrowseForMP3Files("Open MP3 File...");
@@ -62,11 +65,30 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
             if(projectNotes.empty() == false)
             {
                InsertMP3Properties(targetName, projectNotes);
-               InsertMP3Tags(targetName, tags);
+            }
+            
+            if(InsertMP3Tags(targetName, tags) == true)
+            {
+               NotificationWindow::Show("The chapter markers have been exported successfully.");
+            }
+            else
+            {
+               NotificationWindow::Show("Failed to export chapter markers.", true);
             }
          }
+         else
+         {
+            NotificationWindow::Show("The export operation has been canceled.");
+         }
       }
-
+      else
+      {
+         NotificationWindow::Show("The project must be saved before the chapter marker export can run.");
+      }
+   }
+   else
+   {
+      NotificationWindow::Show("The project does not contain any chapter markers.");
    }
    
    return SERVICE_SUCCESS;
