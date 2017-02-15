@@ -183,7 +183,8 @@ bool Project::InsertMarker(const std::string& name, const int color, const doubl
       actualPosition = CurrentPosition();
    }
 
-   return InsertMarker(Marker(position, name, color));
+   const int index = reaper_api::AddProjectMarker2(projectReference_, false, actualPosition, 0, name.c_str(), -1, 0);
+   return index != -1;
 }
 
 double Project::CurrentPosition() const
@@ -269,7 +270,12 @@ std::vector<Marker> Project::QueryAllMarkers() const
    int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
    while(nextIndex > 0)
    {
-      allMarkers.push_back(Marker(position, name, color));
+      const std::string markerName = name;
+      if(("_Edit" != markerName) && (color != 0x01ff0000)) // remove edit markers
+      {
+         allMarkers.push_back(Marker(position, markerName, color));
+      }
+      
       nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
    }
 

@@ -73,6 +73,9 @@
 		42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A6B1E53B21900092214 /* TimeUtilities.cpp */; };
 		42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A6C1E53B21900092214 /* TimeUtilities.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
+		423D88371E54DBFE00AF8A41 /* libtag.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 423D88361E54DBFE00AF8A41 /* libtag.a */; };
+		423D883E1E54DDA800AF8A41 /* MP3Properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */; };
+		423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */ = {isa = PBXBuildFile; fileRef = 423D883D1E54DDA800AF8A41 /* MP3Properties.h */; };
 		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
 		423F32B31B51509D00231F3D /* IActivationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B21B51509D00231F3D /* IActivationService.h */; };
 		423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423F32B41B51869500231F3D /* ServiceManager.cpp */; };
@@ -212,6 +215,9 @@
 		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
 		42327A6C1E53B21900092214 /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtilities.h; path = framework/TimeUtilities.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
+		423D88361E54DBFE00AF8A41 /* libtag.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtag.a; path = ../3rd_party/taglib/lib/macos/debug/libtag.a; sourceTree = "<group>"; };
+		423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MP3Properties.cpp; path = reaper/MP3Properties.cpp; sourceTree = "<group>"; };
+		423D883D1E54DDA800AF8A41 /* MP3Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP3Properties.h; path = reaper/MP3Properties.h; sourceTree = "<group>"; };
 		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
 		423F32B21B51509D00231F3D /* IActivationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IActivationService.h; path = framework/IActivationService.h; sourceTree = "<group>"; };
 		423F32B41B51869500231F3D /* ServiceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceManager.cpp; path = framework/ServiceManager.cpp; sourceTree = "<group>"; };
@@ -280,6 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				423D88371E54DBFE00AF8A41 /* libtag.a in Frameworks */,
 				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
 				42327A651E53A05700092214 /* libexpat.tbd in Frameworks */,
 				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
@@ -302,6 +309,7 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				423D88361E54DBFE00AF8A41 /* libtag.a */,
 				42327A641E53A05700092214 /* libexpat.tbd */,
 				42327A621E53A04B00092214 /* libcurl.tbd */,
 				422A07201E4B6D5E00D758FE /* libz.tbd */,
@@ -372,6 +380,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */,
+				423D883D1E54DDA800AF8A41 /* MP3Properties.h */,
 				4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */,
 				4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */,
 				422A06CB1E4B69F100D758FE /* ICommand.h */,
@@ -533,6 +543,7 @@
 				422A06C61E4B69C100D758FE /* CloseProjectCommand.h in Headers */,
 				422A06F81E4B69F100D758FE /* OpenProjectCommand.h in Headers */,
 				423A5A481B518AAB00231F3D /* IApplication.h in Headers */,
+				423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +659,7 @@
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */,
 				4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */,
+				423D883E1E54DDA800AF8A41 /* MP3Properties.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +710,12 @@
 					../3rd_party/zlib/include,
 					../reaper_extension_sdk/jmde,
 					framework,
+					../3rd_party/taglib/include,
+					../3rd_party/taglib/include/toolkit,
+					../3rd_party/taglib/include/mpeg,
+					../3rd_party/taglib/include/mpeg/id3v2,
+					../3rd_party/taglib/include/mpeg/id3v2/frames,
+					../3rd_party/taglib/include/bindings/c,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -746,6 +764,12 @@
 					../3rd_party/zlib/include,
 					../reaper_extension_sdk/jmde,
 					framework,
+					../3rd_party/taglib/include,
+					../3rd_party/taglib/include/toolkit,
+					../3rd_party/taglib/include/mpeg,
+					../3rd_party/taglib/include/mpeg/id3v2,
+					../3rd_party/taglib/include/mpeg/id3v2/frames,
+					../3rd_party/taglib/include/bindings/c,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -766,15 +790,8 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					Submodule/minizip,
-					../reaper_extension_sdk/jmde,
-					framework,
-					"\"$(SRCROOT)/Submodules/cpr/include\"",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -790,15 +807,8 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					Submodule/minizip,
-					../reaper_extension_sdk/jmde,
-					framework,
-					"\"$(SRCROOT)/Submodules/cpr/include\"",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

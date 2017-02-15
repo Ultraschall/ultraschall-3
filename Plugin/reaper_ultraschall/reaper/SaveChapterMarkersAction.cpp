@@ -32,6 +32,7 @@
 #include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
+#include "TimeUtilities.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -40,56 +41,66 @@ static DeclareCustomAction<SaveChapterMarkersAction> action;
 ServiceStatus SaveChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
-   
+
    const ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   const std::vector<Marker> chapterMarkers = currentProject.ChapterMarkers();
-   if(chapterMarkers.empty() == false)
+
+   std::string targetPath;
+
+   const std::vector<Marker> tags = currentProject.QueryAllMarkers();
+   if(tags.empty() == false)
    {
-      const std::string projectFolder = currentProject.FolderName();
-      if(projectFolder.empty() == false)
+      const std::string initialFolder = currentProject.FolderName();
+      const std::string projectName = currentProject.Name();
+      if((initialFolder.empty() == false) && (projectName.empty() == false))
       {
-         std::string targetPath = FileManager::BrowseForFolder("Export chapter markers...", projectFolder);
+         std::string targetPath = FileManager::BrowseForFolder("Export chapter markers...", initialFolder);
          if(targetPath.empty() == false)
          {
-            const std::string projectName = currentProject.Name();
-            if(projectName.empty() == false)
-            {
-               targetPath = FileManager::AppendPath(targetPath, projectName + ".chapters.txt");
-               std::ofstream output(targetPath, std::ios::out);
-               for(size_t i = 0; i < chapterMarkers.size(); i++)
-               {
-                  std::ostringstream os;
-                  os << chapterMarkers[i].Position();
-                  const std::string timestamp = os.str();
-                  const std::string entry = timestamp + " " + chapterMarkers[i].Name();
-                  output << entry << std::endl;
-               }
-
-               output.close();
-               
-               status = SERVICE_SUCCESS;
-               NotificationWindow::Show("The chapter markers have been saved successfully.");
-            }
-            
-            if(ServiceFailed(status))
-            {
-               NotificationWindow::Show("The chapter markers could not be saved.");
-            }
+            targetPath = FileManager::AppendPath(targetPath, projectName + ".chapters.txt");
+            status = SERVICE_SUCCESS;
          }
          else
          {
             NotificationWindow::Show("The save operation has been canceled.");
+            status = SERVICE_FAILURE;
          }
       }
       else
       {
-         NotificationWindow::Show("The project has no name yet. Please save the project and try again.");
+         NotificationWindow::Show("The project must be saved before the chapter marker export can run.");
+         status = SERVICE_FAILURE;
       }
    }
    else
    {
-      NotificationWindow::Show("No chapter markers have been found.");
+      NotificationWindow::Show("The project does not contain any chapter markers.");
+      status = SERVICE_FAILURE;
+   }
+
+   if(SERVICE_SUCCESS == status)
+   {
+      std::ofstream os(targetPath, std::ios::out);
+      if(os.is_open() == true)
+      {
+         for(size_t i = 0; i < tags.size(); i++)
+         {
+            const std::string timestamp = framework::SecondsToString(tags[i].Position());
+            const std::string item = timestamp + " " + tags[i].Name();
+            
+            os << item << std::endl;
+         }
+         
+         os.close();
+         
+         NotificationWindow::Show("The chapter markers have been saved successfully.");
+         status = SERVICE_SUCCESS;
+      }
+      else
+      {
+         NotificationWindow::Show("Failed to export chapter markers.", true);
+         status = SERVICE_FAILURE;
+      }
    }
    
    return status;

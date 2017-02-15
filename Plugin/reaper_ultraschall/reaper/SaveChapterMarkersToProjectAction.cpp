@@ -31,6 +31,7 @@
 #include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
+#include "TimeUtilities.h"
 
 namespace ultraschall {
    namespace reaper {
@@ -43,8 +44,8 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
    
    const ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   const std::vector<Marker> chapterMarkers = currentProject.ChapterMarkers();
-   if(chapterMarkers.empty() == false)
+   const std::vector<Marker> tags = currentProject.QueryAllMarkers();
+   if(tags.empty() == false)
    {
       const std::string projectFolder = currentProject.FolderName();
       if(projectFolder.empty() == false)
@@ -53,16 +54,23 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
          if(projectName.empty() == false)
          {
             const std::string fullPath = FileManager::AppendPath(projectFolder, projectName + ".chapters.txt");
-            std::ofstream output(fullPath, std::ios::out);
-            for(size_t i = 0; i < chapterMarkers.size(); i++)
+            std::ofstream os(fullPath, std::ios::out);
+            if(os.is_open() == true)
             {
-               // TODO
-               //const std::string timestamp = application.TimestampToString(chapterMarkers[i].Position());
-               //const std::string entry = timestamp + " " + chapterMarkers[i].Name();
-               //output << entry << std::endl;
+               for(size_t i = 0; i < tags.size(); i++)
+               {
+                  const std::string timestamp = framework::SecondsToString(tags[i].Position());
+                  const std::string item = timestamp + " " + tags[i].Name();
+                  
+                  os << item << std::endl;
+               }
             }
-
-            output.close();
+            else
+            {
+               NotificationWindow::Show("Failed to export chapter markers.", true);
+            }
+            
+            os.close();
 
             status = SERVICE_SUCCESS;
             NotificationWindow::Show("The chapter markers have been saved successfully.");

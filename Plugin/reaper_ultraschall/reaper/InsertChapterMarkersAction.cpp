@@ -36,6 +36,7 @@
 #include "ProjectManager.h"
 #include "FileManager.h"
 #include "NotificationWindow.h"
+#include "TimeUtilities.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -50,7 +51,8 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 
    const ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   std::vector<Marker> chapterMarkers;
+   
+   std::vector<Marker> tags;
 
    const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
    for(const std::string& line : lines)
@@ -58,35 +60,32 @@ ServiceStatus InsertChapterMarkersAction::Execute()
       const std::vector<std::string> items = framework::split(line, ' ');
       if(items.size() > 0)
       {
-         // TODO
-         //const double timestamp = application.StringToTimestamp(items[0]);
-         //std::string name;
-         //if(items.size() > 1)
-         //{
-         //   name = items[1];
-         //}
-         //
-         //for(size_t i = 2; i < items.size(); i++)
-         //{
-         //   name += " " + items[i];
-         //}
+         const double position = framework::StringToSeconds(items[0]);
+         std::string name;
+         if(items.size() > 1)
+         {
+            name = items[1];
+         }
          
-         //chapterMarkers.push_back(framework::ChapterMarker(timestamp, name));
+         for(size_t i = 2; i < items.size(); i++)
+         {
+            name += " " + items[i];
+         }
+         
+         tags.push_back(Marker(position, name, 0));
       }
    }
    
-   size_t addedChapterMarkers = 0;
-   for(size_t i = 0; i < chapterMarkers.size(); i++)
+   size_t addedTags = 0;
+   for(size_t i = 0; i < tags.size(); i++)
    {
-      // TODO
-      //const int32_t index = application.SetChapterMarker(chapterMarkers[i]);
-      //if(index > -1)
-      //{
-      //   addedChapterMarkers++;
-      //}
+      if(currentProject.InsertChapterMarker(tags[i].Name(), tags[i].Position()) == true)
+      {
+         addedTags++;
+      }
    }
 
-   if(chapterMarkers.size() == addedChapterMarkers)
+   if(tags.size() == addedTags)
    {
       NotificationWindow::Show("The chapter markers have been added successfully.");
       status = SERVICE_SUCCESS;

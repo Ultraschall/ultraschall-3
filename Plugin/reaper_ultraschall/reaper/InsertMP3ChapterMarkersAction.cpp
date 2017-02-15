@@ -32,6 +32,7 @@
 #include "InsertMP3ChapterMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "FileManager.h"
+#include "MP3Properties.h"
 
 namespace ultraschall {
    namespace reaper {
@@ -60,7 +61,8 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
             const std::string projectNotes = currentProject.Notes();
             if(projectNotes.empty() == false)
             {
-               
+               InsertMP3Properties(targetName, projectNotes);
+               InsertMP3Tags(targetName, tags);
             }
          }
       }
