@@ -37,6 +37,7 @@
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
 #include "InsertMP3ChapterMarkersAction.h"
+#include "SystemProperties.h"
 
 namespace reaper = ultraschall::reaper;
 
@@ -56,7 +57,8 @@ extern "C"
 				try
 				{
 					reaper::ReaperEntryPoints::Setup(instance, pPluginInfo);
-
+               reaper::SetPluginVersion();
+               
 					if(ServiceSucceeded(application.Configure()))
 					{
 						if(ServiceSucceeded(application.Start()))
