@@ -41,6 +41,7 @@ public:
    static std::string BrowseForFiles(const framework::ResourceId id);
    static std::string BrowseForFiles(const std::string& title);
    static std::string BrowseForMP3Files(const std::string& title);
+   static std::string BrowseForImageFiles(const std::string& title);
 
    static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);
    static std::string BrowseForFolder(const std::string& title, const std::string& folder);
@@ -55,6 +56,7 @@ public:
    static std::string RoamingAppDataDirectory();
 
    static bool FileExists(const std::string& path);
+   static size_t FileExists(const std::vector<std::string>& paths);
    static std::vector<std::string> ReadFile(const std::string& filename);
 
    static std::string ReadVersionFromFile(const std::string& path);

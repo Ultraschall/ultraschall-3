@@ -39,12 +39,23 @@ public:
    {
    }
    
+   size_t DataSize() const
+   {
+      return dataSize_;
+   }
+   
+   ItemType* Data() const
+   {
+      return data_;
+   }
+   
    bool Write(const size_t offset, const ItemType* buffer, const size_t bufferSize)
    {
       PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
       PRECONDITION_RETURN(buffer != 0, false);
       
-      memmove(&data_[offset * Malloc<ItemType>::Size()], buffer, bufferSize * Malloc<ItemType>::Size());
+      const size_t itemSize = Malloc<ItemType>::Size();
+      memmove(&data_[offset * itemSize], buffer, bufferSize * itemSize);
       return true;
    }
    
@@ -53,7 +64,8 @@ public:
       PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
       PRECONDITION_RETURN(buffer != 0, false);
 
-      memmove(buffer, &data_[offset * Malloc<ItemType>::Size()], bufferSize * Malloc<ItemType>::Size());
+      const size_t itemSize = Malloc<ItemType>::Size();
+      memmove(buffer, &data_[offset * itemSize], bufferSize * itemSize);
       return true;
    }
    

@@ -54,6 +54,82 @@ char FileManager::PathSeparator()
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
 
+   std::string FileManager::BrowseForImageFiles(const std::string& title)
+   {
+      std::string path;
+      
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+      NSOpenPanel* fileDialog = [NSOpenPanel openPanel];
+      if(nil != fileDialog)
+      {
+         fileDialog.canChooseFiles = YES;
+         fileDialog.canChooseDirectories = NO;
+         fileDialog.canCreateDirectories = NO;
+         fileDialog.allowsMultipleSelection = NO;
+         fileDialog.title = [NSString stringWithUTF8String : title.c_str()];
+         
+#if 0 // can't use recent APIs. REAPER builds with an OS version less than 10.6
+         fileDialog.allowedFileTypes = [[NSArray alloc] initWithObjects:@"jpg", @"png", nil];
+         fileDialog.allowsOtherFileTypes = NO;
+         if([fileDialog runModal] == NSFileHandlingPanelOKButton)
+#endif
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            if([fileDialog runModalForTypes : [[NSArray alloc] initWithObjects:@"jpg", @"png", nil]] == NSFileHandlingPanelOKButton)
+#pragma clang diagnostic pop
+            {
+               path = [[fileDialog URL] fileSystemRepresentation];
+            }
+         
+         fileDialog = nil;
+      }
+#else
+      IFileOpenDialog* pfod = nullptr;
+      HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
+      if(SUCCEEDED(hr))
+      {
+         pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+         
+         COMDLG_FILTERSPEC filters[3] = {0};
+         filters[0].pszName = L"JPG file";
+         filters[0].pszSpec = L"*.jpg";
+         filters[1].pszName = L"PNG file";
+         filters[1].pszSpec = L"*.png";
+         filters[2].pszName = L"All files";
+         filters[2].pszSpec = L"*.*";
+         pfod->SetFileTypes(3, filters);
+         
+         FILEOPENDIALOGOPTIONS fos = FOS_STRICTFILETYPES | FOS_FILEMUSTEXIST;
+         pfod->SetOptions(fos);
+         
+         hr = pfod->Show(reaper_api::GetMainHwnd());
+         if(SUCCEEDED(hr))
+         {
+            IShellItem* psi = nullptr;
+            hr = pfod->GetResult(&psi);
+            if(SUCCEEDED(hr))
+            {
+               LPWSTR fileSystemPath = nullptr;
+               hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &fileSystemPath);
+               if(SUCCEEDED(hr) && (nullptr != fileSystemPath))
+               {
+                  path = framework::MakeUTF8String(fileSystemPath);
+                  CoTaskMemFree(fileSystemPath);
+               }
+               
+               framework::SafeRelease(psi);
+            }
+            
+         }
+         
+         framework::SafeRelease(pfod);
+      }
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+      
+      return path;
+   }
+   
 std::string FileManager::BrowseForFiles(const framework::ResourceId id)
 {
     framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
@@ -101,8 +177,8 @@ std::string FileManager::BrowseForMP3Files(const std::string& title)
          COMDLG_FILTERSPEC filters[2] = {0};
          filters[0].pszName = L"MP3 file";
          filters[0].pszSpec = L"*.mp3";
-         filters[2].pszName = L"All files";
-         filters[2].pszSpec = L"*.*";
+         filters[1].pszName = L"All files";
+         filters[1].pszSpec = L"*.*";
          pfod->SetFileTypes(2, filters);
          
          FILEOPENDIALOGOPTIONS fos = FOS_STRICTFILETYPES | FOS_FILEMUSTEXIST;
@@ -402,6 +478,21 @@ bool FileManager::FileExists(const std::string& path)
     return fileExists;
 }
 
+size_t FileManager::FileExists(const std::vector<std::string>& paths)
+{
+   size_t offset = -1;
+   
+   for(size_t i = 0; (i < paths.size()) && (offset == -1); i++)
+   {
+      if(FileExists(paths[i]) == true)
+      {
+         offset = i;
+      }
+   }
+   
+   return offset;
+}
+   
 std::vector<std::string> FileManager::ReadFile(const std::string& filename)
 {
     std::vector<std::string> lines;

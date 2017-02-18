@@ -24,7 +24,6 @@
 
 #include <string>
 #include <vector>
-#include <fstream>
 
 #include <Framework.h>
 #include <StringUtilities.h>
@@ -52,11 +51,10 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
       const std::string projectName = currentProject.Name();
       if((projectFolder.empty() == false) && (projectName.empty() == false))
       {
-         std::string targetName = FileManager::AppendPath(projectFolder, projectName);
-         targetName += ".mp3";
+         std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
          if(FileManager::FileExists(targetName) == false)
          {
-            targetName = FileManager::BrowseForMP3Files("Open MP3 File...");
+            targetName = FileManager::BrowseForMP3Files("Select MP3 File...");
          }
          
          if(targetName.empty() == false)
@@ -65,6 +63,19 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
             if(projectNotes.empty() == false)
             {
                InsertMP3Properties(targetName, projectNotes);
+            }
+
+            std::vector<std::string> imageNames;
+            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
+            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
+            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
+            const size_t imageIndex = FileManager::FileExists(imageNames);
+            if(imageIndex != -1)
+            {
+               if(InsertMP3Cover(targetName, imageNames[imageIndex]) == false)
+               {
+                  NotificationWindow::Show("Failed to insert cover art.", true);
+               }
             }
             
             if(InsertMP3Tags(targetName, tags) == true)

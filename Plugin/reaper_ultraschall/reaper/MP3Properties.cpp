@@ -27,6 +27,7 @@
 
 #include "MP3Properties.h"
 #include "StringUtilities.h"
+#include "BinaryFileReader.h"
 #include "taglib_include.h"
 
 namespace ultraschall {
@@ -63,6 +64,75 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
    return success;
 }
 
+std::string QueryMIMEType(const uint8_t* data, const size_t dataSize)
+{
+   PRECONDITION_RETURN(data != nullptr, std::string());
+   PRECONDITION_RETURN(dataSize > 0, std::string());
+   
+   std::string mimeType;
+   
+   if(dataSize >= 2)
+   {
+      if((data[0] == 0xff) && (data[1] == 0xd8))
+      {
+         mimeType = "image/jpeg";
+      }
+      
+      if(dataSize >= 8)
+      {
+         if((data[0] == 0x89) && (data[1] == 0x50) && (data[2] == 0x4e) && (data[3] == 0x47))
+         {
+            mimeType = "image/png";
+         }
+      }
+   }
+   
+   return mimeType;
+}
+   
+bool InsertMP3Cover(const std::string& target, const std::string& image)
+{
+   PRECONDITION_RETURN(target.empty() == false, false);
+   PRECONDITION_RETURN(image.empty() == false, false);
+   
+   bool success = false;
+   
+   TagLib::MPEG::File audioFile(target.c_str());
+   
+   TagLib::ID3v2::Tag *tag = audioFile.ID3v2Tag(true);
+   if(tag != nullptr)
+   {
+      TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame;
+      if(frame != nullptr)
+      {
+         framework::Stream<uint8_t>* imageData = framework::BinaryFileReader::ReadBytes(image);
+         if(imageData != nullptr)
+         {
+            uint8_t imageHeader[10] = {0};
+            const size_t imageHeaderSize = 10;
+            if(imageData->Read(0, imageHeader, imageHeaderSize) == true)
+            {
+               const std::string mimeType = QueryMIMEType(imageHeader, imageHeaderSize);
+               if(mimeType.empty() == false)
+               {
+                  frame->setMimeType(mimeType);
+                  
+                  TagLib::ByteVector coverData((const char*)imageData->Data(), (unsigned int)imageData->DataSize());
+                  frame->setPicture(coverData);
+                  tag->addFrame(frame);
+                  success = audioFile.save();
+               }
+            }
+            
+            SafeRelease(imageData);
+         }
+      }
+   }
+   
+   
+   return success;
+}
+   
 uint32_t QueryTargetDuration(const std::string& target)
 {
    PRECONDITION_RETURN(target.empty() == false, -1);

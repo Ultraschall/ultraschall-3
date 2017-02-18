@@ -12,6 +12,7 @@
 #include <id3v2tag.h>
 #include <chapterframe.h>
 #include <textidentificationframe.h>
+#include <attachedpictureframe.h>
 
 namespace taglib = TagLib;
 namespace mp3 = TagLib::MPEG;

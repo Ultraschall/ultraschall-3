@@ -40,7 +40,7 @@ public:
    
    static const char* UniqueName()
    {
-      return "ULTRASCHALL: Insert chapters markers into MP3 target...";
+      return "ULTRASCHALL: Insert chapter markers into MP3 target...";
    }
    
    static ICustomAction* CreateCustomAction()
