@@ -16,7 +16,7 @@ profile
 #
 
 *.pkg
-!Modules/Driver/UltraschallDriver-1.2.pkg
+!3rdParty/Hub/UltraschallHub-2015-11-12.pkg
 *.dmg
 *.dmg.gz
 *.dmg.zip
