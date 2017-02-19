@@ -47,11 +47,21 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
    if((mp3.isNull() == false) && (mp3.tag() != nullptr))
    {
       TagLib::Tag* tags = mp3.tag();
-      tags->setTitle(TagLib::String(tokens[0], TagLib::String::Type::UTF8));
-      tags->setArtist(TagLib::String(tokens[1], TagLib::String::Type::UTF8));
-      tags->setAlbum(TagLib::String(tokens[2], TagLib::String::Type::UTF8));
-      tags->setGenre(TagLib::String(tokens[4], TagLib::String::Type::UTF8));
-      tags->setComment(TagLib::String(tokens[5], TagLib::String::Type::UTF8));
+
+      std::string title = framework::AnsiStringToUnicodeString(tokens[0]);
+      tags->setTitle(TagLib::String(title, TagLib::String::Type::UTF8));
+
+      std::string artist = framework::AnsiStringToUnicodeString(tokens[1]);
+      tags->setArtist(TagLib::String(artist, TagLib::String::Type::UTF8));
+
+      std::string album = framework::AnsiStringToUnicodeString(tokens[2]);
+      tags->setAlbum(TagLib::String(album, TagLib::String::Type::UTF8));
+
+      std::string genre = framework::AnsiStringToUnicodeString(tokens[4]);
+      tags->setGenre(TagLib::String(genre, TagLib::String::Type::UTF8));
+
+      std::string comment = framework::AnsiStringToUnicodeString(tokens[5]);
+      tags->setComment(TagLib::String(comment, TagLib::String::Type::UTF8));
       
       std::istringstream is(tokens[3]);
       unsigned int year = 0;

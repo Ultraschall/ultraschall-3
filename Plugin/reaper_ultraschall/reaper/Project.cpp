@@ -162,7 +162,7 @@ std::string Project::Notes() const
    reaper_api::GetSetProjectNotes(projectReference, false, projectNotes, (int)MAX_PROJECT_NOTES_SIZE);
    std::string notes = projectNotes;
 
-   return notes;
+   return framework::UnicodeStringToAnsiString(notes);
 }
 
 bool Project::InsertMarker(const Marker &marker)
