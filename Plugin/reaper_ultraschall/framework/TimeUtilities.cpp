@@ -22,7 +22,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <vector>
 #include <sstream>
 #include <iomanip>
 
@@ -116,7 +115,7 @@ std::string TimestampToString(const ULTRASCHALL_TIMESTAMP& timestamp, const bool
       }
    }
 
-   std::stringstream str;
+   std::ostringstream str;
    str << std::setw(2) << std::setfill('0') << (int)ts.hours << ':'
        << std::setw(2) << std::setfill('0') << (int)ts.minutes << ':'
        << std::setw(2) << std::setfill('0') << (int)ts.seconds;

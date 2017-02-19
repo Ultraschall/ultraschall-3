@@ -34,12 +34,12 @@
 #include "FileManager.h"
 #include "ReaperEntryPoints.h"
 
-#ifndef ULTRASCHALL_PLATFORM_WIN32
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 #import <AppKit/AppKit.h>
 #else
 #include <windows.h>
 #include <shlobj.h>
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 namespace framework = ultraschall::framework;
 

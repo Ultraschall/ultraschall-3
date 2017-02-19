@@ -84,12 +84,6 @@
     <ClCompile Include="reaper\ThemeVersionCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\StudioLinkVersionCheck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reaper\UpdateCheckAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\VersionString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -163,6 +157,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reaper\SetHistoricalMarkerAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\TimeUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\UpdateCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\SystemProperties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\InsertMP3ChapterMarkersAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\MP3Properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,12 +272,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\StudioLinkVersionCheck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\UpdateCheckAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reaper\VersionString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -363,6 +366,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\Marker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\TimeUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\UpdateCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\SystemProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\InsertMP3ChapterMarkersAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\MP3Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

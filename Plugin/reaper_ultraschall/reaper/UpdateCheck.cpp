@@ -27,6 +27,7 @@
 #include <chrono>
 #include <ctime>
 
+#define CURL_STATICLIB
 #include <curl/curl.h>
 #include <curl/easy.h>
 #include <curl/curlbuild.h>

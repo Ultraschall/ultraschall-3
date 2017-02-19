@@ -54,7 +54,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
       const std::string projectName = currentProject.Name();
       if((initialFolder.empty() == false) && (projectName.empty() == false))
       {
-         std::string targetPath = FileManager::BrowseForFolder("Export chapter markers...", initialFolder);
+         targetPath = FileManager::BrowseForFolder("Export chapter markers...", initialFolder);
          if(targetPath.empty() == false)
          {
             targetPath = FileManager::AppendPath(targetPath, projectName + ".chapters.txt");
