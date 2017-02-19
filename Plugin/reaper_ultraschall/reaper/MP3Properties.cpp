@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
       tags->setComment(TagLib::String(tokens[5], TagLib::String::Type::UTF8));
       
       std::istringstream is(tokens[3]);
-      unsigned int year = -1;
+      unsigned int year = 0;
       is >> year;
       tags->setYear(year);
       
@@ -129,15 +129,14 @@ bool InsertMP3Cover(const std::string& target, const std::string& image)
       }
    }
    
-   
    return success;
 }
    
 uint32_t QueryTargetDuration(const std::string& target)
 {
-   PRECONDITION_RETURN(target.empty() == false, -1);
+   PRECONDITION_RETURN(target.empty() == false, static_cast<uint32_t>(-1));
    
-   uint32_t duration = -1;
+   uint32_t duration = 0;
    
    TagLib::FileRef mp3(target.c_str());
    if((mp3.isNull() == false) && (mp3.audioProperties() != nullptr))
@@ -165,21 +164,30 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
    mp3::File mp3(target.c_str());
    if(mp3.isOpen() == true)
    {
-      for(size_t i = 0; i < tags.size(); i++)
+      id3v2::Tag *id3v2 = mp3.ID3v2Tag();
+      if(id3v2 != nullptr)
       {
-         const uint32_t start = static_cast<uint32_t>(tags[i].Position() * 1000);
-         const uint32_t end = (i < (tags.size() - 1)) ? static_cast<uint32_t>(tags[i + 1].Position() * 1000) : targetDuration;
+         for(size_t i = 0; i < tags.size(); i++)
+         {
+            const uint32_t start = static_cast<uint32_t>(tags[i].Position() * 1000);
+            const uint32_t end = (i < (tags.size() - 1)) ? static_cast<uint32_t>(tags[i + 1].Position() * 1000) : targetDuration;
          
-         id3v2::Tag *id3v2 = mp3.ID3v2Tag();
-         id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"), TagLib::String::Type::UTF8);
-         embeddedFrame->setText(TagLib::String(tags[i].Name(), TagLib::String::Type::UTF8));
-         
-         std::stringstream str;
-         str << "cp" << std::setw(2) << std::setfill('0') << i;
-         TagLib::ByteVector elementId = TagLib::ByteVector::fromCString(str.str().c_str());
-         id3v2::ChapterFrame* frame = new id3v2::ChapterFrame(elementId, start, end, 0, 0);
-         frame->addEmbeddedFrame(embeddedFrame);
-         id3v2->addFrame(frame);
+            id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"), TagLib::String::Type::UTF8);
+            if(embeddedFrame != nullptr)
+            {
+               embeddedFrame->setText(TagLib::String(tags[i].Name(), TagLib::String::Type::UTF8));
+
+               std::stringstream str;
+               str << "cp" << std::setw(2) << std::setfill('0') << i;
+               TagLib::ByteVector elementId = TagLib::ByteVector::fromCString(str.str().c_str());
+               id3v2::ChapterFrame* frame = new id3v2::ChapterFrame(elementId, start, end, 0, 0);
+               if(frame != nullptr)
+               {
+                  frame->addEmbeddedFrame(embeddedFrame);
+                  id3v2->addFrame(frame);
+               }
+            }
+         }
       }
       
       success = mp3.save();
