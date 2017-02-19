@@ -68,7 +68,7 @@ std::string AnsiStringToUnicodeString(const std::string &ansiString)
    return ansiString;
 }
 
-std::string UnicodeStringToAnsiString(const std::string &unicodeString)
+std::string UnicodeStringToAnsiString(const std::string &unicodeString, int)
 {
    return unicodeString;
 }
