@@ -55,28 +55,6 @@ cp ../REAPER/Themes/Ultraschall_3.0_MAC.ReaperConfigZip ./Payload/Ultraschall_3.
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
 pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
 
-# Create Ultraschall REAPER Plugin scripts package
-mkdir -p ./Intermediate/Plugin/Scripts
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_delete_last_marker.lua ./Intermediate/Plugin/Scripts/ultraschall_delete_last_marker.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_mute_envelope.lua ./Intermediate/Plugin/Scripts/ultraschall_mute_envelope.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_safemode_start_pause.lua ./Intermediate/Plugin/Scripts/ultraschall_safemode_start_pause.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_safemode_start_stop.lua ./Intermediate/Plugin/Scripts/ultraschall_safemode_start_stop.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track1.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track1.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track2.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track2.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track3.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track3.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track4.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track4.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track5.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track5.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track6.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track6.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track7.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track7.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_track8.lua ./Intermediate/Plugin/Scripts/ultraschall_select_track8.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_edit.lua ./Intermediate/Plugin/Scripts/ultraschall_set_edit.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_edit_past.lua ./Intermediate/Plugin/Scripts/ultraschall_set_edit_past.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_marker.lua ./Intermediate/Plugin/Scripts/ultraschall_set_marker.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_set_namedmarker.lua ./Intermediate/Plugin/Scripts/ultraschall_set_namedmarker.lua
-cp ../REAPER/Plugin/Scripts/Shared/ultraschall_select_studiolink.lua ./Intermediate/Plugin/Scripts/ultraschall_select_studiolink.lua
-
-pkgbuild --root ./Intermediate/Plugin/Scripts --scripts ./Scripts/Scripts --identifier fm.ultraschall.Plugin.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/UltraschallPluginScripts.pkg
-
 # Create Ultraschall Soundboard package
 pushd ../Soundboard
 ./Build/build_mac_plugin.sh
@@ -120,10 +98,10 @@ rm -rf ./Build
 productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
 rm -f ./Payload/Ultraschall-unsigned.pkg
 
-# Create installer image
+# Create installer disk image
 hdiutil create -format UDRW -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 
-# Mount installer image
+# Mount installer disk image
 mkdir -p ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 hdiutil attach -mountpoint ./$ULTRASCHALL_RELEASE_INTERMEDIATE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 
@@ -133,10 +111,10 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 # Create signature on removal script
 codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Remove\ legacy\ audio\ devices.command
 
-# Unmount installer image
+# Unmount installer disk image
 hdiutil detach ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 
-# Convert installer image
+# Convert installer disk image
 hdiutil convert -format UDRO -o ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 
 # Clean-up
