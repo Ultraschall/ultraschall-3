@@ -2,7 +2,7 @@
 <WixLocalization Culture="en-us" Codepage="1252" xmlns="http://schemas.microsoft.com/wix/2006/localization">
    <String Id="Language">1033</String>         <!-- Supported language and codepage codes can be found here: http://www.tramontana.co.hu/wix/lesson2.php#2.4 -->
 
-   <String Id="ApplicationName">Ultraschall REAPER Extension 3.0</String>
+   <String Id="ApplicationName">Ultraschall REAPER Extension 3.0 beta1</String>
    <String Id="ManufacturerName">ultraschall.fm</String>
    <String Id="ManufacturerFullName">ultraschall.fm</String>
    <String Id="ProductDescription">Podcasting Extensions for the REAPER DAW</String>
@@ -18,11 +18,4 @@
    <String Id="FeatureCompleteDescription">The complete package.</String>
    <String Id="FeatureMainProgramDescription">The main version including all dependencies.</String>
    <String Id="FeatureMainProgramTitle">Main program</String>
-
-   <String Id="ServiceDisplayName">uberAgent</String>
-   <String Id="ServiceDescription">Monitors the system's performance, applications and user experience.</String>
-
-   <String Id="ServerDlgTitle">{\WixUI_Font_Title}Receiver Configuration</String>
-   <String Id="ServerDlgDescription">Target servers for uberAgent's data</String>
-   <String Id="ServerDlgServerLabel">Specify to which Splunk Indexers or Forwarders uberAgent should send its data.&#13;&#10;If multiple targets are specified, uberAgent load-balances between them.&#13;&#10;&#13;&#10;Format:&#13;&#10;    server1:port1, server2:port2, ...&#13;&#10;Default:&#13;&#10;    localhost:19500&#13;&#10;    (requires locally installed Universal Forwarder)</String>
 </WixLocalization>
