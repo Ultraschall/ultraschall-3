@@ -41,38 +41,23 @@
                         <Component Id="ReaperExtension" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
                             <File Id="ReaperExtensionDll" Name="reaper_ultraschall.dll" DiskId="1" Source="Payload\Plugin\reaper_ultraschall.dll"/>
                         </Component>
-                        <Component Id="ReaperScripts" Guid="63EF4775-EBCD-46B9-9527-741489E5EB0D" Win64="yes">
-                            <File Id="UltraschallDeleteLastMarker" Name="ultraschall_delete_last_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_delete_last_marker.lua"/>
-                            <File Id="UltraschallSafeModeStartPause" Name="ultraschall_safemode_start_pause.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_pause.lua"/>
-                            <File Id="UltraschallSafeModeStartStop" Name="ultraschall_safemode_start_stop.lua" DiskId="1" Source="Payload\Plugin\ultraschall_safemode_start_stop.lua"/>
-                            <File Id="UltraschallSetEdit" Name="ultraschall_set_edit.lua" DiskId="1" Source="Payload\\Plugin\ultraschall_set_edit.lua"/>
-                            <File Id="UltraschallSetEditPast" Name="ultraschall_set_edit_past.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_edit_past.lua"/>
-                            <File Id="UltraschallSetMarker" Name="ultraschall_set_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_marker.lua"/>
-                            <File Id="UltraschallSetNamedMarker" Name="ultraschall_set_named_marker.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_named_marker.lua"/>
-                            <File Id="UltraschallSetShownote" Name="ultraschall_set_shownote.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_shownote.lua"/>
-                            <File Id="UltraschallSetNamedShownote" Name="ultraschall_set_named_shownote.lua" DiskId="1" Source="Payload\Plugin\ultraschall_set_named_shownote.lua"/>
-                            <File Id="UltraschallMuteEnvelope" Name="ultraschall_mute_envelope.lua" DiskId="1" Source="Payload\Plugin\ultraschall_mute_envelope.lua"/>
-                            <File Id="UltraschallSelectStudioLink" Name="ultraschall_select_studiolink.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_studiolink.lua"/>
-                            <File Id="UltraschallSelectTrack1" Name="ultraschall_select_track1.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track1.lua"/>
-                            <File Id="UltraschallSelectTrack2" Name="ultraschall_select_track2.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track2.lua"/>
-                            <File Id="UltraschallSelectTrack3" Name="ultraschall_select_track3.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track3.lua"/>
-                            <File Id="UltraschallSelectTrack4" Name="ultraschall_select_track4.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track4.lua"/>
-                            <File Id="UltraschallSelectTrack5" Name="ultraschall_select_track5.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track5.lua"/>
-                            <File Id="UltraschallSelectTrack6" Name="ultraschall_select_track6.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track6.lua"/>
-                            <File Id="UltraschallSelectTrack7" Name="ultraschall_select_track7.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track7.lua"/>
-                            <File Id="UltraschallSelectTrack8" Name="ultraschall_select_track8.lua" DiskId="1" Source="Payload\Plugin\ultraschall_select_track8.lua"/>
-                        </Component>
                         <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
                             <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
                             <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
                             <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
                         </Component>
                     </Directory>
+                    <Component Id="LAMEEncoder" Guid="D7EEED7F-9F66-4913-974D-33969E9E5CC8" Win64="yes">
+                        <File Id="LAMEEncoderDll" Name="lame_enc64.dll" DiskId="1" Source="3rdParty\LAME\Windows\lame_enc64.dll"/>
+                    </Component>
                 </Directory>
                 <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
                     <Directory Id="SteinbergVstFolder" Name="VstPlugins">
                         <Component Id="StudioLinkVst" Guid="A22C272D-F6F2-4564-B9DD-BF385A80F5B3" Win64="yes">
                             <File Id="StudioLinkVstDll" Name="studio-link.dll" DiskId="1" Source="3rdParty\StudioLink\Windows\studio-link.dll"/>
+                        </Component>
+                        <Component Id="SoundboardVst" Guid="32A0FDE3-106F-498F-A780-CA59D7C40A64" Win64="yes">
+                            <File Id="SoundboardVstDll" Name="Soundboard64.dll" DiskId="1" Source="Payload\Soundboard\Soundboard64.dll"/>
                         </Component>
                     </Directory>
                 </Directory>
@@ -87,7 +72,7 @@
                             <File Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html">
                                 <Shortcut Id="InstallStartMenuShortcut" Directory="ProgramMenuDir" Name="INSTALL.html" />
                             </File>
-                            <File Name="Ultraschall_2.2.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_2.2.ReaperConfigZip" >
+                            <File Name="Ultraschall_3.0.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_3.0.ReaperConfigZip" >
                                 <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
                                 <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0"/>
                             </File>
@@ -117,24 +102,17 @@
 
         <DirectoryRef Id="TARGETDIR">
             <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
-<!--
-            <Merge Id="SoundboardRedist" SourceFile="Payload\Soundboard\Soundboard.msm" DiskId="1" Language="1033"/>
--->
         </DirectoryRef>
 
         <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist"/>
         </Feature>
-<!--
-        <Feature Id="SoundboardRedist" Title="Ultraschall Soundboard" AllowAdvertise="no" Display="hidden" Level="1">
-            <MergeRef Id="SoundboardRedist"/>
-        </Feature>
--->
         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
-            <ComponentRef Id="ReaperScripts"/>
+            <ComponentRef Id="SoundboardVst"/>
             <ComponentRef Id="SWSExtension"/>
             <ComponentRef Id="StudioLinkVst"/>
+            <ComponentRef Id="LAMEEncoder"/>
             <ComponentRef Id="UltraschallRelease"/>
             <ComponentRef Id="UltraschallReleaseAddons"/>
         </Feature>
