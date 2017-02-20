@@ -161,6 +161,41 @@ uint32_t QueryTargetDuration(const std::string& target)
    
    return duration;
 }
+ 
+void RemoveMP3Tags(const std::string& target)
+{
+   PRECONDITION(target.empty() == false);
+
+   mp3::File mp3(target.c_str());
+   if(mp3.isOpen() == true)
+   {
+      id3v2::Tag *id3v2 = mp3.ID3v2Tag();
+      if(id3v2 != nullptr)
+      {
+         std::vector<id3v2::ChapterFrame*> foundFrames;
+         
+         id3v2::FrameList frames = id3v2->frameList("CHAP");
+         for(unsigned int i = 0; i < frames.size(); i++)
+         {
+            id3v2::ChapterFrame* frame = dynamic_cast<id3v2::ChapterFrame*>(frames[i]);
+            if(frame != nullptr)
+            {
+               foundFrames.push_back(frame);
+            }
+         }
+         
+         if(foundFrames.empty() == false)
+         {
+            for(size_t j = 0; j < foundFrames.size(); j ++)
+            {
+               id3v2->removeFrame(foundFrames[j]);
+            }
+
+            mp3.save();
+         }
+      }
+   }
+}
    
 bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
 {
@@ -168,6 +203,8 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
    PRECONDITION_RETURN(tags.empty() == false, false);
    const uint32_t targetDuration = QueryTargetDuration(target);
    PRECONDITION_RETURN(targetDuration > 0, false);
+   
+   RemoveMP3Tags(target);
    
    bool success = false;
    
