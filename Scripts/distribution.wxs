@@ -37,8 +37,8 @@
                      <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
                   </Component>
                </Directory>
-               <Component Id="LAMEEncoder" Guid="D7EEED7F-9F66-4913-974D-33969E9E5CC8" Win64="yes">
-                  <File Id="LAMEEncoderDll" Name="lame_enc64.dll" DiskId="1" Source="3rdParty\LAME\Windows\lame_enc64.dll"/>
+               <Component Id="LAMEMP3Encoder" Guid="237AB7ED-155C-44DD-888F-3CD7FC87B730" Win64="yes">
+                  <File Id="LAMEMP3EncoderDll" Name="libmp3lame.dll" DiskId="1" Source="3rdParty\LAME\Windows\libmp3lame.dll"/>
                </Component>
             </Directory>
             <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
@@ -102,7 +102,7 @@
             <ComponentRef Id="SoundboardVst"/>
             <ComponentRef Id="SWSExtension"/>
             <ComponentRef Id="StudioLinkVst"/>
-            <ComponentRef Id="LAMEEncoder"/>
+            <ComponentRef Id="LAMEMP3Encoder"/>
             <ComponentRef Id="UltraschallRelease"/>
             <ComponentRef Id="UltraschallReleaseAddons"/>
          </Feature>
