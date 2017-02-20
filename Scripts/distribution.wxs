@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix 
+<Wix
    xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
    <!--
@@ -53,6 +53,9 @@
             </Directory>
             <Directory Id="UltraschallApplicationFolder" Name="Ultraschall">
                <Component Id="UltraschallRelease" Guid="9F68E7D5-9D8E-45B9-9AED-3E1137F2466C" Win64="yes">
+                  <File Name="Ultraschall Keyboard Mapping.pdf" DiskId="1" Source="Payload\Addons\Ultraschall Keyboard Mapping.pdf">
+                     <Shortcut Id="KeymapStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall Keyboard Mapping.pdf" />
+                  </File>
                   <File Name="README.html" DiskId="1" Source="Payload\README.html">
                      <Shortcut Id="ReadmeStartMenuShortcut" Directory="ProgramMenuDir" Name="README.html" />
                   </File>
@@ -73,9 +76,8 @@
                      <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
                      <File Id="SplashScreen" Name="Ultraschall Reaper Splash Screen.png" DiskId="1" Source="Payload\Addons\Ultraschall Reaper Splash Screen.png"/>
                      <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
-                     <File Id="Keymap" Name="Ultraschall Keyboard Mapping.pdf" DiskId="1" Source="Payload\Addons\Ultraschall Keyboard Mapping.pdf">
-                     </Component>
-                  </Directory>
+                  </Component>
+               </Directory>
                </Directory>
             </Directory>
             <Directory Id="DesktopFolder" />
