@@ -1,113 +1,100 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-
-    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
-
-    <!--
+<Wix 
+   xmlns="http://schemas.microsoft.com/wix/2006/wi">
+   <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
+   <!--
     Upgrade code HAS to be the same for all updates.
     Once you've chosen it don't change it.
     -->
-    <?define UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" ?>
-
-    <!-- The URL for add/remove programs -->
-    <?define InfoURL="http://ultraschall.fm/" ?>
-
-    <Product Id="*" Name="!(loc.ApplicationName)" Language="!(loc.Language)" Version="$(var.VersionNumber)" Manufacturer="!(loc.ManufacturerFullName)" UpgradeCode="$(var.UpgradeCode)">
-        <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="!(loc.ProductDescription)" Comments="!(loc.Comments) $(var.VersionNumber)" />
-
-        <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
-
-        <WixVariable Id="WixUIDialogBmp" Value="Resources\background.bmp"/>
-        <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.bmp"/>
-
-        <Icon Id="Icon.exe" SourceFile="Resources\ultraschall.ico" />
-
-        <Property Id="ARPPRODUCTICON" Value="Icon.exe" />
-        <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />      <!-- Remove repair -->
-
-        <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" AllowSameVersionUpgrades="yes" />
-
-        <Condition Message="!(loc.OS2Old)">
-            <![CDATA[Installed OR (VersionNT >= 601)]]>
-        </Condition>
-
-        <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
-        <Property Id="DiskPrompt" Value="Ultraschall 3.0 Installation [1]" />
-
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFiles64Folder" Name="Program Files">
-                <Directory Id="ReaperApplicationFolder" Name="REAPER (x64)">
-                    <Directory Id="ReaperPluginFolder" Name="Plugins">
-                        <Component Id="ReaperExtension" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
-                            <File Id="ReaperExtensionDll" Name="reaper_ultraschall.dll" DiskId="1" Source="Payload\Plugin\reaper_ultraschall.dll"/>
-                        </Component>
-                        <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
-                            <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
-                            <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
-                            <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
-                        </Component>
-                    </Directory>
-                    <Component Id="LAMEEncoder" Guid="D7EEED7F-9F66-4913-974D-33969E9E5CC8" Win64="yes">
-                        <File Id="LAMEEncoderDll" Name="lame_enc64.dll" DiskId="1" Source="3rdParty\LAME\Windows\lame_enc64.dll"/>
-                    </Component>
-                </Directory>
-                <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
-                    <Directory Id="SteinbergVstFolder" Name="VstPlugins">
-                        <Component Id="StudioLinkVst" Guid="A22C272D-F6F2-4564-B9DD-BF385A80F5B3" Win64="yes">
-                            <File Id="StudioLinkVstDll" Name="studio-link.dll" DiskId="1" Source="3rdParty\StudioLink\Windows\studio-link.dll"/>
-                        </Component>
-                        <Component Id="SoundboardVst" Guid="32A0FDE3-106F-498F-A780-CA59D7C40A64" Win64="yes">
-                            <File Id="SoundboardVstDll" Name="Soundboard64.dll" DiskId="1" Source="Payload\Soundboard\Soundboard64.dll"/>
-                        </Component>
-                    </Directory>
-                </Directory>
-                <Directory Id="UltraschallApplicationFolder" Name="Ultraschall">
-                    <Component Id="UltraschallRelease" Guid="9F68E7D5-9D8E-45B9-9AED-3E1137F2466C" Win64="yes">
-                            <File Name="README.html" DiskId="1" Source="Payload\README.html">
-                                <Shortcut Id="ReadmeStartMenuShortcut" Directory="ProgramMenuDir" Name="README.html" />
-                            </File>
-                            <File Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html">
-                                <Shortcut Id="ChangelogStartMenuShortcut" Directory="ProgramMenuDir" Name="CHANGELOG.html"/>
-                            </File>
-                            <File Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html">
-                                <Shortcut Id="InstallStartMenuShortcut" Directory="ProgramMenuDir" Name="INSTALL.html" />
-                            </File>
-                            <File Name="Ultraschall_3.0.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_3.0.ReaperConfigZip" >
-                                <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
-                                <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0"/>
-                            </File>
-                    </Component>
-                    <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
-                        <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
-                            <File Id="ColorSet" Name="Ultraschall Colorset.SWSColor" DiskId="1" Source="Payload\Addons\Ultraschall Colorset.SWSColor"/>
-                            <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
-                            <File Id="SplashScreen" Name="Ultraschall Reaper Splash Screen.png" DiskId="1" Source="Payload\Addons\Ultraschall Reaper Splash Screen.png"/>
-                            <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
-                        </Component>
-                    </Directory>
-                </Directory>
+   <?define UpgradeCode="D1D96805-203A-4323-B50A-6DE876021B35" ?>
+   <!-- The URL for add/remove programs -->
+   <?define InfoURL="http://ultraschall.fm/" ?>
+   <Product Id="*" Name="!(loc.ApplicationName)" Language="!(loc.Language)" Version="$(var.VersionNumber)" Manufacturer="!(loc.ManufacturerFullName)" UpgradeCode="$(var.UpgradeCode)">
+      <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="!(loc.ProductDescription)" Comments="!(loc.Comments) $(var.VersionNumber)" />
+      <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
+      <WixVariable Id="WixUIDialogBmp" Value="Resources\background.bmp"/>
+      <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.bmp"/>
+      <Icon Id="Icon.exe" SourceFile="Resources\ultraschall.ico" />
+      <Property Id="ARPPRODUCTICON" Value="Icon.exe" />
+      <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
+      <!-- Remove repair -->
+      <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" AllowSameVersionUpgrades="yes" />
+      <Condition Message="!(loc.OS2Old)">
+         <![CDATA[Installed OR (VersionNT >= 601)]]>
+      </Condition>
+      <Media Id="1" Cabinet="Ultraschall.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
+      <Property Id="DiskPrompt" Value="Ultraschall 3.0 Installation [1]" />
+      <Directory Id="TARGETDIR" Name="SourceDir">
+         <Directory Id="ProgramFiles64Folder" Name="Program Files">
+            <Directory Id="ReaperApplicationFolder" Name="REAPER (x64)">
+               <Directory Id="ReaperPluginFolder" Name="Plugins">
+                  <Component Id="ReaperExtension" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
+                     <File Id="ReaperExtensionDll" Name="reaper_ultraschall.dll" DiskId="1" Source="Payload\Plugin\reaper_ultraschall.dll"/>
+                  </Component>
+                  <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
+                     <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
+                     <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
+                     <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
+                  </Component>
+               </Directory>
+               <Component Id="LAMEEncoder" Guid="D7EEED7F-9F66-4913-974D-33969E9E5CC8" Win64="yes">
+                  <File Id="LAMEEncoderDll" Name="lame_enc64.dll" DiskId="1" Source="3rdParty\LAME\Windows\lame_enc64.dll"/>
+               </Component>
             </Directory>
-
+            <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
+               <Directory Id="SteinbergVstFolder" Name="VstPlugins">
+                  <Component Id="StudioLinkVst" Guid="A22C272D-F6F2-4564-B9DD-BF385A80F5B3" Win64="yes">
+                     <File Id="StudioLinkVstDll" Name="studio-link.dll" DiskId="1" Source="3rdParty\StudioLink\Windows\studio-link.dll"/>
+                  </Component>
+                  <Component Id="SoundboardVst" Guid="32A0FDE3-106F-498F-A780-CA59D7C40A64" Win64="yes">
+                     <File Id="SoundboardVstDll" Name="Soundboard64.dll" DiskId="1" Source="Payload\Soundboard\Soundboard64.dll"/>
+                  </Component>
+               </Directory>
+            </Directory>
+            <Directory Id="UltraschallApplicationFolder" Name="Ultraschall">
+               <Component Id="UltraschallRelease" Guid="9F68E7D5-9D8E-45B9-9AED-3E1137F2466C" Win64="yes">
+                  <File Name="README.html" DiskId="1" Source="Payload\README.html">
+                     <Shortcut Id="ReadmeStartMenuShortcut" Directory="ProgramMenuDir" Name="README.html" />
+                  </File>
+                  <File Name="CHANGELOG.html" DiskId="1" Source="Payload\CHANGELOG.html">
+                     <Shortcut Id="ChangelogStartMenuShortcut" Directory="ProgramMenuDir" Name="CHANGELOG.html"/>
+                  </File>
+                  <File Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html">
+                     <Shortcut Id="InstallStartMenuShortcut" Directory="ProgramMenuDir" Name="INSTALL.html" />
+                  </File>
+                  <File Name="Ultraschall_3.0.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_3.0.ReaperConfigZip">
+                     <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
+                     <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0"/>
+                  </File>
+               </Component>
+               <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
+                  <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
+                     <File Id="ColorSet" Name="Ultraschall Colorset.SWSColor" DiskId="1" Source="Payload\Addons\Ultraschall Colorset.SWSColor"/>
+                     <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
+                     <File Id="SplashScreen" Name="Ultraschall Reaper Splash Screen.png" DiskId="1" Source="Payload\Addons\Ultraschall Reaper Splash Screen.png"/>
+                     <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
+                     <File Id="Keymap" Name="Ultraschall Keyboard Mapping.pdf" DiskId="1" Source="Payload\Addons\Ultraschall Keyboard Mapping.pdf">
+                     </Component>
+                  </Directory>
+               </Directory>
+            </Directory>
             <Directory Id="DesktopFolder" />
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ProgramMenuDir" Name="Ultraschall">
-                <Component Id="StartMenuShortcuts" Guid="B7597C7E-0F99-4B16-BF1E-3EC0DAE08664">
-                    <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
-                    <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
-                </Component>
-                </Directory>
+               <Directory Id="ProgramMenuDir" Name="Ultraschall">
+                  <Component Id="StartMenuShortcuts" Guid="B7597C7E-0F99-4B16-BF1E-3EC0DAE08664">
+                     <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                     <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
+                  </Component>
+               </Directory>
             </Directory>
-
-        </Directory>
-
-        <DirectoryRef Id="TARGETDIR">
+         </Directory>
+         <DirectoryRef Id="TARGETDIR">
             <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
-        </DirectoryRef>
-
-        <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+         </DirectoryRef>
+         <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist"/>
-        </Feature>
-        <Feature Id="Complete" Level="1">
+         </Feature>
+         <Feature Id="Complete" Level="1">
             <ComponentRef Id="ReaperExtension"/>
             <ComponentRef Id="SoundboardVst"/>
             <ComponentRef Id="SWSExtension"/>
@@ -115,9 +102,7 @@
             <ComponentRef Id="LAMEEncoder"/>
             <ComponentRef Id="UltraschallRelease"/>
             <ComponentRef Id="UltraschallReleaseAddons"/>
-        </Feature>
-
-        <UIRef Id="WixUI_Minimal" />
-
-    </Product>
-</Wix>
+         </Feature>
+         <UIRef Id="WixUI_Minimal" />
+      </Product>
+   </Wix>

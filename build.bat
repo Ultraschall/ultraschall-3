@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.0.0-beta2
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.0.0-beta4
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -24,8 +24,7 @@ copy ..\REAPER\Themes\Ultraschall_3.0_WIN.ReaperConfigZip Payload\Ultraschall_3.
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
-copy "..\REAPER\Documentation\Rams Edition Release-Poster.pdf" "Payload\Addons\Rams Edition Release-Poster.pdf"
-copy "..\REAPER\Documentation\Rams Edition Release-Poster.png" "Payload\Addons\Rams Edition Release-Poster.png"
+copy "..\REAPER\Documentation\Keymap.pdf" "Payload\Addons\Ultraschall Keyboard Mapping.pdf"
 copy "..\REAPER\Resources\Ultraschall Colorset.SWSColor" "Payload\Addons\Ultraschall Colorset.SWSColor"
 copy "..\REAPER\Resources\Ultraschall Microbanner 80x15.png" "Payload\Addons\Ultraschall Microbanner 80x15.png"
 copy "..\REAPER\Resources\Ultraschall Webbanner.png" "Payload\Addons\Ultraschall Webbanner.png"
