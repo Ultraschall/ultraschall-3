@@ -10,10 +10,28 @@
 * **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
 * **Misc:** Anything that is left.
 
-## 2.2.3 Gropius - 2016-August-25
+## 3.0.0 Miedinger - 2017-March-01
 
 * Soundboard: **Bugfix**
-*Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting tis bug.*
+*Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting this bug.*
+
+* Actions [Windows]: **Bugfix**
+*Fixed a bug that prevented Ultraschall from handling chapter markers correctly when the project name contained Umlauts. Thanks to @jalea and Nico Buch for reporting this bug.*
+
+* Actions: **Chapter Marker export to MP3**
+*Ultraschall 3.0 introduces a new action that lets you export chapter markers directly to MP3.
+ 
+* Actions: **Update Check**
+*Ultraschall now checks for updates once a day.*
+
+* StudioLink: **Update**
+*Ultraschall now includes the updated StudioLink plug-in version 16.12.0.*
+ 
+* StudioLink: **Streaming**
+*Ultraschall now includes the StudioLink OnAir plug-in version 17.02.0.*
+
+* Installer: **LAME MP3 Encoder**
+*Ultraschall now includes the LAME MP3 Encoder 3.98.*
 
 ## 2.2.2 Gropius - 2016-August-14
 

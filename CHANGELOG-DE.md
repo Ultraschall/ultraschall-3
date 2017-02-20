@@ -26,8 +26,7 @@
 
 #### Last Changelog:
 
-## 3.0 - 2016-Dezember-XX
-
+## 3.0 - 2016-März-01
 
 * Theme: **Wellenform**
 *Ausgewählte Items werden in der Helligkeit klarer hervorgehoben* 
