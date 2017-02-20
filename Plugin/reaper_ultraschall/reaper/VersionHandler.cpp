@@ -30,54 +30,56 @@
 #import <AppKit/AppKit.h>
 #endif // #ifndef ULTRASCHALL_PLATFORM_MACOS
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 std::string VersionHandler::HubVersion()
 {
-	std::string version;
+   std::string version;
 
-	if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true)
-	{
-		version = "AudioHub ";
+   if (FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true)
+   {
+      version = "AudioHub ";
 
-		NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist";
-			NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+      NSString *filePath = @"/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist";
+      NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
 
-		NSString* value = [plist objectForKey:@"CFBundleShortVersionString"];
-		version += [value UTF8String];
+      NSString *value = [plist objectForKey:@"CFBundleShortVersionString"];
+      version += [value UTF8String];
 
-		value = [plist objectForKey:@"CFBundleVersion"];
-		version += ".";
-		version += [value UTF8String];
-	}
-	else if(FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
-	{
-		version = "UltraschallHub ";
+      value = [plist objectForKey:@"CFBundleVersion"];
+      version += ".";
+      version += [value UTF8String];
+   }
+   else if (FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true)
+   {
+      version = "UltraschallHub ";
 
-		NSString* filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
-			NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+      NSString *filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
+      NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
 
-		NSString* value = [plist objectForKey:@"CFBundleShortVersionString"];
-		version += [value UTF8String];
+      NSString *value = [plist objectForKey:@"CFBundleShortVersionString"];
+      version += [value UTF8String];
 
-		value = [plist objectForKey:@"CFBundleVersion"];
-		version += ".";
-		version += [value UTF8String];
-	}
+      value = [plist objectForKey:@"CFBundleVersion"];
+      version += ".";
+      version += [value UTF8String];
+   }
 
-	return version;
+   return version;
 }
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 std::string VersionHandler::PluginVersion()
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
-	const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
-	return FileManager::ReadVersionFromFile(path);
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
+   return FileManager::ReadVersionFromFile(path);
 #else
-	return "3.0.0";
+   return "3.0.0";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
@@ -86,16 +88,16 @@ std::string VersionHandler::SoundboardVersion()
    std::string version;
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-   NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
-      inDomains : NSUserDomainMask] firstObject];
-   NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
-   [filePath appendString : @"/Audio/Plug-Ins/Components/Soundboard.component/Contents/Info.plist"];
-      if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-      {
-         NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-         NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
-         version = [value UTF8String];
-      }
+   NSURL *libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                                     inDomains:NSUserDomainMask] firstObject];
+   NSMutableString *filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
+   [filePath appendString:@"/Audio/Plug-Ins/Components/Soundboard.component/Contents/Info.plist"];
+   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+   {
+      NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+      NSString *value = [plist objectForKey:@"CFBundleShortVersionString"];
+      version = [value UTF8String];
+   }
 #else
    const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
    version = FileManager::ReadVersionFromFile(path);
@@ -109,18 +111,41 @@ std::string VersionHandler::StudioLinkVersion()
    std::string version;
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-   NSURL* libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
-      inDomains : NSUserDomainMask] firstObject];
-   NSMutableString* filePath = [NSMutableString stringWithUTF8String : [libraryDirectory fileSystemRepresentation]];
-   [filePath appendString : @"/Audio/Plug-Ins/Components/StudioLink.component/Contents/Info.plist"];
-      if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-      {
-         NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-         NSString* value = [plist objectForKey : @"CFBundleShortVersionString"];
-         version = [value UTF8String];
-      }
+   NSURL *libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                                     inDomains:NSUserDomainMask] firstObject];
+   NSMutableString *filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
+   [filePath appendString:@"/Audio/Plug-Ins/Components/StudioLink.component/Contents/Info.plist"];
+   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+   {
+      NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+      NSString *value = [plist objectForKey:@"CFBundleShortVersionString"];
+      version = [value UTF8String];
+   }
 #else
    const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link.dll";
+   version = FileManager::ReadVersionFromFile(path);
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+
+   return version;
+}
+
+std::string VersionHandler::StudioLinkOnAirVersion()
+{
+   std::string version;
+
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+   NSURL *libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                                     inDomains:NSUserDomainMask] firstObject];
+   NSMutableString *filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
+   [filePath appendString:@"/Audio/Plug-Ins/Components/StudioLinkOnAir.component/Contents/Info.plist"];
+   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+   {
+      NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+      NSString *value = [plist objectForKey:@"CFBundleShortVersionString"];
+      version = [value UTF8String];
+   }
+#else
+   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link-onair.dll";
    version = FileManager::ReadVersionFromFile(path);
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
@@ -146,6 +171,5 @@ std::string VersionHandler::LAMEVersion()
    return "3.98.3";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
-
 }
 }

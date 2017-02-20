@@ -27,27 +27,30 @@
 
 #include <string>
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
 class VersionHandler
 {
-public:
+ public:
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-	static std::string HubVersion();
+   static std::string HubVersion();
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-	static std::string PluginVersion();
+   static std::string PluginVersion();
 
    static std::string SoundboardVersion();
 
    static std::string StudioLinkVersion();
 
+   static std::string StudioLinkOnAirVersion();
+
    static std::string SWSVersion();
 
    static std::string LAMEVersion();
 };
-
 }
 }
 
