@@ -114,5 +114,8 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 -- First start actions
 --------------------------
 
+if first_start == "true" then
+	reaper.SetExtState("ultraschall_start", "firststart", "false", true)	-- there will be only one first start
+end
 
 
