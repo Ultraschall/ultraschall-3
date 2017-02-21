@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 # 
-# Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2014-2017 Ultraschall (http://ultraschall.fm)
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,21 +29,22 @@ function Msg(val)
 	reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
+
 reaper.Undo_BeginBlock()
 
-m = reaper.GetMasterTrack(0)										--streaming is always on the master track
-fx_name_retval, fx_name = reaper.TrackFX_GetFXName(m, 0, "") 		--get the name of the first effect, debug only
-fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkLive", 1) 	--get the slot of the StudioLink effect. If there is none: initiate one.
+m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
+-- fx_name_retval, fx_name = reaper.TrackFX_GetFXName(m, 0, "")           --get the name of the first effect, debug only
+fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
 
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
-state = reaper.GetToggleCommandStateEx(sec, cmd)  					--get state of the OnAir Button: on/off
+state = reaper.GetToggleCommandStateEx(sec, cmd)                           --get state of the OnAir Button: on/off
 
-if state == 0 then 													--streaming is off: start streaming
+if state == 0 then                                                                  --streaming is off: start streaming
 	reaper.SetToggleCommandState(sec, cmd, 1)
 	test2 = reaper.TrackFX_SetEnabled(m, fx_slot, true)
-else																--streaming is on: stop streaming
+else                                                                                --streaming is on: stop streaming
 	reaper.SetToggleCommandState(sec, cmd, 0)
-	test2 = reaper.TrackFX_SetEnabled(m, fx_slot, false)
+	reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)							-- remove FX
 end     
 
 reaper.RefreshToolbar2(sec, cmd)
