@@ -44,62 +44,69 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
    
-   std::vector<Marker> tags = currentProject.QueryAllMarkers();
-   if(tags.empty() == false)
+   const std::string projectFolder = currentProject.FolderName();
+   const std::string projectName = currentProject.Name();
+   if((projectFolder.empty() == false) && (projectName.empty() == false))
    {
-      const std::string projectFolder = currentProject.FolderName();
-      const std::string projectName = currentProject.Name();
-      if((projectFolder.empty() == false) && (projectName.empty() == false))
+      std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
+      if(FileManager::FileExists(targetName) == false)
       {
-         std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
-         if(FileManager::FileExists(targetName) == false)
-         {
-            targetName = FileManager::BrowseForMP3Files("Select MP3 File...");
-         }
+         targetName = FileManager::BrowseForMP3Files("Select MP3 File...");
+      }
          
-         if(targetName.empty() == false)
+      if(targetName.empty() == false)
+      {
+         const std::string projectNotes = currentProject.Notes();
+         if(projectNotes.empty() == false)
          {
-            const std::string projectNotes = currentProject.Notes();
-            if(projectNotes.empty() == false)
+            if(InsertMP3Properties(targetName, projectNotes) == true)
             {
-               InsertMP3Properties(targetName, projectNotes);
-            }
 
-            std::vector<std::string> imageNames;
-            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
-            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
-            imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
-            const size_t imageIndex = FileManager::FileExists(imageNames);
-            if(imageIndex != -1)
-            {
-               if(InsertMP3Cover(targetName, imageNames[imageIndex]) == false)
-               {
-                  NotificationWindow::Show("Failed to insert cover art.", true);
-               }
             }
+            else
+            {
+               NotificationWindow::Show("Failed to insert ID3V2 tags.", true);
+            }
+         }
+
+         std::vector<std::string> imageNames;
+         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
+         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
+         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
+         const size_t imageIndex = FileManager::FileExists(imageNames);
+         if(imageIndex != -1)
+         {
+            if(InsertMP3Cover(targetName, imageNames[imageIndex]) == true)
+            {
+
+            }
+            else
+            {
+               NotificationWindow::Show("Failed to insert cover art.", true);
+            }
+         }
             
+         std::vector<Marker> tags = currentProject.QueryAllMarkers();
+         if(tags.empty() == false)
+         {
             if(InsertMP3Tags(targetName, tags) == true)
             {
-               NotificationWindow::Show("The chapter markers have been exported successfully.");
+               NotificationWindow::Show("The MP3 file has been updated successfully.");
             }
             else
             {
                NotificationWindow::Show("Failed to export chapter markers.", true);
             }
          }
-         else
-         {
-            NotificationWindow::Show("The export operation has been canceled.");
-         }
       }
       else
       {
-         NotificationWindow::Show("The project must be saved before the chapter marker export can run.");
+         NotificationWindow::Show("The export operation has been canceled.");
       }
    }
    else
    {
-      NotificationWindow::Show("The project does not contain any chapter markers.");
+      NotificationWindow::Show("Please save the project and restart the export function.");
    }
    
    return SERVICE_SUCCESS;
