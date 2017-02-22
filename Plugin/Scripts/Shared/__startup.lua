@@ -110,6 +110,11 @@ fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 
+-- curtheme = reaper.GetLastColorThemeFile()
+themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
+reaper.OpenColorThemeFile(themeadress)
+
+
 --------------------------
 -- First start actions
 --------------------------
@@ -117,5 +122,6 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 if first_start == "true" then
 	reaper.SetExtState("ultraschall_start", "firststart", "false", true)	-- there will be only one first start
 end
+
 
 
