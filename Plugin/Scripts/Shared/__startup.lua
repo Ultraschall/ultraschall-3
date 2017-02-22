@@ -110,9 +110,13 @@ fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 
--- curtheme = reaper.GetLastColorThemeFile()
-themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
-reaper.OpenColorThemeFile(themeadress)
+-- is the ReaperThemeZip loaded? Only then (probably on first start) reload the ReaperTheme to get the colors working 
+
+curtheme = reaper.GetLastColorThemeFile()
+if string.find(curtheme, "ReaperThemeZip", 1) then
+	themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
+	reaper.OpenColorThemeFile(themeadress)
+end
 
 
 --------------------------
