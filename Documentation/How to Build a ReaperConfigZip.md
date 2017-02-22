@@ -1,6 +1,12 @@
 #Ultraschall Guide: How to build a .ReaperConfigZip
+## Step 1: Build a ReaperThemeZip file
 
-## Step x: Changes in reaper-extstate.ini
+- locate the REAPER/ColorThemes folder
+- bundle the Ultraschall_2 folder and the last .ReaperTheme file into a .ZIP
+- rename it to xy.ReaperThemeZip
+- open Reaper 
+
+## Step 2: Changes in reaper-extstate.ini
 
 [ultraschall_start]
 
@@ -10,6 +16,21 @@ startscreen=1
 
 WARNING: hence the .ReaperConfigZip can only be produced from *within* REAPER, and the firststart setting will be set to *false* during every start, this has to be updated on the filesystem while REAPER is running !!12 (aka: Fledermausland)
 
----
-## Step x: Update .ReaperConfigZip on GitHub
+## Step 3: load ReaperThemeZip
+
+- open Options / Themes / Show Theme Editor
+- load the ReaperThemeZip from Step 1
+
+## Step 4: clean .ini files
+
+- delete custom nformation from several .ini files in the REAPER directory
+- list goes here...
+
+## Step 5: Export ReaperConfigZip
+
+- Go to Preferences, General.
+- Clear recent project list
+- Export configuration to .ReaperConfigZip
+
+## Step 6: Update .ReaperConfigZip on GitHub
 
