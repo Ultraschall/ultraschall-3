@@ -34,3 +34,15 @@ WARNING: hence the .ReaperConfigZip can only be produced from *within* REAPER, a
 
 ## Step 6: Update .ReaperConfigZip on GitHub
 
+---
+
+# Adjustments for the Windows Theme
+
+## Colors
+
+- Go to Extensions / Auto Color
+- Swap Red & Blue for all entries
+
+## Track templates
+
+- replace AU Effects with VST for StudioLink and OnAir
