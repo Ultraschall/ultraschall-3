@@ -105,10 +105,14 @@ reaper.SetToggleCommandState(sec, 55695, 0)
 -- remove StudioLink OnAir FX from Master
 
 m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
-fx_name_retval, fx_name = reaper.TrackFX_GetFXName(m, 0, "")           --get the name of the first effect, debug only
-fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
-reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
+os = reaper.GetOS()
 
+if string.match(os, "OSX") then 
+	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+else	-- Windows
+	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+end
+reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 -- is the ReaperThemeZip loaded? Only then (probably on first start) reload the ReaperTheme to get the colors working 
 
