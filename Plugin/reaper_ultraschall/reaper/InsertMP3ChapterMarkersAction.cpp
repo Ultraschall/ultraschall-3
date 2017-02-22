@@ -44,6 +44,8 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
    
+   int successfulActions = 0;
+
    const std::string projectFolder = currentProject.FolderName();
    const std::string projectName = currentProject.Name();
    if((projectFolder.empty() == false) && (projectName.empty() == false))
@@ -61,7 +63,7 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
          {
             if(InsertMP3Properties(targetName, projectNotes) == true)
             {
-
+               successfulActions++;
             }
             else
             {
@@ -78,7 +80,7 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
          {
             if(InsertMP3Cover(targetName, imageNames[imageIndex]) == true)
             {
-
+               successfulActions++;
             }
             else
             {
@@ -91,7 +93,7 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
          {
             if(InsertMP3Tags(targetName, tags) == true)
             {
-               NotificationWindow::Show("The MP3 file has been updated successfully.");
+               successfulActions++;
             }
             else
             {
@@ -109,6 +111,11 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
       NotificationWindow::Show("Please save the project and restart the export function.");
    }
    
+   if(successfulActions > 0)
+   {
+      NotificationWindow::Show("The MP3 file has been updated successfully.");
+   }
+
    return SERVICE_SUCCESS;
 }
       
