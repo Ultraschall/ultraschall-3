@@ -51,7 +51,7 @@ startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
 
 
 if plugin_version ~= theme_version then -- different versions of theme and plugin isntalled
-	error_msg = "There is a configuration mismatch betwenn the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
+	error_msg = "There is a configuration mismatch between the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
 end
 
 if plugin_version == "" then 
