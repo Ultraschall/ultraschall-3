@@ -51,7 +51,58 @@ function runcommand(cmd)
 
 end
 
+--
 
+function GetPath(str,sep)
+    return str:match("(.*"..sep..")")
+end
+
+
+-- Check if project has been saved
+	-- OS BASED SEPARATOR
+	if reaper.GetOS() == "Win32" or reaper.GetOS() == "Win64" then
+		-- user_folder = buf --"C:\\Users\\[username]" -- need to be test
+		separator = "\\"
+	else
+		-- user_folder = "/USERS/[username]" -- Mac OS. Not tested on Linux.
+		separator = "/"
+	end
+
+
+	retval, project_path_name = reaper.EnumProjects(-1, "")
+	if project_path_name ~= "" then
+		
+		dir = GetPath(project_path_name, separator)
+		--msg(name)
+		name = string.sub(project_path_name, string.len(dir) + 1)
+		name = string.sub(name, 1, -5)
+
+		name = name:gsub(dir, "")
+	end
+
+-- lookup existing episode image
+
+img_index = false
+
+endings = {".jpg", ".jpeg", ".png"} -- prefer .png
+for key,value in pairs(endings) do 
+	img_adress = string.gsub(project_path_name, ".RPP", value)
+	img_test = gfx.loadimg(0, img_adress)
+	if img_test ~= -1 then
+		img_index = img_test
+	end
+end
+
+if img_index then	-- there is an image
+	w, h = gfx.getimgdim(img_index)
+	if w > h then
+		img_ratio = 80 / w
+	else
+		img_ratio = 80 / h
+	end
+end
+
+-- Msg(w .. "-" .. h)
 
 --
 
@@ -62,36 +113,40 @@ y_offset = -30  -- move all content up/down
 	-- body
 	---- GUI Elements ----
 	
-GUI.elms = {
+if img_index then
+
+	GUI.elms = {
 	
 --     name          = element type          x      y    w    h     caption               ...other params...
-	-- logo			= GUI.Pic:new(			474,278, 0, 0, 0.5, script_path.."us.png"),
+	logo			= GUI.Pic:new(			484,280, 80, 80, img_ratio, img_adress, runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
+	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image:\nFound.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
+	label2           = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
+	label3           = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
+	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
+	chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
+	metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
+	-- image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
+	finalize      	= GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
+}
+
+else
+
+	GUI.elms = {
+	
+--     name          = element type          x      y    w    h     caption               ...other params...
+	-- logo			= GUI.Pic:new(			374,178, 0, 0, img_ratio, img_adress),
 	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image\nJust put a square .jpg, .jpeg or .png image\nwith the same name as your project file (.RPP)\nin the project folder.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
 	label2           = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
 	label3           = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
-
---	label4           = GUI.Lbl:new(          265,  290,               "If you need assistance:", 0),
---	label3           = GUI.Lbl:new(          455,  290,               "Visit our support forum:", 0),
-
-	-- pan_sldr      = GUI.Sldr:new(          360, 280, 128,           "Pan:", -100, 100, 200, 4),
---	pan_knb      = GUI.Knob:new(          530, 100, 48,            "Awesomeness", 0, 9, 11, 5, 1),
---	label2           = GUI.Lbl:new(          508,  42,               "Awesomeness", 0),
-	-- options      = GUI.OptLst:new(     50,  100, 150, 150, "Color notes by:", "Channel,Pitch,Velocity,Penis Size", 4),
-	-- blah           = GUI.OptLst:new(     50,  260, 250, 200, "I have a crush on:", "Justin F,schwa,X-Raym,Jason Brian Merrill,pipelineaudio,Xenakios", 2, 0),
-	-- newlist      = GUI.ChkLst:new(     210, 100, 120, 150, "I like to eat:", "Fruit,Veggies,Meat,Dairy", 4),
-	-- checkers      = GUI.Checklist:new(     20, 380, 240, 30,      "", "Show this Screen on Start", 4),
 	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
 	chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
 	metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
 	image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
 	finalize      	= GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
-	-- label4          = GUI.Lbl:new(          300,  400,               "Have fun!", 0),
-
-	 --testbtn2      = GUI.Btn:new(          450, 100, 100, 50,      "CLICK", userfunc, "This|#Is|A|!Menu"),
-	-- newtext      = GUI.TxtBox:new(     340, 210, 200, 30,      "Favorite music player:", 4),
-		
 }
 
+
+end
 
 	---- Put all of your own functions and whatever here ----
 
