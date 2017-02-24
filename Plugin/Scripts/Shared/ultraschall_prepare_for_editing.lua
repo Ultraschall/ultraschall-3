@@ -57,7 +57,7 @@ if tracks_count > 0 then
 		count_fx = reaper.TrackFX_GetCount(track)
 		for j = 0, count_fx - 1 do				
 			fx_name_retval, fx_name = reaper.TrackFX_GetFXName(track, j, "")
-			if ((fx_name) == "AUi: Ultraschall: Soundboard") or ((fx_name) == "VST: Ultraschall: Soundboard") then	-- this is a track with StudioLink Plugin
+			if ((fx_name) == "AUi: Ultraschall: Soundboard") or ((fx_name) == "VSTi: Soundboard (Ultraschall)") then	-- this is a track with StudioLink Plugin
 				--Msg(fx_name)
 				reaper.SNM_MoveOrRemoveTrackFX(track, j, 0)  --remove Soundboard Effect
 			end
