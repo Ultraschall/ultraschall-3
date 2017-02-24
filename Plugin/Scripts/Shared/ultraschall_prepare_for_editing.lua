@@ -67,7 +67,7 @@ if tracks_count > 0 then
 end
 
 
-txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All SSoundboard FX (if existent) have been removed\n\nYou may proceed editing your project!"
+txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All Soundboard FX (if existent) have been removed\n\nYou may proceed editing your project!"
 title = "OK! Your project is now ready for editing:"
 result = reaper.ShowMessageBox( txt, title, 0 )
 
