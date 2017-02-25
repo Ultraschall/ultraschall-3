@@ -13,6 +13,8 @@
 #include <chapterframe.h>
 #include <textidentificationframe.h>
 #include <attachedpictureframe.h>
+#include <commentsframe.h>
+#include <tableofcontentsframe.h>
 
 namespace taglib = TagLib;
 namespace mp3 = TagLib::MPEG;

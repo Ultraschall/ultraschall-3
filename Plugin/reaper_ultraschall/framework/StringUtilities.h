@@ -85,8 +85,10 @@ static inline void replace(std::string &str, const std::string &source, const st
    }
 }
 
-std::wstring MakeUTF16String(const std::string &src);
+std::u16string MakeUTF16String(const std::string &src);
 
+std::u16string MakeUTF16StringWithBOM(const std::string &src);
+   
 std::string MakeUTF8String(const std::wstring &src);
 
 std::string AnsiStringToUnicodeString(const std::string &ansiString);

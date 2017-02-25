@@ -30,22 +30,38 @@ namespace ultraschall
 namespace framework
 {
 
-std::wstring MakeUTF16String(const std::string &src)
+std::u16string MakeUTF16String(const std::string &src)
 {
-   std::wstring result;
+   std::u16string result;
 
    try
    {
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-      result = converter.from_bytes(src);
+      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> convert;
+      result = convert.from_bytes(src);
+      const char16_t* resultPtr = result.c_str();
+      resultPtr = resultPtr;
    }
    catch (std::range_error &)
    {
+      result.clear();
    }
 
    return result;
 }
 
+std::u16string MakeUTF16StringWithBOM(const std::string &src)
+{
+   std::u16string result;
+   
+   char16_t bom = 0;
+   ((uint8_t*)&bom)[0] = 0xff;
+   ((uint8_t*)&bom)[1] = 0xfe;
+   result += bom;
+   result += MakeUTF16String(src);
+   
+   return result;
+}
+   
 std::string MakeUTF8String(const std::wstring &src)
 {
    std::string result;
@@ -57,6 +73,7 @@ std::string MakeUTF8String(const std::wstring &src)
    }
    catch (std::range_error &)
    {
+      result.clear();
    }
 
    return result;

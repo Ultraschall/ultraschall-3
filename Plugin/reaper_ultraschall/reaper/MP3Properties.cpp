@@ -24,6 +24,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <codecvt>
 
 #include "MP3Properties.h"
 #include "StringUtilities.h"
@@ -33,6 +34,100 @@
 namespace ultraschall {
 namespace reaper {
 
+std::u16string MakeUTF16BOM()
+{
+   std::u16string result;
+   
+   char16_t bom = 0;
+   ((uint8_t*)&bom)[0] = 0xff;
+   ((uint8_t*)&bom)[1] = 0xfe;
+   result += bom;
+   
+   return result;
+}
+   
+#define UTF16_BOM MakeUTF16BOM()
+   
+void RemoveMP3Frames(const std::string& target, const std::string& frameId);
+
+void RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id)
+{
+   PRECONDITION(parent != nullptr);
+   PRECONDITION(id.empty() == false);
+   
+   std::vector<id3v2::Frame*> selectedFrames;
+   
+   TagLib::ID3v2::FrameList frames = parent->frameList(id.c_str());
+   for(unsigned int i = 0; i < frames.size(); i++)
+   {
+      id3v2::Frame* frame = frames[i];
+      if(frame != nullptr)
+      {
+         selectedFrames.push_back(frame);
+      }
+   }
+   
+   if(selectedFrames.empty() == false)
+   {
+      for(size_t j = 0; j < selectedFrames.size(); j ++)
+      {
+         parent->removeFrame(selectedFrames[j]);
+      }
+   }
+}
+   
+bool InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text)
+{
+   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(id.empty() == false, false);
+   PRECONDITION_RETURN(text.empty() == false, false);
+   
+   bool success = false;
+   
+   RemoveMultipleFrames(parent, id.c_str());
+   
+   TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString(id.c_str()));
+   if(textFrame != nullptr)
+   {
+      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+      std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(text);
+      TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
+      textFrame->setTextEncoding(TagLib::String::Type::UTF16);
+      textFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
+      
+      parent->addFrame(textFrame);
+      success = true;
+   }
+   
+   return success;
+}
+ 
+bool InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text)
+{
+   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(text.empty() == false, false);
+   
+   bool success = false;
+   
+   RemoveMultipleFrames(parent, id.c_str());
+   
+   TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
+   if(commentsFrame != nullptr)
+   {
+      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+      std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(text);
+      TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
+      commentsFrame->setLanguage(TagLib::ByteVector::fromCString("eng"));
+      commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
+      commentsFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
+      
+      parent->addFrame(commentsFrame);
+      success = true;
+   }
+   
+   return success;
+}
+   
 bool InsertMP3Properties(const std::string& target, const std::string& properties)
 {
    PRECONDITION_RETURN(target.empty() == false, false);
@@ -43,34 +138,22 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
    
    bool success = false;
    
-   TagLib::FileRef mp3(target.c_str());
-   if((mp3.isNull() == false) && (mp3.tag() != nullptr))
+   mp3::File mp3(target.c_str());
+   if(mp3.isOpen() == true)
    {
-      TagLib::Tag* tags = mp3.tag();
-
-      std::string title = framework::AnsiStringToUnicodeString(tokens[0]);
-      tags->setTitle(TagLib::String(title, TagLib::String::Type::UTF8));
-
-      std::string artist = framework::AnsiStringToUnicodeString(tokens[1]);
-      tags->setArtist(TagLib::String(artist, TagLib::String::Type::UTF8));
-
-      std::string album = framework::AnsiStringToUnicodeString(tokens[2]);
-      tags->setAlbum(TagLib::String(album, TagLib::String::Type::UTF8));
-
-      std::string genre = framework::AnsiStringToUnicodeString(tokens[4]);
-      tags->setGenre(TagLib::String(genre, TagLib::String::Type::UTF8));
-
-      std::string comment = framework::AnsiStringToUnicodeString(tokens[5]);
-      tags->setComment(TagLib::String(comment, TagLib::String::Type::UTF8));
-      
-      std::istringstream is(tokens[3]);
-      unsigned int year = 0;
-      is >> year;
-      tags->setYear(year);
-      
-      success = mp3.save();
+      id3v2::Tag* tag = mp3.ID3v2Tag();
+      if(tag != nullptr)
+      {
+         InsertSingleTextFrame(tag, "TIT2", tokens[0]); // title
+         InsertSingleTextFrame(tag, "TPE1", tokens[1]); // artist
+         InsertSingleTextFrame(tag, "TALB", tokens[2]); // album
+         InsertSingleTextFrame(tag, "TDRC", tokens[3]); // date
+         InsertSingleTextFrame(tag, "TCON", tokens[4]); // genre
+         InsertSingleCommentsFrame(tag, "COMM", tokens[5]); // comment
+         success = mp3.save();
+      }
    }
-
+   
    return success;
 }
 
@@ -107,12 +190,14 @@ bool InsertMP3Cover(const std::string& target, const std::string& image)
    
    bool success = false;
    
+   RemoveMP3Frames(target, "APIC");
+   
    TagLib::MPEG::File audioFile(target.c_str());
    
    TagLib::ID3v2::Tag *tag = audioFile.ID3v2Tag(true);
    if(tag != nullptr)
    {
-      TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame;
+      TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame();
       if(frame != nullptr)
       {
          framework::Stream<uint8_t>* imageData = framework::BinaryFileReader::ReadBytes(image);
@@ -129,6 +214,7 @@ bool InsertMP3Cover(const std::string& target, const std::string& image)
                   
                   TagLib::ByteVector coverData((const char*)imageData->Data(), (unsigned int)imageData->DataSize());
                   frame->setPicture(coverData);
+                  
                   tag->addFrame(frame);
                   success = audioFile.save();
                }
@@ -162,22 +248,23 @@ uint32_t QueryTargetDuration(const std::string& target)
    return duration;
 }
  
-void RemoveMP3Tags(const std::string& target)
+void RemoveMP3Frames(const std::string& target, const std::string& frameId)
 {
    PRECONDITION(target.empty() == false);
-
+   PRECONDITION(frameId.empty() == false);
+   
    mp3::File mp3(target.c_str());
    if(mp3.isOpen() == true)
    {
       id3v2::Tag *id3v2 = mp3.ID3v2Tag();
       if(id3v2 != nullptr)
       {
-         std::vector<id3v2::ChapterFrame*> foundFrames;
+         std::vector<id3v2::Frame*> foundFrames;
          
-         id3v2::FrameList frames = id3v2->frameList("CHAP");
+         id3v2::FrameList frames = id3v2->frameList(frameId.c_str());
          for(unsigned int i = 0; i < frames.size(); i++)
          {
-            id3v2::ChapterFrame* frame = dynamic_cast<id3v2::ChapterFrame*>(frames[i]);
+            id3v2::Frame* frame = frames[i];
             if(frame != nullptr)
             {
                foundFrames.push_back(frame);
@@ -190,7 +277,7 @@ void RemoveMP3Tags(const std::string& target)
             {
                id3v2->removeFrame(foundFrames[j]);
             }
-
+            
             mp3.save();
          }
       }
@@ -204,8 +291,6 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
    const uint32_t targetDuration = QueryTargetDuration(target);
    PRECONDITION_RETURN(targetDuration > 0, false);
    
-   RemoveMP3Tags(target);
-   
    bool success = false;
    
    mp3::File mp3(target.c_str());
@@ -214,25 +299,69 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
       id3v2::Tag *id3v2 = mp3.ID3v2Tag();
       if(id3v2 != nullptr)
       {
+         RemoveMultipleFrames(id3v2, "CHAP");
+         
+         std::vector<std::string> tableOfContentsItems;
+
          for(size_t i = 0; i < tags.size(); i++)
          {
             const uint32_t start = static_cast<uint32_t>(tags[i].Position() * 1000);
             const uint32_t end = (i < (tags.size() - 1)) ? static_cast<uint32_t>(tags[i + 1].Position() * 1000) : targetDuration;
          
-            id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"), TagLib::String::Type::UTF8);
+            id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
             if(embeddedFrame != nullptr)
             {
-               embeddedFrame->setText(TagLib::String(tags[i].Name(), TagLib::String::Type::UTF8));
+               std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+               
+               std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(tags[i].Name());
+               TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
+               embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
+               embeddedFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
 
                std::stringstream str;
-               str << "cp" << std::setw(2) << std::setfill('0') << i;
-               TagLib::ByteVector elementId = TagLib::ByteVector::fromCString(str.str().c_str());
+               str << "chp" << i;
+               
+               std::string tableOfContensItem = str.str();
+               tableOfContentsItems.push_back(tableOfContensItem);
+               
+               TagLib::ByteVector elementId = TagLib::ByteVector::fromCString(tableOfContensItem.c_str());
                id3v2::ChapterFrame* frame = new id3v2::ChapterFrame(elementId, start, end, 0, 0);
                if(frame != nullptr)
                {
                   frame->addEmbeddedFrame(embeddedFrame);
                   id3v2->addFrame(frame);
                }
+               
+            }
+        
+         }
+         
+         if(tableOfContentsItems.empty() == false)
+         {
+            RemoveMultipleFrames(id3v2, "CTOC");
+            
+            TagLib::ByteVector elementId = TagLib::ByteVector::fromCString("toc");
+            TagLib::ID3v2::TableOfContentsFrame* tableOfContentsFrame = new TagLib::ID3v2::TableOfContentsFrame(elementId);
+            if(tableOfContentsFrame != nullptr)
+            {
+               for(size_t j = 0; j < tableOfContentsItems.size(); j++)
+               {
+                  tableOfContentsFrame->addChildElement(TagLib::ByteVector::fromCString(tableOfContentsItems[j].c_str()));
+               }
+               
+               id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
+               if(embeddedFrame != nullptr)
+               {
+                  std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+                  const std::string name = "toplevel toc";
+                  const std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(name);
+                  TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
+                  embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
+                  embeddedFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
+                  tableOfContentsFrame->addEmbeddedFrame(embeddedFrame);
+               }
+               
+               id3v2->addFrame(tableOfContentsFrame);
             }
          }
       }
