@@ -24,7 +24,6 @@
 
 #include <sstream>
 #include <iomanip>
-#include <codecvt>
 
 #include "MP3Properties.h"
 #include "StringUtilities.h"
@@ -34,20 +33,6 @@
 namespace ultraschall {
 namespace reaper {
 
-std::u16string MakeUTF16BOM()
-{
-   std::u16string result;
-   
-   char16_t bom = 0;
-   ((uint8_t*)&bom)[0] = 0xff;
-   ((uint8_t*)&bom)[1] = 0xfe;
-   result += bom;
-   
-   return result;
-}
-   
-#define UTF16_BOM MakeUTF16BOM()
-   
 void RemoveMP3Frames(const std::string& target, const std::string& frameId);
 
 void RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id)
@@ -89,8 +74,7 @@ bool InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id, co
    TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString(id.c_str()));
    if(textFrame != nullptr)
    {
-      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-      std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(text);
+      framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(text);
       TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
       textFrame->setTextEncoding(TagLib::String::Type::UTF16);
       textFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
@@ -114,8 +98,7 @@ bool InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string& id
    TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
    if(commentsFrame != nullptr)
    {
-      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-      std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(text);
+      framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(text);
       TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
       commentsFrame->setLanguage(TagLib::ByteVector::fromCString("eng"));
       commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
@@ -311,9 +294,7 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
             id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
             if(embeddedFrame != nullptr)
             {
-               std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-               
-               std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(tags[i].Name());
+               framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(tags[i].Name());
                TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
                embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
                embeddedFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
@@ -352,9 +333,7 @@ bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags)
                id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
                if(embeddedFrame != nullptr)
                {
-                  std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-                  const std::string name = "toplevel toc";
-                  const std::u16string convertedString = UTF16_BOM + stringConverter.from_bytes(name);
+                  framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM("toplevel toc");
                   TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
                   embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
                   embeddedFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));

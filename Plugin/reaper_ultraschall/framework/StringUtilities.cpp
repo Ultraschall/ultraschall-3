@@ -30,16 +30,33 @@ namespace ultraschall
 namespace framework
 {
 
-std::u16string MakeUTF16String(const std::string &src)
+
+UnicodeString MakeUTF16BOM()
 {
-   std::u16string result;
+   UnicodeString result;
+
+   UnicodeChar bom = 0;
+   ((uint8_t*)&bom)[0] = 0xff;
+   ((uint8_t*)&bom)[1] = 0xfe;
+   result += bom;
+
+   return result;
+}
+
+#define UTF16_BOM MakeUTF16BOM()
+
+UnicodeString MakeUnicodeString(const std::string &src)
+{
+   UnicodeString result;
 
    try
    {
+#ifdef ULTRASCHALL_PLATFORM_MACOS
       std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> convert;
+#else
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> convert;
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
       result = convert.from_bytes(src);
-      const char16_t* resultPtr = result.c_str();
-      resultPtr = resultPtr;
    }
    catch (std::range_error &)
    {
@@ -49,17 +66,9 @@ std::u16string MakeUTF16String(const std::string &src)
    return result;
 }
 
-std::u16string MakeUTF16StringWithBOM(const std::string &src)
+UnicodeString MakeUnicodeStringWithBOM(const std::string &src)
 {
-   std::u16string result;
-   
-   char16_t bom = 0;
-   ((uint8_t*)&bom)[0] = 0xff;
-   ((uint8_t*)&bom)[1] = 0xfe;
-   result += bom;
-   result += MakeUTF16String(src);
-   
-   return result;
+   return UTF16_BOM + MakeUnicodeString(src);
 }
    
 std::string MakeUTF8String(const std::wstring &src)

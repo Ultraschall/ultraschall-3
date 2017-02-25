@@ -85,9 +85,17 @@ static inline void replace(std::string &str, const std::string &source, const st
    }
 }
 
-std::u16string MakeUTF16String(const std::string &src);
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+typedef char16_t UnicodeChar;
+typedef std::u16string UnicodeString;
+#else
+typedef wchar_t UnicodeChar;
+typedef std::wstring UnicodeString;
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-std::u16string MakeUTF16StringWithBOM(const std::string &src);
+UnicodeString MakeUnicodeString(const std::string &src);
+
+UnicodeString MakeUnicodeStringWithBOM(const std::string &src);
    
 std::string MakeUTF8String(const std::wstring &src);
 

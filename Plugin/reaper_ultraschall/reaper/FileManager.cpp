@@ -25,6 +25,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <codecvt>
 
 #include <Framework.h>
 #include <ResourceManager.h>
@@ -92,7 +93,8 @@ std::string FileManager::BrowseForImageFiles(const std::string &title)
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if (SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
+        pfod->SetTitle(stringConverter.from_bytes(title).c_str());
 
         COMDLG_FILTERSPEC filters[3] = {0};
         filters[0].pszName = L"JPG file";
@@ -174,7 +176,8 @@ std::string FileManager::BrowseForMP3Files(const std::string &title)
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if (SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
+        pfod->SetTitle(stringConverter.from_bytes(title).c_str());
 
         COMDLG_FILTERSPEC filters[2] = {0};
         filters[0].pszName = L"MP3 file";
@@ -247,7 +250,8 @@ std::string FileManager::BrowseForFiles(const std::string &title)
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if (SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
+        pfod->SetTitle(stringConverter.from_bytes(title).c_str());
 
         COMDLG_FILTERSPEC filters[3] = {0};
         filters[0].pszName = L"MP4 chapters";
@@ -325,11 +329,13 @@ std::string FileManager::BrowseForFolder(const std::string &title, const std::st
     HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC, IID_PPV_ARGS(&pfod));
     if (SUCCEEDED(hr))
     {
-        pfod->SetTitle(framework::MakeUTF16String(title).c_str());
-        if (folder.empty() == false)
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
+        pfod->SetTitle(stringConverter.from_bytes(title).c_str());
+       
+        if(folder.empty() == false)
         {
             IShellItem *psi = nullptr;
-            hr = SHCreateItemFromParsingName(framework::MakeUTF16String(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
+            hr = SHCreateItemFromParsingName(stringConverter.from_bytes(folder).c_str(), nullptr, IID_PPV_ARGS(&psi));
             if (SUCCEEDED(hr))
             {
                 pfod->SetFolder(psi);
