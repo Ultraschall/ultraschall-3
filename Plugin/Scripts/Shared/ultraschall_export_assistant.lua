@@ -29,56 +29,41 @@ function Msg(val)
 	reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
--- Grab all of the functions and classes from our GUI library
+function runcommand(cmd)	-- run a command by its name
+
+	start_id = reaper.NamedCommandLookup(cmd)
+	reaper.Main_OnCommand(start_id,0) 
+
+end
+
+function GetPath(str,sep)
+ 
+    return str:match("(.*"..sep..")")
+
+end
+
+-- initiate values
+
 local info = debug.getinfo(1,'S');
 script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
 GUI = dofile(script_path .. "ultraschall_gui_lib.lua")
-
--- All functions in the GUI library are now contained in the GUI table,
--- so they can be accessed via:          GUI.function(params)
-
-	---- Window settings and user functions ----
-
-
 GUI.name = "Ultraschall Export Assistant"
 GUI.x, GUI.y, GUI.w, GUI.h = 200, 200, 660, 440
+y_offset = -30  -- move all content up/down
 
+-- OS BASED SEPARATOR
 
-function runcommand(cmd)
-
-	start_id = reaper.NamedCommandLookup(cmd)
-	reaper.Main_OnCommand(start_id,0) 	--Show Startscreen	
-
-end
-
---
-
-function GetPath(str,sep)
-    return str:match("(.*"..sep..")")
-end
-
+if reaper.GetOS() == "Win32" or reaper.GetOS() == "Win64" then	separator = "\\" else separator = "/" end
 
 -- Check if project has been saved
-	-- OS BASED SEPARATOR
-	if reaper.GetOS() == "Win32" or reaper.GetOS() == "Win64" then
-		-- user_folder = buf --"C:\\Users\\[username]" -- need to be test
-		separator = "\\"
-	else
-		-- user_folder = "/USERS/[username]" -- Mac OS. Not tested on Linux.
-		separator = "/"
-	end
 
-
-	retval, project_path_name = reaper.EnumProjects(-1, "")
-	if project_path_name ~= "" then
-		
-		dir = GetPath(project_path_name, separator)
-		--msg(name)
-		name = string.sub(project_path_name, string.len(dir) + 1)
-		name = string.sub(name, 1, -5)
-
-		name = name:gsub(dir, "")
-	end
+retval, project_path_name = reaper.EnumProjects(-1, "")
+if project_path_name ~= "" then
+	dir = GetPath(project_path_name, separator)
+	name = string.sub(project_path_name, string.len(dir) + 1)
+	name = string.sub(name, 1, -5)
+	name = name:gsub(dir, "")
+end
 
 -- lookup existing episode image
 
@@ -94,34 +79,29 @@ for key,value in pairs(endings) do
 end
 
 if img_index then	-- there is an image
+	preview_size = 80 	-- preview size in Pixel, always square
 	w, h = gfx.getimgdim(img_index)
-	if w > h then
-		img_ratio = 80 / w
+	if w > h then	-- adjust size to the longer border
+		img_ratio = preview_size / w   	
 	else
-		img_ratio = 80 / h
+		img_ratio = preview_size / h
 	end
 end
 
 -- Msg(w .. "-" .. h)
 
---
-
-y_offset = -30  -- move all content up/down
-
-
-
 	-- body
 	---- GUI Elements ----
 	
-if img_index then
+if img_index then	-- there is an episode-image
 
 	GUI.elms = {
 	
 --     name          = element type          x      y    w    h     caption               ...other params...
 	logo			= GUI.Pic:new(			484,280, 80, 80, img_ratio, img_adress, runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
 	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image:\nFound.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
-	label2           = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
-	label3           = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
+	label2          = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n5.", 0),
+	label3          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
 	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
 	chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
 	metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
@@ -136,15 +116,14 @@ else
 --     name          = element type          x      y    w    h     caption               ...other params...
 	-- logo			= GUI.Pic:new(			374,178, 0, 0, img_ratio, img_adress),
 	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image\nJust put a square .jpg, .jpeg or .png image\nwith the same name as your project file (.RPP)\nin the project folder.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
-	label2           = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
-	label3           = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
+	label2          = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
+	label3          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
 	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
 	chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
 	metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
 	image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
 	finalize      	= GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
 }
-
 
 end
 
