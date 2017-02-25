@@ -34,7 +34,14 @@ reaper.Undo_BeginBlock()
 
 m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
 -- fx_name_retval, fx_name = reaper.TrackFX_GetFXName(m, 0, "")           --get the name of the first effect, debug only
-fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+
+os = reaper.GetOS()
+if string.match(os, "OSX") then 
+	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+else	-- Windows
+	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+end
+
 
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
 state = reaper.GetToggleCommandStateEx(sec, cmd)                           --get state of the OnAir Button: on/off

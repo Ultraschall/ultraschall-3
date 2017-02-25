@@ -51,7 +51,7 @@ startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
 
 
 if plugin_version ~= theme_version then -- different versions of theme and plugin isntalled
-	error_msg = "There is a configuration mismatch betwenn the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
+	error_msg = "There is a configuration mismatch between the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
 end
 
 if plugin_version == "" then 
@@ -105,9 +105,22 @@ reaper.SetToggleCommandState(sec, 55695, 0)
 -- remove StudioLink OnAir FX from Master
 
 m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
-fx_name_retval, fx_name = reaper.TrackFX_GetFXName(m, 0, "")           --get the name of the first effect, debug only
-fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+os = reaper.GetOS()
+
+if string.match(os, "OSX") then 
+	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+else	-- Windows
+	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+end
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
+
+-- is the ReaperThemeZip loaded? Only then (probably on first start) reload the ReaperTheme to get the colors working 
+
+curtheme = reaper.GetLastColorThemeFile()
+if string.find(curtheme, "ReaperThemeZip", 1) then
+	themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
+	reaper.OpenColorThemeFile(themeadress)
+end
 
 
 --------------------------
@@ -117,5 +130,6 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 if first_start == "true" then
 	reaper.SetExtState("ultraschall_start", "firststart", "false", true)	-- there will be only one first start
 end
+
 
 
