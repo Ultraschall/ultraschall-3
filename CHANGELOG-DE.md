@@ -1,44 +1,19 @@
 # Changelog
 
-#### Infos:
-## Syntax für das Changelog
 
-* Preferences: **Diese Änderungen**
-*werden im Preferences-Dialog von Reaper vorgenommen, den man über `⌘`+`,` oder im Menü unter `Reaper | Preferences…` erreicht.*
-
-* Theme: **Diese Änderungen betreffen das mitgelieferte Theme**
-*und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.*
-
-* Actions: **Änderungen, die die Bindung von Aktionen**
-*teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.*
-
-* Soundboard: **Features unseres eigenen Soundboards**
-*für Einspieler aller Art.*
-
-* Installer: **Neuerungen, die den mit der 1.2**
-*eingeführten Installer für den Mac betreffen.*
-
-* Hub [Nur Mac]: **Unser Projekt zur Ablösung von [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2)**
-*Soundflower für ein stabiles und knacksfreies Podcastingerlebnis.*
-
-* Misc: **Infos**
-*Was sonst noch so anfällt.*
-
-#### Last Changelog:
-
-## 3.0 - 2016-März-01
+## 3.0 Miedinger - 2017-März
 
 * Theme: **Wellenform**
-*Ausgewählte Items werden in der Helligkeit klarer hervorgehoben* 
+*Ausgewählte Items werden in der Helligkeit klarer hervorgehoben. Schnitte innerhalb einer Wellenform werden deutlicher angezeigt.* 
 
 * Theme: **User Interface**
-*Einzelne Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit*
+*Diverse Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit.*
 
 * Theme: **Auswahlwerkzeug**
-*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cur) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand.*
+*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon, oder über den Tastaturshortcur `#`*
 
 * Theme: **Hervorhebung 'Prepare all tracks...'**
-*Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen*
+*Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen. Die Funktion selbst wurde neu implementiert und erweitert. Nach erfolgreichem Durchlauf wird ein neues Status-Fenster angezeigt als Rückmeldung.*
 
 * Actions: **Import von Kapitelmarken aus WAV Datein**
 *Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
@@ -46,14 +21,40 @@
 * Mastering: **Ultraschall Dynamics**
 *Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
 
-* Mastering: **Kapitelmarken in MP3**
-*Die Kapitelmarken eines Projektes können einfach in eine bestehende MP3 Datei hineingerendert werden.*
+* Mastering: **Effektvorgaben bei neuen Spuren**
+*Beim Anlegen neuer Spuren werden automatisch die Effekte ReaEQ (Equalizer) und JS: General Dynamics hinzugefügt, jedoch noch nicht aktiviert.*
 
-* Streaming **StudioLink Live Streaming**
-*Durch die Unterstützung von StudioLink Live kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
+* Mastering: **Neues EQ-Preset**
+*Ein neues Ultraschall 3 Preset für den EQ eird mitgeliefert, dass weniger Bassanhebung als der Preset der 2er Version liefert und ein guter Startpunkt für die Headsets DT297 und HMC660 ist.*
+
+* Editing: **Volume-Editing**
+*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im SPurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
+
+* Editing: **Einfacheres Envelope-Handling**
+*Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
+
+* Mastering: **Export Assistent**
+*Ein neuer Export-Assistent, links unten in der `Export` Iconleiste zu finden, hilft dabei perfekte MP3 Dateien zu erzeugen. Die ID3V2 Elemente Metadaten (wie Titel, Podcast etc.), Episodenbild und Kapitelmarken werden in die produzierte MP3 Datei gespeichert.*
+
+* Streaming **StudioLink OnAir Streaming**
+*Durch die Unterstützung von StudioLink OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
 
 * Installer: **Update Check**
-*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt.*
+*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitätschek stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
+
+* Theme: **Ultraschall-Startscreen**
+*Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
+
+* Actions: **Colorpicker**
+*Ein nutzerfreundlicher Colorpicker hilft dabei, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
+
+* Theme: **Anpassungen der Views**
+*Die Views-Umschalter links oben erhalten eine Persistenz-Schicht und zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an. Im Edit-View wird oben das Navigator-Fenster über die ganze Breite angezeigt. Im Edit-View wird ferner unten links ein neuer Reiter für `Loudness` hinzugefügt, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
+
+* Theme: **FX immer sichtbar im Mixerbereich**
+*Durch die stegig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) ist nun der FX-Effektschalter im Mixerbereich bei SPuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
+
+
 
 ## 2.2.3 Gropius - 2016-August-25
 
