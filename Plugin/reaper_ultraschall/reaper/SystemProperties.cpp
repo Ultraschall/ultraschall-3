@@ -30,20 +30,22 @@
 #include "ReaperEntryPoints.h"
 #include "NotificationWindow.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
-static const char* VERSIONS_SECTION_NAME = "ultraschall_versions";
-static const char* THEME_VERSION_KEY_NAME = "theme";
-static const char* PLUGIN_VERSION_KEY_NAME = "plugin";
-static const char* VERSION_VALUE_NAME = "20170221";
-   
+static const char *VERSIONS_SECTION_NAME = "ultraschall_versions";
+static const char *THEME_VERSION_KEY_NAME = "theme";
+static const char *PLUGIN_VERSION_KEY_NAME = "plugin";
+static const char *VERSION_VALUE_NAME = "20170226";
+
 void SetPluginVersion()
 {
-   if(reaper_api::HasExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
+   if (reaper_api::HasExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
    {
       const std::string themeVersion = reaper_api::GetExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
-      if(themeVersion == VERSION_VALUE_NAME)
+      if (themeVersion == VERSION_VALUE_NAME)
       {
          reaper_api::SetExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
       }
@@ -64,37 +66,36 @@ void SetPluginVersion()
       NotificationWindow::Show(str);
    }
 }
-  
-static const char* GLOBAL_SECTION_NAME = "ultraschall";
-   
-bool HasSystemProperty(const std::string& key)
+
+static const char *GLOBAL_SECTION_NAME = "ultraschall";
+
+bool HasSystemProperty(const std::string &key)
 {
    PRECONDITION_RETURN(key.empty() == false, false);
-   
+
    return reaper_api::HasExtState(GLOBAL_SECTION_NAME, key.c_str());
 }
 
-void SetSystemProperty(const std::string& key, const std::string& value, const bool save)
+void SetSystemProperty(const std::string &key, const std::string &value, const bool save)
 {
    PRECONDITION(key.empty() == false);
    PRECONDITION(value.empty() == false);
-   
+
    reaper_api::SetExtState(GLOBAL_SECTION_NAME, key.c_str(), value.c_str(), save);
 }
 
-std::string GetSystemProperty(const std::string& key)
+std::string GetSystemProperty(const std::string &key)
 {
    PRECONDITION_RETURN(key.empty() == false, std::string());
-   
+
    return reaper_api::GetExtState(GLOBAL_SECTION_NAME, key.c_str());
 }
 
-void DeleteSystemProperty(const std::string& key, const bool save)
+void DeleteSystemProperty(const std::string &key, const bool save)
 {
    PRECONDITION(key.empty() == false);
-   
+
    reaper_api::DeleteExtState(GLOBAL_SECTION_NAME, key.c_str(), save);
 }
-   
-}}
-
+}
+}
