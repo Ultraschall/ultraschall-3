@@ -69,6 +69,9 @@
 * Mastering: **Rauschfilter verfügbar**
 *Zum Beheben gängiger Soundprobleme wie Rauschen oder Netzbrummen wurde der ReaFir-Effekt in die Effekt-Favoriten mit aufgenommen. Die Bediehnung wird im Video zu Ultraschall Dynamics erläutert.* 
 
+* Mastering: **Projektordner öffnen**
+*Menübefehl und Icon für das Öffnen des Projektverzeichnisses öffnet nun wirklich das Projektverzeichnis - nicht wie bisher den Unterordner mit den Sounddateien.*
+
 * Actions: **Colorpicker**
 *Ein nutzerfreundlicher Colorpicker (Shortcut: `alt`+`c`) hilft dabei, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
 
