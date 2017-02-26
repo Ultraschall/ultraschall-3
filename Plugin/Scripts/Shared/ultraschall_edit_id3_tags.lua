@@ -59,7 +59,7 @@ end
 dialog_ret_vals = notes2csv() --default values
 retval, result = reaper.GetUserInputs("Edit ID3 Podcast Metadata", 6, "Title:,Artist:,Album (Podcast):,Year:,Genre:,Comment:", dialog_ret_vals)
 if retval == true then
-  Msg(result)
+  -- Msg(result)
   notes = reaper.GetSetProjectNotes(0, true, csv2lines(result)) -- write new notes
 end
 
