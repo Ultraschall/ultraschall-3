@@ -329,7 +329,7 @@ function Init()
 	
 	-- Create the window
 	gfx.clear = GUI.rgb2num(table.unpack(GUI.colors.wnd_bg))
-	gfx.init(GUI.name, GUI.w, GUI.h, 0, GUI.x, GUI.y)
+	gfx.init(GUI.name, GUI.w, GUI.h, 0, GUI.x, GUI.y)	-- 0 means "undocked", 1 would dock it in the first dock position (Mixer)
 
 	-- Initialize any variables that are necessary
 	GUI.last_time = 0
