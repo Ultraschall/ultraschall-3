@@ -127,6 +127,8 @@ end
 -- First start actions
 --------------------------
 
+-- not really needed right now, but maybe in coming releases
+
 if first_start == "true" then
 	reaper.SetExtState("ultraschall_start", "firststart", "false", true)	-- there will be only one first start
 end
