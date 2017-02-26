@@ -1,7 +1,22 @@
-# Changelog
+# Ultraschall Changelog
 
 
 ## 3.0 Miedinger - 2017-März
+
+* Streaming **StudioLink OnAir Streaming**
+*Durch die Unterstützung von StudioLink OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
+
+* Installer: **Update Check**
+*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitätschek stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
+
+* Theme: **Ultraschall-Startscreen**
+*Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
+
+* Theme: **Anpassungen der Views**
+*Die Views-Umschalter links oben erhalten eine Persistenz-Schicht und zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an. Im Edit-View wird oben das Navigator-Fenster über die ganze Breite angezeigt. Im Edit-View wird ferner unten links ein neuer Reiter für `Loudness` hinzugefügt, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
+
+* Theme: **FX immer sichtbar im Mixerbereich**
+*Durch die stegig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) ist nun der FX-Effektschalter im Mixerbereich bei SPuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
 
 * Theme: **Wellenform**
 *Ausgewählte Items werden in der Helligkeit klarer hervorgehoben. Schnitte innerhalb einer Wellenform werden deutlicher angezeigt.* 
@@ -15,8 +30,26 @@
 * Theme: **Hervorhebung 'Prepare all tracks...'**
 *Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen. Die Funktion selbst wurde neu implementiert und erweitert. Nach erfolgreichem Durchlauf wird ein neues Status-Fenster angezeigt als Rückmeldung.*
 
-* Actions: **Import von Kapitelmarken aus WAV Datein**
-*Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
+* Editing: **Volume-Editing**
+*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im SPurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
+
+* Editing: **Einfacheres Envelope-Handling**
+*Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
+
+* Editing: **Verbessertes Verhalten der `esc`-Taste**
+*Wir glauben an die Zukunft und die Notwendigkeit der `esc`-Taste. Daher haben wir die "lösche jegliche Auswahl"-Funktion erheblich erweitert - die hebt nun Track- Item- Envelope- und Zeitmarkierungen auf.*
+
+* Editing: **Vorhören von Schnitten**
+*Mit dem Shortcut `p` kann  man vorhören, wie sich ein Schnitt mittels Zeitmarkierung auswirken würde, ohne dass man diesen bereits durchführen muss. In Kombination mit den neuen Shortcuts zum Verschieben der In- und Outpoints einer Zeitauswahl `<`, `y`, `x` und `c` ist dadurch ein sehr effizienter und kontrollierter Schnitt möglich.*
+
+* Editing: **Play-Cursor auf Anfang von Zeitauswahlen**
+*Setzt man eine Zeitauswahl, so wird der Play-Cursor direkt auf den Inpoint dieser Auswahl gesetzt und man kann direkt mit `return` oder `space` die Auswahl anhören.*
+
+* Editing: **Erweiterter Ripple-Cut**
+*Mit dem Shortcut `cmd`+`x` wird ein Ripple-Cut über alle Spuren auch dann durchgeführt, wenn nur ein einzelnes Item ausgewählt wird. Schnittbereich ist dann Start- und Endpunkt dieses Items.*
+
+* Keymap: **Neues Layout für Tastatur-Shortcuts**
+*Eine Vielzahl an Shortcuts wurden überarbeitet und neu hinzugefügt um einen effizienteren Schnitt über Tastatur zu ermöglichen. In einem [.PDF](http://url.ultraschall-podcast.de/keymap) sind die neuen Shortcuts ausgewiesen, eigene Anpassungen können an einer mitgelieferten PowerPoint-Datei vorgenommen werden.*
 
 * Mastering: **Ultraschall Dynamics**
 *Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
@@ -27,33 +60,17 @@
 * Mastering: **Neues EQ-Preset**
 *Ein neues Ultraschall 3 Preset für den EQ eird mitgeliefert, dass weniger Bassanhebung als der Preset der 2er Version liefert und ein guter Startpunkt für die Headsets DT297 und HMC660 ist.*
 
-* Editing: **Volume-Editing**
-*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im SPurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
-
-* Editing: **Einfacheres Envelope-Handling**
-*Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
-
 * Mastering: **Export Assistent**
 *Ein neuer Export-Assistent, links unten in der `Export` Iconleiste zu finden, hilft dabei perfekte MP3 Dateien zu erzeugen. Die ID3V2 Elemente Metadaten (wie Titel, Podcast etc.), Episodenbild und Kapitelmarken werden in die produzierte MP3 Datei gespeichert.*
 
-* Streaming **StudioLink OnAir Streaming**
-*Durch die Unterstützung von StudioLink OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
-
-* Installer: **Update Check**
-*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitätschek stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
-
-* Theme: **Ultraschall-Startscreen**
-*Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
+* Mastering: **Rauschfilter verfügbar**
+*Zum Beheben gängiger Soundprobleme wie Rauschen oder Netzbrummen wurde der ReaFir-Effekt in die Effekt-Favoriten mit aufgenommen. Die Bediehnung wird im Video zu Ultraschall Dynamics erläutert.* 
 
 * Actions: **Colorpicker**
-*Ein nutzerfreundlicher Colorpicker hilft dabei, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
+*Ein nutzerfreundlicher Colorpicker (Shortcut: `alt`+`c`) hilft dabei, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
 
-* Theme: **Anpassungen der Views**
-*Die Views-Umschalter links oben erhalten eine Persistenz-Schicht und zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an. Im Edit-View wird oben das Navigator-Fenster über die ganze Breite angezeigt. Im Edit-View wird ferner unten links ein neuer Reiter für `Loudness` hinzugefügt, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
-
-* Theme: **FX immer sichtbar im Mixerbereich**
-*Durch die stegig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) ist nun der FX-Effektschalter im Mixerbereich bei SPuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
-
+* Actions: **Import von Kapitelmarken aus WAV Datein**
+*Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
 
 
 ## 2.2.3 Gropius - 2016-August-25
