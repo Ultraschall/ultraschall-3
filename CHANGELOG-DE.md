@@ -3,29 +3,29 @@
 
 ## 3.0 Miedinger - 2017-März
 
-* Streaming **StudioLink OnAir Streaming**
-*Durch die Unterstützung von StudioLink OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen werden sowie die Streaming-URL publiziert werden.*
+* Streaming **Studio-Link OnAir Streaming**
+*Durch die Unterstützung von Studio-Link OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
 
 * Installer: **Update Check**
-*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitätschek stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
+*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitäts-Check stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
 
 * Theme: **Ultraschall-Startscreen**
 *Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
 
 * Theme: **Anpassungen der Views**
-*Die Views-Umschalter links oben erhalten eine Persistenz-Schicht und zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an. Im Edit-View wird oben das Navigator-Fenster über die ganze Breite angezeigt. Im Edit-View wird ferner unten links ein neuer Reiter für `Loudness` hinzugefügt, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
+*Die Views-Umschalter oben links zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an (Stichwort: Persistenz-Schicht). Im Edit-View wird ganz oben jetzt das Navigator-Fenster über die gesamte Breite angezeigt. Zusätzlich gibt es unten links nun einen neuen Reiter für `Loudness`, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
 
 * Theme: **FX immer sichtbar im Mixerbereich**
-*Durch die stegig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) ist nun der FX-Effektschalter im Mixerbereich bei SPuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
+*Durch die stetig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) sind nun die FX-Buttons im Mixerbereich der Spuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
 
 * Theme: **Wellenform**
 *Ausgewählte Items werden in der Helligkeit klarer hervorgehoben. Schnitte innerhalb einer Wellenform werden deutlicher angezeigt.* 
 
 * Theme: **User Interface**
-*Diverse Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit.*
+*Viele GUI-Elemente erhalten mehr Kontrast für bessere Sichtbarkeit.*
 
 * Theme: **Auswahlwerkzeug**
-*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon, oder über den Tastaturshortcut: `#`.*
+*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bisherigenen Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon, oder über den Tastaturshortcut: `#`.*
 
 * Theme: **Hervorhebung 'Prepare all tracks...'**
 *Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen. Die Funktion selbst wurde neu implementiert und erweitert. Nach erfolgreichem Durchlauf wird ein neues Status-Fenster angezeigt als Rückmeldung.*
