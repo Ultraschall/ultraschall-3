@@ -22,6 +22,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <sstream>
+
 #include <Framework.h>
 
 #include "SystemProperties.h"
@@ -47,12 +49,19 @@ void SetPluginVersion()
       }
       else
       {
-         NotificationWindow::Show("INVALID_THEME");
+         std::ostringstream str;
+         str << "There is a configuration mismatch between the ULTRASCHALL THEME ("
+             << themeVersion
+             << ") and PLUGIN ("
+             << VERSION_VALUE_NAME
+             << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation guide on http://ultraschall.fm/install/";
+         NotificationWindow::Show(str.str());
       }
    }
    else
    {
-      NotificationWindow::Show("MISSING_THEME");
+      const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
+      NotificationWindow::Show(str);
    }
 }
   
