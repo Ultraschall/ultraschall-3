@@ -15,6 +15,7 @@
 #include <attachedpictureframe.h>
 #include <commentsframe.h>
 #include <tableofcontentsframe.h>
+#include <podcastframe.h>
 
 namespace taglib = TagLib;
 namespace mp3 = TagLib::MPEG;

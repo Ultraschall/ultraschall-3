@@ -161,7 +161,7 @@ std::string Project::Notes() const
    char projectNotes[MAX_PROJECT_NOTES_SIZE] = {0};
    reaper_api::GetSetProjectNotes(projectReference, false, projectNotes, (int)MAX_PROJECT_NOTES_SIZE);
    std::string notes = projectNotes;
-
+   notes.erase(std::remove(notes.begin(), notes.end(), '\r'), notes.end());
    return framework::UnicodeStringToAnsiString(notes);
 }
 

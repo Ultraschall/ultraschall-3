@@ -93,15 +93,15 @@ typedef wchar_t UnicodeChar;
 typedef std::wstring UnicodeString;
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-UnicodeString MakeUnicodeString(const std::string &src);
+UnicodeString MakeUnicodeString(const std::string& src);
 
-UnicodeString MakeUnicodeStringWithBOM(const std::string &src);
+UnicodeString MakeUnicodeStringWithBOM(const std::string& src);
    
-std::string MakeUTF8String(const std::wstring &src);
+std::string MakeUTF8String(const UnicodeString& src);
 
-std::string AnsiStringToUnicodeString(const std::string &ansiString);
+std::string AnsiStringToUnicodeString(const std::string& ansiString);
 
-std::string UnicodeStringToAnsiString(const std::string &unicodeString, int codepage = 0);
+std::string UnicodeStringToAnsiString(const std::string& unicodeString, int codepage = 0);
 }
 }
 

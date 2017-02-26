@@ -78,7 +78,7 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
          const size_t imageIndex = FileManager::FileExists(imageNames);
          if(imageIndex != -1)
          {
-            if(InsertMP3Cover(targetName, imageNames[imageIndex]) == true)
+            if(InsertMP3CoverPicture(targetName, imageNames[imageIndex]) == true)
             {
                successfulActions++;
             }

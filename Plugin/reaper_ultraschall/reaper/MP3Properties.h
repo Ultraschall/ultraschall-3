@@ -33,7 +33,7 @@ namespace ultraschall {
 namespace reaper {
 
 bool InsertMP3Properties(const std::string& target, const std::string& properties);
-bool InsertMP3Cover(const std::string& target, const std::string& image);
+bool InsertMP3CoverPicture(const std::string& target, const std::string& image);
 bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags);
 
 }}

@@ -52,11 +52,11 @@ UnicodeString MakeUnicodeString(const std::string &src)
    try
    {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> convert;
+      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
 #else
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> convert;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
-      result = convert.from_bytes(src);
+      result = stringConverter.from_bytes(src);
    }
    catch (std::range_error &)
    {
@@ -69,16 +69,30 @@ UnicodeString MakeUnicodeString(const std::string &src)
 UnicodeString MakeUnicodeStringWithBOM(const std::string &src)
 {
    return UTF16_BOM + MakeUnicodeString(src);
+//   return MakeUnicodeString(src);
 }
    
-std::string MakeUTF8String(const std::wstring &src)
+std::string MakeUTF8String(const UnicodeString& src)
 {
    std::string result;
 
+   size_t offset = 0;
+   if(src.size() > 1)
+   {
+      if(src[0] == (UnicodeChar)0xfffe)
+      {
+         offset = 1;
+      }
+   }
+   
    try
    {
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-      result = converter.to_bytes(src);
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+      std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+#else
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+      result = stringConverter.to_bytes(&src[offset]);
    }
    catch (std::range_error &)
    {
