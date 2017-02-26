@@ -7,7 +7,7 @@ Bitte aufmerksam befolgen!
 Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellungen werden in der Regel ungefragt überschrieben** - es lohnt also, diese vorher über das Menü `REAPER | Preferences | General | Export Configuration…` zu sichern.
 
 
-## Mac OS X ab 10.11
+## macOS ab 10.11
 
 
 1. **REAPER installieren:** [REAPER v5.34 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
