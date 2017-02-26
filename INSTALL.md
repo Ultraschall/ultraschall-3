@@ -6,7 +6,7 @@ Use of this distribution is **at your own risk. Previous settings are usually ov
 
 Our changes affect on many levels: file system (graphics), Walter theming file, project settings, Reaper settings, toolbar settings, etc. All changes are **open source** ([CC0](https://creativecommons.org/about/cc0)) an can be adapted as wished. Beware: you should have a clear idea of what your are doing.
 
-## Installation instructions for Ultraschall 2.2 (Please follow precisely!)
+## Installation instructions for Ultraschall 3.0 (Please follow precisely!)
 
 Depending on your previous Reaper and Ultraschall set-up, there are different paths to follow: update or clean install.
 
