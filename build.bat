@@ -24,7 +24,8 @@ copy ..\REAPER\Themes\Ultraschall_3.0_WIN.ReaperConfigZip Payload\Ultraschall_3.
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
-copy "..\REAPER\Documentation\Keymap.pdf" "Payload\Addons\Ultraschall Keyboard Mapping.pdf"
+copy "..\REAPER\Documentation\Keymap.pdf" "Payload\Addons\Ultraschall Keyboard Layout.pdf"
+copy "..\REAPER\Documentation\Keymap.pptx" "Payload\Addons\Ultraschall Keyboard Layout.pptx"
 copy "..\REAPER\Resources\Ultraschall Colorset.SWSColor" "Payload\Addons\Ultraschall Colorset.SWSColor"
 copy "..\REAPER\Resources\Ultraschall Microbanner 80x15.png" "Payload\Addons\Ultraschall Microbanner 80x15.png"
 copy "..\REAPER\Resources\Ultraschall Webbanner.png" "Payload\Addons\Ultraschall Webbanner.png"
