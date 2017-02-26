@@ -25,10 +25,13 @@
 *Diverse Elemente der GUI erhalten mehr Kontrast für bessere Sichtbarkeit.*
 
 * Theme: **Auswahlwerkzeug**
-*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon, oder über den Tastaturshortcur `#`*
+*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi für den Mauszeiger gewechselt werden: dem bekannten Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus, der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall on der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon, oder über den Tastaturshortcut: `#`.*
 
 * Theme: **Hervorhebung 'Prepare all tracks...'**
 *Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Aufmerksamkeit zu erhöhen. Die Funktion selbst wurde neu implementiert und erweitert. Nach erfolgreichem Durchlauf wird ein neues Status-Fenster angezeigt als Rückmeldung.*
+
+* Theme: **Podcast-Menü**
+*Diverse Einträge im Podcast-Menü wurden aktualisiert und klarer angeordnet.*
 
 * Editing: **Volume-Editing**
 *Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im SPurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
@@ -37,7 +40,7 @@
 *Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
 
 * Editing: **Verbessertes Verhalten der `esc`-Taste**
-*Wir glauben an die Zukunft und die Notwendigkeit der `esc`-Taste. Daher haben wir die "lösche jegliche Auswahl"-Funktion erheblich erweitert - die hebt nun Track- Item- Envelope- und Zeitmarkierungen auf.*
+*Wir glauben an die Zukunft und die Notwendigkeit der `esc`-Taste. Daher haben wir die "lösche jegliche Auswahl"-Funktion erheblich erweitert - sie hebt nun Track-, Item-, Envelope- und Zeitmarkierungen auf.*
 
 * Editing: **Vorhören von Schnitten**
 *Mit dem Shortcut `p` kann  man vorhören, wie sich ein Schnitt mittels Zeitmarkierung auswirken würde, ohne dass man diesen bereits durchführen muss. In Kombination mit den neuen Shortcuts zum Verschieben der In- und Outpoints einer Zeitauswahl `<`, `y`, `x` und `c` ist dadurch ein sehr effizienter und kontrollierter Schnitt möglich.*
