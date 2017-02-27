@@ -34,7 +34,7 @@ Zur Handhabung der neuen Funktionen empfehlen wir den demnächst erscheinenden R
 
 3. **Die REAPER Ultraschall-Konfiguration installieren:** REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde. Daher die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete REAPER-Fenster fallen lassen. Den Import durchlaufen lassen. Danach kann die Datei vom Desktop gelöscht werden.
 
-4. **StudioLink und das Ultraschall-Soundboard verbinden:** Unser integriertes Soundboard zum Einspielen von Jingles und Ähnlichem sowie StudioLink (als Alternative zu Skype-Remoterecordings) wird automatisch installiert. Man muss dies jedoch REAPER einmalig nach der Installation mitteilen: Im Menü `Options | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
+4. **StudioLink und das Ultraschall-Soundboard verbinden:** Unser integriertes Soundboard zum Einspielen von Jingles und Ähnlichem, sowie StudioLink (als Alternative zu Skype-Remoterecordings) wird automatisch installiert. Man muss dies jedoch REAPER einmalig nach der Installation mitteilen: Im Menü `Options | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
 
 5. **Aufräumen:** Die Verknüpfung `Ultraschall REAPER Theme` vom Desktop löschen.
 

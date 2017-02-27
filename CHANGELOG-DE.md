@@ -40,7 +40,7 @@ Ultraschall wird mit aktualisiertem StudioLink Plug-in in version 16.12.0. ausge
 *Diverse Einträge im Podcast-Menü wurden aktualisiert und klarer angeordnet.*
 
 * Editing: **Volume-Editing**
-*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im SPurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
+*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im Spurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
 
 * Editing: **Einfacheres Envelope-Handling**
 *Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
@@ -58,7 +58,7 @@ Ultraschall wird mit aktualisiertem StudioLink Plug-in in version 16.12.0. ausge
 *Mit dem Shortcut `cmd`+`x` wird ein Ripple-Cut über alle Spuren auch dann durchgeführt, wenn nur ein einzelnes Item ausgewählt wird. Schnittbereich ist dann Start- und Endpunkt dieses Items.*
 
 * Keymap: **Neues Layout für Tastatur-Shortcuts**
-*Eine Vielzahl an Shortcuts wurden überarbeitet und neu hinzugefügt um einen effizienteren Schnitt über Tastatur zu ermöglichen. In einem [.PDF](http://url.ultraschall-podcast.de/keymap) sind die neuen Shortcuts ausgewiesen, eigene Anpassungen können an einer mitgelieferten PowerPoint-Datei vorgenommen werden.*
+*Eine Vielzahl an Shortcuts wurden überarbeitet und neu hinzugefügt um einen effizienteren Schnitt über die Tastatur zu ermöglichen. In einem [.PDF](http://url.ultraschall-podcast.de/keymap) sind die neuen Shortcuts ausgewiesen, eigene Anpassungen können an einer mitgelieferten PowerPoint-Datei vorgenommen werden.*
 
 * Mastering: **Ultraschall Dynamics**
 *Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
@@ -81,11 +81,11 @@ Ultraschall wird mit aktualisiertem StudioLink Plug-in in version 16.12.0. ausge
 * Actions: **Colorpicker**
 *Ein nutzerfreundlicher Colorpicker (Shortcut: `alt`+`c`) hilft dabei, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
 
-* Actions: **Import von Kapitelmarken aus WAV Datein**
-*Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
+* Actions: **Import von Kapitelmarken aus WAV Dateien**
+*Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
 
 * Actions [Windows]: **Bugfix für Umlaute**
-*Es wurde ein Fehler behoben im Umgang mit Kapitelömarken die Umlaute enthalten. Danke an @jalea and Nico Buch für das aufspüren dieses Fehlers.*
+*Es wurde ein Fehler behoben im Umgang mit Kapitelmarken, die Umlaute enthalten. Danke an @jalea and Nico Buch für das Aufspüren dieses Fehlers.*
 
 
 ## 2.2.3 Gropius - 2016-August-25
