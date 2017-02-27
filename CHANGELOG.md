@@ -30,7 +30,7 @@
 * Installer: **LAME MP3 Encoder**
 *Ultraschall now includes the LAME MP3 Encoder 3.98.*
 
-# 2.2.3 Gropius - 2016-August-14
+## 2.2.3 Gropius - 2016-August-14
 
 * Soundboard: **Bugfix**
 *Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting this bug.*
