@@ -12,9 +12,6 @@
 
 ## 3.0.0 Miedinger - 2017-March-01
 
-* Soundboard: **Bugfix**
-*Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting this bug.*
-
 * Actions [Windows]: **Bugfix**
 *Fixed a bug that prevented Ultraschall from handling chapter markers correctly when the project name contained Umlauts. Thanks to @jalea and Nico Buch for reporting this bug.*
 
@@ -32,6 +29,11 @@
 
 * Installer: **LAME MP3 Encoder**
 *Ultraschall now includes the LAME MP3 Encoder 3.98.*
+
+# 2.2.3 Gropius - 2016-August-14
+
+* Soundboard: **Bugfix**
+*Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting this bug.*
 
 ## 2.2.2 Gropius - 2016-August-14
 
