@@ -10,7 +10,13 @@ GUI = dofile(script_path .. "ultraschall_gui_lib.lua")
 
 
 GUI.name = "Ultraschall 3"
-GUI.x, GUI.y, GUI.w, GUI.h = 200, 200, 680, 415
+GUI.w, GUI.h = 680, 415
+
+-- position always in the centre of the screen
+
+l, t, r, b = 0, 0, GUI.w, GUI.h
+__, __, screen_w, screen_h = reaper.my_getViewport(l, t, r, b, l, t, r, b, 1)
+GUI.x, GUI.y = (screen_w - GUI.w) / 2, (screen_h - GUI.h) / 2
 
 
 

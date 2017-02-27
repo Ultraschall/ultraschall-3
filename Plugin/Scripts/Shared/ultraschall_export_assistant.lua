@@ -47,8 +47,16 @@ end
 local info = debug.getinfo(1,'S');
 script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
 GUI = dofile(script_path .. "ultraschall_gui_lib.lua")
+
 GUI.name = "Ultraschall Export Assistant"
-GUI.x, GUI.y, GUI.w, GUI.h = 200, 200, 660, 440
+GUI.w, GUI.h = 660, 440
+
+-- position always in the centre of the screen
+
+l, t, r, b = 0, 0, GUI.w, GUI.h
+__, __, screen_w, screen_h = reaper.my_getViewport(l, t, r, b, l, t, r, b, 1)
+GUI.x, GUI.y = (screen_w - GUI.w) / 2, (screen_h - GUI.h) / 2
+
 y_offset = -30  -- move all content up/down
 
 -- OS BASED SEPARATOR
