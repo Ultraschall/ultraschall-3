@@ -4,10 +4,16 @@
 ## 3.0 Miedinger - 2017-März
 
 * Streaming **Studio-Link OnAir Streaming**
-*Durch die Unterstützung von Studio-Link OnAir kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
+*Durch die Unterstützung von Studio-Link OnAir (Version 17.02.0.) kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
 
 * Installer: **Update Check**
 *Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitäts-Check stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
+
+* Installer: **LAME MP3 Encoder**
+*Der LAME MP3 Encoder wird in Version 3.98. automatisch installiert.*
+
+* Studio Link: **Update**
+Ultraschall wird mit aktualisiertem StudioLink Plug-in in version 16.12.0. ausgeliefert.
 
 * Theme: **Ultraschall-Startscreen**
 *Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
@@ -77,6 +83,9 @@
 
 * Actions: **Import von Kapitelmarken aus WAV Datein**
 *Einige Aufnahmegeräte - etwa Zoom H5 und H6 - bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können Sie ausgelesen und in Ultraschall-Kapitelmarken verwandelt werden.*
+
+* Actions [Windows]: **Bugfix für Umlaute**
+*Es wurde ein Fehler behoben im Umgang mit Kapitelömarken die Umlaute enthalten. Danke an @jalea and Nico Buch für das aufspüren dieses Fehlers.*
 
 
 ## 2.2.3 Gropius - 2016-August-25
