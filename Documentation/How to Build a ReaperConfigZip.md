@@ -23,7 +23,7 @@ WARNING: hence the .ReaperConfigZip can only be produced from *within* REAPER, a
 
 ## Step 4: clean .ini files
 
-- delete custom nformation from several .ini files in the REAPER directory
+- delete custom information from several .ini files in the REAPER directory
 - list goes here...
 
 ## Step 5: Export ReaperConfigZip
