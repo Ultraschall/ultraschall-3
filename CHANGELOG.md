@@ -9,6 +9,9 @@
 * Installer: **Update Check**
 *Ultraschall will check upon launching whether a new version has been published. It will validate that compatible versions of plugin and theme are installed. If not it will warn you.*
 
+* Installer: **LAME MP3 Encoder**
+*The LAME MP3 Encoder in version 3.98.3 is automatically installed.*
+
 * Theme: **Ultraschall Start-up Screen**
 *A new start-up screen confirms the successful installation and provides initial hints and links to the support resources.*
 
