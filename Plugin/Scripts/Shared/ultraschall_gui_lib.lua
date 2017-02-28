@@ -73,12 +73,21 @@ local GUI = {}
 	aware of which format you're getting in return.
 		
 ]]--
+
+if reaper.GetOS()=="OSX32" or reaper.GetOS()=="OSX64" then
+	font_size = 14
+	font_face = "Helvetica"
+else
+	font_size = 16
+	font_face = "Arial"
+end
+
 GUI.fonts = {
 	
-	{"Helvetica", 14},	-- 1. Title
-	{"Helvetica", 14},	-- 2. Header
-	{"Helvetica", 14},	-- 3. Label
-	{"Helvetica", 14}		-- 4. Value
+	{font_face, font_size},	-- 1. Title
+	{font_face, font_size},	-- 2. Header
+	{font_face, font_size},	-- 3. Label
+	{font_face, font_size}	-- 4. Value
 	
 }
 
