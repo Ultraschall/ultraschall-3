@@ -28,7 +28,7 @@ Zur Handhabung der neuen Funktionen empfehlen wir den demnächst erscheinenden R
 
 ##Windows: Installation##
 
-1. **REAPER installieren:** [REAPER v5.34 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren - eine **Vollversion ist für 60 Tage kostenlos** testbar, danach werden 65 € fällig. Für Windows unterstützen wir nur die **64 Bit** Version.
+1. **REAPER installieren:** [REAPER v5.34 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an. Für Windows unterstützen wir nur die **64 Bit** Version.
 
 2. **Ultraschall laden:** Die [Ultraschall-3.0.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win) Datei laden. Den Installer starten und durchlaufen lassen.
 
