@@ -1,5 +1,6 @@
 # Ultraschall Changelog
 
+Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0 Miedinger - 2017-März
 

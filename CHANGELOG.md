@@ -1,5 +1,6 @@
 # Changelog
 
+Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0.0 Miedinger - 2017-March
 
