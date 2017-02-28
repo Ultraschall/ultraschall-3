@@ -67,7 +67,7 @@ Ultraschall wird mit aktualisiertem StudioLink Plug-in in version 16.12.0. ausge
 *Beim Anlegen neuer Spuren werden automatisch die Effekte ReaEQ (Equalizer) und JS: General Dynamics hinzugefügt, jedoch noch nicht aktiviert.*
 
 * Mastering: **Neues EQ-Preset**
-*Ein neues Ultraschall 3 Preset für den EQ eird mitgeliefert, dass weniger Bassanhebung als der Preset der 2er Version liefert und ein guter Startpunkt für die Headsets DT297 und HMC660 ist.*
+*Ein neues Ultraschall 3 Preset für den EQ eird mitgeliefert, dass weniger Bassanhebung als der Preset der 2er Version liefert und ein guter Startpunkt für die Headsets [DT297](https://www.thomann.de/de/beyerdynamic_dt297pv80_mk_ii.htm?partner_id=60110) und [HMC660](https://sendegate.de/t/profi-klang-fuer-alle-das-hmc660-headset-richtig-einsetzen-fuer-unter-100/3076?u=rstockm) ist.*
 
 * Mastering: **Export Assistent**
 *Ein neuer Export-Assistent, links unten in der `Export` Iconleiste zu finden, hilft dabei perfekte MP3 Dateien zu erzeugen. Die ID3V2 Elemente Metadaten (wie Titel, Podcast etc.), Episodenbild und Kapitelmarken werden in die produzierte MP3 Datei gespeichert.*
