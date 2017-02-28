@@ -1,14 +1,5 @@
 # Changelog
 
-## Syntax of the changelog
-
-* **Preferences:** Changes to Reaper's preferences dialog, which can be opened via `⌘`+`,` or through the `Reaper | Preferences` menu.
-* **Theme:** These changes affect the design or arrangement of elements (buttons, controllers, displays, etc.) of the theme we provide.
-* **Actions:** Adds new features and changes that affect the keyboard, mouse or trackpad bindings to actions or presets.
-* **Soundboard:** Features of our own Soundboard for audio snippets/shorts/inserts.
-* **Installer:** New features for the Mac installer which was introduced with Ultraschall 1.2.
-* **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
-* **Misc:** Anything that is left.
 
 ## 3.0.0 Miedinger - 2017-March-01
 
