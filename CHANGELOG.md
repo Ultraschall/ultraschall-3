@@ -63,10 +63,10 @@
 * Mastering: **New EQ Preset**
 *Ultraschall 3 includes a new EQ preset, that delivers less bass boost then the preset from version 2. It is a good starting point for the headsets DT297 and HMC660.*
 
-* Mastering: **Export Assistent**
+* Mastering: **Export Assistant**
 *`Export` can be found in the bottom left icon bar and helps you generate perfect MP3 files. The ID3V2 elements metadata (like title, podcast, etc.), episode images and chapter marks will be written to the MP3 files you produce.*
 
-* Mastering: **Rauschfilter verfügbar**
+* Mastering: **Noise Filter**
 *We've added the ReaFix effect to the effect favorites in order to fix common sound problems like hissing or electric hum. Its use is explained in the Ultraschall Dynamics video.*
 
 * Mastering: **Open Project Directory**
