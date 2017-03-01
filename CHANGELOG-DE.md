@@ -4,8 +4,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 ## 3.0 Miedinger - 2017-März
 
-* Streaming **Studio-Link OnAir Streaming**
-*Durch die Unterstützung von Studio-Link OnAir (Version 17.02.0.) kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
+* Streaming **Studio Link OnAir Streaming**
+*Durch die Unterstützung von Studio Link OnAir (Version 17.02.0.) kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
 
 * Installer: **Update Check**
 *Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitäts-Check stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
@@ -135,7 +135,7 @@ Zusätzlich gibt es unten links nun einen neuen Reiter für `Loudness`, mit dem 
 *Das Ultraschall-Soundboard steht nun mit vollem Funktionsumfang auch unter Windows zur Verfügung. Bei der Mac-Version wurde von VST auf AU Technik umgestellt.*
 
 * Installer: **StudioLink Plugin und standalone**
-*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.studio-link.de/standalone/installation-standalone.html) laden.*
+*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.Studio Link.de/standalone/installation-standalone.html) laden.*
 
 * Preferences: **Stop Funktion überarbeitet**
 *Die Stop-Funktion bei Aufnahmen wurde so überarbeitet, dass der Aufnahme-Cursor nach Stop an das Ende der bisherigen Aufnahme gesetzt wird. Dies verhindert, dass bei einem erneuten Start der Aufnahme kein alternativer Take angelegt wird, sondern die eigentliche Aufnahme fortgesetzt wird.*
