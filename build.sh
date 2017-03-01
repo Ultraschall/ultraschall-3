@@ -122,15 +122,15 @@ echo '
            set current view of container window to icon view
            set toolbar visible of container window to false
            set statusbar visible of container window to false
-           set the bounds of container window to {100, 100, 707, 510}
+           set the bounds of container window to {100, 100, 800, 509}
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.0.0-beta10.pkg" of container window to {50, 30}
+           set position of item "Ultraschall-3.0.0-beta11.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.0.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
-           set position of item "INSTALL.html" of container window to {175, 135}
-           set position of item "CHANGELOG.html" of container window to {300, 135}
+           set position of item "INSTALL.html" of container window to {200, 135}
+           set position of item "CHANGELOG.html" of container window to {350, 135}
            set position of item "UltraschallHub.pkg" of container window to {50, 220}
            set position of item "Add-ons" of container window to {200, 220}
            set position of item "Uninstall.command" of container window to {50, 320}
