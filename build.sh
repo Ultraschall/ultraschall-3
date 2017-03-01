@@ -126,7 +126,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.0.0-beta11.pkg" of container window to {50, 30}
+           set position of item "Ultraschall-3.0.0-beta12.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.0.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}
