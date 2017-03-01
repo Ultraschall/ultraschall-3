@@ -51,6 +51,10 @@ cp ../REAPER/Plugin/Resources/Ultraschall\ Reaper\ Splash\ Screen.png ./Payload/
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_3.0_MAC.ReaperConfigZip ./Payload/Ultraschall_3.0.ReaperConfigZip
 
+# Copy background image to payload directory
+mkdir ./Payload/.background
+cp ./Resources/backgroundv3.png ./Payload/.background/background.png
+
 # Create Ultraschall REAPER Extension package
 xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcodeproj -configuration Release
 pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
@@ -110,6 +114,36 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 
 # Create signature on removal script
 codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Remove\ legacy\ audio\ devices.command
+
+echo '
+   tell application "Finder"
+     tell disk "'$ULTRASCHALL_RELEASE_INTERMEDIATE'"
+           open
+           set current view of container window to icon view
+           set toolbar visible of container window to false
+           set statusbar visible of container window to false
+           set the bounds of container window to {100, 100, 707, 510}
+           set viewOptions to the icon view options of container window
+           set arrangement of viewOptions to not arranged
+           set background picture of viewOptions to file ".background:background.png"
+           set position of item "Ultraschall-3.0.0-beta10.pkg" of container window to {50, 30}
+           set position of item "Ultraschall_3.0.ReaperConfigZip" of container window to {200, 30}
+           set position of item "README.html" of container window to {50, 135}
+           set position of item "INSTALL.html" of container window to {175, 135}
+           set position of item "CHANGELOG.html" of container window to {300, 135}
+           set position of item "UltraschallHub.pkg" of container window to {50, 220}
+           set position of item "Add-ons" of container window to {200, 220}
+           set position of item "Uninstall.command" of container window to {50, 320}
+           set position of item "Remove legacy audio devices.command" of container window to {200, 320}
+           close
+           open
+           update without registering applications
+           delay 2
+     end tell
+   end tell
+' | osascript
+
+sync
 
 # Unmount installer disk image
 hdiutil detach ./$ULTRASCHALL_RELEASE_INTERMEDIATE
