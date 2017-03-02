@@ -43,41 +43,43 @@
 #include "ReaperEntryPoints.h"
 #include "SystemProperties.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
-   std::string data((const char*) ptr, (size_t) size * nmemb);
-   *((std::stringstream*) stream) << data << std::endl;
+   std::string data((const char *)ptr, (size_t)size * nmemb);
+   *((std::stringstream *)stream) << data << std::endl;
    return size * nmemb;
 }
-   
+
 double QueryCurrentDateTimeAsSeconds()
 {
    std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
    std::chrono::duration<double> ticks = currentTime.time_since_epoch();
    return ticks.count();
 }
-   
+
 void UpdateCheck()
 {
    bool updateCheckRequired = false;
    std::string lastUpdateCheck;
-   
+
    static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
-   if(HasSystemProperty(LAST_UPDATE_CHECK_NAME) == true)
+   if (HasSystemProperty(LAST_UPDATE_CHECK_NAME) == true)
    {
       lastUpdateCheck = GetSystemProperty(LAST_UPDATE_CHECK_NAME);
-      if(lastUpdateCheck.empty() == false)
+      if (lastUpdateCheck.empty() == false)
       {
          std::istringstream is(lastUpdateCheck);
          double lastUpdateCheckTimestamp = 0;
          is >> lastUpdateCheckTimestamp;
-         
+
          static const double delta = 60 * 60 * 24;
          const double now = QueryCurrentDateTimeAsSeconds();
-         if((now - lastUpdateCheckTimestamp) >= delta)
+         if ((now - lastUpdateCheckTimestamp) >= delta)
          {
             updateCheckRequired = true;
          }
@@ -87,41 +89,40 @@ void UpdateCheck()
    {
       updateCheckRequired = true;
    }
-   
-   if(updateCheckRequired == true)
+
+   if (updateCheckRequired == true)
    {
-      void* curl = curl_easy_init();
-      
+      void *curl = curl_easy_init();
+
       const std::string url = "https://ultraschall.io/ultraschall_release.txt";
       curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
       curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-      curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1); //Prevent "longjmp causes uninitialized stack frame" bug
+      curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
       curl_easy_setopt(curl, CURLOPT_ACCEPT_ENCODING, "deflate");
       std::stringstream out;
       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
       CURLcode res = curl_easy_perform(curl);
-      if(res == CURLE_OK)
+      if (res == CURLE_OK)
       {
          std::string remoteVersion = out.str();
          framework::trim(remoteVersion);
          const std::string localVersion = VersionHandler::PluginVersion();
-         if(remoteVersion > localVersion)
+         if (remoteVersion > localVersion)
          {
-            std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/download to download version ";
+            std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
             message += remoteVersion + ".";
             NotificationWindow::Show(message);
          }
       }
-      
+
       curl_easy_cleanup(curl);
-      
+
       std::ostringstream os;
       os << QueryCurrentDateTimeAsSeconds();
       lastUpdateCheck = os.str();
       SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
    }
 }
-
 }
 }
