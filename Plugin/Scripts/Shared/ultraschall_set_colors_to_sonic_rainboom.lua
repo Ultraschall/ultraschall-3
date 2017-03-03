@@ -50,7 +50,10 @@ max_color = 20  -- Number of colors to cycle
 
 curtheme = reaper.GetLastColorThemeFile()
 os = reaper.GetOS()
+nothingselected = false
+
 if (reaper.CountSelectedTracks(0) == 0) then  -- no track selected
+  nothingselected = true
   reaper.Main_OnCommand(40296,0)         -- select all tracks
 end
 
@@ -108,4 +111,6 @@ if countTracks > 0 then -- SELECTED TRACKS LOOP
     end
 end
 
--- reaper.Main_OnCommand(40297,0)         -- unselect all tracks
+if nothingselected == true then
+  reaper.Main_OnCommand(40297,0)         -- unselect all tracks
+end

@@ -537,11 +537,14 @@ function ColorPic:onmousedown()
 		-- step 3: assign colors to tracks
 		----------------------------------
 
+		nothingselected = false
 		countTracks = reaper.CountSelectedTracks(0)
 		countItems = reaper.CountSelectedMediaItems(0)
 
 		if countTracks == 0 and countItems == 0 then  -- no track or items selected
+			nothingselected = true
   			reaper.Main_OnCommand(40296,0)         -- select all tracks
+  			countTracks = reaper.CountSelectedTracks(0)
 		end
 		
 		if countTracks > 0 then -- SELECTED TRACKS LOOP
@@ -557,6 +560,10 @@ function ColorPic:onmousedown()
     			reaper.SetMediaItemInfo_Value(item, "I_CUSTOMCOLOR", col|16777216)
     			reaper.UpdateArrange()
     		end
+		end
+
+		if nothingselected == true then				-- restore selection state
+			reaper.Main_OnCommand(40297,0)         -- unselect all tracks
 		end
 
 	end

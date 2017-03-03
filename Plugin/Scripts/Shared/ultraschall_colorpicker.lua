@@ -13,16 +13,6 @@ GUI.name = "Ultraschall Color Picker"
 GUI.x, GUI.y, GUI.w, GUI.h = 100, 200, 235, 175
 
 
-
--- Example of a user function that we'll run from a button
-function userfunc(str)
-		
-	gfx.x, gfx.y = GUI.mouse.x, GUI.mouse.y
-	gfx.showmenu(str)
-	
-end
-
-
 -----------------------
 -- Step 1 : get started
 -----------------------
