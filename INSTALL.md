@@ -1,4 +1,4 @@
-# Installation instructions for Ultraschall 3.0 
+# Installation instructions for Ultraschall 3.0
 Please follow precisely!
 
 
@@ -8,11 +8,11 @@ Use this distribution at **your own risk since existing settings are generally o
 
 ## macOS 10.11 or newer
 
-1. **Download and install [Reaper 5.34 OS X 64-bit](http://www.reaper.fm/download.php)**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
+1. **Download and install [Reaper 5.35 OS X 64-bit](http://www.reaper.fm/download.php)**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
 
 2. **Download our [Ultraschall 3.0](http://url.ultraschall-podcast.de/us30) distribution** and open the `.dmg` file.
 
-3. **Start and run `Ultraschall-3.0.pkg`** from our `.dmg`. **Please note:** In case an error occurs near the end of the installation, please reboot macOS once and rerun our installer. It definitely works then.
+3. **Start and run `Ultraschall-3.0.0.pkg`** from our `.dmg`. **Please note:** In case an error occurs near the end of the installation, please reboot macOS once and rerun our installer. It definitely works then.
 
 4. **Optional - install UltraschallHub:** In case you want to use advanced Ultraschall features (like purely software-defined N-1 audio-routing for Skype recording), please install our successor to [Soundflower](https://rogueamoeba.com/freebies/soundflower/): `Ultraschall Hub.pkg`. This step is *not required* for using StudioLink or the soundboard.
 
@@ -24,9 +24,9 @@ In order to learn more about Ultraschall's functions and usage, we recommend the
 
 ### Windows
 
-1. **Download and run the [Reaper 5.34 Windows 64-bit](http://www.reaper.fm/download.php) installer**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
+1. **Download and run the [Reaper 5.35 Windows 64-bit](http://www.reaper.fm/download.php) installer**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
 
-2. **Download and run [Ultraschall_3.0.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win)**. 
+2. **Download and run [Ultraschall-3.0.0.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win)**.
 
 3. **Install REAPER Ultraschall configuration:** Start REAPER. A warning about the theme not being installed will be shown. Now drag our `Ultraschall REAPER Theme` from your Windows desktop into Reaper's main window. Let the import run complete. Now you can delete the file from your desktop.
 
