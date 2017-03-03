@@ -50,6 +50,10 @@ first_start = reaper.GetExtState("ultraschall_start", "firststart")
 startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
 
 
+if theme_version ~= tostring(theme_version_now) then 
+	error_msg = "Your ULTRASCHALL THEME is out of date. \n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
+end
+
 if plugin_version ~= theme_version then -- different versions of theme and plugin isntalled
 	error_msg = "There is a configuration mismatch between the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
 end
@@ -62,9 +66,7 @@ if theme_version == "" then
 	error_msg = "There are parts of the ULTRASCHALL THEME missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/" 
 end
 
-if theme_version ~= tostring(theme_version_now) then 
-	error_msg = "Your ULTRASCHALL THEME is out of date. \n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
-end
+
 
 if error_msg then
 		type = 0
