@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix
+<Wix 
    xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
    <!--
@@ -76,9 +76,7 @@
                </Component>
                <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                   <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
-                     <File Id="ColorSet" Name="Ultraschall Colorset.SWSColor" DiskId="1" Source="Payload\Addons\Ultraschall Colorset.SWSColor"/>
                      <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
-                     <File Id="SplashScreen" Name="Ultraschall Reaper Splash Screen.png" DiskId="1" Source="Payload\Addons\Ultraschall Reaper Splash Screen.png"/>
                      <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
                   </Component>
                </Directory>
