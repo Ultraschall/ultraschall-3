@@ -47,10 +47,6 @@ extern "C"
 	{
 		reaper::Application& application = reaper::Application::Instance();
 
-      char buffer[256] = {0};
-      sprintf(buffer, "_WIN32_WINNT=0x%2.2x", _WIN32_WINNT);
-      MessageBox(NULL, buffer, "Ultraschall", MB_OK);
-
 		if(pPluginInfo != 0)
 		{
          Trace0(TRACE_LEVEL_INFO, "Ultraschall is starting-up...");
