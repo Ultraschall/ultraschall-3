@@ -2,7 +2,7 @@
 
 Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-## 3.0.0 Miedinger - 2017-March-03
+## 3.0.1 Miedinger - 2017-March-05
 
 * Streaming **Studio Link OnAir Streaming**
 *Thanks to the support by Studio Link OnAir you can now start a livestream of your show with a single click. The signal attached to the mastermix will be streamed via a public web-interface. There, you can set stream properties and share the URL.*
