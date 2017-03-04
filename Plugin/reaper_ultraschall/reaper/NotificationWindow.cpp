@@ -38,7 +38,14 @@ void NotificationWindow::Show(const std::string& message, const bool isError)
    [NotificationPanel showWithMessage: [NSString stringWithUTF8String: message.c_str()]
                                asError: isError ? YES : NO];
 #else
-    MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+   if(reaper_api::GetMainHwnd != nullptr)
+   {
+      MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true)?MB_ICONERROR:MB_ICONINFORMATION);
+   }
+   else
+   {
+      ShowFatalErrorMessage();
+   }
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
 
@@ -49,9 +56,24 @@ void NotificationWindow::Show(const std::string& message, const std::string& inf
                                   info: [NSString stringWithUTF8String: information.c_str()]
                                   asError: isError ? YES : NO];
 #else
-    MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+   if(reaper_api::GetMainHwnd != nullptr)
+   {
+      MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true)?MB_ICONERROR:MB_ICONINFORMATION);
+   }
+   else
+   {
+      ShowFatalErrorMessage();
+   }
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
    
+void NotificationWindow::ShowFatalErrorMessage()
+{
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+#else
+   MessageBox(nullptr, "Ultraschall detected an incompatible version of REAPER and will therefore exit immediately!", "Fatal Error", MB_OK | MB_ICONHAND);
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+}
+
 }}
 

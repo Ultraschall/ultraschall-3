@@ -40,14 +40,18 @@ static const char *THEME_VERSION_KEY_NAME = "theme";
 static const char *PLUGIN_VERSION_KEY_NAME = "plugin";
 static const char *VERSION_VALUE_NAME = "20170226";
 
-void SetPluginVersion()
+bool QuerySetPluginVersion()
 {
+   bool result = false;
+
    if (reaper_api::HasExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
    {
       const std::string themeVersion = reaper_api::GetExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
       if (themeVersion == VERSION_VALUE_NAME)
       {
          reaper_api::SetExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
+         // quick sanity check
+         result = reaper_api::HasExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
       }
       else
       {
@@ -58,13 +62,19 @@ void SetPluginVersion()
              << VERSION_VALUE_NAME
              << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation guide on http://ultraschall.fm/install/";
          NotificationWindow::Show(str.str());
+
+         result = false;
       }
    }
    else
    {
       const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
       NotificationWindow::Show(str);
+
+      result = false;
    }
+
+   return result;
 }
 
 static const char *GLOBAL_SECTION_NAME = "ultraschall";

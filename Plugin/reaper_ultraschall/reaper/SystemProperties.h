@@ -30,7 +30,7 @@
 namespace ultraschall {
 namespace reaper {
 
-void SetPluginVersion();
+bool QuerySetPluginVersion();
    
 bool HasSystemProperty(const std::string& key);
 void SetSystemProperty(const std::string& key, const std::string& value, const bool save = false);

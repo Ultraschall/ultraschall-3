@@ -50,8 +50,13 @@ namespace reaper
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
+   PRECONDITION_RETURN(ptr != 0, 0);
+   PRECONDITION_RETURN(nmemb > 0, 0);
+   PRECONDITION_RETURN(stream != 0, 0);
+
    std::string data((const char *)ptr, (size_t)size * nmemb);
-   *((std::stringstream *)stream) << data << std::endl;
+   std::stringstream& os = *((std::stringstream *)stream);
+   os << data << std::endl;
    return size * nmemb;
 }
 
@@ -92,36 +97,44 @@ void UpdateCheck()
 
    if (updateCheckRequired == true)
    {
-      void *curl = curl_easy_init();
-
-      const std::string url = "https://ultraschall.io/ultraschall_release.txt";
-      curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-      curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-      curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
-      curl_easy_setopt(curl, CURLOPT_ACCEPT_ENCODING, "deflate");
-      std::stringstream out;
-      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-      curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
-      CURLcode res = curl_easy_perform(curl);
-      if (res == CURLE_OK)
+      void *curlHandle = curl_easy_init();
+      if(curlHandle != nullptr)
       {
-         std::string remoteVersion = out.str();
-         framework::trim(remoteVersion);
-         const std::string localVersion = VersionHandler::PluginVersion();
-         if (remoteVersion > localVersion)
+         const std::string url = "https://ultraschall.io/ultraschall_release.txt";
+         curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+         curl_easy_setopt(curlHandle, CURLOPT_FOLLOWLOCATION, 1L);
+         curl_easy_setopt(curlHandle, CURLOPT_NOSIGNAL, 1);
+         curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "deflate");
+         curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+
+         std::stringstream out;
+         curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
+
+         CURLcode res = curl_easy_perform(curlHandle);
+         if(res == CURLE_OK)
          {
-            std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
-            message += remoteVersion + ".";
-            NotificationWindow::Show(message);
+            std::string remoteVersion = out.str();
+            if(remoteVersion.empty() == false)
+            {
+               framework::trim(remoteVersion);
+               const std::string localVersion = VersionHandler::PluginVersion();
+               if(remoteVersion > localVersion)
+               {
+                  std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
+                  message += remoteVersion + ".";
+                  NotificationWindow::Show(message);
+               }
+            }
          }
+
+         curl_easy_cleanup(curlHandle);
+         curlHandle = nullptr;
+
+         std::ostringstream os;
+         os << QueryCurrentDateTimeAsSeconds();
+         lastUpdateCheck = os.str();
+         SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
       }
-
-      curl_easy_cleanup(curl);
-
-      std::ostringstream os;
-      os << QueryCurrentDateTimeAsSeconds();
-      lastUpdateCheck = os.str();
-      SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
    }
 }
 }

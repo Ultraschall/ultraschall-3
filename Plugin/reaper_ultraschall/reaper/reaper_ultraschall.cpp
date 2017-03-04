@@ -54,44 +54,51 @@ extern "C"
 			static bool started = false;
 			if(false == started)
 			{
-				try
-				{
-					reaper::ReaperEntryPoints::Setup(instance, pPluginInfo);
-               reaper::SetPluginVersion();
-               
-					if(ServiceSucceeded(application.Configure()))
-					{
-						if(ServiceSucceeded(application.Start()))
-						{
-                     application.RegisterCustomAction<reaper::AboutAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
+            if(reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
+            {
+               Trace0(TRACE_LEVEL_INFO, "REAPER connection established.");
 
-							application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
+               if(reaper::QuerySetPluginVersion() == true)
+               {
+                  Trace0(TRACE_LEVEL_INFO, "Theme/Plugin versions successfully matched.");
 
-                     application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersAction' activated.");
-                     
-                     application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
+                  if(ServiceSucceeded(application.Configure()))
+                  {
+                     if(ServiceSucceeded(application.Start()))
+                     {
+                        application.RegisterCustomAction<reaper::AboutAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
 
-                     application.RegisterCustomAction<reaper::InsertMP3ChapterMarkersAction>();
-                     Trace0(TRACE_LEVEL_INFO, "'InsertMP3ChapterMarkersAction' activated.");
-}
-					}
-				}
-				catch(reaper::InvalidEntryPointException&)
-				{
-					std::string errorReason = "\
-You are trying to load a version of REAPER that is not compatible to Ultraschall 2.";
+                        application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
 
-					reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
-					return 0;
-				}
+                        application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersAction' activated.");
 
-            Trace0(TRACE_LEVEL_INFO, "Ultraschall is running.");
+                        application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
 
-				started = true;
+                        application.RegisterCustomAction<reaper::InsertMP3ChapterMarkersAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'InsertMP3ChapterMarkersAction' activated.");
+
+                        Trace0(TRACE_LEVEL_INFO, "Ultraschall is running.");
+
+                        started = true;
+                     }
+                  }
+               }
+               else
+               {
+                  Trace0(TRACE_LEVEL_ERROR, "Failed to match Theme/Plugin versions.");
+               }
+
+            }
+            else
+            {
+               Trace0(TRACE_LEVEL_ERROR, "Failed to establish REAPER connection.");
+               std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
+               reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
+            }
 			}
 
          Trace0(TRACE_LEVEL_INFO, "done.");

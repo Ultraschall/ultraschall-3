@@ -22,7 +22,7 @@
     <ProjectGuid>{72A2A1C0-EB84-47A4-99A5-79E5B969F814}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>reaper_ultraschall</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -48,7 +48,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -102,7 +102,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -110,7 +110,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;libz-static-x64-debug.lib;libcurld.lib;tag.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>version.lib;libz-static-x64-debug.lib;libcurl-static-x64-debug.lib;libtag-static-x64-debug.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(OutDir)$(TargetName)$(TargetExt) "C:\Program Files\REAPER (x64)\Plugins"</Command>
@@ -144,7 +144,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -154,7 +154,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;libz-static-x64-release.lib;libcurl.lib;tag.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>version.lib;libz-static-x64-release.lib;libcurl-static-x64-release.lib;libtag-static-x64-release.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>

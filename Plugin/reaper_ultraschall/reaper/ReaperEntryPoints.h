@@ -75,9 +75,9 @@ class ReaperEntryPoints
 public:
    static REAPER_PLUGIN_HINSTANCE instance_;
    
-   static void Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+   static bool Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 private:
-   ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+   static bool LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 };
 
 class ReaperProjectEntryPoints

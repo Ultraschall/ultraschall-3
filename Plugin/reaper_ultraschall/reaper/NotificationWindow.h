@@ -35,6 +35,9 @@ class NotificationWindow
 public:
     static void Show(const std::string& message, const bool isError = false);
     static void Show(const std::string& message, const std::string& info, const bool isError = false);
+
+private:
+   static void ShowFatalErrorMessage();
 };
 
 }}

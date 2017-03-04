@@ -50,7 +50,7 @@ void TraceVa_0(const TraceLevel level, const char* format, va_list args)
    _vsnprintf_s(buffer, MAX_TRACE_MESSAGE_SIZE, format, args);
 
    char message[MAX_TRACE_MESSAGE_SIZE * 2] = {0};
-   _snprintf_s(message, MAX_TRACE_MESSAGE_SIZE * 2, "ULTRASCHALL: %s",  buffer);
+   _snprintf_s(message, MAX_TRACE_MESSAGE_SIZE * 2, "ULTRASCHALL: %s\n",  buffer);
 
    OutputDebugStringA(message);
 #else
@@ -76,7 +76,7 @@ void TraceVa_1(const TraceLevel level, const char* file, const int line, const c
    _vsnprintf_s(buffer, MAX_TRACE_MESSAGE_SIZE, format, args);
 
    char message[MAX_TRACE_MESSAGE_SIZE * 2] = { 0 };
-   _snprintf_s(message, MAX_TRACE_MESSAGE_SIZE * 2, "ULTRASCHALL: %s(%d): %s", file, line, buffer);
+   _snprintf_s(message, MAX_TRACE_MESSAGE_SIZE * 2, "ULTRASCHALL: %s(%d): %s\n", file, line, buffer);
 
    OutputDebugStringA(message);
 #else

@@ -23,7 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ReaperEntryPoints.h"
-#include "InvalidEntryPointException.h"
+#include "TraceUtilities.h"
 
 #include "Application.h"
 #include "ProjectManager.h"
@@ -32,6 +32,7 @@
 namespace reaper_api 
 {
    HWND (*GetMainHwnd)();
+
    int (*plugin_register)(const char* name, void* infostruct);
    
    const char* (*GetAppVersion)();
@@ -86,66 +87,88 @@ static bool OnStopCommand(int commandId, int)
    return Application::OnStopCommand(commandId);
 }
 
-void ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const char* entryPointName)
+bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const std::string& entryPointName)
 {
-   (*((void **)&(entryPoint)) = (void *)ppi->GetFunc(entryPointName));
-   if(0 == entryPoint)
+   PRECONDITION_RETURN(ppi != nullptr, false);
+   PRECONDITION_RETURN(entryPointName.empty() == false, false);
+
+   (*((void **)&(entryPoint)) = (void *)ppi->GetFunc(entryPointName.c_str()));
+   if(entryPoint != nullptr)
    {
-      throw InvalidEntryPointException(entryPointName);
+      return true;
+   }
+   else
+   {
+      Trace1(TRACE_LEVEL_ERROR, "Failed to load entry point: \"%s\"", entryPointName.c_str());
+
+      return false;
    }
 }
-   
-ReaperEntryPoints::ReaperEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* ppi)
+
+#define LOAD_AND_VERIFY_REAPER_ENTRY_POINT(__rp__, __ep__, __ep_name__) \
+{ \
+const bool __ep_loaded__ = ImportReaperEntryPoint(__rp__, (void*&)__ep__, __ep_name__); \
+if((__ep_loaded__ == false) || (nullptr == __ep__)) \
+{ \
+Trace1(TRACE_LEVEL_ERROR, "FAILED to load REAPER entry point \"%s\".", __ep_name__); \
+return false; \
+} \
+else \
+{ \
+Trace1(TRACE_LEVEL_DEBUG, "Successfully loaded REAPER entry point \"%s\".", __ep_name__); \
+} \
+}
+
+bool ReaperEntryPoints::LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* ppi)
 {
+   PRECONDITION_RETURN(instance != nullptr, false);
+   PRECONDITION_RETURN(ppi != nullptr, false);
+
    instance_ = instance;
 
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetMainHwnd, "GetMainHwnd");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::plugin_register, "plugin_register");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetAppVersion, "GetAppVersion");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjectPath, "GetProjectPath");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjectPathEx, "GetProjectPathEx");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjects, "EnumProjects");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::format_timestr_pos, "format_timestr_pos");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::parse_timestr, "parse_timestr");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::PreventUIRefresh, "PreventUIRefresh");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::CountProjectMarkers, "CountProjectMarkers");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers, "EnumProjectMarkers");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers2, "EnumProjectMarkers2");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::EnumProjectMarkers3, "EnumProjectMarkers3");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::AddProjectMarker2, "AddProjectMarker2");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteProjectMarker, "DeleteProjectMarker");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetLastMarkerAndCurRegion, "GetLastMarkerAndCurRegion");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteProjectMarkerByIndex, "DeleteProjectMarkerByIndex");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayStateEx, "GetPlayStateEx");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetCursorPositionEx, "GetCursorPositionEx");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetPlayPositionEx, "GetPlayPositionEx");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetSetProjectNotes, "GetSetProjectNotes");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::SetProjExtState, "SetProjExtState");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetProjExtState, "GetProjExtState");
-
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::HasExtState, "HasExtState");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::SetExtState, "SetExtState");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::GetExtState, "GetExtState");
-   ImportReaperEntryPoint(ppi, (void*&)reaper_api::DeleteExtState, "DeleteExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetMainHwnd, "GetMainHwnd");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::plugin_register, "plugin_register");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetAppVersion, "GetAppVersion");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetProjectPath, "GetProjectPath");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetProjectPathEx, "GetProjectPathEx");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::EnumProjects, "EnumProjects");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::format_timestr_pos, "format_timestr_pos");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::parse_timestr, "parse_timestr");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::PreventUIRefresh, "PreventUIRefresh");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::CountProjectMarkers, "CountProjectMarkers");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::EnumProjectMarkers, "EnumProjectMarkers");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::EnumProjectMarkers2, "EnumProjectMarkers2");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::EnumProjectMarkers3, "EnumProjectMarkers3");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::AddProjectMarker2, "AddProjectMarker2");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::DeleteProjectMarker, "DeleteProjectMarker");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetLastMarkerAndCurRegion, "GetLastMarkerAndCurRegion");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::DeleteProjectMarkerByIndex, "DeleteProjectMarkerByIndex");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetPlayStateEx, "GetPlayStateEx");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetCursorPositionEx, "GetCursorPositionEx");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetPlayPositionEx, "GetPlayPositionEx");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetSetProjectNotes, "GetSetProjectNotes");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::SetProjExtState, "SetProjExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetProjExtState, "GetProjExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::HasExtState, "HasExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::SetExtState, "SetExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetExtState, "GetExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::DeleteExtState, "DeleteExtState");
 
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
    reaper_api::plugin_register("hookcommand", (void*)OnStartCommand);
    reaper_api::plugin_register("hookpostcommand", (void*)OnStopCommand);
+
+   return true;
 }
 
 REAPER_PLUGIN_HINSTANCE ReaperEntryPoints::instance_ = 0;
 
-void ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
+bool ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
-   static ReaperEntryPoints entryPoints(instance, pPluginInfo);
+   const bool result = ReaperEntryPoints::LoadEntryPoints(instance, pPluginInfo);
    static ReaperProjectEntryPoints projectEntryPointes;
+
+   return result;
 }
 
 static bool ProcessExtensionLine(const char *line, ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
