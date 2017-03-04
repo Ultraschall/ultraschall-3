@@ -75,7 +75,7 @@ end
 --reaper.ShowConsoleMsg("") --clear console
 dialog_ret_vals = notes2csv() --default values
 
-retval, result = reaper.GetUserInputs("Edit ID3 Podcast Metadata", 6, "Title (no comma allowed):,Artist (no comma allowed):,Album (Podcast, no comma allowed):,Year (no comma allowed):,Genre (no comma allowed):,Comment (you may use comma):", dialog_ret_vals)
+retval, result = reaper.GetUserInputs("Edit ID3 Podcast Metadata", 6, "Title (no comma allowed):,Artist (no comma allowed):,Album (Podcast, no comma allowed):,Year (no comma allowed):,Genre (no comma allowed):,Comment (no comma allowed):", dialog_ret_vals)
 if retval == true then
   --step through field 1-5 and check if the numer of " is even. Add a " to the end if needed.
   pos=0
