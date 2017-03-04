@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-   <title>Ultraschall 3.0.0</title>
+   <title>Ultraschall 3.0.1 beta1</title>
    <organization>fm.ultraschall</organization>
    <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
    <domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
@@ -13,7 +13,7 @@
    <pkg-ref id="fm.ultraschall.Soundboard.Extras" version="3.0.0">UltraschallSoundboardExtras.pkg</pkg-ref>
    <pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
    <pkg-ref id="net.sf.lame.Encoder" version="3.98.3">LAME.pkg</pkg-ref>
-   <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.0.0">UltraschallPluginExtension.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.0.1">UltraschallPluginExtension.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Resources" version="3.0.0">UltraschallResources.pkg</pkg-ref>
    <pkg-ref id="com.mj-s.sws" version="2.8.3">SWS_Extension-2.8.3.pkg</pkg-ref>
    <pkg-ref id="com.mj-s.sws.Scripts" version="2.8.3">SWS_ExtensionScripts-2.8.3.pkg</pkg-ref>
