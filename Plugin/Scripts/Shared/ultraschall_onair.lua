@@ -77,7 +77,7 @@ else
 	end
 
 
-	if state == 0 then                                                                  --streaming is off: start streaming
+	if state ~= 1 then                                                                  --streaming is off: start streaming
 		reaper.SetToggleCommandState(sec, cmd, 1)
 		test2 = reaper.TrackFX_SetEnabled(m, fx_slot, true)
 	else                                                                                --streaming is on: stop streaming
