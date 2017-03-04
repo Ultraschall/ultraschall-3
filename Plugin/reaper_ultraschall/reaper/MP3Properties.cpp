@@ -217,7 +217,7 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
    PRECONDITION_RETURN(properties.empty() == false, false);
    std::vector<std::string> tokens = framework::split(properties, '\n');
    PRECONDITION_RETURN(tokens.empty() == false, false);
-   PRECONDITION_RETURN(tokens.size() == 6, false);
+   PRECONDITION_RETURN(tokens.size() >= 5, false);
    
    bool success = false;
    
@@ -234,7 +234,11 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
          InsertSingleTextFrame(tag, "TALB", tokens[2]); // album
          InsertSingleTextFrame(tag, "TDRC", tokens[3]); // date
          InsertSingleTextFrame(tag, "TCON", tokens[4]); // genre
-         InsertSingleCommentsFrame(tag, "COMM", tokens[5]); // comment
+         
+         if(tokens.size() > 5)
+         {
+            InsertSingleCommentsFrame(tag, "COMM", tokens[5]); // comment
+         }
          
          success = SaveMP3File(mp3);
       }
