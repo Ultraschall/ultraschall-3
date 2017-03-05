@@ -66,10 +66,33 @@ if tracks_count > 0 then
 	end 														-- ENDLOOP through tracks
 end
 
+-----------------------------
+-- remove StudioLink OnAir FX from Master
+-----------------------------
 
-txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All Soundboard FX (if existent) have been removed\n\nYou may proceed editing your project!"
+m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
+os = reaper.GetOS()
+sec = tonumber(reaper.GetExtState("ultraschall_gui", "sec"))
+
+if string.match(os, "OSX") then 
+	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+else	-- Windows
+	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+end
+
+reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
+reaper.SetToggleCommandState(sec, 55695, 0)		--set OnAir Button off
+reaper.RefreshToolbar2(sec, 55695)
+
+-----------------------------
+-- Display Info
+-----------------------------
+
+txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All Soundboard FX (if existent) have been removed\n- Studio Link OnAir Streaming (if active) has been stopped\n\nYou may proceed editing your project!"
 title = "OK! Your project is now ready for editing:"
 result = reaper.ShowMessageBox( txt, title, 0 )
+
+-----------------------------
 
 reaper.Undo_EndBlock("Prepare all tracks for editing", -1) -- End of the undo block. Leave it at the bottom of your main function.
 

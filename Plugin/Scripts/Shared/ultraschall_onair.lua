@@ -32,7 +32,6 @@ end
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
 state = reaper.GetToggleCommandStateEx(sec, cmd)                           --get state of the OnAir Button: on (1) /off (0)
 
-
 playstate = reaper.GetPlayState()
 -- reaper.ShowConsoleMsg(state)
 if playstate == 5 and state == 1 then -- is recording and stream active
