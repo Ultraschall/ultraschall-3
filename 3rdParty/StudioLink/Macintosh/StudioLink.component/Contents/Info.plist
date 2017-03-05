@@ -18,7 +18,7 @@
 			<key>type</key>
 			<string>aufx</string>
 			<key>version</key>
-			<integer>1114625</integer>
+			<integer>1051648</integer>
 		</dict>
 	</array>
 	<key>BuildMachineOSBuild</key>
@@ -34,11 +34,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>17.02.1</string>
+	<string>16.12.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>17.02.1</string>
+	<string>16.12.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
