@@ -26,7 +26,7 @@ In order to learn more about Ultraschall's functions and usage, we recommend the
 
 1. **Download and run the [Reaper 5.35 Windows 64-bit](http://www.reaper.fm/download.php) installer**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
 
-2. **Download and run [Ultraschall-3.0.0.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win)**.
+2. **Download and run [Ultraschall-3.0.1.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win)**.
 
 3. **Install REAPER Ultraschall configuration:** Start REAPER. A warning about the theme not being installed will be shown. Now drag our `Ultraschall REAPER Theme` from your Windows desktop into Reaper's main window. Let the import run complete. Now you can delete the file from your desktop.
 
