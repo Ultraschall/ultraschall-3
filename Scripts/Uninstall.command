@@ -354,6 +354,16 @@ if [ -d /Library/Application\ Support/Ultraschall/TouchOSC ]; then
 fi
 
 # Uninstall Ultraschall StudioLink Audio Unit from user domain
+if [ -d ~/Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component ]; then
+	rm -rf ~/Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component
+fi
+
+# Uninstall Ultraschall StudioLink Audio Unit from system domain
+if [ -d /Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component ]; then
+	sudo rm -rf /Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component
+fi
+
+# Uninstall Ultraschall StudioLink Audio Unit from user domain
 if [ -d ~/Library/Audio/Plug-Ins/Components/StudioLink.component ]; then
 	rm -rf ~/Library/Audio/Plug-Ins/Components/StudioLink.component
 fi
