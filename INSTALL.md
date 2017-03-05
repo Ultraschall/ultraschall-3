@@ -12,7 +12,7 @@ Use this distribution at **your own risk since existing settings are generally o
 
 2. **Download our [Ultraschall 3.0](http://url.ultraschall-podcast.de/us30) distribution** and open the `.dmg` file.
 
-3. **Start and run `Ultraschall-3.0.0.pkg`** from our `.dmg`. **Please note:** In case an error occurs near the end of the installation, please reboot macOS once and rerun our installer. It definitely works then.
+3. **Start and run `Ultraschall-3.0.1.pkg`** from our `.dmg`. **Please note:** In case an error occurs near the end of the installation, please reboot macOS once and rerun our installer. It definitely works then.
 
 4. **Optional - install UltraschallHub:** In case you want to use advanced Ultraschall features (like purely software-defined N-1 audio-routing for Skype recording), please install our successor to [Soundflower](https://rogueamoeba.com/freebies/soundflower/): `Ultraschall Hub.pkg`. This step is *not required* for using StudioLink or the soundboard.
 

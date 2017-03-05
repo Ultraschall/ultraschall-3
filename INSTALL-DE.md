@@ -14,7 +14,7 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 
 2. **Ultraschall laden:** [unsere 3.0 Distribution](http://url.ultraschall-podcast.de/us30) laden und das `.dmg` starten
 
-3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-3.0.0.pkg` starten und durchlaufen lassen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal macOS neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-3.0.1.pkg` starten und durchlaufen lassen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal macOS neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
 
 4. **Optional - UltraschallHub installieren:** Wenn man in Ultraschall erweiterte Features wie eine rein in Software modellierte Skype N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices (ehemals: [Soundflower](https://rogueamoeba.com/freebies/soundflower/)) Voraussetzung. Hierzu das `UltraschallHub.pkg` durchlaufen lassen. Für den Einsatz von StudioLink oder Soundboard in Ultraschall ist dieser Schritt *nicht* notwendig und kann übersprungen werden.
 
