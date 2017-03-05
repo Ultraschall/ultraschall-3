@@ -97,9 +97,18 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
+<<<<<<< HEAD
    NotificationWindow::Show("About Ultraschall 3.0.1 \"Miedinger\"...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }
 }
 }
+=======
+   NotificationWindow::Show("About Ultraschall 2.2.2 \"Gropius\"...", message1 + message2);
+
+   return SERVICE_SUCCESS;
+}
+}
+}
+>>>>>>> origin/master
