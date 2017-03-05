@@ -38,4 +38,12 @@ else
 	past_position = current_position -- ignore for the first 2 minutes
 end
 
-reaper.AddProjectMarker2(0, false, past_position, 0, "_Past", 0, 0x6666aa|0x1000000) -- set blue past-marker
+os = reaper.GetOS()
+if string.match(os, "OSX") then 
+	color = 0x6666aa|0x1000000
+else
+	color = 0xaa6666|0x1000000
+end
+
+
+reaper.AddProjectMarker2(0, false, past_position, 0, "_Past", 0, color) -- set blue past-marker

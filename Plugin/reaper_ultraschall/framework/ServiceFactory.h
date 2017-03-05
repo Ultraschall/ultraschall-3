@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,12 @@ public:
    ServiceFactory();
    virtual ~ServiceFactory();
 
-   typedef const ServiceStatus (*CREATE_SERVICE_FUNCTION)(IService*&);
-   const ServiceStatus RegisterService(const std::string& name, const CREATE_SERVICE_FUNCTION pfn);
+   typedef ServiceStatus (*CREATE_SERVICE_FUNCTION)(IService*&);
+   ServiceStatus RegisterService(const std::string& name, const CREATE_SERVICE_FUNCTION pfn);
    void UnregisterService(const std::string& name);
    void UnregisterAllServices();
 
-   const ServiceStatus CreateService(const std::string& name, IService*& pService) const;
+   ServiceStatus CreateService(const std::string& name, IService*& pService) const;
 
 private:
    ServiceFactory(const ServiceFactory&);

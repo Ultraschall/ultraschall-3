@@ -70,7 +70,7 @@ void ServiceManager::ReleaseAllServices()
    }
 }
 
-const ServiceStatus ServiceManager::AcquireService(const std::string& name, IService*& pService) const
+ServiceStatus ServiceManager::AcquireService(const std::string& name, IService*& pService) const
 {
    PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
 

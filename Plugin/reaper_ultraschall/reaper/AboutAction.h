@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,52 +26,40 @@
 #define __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__
 
 #include <string>
-#include <ResourceManager.h>
-#include "CustomAction.h"
+#include <ResourceId.h>
 
-namespace ultraschall { namespace reaper {
+#include "ICustomAction.h"
+
+namespace ultraschall { 
+namespace reaper {
    
-class AboutAction : public CustomAction
+class AboutAction : public ICustomAction
 {
 public:
-   static const char* UniqueId();
-   
-   static const ServiceStatus CreateCustomAction(ICustomAction*& pCustomAction)
+   static const char* UniqueId()
    {
-      pCustomAction = new AboutAction();
-      PRECONDITION_RETURN(pCustomAction != 0, SERVICE_FAILURE);
-      return SERVICE_SUCCESS;
+      return "ULTRASCHALL_ABOUT_ULTRASCHALL";
    }
    
-   virtual const char* LocalizedName() const override
+   static const char* UniqueName()
    {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      return resourceManager.GetLocalizedString(actionNameId_);
+      return "ULTRASCHALL: About Ultraschall...";
    }
-   
-   virtual const ServiceStatus Execute() override;
 
-protected:
-   virtual ~AboutAction()
+   static ICustomAction* CreateCustomAction()
    {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      resourceManager.UnregisterLocalizedString(actionNameId_);
+      return new AboutAction();
    }
    
+   virtual ServiceStatus Execute() override;
+
 private:
    AboutAction()
    {
-      framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-      ServiceStatus status = resourceManager.RegisterLocalizedString(actionNameId_);
-      if(ServiceSucceeded(status))
-      {
-         resourceManager.SetLocalizedString(actionNameId_, "en-EN", "ULTRASCHALL: About Ultraschall...");
-      }
    }
-
-   framework::ResourceId actionNameId_;
 };
    
-}}
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ABOUT_ULTRASCHALL_ACTION_H_INCL__

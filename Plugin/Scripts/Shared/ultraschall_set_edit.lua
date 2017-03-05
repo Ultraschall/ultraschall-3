@@ -31,5 +31,12 @@ else
 	current_position = reaper.GetPlayPosition() -- Position of play-cursor
 end
 
-reaper.AddProjectMarker2(0, false, current_position, 0, "_Edit", 0, 0xFF0000|0x1000000) -- set red edit-marker
+os = reaper.GetOS()
+if string.match(os, "OSX") then 
+	color = 0xFF0000|0x1000000
+else
+	color = 0x0000FF|0x1000000
+end
+
+reaper.AddProjectMarker2(0, false, current_position, 0, "_Edit", 0, color) -- set red edit-marker
 

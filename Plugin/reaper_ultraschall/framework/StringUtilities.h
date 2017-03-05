@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,56 +33,76 @@
 
 #include <Framework.h>
 
-namespace ultraschall { namespace framework {
-   
+namespace ultraschall
+{
+namespace framework
+{
+
 #define _MAKE_TEXT(str) #str
 #define MAKE_TEXT(str) _MAKE_TEXT(str)
 
-inline const std::vector<std::string> split(const std::string& input, const char delimiter)
+inline std::vector<std::string> split(const std::string &input, const char delimiter)
 {
    std::vector<std::string> tokens;
    std::stringstream stream(input);
    std::string token;
-   
+
    while (std::getline(stream, token, delimiter))
    {
       tokens.push_back(token);
    }
-   
+
    return tokens;
 }
-   
+
 // trim from start
-static inline std::string &ltrim(std::string &s) {
+static inline std::string &ltrim(std::string &s)
+{
    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
    return s;
 }
 
 // trim from end
-static inline std::string &rtrim(std::string &s) {
+static inline std::string &rtrim(std::string &s)
+{
    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
    return s;
 }
 
 // trim from both ends
-static inline std::string &trim(std::string &s) {
+static inline std::string &trim(std::string &s)
+{
    return ltrim(rtrim(s));
 }
 
-static inline void replace(std::string& str, const std::string& source, const std::string& target)
+static inline void replace(std::string &str, const std::string &source, const std::string &target)
 {
    size_t start_pos = 0;
-   while((start_pos = str.find(source, start_pos)) != std::string::npos)
+   while ((start_pos = str.find(source, start_pos)) != std::string::npos)
    {
       str.replace(start_pos, source.length(), target);
       start_pos += target.length();
    }
 }
- 
-std::wstring MakeUTF16String(const std::string& src);
 
-std::string MakeUTF8String(const std::wstring& src);
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+typedef char16_t UnicodeChar;
+typedef std::u16string UnicodeString;
+#else
+typedef wchar_t UnicodeChar;
+typedef std::wstring UnicodeString;
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-}}
+UnicodeString MakeUnicodeString(const std::string &src);
+
+UnicodeString MakeUnicodeStringWithBOM(const std::string &src);
+
+std::string MakeUTF8String(const UnicodeString &src);
+
+std::string AnsiStringToUnicodeString(const std::string &ansiString);
+
+std::string UnicodeStringToAnsiString(const std::string &unicodeString, int codepage = 0);
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__

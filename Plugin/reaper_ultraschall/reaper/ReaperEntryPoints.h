@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,14 +39,33 @@
 #define REAPERAPI_WANT_plugin_register
 #define REAPERAPI_WANT_GetAppVersion
 #define REAPERAPI_WANT_GetProjectPath
+#define REAPERAPI_WANT_GetProjectPathEx
 #define REAPERAPI_WANT_EnumProjects
 #define REAPERAPI_WANT_format_timestr_pos
 #define REAPERAPI_WANT_parse_timestr
+#define REAPERAPI_WANT_PreventUIRefresh
+#define REAPERAPI_WANT_CountProjectMarkers
 #define REAPERAPI_WANT_EnumProjectMarkers
+#define REAPERAPI_WANT_EnumProjectMarkers2
+#define REAPERAPI_WANT_EnumProjectMarkers3
 #define REAPERAPI_WANT_AddProjectMarker2
+#define REAPERAPI_WANT_SetProjectMarker3
 #define REAPERAPI_WANT_DeleteProjectMarker
+#define REAPERAPI_WANT_GetPlayStateEx
+#define REAPERAPI_WANT_GetCursorPositionEx
+#define REAPERAPI_WANT_GetPlayPositionEx
+#define REAPERAPI_WANT_GetLastMarkerAndCurRegion
+#define REAPERAPI_WANT_DeleteProjectMarkerByIndex
+#define REAPERAPI_WANT_GetSetProjectNotes
+#define REAPERAPI_WANT_SetProjExtState
+#define REAPERAPI_WANT_GetProjExtState
+#define REAPERAPI_WANT_HasExtState
+#define REAPERAPI_WANT_SetExtState
+#define REAPERAPI_WANT_GetExtState
+#define REAPERAPI_WANT_DeleteExtState
+
 namespace reaper_api {
-#include <reaper_plugin_functions.h>
+#include "reaper_plugin_functions.h"
 }
 
 namespace ultraschall { namespace reaper {
@@ -54,10 +73,20 @@ namespace ultraschall { namespace reaper {
 class ReaperEntryPoints
 {
 public:
-   static void Setup(reaper_plugin_info_t* pPluginInfo);
+   static REAPER_PLUGIN_HINSTANCE instance_;
    
+   static bool Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 private:
-   ReaperEntryPoints(reaper_plugin_info_t* pPluginInfo);
+   static bool LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+};
+
+class ReaperProjectEntryPoints
+{
+public:
+   ReaperProjectEntryPoints();
+
+private:
+   static project_config_extension_t projectConfigExtension_;
 };
 
 }}

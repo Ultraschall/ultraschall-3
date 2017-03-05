@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,47 @@
 #ifndef __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
-#include <SharedObject.h>
-#include "CustomActionFactory.h"
+#include <IUnknown.h>
+#include <ServiceStatus.h>
+
+#include "ProjectManager.h"
 
 namespace framework = ultraschall::framework;
 
 namespace ultraschall { namespace reaper {
 
-class ICustomAction : public framework::SharedObject
+class ICustomAction : public framework::IUnknown
 {
 public:
-   virtual const char* LocalizedName() const = 0;
-   virtual const ServiceStatus Execute() = 0;
-   
+   static bool ValidateCustomActionId(const int32_t id)
+   {
+      return id != INVALID_CUSTOM_ACTION_ID;
+   }
+
+   virtual ServiceStatus Execute() = 0;
+
+   static bool RegisterProject()
+   {
+      bool registered = false;
+
+      ProjectManager& projectManager = ProjectManager::Instance();
+      ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
+      if(currentProjectReference != nullptr)
+      {
+         const Project& currentProject = projectManager.LookupProject(currentProjectReference);
+         if(Project::Validate(currentProject) == false)
+         {
+            registered = projectManager.InsertProject(currentProjectReference);
+         }
+         else
+         {
+            registered = true;
+         }
+      }
+
+      return registered;
+   }
+
 protected:
    ICustomAction()
    {
@@ -50,6 +78,8 @@ protected:
 private:
    ICustomAction(const ICustomAction&);
    ICustomAction& operator=(const ICustomAction&);
+
+   static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
 }}

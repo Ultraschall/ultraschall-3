@@ -1,14 +1,103 @@
 # Changelog
 
-## Syntax of the changelog
+Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-* **Preferences:** Changes to Reaper's preferences dialog, which can be opened via `⌘`+`,` or through the `Reaper | Preferences` menu.
-* **Theme:** These changes affect the design or arrangement of elements (buttons, controllers, displays, etc.) of the theme we provide.
-* **Actions:** Adds new features and changes that affect the keyboard, mouse or trackpad bindings to actions or presets.
-* **Soundboard:** Features of our own Soundboard for audio snippets/shorts/inserts.
-* **Installer:** New features for the Mac installer which was introduced with Ultraschall 1.2.
-* **Hub [Mac only]:** Our project to replace [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2), and to provide a stable, crackle-free podcasting experience.
-* **Misc:** Anything that is left.
+## 3.0.1 Miedinger - 2017-March-05
+
+* Streaming **Studio Link OnAir Streaming**
+*Thanks to the support by Studio Link OnAir you can now start a livestream of your show with a single click. The signal attached to the mastermix will be streamed via a public web-interface. There, you can set stream properties and share the URL.*
+
+* Installer: **Update Check**
+*Ultraschall will check upon launching whether a new version has been published. It will validate that compatible versions of plugin and theme are installed. If not it will warn you.*
+
+* Installer: **LAME MP3 Encoder**
+*The LAME MP3 Encoder in version 3.98.3 is automatically installed.*
+
+* Theme: **Ultraschall Start-up Screen**
+*A new start-up screen confirms the successful installation and provides initial hints and links to the support resources.*
+
+* Theme: **View Adjustments**
+*The view switchers in the top left now show the current mode after restarting Reaper (keyword: persistence layer). In the Edit view, the navigator window is now displayed over the whole width. Additionally, a new `Loudness` tab was added to the bottom left, which lets you measure the LUFS of tracks or individual items (see Ultraschall Dynamics).*
+
+* Theme: **FX always visible in the mixer**
+*Due to the continually growing importance of effects (StudioLink, OnAir, Soundboard, Dynamics), the FX buttons in the tracks' mixer panel are now always visible, and remain so when you shrink the windows.*
+
+* Theme: **Waveform**
+*Selected items and cuts within the waveform are highlighted more clearly now.*
+
+* Theme: **User Interface**
+*Many GUI elements receive more contrast to increase their visibility.*
+
+* Theme: **Selection Tool**
+*You can now switch the mouse pointer between two editing modes: the previous mode selects and moves individual items on the timeline, while the new mode helps you select times for faster (ripple) cutting. Times can thus be selected anywhere on the timeline, not just on the upper edge as previously. A new icon, as well as the keyboard shortcut `#`, switch between the modes.*
+
+* Theme: **Emphasis on 'Prepare all tracks...'**
+*The menu action 'Prepare all tracks for editing' needs to be used after each recording and before cutting. It is now emphasised visually. Also, the function itself has been reimplemented and expanded. A new status dialogue is displayed to provide user feedback after successful completion.*
+
+* Theme: **Podcast Menu**
+*Several `Podcast` menu entries were updated and reordered more logically.*
+
+* Editing: **Volume Editing**
+*Selected tracks can be overlayed with a new volume envelope (pre-FX!) via the menu or the shortcut `alt`+`v`. That overlay helps you realize complex fadings or volume gradients. Moreover, we've added a new pre-FX gain controller to the track area's left part. This controller adjusts the total volume of a single track; with visual feedback by the waveform. The tracks' visibility is toggled via the top icon known from the mute track.*
+
+* Editing: **Easier Envelope Handling**
+*We reworked the mode of setting and moving points in the (mure or volume) envelopes. Now you simply move existing points or click at where the next point should be set. A muted section can thus be set via two clicks. The old free-hand drawing mode can be reactivated any time by pressing `cmd`.*
+
+* Editing: **Better `esc` Key Behaviour**
+*We believe in the future and necessity of the `esc` key. That's why we enhanced the "delete any selection" function considerably. It now deselects track, item, envelope and time markers.*
+
+* Editing: **Pre-Listening Cuts**
+*The shortcut `p` allows you to pre-listen the result of a cut by time markers, without actually applying the cut. This, together with the new shortcuts `<`, `y`, `x` und `c` for moving the in- and outpoints of a time selection, enables more efficient and controlled cutting.*
+
+* Editing: **Play Cursor at the Beginning of a Time Selection**
+*Selecting time places the play cursor directly at the inpoint of the selection, to that one can use `return` or `space` to directly listen to the selection.*
+
+* Editing: **Expanded Ripple Cut**
+*The shortcut `cmd`+`x` effects a ripple cut over all tracks, even when only a single item is selected. The cutting range will then be the start- and endpoint of the item.*
+
+* Keymap: **New Layout for Keyboard Shortcuts**
+*A multitude of shortcuts was reworked and newly added in order to enable more efficient cutting via the keyboard. The new shortcuts are visualised in a [.PDF](http://url.ultraschall-podcast.de/keymap) and you can reflect customizations in the corresponding PowerPoint source file.*
+
+* Mastering: **Ultraschall Dynamics**
+*The new Dynamics Effect can optimize the podcast's loudness to -16 LUFS. This effect replaces the previously recommended AU General Dynamic Effect and can also be applied in Ultraschall's Windows version. We deliver presets with and without soft noisegate in order to reduce faint disturbances. The effect can be used and parameterized on single tracks, single items, as well as on the master channel. Please note: the effect is less suited for the repair of audio problems (humming, reverberation, etc.) against which we highly recommend using [Auphonic](https://auphonic.com/).*
+
+* Mastering: **Effect Templates for New Tracks**
+*Adding new tracks automatically adds the effects ReaEQ (Equalizer) and JS: General Dynamics, but without activating them.*
+
+* Mastering: **New EQ Preset**
+*Ultraschall 3 includes a new EQ preset, that delivers less bass boost then the preset from version 2. It is a good starting point for the headsets DT297 and HMC660.*
+
+* Mastering: **Export Assistant**
+*`Export` can be found in the bottom left icon bar and helps you generate perfect MP3 files. The ID3V2 elements metadata (like title, podcast, etc.), episode images and chapter marks will be written to the MP3 files you produce.*
+
+* Mastering: **Noise Filter**
+*We've added the ReaFix effect to the effect favorites in order to fix common sound problems like hissing or electric hum. Its use is explained in the Ultraschall Dynamics video.*
+
+* Mastering: **Open Project Directory**
+*the menu command and the icon for opening the project directory now does exactly that, instead of the subdirectory with the sound files.*
+
+* Actions: **Colorpicker**
+*The user-friendly Colorpicker (shortcut: `alt`+`c`) helps you keep the overview in complex projects; assign colors to tracks and single clips, or even gradients to multiple tracks, which can be fluid or using a sensible contrast range.*
+
+* Actions: **Import Chaptermarks from WAV Files**
+*Some devices - like Zoom H5 and H6 - allow writing chapter marks to the .WAV file during the recording. A new chapter mark action allows reading those and converts them into Ultraschall chaptermarks.*
+
+* Actions [Windows]: **Bugfix for Umlauts**
+*We fixed a bug in the handling of chaptermarks with mutated vowels. Thanks to [@jalea](https://twitter.com/jalea) and to Nico Buch for tracking down that error!*
+
+* Soundboard: **Bugfix**
+*Fixed a bug where the soundboard would not pause playback when triggered with OSC. Thanks to Bastian Boessl for reporting this bug.*
+
+## 2.2.2 Gropius - 2016-August-14
+
+* Soundboard [Mac]: **Bugfix**
+*Fixed a bug that prevented a recorded soundboard-track from playing.*
+
+* Misc [Windows]: **Compatibility**
+*Updates for Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall now includes the updated StudioLink version 16.04.1.*
 
 ## 2.2.2 Gropius - 2016-August-14
 
@@ -65,10 +154,10 @@
 *Tracks are now set to 'Record Arm' after they have been inserted into the REAPER project. You are not any longer required to press the red 'Record Arm'-button.
 
 * Misc: **Ultraschall 3 Preset for ReaEQ**
-*The preset Ultraschall 3 is automatically activated if you insert the ReaEQ Equaliyer into the tracks effect chain. This results in less rumble and less boost of lower frequencies.    
+*The preset Ultraschall 3 is automatically activated if you insert the ReaEQ Equaliyer into the tracks effect chain. This results in less rumble and less boost of lower frequencies.
 
 * Misc: **Ultraschall Presets for audio compoitions**
-*The effect presets Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate) may be used for voice colorization in audio compositions* 
+*The effect presets Telephone (ReaEQ), Small Room, Large Room, Church (ReaVerbate) may be used for voice colorization in audio compositions*
 
 * Installer: **Bugfix**
 *The code signature of Uninstall.command was corrupted. Thanks to Arnd Layer for reporting this bug.*

@@ -1,61 +1,39 @@
-# Installation
+# Installation instructions for Ultraschall 3.0
+Please follow precisely!
 
-## The basics
 
-Use of this distribution is **on your own risk. Previous settings are usually overwritten without further prompts.** It is therefore advised to save your existing settings via the menu `REAPER | Preferences… | General | Export Configuration…`.
+## Basics
 
-Our changes affect many levels: file system (graphics), Walter theming file, project settings, Reaper settings, toolbar settings, etc. All changes are **open source** ([CC0](https://creativecommons.org/about/cc0)) an can be adapted as you wish. But you should have a clear idea of what your are doing.
+Use this distribution at **your own risk since existing settings are generally overwritten without prompt**. Therefore, please save them via the menu `REAPER | Preferences | General | Export Configuration…` before installing Ultraschall.
 
-## Installation instructions for Ultraschall 2.2 (Please follow precisely!)
+## macOS 10.11 or newer
 
-Depending on your previous Reaper and Ultraschall set-up, there are different paths for you to follow: update or clean install.
+1. **Download and install [Reaper 5.35 OS X 64-bit](http://www.reaper.fm/download.php)**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
 
-### Mac OS X 10.11 (update)
+2. **Download our [Ultraschall 3.0](http://url.ultraschall-podcast.de/us30) distribution** and open the `.dmg` file.
 
-1. **Update Reaper:** Download and install [Reaper 5.201 64Bit](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+3. **Start and run `Ultraschall-3.0.1.pkg`** from our `.dmg`. **Please note:** In case an error occurs near the end of the installation, please reboot macOS once and rerun our installer. It definitely works then.
 
-2. **Download** [Ultraschall 2.2](http://url.ultraschall-podcast.de/us22) and open the `.dmg` file.
+4. **Optional - install UltraschallHub:** In case you want to use advanced Ultraschall features (like purely software-defined N-1 audio-routing for Skype recording), please install our successor to [Soundflower](https://rogueamoeba.com/freebies/soundflower/): `Ultraschall Hub.pkg`. This step is *not required* for using StudioLink or the soundboard.
 
-3. **Purge the old installation** by running `Uninstall.command` (alternative click > Open with > Terminal & confirm with your password). This will remove old entries from `/System/Library`. In order to remove old [Soundflower](https://rogueamoeba.com/freebies/soundflower/) or USH devices, please also run `Remove legacy audio devices.command`.
-
-Continue with the clean install instructions at step 3.
-
-### Mac OS X 10.11 (clean install)
-
-1. **Download and install [Reaper 5.201 64Bit](http://www.reaper.fm/download.php)**. It can be tested free of charge for 30 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
-
-2. **Download** [Ultraschall 2.2](http://url.ultraschall-podcast.de/us22) and open the `.dmg` file.
-
-3. **Launch** `Ultraschall-2.2.pkg` from our `.dmg`. In case an error occurs near the end of the installation, please reboot your Mac and rerun our `.pkg`.
-
-4. **Optional:** In case you want to use advanced Ultraschall features like purely software-defined N-1 audio-routing for Skype recording, please install our successor to Soundflower: `Ultraschall Hub.pkg`.
-
-5. **Launch Reaper and drag** our `Ultraschall_2.2.ReaperConfigZip` into Reaper's main window. The individual images and config files will be automagically written to the correct locations by Reaper. **WARNING:** If you have adjusted settings before, we recommend to export them via the `REAPER | Preferences… | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
-
-6. **Optional:** In case you want to use our hand-crafted color scheme by [graphorama](https://sendegate.de/users/graphorama), go to `Extensions | Auto Color/Icon`. Right-click into that window and select Show Color Management Window. Via `Load color set from file…`, go into our `.dmg` and open `/Add-ons/Ultraschall Colorset.SWSColor`.
-
-7. **Optional:** You may change the Reaper start splash animation with a Ultraschall logo: copy `Ultraschall Reaper Splash Screen.png` from the `Add-ons` folder in our `.dmg` anywhere on your Filesystem. Point to this image via `REAPER | Preferences… | General | Advanced UI/System tweaks… |` and `Custom splash screen image:`.
-
+5. **Install REAPER Ultraschall configuration:** Launch Reaper. A warning about the theme not being installed will be shown. Now drag our `Ultraschall_3.0.ReaperConfigZip` into Reaper's main window and click `Import`. **WARNING:** If you have adjusted settings before, we recommend to export them via the `REAPER | Preferences… | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a considerable portion of REAPER's settings  without further prompts.
 In order to learn more about Ultraschall's functions and usage, we recommend the soon-to-be-published Release Screencast in [our YouTube channel](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG).
+
+7. **Troubleshooting** by running `Uninstall.command` (right-click > Open with > Terminal & confirm with your password). This will remove old entries from `/System/Library`. In order to remove old [Soundflower](https://rogueamoeba.com/freebies/soundflower/) or USH devices please also run `Remove legacy audio devices.command`.
+
 
 ### Windows
 
-<<<<<<< HEAD
-1. **Download and install** [Reaper 5.201 **64bit**](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
+1. **Download and run the [Reaper 5.35 Windows 64-bit](http://www.reaper.fm/download.php) installer**. The test version is fully functional for 60 days and costs US$ 60 afterwards.
 
-2. **Download the Ultraschall package** via [Ultraschall_2.2.msi (24.1 MB)](http://url.ultraschall-podcast.de/us22win) and start the installer. 
+2. **Download and run [Ultraschall-3.0.1.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win)**.
 
-3. **Launch Reaper and drag** our `Ultraschall REAPER Theme` from the Desktop into Reaper's main window.. The individual images and config files will be automagically written to the correct locations by Reaper. **WARNING:** If you have adjusted settings before, we recommend to export them via the `REAPER | Preferences… | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
+3. **Install REAPER Ultraschall configuration:** Start REAPER. A warning about the theme not being installed will be shown. Now drag our `Ultraschall REAPER Theme` from your Windows desktop into Reaper's main window. Let the import run complete. Now you can delete the file from your desktop.
 
-4. **Connect StudioLink and the integrated Ultraschall-Soundboard** via `REAPER | Preferences | Plug-ins | VST` (bottom left): click `Auto-detect` (top right) and click `OK`.
+4. **Connect StudioLink and the Ultraschall-Soundboard:** Our integrated soundboard plays jingles etc., while Studio-Link is a remove recording alternative to Skype. Both are installed automatically and just need to be activated once in the menu `Options | Preferences… | Plug-ins/VST`. Click `Auto-detect` (top right) and then confirm with `Apply`. You may now close the settings.
 
-5. **Cleanup** Delete the shortcut `Ultraschall REAPER Theme` from the desktop and you're done.
+5. **Cleanup** Delete the shortcut `Ultraschall REAPER Theme` from your desktop.
 
-=======
-1. **Download and install** [Reaper 5.1 **64bit**](http://www.reaper.fm/download.php). It can be tested free of charge for 60 days and costs 60 USD afterwards. Presets from an already installed v4 will be retained.
-2. **Download and install** the [SWS Extension](http://www.sws-extension.org/). Without this, many Ultraschall features unfortunately won't work.
-3. **Download the Ultraschall package** via [Ultraschall_2.1.1win.zip (24.1 MB)](http://url.ultraschall-podcast.de/us21win) and unzip the archive. Search for the  Ultraschall_2.1.ReaperConfigZip file.
-4. **Launch Reaper and drag** our [Ultraschall_2.1.ReaperConfigZip](http://url.ultraschall-podcast.de/us21win) into Reaper's main window. **WARNING:** If you have adjusted settings before, we recommend to export them via the `Preferences | General | Export Configuration…` menu **before** importing Ultraschall's configuration. Our distribution overwrites a large number of settings without further prompts.
-5. Because we weren't yet able to implement Windows versions of several advanced Ultraschall features (virtual sound cards), the Ultraschall Hub installation can be skipped.
-6. A Windows version of our Soundboard is still in the works and we are looking for testers.
->>>>>>> master
+6. **Dive in:** Start REAPER and check the menu `Podcast | About Ultraschall...` for complete installation of all components. Warning messages will appear upon startup in case plguins or theme are not correctly installed. Ultraschall only works if **both** components are installed (steps 2 and 3).
+
+

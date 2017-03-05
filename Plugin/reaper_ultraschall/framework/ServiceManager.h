@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,11 +38,11 @@ class ServiceManager
 public:
    static ServiceManager& Instance();
 
-   const ServiceStatus RegisterService(const std::string& name);
+   ServiceStatus RegisterService(const std::string& name);
    void ReleaseService(const std::string& name);
    void ReleaseAllServices();
 
-   const ServiceStatus AcquireService(const std::string& name, IService*& pService) const;
+   ServiceStatus AcquireService(const std::string& name, IService*& pService) const;
 
 protected:
    virtual ~ServiceManager();

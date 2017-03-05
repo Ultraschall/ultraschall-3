@@ -26,80 +26,89 @@
 #include <vector>
 #include <fstream>
 
-#include <cpr/cpr.h>
-
-#ifndef _WIN32
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/xpath.h>
-#include <libxml/xpathInternals.h>
-#endif
-
+#include "AboutAction.h"
+#include "CustomActionFactory.h"
 #include "ReaperVersionCheck.h"
 #include "ThemeVersionCheck.h"
-#include "HubVersionCheck.h"
-#include "SoundboardVersionCheck.h"
-#include "StudioLinkVersionCheck.h"
-#include "PluginVersionCheck.h"
-#include "SWSVersionCheck.h"
-#include "AboutAction.h"
+#include "VersionHandler.h"
 #include "NotificationWindow.h"
 #include "FileManager.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
 static DeclareCustomAction<AboutAction> action;
 
-const char* AboutAction::UniqueId()
+ServiceStatus AboutAction::Execute()
 {
-   return "ULTRASCHALL_ABOUT_ULTRASCHALL";
-}
+   const std::string pluginVersion = VersionHandler::PluginVersion();
 
-const ServiceStatus AboutAction::Execute()
-{
-   const std::string pluginVersion = QueryPluginVersion();
-  
    std::string message1 = "\
-http://ultraschall.fm\r\n\r\n\
-Copyright (c) 2016 Ralf Stockmann, Daniel Lindenfelser, Katrin Leinweber, Andreas Pieper, Artur Kordowski, Mich\u00E9l Knecht, Tim Pritlove, Heiko Panjas\r\n\r\n\
-Ultraschall REAPER Extension " + pluginVersion + "\r\n";
+ULTRASCHALL Podcasting Extension for REAPER\r\n\r\n\
+Copyright (c) 2017 ultraschall.fm\r\n\r\n\
+Ultraschall REAPER Extension " +
+                          pluginVersion + "\r\n";
 
    const std::string themeVersion = QueryThemeVersion();
-   if(themeVersion.empty() == false)
+   if (themeVersion.empty() == false)
    {
       message1 += "Ultraschall REAPER Theme " + themeVersion + "\r\n";
    }
 
-#ifndef WIN32
-   const std::string hubVersion = QueryHubVersion();
-   if(hubVersion.empty() == false)
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+   const std::string hubVersion = VersionHandler::HubVersion();
+   if (hubVersion.empty() == false)
    {
       message1 += hubVersion + "\r\n";
    }
-#endif // #ifndef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-   const std::string soundboardVersion = QuerySoundboardVersion();
-   if(soundboardVersion.empty() == false)
+   const std::string soundboardVersion = VersionHandler::SoundboardVersion();
+   if (soundboardVersion.empty() == false)
    {
       message1 += "Ultraschall Soundboard " + soundboardVersion + "\r\n";
    }
 
-   const std::string studioLinkVersion = QueryStudioLinkVersion();
-   if(studioLinkVersion.empty() == false)
+   const std::string studioLinkVersion = VersionHandler::StudioLinkVersion();
+   if (studioLinkVersion.empty() == false)
    {
-       message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
+      message1 += "StudioLink Plug-in " + studioLinkVersion + "\r\n";
+   }
+
+   const std::string studioLinkOnAirVersion = VersionHandler::StudioLinkOnAirVersion();
+   if (studioLinkOnAirVersion.empty() == false)
+   {
+      message1 += "StudioLink OnAir Plug-in " + studioLinkOnAirVersion + "\r\n";
+   }
+
+   const std::string lameVersion = VersionHandler::LAMEVersion();
+   if (lameVersion.empty() == false)
+   {
+      message1 += "LAME MP3 Encoder " + lameVersion + "\r\n";
    }
 
    std::string message2 = "\
-SWS REAPER Extension " + QuerySWSVersion() + "\r\n\
+SWS REAPER Extension " + VersionHandler::SWSVersion() +
+                          "\r\n\
 REAPER ";
 
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
+<<<<<<< HEAD
+   NotificationWindow::Show("About Ultraschall 3.0.1 \"Miedinger\"...", message1 + message2);
+
+   return SERVICE_SUCCESS;
+}
+}
+}
+=======
    NotificationWindow::Show("About Ultraschall 2.2.2 \"Gropius\"...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }
-
-}}
+}
+}
+>>>>>>> origin/master

@@ -1,30 +1,107 @@
-# Changelog
+# Ultraschall Changelog
 
-#### Infos:
-## Syntax für das Changelog
+Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-* Preferences: **Diese Änderungen**
-*werden im Preferences-Dialog von Reaper vorgenommen, den man über `⌘`+`,` oder im Menü unter `Reaper | Preferences…` erreicht.*
+## 3.0.1 Miedinger - 2017-März-05
 
-* Theme: **Diese Änderungen betreffen das mitgelieferte Theme**
-*und sind für Design und Anordnung der Elemente (Buttons, Regler, Anzeigen...) verantwortlich.*
+* Streaming **Studio Link OnAir Streaming**
+*Durch die Unterstützung von Studio Link OnAir (Version 17.02.0.) kann mit einem Knopfdruck ein Live-Streaming der Sendung gestartet werden. Gestreamt wird immer das im Mastermix anliegende Signal, über ein sich öffnendes Web-Interface können Anpassungen der Streaming-Metadaten vorgenommen sowie die Streaming-URL publiziert werden.*
 
-* Actions: **Änderungen, die die Bindung von Aktionen**
-*teilweise auch Presets auf Tastatur/Maus/Trackpad betreffen.*
+* Installer: **Update Check**
+*Beim Starten von Ultraschall wird geprüft, ob eine neue Version vorliegt. Eine Validitäts-Check stellt sicher, dass zueinander passende Versionen von Plugin und Theme installiert sind und gibt gegebenenfalls Warnmeldungen.*
 
-* Soundboard: **Features unseres eigenen Soundboards**
-*für Einspieler aller Art.*
+* Installer: **LAME MP3 Encoder**
+*Der LAME MP3 Encoder wird in Version 3.98.3 automatisch installiert.*
 
-* Installer: **Neuerungen, die den mit der 1.2**
-*eingeführten Installer für den Mac betreffen.*
+* Studio Link: **Update**
+Ultraschall wird mit aktualisiertem StudioLink Plug-in in Version 16.12.0. ausgeliefert.
 
-* Hub [Nur Mac]: **Unser Projekt zur Ablösung von [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2)**
-*Soundflower für ein stabiles und knacksfreies Podcastingerlebnis.*
+* Theme: **Ultraschall-Startscreen**
+*Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
 
-* Misc: **Infos**
-*Was sonst noch so anfällt.*
+* Theme: **Anpassungen der Views**
+*Die Views-Umschalter oben links zeigen nun auch nach einem Reaper-Neustart den aktuellen Modus an (Stichwort: Persistenz-Schicht). Im Edit-View wird ganz oben jetzt das Navigator-Fenster über die gesamte Breite angezeigt.
+Zusätzlich gibt es unten links nun einen neuen Reiter für `Loudness`, mit dem sich die Lautstärke von Spuren oder einzelnen Items in LUFS messen lässt (siehe: Ultraschall-Dynamics).*
 
-#### Last Changelog:
+* Theme: **FX immer sichtbar im Mixerbereich**
+*Durch die stetig wachsende Bedeutung der Effekte (StudioLink, OnAir, Soundboard, Dynamics) sind nun die FX-Buttons im Mixerbereich der Spuren immer sichtbar, auch bei sehr verkleinertem Fenster.*
+
+* Theme: **Wellenform**
+*Ausgewählte Items werden in der Helligkeit klarer hervorgehoben. Schnitte innerhalb einer Wellenform werden deutlicher angezeigt.*
+
+* Theme: **User Interface**
+*Viele GUI-Elemente erhalten mehr Kontrast für bessere Sichtbarkeit.*
+
+* Theme: **Auswahlwerkzeug**
+*Mit einem neuen Icon-Schalter kann zwischen zwei Editier-Modi gewechselt werden: dem bisherigenen Modus, der einzelne Elemente auf der Timeline markiert und verschiebt, sowie einem neuen Auswahl-Modus ("TSB-Button"), der das Erstellen von Zeitauswahlen für schnellen Schnitt (Ripple-Cut) erheblich vereinfacht. Eine Zeitauswahl kann damit überall in der Timeline gesetzt werden, nicht mehr nur wie bisher am oberen Rand. Das Umschalten der Modi erfolgt entweder über das neue Icon oder über den Tastatur-Shortcut: `#`.*
+
+* Theme: **Hervorhebung 'Prepare all tracks for editing'**
+*Die nach jeder Aufnahme und vor dem Schnitt aufzurufende Menü-Aktion 'Prepare all tracks for editing' wird optisch hervorgehoben um die Sichtbarkeit zu erhöhen. Die Funktion selbst wurde neu implementiert und erweitert. Nach erfolgreichem Durchlauf wird ein neues Status-Fenster angezeigt.*
+
+* Theme: **Podcast-Menü**
+*Diverse Einträge im Podcast-Menü wurden aktualisiert und klarer angeordnet.*
+
+* Editing: **Volume-Editing**
+*Über das Menü oder den Shortcut `alt`+`v` kann für ausgewählte Spuren ein Lautstärke-Envelope (PRE-FX!) angezeigt werden. Mit diesem können komplexere Fadings oder Lautstärke-Verläufe realisiert werden. Ferner gibt es einen PRE-FX Gainregler links im Spurbereich, mit dem sich die Gesamtlautstärke einer Spur - mit visueller Rückmeldung durch die Wellenform - anpassen lässt. Die Sichtbarkeit der Spuren wird über das aus der Mute-Spur bekannte Icon oben umgeschaltet.*
+
+* Editing: **Einfacheres Envelope-Handling**
+*Der Modus, mit dem man in Envelopes (Mute oder Volume) Punkt setzen oder verschieben kann, ist überarbeitet worden. Man klickt nun einfach an die Stelle, an der der nächste Punkt gesetzt werden soll, bzw. verschiebt bestehende Punkte. Ein Mute-Bereich ist so mittels zweier Klicks einstellbar. Der alte Freihand-Malmodus kann jederzeit durch gedrückt halten der `cmd` Taste zurückgeholt werden.*
+
+* Editing: **Verbessertes Verhalten der `esc`-Taste**
+*Wir glauben an die Zukunft und die Notwendigkeit der `esc`-Taste. Daher haben wir die "lösche jegliche Auswahl"-Funktion erheblich erweitert - sie hebt nun Track-, Item-, Envelope- und Zeitmarkierungen auf.*
+
+* Editing: **Vorhören von Schnitten**
+*Mit dem Shortcut `p` kann  man vorhören, wie sich ein Schnitt mittels Zeitmarkierung auswirken würde, ohne dass man diesen bereits durchführen muss. In Kombination mit den neuen Shortcuts zum Verschieben der In- und Outpoints einer Zeitauswahl `<`, `y`, `x` und `c` ist dadurch ein sehr effizienter und kontrollierter Schnitt möglich.*
+
+* Editing: **Play-Cursor auf Anfang von Zeitauswahlen**
+*Setzt man eine Zeitauswahl, so wird der Play-Cursor direkt auf den Inpoint dieser Auswahl gesetzt und man kann direkt mit `return` oder `space` die Auswahl anhören.*
+
+* Editing: **Erweiterter Ripple-Cut**
+*Mit dem Shortcut `cmd`+`x` wird ein Ripple-Cut über alle Spuren auch dann durchgeführt, wenn nur ein einzelnes Item ausgewählt wird. Schnittbereich ist dann Start- und Endpunkt dieses Items.*
+
+* Keymap: **Neues Layout für Tastatur-Shortcuts**
+*Eine Vielzahl an Shortcuts wurden überarbeitet und neu hinzugefügt um einen effizienteren Schnitt über die Tastatur zu ermöglichen. In einem [.PDF](http://url.ultraschall-podcast.de/keymap) sind die neuen Shortcuts ausgewiesen, eigene Anpassungen können in einer mitgelieferten PowerPoint-Datei vorgenommen werden.*
+
+* Mastering: **Ultraschall Dynamics**
+*Mit dem neuen Dynamics Effekt kann die Lautheit des Podcasts auf ca. -16 LUFS optimiert werden. Der Effekt ersetzt den bisher empfohlenen AU General Dynamic Effekt und ist auch unter Windows einsetzbar. Es werden Presets mitgeliefert mit und ohne weichem Noisegate zur Reduzierung leiser Störungen. Der Effekt kann sowohl auf Einzelspuren, einzelnen Items, als auch auf dem Master-Kanal eingesetzt und parametrisiert werden. Achtung: der Effekt ist weniger geeignet zur Reparatur von problematischem Material (Brummen, Hall etc.) - hier wird dringend nach wie vor der Einsatz von Auphonic empfohlen.*
+
+* Mastering: **Effektvorgaben bei neuen Spuren**
+*Beim Anlegen neuer Spuren werden automatisch die Effekte ReaEQ (Equalizer) und JS: General Dynamics hinzugefügt, jedoch noch nicht aktiviert.*
+
+* Mastering: **Neues EQ-Preset**
+	*Ein neues Ultraschall 3 Preset für den EQ wird mitgeliefert. Es bietet weniger Bassanhebung als der Preset der 2er Version und ist ein guter Startpunkt für die Headsets [DT297](https://www.thomann.de/de/beyerdynamic_dt297pv80_mk_ii.htm?partner_id=60110) und [HMC660](https://sendegate.de/t/profi-klang-fuer-alle-das-hmc660-headset-richtig-einsetzen-fuer-unter-100/3076?u=rstockm) ist.*
+
+* Mastering: **Export Assistent**
+*Ein neuer Export-Assistent, links unten in der `Export` Iconleiste zu finden, hilft dabei, perfekte MP3-Dateien zu erzeugen. Die ID3V2 Elemente Metadaten (wie Titel, Podcast etc.), Episodenbild und Kapitelmarken werden in die produzierte MP3-Datei gespeichert.*
+
+* Mastering: **Rauschfilter verfügbar**
+*Zum Beheben gängiger Soundprobleme wie Rauschen oder Netzbrummen wurde der ReaFir-Effekt in die Effekt-Favoriten mit aufgenommen. Die Bedienung wird im Video zu Ultraschall Dynamics erläutert. (LINK?)*
+
+* Mastering: **Bugfix: Projektordner öffnen**
+*Menübefehl und Icon für das Öffnen des Projektverzeichnisses öffnen nun wirklich das Projektverzeichnis - nicht wie bisher den Unterordner mit den Sounddateien.*
+
+* Actions: **Colorpicker**
+*Der neue nutzerfreundlicher Colorpicker (Shortcut: `alt`+`c`) hilft, Übersicht in komplexen Projekten zu erhalten: Spuren oder einzelnen Clips können Farben zugewiesen werden, mehrere Spuren über eine Auswahl auch Farbverläufe - entweder fließend, oder unter Nutzung eines sinnvollen Kontrast-Bereichs.*
+
+* Actions: **Import von Kapitelmarken aus WAV-Dateien**
+*Einige Aufnahmegeräte (z.B. Zoom H5 und H6) bieten die Möglichkeit, während der Aufnahme Kapitelmarken in die .WAV Datei zu schreiben. Mit dieser neuen Kapitelmarken-Aktion können sie ausgelesen und in Ultraschall-Kapitelmarken umgewandelt werden.*
+
+* Actions [Windows]: **Bugfix für Umlaute**
+*Es wurde ein Fehler behoben im Umgang mit Kapitelmarken, die Umlaute enthalten. Danke an @jalea and Nico Buch für das Aufspüren dieses Fehlers.*
+
+* Soundboard: **Bugfix**
+*Mit OSC kann das Abspielen von Sounds nicht angehalten werden. Danke an Bastian Boessl für den Bugreport.*
+
+## 2.2.2 Gropius - 2016-August-14
+
+* Soundboard [Mac]: **Bugfix**
+*Bugfix: Aufgenommene Soundboard-Spuren werden jetzt abgespielt.*
+
+* Misc [Windows]: **Kompatibilität**
+*Updates für Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall enthält jetzt die neue StudioLink-Version 16.04.1.*
 
 ## 2.2.2 Gropius - 2016-August-14
 
@@ -69,7 +146,7 @@
 *Das Ultraschall-Soundboard steht nun mit vollem Funktionsumfang auch unter Windows zur Verfügung. Bei der Mac-Version wurde von VST auf AU Technik umgestellt.*
 
 * Installer: **StudioLink Plugin und standalone**
-*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.studio-link.de/standalone/installation-standalone.html) laden.*
+*Ultraschall liefert im Installer die Version des StudioLink-Plugins aus. Externe GesprächspartnerInnen können sich die [Standalone-Fassung von StudioLink](https://doku.Studio Link.de/standalone/installation-standalone.html) laden.*
 
 * Preferences: **Stop Funktion überarbeitet**
 *Die Stop-Funktion bei Aufnahmen wurde so überarbeitet, dass der Aufnahme-Cursor nach Stop an das Ende der bisherigen Aufnahme gesetzt wird. Dies verhindert, dass bei einem erneuten Start der Aufnahme kein alternativer Take angelegt wird, sondern die eigentliche Aufnahme fortgesetzt wird.*

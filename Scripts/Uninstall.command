@@ -2,7 +2,7 @@
 
 # Uninstall Ultraschall REAPER Extension from user domain
 if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib ]; then
-	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_Ultraschall.dylib
+	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib
 fi
 
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py ]; then
@@ -176,7 +176,7 @@ fi
 
 # Uninstall Ultraschall REAPER Extension from system domain
 if [ -f /Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib ]; then
-	sudo rm -f /Library/Application\ Support/REAPER/UserPlugins/reaper_Ultraschall.dylib
+	sudo rm -f /Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib
 fi
 
 if [ -f /Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py ]; then
@@ -351,6 +351,16 @@ fi
 
 if [ -d /Library/Application\ Support/Ultraschall/TouchOSC ]; then
 	sudo rm -rf /Library/Application\ Support/Ultraschall/TouchOSC
+fi
+
+# Uninstall Ultraschall StudioLink Audio Unit from user domain
+if [ -d ~/Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component ]; then
+	rm -rf ~/Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component
+fi
+
+# Uninstall Ultraschall StudioLink Audio Unit from system domain
+if [ -d /Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component ]; then
+	sudo rm -rf /Library/Audio/Plug-Ins/Components/StudioLinkOnAir.component
 fi
 
 # Uninstall Ultraschall StudioLink Audio Unit from user domain

@@ -22,7 +22,7 @@
     <ProjectGuid>{72A2A1C0-EB84-47A4-99A5-79E5B969F814}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>reaper_ultraschall</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -48,7 +48,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -73,7 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -102,14 +102,15 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;Submodules\curl\include;Submodules\cpr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>Submodules\zlib\contrib\vstudio\vc11\x64\ZlibStatDebug;Submodules\curl\build\Win64\VC14\LIB Debug - DLL Windows SSPI</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;zlibstat.lib;libcurld.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>version.lib;libz-static-x64-debug.lib;libcurl-static-x64-debug.lib;libtag-static-x64-debug.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(OutDir)$(TargetName)$(TargetExt) "C:\Program Files\REAPER (x64)\Plugins"</Command>
@@ -143,8 +144,8 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;Submodules\zlib;Submodules\zlib\contrib\minizip;Submodules\curl\include;Submodules\cpr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
@@ -152,8 +153,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>Submodules\zlib\contrib\vstudio\vc11\x64\ZlibStatReleaseWithoutAsm;Submodules\curl\build\Win64\VC14\LIB Release - DLL Windows SSPI</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;zlibstat.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>version.lib;libz-static-x64-release.lib;libcurl-static-x64-release.lib;libtag-static-x64-release.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -162,51 +164,62 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\BinaryFileReader.cpp" />
-    <ClCompile Include="framework\ChapterMarker.cpp" />
-    <ClCompile Include="framework\Malloc.cpp" />
     <ClCompile Include="framework\ResourceId.cpp" />
     <ClCompile Include="framework\ResourceManager.cpp" />
     <ClCompile Include="framework\ServiceFactory.cpp" />
     <ClCompile Include="framework\ServiceManager.cpp" />
-    <ClCompile Include="framework\Stream.cpp" />
     <ClCompile Include="framework\StringUtilities.cpp" />
     <ClCompile Include="framework\TextFileReader.cpp" />
     <ClCompile Include="framework\TextFileWriter.cpp" />
+    <ClCompile Include="framework\TimeUtilities.cpp" />
+    <ClCompile Include="framework\TraceUltilities.cpp" />
     <ClCompile Include="framework\TranscriptItem.cpp" />
     <ClCompile Include="reaper\AboutAction.cpp" />
     <ClCompile Include="reaper\Application.cpp" />
+    <ClCompile Include="reaper\CloseProjectCommand.cpp" />
+    <ClCompile Include="reaper\CommandFactory.cpp" />
+    <ClCompile Include="reaper\CommandManager.cpp" />
     <ClCompile Include="reaper\Configuration.cpp" />
     <ClCompile Include="reaper\CustomAction.cpp" />
     <ClCompile Include="reaper\CustomActionFactory.cpp" />
     <ClCompile Include="reaper\CustomActionManager.cpp" />
     <ClCompile Include="reaper\FileManager.cpp" />
-    <ClCompile Include="reaper\HubVersionCheck.cpp" />
-    <ClCompile Include="reaper\InsertChaptersAction.cpp" />
-    <ClCompile Include="reaper\InsertTranscriptAction.cpp" />
+    <ClCompile Include="reaper\InsertChapterMarkersAction.cpp" />
+    <ClCompile Include="reaper\InsertMP3ChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\InvalidEntryPointException.cpp" />
+    <ClCompile Include="reaper\MP3Properties.cpp" />
+    <ClCompile Include="reaper\NewProjectCommand.cpp" />
     <ClCompile Include="reaper\NotificationWindow.cpp" />
-    <ClCompile Include="reaper\PatchConfiguration.cpp" />
-    <ClCompile Include="reaper\PluginVersionCheck.cpp" />
+    <ClCompile Include="reaper\OpenProjectCommand.cpp" />
+    <ClCompile Include="reaper\Project.cpp" />
+    <ClCompile Include="reaper\ProjectCallback.cpp" />
+    <ClCompile Include="reaper\ProjectManager.cpp" />
     <ClCompile Include="reaper\ReaperEntryPoints.cpp" />
     <ClCompile Include="reaper\ReaperVersionCheck.cpp" />
     <ClCompile Include="reaper\reaper_ultraschall.cpp" />
-    <ClCompile Include="reaper\ReplaceChaptersAction.cpp" />
-    <ClCompile Include="reaper\SaveChaptersAction.cpp" />
-    <ClCompile Include="reaper\SaveChaptersToProjectAction.cpp" />
+    <ClCompile Include="reaper\ReplaceChapterMarkersAction.cpp" />
+    <ClCompile Include="reaper\SaveChapterMarkersAction.cpp" />
+    <ClCompile Include="reaper\SaveChapterMarkersToProjectAction.cpp" />
+    <ClCompile Include="reaper\SaveProjectCommand.cpp" />
+    <ClCompile Include="reaper\SetChapterMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetEditMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetHistoricalMarkerAction.cpp" />
+    <ClCompile Include="reaper\SetShownoteMarkerAction.cpp" />
     <ClCompile Include="reaper\SoundboardVersionCheck.cpp" />
-    <ClCompile Include="reaper\StudioLinkVersionCheck.cpp" />
     <ClCompile Include="reaper\SWSVersionCheck.cpp" />
+    <ClCompile Include="reaper\SystemProperties.cpp" />
     <ClCompile Include="reaper\ThemeVersionCheck.cpp" />
-    <ClCompile Include="reaper\UnsupportedPlatformException.cpp" />
-    <ClCompile Include="reaper\UpdateCheckAction.cpp" />
+    <ClCompile Include="reaper\ToggleChapterMarkersAction.cpp" />
+    <ClCompile Include="reaper\ToggleEditMarkersAction.cpp" />
+    <ClCompile Include="reaper\ToggleShownoteMarkersAction.cpp" />
+    <ClCompile Include="reaper\UndoMarkerAction.cpp" />
+    <ClCompile Include="reaper\UpdateCheck.cpp" />
+    <ClCompile Include="reaper\VersionHandler.cpp" />
     <ClCompile Include="reaper\VersionString.cpp" />
-    <ClCompile Include="Submodules\zlib\contrib\minizip\ioapi.c" />
-    <ClCompile Include="Submodules\zlib\contrib\minizip\iowin32.c" />
-    <ClCompile Include="Submodules\zlib\contrib\minizip\unzip.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h" />
-    <ClInclude Include="framework\ChapterMarker.h" />
+    <ClInclude Include="framework\FileUtilities.h" />
     <ClInclude Include="framework\Framework.h" />
     <ClInclude Include="framework\IActivationService.h" />
     <ClInclude Include="framework\IApplication.h" />
@@ -222,41 +235,58 @@
     <ClInclude Include="framework\SharedObjectFactory.h" />
     <ClInclude Include="framework\SharedObjectManager.h" />
     <ClInclude Include="framework\Stream.h" />
+    <ClInclude Include="framework\StringDefs.h" />
     <ClInclude Include="framework\StringUtilities.h" />
     <ClInclude Include="framework\TextFileReader.h" />
     <ClInclude Include="framework\TextFileWriter.h" />
+    <ClInclude Include="framework\TimeUtilities.h" />
+    <ClInclude Include="framework\TraceUtilities.h" />
     <ClInclude Include="framework\TranscriptItem.h" />
     <ClInclude Include="reaper\AboutAction.h" />
     <ClInclude Include="reaper\Application.h" />
+    <ClInclude Include="reaper\CloseProjectCommand.h" />
+    <ClInclude Include="reaper\CommandFactory.h" />
+    <ClInclude Include="reaper\CommandManager.h" />
     <ClInclude Include="reaper\Configuration.h" />
     <ClInclude Include="reaper\CustomAction.h" />
     <ClInclude Include="reaper\CustomActionFactory.h" />
     <ClInclude Include="reaper\CustomActionManager.h" />
     <ClInclude Include="reaper\FileManager.h" />
-    <ClInclude Include="reaper\HubVersionCheck.h" />
     <ClInclude Include="reaper\ICustomAction.h" />
-    <ClInclude Include="reaper\InsertChaptersAction.h" />
-    <ClInclude Include="reaper\InsertTranscriptAction.h" />
+    <ClInclude Include="reaper\ICommand.h" />
+    <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
+    <ClInclude Include="reaper\InsertMP3ChapterMarkersAction.h" />
     <ClInclude Include="reaper\InvalidEntryPointException.h" />
+    <ClInclude Include="reaper\Marker.h" />
+    <ClInclude Include="reaper\MP3Properties.h" />
+    <ClInclude Include="reaper\NewProjectCommand.h" />
     <ClInclude Include="reaper\NotificationWindow.h" />
-    <ClInclude Include="reaper\PatchConfiguration.h" />
-    <ClInclude Include="reaper\PluginVersionCheck.h" />
+    <ClInclude Include="reaper\OpenProjectCommand.h" />
+    <ClInclude Include="reaper\Project.h" />
+    <ClInclude Include="reaper\ProjectCallback.h" />
+    <ClInclude Include="reaper\ProjectManager.h" />
     <ClInclude Include="reaper\ReaperEntryPoints.h" />
     <ClInclude Include="reaper\ReaperVersionCheck.h" />
-    <ClInclude Include="reaper\ReplaceChaptersAction.h" />
-    <ClInclude Include="reaper\SaveChaptersAction.h" />
-    <ClInclude Include="reaper\SaveChaptersToProjectAction.h" />
+    <ClInclude Include="reaper\ReplaceChapterMarkersAction.h" />
+    <ClInclude Include="reaper\SaveChapterMarkersAction.h" />
+    <ClInclude Include="reaper\SaveChapterMarkersToProjectAction.h" />
+    <ClInclude Include="reaper\SaveProjectCommand.h" />
+    <ClInclude Include="reaper\SetChapterMarkerAction.h" />
+    <ClInclude Include="reaper\SetEditMarkerAction.h" />
+    <ClInclude Include="reaper\SetHistoricalMarkerAction.h" />
+    <ClInclude Include="reaper\SetShownoteMarkerAction.h" />
     <ClInclude Include="reaper\SoundboardVersionCheck.h" />
-    <ClInclude Include="reaper\StudioLinkVersionCheck.h" />
     <ClInclude Include="reaper\SWSVersionCheck.h" />
+    <ClInclude Include="reaper\SystemProperties.h" />
     <ClInclude Include="reaper\ThemeVersionCheck.h" />
-    <ClInclude Include="reaper\UnsupportedPlatformException.h" />
-    <ClInclude Include="reaper\UpdateCheckAction.h" />
+    <ClInclude Include="reaper\ToggleChapterMarkersAction.h" />
+    <ClInclude Include="reaper\ToggleEditMarkersAction.h" />
+    <ClInclude Include="reaper\ToggleShownoteMarkersAction.h" />
+    <ClInclude Include="reaper\UndoMarkerAction.h" />
+    <ClInclude Include="reaper\UpdateCheck.h" />
+    <ClInclude Include="reaper\VersionHandler.h" />
     <ClInclude Include="reaper\VersionString.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Submodules\zlib\contrib\minizip\ioapi.h" />
-    <ClInclude Include="Submodules\zlib\contrib\minizip\iowin32.h" />
-    <ClInclude Include="Submodules\zlib\contrib\minizip\unzip.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="reaper_ultraschall.rc" />

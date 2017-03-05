@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -99,7 +99,7 @@ const char* ResourceManager::GetLocalizedString(const ResourceId& id) const
    return result;
 }
 
-const ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& id)
+ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& id)
 {
    ServiceStatus status = SERVICE_FAILURE;
    
@@ -117,7 +117,7 @@ const ServiceStatus ResourceManager::RegisterLocalizedString(const ResourceId& i
    return status;
 }
    
-const ServiceStatus ResourceManager::SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str)
+ServiceStatus ResourceManager::SetLocalizedString(const ResourceId& id, const std::string& language, const std::string& str)
 {
    ServiceStatus status = SERVICE_FAILURE;
    

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,22 +34,19 @@
 
 namespace ultraschall { namespace reaper {
 
-class ICustomAction;
-
 class CustomActionManager
 {
 public:
    static CustomActionManager& Instance();
 
-   static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
+   ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
    
-   const ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
    void UnregisterCustomAction(const int32_t id);
    void UnregisterCustomAction(const std::string& name);
    void UnregisterAllCustomActions();
 
-   const ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
-   const ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
+   ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
+   ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
 
 protected:
    virtual ~CustomActionManager();

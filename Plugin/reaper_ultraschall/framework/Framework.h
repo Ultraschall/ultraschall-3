@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,8 @@
 #include <Platform.h>
 
 #include <cstdint>
+#include <cstdlib>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -71,14 +73,6 @@ template<class ReferenceCountedType> inline static void SafeRelease(ReferenceCou
    }
 }
 
-template<class ReferenceCountedType> inline static void SafeRetain(ReferenceCountedType* ptr)
-{
-   if(ptr != 0)
-   {
-      ptr->AddRef();
-   }
-}
-   
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__

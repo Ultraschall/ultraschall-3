@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +32,8 @@ namespace ultraschall { namespace framework {
 class TextFileReader
 {
 public:
-   static const std::string Read(const std::string& filename);
-   static const std::vector<std::string> ReadLines(const std::string& filename);
+   static std::string Read(const std::string& filename);
+   static std::vector<std::string> ReadLines(const std::string& filename);
 };
 
 }}

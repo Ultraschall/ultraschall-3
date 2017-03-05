@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,21 +30,23 @@
 
 #include <ServiceStatus.h>
 
-namespace ultraschall { namespace reaper {
+#include "ICustomAction.h"
 
-class ICustomAction;
+namespace ultraschall { namespace reaper {
 
 class CustomActionFactory
 {
 public:
    static CustomActionFactory& Instance();
 
-   typedef const ServiceStatus (*CREATE_CUSTOM_ACTION_FUNCTION)(ICustomAction*&);
-   const ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+   typedef ICustomAction* (*CREATE_CUSTOM_ACTION_FUNCTION)();
+
+   ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+
    void UnregisterCustomAction(const std::string& id);
    void UnregisterAllCustomActions();
 
-   const ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
+   ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
 
 protected:
    virtual ~CustomActionFactory();
@@ -57,6 +59,24 @@ private:
 
    std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION> functions_;
    mutable std::recursive_mutex functionsLock_;
+};
+
+template<class C> class DeclareCustomAction
+{
+public:
+   typedef C custom_action_type;
+
+   DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
+   }
+
+   virtual ~DeclareCustomAction()
+   {
+      CustomActionFactory& factory = CustomActionFactory::Instance();
+      factory.UnregisterCustomAction(custom_action_type::UniqueId());
+   }
 };
 
 }}

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
-#define __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__
+#define __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__
 
 #include <string>
 #include <ResourceId.h>
@@ -35,10 +35,11 @@ class NotificationWindow
 public:
     static void Show(const std::string& message, const bool isError = false);
     static void Show(const std::string& message, const std::string& info, const bool isError = false);
-    static void Show(const framework::ResourceId id, const bool isError = false);
-    static void ShowUpdateAvailable(const std::string& message, const std::string& info, const std::string& changelog);
+
+private:
+   static void ShowFatalErrorMessage();
 };
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_MESSAGE_BOX_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__

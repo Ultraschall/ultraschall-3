@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,10 @@
 #include "ThemeVersionCheck.h"
 #include "FileManager.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+namespace reaper {
 
-const std::string QueryThemeVersion()
+std::string QueryThemeVersion()
 {
    std::string result;
    
@@ -48,10 +49,10 @@ const std::string QueryThemeVersion()
    {
 #ifndef WIN32
       const std::string themeControlFile = applicationSupportDirectory +
-        "/REAPER/ColorThemes/Ultraschall_2.2.ReaperThemeZip";
+        "/REAPER/ColorThemes/Ultraschall_3.0.ReaperThemeZip";
 #else
        const std::string themeControlFile = applicationSupportDirectory +
-           "\\REAPER\\ColorThemes\\Ultraschall_2.2.ReaperThemeZip";
+           "\\REAPER\\ColorThemes\\Ultraschall_3.0.ReaperThemeZip";
 #endif // #ifndef WIN32
 
       unzFile themeFile = unzOpen(themeControlFile.c_str());
@@ -119,4 +120,5 @@ const std::string QueryThemeVersion()
    return result;
 }
 
-}}
+}
+}
