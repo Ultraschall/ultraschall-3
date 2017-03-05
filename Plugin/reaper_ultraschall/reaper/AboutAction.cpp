@@ -97,7 +97,7 @@ REAPER ";
    message2 += QueryRawReaperVersion();
    message2 += "\r\n";
 
-   NotificationWindow::Show("About Ultraschall 3.0.1 \"Miedinger\"...", message1 + message2);
+   NotificationWindow::Show("About Ultraschall 3.0.2 \"Miedinger\" beta1...", message1 + message2);
 
    return SERVICE_SUCCESS;
 }
