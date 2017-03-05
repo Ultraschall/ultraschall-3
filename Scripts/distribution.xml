@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-	<title>Ultraschall 2.2.2</title>
-	<organization>fm.ultraschall</organization>
-	<options customize="never" require-scripts="true" rootVolumeOnly="true"/>
-	<domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
-	<os-version min="10.11"/>
-	<background file="background.png" mime-type="image/png"/>
-	<!-- Define documents displayed at various steps -->
-	<license file="license.html" mime-type="text/html"/>
-	<!-- List all component packages -->
-	<pkg-ref id="fm.ultraschall.Soundboard.Component" version="2.2.2">UltraschallSoundboard.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Soundboard.Extras" version="2.2.2">UltraschallSoundboardExtras.pkg</pkg-ref>
-	<pkg-ref id="com.itsr.StudioLink.Component" version="16.04.1">StudioLink.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Extension" version="2.2.2">UltraschallPluginExtension.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Plugin.Scripts" version="2.2.2">UltraschallPluginScripts.pkg</pkg-ref>
-	<pkg-ref id="fm.ultraschall.Resources" version="2.2.2">UltraschallResources.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws" version="2.8.3">SWS_Extension-2.8.3.pkg</pkg-ref>
-	<pkg-ref id="com.mj-s.sws.Scripts" version="2.8.3">SWS_ExtensionScripts-2.8.3.pkg</pkg-ref>
-	<!-- List them again here. They can now be organised as a hierarchy if you want. -->
-	<choices-outline>
-		<line choice="fm.ultraschall.Soundboard.Component"/>
-		<line choice="fm.ultraschall.Soundboard.Extras"/>
-		<line choice="com.itsr.StudioLink.Component"/>
-		<line choice="fm.ultraschall.Plugin.Extension"/>
-		<line choice="fm.ultraschall.Plugin.Scripts"/>
-		<line choice="fm.ultraschall.Resources"/>
-		<line choice="com.mj-s.sws"/>
-		<line choice="com.mj-s.sws.Scripts"/>
-	</choices-outline>
-	<!-- Define each choice above -->
-	<choice id="fm.ultraschall.Soundboard.Component" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard Plug-in." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.Soundboard.Component"/>
-	</choice>
-	<choice id="fm.ultraschall.Soundboard.Extras" visible="true" title="Ultraschall Soundboard Extras" description="Ultraschall Soundboard TouchOSC templates and additional sounds." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.Soundboard.Extras"/>
-	</choice>
-	<choice id="com.itsr.StudioLink.Component" visible="true" title="StudioLink" description="StudioLink Plug-in." start_selected="true">
-	  <pkg-ref id="com.itsr.StudioLink.Component"/>
-	</choice>
-	<choice id="fm.ultraschall.Plugin.Extension" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension. Adds import and export of chapter markers to REAPER 5." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.Plugin.Extension"/>
-	</choice>
-	<choice id="fm.ultraschall.Plugin.Scripts" visible="true" title="Ultraschall REAPER Extension Scripts" description="Ultraschall REAPER Extension Scripts. Add extended functions for Podcasters to REAPER 5." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.Plugin.Scripts"/>
-	</choice>
-	<choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="Additional documents and images." start_selected="true">
-	  <pkg-ref id="fm.ultraschall.Resources"/>
-  	</choice>
-	<choice id="com.mj-s.sws" visible="true" title="SWS REAPER Extension" description="SWS REAPER Extension (see http://sws.mj-s.com)" start_selected="true">
-	  <pkg-ref id="com.mj-s.sws"/>
-	</choice>
-	<choice id="com.mj-s.sws.Scripts" visible="true" title="SWS REAPER Extension Scripts" description="SWS REAPER Extension Scripts (see http://sws.mj-s.com)" start_selected="true">
-	  <pkg-ref id="com.mj-s.sws.Scripts"/>
-	</choice>
+   <title>Ultraschall 3.0.1</title>
+   <organization>fm.ultraschall</organization>
+   <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
+   <domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
+   <os-version min="10.11"/>
+   <background file="background.png" mime-type="image/png"/>
+   <!-- Define documents displayed at various steps -->
+   <license file="license.html" mime-type="text/html"/>
+   <!-- List all component packages -->
+   <pkg-ref id="fm.ultraschall.Soundboard.Component" version="3.0.0">UltraschallSoundboard.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Soundboard.Extras" version="3.0.0">UltraschallSoundboardExtras.pkg</pkg-ref>
+   <pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
+   <pkg-ref id="net.sf.lame.Encoder" version="3.98.3">LAME.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.0.1">UltraschallPluginExtension.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Resources" version="3.0.0">UltraschallResources.pkg</pkg-ref>
+   <pkg-ref id="com.mj-s.sws" version="2.8.3">SWS_Extension-2.8.3.pkg</pkg-ref>
+   <pkg-ref id="com.mj-s.sws.Scripts" version="2.8.3">SWS_ExtensionScripts-2.8.3.pkg</pkg-ref>
+   <!-- List them again here. They can now be organised as a hierarchy if you want. -->
+   <choices-outline>
+      <line choice="fm.ultraschall.Soundboard.Component"/>
+      <line choice="fm.ultraschall.Soundboard.Extras"/>
+      <line choice="com.itsr.StudioLink.Component"/>
+      <line choice="net.sf.lame.Encoder"/>
+      <line choice="fm.ultraschall.Plugin.Extension"/>
+      <line choice="fm.ultraschall.Resources"/>
+      <line choice="com.mj-s.sws"/>
+      <line choice="com.mj-s.sws.Scripts"/>
+   </choices-outline>
+   <!-- Define each choice above -->
+   <choice id="fm.ultraschall.Soundboard.Component" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard Plug-in." start_selected="true">
+      <pkg-ref id="fm.ultraschall.Soundboard.Component"/>
+   </choice>
+   <choice id="fm.ultraschall.Soundboard.Extras" visible="true" title="Ultraschall Soundboard Extras" description="Ultraschall Soundboard TouchOSC templates and additional sounds." start_selected="true">
+      <pkg-ref id="fm.ultraschall.Soundboard.Extras"/>
+   </choice>
+   <choice id="com.itsr.StudioLink.Component" visible="true" title="StudioLink" description="StudioLink Plug-in." start_selected="true">
+      <pkg-ref id="com.itsr.StudioLink.Component"/>
+   </choice>
+   <choice id="net.sf.lame.Encoder" visible="true" title="LAME MP3 Encoder" description="LAME MP3 Encoder." start_selected="true">
+      <pkg-ref id="net.sf.lame.Encoder"/>
+   </choice>
+   <choice id="fm.ultraschall.Plugin.Extension" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension. Adds import and export of chapter markers to REAPER 5." start_selected="true">
+      <pkg-ref id="fm.ultraschall.Plugin.Extension"/>
+   </choice>
+   <choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="Additional documents and images." start_selected="true">
+      <pkg-ref id="fm.ultraschall.Resources"/>
+   </choice>
+   <choice id="com.mj-s.sws" visible="true" title="SWS REAPER Extension" description="SWS REAPER Extension (see http://sws.mj-s.com)" start_selected="true">
+      <pkg-ref id="com.mj-s.sws"/>
+   </choice>
+   <choice id="com.mj-s.sws.Scripts" visible="true" title="SWS REAPER Extension Scripts" description="SWS REAPER Extension Scripts (see http://sws.mj-s.com)" start_selected="true">
+      <pkg-ref id="com.mj-s.sws.Scripts"/>
+   </choice>
 </installer-gui-script>
