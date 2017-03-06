@@ -12,6 +12,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Keymap: **Optimierung der Tastatur-Shortcuts für Windows**
 *Die Belegung von Shortcuts von Windows wurde dem Verhalen auf macOS angepasst. Die PDF-Schablone funktioniert nun auf beiden Systemen gleich.*
 
+* Theme: **FX Buttons im Master-Kanal**
+*Die Buttons zum Einstellen von FX sind nun auch im Master-Kanal in jeder Größe sichtbar.*
 
 ## 3.0.1 Miedinger - 2017-März-05
 
