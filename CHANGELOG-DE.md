@@ -9,6 +9,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing **Verbesserter Ripple-Cut**
 *Die neue Ripple-Cut Funktion (`cmd` + `x` sowie das entsprechende Icon) verhalten sich nun sinnvoller: ist nichts ausgewählt, passiert nichts. Ist eine Zeitauswahl markiert, wird nur diese geschnitten, unabhängig von eventuell zugleich ausgewählten Items. Ist keine Zeitauswahl markiert, aber genau ein Item, so wird anhand dessen Rändern ein Ripple-Cut vorgenommen (Tim's Ripple Cut). Ist keine Zeitauswahl markiert, sowie mehrere Items, passiert nichts.*
 
+* Editing **Schneller Wechsel und Einfrieren der Trackhöhe**
+*Mit der Taste `h` schaltet man schnell zwischen zwei (einstellbaren) Trackhöhen hin und her, die dann ihre Höhe auch bei Verschieben der Fenster untereinander behalten. Das Umschalten wirkt auf alle markierten Spuren. Ist keine Spur markiert, werden alle Spuren verändert. Das Einfrieren der Höhe kann mit mit den Zoom-Schaltern wieder aufgehoben werden.*
+
 * Keymap: **Optimierung der Tastatur-Shortcuts für Windows**
 *Die Belegung von Shortcuts von Windows wurde dem Verhalen auf macOS angepasst. Die PDF-Schablone funktioniert nun auf beiden Systemen gleich.*
 
