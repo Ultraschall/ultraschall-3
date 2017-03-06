@@ -85,10 +85,19 @@ reaper.SetToggleCommandState(sec, 55695, 0)		--set OnAir Button off
 reaper.RefreshToolbar2(sec, 55695)
 
 -----------------------------
+-- Enable all sends to master for rendering
+-----------------------------
+
+reaper.Main_OnCommand(40296,0) -- select all tracks
+reaper.Main_OnCommand(reaper.NamedCommandLookup("_SWS_ENMPSEND"), 0) -- Enable all sends to Master
+reaper.Main_OnCommand(40297,0) -- unselect all tracks
+
+
+-----------------------------
 -- Display Info
 -----------------------------
 
-txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All Soundboard FX (if existent) have been removed\n- Studio Link OnAir Streaming (if active) has been stopped\n\nYou may proceed editing your project!"
+txt = "- Automation mode of all tracks is set to trim/read\n- All tracks and envelopes are disarmed for recording\n- All sends to StudioLink tracks (if existent) have been removed\n- All StudioLink FX (if existent) have been removed\n- All Soundboard FX (if existent) have been removed\n- Studio Link OnAir Streaming (if active) has been stopped\n- All sends to Master have been enabled\n\nYou may proceed editing your project!"
 title = "OK! Your project is now ready for editing:"
 result = reaper.ShowMessageBox( txt, title, 0 )
 
