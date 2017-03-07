@@ -67,7 +67,7 @@ GUI.elms = {
 	
 --     name          = element type          x      y    w    h     caption               ...other params...
 	logo			= GUI.Pic:new(			240,10, 0, 0, 1, script_path.."us.png"),
-	label           = GUI.Lbl:new(          165,  160,               "Ultraschall 3.0 - Miedinger - was sucsessfully installed.", 0),
+	label           = GUI.Lbl:new(          165,  160,               "Ultraschall 3.0.2 - Miedinger - was successfully installed.", 0),
 	label2           = GUI.Lbl:new(          135,  200,               "Visit the Podcast menu to explore the user interface and features.", 0),
 	label3           = GUI.Lbl:new(          210,  220,               "Use Project templates for a quick setup.", 0),
 
