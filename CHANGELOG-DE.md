@@ -21,6 +21,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Actions: **Erweitertes Prepare all tracks for editing**
 *Die Funktion beinhaltet nun das Einschalten der Sends aller Spuren richtung Masterkanal - eine gängige Fehlerquelle für scheinbar fehlende Spuren im finalen Mix.*
 
+* Mastering: **Erweiterte Episodenbilder**
+*Im Projektordner sind für den MP3-Export nun auch Episodenbilder mit dem Namen `cover.jpg`, `cover.jpeg` sowie `cover.png` zugelassen um schnell ein Standardbild nachnutzen zu können. Danke an Mespotine für die Idee.*
+
 ## 3.0.1 Miedinger - 2017-März-05
 
 * Streaming: **Studio Link OnAir Streaming**
