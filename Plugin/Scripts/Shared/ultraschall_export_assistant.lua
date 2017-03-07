@@ -79,6 +79,15 @@ img_index = false
 
 endings = {".jpg", ".jpeg", ".png"} -- prefer .png
 for key,value in pairs(endings) do 
+	img_adress = dir .. "cover" .. value		-- does cover.xyz exist?
+	img_test = gfx.loadimg(0, img_adress)
+	if img_test ~= -1 then
+		img_index = img_test
+	end
+end
+
+endings = {".jpg", ".jpeg", ".png"} -- prefer .png
+for key,value in pairs(endings) do 
 	img_adress = string.gsub(project_path_name, ".RPP", value)
 	img_test = gfx.loadimg(0, img_adress)
 	if img_test ~= -1 then
