@@ -77,12 +77,14 @@ end
 
 img_index = false
 
-endings = {".jpg", ".jpeg", ".png"} -- prefer .png
-for key,value in pairs(endings) do 
-	img_adress = dir .. "cover" .. value		-- does cover.xyz exist?
-	img_test = gfx.loadimg(0, img_adress)
-	if img_test ~= -1 then
-		img_index = img_test
+if dir then
+	endings = {".jpg", ".jpeg", ".png"} -- prefer .png
+	for key,value in pairs(endings) do 
+		img_adress = dir .. "cover" .. value		-- does cover.xyz exist?
+		img_test = gfx.loadimg(0, img_adress)
+		if img_test ~= -1 then
+			img_index = img_test
+		end
 	end
 end
 
@@ -116,7 +118,7 @@ if img_index then	-- there is an episode-image
 	
 --     name          = element type          x      y    w    h     caption               ...other params...
 	logo			= GUI.Pic:new(			484,280, 80, 80, img_ratio, img_adress, runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
-	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image:\nFound.\n\n\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
+	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Episode Image:\nFound.\n\n\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
 	label2          = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
 	label3          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
 	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
@@ -132,7 +134,7 @@ else
 	
 --     name          = element type          x      y    w    h     caption               ...other params...
 	-- logo			= GUI.Pic:new(			374,178, 0, 0, img_ratio, img_adress),
-	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Image\nJust put a square .jpg, .jpeg or .png image\nwith the same name as your project file (.RPP)\nin the project folder.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
+	label           = GUI.Lbl:new(          50,  120+y_offset,               "Export MP3\nRender your Podcast to a MP3 File.\n\n\nChapter Markers\nYou may take a final look at your chapter markers.\n\n\nID3 Metadata\nUse the ID3 Editor to add metadata to your podcast.\n\n\nPodcast Episode Image\nJust put a square .jpg, .jpeg or .png image with the\nname 'cover.xyz' OR with the same name as your\nproject file (.RPP) in the project folder.\n\n\nFinalize MP3\nHit the button and select your MP3 to finalize it\nwith metadata, chapters and episode image!", 0),
 	label2          = GUI.Lbl:new(          30,  120+y_offset,               "1.\n\n\n\n2.\n\n\n\n3.\n\n\n\n4.\n\n\n\n\n\n5.", 0),
 	label3          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
 	export      	= GUI.Btn:new(          430, 120+y_offset, 190, 40,      "Export MP3", runcommand, "_3fd5566413d8497486c9981b4bb963e8"),
