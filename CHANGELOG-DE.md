@@ -12,8 +12,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Schneller Wechsel und Einfrieren der Trackhöhe**
 *Mit der Taste `h` schaltet man schnell zwischen zwei (einstellbaren) Trackhöhen hin und her, die dann ihre Höhe auch bei Verschieben der Fenster untereinander behalten. Das Umschalten wirkt auf alle markierten Spuren. Ist keine Spur markiert, werden alle Spuren verändert. Das Einfrieren der Höhe kann mit mit den Zoom-Schaltern wieder aufgehoben werden.*
 
-* Keymap: **Optimierung der Tastatur-Shortcuts für Windows**
-*Die Belegung von Shortcuts von Windows wurde dem Verhalen auf macOS angepasst. Die PDF-Schablone funktioniert nun auf beiden Systemen gleich.*
+* Keymap: **Optimierung der Tastatur-Shortcuts und Mapping für Windows**
+*Die Belegung von Shortcuts von Windows wurde dem Verhalen auf macOS angepasst. Die PDF-Schablone funktioniert nun auf beiden Systemen gleich. Neue Shortcuts sind etwa: `shift` + `n` - Normalisierung ausgewählter Items sowie `alt` + `d` - ausschalten aller Docks für ablenkungsfreies Editieren.*
 
 * Theme: **FX Buttons im Master-Kanal**
 *Die Buttons zum Einstellen von FX sind nun auch im Master-Kanal in jeder Größe sichtbar.*
