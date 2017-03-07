@@ -25,21 +25,18 @@
 #include "StringUtilities.h"
 #include <codecvt>
 
-#include <iconv.h>
-
 namespace ultraschall
 {
 namespace framework
 {
-
 
 UnicodeString MakeUTF16BOM()
 {
    UnicodeString result;
 
    UnicodeChar bom = 0;
-   ((uint8_t*)&bom)[0] = 0xff;
-   ((uint8_t*)&bom)[1] = 0xfe;
+   ((uint8_t *)&bom)[0] = 0xff;
+   ((uint8_t *)&bom)[1] = 0xfe;
    result += bom;
 
    return result;
@@ -71,22 +68,22 @@ UnicodeString MakeUnicodeString(const std::string &src)
 UnicodeString MakeUnicodeStringWithBOM(const std::string &src)
 {
    return UTF16_BOM + MakeUnicodeString(src);
-//   return MakeUnicodeString(src);
+   //   return MakeUnicodeString(src);
 }
-   
-std::string MakeUTF8String(const UnicodeString& src)
+
+std::string MakeUTF8String(const UnicodeString &src)
 {
    std::string result;
 
    size_t offset = 0;
-   if(src.size() > 1)
+   if (src.size() > 1)
    {
-      if(src[0] == (UnicodeChar)0xfffe)
+      if (src[0] == (UnicodeChar)0xfffe)
       {
          offset = 1;
       }
    }
-   
+
    try
    {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
@@ -202,6 +199,5 @@ std::string UnicodeStringToAnsiString(const std::string &str, int codepage)
 }
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
-   
 }
 }
