@@ -53,10 +53,10 @@ UnicodeString MakeUnicodeString(const std::string &src)
    {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
       std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-#else
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
       result = stringConverter.from_bytes(src);
+#else
+      result = AnsiStringToWideUnicodeString(src);
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
    }
    catch (std::range_error &)
    {
@@ -69,7 +69,6 @@ UnicodeString MakeUnicodeString(const std::string &src)
 UnicodeString MakeUnicodeStringWithBOM(const std::string &src)
 {
    return UTF16_BOM + MakeUnicodeString(src);
-//   return MakeUnicodeString(src);
 }
    
 std::string MakeUTF8String(const UnicodeString& src)
@@ -155,6 +154,33 @@ std::string AnsiStringToUnicodeString(const std::string &str)
    }
 
    return unicodeString;
+}
+
+std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString)
+{
+   std::wstring wideUnicodeString;
+
+   if(ansiString.empty() == false)
+   {
+      const int wideStringBufferLength = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), 0, 0);
+      if(wideStringBufferLength > 0)
+      {
+         WCHAR *wideStringBuffer = (WCHAR *)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
+         if(wideStringBuffer != nullptr)
+         {
+            int convertedBytes = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), wideStringBuffer, wideStringBufferLength);
+            if(convertedBytes > 0)
+            {
+               wideUnicodeString = wideStringBuffer;
+            }
+
+            free(wideStringBuffer);
+            wideStringBuffer = nullptr;
+         }
+      }
+   }
+
+   return wideUnicodeString;
 }
 
 std::string UnicodeStringToAnsiString(const std::string &str, int codepage)

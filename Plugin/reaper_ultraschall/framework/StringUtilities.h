@@ -101,6 +101,8 @@ std::string MakeUTF8String(const UnicodeString& src);
 
 std::string AnsiStringToUnicodeString(const std::string& ansiString);
 
+std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString);
+
 std::string UnicodeStringToAnsiString(const std::string& unicodeString, int codepage = 0);
 }
 }
