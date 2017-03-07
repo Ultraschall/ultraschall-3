@@ -94,7 +94,7 @@ Zusätzlich gibt es unten links nun einen neuen Reiter für `Loudness`, mit dem 
 *Ein neuer Export-Assistent, links unten in der `Export` Iconleiste zu finden, hilft dabei, perfekte MP3-Dateien zu erzeugen. Die ID3V2 Elemente Metadaten (wie Titel, Podcast etc.), Episodenbild und Kapitelmarken werden in die produzierte MP3-Datei gespeichert.*
 
 * Mastering: **Rauschfilter verfügbar**
-*Zum Beheben gängiger Soundprobleme wie Rauschen oder Netzbrummen wurde der ReaFir-Effekt in die Effekt-Favoriten mit aufgenommen. Die Bedienung wird im Video zu Ultraschall Dynamics erläutert. (LINK?)*
+*Zum Beheben gängiger Soundprobleme wie Rauschen oder Netzbrummen wurde der ReaFir-Effekt in die Effekt-Favoriten mit aufgenommen. Die Bedienung wird im [Video zu Ultraschall Dynamics](http://ultraschall.fm/tutorials/) erläutert.*
 
 * Mastering: **Bugfix: Projektordner öffnen**
 *Menübefehl und Icon für das Öffnen des Projektverzeichnisses öffnen nun wirklich das Projektverzeichnis - nicht wie bisher den Unterordner mit den Sounddateien.*
