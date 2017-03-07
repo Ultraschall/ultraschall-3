@@ -38,7 +38,7 @@ namespace reaper
 static const char *VERSIONS_SECTION_NAME = "ultraschall_versions";
 static const char *THEME_VERSION_KEY_NAME = "theme";
 static const char *PLUGIN_VERSION_KEY_NAME = "plugin";
-static const char *VERSION_VALUE_NAME = "20170226";
+static const char *VERSION_VALUE_NAME = "20170306";
 
 bool QuerySetPluginVersion()
 {

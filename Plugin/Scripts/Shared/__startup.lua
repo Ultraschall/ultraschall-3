@@ -30,7 +30,7 @@ function Msg(val)
   reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
-theme_version_now = 20170226 -- version of this theme
+theme_version_now = 20170306 -- version of this theme
 
 -- reaper.SetExtState("ultraschall_versions", "theme", theme_version_now, true)
 -- not a godd idea: something went wrong during the installation of the theme, so don't fix but reinstall

@@ -73,7 +73,6 @@
 		42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A6B1E53B21900092214 /* TimeUtilities.cpp */; };
 		42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A6C1E53B21900092214 /* TimeUtilities.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
-		423D88371E54DBFE00AF8A41 /* libtag.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 423D88361E54DBFE00AF8A41 /* libtag.a */; };
 		423D883E1E54DDA800AF8A41 /* MP3Properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */; };
 		423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */ = {isa = PBXBuildFile; fileRef = 423D883D1E54DDA800AF8A41 /* MP3Properties.h */; };
 		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
@@ -92,6 +91,7 @@
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
 		4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */; };
 		4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */; };
+		425300281E6DF2F6007B3ECF /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 425300271E6DF2F6007B3ECF /* libiconv.tbd */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */; };
@@ -215,7 +215,6 @@
 		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
 		42327A6C1E53B21900092214 /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtilities.h; path = framework/TimeUtilities.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
-		423D88361E54DBFE00AF8A41 /* libtag.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtag.a; path = ../3rd_party/taglib/lib/macos/debug/libtag.a; sourceTree = "<group>"; };
 		423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MP3Properties.cpp; path = reaper/MP3Properties.cpp; sourceTree = "<group>"; };
 		423D883D1E54DDA800AF8A41 /* MP3Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP3Properties.h; path = reaper/MP3Properties.h; sourceTree = "<group>"; };
 		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
@@ -234,6 +233,7 @@
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
 		4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheck.cpp; path = reaper/UpdateCheck.cpp; sourceTree = "<group>"; };
 		4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheck.h; path = reaper/UpdateCheck.h; sourceTree = "<group>"; };
+		425300271E6DF2F6007B3ECF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutAction.cpp; path = reaper/AboutAction.cpp; sourceTree = "<group>"; };
@@ -278,7 +278,6 @@
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 		A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = PluginVersionCheck.cpp; path = reaper/PluginVersionCheck.cpp; sourceTree = "<group>"; };
 		A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginVersionCheck.h; path = reaper/PluginVersionCheck.h; sourceTree = "<group>"; };
-		A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,10 +285,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				423D88371E54DBFE00AF8A41 /* libtag.a in Frameworks */,
 				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
 				42327A651E53A05700092214 /* libexpat.tbd in Frameworks */,
 				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
+				425300281E6DF2F6007B3ECF /* libiconv.tbd in Frameworks */,
 				422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,7 +308,8 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				423D88361E54DBFE00AF8A41 /* libtag.a */,
+				425300271E6DF2F6007B3ECF /* libiconv.tbd */,
+				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42327A641E53A05700092214 /* libexpat.tbd */,
 				42327A621E53A04B00092214 /* libcurl.tbd */,
 				422A07201E4B6D5E00D758FE /* libz.tbd */,
@@ -321,8 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				420E078F1E4F25E600FEF003 /* 3rdParty */,
-				A9B92D1F1C95C8EF00D6B1AE /* WebKit.framework */,
-				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42F19A5F1ABEE7FA00231F3D /* Reaper */,
 				42F19A5E1ABEE7EA00231F3D /* Framework */,
 				429A7C5A1ABEE63B00231F3D /* Products */,
@@ -792,6 +790,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/debug;
+				OTHER_LDFLAGS = "-ltag-static-x64-debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -809,6 +808,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/release;
+				OTHER_LDFLAGS = "-ltag-static-x64-release";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

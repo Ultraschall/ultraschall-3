@@ -79,7 +79,7 @@ std::string VersionHandler::PluginVersion()
    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
    return FileManager::ReadVersionFromFile(path);
 #else
-   return "3.0.1";
+   return "3.0.2";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
