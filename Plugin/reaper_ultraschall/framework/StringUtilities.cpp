@@ -25,6 +25,8 @@
 #include "StringUtilities.h"
 #include <codecvt>
 
+#include <iconv.h>
+
 namespace ultraschall
 {
 namespace framework
@@ -200,5 +202,6 @@ std::string UnicodeStringToAnsiString(const std::string &str, int codepage)
 }
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+   
 }
 }

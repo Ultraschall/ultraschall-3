@@ -91,6 +91,7 @@
 		424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */; };
 		4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */; };
 		4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */; };
+		425300281E6DF2F6007B3ECF /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 425300271E6DF2F6007B3ECF /* libiconv.tbd */; };
 		4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */; };
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4254C9911BF2A7D900B1EF1F /* AboutAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */; };
@@ -232,6 +233,7 @@
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
 		4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheck.cpp; path = reaper/UpdateCheck.cpp; sourceTree = "<group>"; };
 		4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheck.h; path = reaper/UpdateCheck.h; sourceTree = "<group>"; };
+		425300271E6DF2F6007B3ECF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4254C98F1BF2A7D900B1EF1F /* AboutAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AboutAction.cpp; path = reaper/AboutAction.cpp; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
 				42327A651E53A05700092214 /* libexpat.tbd in Frameworks */,
 				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
+				425300281E6DF2F6007B3ECF /* libiconv.tbd in Frameworks */,
 				422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +308,7 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				425300271E6DF2F6007B3ECF /* libiconv.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42327A641E53A05700092214 /* libexpat.tbd */,
 				42327A621E53A04B00092214 /* libcurl.tbd */,
