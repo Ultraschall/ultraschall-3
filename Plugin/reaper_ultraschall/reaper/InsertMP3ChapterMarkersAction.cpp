@@ -72,6 +72,9 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
          }
 
          std::vector<std::string> imageNames;
+         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
+         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
+         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
          imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
          imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
          imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
