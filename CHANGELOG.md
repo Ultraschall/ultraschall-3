@@ -5,16 +5,16 @@ Please consult our tutorial videos (German) for detailed advide: [http://ultrasc
 ## 3.0.2 Miedinger - 2017-March-09
 
 * Editing: **Shortcuts for Inpoint and Outpoint**
-*Use the buttons `alt` +` i` and `alt` +` o` to jump to the beginning or end of a time selection. With `shift` +` i` and `shift` +` o` sound will be played from the respective position.*
+*Use the buttons `alt` + `i` and `alt` + `o` to jump to the beginning or end of a time selection. With `shift` + `i` and `shift` + `o` sound will be played from the respective position.*
 
 * Editing: **Improved ripple-cut**
-*The new ripple-cut function (`cmd` +` x` as well as the corresponding icon) now behave more sensibly: if nothing is selected, nothing happens. If a time selection is selected, only this will be cut, regardless of items that may or may not be selected at the same time. If no time selection is selected, but exactly one item, a ripple cut (Tim's Ripple Cut) is made by means of its edges. If no time selection is selected, but several items, nothing happens.*
+*The new ripple-cut function (`cmd` + `x` as well as the corresponding icon) now behave more sensibly: if nothing is selected, nothing happens. If a time selection is selected, only this will be cut, regardless of items that may or may not be selected at the same time. If no time selection is selected, but exactly one item, a ripple cut (Tim's Ripple Cut) is made by means of its edges. If no time selection is selected, but several items, nothing happens.*
 
-* Editing: **Quick change and freeze track height**
-*Use the `h` key to quickly switch between two (adjustable) track heights, which keep their height even when the windows are changed in size. The switch affects all selected tracks. If no track is selected, all tracks are affected. The freezing of the height can be canceled with the zoom buttons beneath the vertical scrollbar.*
+* Editing: **Quickly change and freeze track height**
+*Use the `h` key to quickly switch between two (adjustable) track heights, which keep their height even when the window is changed in size. The switch affects all selected tracks. If no track is selected, all tracks are affected. The freezing of the height can be canceled with the zoom buttons beneath the vertical scrollbar.*
 
 * Keymap: **Optimization of keyboard shortcuts and mapping for Windows**
-*The assignment of shortcuts for Windows was adapted to the behavior on macOS. The PDF template now works the same on both systems. New shortcuts include: `shift` +` n` - Normalization of selected items as well as `alt` +` d` - Switch off all docks for distraction-free editing.*
+*The assignment of shortcuts for Windows was adapted to the behavior on macOS. The PDF template now works the same on both systems. New shortcuts include: `shift` + `n` - Normalization of selected items as well as `alt` + `d` - Switch off all docks for distraction-free editing.*
 
 * Theme: **FX buttons on master channel**
 *The buttons for setting FX are now also visible in the master channel in any size.*
@@ -23,7 +23,7 @@ Please consult our tutorial videos (German) for detailed advide: [http://ultrasc
 *The function now includes switching on the sends of all tracks towards the master channel - a common source of mistakes for seemingly missing tracks in the final mix.*
 
 * Mastering: **Extended episode images**
-*to quickly use a standard image as episode image, you may now also use files with the name `cover.jpg`,` cover.jpeg` or `cover.png` in the project folder. Thanks to Mespotine for the idea.*
+*To quickly use a standard image as episode image, you may now also use files with the name `cover.jpg`, `cover.jpeg` or `cover.png` in the project folder. Thanks to Mespotine for the idea.*
 
 ## 3.0.1 Miedinger - 2017-March-05
 
@@ -76,7 +76,7 @@ Please consult our tutorial videos (German) for detailed advide: [http://ultrasc
 *Selecting time places the play cursor directly at the inpoint of the selection, to that one can use `return` or `space` to directly listen to the selection.*
 
 * Editing: **Expanded Ripple Cut**
-*The shortcut `cmd`+`x` effects a ripple cut over all tracks, even when only a single item is selected. The cutting range will then be the start- and endpoint of the item.*
+*The shortcut `cmd` + `x` effects a ripple cut over all tracks, even when only a single item is selected. The cutting range will then be the start- and endpoint of the item.*
 
 * Keymap: **New Layout for Keyboard Shortcuts**
 *A multitude of shortcuts was reworked and newly added in order to enable more efficient cutting via the keyboard. The new shortcuts are visualised in a [.PDF](http://url.ultraschall-podcast.de/keymap) and you can reflect customizations in the corresponding PowerPoint source file.*
