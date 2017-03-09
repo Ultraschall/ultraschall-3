@@ -2,6 +2,29 @@
 
 Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
+## 3.0.2 Miedinger - 2017-March-09
+
+* Editing: **Shortcuts for Inpoint and Outpoint**
+*Use the buttons `alt` +` i` and `alt` +` o` to jump to the beginning or end of a time selection. With `shift` +` i` and `shift` +` o` sound will be played from the respective position.*
+
+* Editing: **Improved ripple-cut**
+*The new ripple-cut function (`cmd` +` x` as well as the corresponding icon) now behave more sensibly: if nothing is selected, nothing happens. If a time selection is selected, only this will be cut, regardless of items that may or may not be selected at the same time. If no time selection is selected, but exactly one item, a ripple cut (Tim's Ripple Cut) is made by means of its edges. If no time selection is selected, but several items, nothing happens.*
+
+* Editing: **Quick change and freeze track height**
+*Use the `h` key to quickly switch between two (adjustable) track heights, which keep their height even when the windows are changed in size. The switch affects all selected tracks. If no track is selected, all tracks are affected. The freezing of the height can be canceled with the zoom buttons beneath the vertical scrollbar.*
+
+* Keymap: **Optimization of keyboard shortcuts and mapping for Windows**
+*The assignment of shortcuts for Windows was adapted to the behavior on macOS. The PDF template now works the same on both systems. New shortcuts include: `shift` +` n` - Normalization of selected items as well as `alt` +` d` - Switch off all docks for distraction-free editing.*
+
+* Theme: **FX buttons on master channel**
+*The buttons for setting FX are now also visible in the master channel in any size.*
+
+* Actions: **Advanced Prepare all tracks for editing**
+*The function now includes switching on the sends of all tracks towards the master channel - a common source of mistakes for seemingly missing tracks in the final mix.*
+
+* Mastering: **Extended episode images**
+*to quickly use a standard image as episode image, you may now also use files with the name `cover.jpg`,` cover.jpeg` or `cover.png` in the project folder. Thanks to Mespotine for the idea.*
+
 ## 3.0.1 Miedinger - 2017-March-05
 
 * Streaming **Studio Link OnAir Streaming**
