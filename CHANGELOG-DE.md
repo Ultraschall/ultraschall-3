@@ -125,6 +125,17 @@ Zusätzlich gibt es unten links nun einen neuen Reiter für `Loudness`, mit dem 
 * StudioLink: **Update**
 *Ultraschall enthält jetzt die neue StudioLink-Version 16.04.1.*
 
+## 2.2.2 Gropius - 2016-August-14
+
+* Soundboard [Mac]: **Bugfix**
+*Bugfix: Aufgenommene Soundbooard-Spuren werdem jetzt abgespielt.*
+
+* Misc [Windows]: **Kompatibilität**
+*Updates für Windows 10 Version 1607 (Build 14393, Anniversary-Update).*
+
+* StudioLink: **Update**
+*Ultraschall enthält jetzt die neue StudioLink-Version 16.04.1.*
+
 ## 2.2.1 Gropius - 2016-June-09
 
 * Installer: **Bugfix**
