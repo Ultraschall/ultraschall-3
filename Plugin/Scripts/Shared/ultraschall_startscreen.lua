@@ -31,7 +31,7 @@ function Msg(val)
 end
 
 ------------------------------------------------------
--- Open an URL in a Browse - OS agnostic
+-- Open a URL in a browser - OS agnostic
 ------------------------------------------------------
 
 function open_url(url)
@@ -45,7 +45,7 @@ function open_url(url)
 end
 
 ------------------------------------------------------
---	Getting the values of a Checklist's options
+--	Getting the values of a checklist's options
 ------------------------------------------------------
 
 function check_values()
@@ -78,7 +78,7 @@ GUI.name = "Ultraschall 3"
 GUI.w, GUI.h = 680, 415
 
 ------------------------------------------------------
--- position always in the centre of the screen
+-- position always in the center of the screen
 ------------------------------------------------------
 
 l, t, r, b = 0, 0, GUI.w, GUI.h
