@@ -9,6 +9,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Weiter verbessertes Verhalten der `esc`-Taste**
 *Die "lösche jegliche Auswahl"-Funktion beinhaltet nun auch nicht selektierte Envelope-Points. Erstaunlich.*
 
+* Editing: **Midi Actions für EQ-Regler**
+
+
 ## 3.0.2 Miedinger - 2017-März-06
 * Editing: **Shortcuts für In- und Outpoint**
 *Mit den Tasten `alt` + `i` sowie `alt` + `o` springt man zum Anfang bzw. Ende einer Zeitauswahl. Mit `shift` + `i` sowie `shift` + `o` wird ab der jeweiligen Position abgespielt.*
