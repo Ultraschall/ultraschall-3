@@ -14,7 +14,7 @@ md Build > nul
 
 rem Visual Studio CRT
 md Payload\VCRedist > nul
-copy "%ProgramFiles(x86)%\Common Files\Merge Modules\Microsoft_VC140_CRT_x64.msm" Payload\VCRedist
+copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\MergeModules\Microsoft_VC150_CRT_x64.msm" Payload\VCRedist
 
 rem Resources
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\README.html ..\REAPER\README.md

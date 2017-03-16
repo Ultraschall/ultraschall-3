@@ -92,7 +92,7 @@
          </Directory>
       </Directory>
       <DirectoryRef Id="TARGETDIR">
-         <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC140_CRT_x64.msm" DiskId="1" Language="0"/>
+         <Merge Id="VCRedist" SourceFile="Payload\VCRedist\Microsoft_VC150_CRT_x64.msm" DiskId="1" Language="0"/>
       </DirectoryRef>
       <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
          <MergeRef Id="VCRedist"/>
