@@ -24,6 +24,7 @@
 
 #include "VersionHandler.h"
 #include "FileManager.h"
+#include "SWSVersionCheck.h"
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 #import <Foundation/Foundation.h>
@@ -76,8 +77,15 @@ std::string VersionHandler::HubVersion()
 std::string VersionHandler::PluginVersion()
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_ultraschall.dll";
-   return FileManager::ReadVersionFromFile(path);
+   std::string pluginVersion;
+
+   const std::string path = FindUltraschallPluginPath();
+   if(path.empty() == false)
+   {
+      pluginVersion = FileManager::ReadVersionFromFile(path);
+   }
+
+   return pluginVersion;
 #else
    return "3.0.3";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32

@@ -28,6 +28,10 @@
 namespace ultraschall {
     namespace reaper {
 
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+std::string FindUltraschallPluginPath();
+#endif
+
 bool SWSVersionCheck();
 
 }
