@@ -2,6 +2,16 @@
 
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
+## 3.0.3 Miedinger - 2017-März-
+* Editing Mac: **Ziehen und Kopieren von Items**
+*Unter macOS wurde das Drag&Copy Verhalten von Items dem Systemstandard angepasst: `alt` + `gedrückter Primärklick`*
+
+* Editing: **Weiter verbessertes Verhalten der `esc`-Taste**
+*Die "lösche jegliche Auswahl"-Funktion beinhaltet nun auch nicht selektierte Envelope-Points. Erstaunlich.*
+
+* Editing: **Midi Actions für EQ-Regler**
+
+
 ## 3.0.2 Miedinger - 2017-März-06
 * Editing: **Shortcuts für In- und Outpoint**
 *Mit den Tasten `alt` + `i` sowie `alt` + `o` springt man zum Anfang bzw. Ende einer Zeitauswahl. Mit `shift` + `i` sowie `shift` + `o` wird ab der jeweiligen Position abgespielt.*
