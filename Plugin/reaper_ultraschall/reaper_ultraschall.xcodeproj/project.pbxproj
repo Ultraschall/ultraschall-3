@@ -113,8 +113,6 @@
 		42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationPanel.mm */; };
 		429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB0861BDBCDCE005EA658 /* CustomAction.cpp */; };
 		429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EB0871BDBCDCE005EA658 /* CustomAction.h */; };
-		429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB08A1BDBD69F005EA658 /* InvalidEntryPointException.cpp */; };
-		429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */; };
 		42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* NotificationWindow.cpp */; };
 		42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* NotificationWindow.h */; };
 		42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */; };
@@ -256,8 +254,6 @@
 		429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = reaper_ultraschall.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		429EB0861BDBCDCE005EA658 /* CustomAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomAction.cpp; path = reaper/CustomAction.cpp; sourceTree = "<group>"; };
 		429EB0871BDBCDCE005EA658 /* CustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAction.h; path = reaper/CustomAction.h; sourceTree = "<group>"; };
-		429EB08A1BDBD69F005EA658 /* InvalidEntryPointException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InvalidEntryPointException.cpp; path = reaper/InvalidEntryPointException.cpp; sourceTree = "<group>"; };
-		429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvalidEntryPointException.h; path = reaper/InvalidEntryPointException.h; sourceTree = "<group>"; };
 		42A988C81AF286D500231F3D /* NotificationWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = NotificationWindow.cpp; path = reaper/NotificationWindow.cpp; sourceTree = "<group>"; };
 		42A988C91AF286D500231F3D /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationWindow.h; path = reaper/NotificationWindow.h; sourceTree = "<group>"; };
 		42E655011ACEE32A00231F3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -446,8 +442,6 @@
 				42A988C91AF286D500231F3D /* NotificationWindow.h */,
 				429EB0861BDBCDCE005EA658 /* CustomAction.cpp */,
 				429EB0871BDBCDCE005EA658 /* CustomAction.h */,
-				429EB08A1BDBD69F005EA658 /* InvalidEntryPointException.cpp */,
-				429EB08B1BDBD69F005EA658 /* InvalidEntryPointException.h */,
 				42915BD61BDC040A00916876 /* NotificationPanel.h */,
 				42915BD71BDC040A00916876 /* NotificationPanel.mm */,
 				42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */,
@@ -490,7 +484,6 @@
 				422A06F31E4B69F100D758FE /* InsertChapterMarkersAction.h in Headers */,
 				422A070A1E4B69F100D758FE /* SetEditMarkerAction.h in Headers */,
 				422A06C81E4B69C100D758FE /* CommandFactory.h in Headers */,
-				429EB08D1BDBD69F005EA658 /* InvalidEntryPointException.h in Headers */,
 				422A071C1E4B6B7000D758FE /* Platform.h in Headers */,
 				4254C9921BF2A7D900B1EF1F /* AboutAction.h in Headers */,
 				422A070C1E4B69F100D758FE /* SetHistoricalMarkerAction.h in Headers */,
@@ -605,7 +598,6 @@
 				42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */,
 				422A06FD1E4B69F100D758FE /* ProjectManager.cpp in Sources */,
 				42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */,
-				429EB08C1BDBD69F005EA658 /* InvalidEntryPointException.cpp in Sources */,
 				422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */,
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
 				422A07151E4B69F100D758FE /* UndoMarkerAction.cpp in Sources */,
