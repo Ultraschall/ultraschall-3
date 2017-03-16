@@ -85,12 +85,13 @@ void ProjectCallback::BeginLoadProjectState(ProjectHandle)
 {
 }
 
-std::pair<uint8_t, uint8_t> ProjectCallback::ParseVersion(const std::string& line)
+std::pair<uint8_t, uint8_t> ProjectCallback::ParseVersion(const std::string& /*line*/)
 {
+   //FIXME
    return std::pair<uint8_t, uint8_t>(3, 0);
 }
 
-uint32_t ProjectCallback::ParseMarkerStatus(const std::string& line)
+uint32_t ProjectCallback::ParseMarkerStatus(const std::string& /*line*/)
 {
    return Project::SHOW_EDIT_MARKERS | Project::SHOW_CHAPTER_MARKERS;
 }

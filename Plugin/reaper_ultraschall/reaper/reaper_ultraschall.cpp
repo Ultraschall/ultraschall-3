@@ -28,7 +28,6 @@
 #include "Application.h"
 #include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
-#include "InvalidEntryPointException.h"
 
 #include "CustomActionManager.h"
 

@@ -43,7 +43,7 @@ void Trace_0(const TraceLevel level, const char* format, ...)
    va_end(args);
 }
 
-void TraceVa_0(const TraceLevel level, const char* format, va_list args)
+void TraceVa_0(const TraceLevel /*level*/, const char* format, va_list args)
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
    char buffer[MAX_TRACE_MESSAGE_SIZE] = {0};
@@ -69,7 +69,7 @@ void Trace_1(const TraceLevel level, const char* file, const int line, const cha
    va_end(args);
 }
 
-void TraceVa_1(const TraceLevel level, const char* file, const int line, const char* format, va_list args)
+void TraceVa_1(const TraceLevel /*level*/, const char* file, const int line, const char* format, va_list args)
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
    char buffer[MAX_TRACE_MESSAGE_SIZE] = { 0 };

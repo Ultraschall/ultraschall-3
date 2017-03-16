@@ -186,7 +186,6 @@
     <ClCompile Include="reaper\FileManager.cpp" />
     <ClCompile Include="reaper\InsertChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\InsertMP3ChapterMarkersAction.cpp" />
-    <ClCompile Include="reaper\InvalidEntryPointException.cpp" />
     <ClCompile Include="reaper\MP3Properties.cpp" />
     <ClCompile Include="reaper\NewProjectCommand.cpp" />
     <ClCompile Include="reaper\NotificationWindow.cpp" />
@@ -256,7 +255,6 @@
     <ClInclude Include="reaper\ICommand.h" />
     <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
     <ClInclude Include="reaper\InsertMP3ChapterMarkersAction.h" />
-    <ClInclude Include="reaper\InvalidEntryPointException.h" />
     <ClInclude Include="reaper\Marker.h" />
     <ClInclude Include="reaper\MP3Properties.h" />
     <ClInclude Include="reaper\NewProjectCommand.h" />

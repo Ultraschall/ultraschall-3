@@ -22,6 +22,8 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <Framework.h>
+
 #include "ToggleShownoteMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "ProjectManager.h"

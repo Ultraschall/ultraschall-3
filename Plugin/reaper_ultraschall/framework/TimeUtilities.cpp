@@ -72,16 +72,20 @@ static ULTRASCHALL_TIMESTAMP MillisecondsToTimestamp(const uint32_t milliseconds
 {
    ULTRASCHALL_TIMESTAMP ts;
 
-   ts.hours = milliseconds / (1000 * 60 * 60);
+   PRECONDITION_RETURN((milliseconds / (1000 * 60 * 60)) <= UINT8_MAX, ULTRASCHALL_TIMESTAMP());
+   ts.hours = static_cast<uint8_t>(milliseconds / (1000 * 60 * 60));
    const uint32_t minutes = milliseconds % (1000 * 60 * 60);
 
-   ts.minutes = minutes / (1000 * 60);
+   PRECONDITION_RETURN((minutes / (1000 * 60)) <= UINT8_MAX, ULTRASCHALL_TIMESTAMP());
+   ts.minutes = static_cast<uint8_t>(minutes / (1000 * 60));
    const uint32_t seconds = minutes % (1000 * 60);
    
-   ts.seconds = seconds / 1000;
+   PRECONDITION_RETURN((seconds / 1000) <= UINT8_MAX, ULTRASCHALL_TIMESTAMP());
+   ts.seconds = static_cast<uint8_t>(seconds / 1000);
    const uint32_t ms = seconds % 1000;
    
-   ts.milliseconds = ms;  
+   PRECONDITION_RETURN(ms <= UINT16_MAX, ULTRASCHALL_TIMESTAMP());
+   ts.milliseconds = static_cast<uint16_t>(ms);
 
    return ts;
 }

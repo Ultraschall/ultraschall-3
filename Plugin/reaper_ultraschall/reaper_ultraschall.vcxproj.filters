@@ -63,9 +63,6 @@
     <ClCompile Include="reaper\FileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\InvalidEntryPointException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\reaper_ultraschall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -249,9 +246,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\ICustomAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\InvalidEntryPointException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\ReaperEntryPoints.h">

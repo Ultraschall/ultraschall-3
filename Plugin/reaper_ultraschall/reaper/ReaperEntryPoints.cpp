@@ -171,6 +171,7 @@ bool ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_in
    return result;
 }
 
+#if 0
 static bool ProcessExtensionLine(const char *line, ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
 {
    PRECONDITION_RETURN(line != 0, false);
@@ -213,6 +214,7 @@ static void BeginLoadProjectState(bool isUndo, struct project_config_extension_t
       ProjectCallback::BeginLoadProjectState(currentProjectReference);
    }
 }
+#endif
 
 project_config_extension_t ReaperProjectEntryPoints::projectConfigExtension_ = { 0 };
 

@@ -172,7 +172,7 @@ bool Project::InsertMarker(const Marker &marker)
    return false;
 }
 
-bool Project::InsertMarker(const std::string &name, const int color, const double position)
+bool Project::InsertMarker(const std::string &name, const int /*color*/, const double position)
 {
    PRECONDITION_RETURN(projectReference_ != 0, false);
    PRECONDITION_RETURN(name.empty() == false, false);
