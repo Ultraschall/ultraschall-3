@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix 
+<Wix
    xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
    <!--
@@ -34,7 +34,6 @@
                   <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
                      <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
                      <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
-                     <File Id="SWSExtensionWhatsNew" Name="reaper_sws_whatsnew.txt" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws_whatsnew.txt"/>
                   </Component>
                </Directory>
                <Component Id="LAMEMP3Encoder" Guid="237AB7ED-155C-44DD-888F-3CD7FC87B730" Win64="yes">
