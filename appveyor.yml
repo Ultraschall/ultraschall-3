@@ -1,6 +1,7 @@
 version: Build {build}
 configuration: Release
 platform: x64
+image: Visual Studio 2017
 before_build:
 build:
   project: .\Plugin\reaper_ultraschall\reaper_ultraschall.sln
@@ -12,4 +13,3 @@ notifications:
   on_build_success: false
   on_build_failure: false
   on_build_status_changed: true
-  
