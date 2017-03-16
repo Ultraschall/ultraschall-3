@@ -247,7 +247,7 @@ def BR_GetMouseCursorContext_MIDI(p0,p1,p2,p3,p4):
   f=CFUNCTYPE(c_uint64,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
   t=(c_byte(p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4))
   r=f(byref(t[0]),byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]))
-  return (rpr_unpackp('HWND',r),int(t[0].value),int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value))
+  return (rpr_unpackp('void*',r),int(t[0].value),int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value))
 
 def BR_GetMouseCursorContext_Position():
   a=rpr_getfp('BR_GetMouseCursorContext_Position')
