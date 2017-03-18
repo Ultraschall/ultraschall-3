@@ -3,6 +3,9 @@
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0.3 Miedinger - 2017-März-
+* Streaming: **Update für Studio Link OnAir**
+*Eine neue Version von Studio Link OnAir wird ausgeliefert, die ein seltenes Stabilitätsproblem unter Windows behebt.*
+
 * Keymap Mac: **Anpassungen an Systemstandard**
 *Unter macOS wurden folgende Aktionen für Shortcuts an den Systemstandard angepasst: Drag&Copy von Items erfolgt nun über `alt` + `gedrückter Primärklick`. Der aktuelle Projekt-Tab wird mit `cmd`+ `w` geschlossen.*
 
