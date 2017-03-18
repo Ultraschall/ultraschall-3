@@ -3,13 +3,14 @@
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0.3 Miedinger - 2017-März-
-* Editing Mac: **Ziehen und Kopieren von Items**
-*Unter macOS wurde das Drag&Copy Verhalten von Items dem Systemstandard angepasst: `alt` + `gedrückter Primärklick`*
+* Keymap Mac: **Anpassungen an Systemstandard**
+*Unter macOS wurden folgende Aktionen für Shortcuts an den Systemstandard angepasst: Drag&Copy von Items erfolgt nun über `alt` + `gedrückter Primärklick`. Der aktuelle Projekt-Tab wird mit `cmd`+ `w` geschlossen.*
 
 * Editing: **Weiter verbessertes Verhalten der `esc`-Taste**
 *Die "lösche jegliche Auswahl"-Funktion beinhaltet nun auch nicht selektierte Envelope-Points. Erstaunlich.*
 
 * Editing: **Midi Actions für EQ-Regler**
+*Zwei neue Ultraschall-Midi Aktionen ermöglichen das leichte verschieben des Inpoint und Outpoint über einen klassischen EQ-Regler auf einem Midi-Interface: In der Mittelstellung passiert nichts, ein Drehen nach Links oder Rechts bewirkt eine beschleunigte Bewegung in die jeweilige Richtung. Je weiter der Einschlag, desto schneller bewegt sich der In-/Outpoint. Die Skripte (`ultraschall_midi_move_start_of_time_slection.lua` und `ultraschall_midi_move_end_of_time_slection.lua`) müssen manuell einem Midi-Signal zugeordnet werden.*
 
 
 ## 3.0.2 Miedinger - 2017-März-06
