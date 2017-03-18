@@ -2,6 +2,20 @@
 
 Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
+## 3.0.3 Miedinger - 2017-März-
+
+* Streaming: **Update for Studio Link OnAir**
+*Fixes a rare stability problem in the Windows version of Studio Link OnAir.*
+
+* Keymap Mac: **Aligned with system standard**
+*The following shortcut actions were aligned with macOS' system standard: Drag-and-copy of items now works with `alt` + `primary clicking-and-holding`. The current project tab is closed by  `cmd` + `w`.*
+
+* Editing: **Further improvements to `esc` key behavior**
+*The "delete entire selection" function now includes also unselected envelope points. Amazing.*
+
+* Editing: **Midi actions for EQ tuner**
+*Two new Ultraschall midi actions simplify moving the in- and outpoints via a classical EQ tuner on a midi interface: The middle setting has no effect, a turn to the left or right speeds up movements in the respective direction. The further the turn, the faster the in-/outpoint moves. The scripts (`ultraschall_midi_move_start_of_time_slection.lua` und `ultraschall_midi_move_end_of_time_slection.lua`) need to be manually assigned to a midi signal.*
+
 ## 3.0.2 Miedinger - 2017-March-09
 
 * Editing: **Shortcuts for Inpoint and Outpoint**
