@@ -10,7 +10,7 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 ## macOS ab 10.11
 
 
-1. **REAPER installieren:** [REAPER v5.35 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
+1. **REAPER aktualisieren / installieren:** [REAPER v5.35 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.35 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
 2. **Ultraschall laden:** [unsere 3.0 Distribution](http://url.ultraschall-podcast.de/us30) laden und das `.dmg` starten
 
@@ -28,7 +28,7 @@ Zur Handhabung der neuen Funktionen empfehlen wir den demnächst erscheinenden R
 
 ##Windows: Installation##
 
-1. **REAPER installieren:** [REAPER v5.35 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an. Für Windows unterstützen wir nur die **64 Bit** Version.
+1. **REAPER aktualisieren / installieren:** [REAPER v5.35 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.35 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an. Für Windows unterstützen wir nur die **64 Bit** Version.
 
 2. **Ultraschall laden:** Die [Ultraschall-3.0.2.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win) Datei laden. Den Installer starten und durchlaufen lassen.
 
