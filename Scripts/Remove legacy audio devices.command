@@ -43,3 +43,5 @@ then
 	sudo rm -rf /System/Library/Extensions/Soundflower.kext
 fi
 
+echo "Uninstall finished. You might close this window."
+echo "Deinstallation abgeschlossen. Dieses Fenster kann geschlossen werden."

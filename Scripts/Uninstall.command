@@ -628,3 +628,6 @@ fi
 if [ -f /var/db/receipts/com.mj-s.sws.Scripts.plist ]; then
 	sudo rm -f /var/db/receipts/com.mj-s.sws.Scripts.plist
 fi
+
+echo "Uninstall finished. You might close this window."
+echo "Deinstallation abgeschlossen. Dieses Fenster kann geschlossen werden."
