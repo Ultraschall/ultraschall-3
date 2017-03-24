@@ -44,4 +44,4 @@ then
 fi
 
 echo "Uninstall finished. You might close this window."
-echo "Deinstallation abgeschlossen. Dieses Fenster kann geschlossen werden."
+
