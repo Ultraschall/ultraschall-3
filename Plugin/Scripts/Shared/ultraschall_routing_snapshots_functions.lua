@@ -120,7 +120,7 @@ function buildTable()
 	for i = 1,4 do
 
 		if reaper.GetProjExtState(0, "snapshots", i) == 0 then
-			GUI.elms[i+5]		= GUI.Subpic:new(		23,	30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
+			GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
 			GUI.elms[i+10]      = GUI.Lbl:new(          200, 36+(i*64),  			" free", 0)
 			GUI.elms[i+15]      = GUI.Btn:new(          305, 29+(i*64), 130, 30,    " Save (Shift+F"..i..")", saveSnapshot, i)
 		else
