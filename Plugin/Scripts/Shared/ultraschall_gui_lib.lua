@@ -649,6 +649,120 @@ function Pic:ontype() end
 GUI.Pic = Pic
 
 
+
+
+	---- Element classes ----
+	
+
+--[[	SubPic class.
+	
+	---- User parameters ----
+x, y			Coordinates of top-left corner
+source			Image Source
+action 			onclick action
+	
+]]--
+
+
+-----------------
+
+-- picture - New
+local Subpic = {}
+function Subpic:new(x, y, w, h, zoom, source, offset_x, offset_y, ... )
+	
+	local picture = {}
+	picture.type = "Subpic"
+	
+	picture.x, picture.y = x, y
+	picture.w, picture.h = w, h
+	picture.offset_x, picture.offset_y = offset_x, offset_y
+	picture.zoom = zoom
+	picture.source = source
+	picture.params = {...}
+	
+	setmetatable(picture, self)
+    self.__index = self 
+    return picture
+	
+end
+
+
+-- picture - Draw
+function Subpic:draw()
+	
+	local x, y, zoom, w, h, offset_x, offset_y = self.x, self.y, self.zoom, self.w, self.h, self.offset_x, self.offset_y
+		
+	buffer_id = 0 -- top layer
+	loadimg = gfx.loadimg(buffer_id, self.source)
+	gfx.x, gfx.y = x, y
+	gfx.blit(buffer_id,zoom,0, offset_x, offset_y, w, h)	
+
+end
+
+
+-- picture - Unused methods.
+
+function Subpic:onmousedown() end
+function Subpic:onmouseup() end
+function Subpic:ondoubleclick() end
+function Subpic:ondrag() end
+function Subpic:ontype() end
+
+
+GUI.Subpic = Subpic
+
+
+--[[	Line class.
+	
+	---- User parameters ----
+x, y			Coordinates of top-left corner
+x2, y2			Coordinates for the end
+	
+]]--
+
+
+-----------------
+
+-- picture - New
+local Line = {}
+function Line:new(x, y, x2, y2)
+	
+	local drawline = {}
+	drawline.type = "Line"
+	drawline.x, drawline.y = x, y
+	drawline.x2, drawline.y2 = x2, y2
+	drawline.w, drawline.h = 1, 1
+	
+	setmetatable(drawline, self)
+    self.__index = self 
+    return drawline
+	
+end
+
+
+-- picture - Draw
+function Line:draw()
+	
+	local x, y, x2, y2 = self.x, self.y, self.x2, self.y2
+
+	buffer_id = 0 -- top layer
+	gfx.x, gfx.y = x, y
+	GUI.color("elm_outline")
+	gfx.line(x,y,x2,y2)
+
+end
+
+-- Line - Unused methods.
+
+function Line:onmousedown() end
+function Line:onmouseup() end
+function Line:ondoubleclick() end
+function Line:ondrag() end
+function Line:ontype() end
+
+GUI.Line = Line
+
+
 -----------------
 
 -- Lbl - New
