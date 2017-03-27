@@ -67,18 +67,16 @@ end
 function switchButtons(slot)
 	
 	ButtonID = {}
-	ButtonID[1] = reaper.NamedCommandLookup("_RS56d078b52d4169fdadac0d75927f6e2319c32c6d") -- Setup Button
-	ButtonID[2] = reaper.NamedCommandLookup("_RS2bc567cfc4b9cdd0c145dbea77f86e845573cfd4") -- Record Button
-	ButtonID[3] = reaper.NamedCommandLookup("_RSbfc16db8df5a9ba2b49c263edd185217988a559e") -- Edit Button
-	ButtonID[4] = reaper.NamedCommandLookup("_RS01e4cf23da5f52820db0a67e3ee2ee0f3b6a6423") -- Story Button
+	ButtonID[1] = reaper.NamedCommandLookup("_RS56d078b52d4169fdadac0d75927f6e2319c32c6d") -- Preshow
+	ButtonID[2] = reaper.NamedCommandLookup("_RS2bc567cfc4b9cdd0c145dbea77f86e845573cfd4") -- Recording
+	ButtonID[3] = reaper.NamedCommandLookup("_RSbfc16db8df5a9ba2b49c263edd185217988a559e") -- Aftershow
+	ButtonID[4] = reaper.NamedCommandLookup("_RS01e4cf23da5f52820db0a67e3ee2ee0f3b6a6423") -- Editing
 
 	reaper.SetToggleCommandState(0, ButtonID[1], 0)		-- erase all buttons states
 	reaper.SetToggleCommandState(0, ButtonID[2], 0)
 	reaper.SetToggleCommandState(0, ButtonID[3], 0)
 	reaper.SetToggleCommandState(0, ButtonID[4], 0)
 	reaper.SetToggleCommandState(0, ButtonID[slot], 1)	-- yes, this feels clumsy. Any beter ideas? 
-
-	reaper.Main_OnCommand(40454,0) 	--(re)load Screenset
 
 end
 
@@ -100,22 +98,13 @@ function buildTable()
 
 	GUI.elms = {
 	
-
 --     name          = element type          x      y    w    h     caption               ...other params...	
 	label           = GUI.Lbl:new(          23,	50+y_offset,  "Use routing snapshots to manage different recording situations.", 0),
 	label2 			= GUI.Lbl:new(			23,  75+y_offset,	"These snapshots save and recall all information of the", 0),
 	label3          = GUI.Lbl:new(          55,  130+y_offset,  "Preshow\n\n\n\nRecording\n\n\n\nAftershow\n\n\n\nEditing", 0),
 	routingbutton   = GUI.Btn:new(          375, 41, 130, 22,    " Routing Matrix", runcommand, 40251),
 
-	--label4          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
-
-	--chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
-	--metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
-	-- image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
-	--finalize      	= GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
 }
-
-
 
 	for i = 1,4 do
 
@@ -128,7 +117,7 @@ function buildTable()
 			if getRoutingInfo() == valOutNeedBig then
 				GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 62, 3+((i-1)*30))
 			else
-				GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 32, 3+((i-1)*30))
+				GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
 			end
 
 			GUI.elms[i+10]      = GUI.Btn:new(          155, 29+(i*64), 130, 30,    " Recall (F"..i..")", recallSnapshot, i)
@@ -142,7 +131,6 @@ function buildTable()
 
 
 -- table.insert (GUI.elms, label)
-
 
 end
 
