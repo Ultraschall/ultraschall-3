@@ -25,6 +25,7 @@
 #include <sstream>
 
 #include <Framework.h>
+#include <StringUtilities.h>
 
 #include "SystemProperties.h"
 #include "ReaperEntryPoints.h"
@@ -38,7 +39,7 @@ namespace reaper
 static const char *VERSIONS_SECTION_NAME = "ultraschall_versions";
 static const char *THEME_VERSION_KEY_NAME = "theme";
 static const char *PLUGIN_VERSION_KEY_NAME = "plugin";
-static const char *VERSION_VALUE_NAME = "20170327";
+static const char *VERSION_VALUE_NAME = "20170328";
 
 bool QuerySetPluginVersion()
 {
@@ -77,7 +78,7 @@ bool QuerySetPluginVersion()
    return result;
 }
 
-static const char *GLOBAL_SECTION_NAME = "ultraschall";
+static const char *GLOBAL_SECTION_NAME = "ultraschall_update";
 
 bool HasSystemProperty(const std::string &key)
 {
@@ -107,5 +108,23 @@ void DeleteSystemProperty(const std::string &key, const bool save)
 
    reaper_api::DeleteExtState(GLOBAL_SECTION_NAME, key.c_str(), save);
 }
+   
+bool GetBooleanSystemProperty(const std::string& key)
+{
+   bool propertyValue = false;
+   
+   const std::string rawProperty = GetSystemProperty(key);
+   if(rawProperty.empty() == false)
+   {
+      if((framework::StringLowercase(rawProperty) == "true") ||
+         (framework::StringToInt(rawProperty) != 0))
+      {
+         propertyValue = true;
+      }
+   }
+   
+   return propertyValue;
+}
+   
 }
 }

@@ -37,6 +37,8 @@ void SetSystemProperty(const std::string& key, const std::string& value, const b
 std::string GetSystemProperty(const std::string& key);
 void DeleteSystemProperty(const std::string& key, const bool save = false);
    
+bool GetBooleanSystemProperty(const std::string& key);
+   
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_SYSTEM_PROPERTIES_H_INCL__
