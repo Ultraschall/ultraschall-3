@@ -22,6 +22,13 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Midi Actions für EQ-Regler**
 *Zwei neue Ultraschall-Midi Aktionen ermöglichen das leichte Verschieben des Inpoint und Outpoint über einen klassischen EQ-Regler auf einem Midi-Interface: In der Mittelstellung passiert nichts, ein Drehen nach Links oder Rechts bewirkt eine beschleunigte Bewegung in die jeweilige Richtung. Je weiter der Einschlag, desto schneller bewegt sich der In-/Outpoint. Die Skripte (`ultraschall_midi_move_start_of_time_slection.lua` und `ultraschall_midi_move_end_of_time_slection.lua`) müssen manuell einem Midi-Signal zugeordnet werden.*
 
+* Installer: **Update Check**
+*Der Update Check kann nun jederzeit im neuen Startscreen von Ultraschall ab- oder angeschaltet werden.*
+
+* Theme: **Ultraschall-Startscreen erweitert**
+*Der neue Startscreen enthält nun auch die Informationen des alten `About Ultraschall...` Menüeintrages, der somit entfällt.*
+
+
 
 ## 3.0.2 Miedinger - 2017-März-06
 * Editing: **Shortcuts für In- und Outpoint**
@@ -57,7 +64,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Der LAME MP3 Encoder wird in Version 3.98.3 automatisch installiert.*
 
 * Studio Link: **Update**
-Ultraschall wird mit aktualisiertem StudioLink Plug-in in Version 16.12.0. ausgeliefert.
+*Ultraschall wird mit aktualisiertem StudioLink Plug-in in Version 16.12.0. ausgeliefert.*
 
 * Theme: **Ultraschall-Startscreen**
 *Ein neuer Startscreen informiert über die erfolgreiche Installation und gibt erste Hinweise sowie Links zu Hilfe-Ressourcen.*
