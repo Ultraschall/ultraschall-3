@@ -106,13 +106,13 @@ std::string QueryThemeVersion()
    
    if(versionString.empty() == false)
    {
-      const std::vector<std::string> versionTokens = framework::split(versionString, ':');
+      const std::vector<std::string> versionTokens = framework::StringTokenize(versionString, ':');
       if(versionTokens.size() == 2)
       {
          std::string version = versionTokens[1];
          if(version.empty() == false)
          {
-            result = framework::trim(version);
+            result = framework::StringTrim(version);
          }
       }
    }

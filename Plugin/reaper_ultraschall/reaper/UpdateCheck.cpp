@@ -116,7 +116,7 @@ void UpdateCheck()
             std::string remoteVersion = out.str();
             if(remoteVersion.empty() == false)
             {
-               framework::trim(remoteVersion);
+               framework::StringTrim(remoteVersion);
                const std::string localVersion = VersionHandler::PluginVersion();
                if(remoteVersion > localVersion)
                {

@@ -10,8 +10,6 @@
 		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
 		420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */; };
 		420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */; };
-		4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4215FEFE1CEA687400CCA10C /* VersionString.cpp */; };
-		4215FF011CEA687400CCA10C /* VersionString.h in Headers */ = {isa = PBXBuildFile; fileRef = 4215FEFF1CEA687400CCA10C /* VersionString.h */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
 		422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06BC1E4B683C00D758FE /* VersionHandler.h */; };
 		422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */; };
@@ -151,8 +149,6 @@
 		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
 		420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMP3ChapterMarkersAction.cpp; path = reaper/InsertMP3ChapterMarkersAction.cpp; sourceTree = "<group>"; };
 		420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMP3ChapterMarkersAction.h; path = reaper/InsertMP3ChapterMarkersAction.h; sourceTree = "<group>"; };
-		4215FEFE1CEA687400CCA10C /* VersionString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VersionString.cpp; path = reaper/VersionString.cpp; sourceTree = "<group>"; };
-		4215FEFF1CEA687400CCA10C /* VersionString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionString.h; path = reaper/VersionString.h; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
 		422A06BC1E4B683C00D758FE /* VersionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionHandler.h; path = reaper/VersionHandler.h; sourceTree = "<group>"; };
 		422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CloseProjectCommand.cpp; path = reaper/CloseProjectCommand.cpp; sourceTree = "<group>"; };
@@ -424,8 +420,6 @@
 				422A06C41E4B69C100D758FE /* CommandManager.h */,
 				422A06BB1E4B683C00D758FE /* VersionHandler.cpp */,
 				422A06BC1E4B683C00D758FE /* VersionHandler.h */,
-				4215FEFE1CEA687400CCA10C /* VersionString.cpp */,
-				4215FEFF1CEA687400CCA10C /* VersionString.h */,
 				424C83001AC8086F00231F3D /* FileManager.cpp */,
 				424C83011AC8086F00231F3D /* FileManager.h */,
 				42F19A661ABEE82200231F3D /* Application.cpp */,
@@ -501,7 +495,6 @@
 				4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */,
 				4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */,
 				42F19A631ABEE81500231F3D /* Framework.h in Headers */,
-				4215FF011CEA687400CCA10C /* VersionString.h in Headers */,
 				42F19A761ABEE82200231F3D /* Application.h in Headers */,
 				422A07021E4B69F100D758FE /* SaveChapterMarkersAction.h in Headers */,
 				42F19A781ABEE82200231F3D /* CustomActionFactory.h in Headers */,
@@ -616,7 +609,6 @@
 				422A06C71E4B69C100D758FE /* CommandFactory.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
-				4215FF001CEA687400CCA10C /* VersionString.cpp in Sources */,
 				422A06F71E4B69F100D758FE /* OpenProjectCommand.cpp in Sources */,
 				42327A691E53ACC900092214 /* SystemProperties.cpp in Sources */,
 				422A07251E4B6E4F00D758FE /* ioapi.c in Sources */,

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 The Ultraschall Project (http://ultraschall.fm)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -60,6 +60,7 @@ Application& Application::Instance()
 ServiceStatus Application::Start()
 {
    PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
+   
    UpdateCheck();
    
    return SERVICE_SUCCESS;
@@ -172,7 +173,7 @@ std::string Application::GetProjectFileName() const
    if(projectPath.empty() == false)
    {
 #ifndef WIN32
-      const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
+      const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
       const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
 #endif // #ifndef WIN32
@@ -193,7 +194,7 @@ std::string Application::GetProjectFolderName() const
    if(projectPath.empty() == false)
    {
 #ifndef WIN32
-      const std::vector<std::string> pathComponents = framework::split(projectPath, '/');
+      const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
       const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
 #endif // #ifndef WIN32
@@ -245,12 +246,12 @@ struct Timestamp
 
    static Timestamp FromString(const std::string& str)
    {
-      std::vector<std::string> items = framework::split(str, ':');
+      std::vector<std::string> items = framework::StringTokenize(str, ':');
       std::reverse(items.begin(), items.end());
 
       Timestamp timestamp;
 
-      std::vector<std::string> buffer = framework::split(items[0], '.');
+      std::vector<std::string> buffer = framework::StringTokenize(items[0], '.');
       for(size_t i = 0; i < buffer.size(); ++i)
       {
          switch(i)
@@ -343,19 +344,19 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ");
 
    const std::string information3("\
-The Ultraschall REAPER Extension requires at least REAPER 5.1\
+The Ultraschall REAPER Extension requires at least REAPER 5.40\
 ");
 
    const std::string information4("\
-If you want to use the Ultraschall REAPER extension, you must install REAPER 5.1\
+If you want to use the Ultraschall REAPER extension, you must install REAPER 5.40\
 ");
 
    const std::string information5("\
-The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.1\
+The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.40\
 ");
 
    const std::string information6("\
-If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.1\
+If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.40\
 ");
 
    const std::string information7("\

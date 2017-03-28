@@ -215,7 +215,7 @@ bool InsertMP3Properties(const std::string& target, const std::string& propertie
 {
    PRECONDITION_RETURN(target.empty() == false, false);
    PRECONDITION_RETURN(properties.empty() == false, false);
-   std::vector<std::string> tokens = framework::split(properties, '\n');
+   std::vector<std::string> tokens = framework::StringTokenize(properties, '\n');
    PRECONDITION_RETURN(tokens.empty() == false, false);
    PRECONDITION_RETURN(tokens.size() >= 5, false);
    

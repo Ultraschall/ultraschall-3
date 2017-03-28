@@ -57,7 +57,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
    const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
    for(const std::string& line : lines)
    {
-      const std::vector<std::string> items = framework::split(line, ' ');
+      const std::vector<std::string> items = framework::StringTokenize(line, ' ');
       if(items.size() > 0)
       {
          const double position = framework::StringToSeconds(items[0]);
