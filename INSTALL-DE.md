@@ -1,4 +1,4 @@
-# Installation von Ultraschall 3.0
+# Installation von Ultraschall 3.0.3
 Bitte aufmerksam befolgen!
 
 
@@ -10,15 +10,15 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 ## macOS ab 10.11
 
 
-1. **REAPER aktualisieren / installieren:** [REAPER v5.35 OS X 64-bit](http://www.reaper.fm/download.php) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.35 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
+1. **REAPER aktualisieren / installieren:** [REAPER v5.40 OS X 64-bit](http://www.reaper.fm/files/5.x/reaper540_x86_64.dmg) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.40 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
-2. **Ultraschall laden:** [unsere 3.0 Distribution](http://url.ultraschall-podcast.de/us30) laden und das `.dmg` starten
+2. **Ultraschall laden:** [unsere 3.0.3 Distribution](http://url.ultraschall-podcast.de/us30) laden und das `.dmg` starten
 
-3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-3.0.2.pkg` starten und durchlaufen lassen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal macOS neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
+3. **Ultraschall Plugin installieren:** Unser Installationsprogramm `Ultraschall-3.0.3.pkg` starten und durchlaufen lassen. **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal macOS neu booten und den Installer erneut durchlaufen lassen – dann funktioniert es mit Sicherheit.
 
-4. **Optional - UltraschallHub installieren:** Wenn man in Ultraschall erweiterte Features wie eine rein in Software modellierte Skype N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices (ehemals: [Soundflower](https://rogueamoeba.com/freebies/soundflower/)) Voraussetzung. Hierzu das `UltraschallHub.pkg` durchlaufen lassen. Für den Einsatz von StudioLink oder Soundboard in Ultraschall ist dieser Schritt *nicht* notwendig und kann übersprungen werden.
+4. **Die REAPER Ultraschall-Konfiguration installieren**: REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde. Nun die Datei `Ultraschall_3.0.ReaperConfigZip` in das geöffnete REAPER Hauptfenster ziehen und `Importieren` klicken. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, diese **ZUVOR** an gleicher Stelle wie oben angegeben zu exportieren – es werden von dieser Distribution erhebliche REAPER-Bereiche ungefragt überschrieben.
 
-5. **Die REAPER Ultraschall-Konfiguration installieren**: REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde. Nun die Datei `Ultraschall_3.0.ReaperConfigZip` in das geöffnete REAPER Hauptfenster ziehen und `Importieren` klicken. **WARNUNG:** Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, diese **ZUVOR** an gleicher Stelle wie oben angegeben zu exportieren – es werden von dieser Distribution erhebliche REAPER-Bereiche ungefragt überschrieben.
+5. **Optional - UltraschallHub installieren:** Wenn man in Ultraschall erweiterte Features wie eine rein in Software modellierte Skype N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices (ehemals: [Soundflower](https://rogueamoeba.com/freebies/soundflower/)) Voraussetzung. Hierzu das `UltraschallHub.pkg` durchlaufen lassen. Für den Einsatz von StudioLink oder Soundboard in Ultraschall ist dieser Schritt *nicht* notwendig und kann übersprungen werden.
 
 6. **Loslegen:** REAPER starten und im Menü unter `Podcast | About Ultraschall...` kontrollieren, dass alle Komponenten richtig installiert sind. Warnmeldungen beim Start zeigen an, wenn entweder Plugin oder Theme nicht richtig installiert wurden. Ultraschall funktioniert nur, wenn **beide** Komponenten (Schritte 3 und 5) installiert sind.
 Zur Handhabung der neuen Funktionen empfehlen wir den demnächst erscheinenden Release-Screencast im Ultraschall-Youtube-Kanal: <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG>.
@@ -28,9 +28,9 @@ Zur Handhabung der neuen Funktionen empfehlen wir den demnächst erscheinenden R
 
 ##Windows: Installation##
 
-1. **REAPER aktualisieren / installieren:** [REAPER v5.35 Windows 64-bit](http://www.reaper.fm/download.php) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.35 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an. Für Windows unterstützen wir nur die **64 Bit** Version.
+1. **REAPER aktualisieren / installieren:** [REAPER v5.40 Windows 64-bit](http://www.reaper.fm/files/5.x/reaper540_x64-install.exe) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.35 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an. Für Windows unterstützen wir nur die **64 Bit** Version.
 
-2. **Ultraschall laden:** Die [Ultraschall-3.0.2.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win) Datei laden. Den Installer starten und durchlaufen lassen.
+2. **Ultraschall laden:** Die [Ultraschall-3.0.3.msi (24.1 MB)](http://url.ultraschall-podcast.de/us30win) Datei laden. Den Installer starten und durchlaufen lassen.
 
 3. **Die REAPER Ultraschall-Konfiguration installieren:** REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde. Daher die nun auf dem Desktop zu findende Datei `Ultraschall REAPER Theme` in das geöffnete REAPER-Fenster fallen lassen. Den Import durchlaufen lassen. Danach kann die Datei vom Desktop gelöscht werden.
 
