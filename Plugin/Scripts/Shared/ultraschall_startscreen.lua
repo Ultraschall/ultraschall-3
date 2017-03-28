@@ -45,21 +45,41 @@ function open_url(url)
 end
 
 ------------------------------------------------------
---	Getting the values of a checklist's options
+--	Getting the values of startscreen and updatecheck
 ------------------------------------------------------
 
 function check_values()
 	
+	local startscreen
+	local updatecheck
+
 	startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
-	startscript_check = GUI.Val("checkers")
-	startscript = startscript_check[1]
 	
-	if startscript == true  and startscreen == "0" then-- ckeckbox is activated
+	if GUI.Val("checkers")[1] == true  and startscreen == "0" then			-- ckeckbox is activated
 		reaper.SetExtState("ultraschall_start", "startscreen", "1", true)
-	elseif startscript == false and startscreen == "1" then-- ckeckbox is deactivated
+	elseif GUI.Val("checkers")[1] == false and startscreen == "1" then		-- ckeckbox is deactivated
 		reaper.SetExtState("ultraschall_start", "startscreen", "0", true)
 	end
+
+	updatecheck = reaper.GetExtState("ultraschall_update", "update_check")
+	
+	if GUI.Val("checkers2")[1] == true  and updatecheck == "0" then			-- ckeckbox is activated
+		reaper.SetExtState("ultraschall_update", "update_check", "1", true)
+	elseif GUI.Val("checkers2")[1] == false and updatecheck == "1" then		-- ckeckbox is deactivated
+		reaper.SetExtState("ultraschall_update", "update_check", "0", true)
+	end
+
 end
+
+
+-- Example of a user function that we'll run from a button
+function userfunc(str)
+		
+	gfx.x, gfx.y = GUI.mouse.x, GUI.mouse.y
+	gfx.showmenu(str)
+	
+end
+
 
 ------------------------------------------------------
 --	End of functions
@@ -95,22 +115,30 @@ GUI.elms = {
 --     name          = element type          x      y    w    h     caption               ...other params...
 	logo			= GUI.Pic:new(			240,10, 0, 0, 1, script_path.."us.png"),
 	label           = GUI.Lbl:new(          165,  160,               "Ultraschall 3.0.3 - Miedinger - was successfully installed.", 0),
-	label2           = GUI.Lbl:new(          135,  200,               "Visit the Podcast menu to explore the user interface and features.", 0),
-	label3           = GUI.Lbl:new(          210,  220,               "Use Project templates for a quick setup.", 0),
+	label2           = GUI.Lbl:new(          135,  220,               "Visit the Podcast menu to explore the user interface and features.", 0),
+	label3           = GUI.Lbl:new(          210,  240,               "Use Project templates for a quick setup.", 0),
 	label4           = GUI.Lbl:new(          265,  290,               "If you need assistance:", 0),
 	checkers      = GUI.Checklist:new(     20, 380, 240, 30,      "", "Show this Screen on Start", 4),
+	checkers2      = GUI.Checklist:new(     405, 380, 240, 30,      "", "Automatically check for updates", 4),
 	tutorials      	= GUI.Btn:new(          30, 320, 190, 40,      "Tutorials", open_url, "http://ultraschall.fm/tutorials/"),
 	twitter      	= GUI.Btn:new(          242, 320, 190, 40,      "Twitter", open_url, "https://twitter.com/ultraschall_fm"),
 	forum      		= GUI.Btn:new(          455, 320, 190, 40,      "Userforum", open_url, "https://sendegate.de/c/ultraschall"),
+	versions      = GUI.Btn:new(          276, 185, 120, 24,      " Show Details", userfunc, "Version check:||!Ultraschall REAPER Extension 3.0.3|!Ultraschall REAPER Theme 3.0.3|#UltraschallHub 1.0.1|!Ultraschall Soundboard 3.0.0|#StudioLink Plug-in 16.12.0|!StudioLink OnAir Plug-in 17.02.1|!LAME MP3 Encoder 3.98.3|!SWS REAPER Extension 2.8.8|>REAPER 5.35|<REAPER 5.40 available||Copy to clipboard"),
 		
 }
 
 
+
+
+
 ---- Put all of your own functions and whatever here ----
 
-startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
-if startscreen == "1" then
+if reaper.GetExtState("ultraschall_start", "startscreen") == "1" then
 	GUI.Val("checkers",true)
+end
+
+if reaper.GetExtState("ultraschall_update", "update_check") == "1" then
+	GUI.Val("checkers2",true)
 end
 
 GUI.func = check_values
