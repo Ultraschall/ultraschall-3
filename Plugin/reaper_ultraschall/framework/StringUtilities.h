@@ -98,6 +98,9 @@ static inline int StringToInt(const std::string& str)
    return result;
 }
    
+std::string StringLowercase(const std::string& str);
+std::string StringUppercase(const std::string& str);
+   
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 typedef char16_t UnicodeChar;
 typedef std::u16string UnicodeString;

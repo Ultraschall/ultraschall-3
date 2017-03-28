@@ -30,6 +30,28 @@ namespace ultraschall
 namespace framework
 {
 
+std::string StringLowercase(const std::string& str)
+{
+   std::string convertedString = str;
+   if(convertedString.empty() == false)
+   {
+      std::transform(convertedString.begin(), convertedString.end(), convertedString.begin(), ::tolower);
+   }
+   
+   return convertedString;
+}
+
+std::string StringUppercase(const std::string& str)
+{
+   std::string convertedString = str;
+   if(convertedString.empty() == false)
+   {
+      std::transform(convertedString.begin(), convertedString.end(), convertedString.begin(), ::toupper);
+   }
+   
+   return convertedString;
+}
+   
 UnicodeString MakeUTF16BOM()
 {
       UnicodeString result;
