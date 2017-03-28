@@ -25,6 +25,12 @@
 ]]
 
 
+-- Print Message to console (debugging)
+function Msg(val)
+  reaper.ShowConsoleMsg(tostring(val).."\n")
+end
+
+
 --[[reaper.GetPlayState()
 
 0=stop,
@@ -36,8 +42,6 @@
 
 function main()
 state = reaper.GetPlayState()
-
-	--reaper.ShowConsoleMsg(state)
 
 	if state == 5 then -- is recording
 
@@ -74,8 +78,7 @@ state = reaper.GetPlayState()
 
 	else -- pause or stop
 		reaper.OnPlayButton()
-
 	end
 end
-end
+
 reaper.defer(main)

@@ -4,11 +4,17 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 ## 3.0.3 Miedinger - 2017-März-
 
-* Streaming: **Update für Studio Link OnAir**
-*Eine neue Version von Studio Link OnAir wird ausgeliefert, die ein seltenes Stabilitätsproblem unter Windows behebt.*
+* Actions: **Überarbeitete Routing Snapshots**
+*Um während eine Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungs-Oberfläche versehen. Die Snapshots berücksichtigen nun auch Sends richtung Master sowie Hardware-Sends. [Video]*
+
+* Keymap: **Shortcuts für Routing-Snapshots**
+*Mit `F1` bis `F4` werden gesetzte Routing Snapshots abgerufen. Mit `shift` + `F1` bis `F4` wird die gerade eingestellte Routing-Matrix in den jeweiligen Snapshot-Slot geschrieben.*
 
 * Keymap Mac: **Anpassungen an Systemstandard**
 *Unter macOS wurden folgende Aktionen für Shortcuts an den Systemstandard angepasst: Drag&Copy von Items erfolgt nun über `alt` + `gedrückter Primärklick`. Der aktuelle Projekt-Tab wird mit `cmd` + `w` geschlossen.*
+
+* Streaming: **Update für Studio Link OnAir**
+*Eine neue Version von Studio Link OnAir wird ausgeliefert, die ein seltenes Stabilitätsproblem unter Windows behebt.*
 
 * Editing: **Weiter verbessertes Verhalten der `esc`-Taste**
 *Die "lösche jegliche Auswahl"-Funktion beinhaltet nun auch nicht-selektierte Envelope-Points. Erstaunlich.*
