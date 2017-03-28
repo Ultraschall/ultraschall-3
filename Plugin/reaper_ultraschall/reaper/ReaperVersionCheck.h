@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,9 @@
 #ifndef __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
 #define __ULTRASCHALL_REAPER_REAPER_VERSION_CHECK_H_INCL__
 
-#include "VersionString.h"
-
 namespace ultraschall { namespace reaper {
    
 std::string QueryRawReaperVersion();
-VersionString QueryReaperVersion();
 bool ReaperVersionCheck();
    
 }}

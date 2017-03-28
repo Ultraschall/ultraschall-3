@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,6 @@
 #include "ReaperEntryPoints.h"
 #include "FileManager.h"
 #include "StringUtilities.h"
-#include "VersionString.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -36,49 +35,35 @@ std::string QueryRawReaperVersion()
 {
     std::string version;
     
-    const std::vector<std::string> versionTokens = framework::split(reaper_api::GetAppVersion(), '/');
+    const std::vector<std::string> tokens = framework::StringTokenize(reaper_api::GetAppVersion(), '/');
     const size_t MIN_VERSION_TOKEN_COUNT = 1;
-    if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
+    if(tokens.size() >= MIN_VERSION_TOKEN_COUNT)
     {
-        version = versionTokens[0];
+        version = tokens[0];
     }
 
     return version;
 }
 
-VersionString QueryReaperVersion()
-{
-    VersionString versionString = VersionString::Invalid();
-
-    const std::string version = QueryRawReaperVersion();
-    if(version.empty() == false)
-    {
-        const std::vector<std::string> versionTokens = framework::split(version, '/');
-        const size_t MIN_VERSION_TOKEN_COUNT = 1;
-        if(versionTokens.size() >= MIN_VERSION_TOKEN_COUNT)
-        {
-            versionString = VersionString::FromString(versionTokens[0]);
-        }
-    }
-
-    return versionString;
-}
-
 bool ReaperVersionCheck()
 {
-    bool result = false;
+   bool result = false;
 
-    VersionString versionString = QueryReaperVersion();
-    if(versionString.IsValid() == true)
-    {
-        const uint8_t MIN_REQUIRED_REAPER_MAJOR_VERSION = 5;
-        const uint8_t MIN_REQUIRED_REAPER_MINOR_VERSION = 1;
-        if((versionString.MajorVersion() >= MIN_REQUIRED_REAPER_MAJOR_VERSION) &&
-           (versionString.MinorVersion() >= MIN_REQUIRED_REAPER_MINOR_VERSION))
-        {
+   std::string versionString = QueryRawReaperVersion();
+   if(versionString.empty() == false)
+   {
+      std::vector<std::string> tokens = framework::StringTokenize(versionString, '.');
+      if(tokens.size() == 2)
+      {
+         const int MIN_REQUIRED_REAPER_MAJOR_VERSION = 5;
+         const int MIN_REQUIRED_REAPER_MINOR_VERSION = 40;
+         if((framework::StringToInt(tokens[0]) >= MIN_REQUIRED_REAPER_MAJOR_VERSION) &&
+            (framework::StringToInt(tokens[1]) >= MIN_REQUIRED_REAPER_MINOR_VERSION))
+         {
             result = true;
-        }
-    }
+         }
+      }
+   }
 
     return result;
 }
