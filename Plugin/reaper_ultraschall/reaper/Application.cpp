@@ -175,7 +175,7 @@ std::string Application::GetProjectFileName() const
 #ifndef WIN32
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
-      const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
+      const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '\\');
 #endif // #ifndef WIN32
       if(pathComponents.empty() == false)
       {
@@ -196,7 +196,7 @@ std::string Application::GetProjectFolderName() const
 #ifndef WIN32
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
-      const std::vector<std::string> pathComponents = framework::split(projectPath, '\\');
+      const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '\\');
 #endif // #ifndef WIN32
 
       if(pathComponents.empty() == false)

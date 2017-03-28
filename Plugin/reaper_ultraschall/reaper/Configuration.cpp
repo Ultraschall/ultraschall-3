@@ -62,7 +62,7 @@ void Configuration::Read()
    std::string entry;
    while(std::getline(input, entry))
    {
-      const std::vector<std::string> items = framework::split(entry, '=');
+      const std::vector<std::string> items = framework::StringTokenize(entry, '=');
       if(items.size() > 1)
       {
          if(items[0] == "host-pin-code")

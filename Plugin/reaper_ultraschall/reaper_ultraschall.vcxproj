@@ -215,7 +215,6 @@
     <ClCompile Include="reaper\UndoMarkerAction.cpp" />
     <ClCompile Include="reaper\UpdateCheck.cpp" />
     <ClCompile Include="reaper\VersionHandler.cpp" />
-    <ClCompile Include="reaper\VersionString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h" />
@@ -284,7 +283,6 @@
     <ClInclude Include="reaper\UndoMarkerAction.h" />
     <ClInclude Include="reaper\UpdateCheck.h" />
     <ClInclude Include="reaper\VersionHandler.h" />
-    <ClInclude Include="reaper\VersionString.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
