@@ -72,70 +72,74 @@ void UpdateCheck()
    bool updateCheckRequired = false;
    std::string lastUpdateCheck;
 
-   static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
-   if (HasSystemProperty(LAST_UPDATE_CHECK_NAME) == true)
+   if(GetBooleanSystemProperty("update_check") == true)
    {
-      lastUpdateCheck = GetSystemProperty(LAST_UPDATE_CHECK_NAME);
-      if (lastUpdateCheck.empty() == false)
+      static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
+      if (HasSystemProperty(LAST_UPDATE_CHECK_NAME) == true)
       {
-         std::istringstream is(lastUpdateCheck);
-         double lastUpdateCheckTimestamp = 0;
-         is >> lastUpdateCheckTimestamp;
-
-         static const double delta = 60 * 60 * 24;
-         const double now = QueryCurrentDateTimeAsSeconds();
-         if ((now - lastUpdateCheckTimestamp) >= delta)
+         lastUpdateCheck = GetSystemProperty(LAST_UPDATE_CHECK_NAME);
+         if (lastUpdateCheck.empty() == false)
          {
-            updateCheckRequired = true;
-         }
-      }
-   }
-   else
-   {
-      updateCheckRequired = true;
-   }
-
-   if (updateCheckRequired == true)
-   {
-      void *curlHandle = curl_easy_init();
-      if(curlHandle != nullptr)
-      {
-         const std::string url = "https://ultraschall.io/ultraschall_release.txt";
-         curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
-         curl_easy_setopt(curlHandle, CURLOPT_FOLLOWLOCATION, 1L);
-         curl_easy_setopt(curlHandle, CURLOPT_NOSIGNAL, 1);
-         curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "deflate");
-         curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
-
-         std::stringstream out;
-         curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
-
-         CURLcode res = curl_easy_perform(curlHandle);
-         if(res == CURLE_OK)
-         {
-            std::string remoteVersion = out.str();
-            if(remoteVersion.empty() == false)
+            std::istringstream is(lastUpdateCheck);
+            double lastUpdateCheckTimestamp = 0;
+            is >> lastUpdateCheckTimestamp;
+            
+            static const double delta = 60 * 60 * 24;
+            const double now = QueryCurrentDateTimeAsSeconds();
+            if ((now - lastUpdateCheckTimestamp) >= delta)
             {
-               framework::StringTrim(remoteVersion);
-               const std::string localVersion = VersionHandler::PluginVersion();
-               if(remoteVersion > localVersion)
-               {
-                  std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
-                  message += remoteVersion + ".";
-                  NotificationWindow::Show(message);
-               }
+               updateCheckRequired = true;
             }
          }
+      }
+      else
+      {
+         updateCheckRequired = true;
+      }
 
-         curl_easy_cleanup(curlHandle);
-         curlHandle = nullptr;
-
-         std::ostringstream os;
-         os << QueryCurrentDateTimeAsSeconds();
-         lastUpdateCheck = os.str();
-         SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
+      if (updateCheckRequired == true)
+      {
+         void *curlHandle = curl_easy_init();
+         if(curlHandle != nullptr)
+         {
+            const std::string url = "https://ultraschall.io/ultraschall_release.txt";
+            curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curlHandle, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curlHandle, CURLOPT_NOSIGNAL, 1);
+            curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "deflate");
+            curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+            
+            std::stringstream out;
+            curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
+            
+            CURLcode res = curl_easy_perform(curlHandle);
+            if(res == CURLE_OK)
+            {
+               std::string remoteVersion = out.str();
+               if(remoteVersion.empty() == false)
+               {
+                  framework::StringTrim(remoteVersion);
+                  const std::string localVersion = VersionHandler::PluginVersion();
+                  if(remoteVersion > localVersion)
+                  {
+                     std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
+                     message += remoteVersion + ".";
+                     NotificationWindow::Show(message);
+                  }
+               }
+            }
+            
+            curl_easy_cleanup(curlHandle);
+            curlHandle = nullptr;
+            
+            std::ostringstream os;
+            os << QueryCurrentDateTimeAsSeconds();
+            lastUpdateCheck = os.str();
+            SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
+         }
       }
    }
 }
+
 }
 }
