@@ -1,6 +1,6 @@
 # Changelog
 
-Please consult our tutorial videos (German) for detailed advide: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
+Please consult our tutorial videos (German) for detailed advice: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0.3 Miedinger - 2017-März-
 
@@ -22,7 +22,7 @@ Please consult our tutorial videos (German) for detailed advide: [http://ultrasc
 *Use the buttons `alt` + `i` and `alt` + `o` to jump to the beginning or end of a time selection. With `shift` + `i` and `shift` + `o` sound will be played from the respective position.*
 
 * Editing: **Improved ripple-cut**
-*The new ripple-cut function (`cmd` + `x` as well as the corresponding icon) now behave more sensibly: if nothing is selected, nothing happens. If a time selection is selected, only this will be cut, regardless of items that may or may not be selected at the same time. If no time selection is selected, but exactly one item, a ripple cut (Tim's Ripple Cut) is made by means of its edges. If no time selection is selected, but several items, nothing happens.*
+*The new ripple-cut function (`cmd` + `x` as well as the corresponding icon) now behaves more sensibly: if nothing is selected, nothing happens. If a time selection is selected, only this will be cut, regardless of items that may or may not be selected at the same time. If no time selection is selected, but exactly one item, a ripple cut (Tim's Ripple Cut) is made by means of its edges. If no time selection is selected, but several items, nothing happens.*
 
 * Editing: **Quickly change and freeze track height**
 *Use the `h` key to quickly switch between two (adjustable) track heights, which keep their height even when the window is changed in size. The switch affects all selected tracks. If no track is selected, all tracks are affected. The freezing of the height can be canceled with the zoom buttons beneath the vertical scrollbar.*
