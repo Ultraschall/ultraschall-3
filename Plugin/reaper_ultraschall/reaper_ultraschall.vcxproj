@@ -175,7 +175,6 @@
     <ClCompile Include="framework\TimeUtilities.cpp" />
     <ClCompile Include="framework\TraceUltilities.cpp" />
     <ClCompile Include="framework\TranscriptItem.cpp" />
-    <ClCompile Include="reaper\AboutAction.cpp" />
     <ClCompile Include="reaper\Application.cpp" />
     <ClCompile Include="reaper\CloseProjectCommand.cpp" />
     <ClCompile Include="reaper\CommandFactory.cpp" />
@@ -241,7 +240,6 @@
     <ClInclude Include="framework\TimeUtilities.h" />
     <ClInclude Include="framework\TraceUtilities.h" />
     <ClInclude Include="framework\TranscriptItem.h" />
-    <ClInclude Include="reaper\AboutAction.h" />
     <ClInclude Include="reaper\Application.h" />
     <ClInclude Include="reaper\CloseProjectCommand.h" />
     <ClInclude Include="reaper\CommandFactory.h" />
