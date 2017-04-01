@@ -72,12 +72,12 @@ void UpdateCheck()
    bool updateCheckRequired = false;
    std::string lastUpdateCheck;
 
-   if(GetBooleanSystemProperty("update_check") == true)
+   if(GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
-      if (HasSystemProperty(LAST_UPDATE_CHECK_NAME) == true)
+      if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
-         lastUpdateCheck = GetSystemProperty(LAST_UPDATE_CHECK_NAME);
+         lastUpdateCheck = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
          if (lastUpdateCheck.empty() == false)
          {
             std::istringstream is(lastUpdateCheck);
@@ -135,7 +135,7 @@ void UpdateCheck()
             std::ostringstream os;
             os << QueryCurrentDateTimeAsSeconds();
             lastUpdateCheck = os.str();
-            SetSystemProperty(LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
+            SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
          }
       }
    }

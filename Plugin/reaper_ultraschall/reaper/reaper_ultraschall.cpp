@@ -31,7 +31,6 @@
 
 #include "CustomActionManager.h"
 
-#include "AboutAction.h"
 #include "InsertChapterMarkersAction.h"
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
@@ -65,9 +64,6 @@ extern "C"
                   {
                      if(ServiceSucceeded(application.Start()))
                      {
-                        application.RegisterCustomAction<reaper::AboutAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'AboutAction' activated.");
-
                         application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
                         Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
 

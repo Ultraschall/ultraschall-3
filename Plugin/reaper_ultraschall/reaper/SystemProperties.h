@@ -30,15 +30,21 @@
 namespace ultraschall {
 namespace reaper {
 
+static const char *VERSIONS_SECTION_NAME = "ultraschall_versions";
+static const char *UPDATE_SECTION_NAME = "ultraschall_update";
+static const char *BOM_SECTION_NAME = "ultraschall_bom";
+   
 bool QuerySetPluginVersion();
    
-bool HasSystemProperty(const std::string& key);
-void SetSystemProperty(const std::string& key, const std::string& value, const bool save = false);
-std::string GetSystemProperty(const std::string& key);
-void DeleteSystemProperty(const std::string& key, const bool save = false);
+bool HasSystemProperty(const std::string& section, const std::string& key);
+void SetSystemProperty(const std::string& section, const std::string& key, const std::string& value, const bool save = false);
+std::string GetSystemProperty(const std::string& section, const std::string& key);
+void DeleteSystemProperty(const std::string& section, const std::string& key, const bool save = false);
    
-bool GetBooleanSystemProperty(const std::string& key);
+bool GetBooleanSystemProperty(const std::string& section, const std::string& key);
    
+void UpdateBillOfMaterials();
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_SYSTEM_PROPERTIES_H_INCL__
