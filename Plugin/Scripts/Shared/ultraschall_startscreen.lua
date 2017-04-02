@@ -33,7 +33,6 @@ end
 ------------------------------------------------------
 -- Open a URL in a browser - OS agnostic
 ------------------------------------------------------
-
 function open_url(url)
   
   local OS=reaper.GetOS()
@@ -45,9 +44,46 @@ function open_url(url)
 end
 
 ------------------------------------------------------
+-- Open a info windows for cut & paste
+------------------------------------------------------
+function open_info(msg, title)
+
+		type = 0
+		result = reaper.ShowMessageBox( msg, title, type )
+end
+
+------------------------------------------------------
+-- Get Versions and return them as a table
+------------------------------------------------------
+function get_versions()
+
+	local versionsTable = {}
+	local versionItemsCount = tonumber(reaper.GetExtState("ultraschall_bom", "found_items"))  -- number of entrie
+	if versionItemsCount > 0 then -- there are any items
+		for i = 1, versionItemsCount, 1 do
+			versionsTable[i] = reaper.GetExtState("ultraschall_bom", "item_"..tostring(i))
+		end
+	else
+		open_info("There are parts of the ULTRASCHALL install missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/","Ultraschall Configuration Problem")  -- Fehleranzeige hier
+	end	
+	return versionsTable
+end
+
+------------------------------------------------------
+-- Build menu string from table
+------------------------------------------------------
+function build_menu(table)
+
+	local menuString = "Version Check:||"
+	for i, item in ipairs(table) do 
+		menuString = menuString.."!"..item.."|"
+	end
+	return menuString
+end
+
+------------------------------------------------------
 --	Getting the values of startscreen and updatecheck
 ------------------------------------------------------
-
 function check_values()
 	
 	local startscreen
@@ -71,13 +107,15 @@ function check_values()
 
 end
 
-
--- Example of a user function that we'll run from a button
-function userfunc(str)
+------------------------------------------------------
+--	Show the GUI menu item
+------------------------------------------------------
+function show_menu(str)
 		
 	gfx.x, gfx.y = GUI.mouse.x, GUI.mouse.y
-	gfx.showmenu(str)
-	
+	selectedMenu = gfx.showmenu(str)
+	return selectedMenu
+
 end
 
 
@@ -107,6 +145,7 @@ GUI.x, GUI.y = (screen_w - GUI.w) / 2, (screen_h - GUI.h) / 2
 
 
 
+
 	-- body
 	---- GUI Elements ----
 	
@@ -123,12 +162,16 @@ GUI.elms = {
 	tutorials      	= GUI.Btn:new(          30, 320, 190, 40,      "Tutorials", open_url, "http://ultraschall.fm/tutorials/"),
 	twitter      	= GUI.Btn:new(          242, 320, 190, 40,      "Twitter", open_url, "https://twitter.com/ultraschall_fm"),
 	forum      		= GUI.Btn:new(          455, 320, 190, 40,      "Userforum", open_url, "https://sendegate.de/c/ultraschall"),
-	versions      = GUI.Btn:new(          276, 185, 120, 24,      " Show Details", userfunc, "Version check:||!Ultraschall REAPER Extension 3.0.3|!Ultraschall REAPER Theme 3.0.3|#UltraschallHub 1.0.1|!Ultraschall Soundboard 3.0.0|#StudioLink Plug-in 16.12.0|!StudioLink OnAir Plug-in 17.02.1|!LAME MP3 Encoder 3.98.3|!SWS REAPER Extension 2.8.8|>REAPER 5.35|<REAPER 5.40 available||Copy to clipboard"),
-		
 }
 
 
+versionsTable = get_versions()
+version_items = build_menu(versionsTable)
+GUI.elms.versions  = GUI.Btn:new(          276, 185, 120, 24,      " Show Details", show_menu, version_items)
 
+-- open_info(build_info(versionsTable),"Version Info for cut & paste")
+
+-- Version check:||!Ultraschall REAPER Extension 3.0.3|!Ultraschall REAPER Theme 3.0.3|#UltraschallHub 1.0.1|!Ultraschall Soundboard 3.0.0|#StudioLink Plug-in 16.12.0|!StudioLink OnAir Plug-in 17.02.1|!LAME MP3 Encoder 3.98.3|!SWS REAPER Extension 2.8.8|>REAPER 5.35|<REAPER 5.40 available||Copy to clipboard
 
 
 ---- Put all of your own functions and whatever here ----
@@ -144,26 +187,6 @@ end
 GUI.func = check_values
 GUI.freq = 0
 
-
-	---- Main loop ----
-
---[[
-	
-	If you want to run a function during the update loop, use the variable GUI.func prior to
-	starting GUI.Main() loop:
-	
-	GUI.func = my_function
-	GUI.freq = 5     <-- How often in seconds to run the function, so we can avoid clogging up the CPU.
-						- Will run once a second if no value is given.
-						- Integers only, 0 will run every time.
-	
-	GUI.Init()
-	GUI.Main()
-	
-]]--
-
--- local startscreen = GUI.val("checkers")
--- local startscreen = GUI.elms.checkers[GUI.Val()]
 
 GUI.Init()
 GUI.Main()
