@@ -59,7 +59,7 @@ function get_versions()
 
 	local versionsTable = {}
 	local versionItemsCount = tonumber(reaper.GetExtState("ultraschall_bom", "found_items"))  -- number of entrie
-	if versionItemsCount > 0 then -- there are any items
+	if versionItemsCount and versionItemsCount > 0 then -- there are any items
 		for i = 1, versionItemsCount, 1 do
 			versionsTable[i] = reaper.GetExtState("ultraschall_bom", "item_"..tostring(i))
 		end
