@@ -41,7 +41,7 @@ namespace reaper
 
 static const char *THEME_VERSION_KEY_NAME = "theme";
 static const char *PLUGIN_VERSION_KEY_NAME = "plugin";
-static const char *VERSION_VALUE_NAME = "20170328";
+static const char *VERSION_VALUE_NAME = "20170402";
 
 bool QuerySetPluginVersion()
 {
