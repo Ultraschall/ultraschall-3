@@ -1,20 +1,33 @@
-# Changelog
+# Ultraschall Changelog
 
 Please consult our tutorial videos (German) for detailed advice: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
 ## 3.0.3 Miedinger - 2017-März-
 
-* Streaming: **Update for Studio Link OnAir**
-*Fixes a rare stability problem in the Windows version of Studio Link OnAir.*
+* Actions: **Reworked Routing Snapshots**
+*It is sometimes necessary to prepare and enact different routing situations, for example pre-show with music on the stream, show with all voices and after-show with low music. The routing snapshot area has been reimplemented completely and enhanced with its own user interface in order to facilitate its better during a live show, for example assisted by Studio-Link OnAir. The snapshots now also support sends to master and hardware sends.
+
+* Keymap: **Shortcuts for Routing Snapshots**
+*`F1` to `F4` access pre-defined Routing Snapshots. `Shift` + `F1` to `F4` writes the currently configured Routing Matrix into the respective snapshot slot.*
 
 * Keymap Mac: **Aligned with system standard**
 *The following shortcut actions were aligned with macOS' system standard: Drag-and-copy of items now works with `alt` + `primary clicking-and-holding`. The current project tab is closed by  `cmd` + `w`.*
+
+* Streaming: **Update for Studio Link OnAir**
+*Fixes a rare stability problem in the Windows version of Studio Link OnAir.*
 
 * Editing: **Further improvements to `esc` key behavior**
 *The "delete entire selection" function now includes also unselected envelope points. Amazing.*
 
 * Editing: **Midi actions for EQ tuner**
 *Two new Ultraschall midi actions simplify moving the in- and outpoints via a classical EQ tuner on a midi interface: The middle setting has no effect, a turn to the left or right speeds up movements in the respective direction. The further the turn, the faster the in-/outpoint moves. The scripts (`ultraschall_midi_move_start_of_time_slection.lua` und `ultraschall_midi_move_end_of_time_slection.lua`) need to be manually assigned to a midi signal.*
+
+* Installer: **Update Check**
+*Update Checks can now be en- and disabled at any time in the new start screen of Ultraschall.*
+
+* Theme: **Expanded Ultraschall start screen**
+*The new start screen now also contains the information from the old `About Ultraschall...` menu, which is hereby removed.*
+
 
 ## 3.0.2 Miedinger - 2017-March-09
 
@@ -222,7 +235,7 @@ Please consult our tutorial videos (German) for detailed advice: [http://ultrasc
 *In order to prevent the unintended stop of an ongoing recording, the keys `RETURN` and `SPACE` are now deactivated during a recording. A prompt will appear and can be affirmed to actually stop the recording.*
 
 * Actions: **More robust chapter mark functions**
-*All chapter mark functions were re-implemented in Lua and now take into account, whether a recording is **a)** ongoing, in which case the marker is set at the currently recorded position, or **b)** being played back, in which case it is set at the currently played position, or **c)** not applicable, in which case the marker is set to current position of the editing cursor. The MIDI connection was redesigned more robustly, so that chapter marks can be set via MIDI in any program state -- even when existing markers are being edited.*
+*All chapter mark functions were reimplemented in Lua and now take into account, whether a recording is **a)** ongoing, in which case the marker is set at the currently recorded position, or **b)** being played back, in which case it is set at the currently played position, or **c)** not applicable, in which case the marker is set to current position of the editing cursor. The MIDI connection was redesigned more robustly, so that chapter marks can be set via MIDI in any program state -- even when existing markers are being edited.*
 
 * Actions: **Labelling of Ultraschall actions**
 *All Ultraschall function are now uniformly pre-fixed with `ULTRASCHALL:` and more clearly labelled in the actions dialogue for the keyboard assignments, which is accessible through the `?` key.*
