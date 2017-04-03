@@ -55,10 +55,10 @@ bool ReaperVersionCheck()
       std::vector<std::string> tokens = framework::StringTokenize(versionString, '.');
       if(tokens.size() == 2)
       {
-         const int MIN_REQUIRED_REAPER_MAJOR_VERSION = 5;
-         const int MIN_REQUIRED_REAPER_MINOR_VERSION = 40;
-         if((framework::StringToInt(tokens[0]) >= MIN_REQUIRED_REAPER_MAJOR_VERSION) &&
-            (framework::StringToInt(tokens[1]) >= MIN_REQUIRED_REAPER_MINOR_VERSION))
+         const int REQUIRED_REAPER_MAJOR_VERSION = 5;
+         const int REQUIRED_REAPER_MINOR_VERSION = 40;
+         if((framework::StringToInt(tokens[0]) == REQUIRED_REAPER_MAJOR_VERSION) &&
+            (framework::StringToInt(tokens[1]) == REQUIRED_REAPER_MINOR_VERSION))
          {
             result = true;
          }

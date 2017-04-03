@@ -345,7 +345,7 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ");
 
    const std::string information3("\
-The Ultraschall REAPER Extension requires at least REAPER 5.40\
+The Ultraschall REAPER Extension requires REAPER 5.40\
 ");
 
    const std::string information4("\
