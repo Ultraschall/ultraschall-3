@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-3.0.3-beta5
+export ULTRASCHALL_RELEASE=Ultraschall-3.0.3-beta6
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -124,7 +124,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.0.3-beta5.pkg" of container window to {50, 30}
+           set position of item "Ultraschall-3.0.3-beta6.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.0.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}
