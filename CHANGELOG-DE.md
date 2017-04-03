@@ -8,7 +8,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Um die Fehlerbehebung und Stabilität des Systems zu gewährleisten, wird bei jedem Start nun auf eine spezifische Version von REAPER geprüft ( **5.40** ). Zukünftige Releases werden dann jeweils mit neue Versionen gekoppelt sein. **Von einem manuellen Update von REAPER ist daher unbedingt abzusehen**, die Ultraschall-Erweiterungen werden dann deaktiviert.*
 
 * Actions: **Überarbeitete Routing Snapshots**
-*Um während eine Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungs-Oberfläche versehen. Die Snapshots berücksichtigen nun auch Sends richtung Master sowie Hardware-Sends. [Video]*
+*Um während einer Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungsoberfläche versehen. Die Snapshots berücksichtigen nun auch Sends in Richtung Master sowie Hardware-Sends. [Video]*
 
 * Keymap: **Shortcuts für Routing-Snapshots**
 *Mit `F1` bis `F4` werden gesetzte Routing Snapshots abgerufen. Mit `shift` + `F1` bis `F4` wird die gerade eingestellte Routing-Matrix in den jeweiligen Snapshot-Slot geschrieben.*
