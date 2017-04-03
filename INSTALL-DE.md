@@ -10,7 +10,7 @@ Der Einsatz dieser Distribution erfolgt auf **eigene Gefahr, eigene Einstellunge
 ## macOS ab 10.11
 
 
-1. **REAPER aktualisieren / installieren:** [REAPER v5.40 OS X 64-bit](http://www.reaper.fm/files/5.x/reaper540_x86_64.dmg) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.40 oder neuer voraus. Eine Testversion ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
+1. **REAPER aktualisieren / installieren:** [REAPER v5.40 OS X 64-bit](http://www.reaper.fm/files/5.x/reaper540_x86_64.dmg) laden und installieren. **Achtung:** Ultraschall setzt wirklich zwingend Version 5.40 voraus. Der Einsatz jeder anderen Version von REAPER führt dazu, dass das Ultraschall-Plugin nicht gestartet wird. Von einem manuellen Update von REAPER ist daher zwingend abzushen. Eine Testversion von REAPER ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
 2. **Ultraschall laden:** [unsere 3.0.3 Distribution](http://url.ultraschall-podcast.de/us30) laden und das `.dmg` starten
 
