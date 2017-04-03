@@ -4,6 +4,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 ## 3.0.3 Miedinger - 2017-März-
 
+* REAPER: **Festlegung auf eine exakte Versionsnummer**
+*Um die Fehlerbehebung und Stabilität des Systems zu gewährleisten, wird bei jedem Start nun auf eine spezifische Version von REAPER geprüft ( **5.40** ). Zukünftige Releases werden dann jeweils mit neue Versionen gekoppelt sein. **Von einem manuellen Update von REAPER ist daher unbedingt abzusehen**, die Ultraschall-Erweiterungen werden dann deaktiviert.*
+
 * Actions: **Überarbeitete Routing Snapshots**
 *Um während eine Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungs-Oberfläche versehen. Die Snapshots berücksichtigen nun auch Sends richtung Master sowie Hardware-Sends. [Video]*
 
@@ -26,7 +29,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Der Update Check kann nun jederzeit im neuen Startscreen von Ultraschall ab- oder angeschaltet werden.*
 
 * Theme: **Ultraschall-Startscreen erweitert**
-*Der neue Startscreen enthält nun auch die Informationen des alten `About Ultraschall...` Menüeintrages, der somit entfällt.*
+*Der neue Startscreen enthält nun auch die Informationen des alten `About Ultraschall...` Menüeintrages, der somit entfällt. Die Versionsnummern aller installierten Komponenten sind nun im Startscreen unter dem `Details`-Button erreichbar.*
 
 
 
