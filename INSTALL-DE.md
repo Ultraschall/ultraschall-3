@@ -2,7 +2,7 @@
 Die Installation von Ultraschall umfasst **drei zwingend notwendige Schritte**. 
 Diese drei Schrittewerden auch in einem [Screencast-Video](https://youtu.be/RTshDTPBMes) erklärt.
 
-----
+---
 # 1.
 ### REAPER aktualisieren / installieren
 
@@ -14,7 +14,7 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 - Der Einsatz jeder anderen Version von REAPER führt dazu, dass das Ultraschall-Plugin nicht gestartet wird. Von einem manuellen Update von REAPER auf eine andere Version als 5.40 ist daher zwingend abzusehen.
 - Eine Testversion von REAPER ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
-----
+---
 # 2.
 ### Ultraschall laden und den Ultraschall-Installer starten.
 
@@ -43,8 +43,7 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 - Bei weiteren Fehlermeldungen bitte prüfen, ob wirklich die Version 5.40 von REAPER installiert wurde (Schritt 1). Im Zweifel REAPER noch einmal installieren.
 - Es kann weiterhin helfen, den Rechner neu zu starten sowie die `Erste Hilfe` im Festplattendienstprogramm von macOS durchlaufen zu lassen.
 - Falls immer noch Probleme auftreten oder eine sehr alte Installation (vor 2.0) aktualisiert werden soll, empfiehlt es sich, die im `.dmg` liegenden Skripte `Uninstall.command` sowie `Remove legacy audio devices.command` durchlaufen zu lassen und den Rechner neu zu starten. Danach die Schritte 1 bis 3 wiederholen.
-- Sollten *sämtliche dieser Maßnahmen* nicht zum Erfolg führen, kann man Hilfe in unserem Anwender-Forum erbitten: [Ultraschall im Sendegate
-- ](https://sendegate.de/c/ultraschall)
+- Sollten *sämtliche dieser Maßnahmen* nicht zum Erfolg führen, kann man Hilfe in unserem Anwender-Forum erbitten: [Ultraschall im Sendegate](https://sendegate.de/c/ultraschall)
 - Zur Handhabung der neuen Funktionen empfehlen wir die Release-Screencast in unserem [Tutorial Bereich](http://ultraschall.fm/tutorials/).
 
 ----
