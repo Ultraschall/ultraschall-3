@@ -4,10 +4,8 @@ Diese drei Schrittewerden auch in einem [Screencast-Video](https://youtu.be/RTsh
 
 
 --
-
-#1.
-
-###REAPER aktualisieren / installieren
+# 1.
+### REAPER aktualisieren / installieren
 
 Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REAPER. Ultraschall 3.0.3 läuft nur mit der Version REAPER 5.40. 
 
@@ -18,9 +16,8 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 - Eine Testversion von REAPER ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
 --
-#2.
-
-###Ultraschall laden und den Ultraschall-Installer starten.
+# 2.
+### Ultraschall laden und den Ultraschall-Installer starten.
 
 Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 
@@ -32,15 +29,15 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 
 
 --
-#3.
-###Die REAPER Ultraschall-Konfiguration installieren
+# 3.
+### Die REAPER Ultraschall-Konfiguration installieren
 - REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde.
 - Nun die Datei `Ultraschall_3.0.ReaperConfigZip` aus dem noch geöffneten `.dmg`-Fenster in das **geöffnete REAPER Hauptfenster ziehen** und `Importieren` klicken.
 - Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, diese **ZUVOR** zu exportieren – es werden von dieser Distribution erhebliche REAPER-Bereiche ungefragt überschrieben.
 
 --
-#4.
-###Erfolg der Installation kontrollieren
+# 4.
+### Erfolg der Installation kontrollieren
 - REAPER startet nach Schritt 3 automatisch neu.
 - Im sich öffnenden Ultraschall-Startscreen auf `Details` drücken und kontrollieren, dass alle Komponenten richtig installiert sind und bei Start keine Warnmeldungen mehr erscheinen.
 - Warnmeldungen beim Start zeigen an, wenn entweder Plugin (Schritt 2) oder Theme (Schritt 3) nicht richtig installiert wurden. Ultraschall funktioniert nur, wenn **beide** Komponenten installiert sind. In diesem Fall bitte die Schritte 2 und 3 sorgfältig wiederholen.
@@ -53,7 +50,7 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 
 --
 
-###Optional - UltraschallHub installieren
+### Optional - UltraschallHub installieren
 Wenn man in Ultraschall eine rein in Software modellierte SKYPE N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices Voraussetzung:
 
 - Hierzu das `UltraschallHub.pkg` aus dem `.dmg` Fenster durchlaufen lassen.
