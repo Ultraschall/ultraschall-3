@@ -2,8 +2,7 @@
 Die Installation von Ultraschall umfasst **drei zwingend notwendige Schritte**. 
 Diese drei Schrittewerden auch in einem [Screencast-Video](https://youtu.be/RTshDTPBMes) erklärt.
 
-
---
+----
 # 1.
 ### REAPER aktualisieren / installieren
 
@@ -15,7 +14,7 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 - Der Einsatz jeder anderen Version von REAPER führt dazu, dass das Ultraschall-Plugin nicht gestartet wird. Von einem manuellen Update von REAPER auf eine andere Version als 5.40 ist daher zwingend abzusehen.
 - Eine Testversion von REAPER ist *uneingeschränkt 60 Tage lauffähig*, danach fallen einmalig 65 € Kosten an.
 
---
+----
 # 2.
 ### Ultraschall laden und den Ultraschall-Installer starten.
 
@@ -28,14 +27,14 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 - Wenn man nach diesem Schritt REAPER startet, wird man mit Fehlermeldungen begrüßt - daher **unbedingt fortfahren** mit Schritt 3:
 
 
---
+----
 # 3.
 ### Die REAPER Ultraschall-Konfiguration installieren
 - REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde.
 - Nun die Datei `Ultraschall_3.0.ReaperConfigZip` aus dem noch geöffneten `.dmg`-Fenster in das **geöffnete REAPER Hauptfenster ziehen** und `Importieren` klicken.
 - Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, diese **ZUVOR** zu exportieren – es werden von dieser Distribution erhebliche REAPER-Bereiche ungefragt überschrieben.
 
---
+----
 # 4.
 ### Erfolg der Installation kontrollieren
 - REAPER startet nach Schritt 3 automatisch neu.
@@ -48,7 +47,7 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 - ](https://sendegate.de/c/ultraschall)
 - Zur Handhabung der neuen Funktionen empfehlen wir die Release-Screencast in unserem [Tutorial Bereich](http://ultraschall.fm/tutorials/).
 
---
+----
 
 ### Optional - UltraschallHub installieren
 Wenn man in Ultraschall eine rein in Software modellierte SKYPE N-1 Schaltung umsetzen möchte, ist die Installation unserer eigenen Ultraschall Devices Voraussetzung:
