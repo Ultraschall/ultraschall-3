@@ -33,7 +33,6 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 
 - REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde.
 - Nun die Datei `Ultraschall_3.0.ReaperConfigZip` aus dem noch geöffneten `.dmg`-Fenster in das **geöffnete REAPER Hauptfenster ziehen** und `Importieren` klicken.
-- Wenn man vorher bereits mit eigenen Einstellungen gearbeitet hat empfiehlt es sich, diese **ZUVOR** zu exportieren – es werden von dieser Distribution erhebliche REAPER-Bereiche ungefragt überschrieben.
 
 # 4.
 ### Erfolg der Installation kontrollieren
@@ -93,7 +92,6 @@ Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
 
 - Unser integriertes Soundboard zum Einspielen von Jingles und Ähnlichem, sowie StudioLink (als Alternative zu Skype-Remoterecordings) und StudioLink OnAir wird automatisch installiert. Man muss dies jedoch REAPER einmalig nach der Installation mitteilen: 
 - Im Menü `Options | Preferences… | Plug-ins/VST` anwählen. Nun rechts oben den Button `Auto-detect` drücken und rechts unten mit `Apply` bestätigen. Die Einstellungen können nun wieder geschlossen werden.
-- Aufräumen: Die Verknüpfung `Ultraschall REAPER Theme` vom Desktop löschen.
 
 # 5.
 ### Erfolg der Installation kontrollieren
