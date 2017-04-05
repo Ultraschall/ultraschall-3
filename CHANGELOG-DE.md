@@ -2,10 +2,10 @@
 
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-## 3.0.3 Miedinger - 2017-März-
+## 3.0.3 Miedinger - 2017-April-6
 
 * REAPER: **Festlegung auf eine exakte Versionsnummer**
-*Um die Fehlerbehebung und Stabilität des Systems zu gewährleisten, wird bei jedem Start nun auf eine spezifische Version von REAPER geprüft ( **5.40** ). Zukünftige Releases werden dann jeweils mit neue Versionen gekoppelt sein. **Von einem manuellen Update von REAPER ist daher unbedingt abzusehen**, die Ultraschall-Erweiterungen werden dann deaktiviert.*
+*Um die Konsistenz und Stabilität des Systems zu gewährleisten, wird bei jedem Start nun auf eine spezifische Version von REAPER geprüft (5.40). Zukünftige Releases werden dann jeweils mit neuen Versionen gekoppelt sein.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
 
 * Actions: **Überarbeitete Routing Snapshots**
 *Um während einer Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungsoberfläche versehen. Die Snapshots berücksichtigen nun auch Sends in Richtung Master sowie Hardware-Sends. [Video]*
@@ -26,7 +26,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Zwei neue Ultraschall-Midi Aktionen ermöglichen das leichte Verschieben des Inpoint und Outpoint über einen klassischen EQ-Regler auf einem Midi-Interface: In der Mittelstellung passiert nichts, ein Drehen nach Links oder Rechts bewirkt eine beschleunigte Bewegung in die jeweilige Richtung. Je weiter der Einschlag, desto schneller bewegt sich der In-/Outpoint. Die Skripte (`ultraschall_midi_move_start_of_time_slection.lua` und `ultraschall_midi_move_end_of_time_slection.lua`) müssen manuell einem Midi-Signal zugeordnet werden.*
 
 * Installer: **Update Check**
-*Der Update Check kann nun jederzeit im neuen Startscreen von Ultraschall ab- oder angeschaltet werden.*
+*Der Update Check auf neue Versionen von Ultraschall kann nun jederzeit im neuen Startscreen ab- oder angeschaltet werden.*
 
 * Theme: **Ultraschall-Startscreen erweitert**
 *Der neue Startscreen enthält nun auch die Informationen des alten `About Ultraschall...` Menüeintrages, der somit entfällt. Die Versionsnummern aller installierten Komponenten sind nun im Startscreen unter dem `Details`-Button erreichbar.*
