@@ -4,8 +4,11 @@ Please consult our tutorial videos (German) for detailed advice: [http://ultrasc
 
 ## 3.0.3 Miedinger - 2017-März-
 
+* REAPER: **Commitment to a specific version number**
+*For the sake of troubleshooting and in order to maintain system stability, Ultraschall will check for a specific REAPER version ( **5.40** ) on every launch. Future releases will be bound to specific newer versions of REAPER **We therefore strongly advise NOT to manually update REAPER**, since the Ultraschall extensions would be deactivated.*
+
 * Actions: **Reworked Routing Snapshots**
-*It is sometimes necessary to prepare and enact different routing situations, for example pre-show with music on the stream, show with all voices and after-show with low music. The routing snapshot area has been reimplemented completely and enhanced with its own user interface in order to facilitate its better during a live show, for example assisted by Studio-Link OnAir. The snapshots now also support sends to master and hardware sends.
+*It is sometimes necessary to prepare and recall different routing situations – e.g. using Studio-Link OnAir – such as pre-show with music on the stream, the actual show with all the speakers, and after-show with music at low volume. The routing snapshot area has therefore been reimplemented completely and enhanced with its own user interface. The snapshots now also support Sends to Master and Hardware Sends.
 
 * Keymap: **Shortcuts for Routing Snapshots**
 *`F1` to `F4` access pre-defined Routing Snapshots. `Shift` + `F1` to `F4` writes the currently configured Routing Matrix into the respective snapshot slot.*
