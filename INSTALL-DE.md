@@ -58,7 +58,7 @@ Wenn man in Ultraschall eine rein in Software modellierte SKYPE N-1 Schaltung um
 
 
 ----
-# Windows ab Version 7: Installation
+# Windows ab Version 7
 
 
 # 1.
