@@ -1,6 +1,6 @@
 # Installation von Ultraschall 3.0.3
 Die Installation von Ultraschall umfasst **drei zwingend notwendige Schritte**. 
-Diese drei Schrittewerden auch in einem [Screencast-Video](https://youtu.be/RTshDTPBMes) erklärt.
+Diese drei Schritte werden auch in einem [Screencast-Video](https://youtu.be/RTshDTPBMes) erklärt.
 
 # 1.
 ### REAPER aktualisieren / installieren
