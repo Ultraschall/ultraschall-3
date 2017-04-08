@@ -45,7 +45,7 @@ Download our Ultraschall 3.0.3 distribution and open the `.dmg` file:
 - It may also help to restart your computer and run the `First Aid` option in the macOS Disk Utility application.
 - In case of persisting issues or when you want to update an outdated version of Ultraschall prior to 2.0 we recommend to run the scripts `Uninstall.command` and `Remove legacy audio devices.commend` provided in the .dmg and subsequently restart your computer. After restart please repeat steps 1 to 3.
 Should *any of these measures* fail, you can ask for help in our user forum: [Ultraschall at Sendegate](https://sendegate.de/c/ultraschall)
-- We recommend you watch the release screencast in our [Tutorials area](http://ultraschall.fm/tutorials/) to learn the new features.
+- We recommend you watch the release screencast in our [Tutorials area](http://ultraschall.fm/tutorials/) to find out about the new features.
 
 ----
 
@@ -103,4 +103,4 @@ Download our Ultraschall 3.0.3 distribution and open the `.dmg` file:
 - Should you experience further error messages please verify that you have REAPER 64-bit version 5.40 installed (step 1). If in doubt, re-install REAPER.
 - Try restarting your computer to solve your issue.
 Should *any of these measures* fail, you can ask for help in our user forum: [Ultraschall at Sendegate](https://sendegate.de/c/ultraschall)
-- We recommend you watch the release screencast in our [Tutorials area](http://ultraschall.fm/tutorials/) to learn the new features.
+- We recommend you watch the release screencast in our [Tutorials area](http://ultraschall.fm/tutorials/) to find out about the new features.
