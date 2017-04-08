@@ -8,7 +8,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Um die Konsistenz und Stabilität des Systems zu gewährleisten, wird bei jedem Start nun auf eine spezifische Version von REAPER geprüft (5.40). Zukünftige Releases werden dann jeweils mit neuen Versionen gekoppelt sein.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
 
 * Actions: **Überarbeitete Routing Snapshots**
-*Um während einer Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungsoberfläche versehen. Die Snapshots berücksichtigen nun auch Sends in Richtung Master sowie Hardware-Sends. [Video]*
+*Um während einer Live-Sendung - etwa mit Hilfe von Studio Link OnAir - verschiedene Routing-Situationen vorbereiten und abrufen zu können (etwa Preshow mit nur Musik auf dem Stream, Show mit allen Stimmen und Aftershow mit leisem Musikbett), wurde der Bereich der Routing-Snapshots komplett neu implementiert und mit einer eigenen Verwaltungsoberfläche versehen. Die Snapshots berücksichtigen nun auch Sends in Richtung Master sowie Hardware-Sends.*
 
 * Keymap: **Shortcuts für Routing-Snapshots**
 *Mit `F1` bis `F4` werden gesetzte Routing Snapshots abgerufen. Mit `shift` + `F1` bis `F4` wird die gerade eingestellte Routing-Matrix in den jeweiligen Snapshot-Slot geschrieben.*
@@ -30,6 +30,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Theme: **Ultraschall-Startscreen erweitert**
 *Der neue Startscreen enthält nun auch die Informationen des alten `About Ultraschall...` Menüeintrages, der somit entfällt. Die Versionsnummern aller installierten Komponenten sind nun im Startscreen unter dem `Details`-Button erreichbar.*
+
+* Soundboard: **Bugfix**
+*Das Soundboard stoppt nun nicht mehr die Wiedergabe, sobald ein Routing-Preset abgerufen wird.*
 
 
 
