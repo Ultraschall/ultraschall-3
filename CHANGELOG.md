@@ -32,7 +32,7 @@ Please consult our tutorial videos (German) for detailed advice: [http://ultrasc
 *The new start screen now also contains the information from the old `About Ultraschall...` menu, which is hereby removed.*
 
 * Soundboard: **Bugfix**
-*The Soundboard will no longer stop playback when recalling a Routing-Preset.*
+*The Soundboard will no longer stop playback when recalling a Routing Preset.*
 
 
 ## 3.0.2 Miedinger - 2017-March-09
