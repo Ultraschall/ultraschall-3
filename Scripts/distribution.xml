@@ -5,7 +5,7 @@
    <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
    <domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
    <os-version min="10.11"/>
-   <background file="background.png" mime-type="image/png"/>
+   <background file="backgroundv2.png" mime-type="image/png"/>
    <!-- Define documents displayed at various steps -->
    <license file="license.html" mime-type="text/html"/>
    <!-- List all component packages -->
