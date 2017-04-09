@@ -1,18 +1,19 @@
 # Installation instructions for Ultraschall 3.0.3
 
 
-The Ultraschall installation comprises **three mandatory steps (Windows: four)**. 
+The Ultraschall installation comprises **three mandatory steps (Windows: four)**.
 We also explain these steps in a separate [screencast video](https://youtu.be/RTshDTPBMes) in German language.
 
---
+----
+
 # macOS 10.11 or above
 
 # 1.
 ### Update / Install REAPER
 
-The Ultraschall open-source project is an extension for the commercially available REAPER audio production software. Ultraschall 3.0.3 is only compatible to REAPER version 5.40. 
+The Ultraschall open-source project is an extension for the commercially available REAPER audio production software. Ultraschall 3.0.3 is only compatible to REAPER version 5.40.
 
-[**Download REAPER version v5.40 OS X 64-bit**](http://www.reaper.fm/files/5.x/reaper540_x86_64.dmg) 
+[**Download REAPER version v5.40 OS X 64-bit**](http://www.reaper.fm/files/5.x/reaper540_x86_64.dmg)
 
 - Download and open the `.dmg`, and install REAPER or update to version 5.40 respectively.
 - Using any other REAPER version will lead to the Ultraschall plugin being deactivated and not being launched. We strongly advise you NOT to update REAPER manually to any other version than 5.40.
@@ -58,15 +59,16 @@ This step is *not required* for using StudioLink, StudioLink OnAir or the Ultras
 
 
 ----
+
 # Windows Version 7 or above
 
 
 # 1.
 ### Update / Install REAPER
 
-The Ultraschall open-source project is an extension for the commercially available REAPER audio production software. Ultraschall 3.0.3 is only compatible to REAPER version 5.40. 
+The Ultraschall open-source project is an extension for the commercially available REAPER audio production software. Ultraschall 3.0.3 is only compatible to REAPER version 5.40.
 
-[**Download REAPER version v5.40 Windows 64-bit**](http://www.reaper.fm/files/5.x/reaper540_x64-install.exe) 
+[**Download REAPER version v5.40 Windows 64-bit**](http://www.reaper.fm/files/5.x/reaper540_x64-install.exe)
 
 - Download the `.exe`, and install REAPER or update to version 5.40 respectively.
 - Using any other REAPER version will lead to the Ultraschall plugin being deactivated and not being launched. We strongly advise you NOT to update REAPER manually to any other version than 5.40.
@@ -91,7 +93,7 @@ Download our Ultraschall 3.0.3 distribution and open the `.dmg` file:
 # 4.
 ### Connect StudioLink and the Ultraschall Soundboard
 
-- Our integrated soundboard for playing jingles etc., StudioLink (as an alternative broadcasting solution to remote Skype recording) and StudioLink OnAir will be installed automatically. After installation you will however notify REAPER on this: 
+- Our integrated soundboard for playing jingles etc., StudioLink (as an alternative broadcasting solution to remote Skype recording) and StudioLink OnAir will be installed automatically. After installation you will however notify REAPER on this:
 - Go to the menu `Options | Preferences… | Plug-ins/VST`. Now click the `Auto-detect` button in the upper right corner and confirm by clicking `Apply` in the lower right. Close the Preferences again.
 
 # 5.
