@@ -8,7 +8,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 
 - **Design.** A simple, minimalistic impression is aspired to. Distracting ornaments are unwelcome. Superfluous or redundant icons and menu entries are rigorously removed.
 - **Guided by workflow.** Podcasters produce completely differently from musicians. We usually have the three phases of preparation, (live) show and post-production. Ultraschall's program composition is guided by these three phases and one can switch between the respective views back and forth at will.
-- **Rapid access to podcast features.** Functions that are useful for us podcasters are prominently placed: 
+- **Rapid access to podcast features.** Functions that are useful for us podcasters are prominently placed:
 
 ## Features
 
@@ -18,8 +18,8 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Skype N-1:** Record external speakers without switching a single cable. A clean N-1 circuit can be built purely in software, so that all participants can hear everything and enjoy a clear sound without echoes. Skype callers are recorded on a separate track. If necessary, that can also be replaced with a double-ender recording. The same works with Mumble as well, of course.
 * **Custom HUB sound driver:** In order to model complex tasks -- such as Skype N-1 -- in software, one previously needed the abandoned [Soundflower](https://rogueamoeba.com/freebies/soundflower/). Following the latest CoreAudio APIs, we have reimplemented it in a stable and future-proof manner.*
 * **Routing:** Track routing can be managed comfortably via a matrix/switchboard. The preset routing can be activated during a show with a single click -- just as on a digital mixing panel. One can switch effortlessly between preshow (only music to the stream, but the podcasts hear each other already and can warm themselves up), show (everything to the stream) and postshow with light background music and cutting (nothing to the stream). You can create and save your own routing presets as well.
-* **Multifunctional dock:** You can place and recall different tool in the dock area: track mixer, master mix, media browser, navigator, chapter marks, routing matrix, routing presets, effects, clock. The dock can be split into two or three parts, which can be individually managed via tabs. 
-* **Workflow and variable user interface:** We offer one preset with custom window arrangement and tools for each of the three workflow steps preparation, show and post-production 
+* **Multifunctional dock:** You can place and recall different tool in the dock area: track mixer, master mix, media browser, navigator, chapter marks, routing matrix, routing presets, effects, clock. The dock can be split into two or three parts, which can be individually managed via tabs.
+* **Workflow and variable user interface:** We offer one preset with custom window arrangement and tools for each of the three workflow steps preparation, show and post-production
 * **Podcast menu:** All functions that are necessary for the production of a podcast are neatly summarized in a single menu. The arrangement of the entries form top to bottom corresponds with the workflow of a podcast production.
 
 ### Recording
@@ -31,7 +31,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Ducking:** Add a track for the soundboard that lowers its own volume as soon as someone speaks, and ups it again in a break.
 * **Cough buttons:** Each participant can receive a switch that keeps the recording free of unwanted noises. It is recorded, but muted, and can later be optimized or removed.
 * **Remote control via MIDI and OSC:** Almost all functions -- such as the cough switches or the placement of chapter or edit markers -- can be remote controlled.
-* **Wiimotes and iOS as remove controls:** Wiimotes (or replacement devices) are popular, cheap and flexible remotes- They can be set up with custom MIDI or OSC functions. A control interface based on OSC is offered for iOS.  
+* **Wiimotes and iOS as remove controls:** Wiimotes (or replacement devices) are popular, cheap and flexible remotes- They can be set up with custom MIDI or OSC functions. A control interface based on OSC is offered for iOS.
 * **Amp drive:**Large VU meters with peak display (numerical as well) enable the perfect amp drive. The target range of -18dB to -6dB is distinctly colored (yellow).
 * **Navigation:** Wherever you are working on within your project, pressing `Y` will jump you back to the current recording position.
 
@@ -54,13 +54,6 @@ Ultraschall is Open Source.
 - Support Forum: <https://sendegate.de/c/ultraschall>
 - Project Website, download and blog: <http:ultraschall.fm>
 - Tutorial Screencast on [Youtube](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG)
-
-
-### Donate via Flattr
-
-- Daniel: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Daniel!")](https://flattr.com/profile/danlin "Flattr Daniel")
-- Ralf: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ralf!")](https://flattr.com/profile/rstockm "Flattr Ralf")
-- Ultraschall generally: [![Flattr Button](http://api.flattr.com/button/flattr-badge-large.png "Flattr Ultraschall!")](https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware "Flattr Ultraschall")
 
 ### Credits:
 

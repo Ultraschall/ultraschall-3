@@ -48,7 +48,7 @@ Die Feature-Entwicklung von Ultraschall erfolgt entlang dem dreigeteilten Workfl
 * **Ripple-Edit:** Schneide deine mehrspurige Aufnahme ohne dass zwischen den Spuren ein Versatz entsteht. Verwende Ripple-Cut um schnell ganze Abschnitte über alle Spuren hinweg zu schneiden und die Lücke direkt zu schließen.
 * **Variable Abspielgeschwindigkeit:** Die Abhörgeschwindigkeit kann für die Nachproduktion erhöht werden. Die Tonhöhe bleibt dabei konstant.
 * **Navigation:** Viele Shortcuts vereinfachen die Orientierung und Navigation im Projekt - etwa das direkte Anspringen der nächsten Schnittmarken oder Objekte.
-* **Storyboard:** Mächtige Funktionen, die dich bei "gebauten Beiträgen" wie Radio-Features unterstützen! Versehe beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - mit Schlagworten, nach denen du - auch projektübergreifend - suchen und filtern kannst. Verwalte so beliebig viele Clip-Datenbanken. Verwende Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Verbinde fertige Abschnitte mit Regionen oder Gruppen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten. Im Navigator behält man - unabhängig vom Zoom-Faktor - jederzeit den Überblick über das gesamte Projekt. 
+* **Storyboard:** Mächtige Funktionen, die dich bei "gebauten Beiträgen" wie Radio-Features unterstützen! Versehe beliebige Bereiche einer Aufnahme - etwa einzelne Antworten - mit Schlagworten, nach denen du - auch projektübergreifend - suchen und filtern kannst. Verwalte so beliebig viele Clip-Datenbanken. Verwende Farben und Kommentare, um in komplexen Projekten den Überblick zu behalten. Verbinde fertige Abschnitte mit Regionen oder Gruppen, um sie zusammen zu halten. Text-Elemente können frei im Schnittbereich verteilt werden, etwa um Shownotes oder Kommentare zu verwalten. Im Navigator behält man - unabhängig vom Zoom-Faktor - jederzeit den Überblick über das gesamte Projekt.
 * **Effekte:** Die für Podcasts essentiellen Effekte sind direkt eingebunden: Expander (bestehend aus weichem Gate, Kompressor, Limiter) und parametrischer EQ. Die Effekte sind nicht-destruktiv und können jederzeit pro Spur angepasst werden. Für Podcasts sinnvolle Einstellungen der Filter werden mitgeliefert.
 * **Multitrack-Export:** Exportiere dein fertiges Projekt entweder als Mono- Stereo- oder Mehrkanal Datei. Im letzteren Fall kann jede einzelne Sprechspur beispielsweise von [Auphonic](https://auphonic.com/) optimiert werden.
 
@@ -59,8 +59,8 @@ Wir versuchen die Weiterentwicklung von Reaper mit Unterstützung der PodcasterI
 
 * Die Projektseite - wo wir unter anderem in nunmehr vier Videos erkläre was eigentlich Sinn und Zweck des ganzen Projektes ist: <http://ultraschall.fm>
 
-* Ultraschall-Screencast: Alle Funktionen werden in einer Serie von Screencast auf YouTube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit... 
-Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen. 
+* Ultraschall-Screencast: Alle Funktionen werden in einer Serie von Screencast auf YouTube <https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG> ausführlich erläutert. Durch die ständige Weiterentwicklung entsteht hier das Problem, dass ältere Folgen oft einen viel umständlicheren Weg beschreiben, als er mit späteren Releases möglich ist. Dennoch sind die alten Folgen insofern sinnvoll, als dass man hier Grundlagenwissen "von der Pike auf" vermittelt bekommt. Wer also ein Wochenende Zeit...
+Geplant ist eine Text-Überarbeitung der alten Folgen an Stellen, die wirklich nicht mehr dem Status-Quo entsprechen.
 
 * Das Support-Forum auf sendegate.de: wir haben einen eigenen Ultraschall-Bereich im Sendegate eingerichtet, auf dem sich alle Entwickler und die meisten anwendenden PodcasterInnen tummeln: <https://sendegate.de/c/ultraschall> - eine sehr gute Anlaufstelle für den schnellen Austausch von Ideen oder zur konkreten Problemlösung.
 
@@ -72,14 +72,6 @@ Alle Kanäle ist lesend frei geschaltet. Wenn du beitragen möchtest, melde dich
 Diese Distribution krempelt viele Bereiche von Reaper um - man muss umlernen, egal ob man von einer anderen DAW oder der Reaper-Originalversion kommt. Ein erster Anlaufpunkt mit kompakter Erklärung der drei Workflow-Views und der Icons findet sich im der Release beiliegenden Release-Poster (zur 1.0 - teilweise überholt, siehe Release-History unten).
 
 Begleitend sei unser Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
-
-### Flattr
-
-Hier könnt ihr Flattr-Liebe loswerden:
-
-* Daniel: <https://flattr.com/profile/danlin>
-* Ralf: <https://flattr.com/profile/rstockm>
-* Ultraschall insgesamt: <https://flattr.com/thing/2490245/Ultraschall-der-Wegbegleiter-durch-das-Fledermausland-der-Podcastsoftware>
 
 ### Credits:
 
