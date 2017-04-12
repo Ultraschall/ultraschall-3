@@ -77,7 +77,7 @@ The Ultraschall open-source project is an extension for the commercially availab
 # 2.
 ### Download Ultraschall and launch the Ultraschall installer
 
-Download our Ultraschall 3.0.3 distribution and open the `.dmg` file:
+Download our Ultraschall 3.0.3 distribution and open the `.msi` file:
 
 [**Download Ultraschall-3.0.3.msi (24.1 MB)**](http://url.ultraschall-podcast.de/us303win)
 
