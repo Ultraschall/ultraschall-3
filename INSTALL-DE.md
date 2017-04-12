@@ -74,7 +74,7 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 # 2.
 ### Ultraschall laden und den Ultraschall-Installer starten.
 
-Unsere Ultraschall 3.0.3 Distribution laden und das `.dmg` starten:
+Unsere Ultraschall 3.0.3 Distribution laden und das `.msi` starten:
 
 [**Ultraschall-3.0.3.msi (24.1 MB) herunterladen**](http://url.ultraschall-podcast.de/us303win)
 
