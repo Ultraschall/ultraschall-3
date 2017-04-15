@@ -35,7 +35,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Das Soundboard stoppt nun nicht mehr die Wiedergabe, sobald ein Routing-Preset abgerufen wird.*
 
 * Soundboard: **Presets**
-*Das Soundboard funktioniert nun durchgängig mit Presets. Dadurch ist es möglich, beliebige Sound-Sets zu speichern und zu laden, auch während einer Aufnahme. Man kann die Presets den eigenen Projekt-Presets zuzeisen, damit jede Sendung gleich mit den richtigen Einspielern geladen wird. Duch den fliegenden Wechsel von Presets während einer Aufnahme ist nun auch leicht möglich, mehr als 24 Sounds in einer Sendung zu verwenden.*
+*Das Soundboard funktioniert nun durchgängig mit Presets. Dadurch ist es möglich, beliebige Sound-Sets zu speichern und zu laden, auch während einer Aufnahme. Man kann die Presets den eigenen Projekt-Presets zuweisen, damit jede Sendung gleich mit den richtigen Einspielern geladen wird. Duch den fliegenden Wechsel von Presets während einer Aufnahme ist nun auch leicht möglich, mehr als 24 Sounds in einer Sendung zu verwenden.*
 
 
 
