@@ -34,6 +34,8 @@ Please consult our tutorial videos (German) for detailed advice: [http://ultrasc
 * Soundboard: **Bugfix**
 *The Soundboard will no longer stop playback when recalling a Routing Preset.*
 
+* Soundboard: **Presets**
+*The Soundboard now uses presets throughout. This enables saving and loading of sound sets even during a recording. Such on-the-fly changes also enable to easily use more than 24 sounds during a show. One can assign the presets to one's own project presets, so that each session starts with the correct jingles.*
 
 ## 3.0.2 Miedinger - 2017-March-09
 
