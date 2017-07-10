@@ -30,7 +30,7 @@ function Msg(val)
   reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
-theme_version_now = 20170306 -- version of this theme
+theme_version_now = 20170402 -- version of this theme
 
 -- reaper.SetExtState("ultraschall_versions", "theme", theme_version_now, true)
 -- not a godd idea: something went wrong during the installation of the theme, so don't fix but reinstall
@@ -51,31 +51,31 @@ startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
 
 
 if theme_version ~= tostring(theme_version_now) then 
-	error_msg = "Your ULTRASCHALL THEME is out of date. \n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
+  error_msg = "Your ULTRASCHALL THEME is out of date. \n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
 end
 
 if plugin_version ~= theme_version then -- different versions of theme and plugin isntalled
-	error_msg = "There is a configuration mismatch between the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
+  error_msg = "There is a configuration mismatch between the ULTRASCHALL THEME ("..theme_version..") and PLUGIN ("..plugin_version..").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
 end
 
 if plugin_version == "" then 
-	error_msg = "The ULTRASCHALL PLUGIN was not properly installed.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/" 
+  error_msg = "The ULTRASCHALL PLUGIN was not properly installed.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/" 
 end
 
 if theme_version == "" then 
-	error_msg = "There are parts of the ULTRASCHALL THEME missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/" 
+  error_msg = "There are parts of the ULTRASCHALL THEME missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease check the installation guide on http://ultraschall.fm/install/" 
 end
 
 
 
 if error_msg then
-		type = 0
-		title = "Ultraschall Configuration Problem"
- 		result = reaper.ShowMessageBox( error_msg, title, type )
+    type = 0
+    title = "Ultraschall Configuration Problem"
+     result = reaper.ShowMessageBox( error_msg, title, type )
 
 elseif first_start == "true" or startscreen == "1" then
-	start_id = reaper.NamedCommandLookup("_RSc78c66b79c72969f3d554fc9bc414cc8c2c9a89f")
-	reaper.Main_OnCommand(start_id,0) 	--Show Startscreen		
+  start_id = reaper.NamedCommandLookup("_Ultraschall_StartScreen")
+  reaper.Main_OnCommand(start_id,0)   --Show Startscreen    
 end
 
 
@@ -85,19 +85,31 @@ end
 --------------------------
 
 if view then
-	reaper.SetToggleCommandState(sec, view, 1)
-	reaper.RefreshToolbar2(sec, view)
+  reaper.SetToggleCommandState(sec, view, 1)
+  reaper.RefreshToolbar2(sec, view)
 end
 
 if mouse <= 0 then -- selection is activated
-	mouse_id = reaper.NamedCommandLookup("_RS04f578c9a12a05c62111fffb2403eaca640a11a0")
-	reaper.SetToggleCommandState(sec, mouse_id, 1)
-	reaper.RefreshToolbar2(sec, mouse_id)
+  mouse_id = reaper.NamedCommandLookup("_Ultraschall_Toggle_Mouse_Selection")
+  reaper.SetToggleCommandState(sec, mouse_id, 1)
+  reaper.RefreshToolbar2(sec, mouse_id)
 end
 
 -- set OnAir button off
 
-reaper.SetToggleCommandState(sec, 55695, 0)
+on_air_button_id = reaper.NamedCommandLookup("_Ultraschall_OnAir")
+
+reaper.SetToggleCommandState(sec, on_air_button_id, 0) 
+
+--------------------------
+-- Restore opened/closed Windows
+--------------------------
+
+-- Reset the counter for already opened windows
+reaper.SetExtState("Ultraschall_Windows","Ultraschall Routing Snapshots",0.0, true)
+reaper.SetExtState("Ultraschall_Windows","Ultraschall Export Assistant",0.0, true)
+reaper.SetExtState("Ultraschall_Windows","Ultraschall Color Picker",0.0, true)
+reaper.SetExtState("Ultraschall_Windows","Ultraschall 3",0.0, true)
 
 
 --------------------------
@@ -110,9 +122,9 @@ m = reaper.GetMasterTrack(0)                                                  --
 os = reaper.GetOS()
 
 if string.match(os, "OSX") then 
-	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
-else	-- Windows
-	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+  fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+else  -- Windows
+  fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
 end
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
@@ -120,8 +132,8 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 curtheme = reaper.GetLastColorThemeFile()
 if string.find(curtheme, "ReaperThemeZip", 1) then
-	themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
-	reaper.OpenColorThemeFile(themeadress)
+  themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
+  reaper.OpenColorThemeFile(themeadress)
 end
 
 
@@ -132,7 +144,7 @@ end
 -- not really needed right now, but maybe in coming releases
 
 if first_start == "true" then
-	reaper.SetExtState("ultraschall_start", "firststart", "false", true)	-- there will be only one first start
+  reaper.SetExtState("ultraschall_start", "firststart", "false", true)  -- there will be only one first start
 end
 
 

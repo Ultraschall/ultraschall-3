@@ -42,28 +42,28 @@ reaper.Main_OnCommand(40491, 0) -- unarm all tracks for recording
 
 reaper.Main_OnCommand(40297,0) -- unselect all tracks
 
-reaper.Main_OnCommand(reaper.NamedCommandLookup("_RS6b172c85d99c7fe075078618332fbb0a6ee6e73a"), 0) -- select all StudioLink tracks
+reaper.Main_OnCommand(reaper.NamedCommandLookup("_Ultraschall_Select_StudioLink"), 0) -- select all StudioLink tracks
 
 reaper.Main_OnCommand(reaper.NamedCommandLookup("_S&M_SENDS5"), 0) -- remove all receives from selected (StudioLink) tracks 
 
-reaper.Main_OnCommand(reaper.NamedCommandLookup("_RScabf4ba10bae36c7c75734bb2f07d3c909e44472"), 0) -- remove all StudioLink FX
+reaper.Main_OnCommand(reaper.NamedCommandLookup("_Ultraschall_Remove_Studiolink_FX"), 0) -- remove all StudioLink FX
 
 reaper.Main_OnCommand(40297,0) -- unselect all tracks
 
 tracks_count = reaper.CountTracks(0)
-if tracks_count > 0 then										
-	for i = 0, tracks_count-1 do 								-- LOOP TRHOUGH TRACKS
-		track = reaper.GetTrack(0, i) 							-- Get selected track i
+if tracks_count > 0 then                                                  
+	for i = 0, tracks_count-1 do                                         -- LOOP TRHOUGH TRACKS
+		track = reaper.GetTrack(0, i)                                    -- Get selected track i
 		count_fx = reaper.TrackFX_GetCount(track)
-		for j = 0, count_fx - 1 do				
+		for j = 0, count_fx - 1 do                    
 			fx_name_retval, fx_name = reaper.TrackFX_GetFXName(track, j, "")
-			if ((fx_name) == "AUi: Ultraschall: Soundboard") or ((fx_name) == "VSTi: Soundboard (Ultraschall)") then	-- this is a track with StudioLink Plugin
+			if ((fx_name) == "AUi: Ultraschall: Soundboard") or ((fx_name) == "VSTi: Soundboard (Ultraschall)") then     -- this is a track with StudioLink Plugin
 				--Msg(fx_name)
 				reaper.SNM_MoveOrRemoveTrackFX(track, j, 0)  --remove Soundboard Effect
 			end
 
-		end	
-	end 														-- ENDLOOP through tracks
+		end     
+	end                                                                       -- ENDLOOP through tracks
 end
 
 -----------------------------
@@ -76,13 +76,16 @@ sec = tonumber(reaper.GetExtState("ultraschall_gui", "sec"))
 
 if string.match(os, "OSX") then 
 	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
-else	-- Windows
+else     -- Windows
 	fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
 end
 
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
-reaper.SetToggleCommandState(sec, 55695, 0)		--set OnAir Button off
-reaper.RefreshToolbar2(sec, 55695)
+
+on_air_button_id = reaper.NamedCommandLookup("_Ultraschall_OnAir")
+
+reaper.SetToggleCommandState(sec, on_air_button_id, 0)
+reaper.RefreshToolbar2(sec, on_air_button_id)
 
 -----------------------------
 -- Enable all sends to master for rendering
