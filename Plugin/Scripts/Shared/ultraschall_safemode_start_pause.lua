@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 #
-# Copyright (c) 2014-2016 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2014-2017 Ultraschall (http://ultraschall.fm)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,41 +42,50 @@ end
 function main()
 state = reaper.GetPlayState()
 
-	if state == 5 then -- is recording
+  if state == 5 then -- is recording
 
-	--[[type:
-	0=OK,
-	1=OKCANCEL,
-	2=ABORTRETRYIGNORE,
- 	3=YESNOCANCEL,
- 	4=YESNO,
- 	5=RETRYCANCEL]]
+  --[[type:
+  0=OK,
+  1=OKCANCEL,
+  2=ABORTRETRYIGNORE,
+   3=YESNOCANCEL,
+   4=YESNO,
+   5=RETRYCANCEL]]
 
-		type = 1
-		title = "Stop Recording?"
-		msg = "Stop the currently running recording. No more audio will be recorded to disk."
+    type = 4
+    title = "Stop Recording?"
+    msg = "Stop the currently running recording. No more audio will be recorded to disk."
 
-		result = reaper.ShowMessageBox( msg, title, type )
+-- Safe-Mode Toggle-Logic
+SafeModeToggleState=reaper.GetExtState("Ultraschall_Transport", "Safemode_Toggle") -- Get the Safemode-Toggle-State
 
-	--[[result:
-	1=OK,
- 	2=CANCEL,
- 	3=ABORT,
- 	4=RETRY,
- 	5=IGNORE,
- 	6=YES,
- 	7=NO
-	]]
+if SafeModeToggleState=="OFF" then -- If Safe-Mode is OFF, show no message-box
+    result = 6
+    
+elseif SafeModeToggleState=="ON" or SafeModeToggleState=="" then -- If Safe-Mode is ON or was never toggled, show the message-box
+    result=reaper.ShowMessageBox( msg, title, type )
+end
 
-		if result == 1 then -- it's ok to stop the recording
-			reaper.OnPauseButton()
-		end
+  --[[result:
+  1=OK,
+   2=CANCEL,
+   3=ABORT,
+   4=RETRY,
+   5=IGNORE,
+   6=YES,
+   7=NO
+  ]]
 
-	elseif state == 1  then -- playing
-		reaper.OnPauseButton()
-	else -- stop or pause
-		reaper.OnPlayButton()
-	end
+    if result == 6 then -- it's ok to stop the recording
+      reaper.OnPauseButton()
+    end
+
+  elseif state == 1  then -- playing
+    reaper.OnPauseButton()
+  else -- stop or pause
+    reaper.OnPlayButton()
+  end
 end
 
 reaper.defer(main)
+
