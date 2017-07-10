@@ -26,13 +26,13 @@
 
 
 function Msg(val)
-	reaper.ShowConsoleMsg(tostring(val).."\n")
+  reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
-function runcommand(cmd)	-- run a command by its name
+function runcommand(cmd)  -- run a command by its name
 
-	start_id = reaper.NamedCommandLookup(cmd)
-	reaper.Main_OnCommand(start_id,0) 
+  start_id = reaper.NamedCommandLookup(cmd)
+  reaper.Main_OnCommand(start_id,0) 
 
 end
 
@@ -44,90 +44,99 @@ end
 
 function saveSnapshot(slot)
 
-	RoutingInfo=getRoutingInfo()
-	retval = reaper.SetProjExtState(0, "snapshots", slot, RoutingInfo)
-	buildTable()
+  RoutingInfo=getRoutingInfo()
+  retval = reaper.SetProjExtState(0, "snapshots", slot, RoutingInfo)
+  buildTable()
 
 end
 
 function saveSnapshotPure(slot)
 
-	RoutingInfo=getRoutingInfo()
-	retval = reaper.SetProjExtState(0, "snapshots", slot, RoutingInfo)
+  RoutingInfo=getRoutingInfo()
+  retval = reaper.SetProjExtState(0, "snapshots", slot, RoutingInfo)
 
 end
 
 function clearSnapshot(slot)
 
-	retval = reaper.SetProjExtState(0, "snapshots", slot, "")
-	buildTable()
+  retval = reaper.SetProjExtState(0, "snapshots", slot, "")
+  ButtonID = {}
+  ButtonID[1] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_1") -- Preshow
+  ButtonID[2] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_2") -- Recording
+  ButtonID[3] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_3") -- Aftershow
+  ButtonID[4] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_4") -- Editing
+
+reaper.SetToggleCommandState(0, ButtonID[slot], 0)
+ reaper.RefreshToolbar2(0, ButtonID[slot])
+  
+  buildTable()
 
 end
 
 function switchButtons(slot)
-	
-	ButtonID = {}
-	ButtonID[1] = reaper.NamedCommandLookup("_RS56d078b52d4169fdadac0d75927f6e2319c32c6d") -- Preshow
-	ButtonID[2] = reaper.NamedCommandLookup("_RS2bc567cfc4b9cdd0c145dbea77f86e845573cfd4") -- Recording
-	ButtonID[3] = reaper.NamedCommandLookup("_RSbfc16db8df5a9ba2b49c263edd185217988a559e") -- Aftershow
-	ButtonID[4] = reaper.NamedCommandLookup("_RS01e4cf23da5f52820db0a67e3ee2ee0f3b6a6423") -- Editing
+  
+  ButtonID = {}
+  ButtonID[1] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_1") -- Preshow
+  ButtonID[2] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_2") -- Recording
+  ButtonID[3] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_3") -- Aftershow
+  ButtonID[4] = reaper.NamedCommandLookup("_Ultraschall_Snapshot_4") -- Editing
 
-	reaper.SetToggleCommandState(0, ButtonID[1], 0)		-- erase all buttons states
-	reaper.SetToggleCommandState(0, ButtonID[2], 0)
-	reaper.SetToggleCommandState(0, ButtonID[3], 0)
-	reaper.SetToggleCommandState(0, ButtonID[4], 0)
-	reaper.SetToggleCommandState(0, ButtonID[slot], 1)	-- yes, this feels clumsy. Any beter ideas? 
+  reaper.SetToggleCommandState(0, ButtonID[1], 0)    -- erase all buttons states
+  reaper.SetToggleCommandState(0, ButtonID[2], 0)
+  reaper.SetToggleCommandState(0, ButtonID[3], 0)
+  reaper.SetToggleCommandState(0, ButtonID[4], 0)
+  reaper.SetToggleCommandState(0, ButtonID[slot], 1)  -- yes, this feels clumsy. Any beter ideas? 
 
 end
 
 
 function recallSnapshot(slot)
 
-	retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", slot)
+  retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", slot)
     setRoutingInfo(valOutNeedBig)
-	buildTable()
-	switchButtons(slot)
+  buildTable()
+  switchButtons(slot)
 
 end
 
 
 function buildTable()
-	-- body
+  -- body
 
-	img_adress = reaper.GetResourcePath().."/ColorThemes/Ultraschall_2/routing_snapshots.png"
+  img_adress = reaper.GetResourcePath().."/ColorThemes/Ultraschall_2/routing_snapshots.png"
 
-	GUI.elms = {
-	
---     name          = element type          x      y    w    h     caption               ...other params...	
-	label           = GUI.Lbl:new(          23,	50+y_offset,  "Use routing snapshots to manage different recording situations.", 0),
-	label2 			= GUI.Lbl:new(			23,  75+y_offset,	"These snapshots save and recall all information of the", 0),
-	label3          = GUI.Lbl:new(          55,  130+y_offset,  "Preshow\n\n\n\nRecording\n\n\n\nAftershow\n\n\n\nEditing", 0),
-	routingbutton   = GUI.Btn:new(          375, 41, 130, 22,    " Routing Matrix", runcommand, 40251),
+  GUI.elms = {
+  
+--     name          = element type          x      y    w    h     caption               ...other params...  
+  label           = GUI.Lbl:new(          23,  50+y_offset,  "Use routing snapshots to manage different recording situations.", 0),
+  label2       = GUI.Lbl:new(      23,  75+y_offset,  "These snapshots save and recall all information of the", 0),
+  label3          = GUI.Lbl:new(          55,  130+y_offset,  "Preshow\n\n\n\nRecording\n\n\n\nAftershow\n\n\n\nEditing", 0),
+  routingbutton   = GUI.Btn:new(          375, 41, 130, 22,    " Routing Matrix", runcommand, 40251),
 
 }
 
-	for i = 1,4 do
+  for i = 1,4 do
 
-		if reaper.GetProjExtState(0, "snapshots", i) == 0 then
-			GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
-			GUI.elms[i+10]      = GUI.Lbl:new(          200, 36+(i*64),  			" free", 0)
-			GUI.elms[i+15]      = GUI.Btn:new(          305, 29+(i*64), 130, 30,    " Save (Shift+F"..i..")", saveSnapshot, i)
-		else
-			retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", i)
-			if getRoutingInfo() == valOutNeedBig then
-				GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 62, 3+((i-1)*30))
-			else
-				GUI.elms[i+5]		= GUI.Subpic:new(		20,	30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
-			end
+    if reaper.GetProjExtState(0, "snapshots", i) == 0 then
+      GUI.elms[i+5]    = GUI.Subpic:new(    20,  30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
+      GUI.elms[i+10]      = GUI.Lbl:new(          200, 36+(i*64),        " free", 0)
+      GUI.elms[i+15]      = GUI.Btn:new(          305, 29+(i*64), 130, 30,    " Save (Shift+F"..i..")", saveSnapshot, i)
+    else
+      retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", i)
+      if getRoutingInfo() == valOutNeedBig then
+        GUI.elms[i+5]    = GUI.Subpic:new(    20,  30+(i*64), 25, 25, 1, img_adress, 62, 3+((i-1)*30))
+      else
+        GUI.elms[i+5]    = GUI.Subpic:new(    20,  30+(i*64), 25, 25, 1, img_adress, 2, 3+((i-1)*30))
+      end
 
-			GUI.elms[i+10]      = GUI.Btn:new(          155, 29+(i*64), 130, 30,    " Recall (F"..i..")", recallSnapshot, i)
-			GUI.elms[i+15]      = GUI.Btn:new(          305, 29+(i*64), 130, 30,    " Update (Shift+F"..i..")", saveSnapshot, i)
-			GUI.elms[i+20]      = GUI.Btn:new(          455, 29+(i*64), 50, 30,    " Clear", clearSnapshot, i)
-		end
+      GUI.elms[i+10]      = GUI.Btn:new(          155, 29+(i*64), 130, 30,    " Recall (F"..i..")", recallSnapshot, i)
+      GUI.elms[i+15]      = GUI.Btn:new(          305, 29+(i*64), 130, 30,    " Update (Shift+F"..i..")", saveSnapshot, i)
+      GUI.elms[i+20]      = GUI.Btn:new(          455, 29+(i*64), 50, 30,    " Clear", clearSnapshot, i)
+    end
 
-		GUI.elms[i+25]			= GUI.Line:new(			0,11+(i*64),620,11+(i*64))
+    GUI.elms[i+25]      = GUI.Line:new(      0,11+(i*64),620,11+(i*64))
 
-	end
+  end
 
 
 -- table.insert (GUI.elms, label)
@@ -139,55 +148,65 @@ end
 
 function Main(slot)
 
-	retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", slot)
-	if retval == 1 then  -- there is already a routing snapshot, so just recall
-	
-		setRoutingInfo(valOutNeedBig)
-		switchButtons(slot)
-	
-	else				-- there is no snapshot, so open the interface
+  retval, valOutNeedBig=reaper.GetProjExtState(0, "snapshots", slot)
+  if retval == 1 then  -- there is already a routing snapshot, so just recall
+  
+    setRoutingInfo(valOutNeedBig)
+    switchButtons(slot)
+  
+  else        -- there is no snapshot, so open the interface
+    
+    local info = debug.getinfo(1,'S');
+    script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+    GUI = dofile(script_path .. "ultraschall_gui_lib.lua")
 
-		local info = debug.getinfo(1,'S');
-		script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
-		GUI = dofile(script_path .. "ultraschall_gui_lib.lua")
+    GUI.name = "Ultraschall Routing Snapshots"
+    GUI.w, GUI.h = 525, 332
 
-		GUI.name = "Ultraschall Routing Snapshots"
-		GUI.w, GUI.h = 525, 332
+    -- position always in the centre of the screen
 
-		-- position always in the centre of the screen
+    l, t, r, b = 0, 0, GUI.w, GUI.h
+    __, __, screen_w, screen_h = reaper.my_getViewport(l, t, r, b, l, t, r, b, 1)
+    GUI.x, GUI.y = 83, (screen_h - GUI.h) / 2
 
-		l, t, r, b = 0, 0, GUI.w, GUI.h
-		__, __, screen_w, screen_h = reaper.my_getViewport(l, t, r, b, l, t, r, b, 1)
-		GUI.x, GUI.y = 83, (screen_h - GUI.h) / 2
+    y_offset = -30  -- move all content up/down
 
-		y_offset = -30  -- move all content up/down
+    buildTable()
 
-		buildTable()
+      ---- Put all of your own functions and whatever here ----
 
-			---- Put all of your own functions and whatever here ----
+    --Msg("hallo")
 
-		--Msg("hallo")
+      ---- Main loop ----
 
-			---- Main loop ----
+    --[[
+      
+      If you want to run a function during the update loop, use the variable GUI.func prior to
+      starting GUI.Main() loop:
+      
+      GUI.func = my_function
+      GUI.freq = 5     <-- How often in seconds to run the function, so we can avoid clogging up the CPU.
+                - Will run once a second if no value is given.
+                - Integers only, 0 will run every time.
+      
+      GUI.Init()
+      GUI.Main()
+      
+    ]]--
 
-		--[[
-			
-			If you want to run a function during the update loop, use the variable GUI.func prior to
-			starting GUI.Main() loop:
-			
-			GUI.func = my_function
-			GUI.freq = 5     <-- How often in seconds to run the function, so we can avoid clogging up the CPU.
-								- Will run once a second if no value is given.
-								- Integers only, 0 will run every time.
-			
-			GUI.Init()
-			GUI.Main()
-			
-		]]--
-
-		GUI.Init()
-		GUI.Main()
-	end
+  
+  -- Open Snapshot-Editor-window only, when it hasn't been opened yet
+  if reaper.GetExtState("Ultraschall_Windows", GUI.name) == "" then windowcounter=0 -- Check if window was ever opened yet(and external state for it exists already). 
+                                                                                    -- If yes, use temporarily 0 as opened windows-counter;will be changed by ultraschall_gui_lib.lua later
+  else windowcounter=tonumber(reaper.GetExtState("Ultraschall_Windows", GUI.name)) end -- get number of opened windows
+  
+  if windowcounter<1 then -- you can choose how many GUI.name-windows are allowed to be opened at the same time. 
+                          -- 1 means 1 window, 2 means 2 windows, 3 means 3 etc
+    GUI.Init()
+    GUI.Main()
+  end
+  
+  end
 
 end
 
