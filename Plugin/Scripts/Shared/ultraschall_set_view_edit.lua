@@ -31,15 +31,15 @@ function Msg(val)
 end
 
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
-state = reaper.GetToggleCommandStateEx(sec, cmd)  				
+state = reaper.GetToggleCommandStateEx(sec, cmd)                      
 
-ID_1 = reaper.NamedCommandLookup("_RSce49af5f20cf11dbd67253ac11a080128f9b4066") -- Setup Button
-ID_2 = reaper.NamedCommandLookup("_RSd47a4eb6d422aceefc2f6832ff964664629f759a") -- Record Button
-ID_3 = reaper.NamedCommandLookup("_RS69d065307828c966a95426bd6d8185812ff5248d") -- Edit Button
-ID_4 = reaper.NamedCommandLookup("_RS55e62d69c6626960acc095ae9e3bd606c6bee9f6") -- Story Button
+ID_1 = reaper.NamedCommandLookup("_Ultraschall_Set_View_Setup") -- Setup Button
+ID_2 = reaper.NamedCommandLookup("_Ultraschall_Set_View_Record") -- Record Button
+ID_3 = reaper.NamedCommandLookup("_Ultraschall_Set_View_Edit") -- Edit Button
+ID_4 = reaper.NamedCommandLookup("_Ultraschall_Set_View_Story") -- Story Button
 
 
-if state <= 0 then 												
+if state <= 0 then                                                             
 	reaper.SetToggleCommandState(sec, cmd, 1)
 end  
 
@@ -55,7 +55,7 @@ reaper.SetToggleCommandState(sec, ID_4, 0)
 -- reaper.RefreshToolbar2(sec, ID_2)
 -- reaper.RefreshToolbar2(sec, ID_3)
 -- reaper.RefreshToolbar2(sec, ID_4)
-reaper.Main_OnCommand(40456,0) 	--(re)load Screenset
+reaper.Main_OnCommand(40456,0)      --(re)load Screenset
 
 -- Msg(cmd)
 -- Msg(ID_2)
