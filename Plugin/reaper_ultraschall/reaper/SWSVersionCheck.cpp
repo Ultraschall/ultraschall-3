@@ -104,7 +104,7 @@ bool SWSVersionCheck()
 #ifdef ULTRASCHALL_PLATFORM_MACOS
          static const uint64_t originalCrc = 1120934262;
 #else
-         static const uint64_t originalCrc = 3406725881;
+         static const uint64_t originalCrc = 1671586945;
 #endif // #ifndef WIN32
 
          const uint64_t crc = pStream->CRC32();
