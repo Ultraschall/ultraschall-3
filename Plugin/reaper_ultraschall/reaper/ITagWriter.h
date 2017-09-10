@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall ultraschall.fm
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,52 +22,32 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
+#define __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 
-#include "ICustomAction.h"
-#include "MP3TagWriter.h"
-#include "MP4TagWriter.h"
+#include <Framework.h>
+#include <IUnknown.h>
+#include <ServiceStatus.h>
+#include "Marker.h"
 
-namespace ultraschall {
-   namespace reaper {
-
-class ITagWriter;
-      
-class InsertMP3ChapterMarkersAction : public ICustomAction
+namespace ultraschall { namespace reaper {
+   
+class ITagWriter : public framework::IUnknown
 {
 public:
-   static const char* UniqueId()
-   {
-      return "ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS";
-   }
+   virtual bool InsertStandardProperties(const std::string& targetName, const std::string& standardProperties) = 0;
    
-   static const char* UniqueName()
-   {
-      return "ULTRASCHALL: Insert chapter markers into MP3 target...";
-   }
+   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage) = 0;
    
-   static ICustomAction* CreateCustomAction()
-   {
-      return new InsertMP3ChapterMarkersAction();
-   }
+   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers) = 0;
    
-   virtual ServiceStatus Execute() override;
-   
-private:
-   InsertMP3ChapterMarkersAction()
+protected:
+   virtual ~ITagWriter()
    {
    }
-    
-   static std::string FindTargetFile(const Project& project);
-
-   static std::string FindCoverImage(const Project& project);
-   
-   static ITagWriter* CreateTagWriter(const std::string& targetName);
-   
-   static std::string NormalizeTargetName(const std::string& targetName);
 };
-      
+   
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
+

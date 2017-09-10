@@ -123,6 +123,11 @@
 		42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */; };
 		42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */; };
 		42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */; };
+		42F83CD41F659B96009F2ECC /* MP3TagWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F83CD21F659B96009F2ECC /* MP3TagWriter.cpp */; };
+		42F83CD51F659B96009F2ECC /* MP3TagWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F83CD31F659B96009F2ECC /* MP3TagWriter.h */; };
+		42F83CD71F659BBF009F2ECC /* ITagWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F83CD61F659BBF009F2ECC /* ITagWriter.h */; };
+		42F83CDA1F659BE1009F2ECC /* MP4TagWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F83CD81F659BE1009F2ECC /* MP4TagWriter.cpp */; };
+		42F83CDB1F659BE1009F2ECC /* MP4TagWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F83CD91F659BE1009F2ECC /* MP4TagWriter.h */; };
 		42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42FB15761BD65A65004DFF99 /* TextFileReader.cpp */; };
 		42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB15771BD65A65004DFF99 /* TextFileReader.h */; };
 		A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */; };
@@ -260,6 +265,11 @@
 		42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reaper_ultraschall.cpp; path = reaper/reaper_ultraschall.cpp; sourceTree = "<group>"; };
 		42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ReaperVersionCheck.cpp; path = reaper/ReaperVersionCheck.cpp; sourceTree = "<group>"; };
 		42F30D791BF23886003CBF13 /* ReaperVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaperVersionCheck.h; path = reaper/ReaperVersionCheck.h; sourceTree = "<group>"; };
+		42F83CD21F659B96009F2ECC /* MP3TagWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MP3TagWriter.cpp; path = reaper/MP3TagWriter.cpp; sourceTree = "<group>"; };
+		42F83CD31F659B96009F2ECC /* MP3TagWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MP3TagWriter.h; path = reaper/MP3TagWriter.h; sourceTree = "<group>"; };
+		42F83CD61F659BBF009F2ECC /* ITagWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITagWriter.h; path = reaper/ITagWriter.h; sourceTree = "<group>"; };
+		42F83CD81F659BE1009F2ECC /* MP4TagWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MP4TagWriter.cpp; path = reaper/MP4TagWriter.cpp; sourceTree = "<group>"; };
+		42F83CD91F659BE1009F2ECC /* MP4TagWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MP4TagWriter.h; path = reaper/MP4TagWriter.h; sourceTree = "<group>"; };
 		42FB15761BD65A65004DFF99 /* TextFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileReader.cpp; path = framework/TextFileReader.cpp; sourceTree = "<group>"; };
 		42FB15771BD65A65004DFF99 /* TextFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileReader.h; path = framework/TextFileReader.h; sourceTree = "<group>"; };
 		A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = PluginVersionCheck.cpp; path = reaper/PluginVersionCheck.cpp; sourceTree = "<group>"; };
@@ -362,6 +372,7 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				42F83CD61F659BBF009F2ECC /* ITagWriter.h */,
 				423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */,
 				423D883D1E54DDA800AF8A41 /* MP3Properties.h */,
 				4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */,
@@ -444,6 +455,10 @@
 				420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */,
 				42327A671E53ACC900092214 /* SystemProperties.cpp */,
 				42327A681E53ACC900092214 /* SystemProperties.h */,
+				42F83CD21F659B96009F2ECC /* MP3TagWriter.cpp */,
+				42F83CD31F659B96009F2ECC /* MP3TagWriter.h */,
+				42F83CD81F659BE1009F2ECC /* MP4TagWriter.cpp */,
+				42F83CD91F659BE1009F2ECC /* MP4TagWriter.h */,
 			);
 			name = Reaper;
 			sourceTree = "<group>";
@@ -459,6 +474,7 @@
 				4242E97B1BAC99D700382B79 /* TranscriptItem.h in Headers */,
 				424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */,
 				422A06FA1E4B69F100D758FE /* Project.h in Headers */,
+				42F83CD71F659BBF009F2ECC /* ITagWriter.h in Headers */,
 				424C830C1AC8086F00231F3D /* FileManager.h in Headers */,
 				422A07061E4B69F100D758FE /* SaveProjectCommand.h in Headers */,
 				424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */,
@@ -501,6 +517,7 @@
 				422A07161E4B69F100D758FE /* UndoMarkerAction.h in Headers */,
 				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */,
+				42F83CD51F659B96009F2ECC /* MP3TagWriter.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
 				420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
@@ -516,6 +533,7 @@
 				422A06C61E4B69C100D758FE /* CloseProjectCommand.h in Headers */,
 				422A06F81E4B69F100D758FE /* OpenProjectCommand.h in Headers */,
 				423A5A481B518AAB00231F3D /* IApplication.h in Headers */,
+				42F83CDB1F659BE1009F2ECC /* MP4TagWriter.h in Headers */,
 				423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -598,6 +616,7 @@
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
 				422A06C71E4B69C100D758FE /* CommandFactory.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
+				42F83CD41F659B96009F2ECC /* MP3TagWriter.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
 				422A06F71E4B69F100D758FE /* OpenProjectCommand.cpp in Sources */,
 				42327A691E53ACC900092214 /* SystemProperties.cpp in Sources */,
@@ -625,6 +644,7 @@
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
 				422A06F21E4B69F100D758FE /* InsertChapterMarkersAction.cpp in Sources */,
 				422A06C91E4B69C100D758FE /* CommandManager.cpp in Sources */,
+				42F83CDA1F659BE1009F2ECC /* MP4TagWriter.cpp in Sources */,
 				423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */,
 				422A06FF1E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp in Sources */,
 				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,

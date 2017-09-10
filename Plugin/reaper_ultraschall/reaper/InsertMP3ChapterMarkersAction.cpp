@@ -33,6 +33,7 @@
 #include "FileManager.h"
 #include "MP3Properties.h"
 #include "NotificationWindow.h"
+#include "ITagWriter.h"
 
 namespace ultraschall {
    namespace reaper {
@@ -43,58 +44,52 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
 {
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   
-   const std::string projectFolder = currentProject.FolderName();
-   const std::string projectName = currentProject.Name();
-   if((projectFolder.empty() == false) && (projectName.empty() == false))
+   const std::string targetName = FindTargetFile(currentProject);
+   if(targetName.empty() == false)
    {
-      std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
-      if(FileManager::FileExists(targetName) == false)
-      {
-         targetName = FileManager::BrowseForMP3Files("Select MP3 File...");
-      }
-         
-      if(targetName.empty() == false)
+      ITagWriter* pTagWriter = CreateTagWriter(targetName);
+      if(pTagWriter != nullptr)
       {
          int successfulActions = 0;
-
+         
          const std::string projectNotes = currentProject.Notes();
          if(projectNotes.empty() == false)
          {
-            if(InsertMP3Properties(targetName, projectNotes) == true)
+            if(pTagWriter->InsertStandardProperties(targetName, projectNotes) == true)
             {
                successfulActions++;
             }
             else
             {
-               NotificationWindow::Show("Failed to insert ID3V2 tags.", true);
+               NotificationWindow::Show("Failed to insert standard properties.", true);
             }
          }
-
-         std::vector<std::string> imageNames;
-         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
-         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
-         imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
-         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
-         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
-         imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
-         const size_t imageIndex = FileManager::FileExists(imageNames);
-         if(imageIndex != -1)
+         else
          {
-            if(InsertMP3CoverPicture(targetName, imageNames[imageIndex]) == true)
-            {
-               successfulActions++;
-            }
-            else
-            {
-               NotificationWindow::Show("Failed to insert cover art.", true);
-            }
+            NotificationWindow::Show("Failed to read standard properties.", true);
          }
             
-         std::vector<Marker> tags = currentProject.QueryAllMarkers();
+         const std::string coverImage = FindCoverImage(currentProject);
+         if(coverImage.empty() == false)
+         {
+            if(pTagWriter->InsertCoverImage(targetName, coverImage) == true)
+            {
+               successfulActions++;
+            }
+            else
+            {
+               NotificationWindow::Show("Failed to insert cover image.", true);
+            }
+         }
+         else
+         {
+            NotificationWindow::Show("Failed to read cover image.", true);
+         }
+         
+         const std::vector<Marker> tags = currentProject.QueryAllMarkers();
          if(tags.empty() == false)
          {
-            if(InsertMP3Tags(targetName, tags) == true)
+            if(pTagWriter->InsertChapterMarkers(targetName, tags) == true)
             {
                successfulActions++;
             }
@@ -103,23 +98,105 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
                NotificationWindow::Show("Failed to export chapter markers.", true);
             }
          }
+         else
+         {
+            NotificationWindow::Show("Failed to read chapter markers.", true);
+         }
 
          if(successfulActions > 0)
          {
             NotificationWindow::Show("The MP3 file has been updated successfully.");
          }
       }
-      else
-      {
-         NotificationWindow::Show("The export operation has been canceled.");
-      }
-   }
-   else
-   {
-      NotificationWindow::Show("Please save the project and restart the export function.");
    }
    
    return SERVICE_SUCCESS;
+}
+     
+std::string InsertMP3ChapterMarkersAction::FindTargetFile(const Project& project)
+{
+   const std::string projectFolder = project.FolderName();
+   const std::string projectName = project.Name();
+   
+   PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
+   PRECONDITION_RETURN(projectName.empty() == false, std::string());
+   
+   std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
+   if(FileManager::FileExists(targetName) == false)
+   {
+      targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp4";
+      if(FileManager::FileExists(targetName) == false)
+      {
+         targetName = FileManager::BrowseForMP3Files("Select Output File...");
+      }
+      else
+      {
+         targetName.clear();
+      }
+   }
+   
+   return targetName;
+}
+
+std::string InsertMP3ChapterMarkersAction::FindCoverImage(const Project& project)
+{
+   const std::string projectFolder = project.FolderName();
+   const std::string projectName = project.Name();
+  
+   PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
+   PRECONDITION_RETURN(projectName.empty() == false, std::string());
+
+   std::string coverImage;
+   
+   std::vector<std::string> imageNames;
+   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
+   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
+   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
+   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
+   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
+   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
+   const size_t imageIndex = FileManager::FileExists(imageNames);
+   if(imageIndex != -1)
+   {
+      coverImage = imageNames[imageIndex];
+   }
+   
+   return coverImage;
+}
+
+ITagWriter* InsertMP3ChapterMarkersAction::CreateTagWriter(const std::string& targetName)
+{
+   PRECONDITION_RETURN(targetName.empty() == false, nullptr);
+   PRECONDITION_RETURN(targetName.length() > 4, nullptr);
+
+   ITagWriter* pTagWriter = nullptr;
+   
+   const std::string cookedTargetName = NormalizeTargetName(targetName);
+   const size_t extensionOffset = targetName.find(".");
+   if(extensionOffset != std::string::npos)
+   {
+      const std::string fileExtension = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
+      if(fileExtension.empty() == false)
+      {
+         if(fileExtension == "mp3")
+         {
+            pTagWriter = new MP3TagWriter();
+         }
+         else if(fileExtension == "mp4")
+         {
+            pTagWriter = new MP4TagWriter();
+         }
+      }
+   }
+      
+   return pTagWriter;
+}
+      
+std::string InsertMP3ChapterMarkersAction::NormalizeTargetName(const std::string& targetName)
+{
+   std::string firstStage = targetName;
+   std::string secondStage = framework::StringTrimRight(firstStage);
+   return framework::StringLowercase(secondStage);
 }
       
 }}
