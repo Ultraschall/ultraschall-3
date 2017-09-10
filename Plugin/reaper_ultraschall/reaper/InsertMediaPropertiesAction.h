@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__
 
 #include "ICustomAction.h"
 #include "MP3TagWriter.h"
@@ -34,28 +34,28 @@ namespace ultraschall {
 
 class ITagWriter;
       
-class InsertMP3ChapterMarkersAction : public ICustomAction
+class InsertMediaPropertiesAction : public ICustomAction
 {
 public:
    static const char* UniqueId()
    {
-      return "ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS";
+      return "ULTRASCHALL_INSERT_MEDIA_PROPERTIES";
    }
    
    static const char* UniqueName()
    {
-      return "ULTRASCHALL: Insert chapter markers into MP3 target...";
+      return "ULTRASCHALL: Insert media properties into target...";
    }
    
    static ICustomAction* CreateCustomAction()
    {
-      return new InsertMP3ChapterMarkersAction();
+      return new InsertMediaPropertiesAction();
    }
    
    virtual ServiceStatus Execute() override;
    
 private:
-   InsertMP3ChapterMarkersAction()
+   InsertMediaPropertiesAction()
    {
    }
     
@@ -70,4 +70,4 @@ private:
       
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_MP3_CHAPTER_MARKERS_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__

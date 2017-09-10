@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
-		420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */; };
-		420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */; };
+		420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */; };
+		420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
 		422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06BC1E4B683C00D758FE /* VersionHandler.h */; };
 		422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */; };
@@ -148,8 +148,8 @@
 
 /* Begin PBXFileReference section */
 		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
-		420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMP3ChapterMarkersAction.cpp; path = reaper/InsertMP3ChapterMarkersAction.cpp; sourceTree = "<group>"; };
-		420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMP3ChapterMarkersAction.h; path = reaper/InsertMP3ChapterMarkersAction.h; sourceTree = "<group>"; };
+		420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMediaPropertiesAction.cpp; path = reaper/InsertMediaPropertiesAction.cpp; sourceTree = "<group>"; };
+		420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMediaPropertiesAction.h; path = reaper/InsertMediaPropertiesAction.h; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
 		422A06BC1E4B683C00D758FE /* VersionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionHandler.h; path = reaper/VersionHandler.h; sourceTree = "<group>"; };
 		422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CloseProjectCommand.cpp; path = reaper/CloseProjectCommand.cpp; sourceTree = "<group>"; };
@@ -451,8 +451,8 @@
 				4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */,
 				A9B2A1131C9619E30049E984 /* PluginVersionCheck.cpp */,
 				A9B2A1141C9619E30049E984 /* PluginVersionCheck.h */,
-				420E078B1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp */,
-				420E078C1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h */,
+				420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */,
+				420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */,
 				42327A671E53ACC900092214 /* SystemProperties.cpp */,
 				42327A681E53ACC900092214 /* SystemProperties.h */,
 				42F83CD21F659B96009F2ECC /* MP3TagWriter.cpp */,
@@ -519,7 +519,7 @@
 				42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */,
 				42F83CD51F659B96009F2ECC /* MP3TagWriter.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
-				420E078E1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.h in Headers */,
+				420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
@@ -623,7 +623,7 @@
 				422A07251E4B6E4F00D758FE /* ioapi.c in Sources */,
 				422A07071E4B69F100D758FE /* SetChapterMarkerAction.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
-				420E078D1E4F246A00FEF003 /* InsertMP3ChapterMarkersAction.cpp in Sources */,
+				420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */,
 				422A06F51E4B69F100D758FE /* NewProjectCommand.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,
 				422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */,

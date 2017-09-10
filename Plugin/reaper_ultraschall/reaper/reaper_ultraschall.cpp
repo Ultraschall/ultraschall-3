@@ -34,7 +34,7 @@
 #include "InsertChapterMarkersAction.h"
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
-#include "InsertMP3ChapterMarkersAction.h"
+#include "InsertMediaPropertiesAction.h"
 #include "SystemProperties.h"
 
 namespace reaper = ultraschall::reaper;
@@ -73,8 +73,8 @@ extern "C"
                         application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
                         Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
 
-                        application.RegisterCustomAction<reaper::InsertMP3ChapterMarkersAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'InsertMP3ChapterMarkersAction' activated.");
+                        application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
+                        Trace0(TRACE_LEVEL_INFO, "'InsertMediaPropertiesAction' activated.");
 
                         Trace0(TRACE_LEVEL_INFO, "Ultraschall is running.");
 

@@ -28,7 +28,7 @@
 #include <Framework.h>
 #include <StringUtilities.h>
 
-#include "InsertMP3ChapterMarkersAction.h"
+#include "InsertMediaPropertiesAction.h"
 #include "CustomActionFactory.h"
 #include "FileManager.h"
 #include "MP3Properties.h"
@@ -38,9 +38,9 @@
 namespace ultraschall {
    namespace reaper {
       
-static DeclareCustomAction<InsertMP3ChapterMarkersAction> action;
+static DeclareCustomAction<InsertMediaPropertiesAction> action;
 
-ServiceStatus InsertMP3ChapterMarkersAction::Execute()
+ServiceStatus InsertMediaPropertiesAction::Execute()
 {
    ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
@@ -103,6 +103,8 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
             NotificationWindow::Show("Failed to read chapter markers.", true);
          }
 
+         framework::SafeRelease(pTagWriter);
+         
          if(successfulActions > 0)
          {
             NotificationWindow::Show("The MP3 file has been updated successfully.");
@@ -113,7 +115,7 @@ ServiceStatus InsertMP3ChapterMarkersAction::Execute()
    return SERVICE_SUCCESS;
 }
      
-std::string InsertMP3ChapterMarkersAction::FindTargetFile(const Project& project)
+std::string InsertMediaPropertiesAction::FindTargetFile(const Project& project)
 {
    const std::string projectFolder = project.FolderName();
    const std::string projectName = project.Name();
@@ -138,7 +140,7 @@ std::string InsertMP3ChapterMarkersAction::FindTargetFile(const Project& project
    return targetName;
 }
 
-std::string InsertMP3ChapterMarkersAction::FindCoverImage(const Project& project)
+std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
 {
    const std::string projectFolder = project.FolderName();
    const std::string projectName = project.Name();
@@ -164,7 +166,7 @@ std::string InsertMP3ChapterMarkersAction::FindCoverImage(const Project& project
    return coverImage;
 }
 
-ITagWriter* InsertMP3ChapterMarkersAction::CreateTagWriter(const std::string& targetName)
+ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targetName)
 {
    PRECONDITION_RETURN(targetName.empty() == false, nullptr);
    PRECONDITION_RETURN(targetName.length() > 4, nullptr);
@@ -192,7 +194,7 @@ ITagWriter* InsertMP3ChapterMarkersAction::CreateTagWriter(const std::string& ta
    return pTagWriter;
 }
       
-std::string InsertMP3ChapterMarkersAction::NormalizeTargetName(const std::string& targetName)
+std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
 {
    std::string firstStage = targetName;
    std::string secondStage = framework::StringTrimRight(firstStage);
