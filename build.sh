@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-3.0.4-beta1
+export ULTRASCHALL_RELEASE=Ultraschall-3.1-beta1
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -47,7 +47,7 @@ cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Add-ons/Ult
 cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\ Webbanner.png
 
 # Copy REAPER theme to payload directory
-cp ../REAPER/Themes/Ultraschall_3.0_MAC.ReaperConfigZip ./Payload/Ultraschall_3.0.ReaperConfigZip
+cp ../REAPER/Themes/Ultraschall_3.1_MAC.ReaperConfigZip ./Payload/Ultraschall_3.1.ReaperConfigZip
 
 # Copy background image to payload directory
 mkdir ./Payload/.background
@@ -63,7 +63,6 @@ pushd ../Soundboard
 popd
 
 # Create Ultraschall Soundboard package
-# mv ../Soundboard/Files/AudioUnit/
 pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-Ins/Components ./Build/UltraschallSoundboard.pkg
 
 # Create Ultraschall Soundboard extras package
@@ -77,11 +76,11 @@ pkgbuild --root ./3rdParty/LAME/Macintosh --identifier net.sf.lame.Encoder --ins
 
 # Create SWS REAPER Plugin Extension package
 chmod 755 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
-pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.8.8.pkg
+pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.9.6.pkg
 
 # Create SWS REAPER Plugin Scripts package
 chmod 755 ./3rdParty/SWS/Macintosh/Scripts/Scripts/preinstall
-pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.8.8.pkg
+pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./Build/SWS_ExtensionScripts-2.9.6.pkg
 
 # Create Ultraschall Resources package
 pkgbuild --root ../REAPER/Plugin/Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallResources.pkg
@@ -106,9 +105,10 @@ hdiutil create -format UDRW -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_
 mkdir -p ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 hdiutil attach -mountpoint ./$ULTRASCHALL_RELEASE_INTERMEDIATE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 
+echo Creating disk layout...
 echo '
    tell application "Finder"
-     tell disk "'$ULTRASCHALL_RELEASE_INTERMEDIATE'"
+     tell disk "Ultraschall-3.1-beta1.intermediate"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
@@ -117,8 +117,8 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.0.4-beta1.pkg" of container window to {50, 30}
-           set position of item "Ultraschall_3.0.ReaperConfigZip" of container window to {200, 30}
+           set position of item "Ultraschall-3.1-beta1.pkg" of container window to {50, 30}
+           set position of item "Ultraschall_3.1.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}
            set position of item "CHANGELOG.html" of container window to {350, 135}
@@ -133,6 +133,7 @@ echo '
      end tell
    end tell
 ' | osascript
+echo done.
 
 sync
 

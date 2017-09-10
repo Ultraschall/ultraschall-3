@@ -301,6 +301,13 @@ def BR_GetTakeFXCount(p0):
   r=f(t[0])
   return r
 
+def BR_IsMidiOpenInInlineEditor(p0):
+  a=rpr_getfp('BR_IsMidiOpenInInlineEditor')
+  f=CFUNCTYPE(c_byte,c_uint)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),)
+  r=f(t[0])
+  return r
+
 def BR_IsTakeMidi(p0,p1):
   a=rpr_getfp('BR_IsTakeMidi')
   f=CFUNCTYPE(c_byte,c_uint,c_void_p)(a)
@@ -432,6 +439,19 @@ def BR_Win32_WritePrivateProfileString(p0,p1,p2,p3):
   r=f(t[0],t[1],t[2],t[3])
   return r
 
+def CF_GetClipboard(p0,p1):
+  a=rpr_getfp('CF_GetClipboard')
+  f=CFUNCTYPE(None,c_char_p,c_int)(a)
+  t=(rpr_packs(p0),c_int(p1))
+  f(t[0],t[1])
+  return (rpr_unpacks(t[0]),p1)
+
+def CF_SetClipboard(p0):
+  a=rpr_getfp('CF_SetClipboard')
+  f=CFUNCTYPE(None,c_char_p)(a)
+  t=(rpr_packsc(p0),)
+  f(t[0])
+
 def FNG_AddMidiNote(p0):
   a=rpr_getfp('FNG_AddMidiNote')
   f=CFUNCTYPE(c_uint,c_uint)(a)
@@ -478,6 +498,46 @@ def FNG_SetMidiNoteIntProperty(p0,p1,p2):
   f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
   t=(rpr_packp('RprMidiNote*',p0),rpr_packsc(p1),c_int(p2))
   f(t[0],t[1],t[2])
+
+def NF_AnalyzeTakeLoudness(p0,p1,p2,p3,p4,p5,p6,p7):
+  a=rpr_getfp('NF_AnalyzeTakeLoudness')
+  f=CFUNCTYPE(c_byte,c_uint,c_byte,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1),c_double(p2),c_double(p3),c_double(p4),c_double(p5),c_double(p6),c_double(p7))
+  r=f(t[0],t[1],byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]),byref(t[7]))
+  return (r,p0,p1,float(t[2].value),float(t[3].value),float(t[4].value),float(t[5].value),float(t[6].value),float(t[7].value))
+
+def NF_AnalyzeTakeLoudness2(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9):
+  a=rpr_getfp('NF_AnalyzeTakeLoudness2')
+  f=CFUNCTYPE(c_byte,c_uint,c_byte,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_byte(p1),c_double(p2),c_double(p3),c_double(p4),c_double(p5),c_double(p6),c_double(p7),c_double(p8),c_double(p9))
+  r=f(t[0],t[1],byref(t[2]),byref(t[3]),byref(t[4]),byref(t[5]),byref(t[6]),byref(t[7]),byref(t[8]),byref(t[9]))
+  return (r,p0,p1,float(t[2].value),float(t[3].value),float(t[4].value),float(t[5].value),float(t[6].value),float(t[7].value),float(t[8].value),float(t[9].value))
+
+def NF_AnalyzeTakeLoudness_IntegratedOnly(p0,p1):
+  a=rpr_getfp('NF_AnalyzeTakeLoudness_IntegratedOnly')
+  f=CFUNCTYPE(c_byte,c_uint,c_void_p)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),c_double(p1))
+  r=f(t[0],byref(t[1]))
+  return (r,p0,float(t[1].value))
+
+def NF_GetMediaItemAverageRMS(p0):
+  a=rpr_getfp('NF_GetMediaItemAverageRMS')
+  f=CFUNCTYPE(c_double,c_uint)(a)
+  t=(rpr_packp('MediaItem*',p0),)
+  r=f(t[0])
+  return r
+
+def NF_GetMediaItemMaxPeak(p0):
+  a=rpr_getfp('NF_GetMediaItemMaxPeak')
+  f=CFUNCTYPE(c_double,c_uint)(a)
+  t=(rpr_packp('MediaItem*',p0),)
+  r=f(t[0])
+  return r
+
+def SN_FocusMIDIEditor():
+  a=rpr_getfp('SN_FocusMIDIEditor')
+  f=CFUNCTYPE(None)(a)
+  f()
 
 def SNM_AddReceive(p0,p1,p2):
   a=rpr_getfp('SNM_AddReceive')
