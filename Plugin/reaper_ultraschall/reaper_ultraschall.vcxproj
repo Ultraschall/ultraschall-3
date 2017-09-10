@@ -185,8 +185,10 @@
     <ClCompile Include="reaper\CustomActionManager.cpp" />
     <ClCompile Include="reaper\FileManager.cpp" />
     <ClCompile Include="reaper\InsertChapterMarkersAction.cpp" />
-    <ClCompile Include="reaper\InsertMP3ChapterMarkersAction.cpp" />
+    <ClCompile Include="reaper\InsertMediaPropertiesAction.cpp" />
     <ClCompile Include="reaper\MP3Properties.cpp" />
+    <ClCompile Include="reaper\MP3TagWriter.cpp" />
+    <ClCompile Include="reaper\MP4TagWriter.cpp" />
     <ClCompile Include="reaper\NewProjectCommand.cpp" />
     <ClCompile Include="reaper\NotificationWindow.cpp" />
     <ClCompile Include="reaper\OpenProjectCommand.cpp" />
@@ -252,9 +254,12 @@
     <ClInclude Include="reaper\ICustomAction.h" />
     <ClInclude Include="reaper\ICommand.h" />
     <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
-    <ClInclude Include="reaper\InsertMP3ChapterMarkersAction.h" />
+    <ClInclude Include="reaper\InsertMediaPropertiesAction.h" />
+    <ClInclude Include="reaper\ITagWriter.h" />
     <ClInclude Include="reaper\Marker.h" />
     <ClInclude Include="reaper\MP3Properties.h" />
+    <ClInclude Include="reaper\MP3TagWriter.h" />
+    <ClInclude Include="reaper\MP4TagWriter.h" />
     <ClInclude Include="reaper\NewProjectCommand.h" />
     <ClInclude Include="reaper\NotificationWindow.h" />
     <ClInclude Include="reaper\OpenProjectCommand.h" />

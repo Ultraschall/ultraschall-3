@@ -159,10 +159,16 @@
     <ClCompile Include="reaper\SystemProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\InsertMP3ChapterMarkersAction.cpp">
+    <ClCompile Include="reaper\MP3Properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\MP3Properties.cpp">
+    <ClCompile Include="reaper\InsertMediaPropertiesAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\MP3TagWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reaper\MP4TagWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -359,10 +365,19 @@
     <ClInclude Include="reaper\SystemProperties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\InsertMP3ChapterMarkersAction.h">
+    <ClInclude Include="reaper\MP3Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reaper\MP3Properties.h">
+    <ClInclude Include="reaper\InsertMediaPropertiesAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ITagWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\MP3TagWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\MP4TagWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
