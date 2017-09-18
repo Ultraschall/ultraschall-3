@@ -26,7 +26,7 @@
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 #include <windows.h>
-#endif
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 #include "TraceUtilities.h"
 
@@ -56,8 +56,8 @@ void TraceVa_0(const TraceLevel /*level*/, const char* format, va_list args)
 #else
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 // TODO
-#endif
-#endif
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 }
 
