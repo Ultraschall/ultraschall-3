@@ -446,6 +446,13 @@ def CF_GetClipboard(p0,p1):
   f(t[0],t[1])
   return (rpr_unpacks(t[0]),p1)
 
+def CF_GetClipboardBig(p0):
+  a=rpr_getfp('CF_GetClipboardBig')
+  f=CFUNCTYPE(c_char_p,c_uint)(a)
+  t=(rpr_packp('WDL_FastString*',p0),)
+  r=f(t[0])
+  return str(r.decode())
+
 def CF_SetClipboard(p0):
   a=rpr_getfp('CF_SetClipboard')
   f=CFUNCTYPE(None,c_char_p)(a)
@@ -529,6 +536,20 @@ def NF_GetMediaItemAverageRMS(p0):
 
 def NF_GetMediaItemMaxPeak(p0):
   a=rpr_getfp('NF_GetMediaItemMaxPeak')
+  f=CFUNCTYPE(c_double,c_uint)(a)
+  t=(rpr_packp('MediaItem*',p0),)
+  r=f(t[0])
+  return r
+
+def NF_GetMediaItemPeakRMS_NonWindowed(p0):
+  a=rpr_getfp('NF_GetMediaItemPeakRMS_NonWindowed')
+  f=CFUNCTYPE(c_double,c_uint)(a)
+  t=(rpr_packp('MediaItem*',p0),)
+  r=f(t[0])
+  return r
+
+def NF_GetMediaItemPeakRMS_Windowed(p0):
+  a=rpr_getfp('NF_GetMediaItemPeakRMS_Windowed')
   f=CFUNCTYPE(c_double,c_uint)(a)
   t=(rpr_packp('MediaItem*',p0),)
   r=f(t[0])
