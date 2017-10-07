@@ -56,15 +56,7 @@ state = reaper.GetPlayState()
     title = "Stop Recording?"
     msg = "Stop the currently running recording. No more audio will be recorded to disk."
 
--- Safe-Mode Toggle-Logic
-SafeModeToggleState=reaper.GetExtState("Ultraschall_Transport", "Safemode_Toggle") -- Get the Safemode-Toggle-State
-
-if SafeModeToggleState=="OFF" then -- If Safe-Mode is OFF, show no message-box
-    result = 6
-    
-elseif SafeModeToggleState=="ON" or SafeModeToggleState=="" then -- If Safe-Mode is ON or was never toggled, show the message-box
-    result=reaper.ShowMessageBox( msg, title, type )
-end
+    result = reaper.ShowMessageBox( msg, title, type )
 
   --[[result:
   1=OK,
