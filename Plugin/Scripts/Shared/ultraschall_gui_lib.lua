@@ -414,7 +414,7 @@ function Main()
     
     GUI.freq = GUI.freq or 1
     
-    local new_time = os.time()
+    local new_time = reaper.time_precise()
     if new_time - GUI.last_time >= GUI.freq then
       GUI.func()
       GUI.last_time = new_time

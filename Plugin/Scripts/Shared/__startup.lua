@@ -132,7 +132,7 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 curtheme = reaper.GetLastColorThemeFile()
 if string.find(curtheme, "ReaperThemeZip", 1) then
-  themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.0.ReaperTheme"
+  themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.1.ReaperTheme"
   reaper.OpenColorThemeFile(themeadress)
 end
 
