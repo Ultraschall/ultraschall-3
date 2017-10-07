@@ -25,14 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "reaper/ReaperVersionCheck.cpp"
-            timestampString = "527464731.310493"
+            filePath = "reaper/Application.h"
+            timestampString = "528737978.055768"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "ReaperVersionCheck()"
-            landmarkType = "9">
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "Application::InvokeCustomAction()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

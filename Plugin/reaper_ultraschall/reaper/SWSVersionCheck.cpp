@@ -102,9 +102,10 @@ bool SWSVersionCheck()
       if(pStream != 0)
       {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-         static const uint64_t originalCrc = 1120934262;
+         static const uint64_t originalCrc = 3206585461;
 #else
-         static const uint64_t originalCrc = 1671586945;
+         //FIXME fix crc for new version 2.9.7
+         static const uint64_t originalCrc = 1671586945; // 2.9.6
 #endif // #ifndef WIN32
 
          const uint64_t crc = pStream->CRC32();

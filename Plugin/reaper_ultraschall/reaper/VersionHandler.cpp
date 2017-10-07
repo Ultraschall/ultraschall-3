@@ -166,7 +166,7 @@ std::string VersionHandler::SWSVersion()
    const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
    return FileManager::ReadVersionFromFile(path);
 #else
-   return "2.9.6";
+   return "2.9.7";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
