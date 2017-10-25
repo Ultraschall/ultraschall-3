@@ -76,8 +76,6 @@ extern "C"
                         application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
                         Trace0(TRACE_LEVEL_INFO, "'InsertMediaPropertiesAction' activated.");
 
-                        Trace0(TRACE_LEVEL_INFO, "Ultraschall is running.");
-
                         started = true;
                      }
                   }
