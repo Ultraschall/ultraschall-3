@@ -68,7 +68,7 @@
                   <File Name="INSTALL.html" DiskId="1" Source="Payload\INSTALL.html">
                      <Shortcut Id="InstallStartMenuShortcut" Directory="ProgramMenuDir" Name="INSTALL.html" />
                   </File>
-                  <File Name="Ultraschall_3.0.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_3.0.ReaperConfigZip">
+                  <File Name="Ultraschall_3.1.ReaperConfigZip" DiskId="1" Source="Payload\Ultraschall_3.1.ReaperConfigZip">
                      <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0"/>
                      <Shortcut Id="ThemeStartMenuShortcut" Directory="ProgramMenuDir" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0"/>
                   </File>
