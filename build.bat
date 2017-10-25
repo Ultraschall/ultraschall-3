@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.1-beta5
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.1-beta6
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -20,7 +20,7 @@ rem Resources
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\README.html ..\REAPER\README.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\INSTALL.html ..\REAPER\INSTALL.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\CHANGELOG.html ..\REAPER\CHANGELOG.md
-copy ..\REAPER\Themes\Ultraschall_3.0_WIN.ReaperConfigZip Payload\Ultraschall_3.0.ReaperConfigZip
+copy ..\REAPER\Themes\Ultraschall_3.1_WIN.ReaperConfigZip Payload\Ultraschall_3.1.ReaperConfigZip
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
