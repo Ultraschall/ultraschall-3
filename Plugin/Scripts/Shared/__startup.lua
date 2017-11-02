@@ -48,6 +48,7 @@ sec = tonumber(reaper.GetExtState("ultraschall_gui", "sec"))
 mouse = tonumber(reaper.GetExtState("ultraschall_mouse", "state"))
 first_start = reaper.GetExtState("ultraschall_start", "firststart")
 startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
+follow = tonumber(reaper.GetExtState("ultraschall_follow", "state"))
 
 
 if theme_version ~= tostring(theme_version_now) then 
@@ -95,10 +96,16 @@ if mouse <= 0 then -- selection is activated
   reaper.RefreshToolbar2(sec, mouse_id)
 end
 
+if follow <= 0 then -- follow is activated
+  follow_id = reaper.NamedCommandLookup("_Ultraschall_Toggle_Follow")
+  reaper.SetToggleCommandState(sec, follow_id, 1)
+  reaper.RefreshToolbar2(sec, follow_id)
+end
+
+
 -- set OnAir button off
 
 on_air_button_id = reaper.NamedCommandLookup("_Ultraschall_OnAir")
-
 reaper.SetToggleCommandState(sec, on_air_button_id, 0) 
 
 --------------------------
@@ -122,9 +129,9 @@ m = reaper.GetMasterTrack(0)                                                  --
 os = reaper.GetOS()
 
 if string.match(os, "OSX") then 
-  fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+  fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 0)      --get the slot of the StudioLink effect. If there is none: initiate one.
 else  -- Windows
-  fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.
+  fx_slot = reaper.TrackFX_GetByName(m, "StudioLinkOnAir (IT-Service Sebastian Reimers)", 0)      --get the slot of the StudioLink effect. If there is none: initiate one.
 end
 reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
