@@ -14,7 +14,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Zeitauswahl selektiert direkt auch Items**
 *Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt.*
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
-*Mit `alt`+`.` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl.*
+*Mit `alt`+`.` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `alt`+`shift`+`.` wird eine Zeitauswahl wieder unmuted.*
 * Editing: **Folgen-Modus**
 *Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne das Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor.*
 * Editing: **Lautstärke-Zoom der Wellenform**
