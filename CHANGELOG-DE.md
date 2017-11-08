@@ -2,6 +2,24 @@
 
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
+## 3.1 Miedinger - 2017-November
+
+* REAPER: **Unterstützung der Versin 5.62**
+*Ultraschall 3.1 ist für die Version 5.62 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
+* Editing: **Alternative Darstellung der Wellenform**
+*Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellng der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.*
+* Editing: **Spectral Editing**
+* Editing: **Zeitauswahl editieren an Kanten**
+* Editing: **Zeitauswahl selektiert direkt auch Items**
+* Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
+* Theme: **Anzeige ausgewählter Items optimiert**
+* Theme: **Master-Kanal im Mixer immer sichtbar**
+* Mastering: **Ultraschall Dynamics2 Effekt**
+* Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
+* Kapitelmarken: **Setzen geplanter Kapitelmarken**
+* Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
+
+
 ## 3.0.3 Miedinger - 2017-April-6
 
 * REAPER: **Festlegung auf eine exakte Versionsnummer**
