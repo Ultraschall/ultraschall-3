@@ -12,6 +12,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Zeitauswahl editieren an Kanten**
 * Editing: **Zeitauswahl selektiert direkt auch Items**
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
+* Editing: **Follow-Mode**
+* Editing: **Lautstärke-Zoom der Wellenform**
 * Theme: **Anzeige ausgewählter Items optimiert**
 * Theme: **Master-Kanal im Mixer immer sichtbar**
 * Mastering: **Ultraschall Dynamics2 Effekt**
