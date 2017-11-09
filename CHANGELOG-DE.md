@@ -22,7 +22,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Theme: **Anzeige ausgewählter Items optimiert**
 *Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung.*
 * Theme: **Master-Kanal im Mixer immer sichtbar**
-*In allen Views ist nun ach der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 900 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mis ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird.*
+*In allen Views ist nun ach der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mis ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird.*
 * Mastering: **Ultraschall Dynamics2 Effekt**
 *Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.)*
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
@@ -31,6 +31,10 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Mit dem Shortcut `m` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cirsors (abhängig vom Folgen-Modus (siehe oben) gesetzt.*
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
 *Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden, die bisherige Reihenfolge bleibt dabei erhalten.*
+* Theme: **Tooltips optimiert**
+*Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt.*
+* Easter Egg: **Wenns mal wieder länger dauert**
+*Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen.*
 
 
 ## 3.0.3 Miedinger - 2017-April-6
