@@ -7,18 +7,22 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * REAPER: **Unterstützung der Versin 5.62**
 *Ultraschall 3.1 ist für die Version 5.62 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
 * Editing: **Alternative Darstellung der Wellenform**
-*Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellng der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.*
+*Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.*
 * Editing: **Spectral Editing**
 * Editing: **Zeitauswahl editieren an Kanten**
 *Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden.*
 * Editing: **Zeitauswahl selektiert direkt auch Items**
 *Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt.*
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
-*Mit `alt`+`.` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `alt`+`shift`+`.` wird eine Zeitauswahl wieder unmuted.*
+*Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted.*
 * Editing: **Folgen-Modus**
 *Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne das Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor.*
 * Editing: **Lautstärke-Zoom der Wellenform**
 *Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten.*
+* Editing: **Zoom zu Edit-Cursor**
+*Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück.*
+* Editing: **Doppelklick für Play**
+*Ein Doppelklick in der Zeitleiste spielt ab der angeklickten Position ab.*
 * Theme: **Anzeige ausgewählter Items optimiert**
 *Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung.*
 * Theme: **Master-Kanal im Mixer immer sichtbar**
@@ -28,7 +32,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
 *beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken.*
 * Kapitelmarken: **Setzen geplanter Kapitelmarken**
-*Mit dem Shortcut `m` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cirsors (abhängig vom Folgen-Modus (siehe oben) gesetzt.*
+*Mit dem Shortcut `b` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cirsors (abhängig vom Folgen-Modus (siehe oben) gesetzt.*
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
 *Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden, die bisherige Reihenfolge bleibt dabei erhalten.*
 * Theme: **Tooltips optimiert**
