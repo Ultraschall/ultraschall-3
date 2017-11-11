@@ -70,8 +70,8 @@
 		42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A6B1E53B21900092214 /* TimeUtilities.cpp */; };
 		42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A6C1E53B21900092214 /* TimeUtilities.h */; };
 		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
-		423D883E1E54DDA800AF8A41 /* MP3Properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */; };
-		423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */ = {isa = PBXBuildFile; fileRef = 423D883D1E54DDA800AF8A41 /* MP3Properties.h */; };
+		423D883E1E54DDA800AF8A41 /* MP3_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */; };
+		423D883F1E54DDA800AF8A41 /* MP3_Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 423D883D1E54DDA800AF8A41 /* MP3_Interface.h */; };
 		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
 		423F32B31B51509D00231F3D /* IActivationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B21B51509D00231F3D /* IActivationService.h */; };
 		423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423F32B41B51869500231F3D /* ServiceManager.cpp */; };
@@ -210,8 +210,8 @@
 		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
 		42327A6C1E53B21900092214 /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtilities.h; path = framework/TimeUtilities.h; sourceTree = "<group>"; };
 		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
-		423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MP3Properties.cpp; path = reaper/MP3Properties.cpp; sourceTree = "<group>"; };
-		423D883D1E54DDA800AF8A41 /* MP3Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP3Properties.h; path = reaper/MP3Properties.h; sourceTree = "<group>"; };
+		423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MP3_Interface.cpp; path = reaper/MP3_Interface.cpp; sourceTree = "<group>"; };
+		423D883D1E54DDA800AF8A41 /* MP3_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP3_Interface.h; path = reaper/MP3_Interface.h; sourceTree = "<group>"; };
 		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
 		423F32B21B51509D00231F3D /* IActivationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IActivationService.h; path = framework/IActivationService.h; sourceTree = "<group>"; };
 		423F32B41B51869500231F3D /* ServiceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceManager.cpp; path = framework/ServiceManager.cpp; sourceTree = "<group>"; };
@@ -373,8 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				42F83CD61F659BBF009F2ECC /* ITagWriter.h */,
-				423D883C1E54DDA800AF8A41 /* MP3Properties.cpp */,
-				423D883D1E54DDA800AF8A41 /* MP3Properties.h */,
+				423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */,
+				423D883D1E54DDA800AF8A41 /* MP3_Interface.h */,
 				4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */,
 				4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */,
 				422A06CB1E4B69F100D758FE /* ICommand.h */,
@@ -534,7 +534,7 @@
 				422A06F81E4B69F100D758FE /* OpenProjectCommand.h in Headers */,
 				423A5A481B518AAB00231F3D /* IApplication.h in Headers */,
 				42F83CDB1F659BE1009F2ECC /* MP4TagWriter.h in Headers */,
-				423D883F1E54DDA800AF8A41 /* MP3Properties.h in Headers */,
+				423D883F1E54DDA800AF8A41 /* MP3_Interface.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,7 +650,7 @@
 				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */,
-				423D883E1E54DDA800AF8A41 /* MP3Properties.cpp in Sources */,
+				423D883E1E54DDA800AF8A41 /* MP3_Interface.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
