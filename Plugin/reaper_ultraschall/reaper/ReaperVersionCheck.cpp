@@ -54,7 +54,7 @@ bool ReaperVersionCheck() {
         framework::StringTokenize(versionString, '.');
     if (tokens.size() == 2) {
       const int REQUIRED_REAPER_MAJOR_VERSION = 5;
-      const int REQUIRED_REAPER_MINOR_VERSION = 60;
+      const int REQUIRED_REAPER_MINOR_VERSION = 50;
       if ((framework::StringToInt(tokens[0]) ==
            REQUIRED_REAPER_MAJOR_VERSION) &&
           (framework::StringToInt(tokens[1]) >=

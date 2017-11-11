@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MP3_PROPERTIES_H_INCL__
-#define __ULTRASCHALL_REAPER_MP3_PROPERTIES_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
+#define __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
 
 #include <vector>
-
+#include "taglib_include.h"
 #include "Marker.h"
 
 namespace ultraschall {
 namespace reaper {
 
-bool InsertMP3Properties(const std::string& target, const std::string& properties);
-bool InsertMP3CoverPicture(const std::string& target, const std::string& image);
-bool InsertMP3Tags(const std::string& target, const std::vector<Marker> tags);
+bool MP3_Commit(TagLib::MPEG::File& file);
+
+uint32_t MP3_QueryTargetDuration(const std::string& target);
+
+void MP3_RemoveFrames(const std::string& target, const std::string& frameId);
+void MP3_RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id);
+
+bool MP3_InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text);
+bool MP3_InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text);
+bool MP3_InsertSingleChapterFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime);
+bool MP3_InsertSingleTableOfContentsFrame(TagLib::ID3v2::Tag* parent, const std::vector<std::string>& tableOfContentsItems);
+bool MP3_InsertSinglePodcastFrame(TagLib::ID3v2::Tag* parent);
+bool MP3_InsertSingleCoverPictureFrame(TagLib::ID3v2::Tag* parent, const std::string& image);
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_PROPERTIES_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__

@@ -31,7 +31,6 @@
 #include "InsertMediaPropertiesAction.h"
 #include "CustomActionFactory.h"
 #include "FileManager.h"
-#include "MP3Properties.h"
 #include "NotificationWindow.h"
 #include "ITagWriter.h"
 
