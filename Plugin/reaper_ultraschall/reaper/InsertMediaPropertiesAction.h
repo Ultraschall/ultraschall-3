@@ -66,6 +66,15 @@ private:
    static ITagWriter* CreateTagWriter(const std::string& targetName);
    
    static std::string NormalizeTargetName(const std::string& targetName);
+   
+   typedef enum {
+      MP3_TARGET,
+      MP4_TARGET,
+      INVALID_TARGET_TYPE,
+      MAX_TARGET_TYPE = INVALID_TARGET_TYPE
+   } TARGET_TYPE;
+   
+   static TARGET_TYPE EvaluateFileType(const std::string& targetName);
 };
       
 }}

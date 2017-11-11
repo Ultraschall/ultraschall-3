@@ -39,7 +39,7 @@ public:
    
    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage) = 0;
    
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers) = 0;
+   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace) = 0;
    
 protected:
    virtual ~ITagWriter()

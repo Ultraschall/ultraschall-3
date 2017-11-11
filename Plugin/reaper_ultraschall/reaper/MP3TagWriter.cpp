@@ -43,26 +43,50 @@ bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const
    
    bool success = false;
    
-   mp3::File mp3(targetName.c_str());
-   if(mp3.isOpen() == true)
+   MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
+   if(context != nullptr)
    {
-      id3v2::Tag* tag = mp3.ID3v2Tag();
-      if(tag != nullptr)
+      success = MP3_InsertPodcastFrame(context);
+      if(true == success)
       {
-         MP3_InsertSinglePodcastFrame(tag);
-         
-         MP3_InsertSingleTextFrame(tag, "TIT2", tokens[0]); // title
-         MP3_InsertSingleTextFrame(tag, "TPE1", tokens[1]); // artist
-         MP3_InsertSingleTextFrame(tag, "TALB", tokens[2]); // album
-         MP3_InsertSingleTextFrame(tag, "TDRC", tokens[3]); // date
-         MP3_InsertSingleTextFrame(tag, "TCON", tokens[4]); // genre
-         
+         success = MP3_InsertTextFrame(context, "TIT2", tokens[0]); // title
+      }
+      
+      if(true == success)
+      {
+         success = MP3_InsertTextFrame(context, "TPE1", tokens[1]); // artist
+      }
+      
+      if(true == success)
+      {
+         success = MP3_InsertTextFrame(context, "TALB", tokens[2]); // album
+      }
+
+      if(true == success)
+      {
+         success = MP3_InsertTextFrame(context, "TDRC", tokens[3]); // date
+      }
+
+      if(true == success)
+      {
+         success = MP3_InsertTextFrame(context, "TCON", tokens[4]); // genre
+      }
+
+      if(true == success)
+      {
          if(tokens.size() > 5)
          {
-            MP3_InsertSingleCommentsFrame(tag, "COMM", tokens[5]); // comment
+            success = MP3_InsertCommentsFrame(context, "COMM", tokens[5]); // comment
          }
-         
-         success = MP3_Commit(mp3);
+      }
+
+      if(true == success)
+      {
+         success = MP3_CommitTransaction(context);
+      }
+      else
+      {
+         MP3_AbortTransaction(context);
       }
    }
    
@@ -76,24 +100,24 @@ bool MP3TagWriter::InsertCoverImage(const std::string& targetName, const std::st
    
    bool success = false;
    
-   TagLib::MPEG::File audioFile(targetName.c_str());
-   if(audioFile.isOpen() == true)
+   MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
+   if(context != nullptr)
    {
-      TagLib::ID3v2::Tag* tag = audioFile.ID3v2Tag();
-      if(tag != nullptr)
+      success = MP3_InsertCoverPictureFrame(context, coverImage);
+      if(true == success)
       {
-         success = MP3_InsertSingleCoverPictureFrame(tag, coverImage);
-         if(true == success)
-         {
-            success = MP3_Commit(audioFile);
-         }
+         success = MP3_CommitTransaction(context);
+      }
+      else
+      {
+         MP3_AbortTransaction(context);
       }
    }
    
    return success;
 }
 
-bool MP3TagWriter::InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers)
+bool MP3TagWriter::InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace)
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
    PRECONDITION_RETURN(chapterMarkers.empty() == false, false);
@@ -103,32 +127,41 @@ bool MP3TagWriter::InsertChapterMarkers(const std::string& targetName, const std
    
    bool success = false;
    
-   mp3::File mp3(targetName.c_str());
-   if(mp3.isOpen() == true)
+   MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
+   if(context != nullptr)
    {
-      id3v2::Tag *id3v2 = mp3.ID3v2Tag();
-      if(id3v2 != nullptr)
+      if(true == replace)
       {
-         MP3_RemoveMultipleFrames(id3v2, "CHAP");
-         
-         std::vector<std::string> tableOfContentsItems;
-         
-         for(size_t i = 0; i < chapterMarkers.size(); i++)
-         {
-            std::stringstream chapterId;
-            chapterId << "chp" << i;
-            std::string tableOfContensItem = chapterId.str();
-            tableOfContentsItems.push_back(tableOfContensItem);
-            
-            const uint32_t startTime = static_cast<uint32_t>(chapterMarkers[i].Position() * 1000);
-            const uint32_t endTime = (i < (chapterMarkers.size() - 1)) ? static_cast<uint32_t>(chapterMarkers[i + 1].Position() * 1000) : targetDuration;
-            MP3_InsertSingleChapterFrame(id3v2, tableOfContensItem, chapterMarkers[i].Name(), startTime, endTime);
-         }
-         
-         MP3_InsertSingleTableOfContentsFrame(id3v2, tableOfContentsItems);
+         MP3_RemoveFrames(context, "CHAP");
       }
       
-      success = MP3_Commit(mp3);
+      std::vector<std::string> tableOfContentsItems;
+      success = true;
+      for(size_t i = 0; (i < chapterMarkers.size()) && (true == success); i++)
+      {
+         std::stringstream chapterId;
+         chapterId << "chp" << i;
+         std::string tableOfContensItem = chapterId.str();
+         tableOfContentsItems.push_back(tableOfContensItem);
+         
+         const uint32_t startTime = static_cast<uint32_t>(chapterMarkers[i].Position() * 1000);
+         const uint32_t endTime = (i < (chapterMarkers.size() - 1)) ? static_cast<uint32_t>(chapterMarkers[i + 1].Position() * 1000) : targetDuration;
+         success = MP3_InsertChapterFrame(context, tableOfContensItem, chapterMarkers[i].Name(), startTime, endTime);
+      }
+
+      if(true == success)
+      {
+         success = MP3_InsertTableOfContentsFrame(context, tableOfContentsItems);
+      }
+      
+      if(true == success)
+      {
+         success = MP3_CommitTransaction(context);
+      }
+      else
+      {
+         MP3_AbortTransaction(context);
+      }
    }
    
    return success;

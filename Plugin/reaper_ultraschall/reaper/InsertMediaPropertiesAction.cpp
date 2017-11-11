@@ -88,7 +88,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
          const std::vector<Marker> tags = currentProject.QueryAllMarkers();
          if(tags.empty() == false)
          {
-            if(pTagWriter->InsertChapterMarkers(targetName, tags) == true)
+            if(pTagWriter->InsertChapterMarkers(targetName, tags, true) == true)
             {
                successfulActions++;
             }
@@ -106,7 +106,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
          
          if(successfulActions > 0)
          {
-            NotificationWindow::Show("The MP3 file has been updated successfully.");
+            NotificationWindow::Show("The media file has been updated successfully.");
          }
       }
    }
@@ -170,7 +170,33 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targ
    PRECONDITION_RETURN(targetName.empty() == false, nullptr);
    PRECONDITION_RETURN(targetName.length() > 4, nullptr);
 
-   ITagWriter* pTagWriter = nullptr;
+   ITagWriter* tagWriter = nullptr;
+   
+   const TARGET_TYPE targetType = EvaluateFileType(targetName);
+   if(targetType == MP3_TARGET)
+   {
+      tagWriter = new MP3TagWriter();
+   }
+   else if(targetType == MP4_TARGET)
+   {
+      tagWriter = new MP4TagWriter();
+   }
+   
+   return tagWriter;
+}
+      
+std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
+{
+   std::string firstStage = targetName;
+   std::string secondStage = framework::StringTrimRight(firstStage);
+   return framework::StringLowercase(secondStage);
+}
+      
+InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const std::string& targetName)
+{
+   PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
+   
+   TARGET_TYPE type = INVALID_TARGET_TYPE;
    
    const std::string cookedTargetName = NormalizeTargetName(targetName);
    const size_t extensionOffset = targetName.find(".");
@@ -181,25 +207,26 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targ
       {
          if(fileExtension == "mp3")
          {
-            pTagWriter = new MP3TagWriter();
+            type = MP3_TARGET;
          }
          else if(fileExtension == "mp4")
          {
-            pTagWriter = new MP4TagWriter();
+            type = MP4_TARGET;
+         }
+         else if(fileExtension == "m4a")
+         {
+            type = MP4_TARGET;
+         }
+         else if(fileExtension == "m4v")
+         {
+            type = MP4_TARGET;
          }
       }
    }
-      
-   return pTagWriter;
+
+   return type;
 }
-      
-std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
-{
-   std::string firstStage = targetName;
-   std::string secondStage = framework::StringTrimRight(firstStage);
-   return framework::StringLowercase(secondStage);
-}
-      
+
 }}
 
 

@@ -37,7 +37,7 @@ public:
    
    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
    
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers);
+   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
    
 protected:
    virtual ~MP4TagWriter()

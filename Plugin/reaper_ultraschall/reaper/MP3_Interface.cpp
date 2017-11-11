@@ -29,13 +29,50 @@
 namespace ultraschall {
 namespace reaper {
   
+struct MP3_EXPORT_CONTEXT
+{
+   TagLib::MPEG::File targetFile_;
+   TagLib::ID3v2::Tag* tag_;
+   
+   MP3_EXPORT_CONTEXT(const std::string& targetName) : targetFile_(targetName.c_str()), tag_(nullptr)
+   {
+      if(targetFile_.isOpen() == true)
+      {
+         tag_ = targetFile_.ID3v2Tag();
+      }
+   }
+   
+   ~MP3_EXPORT_CONTEXT()
+   {
+      tag_ = nullptr;
+   }
+};
+   
 static const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize);
 
-bool MP3_Commit(TagLib::MPEG::File& file)
+MP3_EXPORT_CONTEXT* MP3_StartTransaction(const std::string& targetName)
 {
-   return file.save(TagLib::MPEG::File::ID3v2, true, 3);
-}
+   PRECONDITION_RETURN(targetName.empty() == false, nullptr);
    
+   return new MP3_EXPORT_CONTEXT(targetName);
+}
+
+bool MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context)
+{
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   
+   const bool success = context->targetFile_.save(TagLib::MPEG::File::ID3v2, true, 3);
+   framework::SafeDelete(context);
+   
+   return success;
+}
+
+void MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context)
+{
+   framework::SafeDelete(context);
+}
+
 const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize)
 {
    PRECONDITION_RETURN(data != nullptr, nullptr);
@@ -112,20 +149,24 @@ void MP3_RemoveFrames(const std::string& target, const std::string& frameId)
                id3v2->removeFrame(foundFrames[j]);
             }
             
-            MP3_Commit(mp3);
+//            FIXME
+//            MP3_Commit(mp3);
          }
       }
    }
 }
    
-void MP3_RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id)
+bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id)
 {
-   PRECONDITION(parent != nullptr);
-   PRECONDITION(id.empty() == false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(id.empty() == false, false);
+   
+   bool success = false;
    
    std::vector<id3v2::Frame*> selectedFrames;
    
-   TagLib::ID3v2::FrameList frames = parent->frameList(id.c_str());
+   TagLib::ID3v2::FrameList frames = context->tag_->frameList(id.c_str());
    for(unsigned int i = 0; i < frames.size(); i++)
    {
       id3v2::Frame* frame = frames[i];
@@ -139,20 +180,25 @@ void MP3_RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id)
    {
       for(size_t j = 0; j < selectedFrames.size(); j ++)
       {
-         parent->removeFrame(selectedFrames[j]);
+         context->tag_->removeFrame(selectedFrames[j]);
       }
+      
+      success = true;
    }
+   
+   return success;
 }
    
-bool MP3_InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text)
+bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    PRECONDITION_RETURN(text.empty() == false, false);
    
    bool success = false;
    
-   MP3_RemoveMultipleFrames(parent, id.c_str());
+   MP3_RemoveFrames(context, id.c_str());
    
    const char* frameIdString = id.c_str();
    TagLib::ByteVector frameId = TagLib::ByteVector::fromCString(frameIdString);
@@ -166,22 +212,23 @@ bool MP3_InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id
       textFrame->setTextEncoding(TagLib::String::Type::UTF16);
       textFrame->setText(TagLib::String(stringData, TagLib::String::Type::UTF16));
       
-      parent->addFrame(textFrame);
+      context->tag_->addFrame(textFrame);
       success = true;
    }
    
    return success;
 }
  
-bool MP3_InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text)
+bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    PRECONDITION_RETURN(text.empty() == false, false);
    
    bool success = false;
    
-   MP3_RemoveMultipleFrames(parent, id.c_str());
+   MP3_RemoveFrames(context, id.c_str());
    
    TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
    if(commentsFrame != nullptr)
@@ -192,16 +239,17 @@ bool MP3_InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string
       commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
       commentsFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
       
-      parent->addFrame(commentsFrame);
+      context->tag_->addFrame(commentsFrame);
       success = true;
    }
    
    return success;
 }
 
-bool MP3_InsertSingleChapterFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime)
+bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    PRECONDITION_RETURN(text.empty() == false, false);
    PRECONDITION_RETURN(startTime != 0xffffffff, false);
@@ -226,7 +274,7 @@ bool MP3_InsertSingleChapterFrame(TagLib::ID3v2::Tag* parent, const std::string&
          embeddedFrame->setText(TagLib::String(rawStringData, TagLib::String::Type::UTF16));
       
          chapterFrame->addEmbeddedFrame(embeddedFrame);
-         parent->addFrame(chapterFrame);
+         context->tag_->addFrame(chapterFrame);
          
          success = true;
       }
@@ -235,14 +283,15 @@ bool MP3_InsertSingleChapterFrame(TagLib::ID3v2::Tag* parent, const std::string&
    return success;
 }
    
-bool MP3_InsertSingleTableOfContentsFrame(TagLib::ID3v2::Tag* parent, const std::vector<std::string>& tableOfContentsItems)
+bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vector<std::string>& tableOfContentsItems)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(tableOfContentsItems.empty() == false, false);
    
    bool success = false;
    
-   MP3_RemoveMultipleFrames(parent, "CTOC");
+   MP3_RemoveFrames(context, "CTOC");
    
    TagLib::ByteVector tableOfContentsId = TagLib::ByteVector::fromCString("toc");
    TagLib::ID3v2::TableOfContentsFrame* tableOfContentsFrame = new TagLib::ID3v2::TableOfContentsFrame(tableOfContentsId);
@@ -263,7 +312,7 @@ bool MP3_InsertSingleTableOfContentsFrame(TagLib::ID3v2::Tag* parent, const std:
          tableOfContentsFrame->addEmbeddedFrame(embeddedFrame);
       }
       
-      parent->addFrame(tableOfContentsFrame);
+      context->tag_->addFrame(tableOfContentsFrame);
       
       success = true;
    }
@@ -271,32 +320,34 @@ bool MP3_InsertSingleTableOfContentsFrame(TagLib::ID3v2::Tag* parent, const std:
    return success;
 }
 
-bool MP3_InsertSinglePodcastFrame(TagLib::ID3v2::Tag* parent)
+bool MP3_InsertPodcastFrame(MP3_EXPORT_CONTEXT* context)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
-   
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+
    bool success = false;
    
-   MP3_RemoveMultipleFrames(parent, "PCST");
+   MP3_RemoveFrames(context, "PCST");
    
    TagLib::ID3v2::PodcastFrame* podcastFrame = new TagLib::ID3v2::PodcastFrame();
    if(podcastFrame != nullptr)
    {
-      parent->addFrame(podcastFrame);
+      context->tag_->addFrame(podcastFrame);
       success = true;
    }
    
    return success;
 }
    
-bool MP3_InsertSingleCoverPictureFrame(TagLib::ID3v2::Tag* parent, const std::string& image)
+bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string& image)
 {
-   PRECONDITION_RETURN(parent != nullptr, false);
+   PRECONDITION_RETURN(context != nullptr, false);
+   PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(image.empty() == false, false);
    
    bool success = false;
    
-   MP3_RemoveMultipleFrames(parent, "APIC");
+   MP3_RemoveFrames(context, "APIC");
    
    TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame();
    if(frame != nullptr)
@@ -315,7 +366,7 @@ bool MP3_InsertSingleCoverPictureFrame(TagLib::ID3v2::Tag* parent, const std::st
                TagLib::ByteVector coverData((const char*)imageData->Data(), (unsigned int)imageData->DataSize());
                frame->setPicture(coverData);
                
-               parent->addFrame(frame);
+               context->tag_->addFrame(frame);
                
                success = true;
             }

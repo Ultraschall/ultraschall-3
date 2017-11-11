@@ -32,19 +32,23 @@
 namespace ultraschall {
 namespace reaper {
 
-bool MP3_Commit(TagLib::MPEG::File& file);
+struct MP3_EXPORT_CONTEXT;
+   
+MP3_EXPORT_CONTEXT* MP3_StartTransaction(const std::string& targetName);
+bool MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context);
+void MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context);
 
-uint32_t MP3_QueryTargetDuration(const std::string& target);
+uint32_t MP3_QueryTargetDuration(const std::string& targetName);
 
 void MP3_RemoveFrames(const std::string& target, const std::string& frameId);
-void MP3_RemoveMultipleFrames(TagLib::ID3v2::Tag* parent, const std::string& id);
+bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id);
 
-bool MP3_InsertSingleTextFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text);
-bool MP3_InsertSingleCommentsFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text);
-bool MP3_InsertSingleChapterFrame(TagLib::ID3v2::Tag* parent, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime);
-bool MP3_InsertSingleTableOfContentsFrame(TagLib::ID3v2::Tag* parent, const std::vector<std::string>& tableOfContentsItems);
-bool MP3_InsertSinglePodcastFrame(TagLib::ID3v2::Tag* parent);
-bool MP3_InsertSingleCoverPictureFrame(TagLib::ID3v2::Tag* parent, const std::string& image);
+bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text);
+bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text);
+bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime);
+bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vector<std::string>& tableOfContentsItems);
+bool MP3_InsertPodcastFrame(MP3_EXPORT_CONTEXT* context);
+bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string& image);
 
 }}
 
