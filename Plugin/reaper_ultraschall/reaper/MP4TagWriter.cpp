@@ -42,7 +42,7 @@ bool MP4TagWriter::InsertCoverImage(const std::string& targetName, const std::st
    return false;
 }
 
-bool MP4TagWriter::InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace)
+bool MP4TagWriter::InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool)
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
    PRECONDITION_RETURN(chapterMarkers.empty() == false, false);

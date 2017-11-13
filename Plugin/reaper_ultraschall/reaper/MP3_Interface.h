@@ -25,6 +25,7 @@
 #ifndef __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
 #define __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
 
+#include <string>
 #include <vector>
 #include "taglib_include.h"
 #include "Marker.h"
