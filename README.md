@@ -32,7 +32,7 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Cough buttons:** Each participant can receive a switch that keeps the recording free of unwanted noises. It is recorded, but muted, and can later be optimized or removed.
 * **Remote control via MIDI and OSC:** Almost all functions -- such as the cough switches or the placement of chapter or edit markers -- can be remote controlled.
 * **Wiimotes and iOS as remove controls:** Wiimotes (or replacement devices) are popular, cheap and flexible remotes- They can be set up with custom MIDI or OSC functions. A control interface based on OSC is offered for iOS.
-* **Amp drive:**Large VU meters with peak display (numerical as well) enable the perfect amp drive. The target range of -18dB to -6dB is distinctly colored (yellow).
+* **Amp drive:** Large VU meters with peak display (numerical as well) enable the perfect amp drive. The target range of -18dB to -6dB is distinctly colored (yellow).
 * **Navigation:** Wherever you are working on within your project, pressing `Y` will jump you back to the current recording position.
 
 ### Production
