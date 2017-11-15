@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4208914A1B2492F800231F3D /* Malloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 420891481B2492F800231F3D /* Malloc.h */; };
 		420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */; };
 		420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
@@ -147,7 +146,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		420891481B2492F800231F3D /* Malloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Malloc.h; path = framework/Malloc.h; sourceTree = "<group>"; };
 		420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMediaPropertiesAction.cpp; path = reaper/InsertMediaPropertiesAction.cpp; sourceTree = "<group>"; };
 		420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMediaPropertiesAction.h; path = reaper/InsertMediaPropertiesAction.h; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 				423F32B41B51869500231F3D /* ServiceManager.cpp */,
 				424C82F31AC8085D00231F3D /* ServiceStatus.h */,
 				42F19A601ABEE81500231F3D /* Framework.h */,
-				420891481B2492F800231F3D /* Malloc.h */,
 				423F32B01B51508C00231F3D /* IConfigurationService.h */,
 				423F32B21B51509D00231F3D /* IActivationService.h */,
 				423A5A471B518AAB00231F3D /* IApplication.h */,
@@ -507,7 +504,6 @@
 				42327A6A1E53ACC900092214 /* SystemProperties.h in Headers */,
 				42F19A7C1ABEE82200231F3D /* ReaperEntryPoints.h in Headers */,
 				424C82F91AC8085D00231F3D /* ServiceFactory.h in Headers */,
-				4208914A1B2492F800231F3D /* Malloc.h in Headers */,
 				422A06F41E4B69F100D758FE /* Marker.h in Headers */,
 				42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */,
 				422A06F61E4B69F100D758FE /* NewProjectCommand.h in Headers */,
