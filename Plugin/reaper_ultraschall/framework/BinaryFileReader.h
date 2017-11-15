@@ -31,7 +31,7 @@ namespace ultraschall { namespace framework {
 class BinaryFileReader
 {
 public:
-   static Stream<uint8_t>* ReadBytes(const std::string& filename);
+   static Stream* ReadBytes(const std::string& filename);
 };
    
 }}

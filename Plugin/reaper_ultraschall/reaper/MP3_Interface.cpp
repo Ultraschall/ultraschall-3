@@ -352,7 +352,7 @@ bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string&
    TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame();
    if(frame != nullptr)
    {
-      framework::Stream<uint8_t>* imageData = framework::BinaryFileReader::ReadBytes(image);
+      framework::Stream* imageData = framework::BinaryFileReader::ReadBytes(image);
       if(imageData != nullptr)
       {
          uint8_t imageHeader[10] = {0};

@@ -174,11 +174,11 @@ std::string Application::GetProjectFileName() const
    const std::string projectPath = GetProjectPathName();
    if(projectPath.empty() == false)
    {
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '\\');
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
       if(pathComponents.empty() == false)
       {
          result = pathComponents[pathComponents.size() - 1];
@@ -195,11 +195,11 @@ std::string Application::GetProjectFolderName() const
    const std::string projectPath = GetProjectPathName();
    if(projectPath.empty() == false)
    {
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '/');
 #else
       const std::vector<std::string> pathComponents = framework::StringTokenize(projectPath, '\\');
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
       if(pathComponents.empty() == false)
       {
@@ -208,11 +208,11 @@ std::string Application::GetProjectFolderName() const
             result += pathComponents[i];
             if(i < pathComponents.size() - 2)
             {
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
                result += '/';
 #else
                result += '\\';
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
             }
          }
       }
@@ -366,7 +366,7 @@ The installation of the Ultraschall REAPER extension has been corrupted. \
 Please reinstall the Ultraschall REAPER extension using the original or an updated installer.\
 ");
 
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() +
       "/REAPER/UserPlugins/reaper_sws_extension.dylib";
    if((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
@@ -390,7 +390,7 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
       NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
       ok = false;
    }
-#endif
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
    if((true == ok) && (ReaperVersionCheck() == false))
    {

@@ -26,70 +26,73 @@
 
 #include <zlib.h>
 #include <IUnknown.h>
-#include <Malloc.h>
+#include <Framework.h>
 
-namespace ultraschall { namespace framework {
-   
+namespace ultraschall {
+  namespace framework {
 
-template <typename ItemType> class Stream : public IUnknown
-{
-public:
-   Stream(const size_t dataSize) : 
-      dataSize_(dataSize), data_(Malloc<ItemType>::Alloc(dataSize_))
-   {
-   }
-   
-   size_t DataSize() const
-   {
-      return dataSize_;
-   }
-   
-   ItemType* Data() const
-   {
-      return data_;
-   }
-   
-   bool Write(const size_t offset, const ItemType* buffer, const size_t bufferSize)
-   {
-      PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
-      PRECONDITION_RETURN(buffer != 0, false);
-      
-      const size_t itemSize = Malloc<ItemType>::Size();
-      memmove(&data_[offset * itemSize], buffer, bufferSize * itemSize);
-      return true;
-   }
-   
-   bool Read(const size_t offset, ItemType* buffer, const size_t bufferSize)
-   {
-      PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
-      PRECONDITION_RETURN(buffer != 0, false);
+    class Stream : public IUnknown
+    {
+    public:
+      Stream(const size_t dataSize) :
+        dataSize_(dataSize), data_(new uint8_t[dataSize_]())
+      {
+      }
 
-      const size_t itemSize = Malloc<ItemType>::Size();
-      memmove(buffer, &data_[offset * itemSize], bufferSize * itemSize);
-      return true;
-   }
-   
-   uint64_t CRC32() const
-   {
-      PRECONDITION_RETURN(data_ != 0, UINT64_MAX);
-      PRECONDITION_RETURN(dataSize_ > 0, UINT64_MAX);
-      
-      uint64_t crc = crc32(0, Z_NULL, 0);
-      return crc32(static_cast<uLong>(crc), data_, static_cast<uInt>(dataSize_));
-   }
-   
-protected:
-   virtual ~Stream()
-   {
-      dataSize_ = 0;
-      Malloc<ItemType>::Free(data_);
-   }
-   
-private:
-   size_t dataSize_;
-   ItemType* data_;
-};
-   
-}}
+      size_t DataSize() const
+      {
+        return dataSize_;
+      }
+
+      const uint8_t* Data() const
+      {
+        return data_;
+      }
+
+      bool Write(const size_t offset, const uint8_t* buffer, const size_t bufferSize)
+      {
+        PRECONDITION_RETURN(data_ != nullptr, false);
+        PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
+        PRECONDITION_RETURN(buffer != nullptr, false);
+
+        const size_t itemSize = sizeof(uint8_t);
+        memmove(&data_[offset * itemSize], buffer, bufferSize * itemSize);
+        return true;
+      }
+
+      bool Read(const size_t offset, uint8_t* buffer, const size_t bufferSize)
+      {
+        PRECONDITION_RETURN(data_ != nullptr, false);
+        PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
+        PRECONDITION_RETURN(buffer != nullptr, false);
+
+        const size_t itemSize = sizeof(uint8_t);
+        memmove(buffer, &data_[offset * itemSize], bufferSize * itemSize);
+        return true;
+      }
+
+      uint64_t CRC32() const
+      {
+        PRECONDITION_RETURN(data_ != nullptr, UINT64_MAX);
+        PRECONDITION_RETURN(dataSize_ > 0, UINT64_MAX);
+
+        uint64_t crc = crc32(0, Z_NULL, 0);
+        return crc32(static_cast<uLong>(crc), data_, static_cast<uInt>(dataSize_));
+      }
+
+    protected:
+      virtual ~Stream()
+      {
+        dataSize_ = 0;
+        SafeDeleteArray(data_);
+      }
+
+    private:
+      size_t dataSize_;
+      uint8_t* data_;
+    };
+
+  }
+}
 
 #endif // #ifdef __ULTRASCHALL_FRAMEWORK_STREAM_H_INCL__

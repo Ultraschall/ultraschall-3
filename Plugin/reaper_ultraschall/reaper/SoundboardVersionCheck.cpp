@@ -24,10 +24,10 @@
 
 #include <string>
 
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
 #include "SoundboardVersionCheck.h"
 #include "FileManager.h"

@@ -89,23 +89,23 @@ bool SWSVersionCheck()
 {
    bool result = false;
 
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
    const std::string swsPlugin2_8UserPath = FileManager::UserApplicationSupportDirectory() +
       "/REAPER/UserPlugins/reaper_sws_extension.dylib";
 #else
    const std::string swsPlugin2_8UserPath = FindSWSPluginPath();
-#endif // #ifndef WIN32 
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32 
 
    if(FileManager::FileExists(swsPlugin2_8UserPath) == true)
    {
-      framework::Stream<uint8_t>* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
+      framework::Stream* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
       if(pStream != 0)
       {
 #ifdef ULTRASCHALL_PLATFORM_MACOS
          static const uint64_t originalCrc = 3206585461;
 #else
          static const uint64_t originalCrc = 2821342186;
-#endif // #ifndef WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_MACOS
 
          const uint64_t crc = pStream->CRC32();
          if(originalCrc == crc)

@@ -24,12 +24,12 @@
 
 #include "ResourceManager.h"
 
-#ifdef WIN32
+#ifdef ULTRASCHALL_PLATFORM_WIN32
 #include <windows.h>
 #include <shobjidl.h>
 #else
 #import <AppKit/AppKit.h>
-#endif
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 namespace ultraschall { namespace framework {
     
@@ -57,7 +57,7 @@ void ResourceManager::SetLanguage(const std::string& id)
    
 void ResourceManager::SetOperatingSystemLanguage()
 {
-#ifndef WIN32
+#ifndef ULTRASCHALL_PLATFORM_WIN32
    currentLanguage_ = "en-EN";
 
    NSLocale *locale = [NSLocale currentLocale];
@@ -73,7 +73,7 @@ void ResourceManager::SetOperatingSystemLanguage()
          }
       }
    }
-#endif // #ifdef WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
    
 const char* ResourceManager::GetLocalizedString(const ResourceId& id) const

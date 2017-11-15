@@ -28,9 +28,9 @@
 
 namespace ultraschall { namespace framework {
    
-Stream<uint8_t>* BinaryFileReader::ReadBytes(const std::string& filename)
+Stream* BinaryFileReader::ReadBytes(const std::string& filename)
 {
-   Stream<uint8_t>* pStream = 0;
+   Stream* pStream = 0;
    
    std::ifstream file(filename, std::ios::in | std::ios::binary | std::ios::ate);
    if(file.is_open() == true)
@@ -43,7 +43,7 @@ Stream<uint8_t>* BinaryFileReader::ReadBytes(const std::string& filename)
          file.read(reinterpret_cast<char*>(buffer), fileSize);
          if(file)
          {
-            pStream = new Stream<uint8_t>(fileSize);
+            pStream = new Stream(fileSize);
             if(pStream != 0)
             {
                const bool succeeded = pStream->Write(0, buffer, fileSize);

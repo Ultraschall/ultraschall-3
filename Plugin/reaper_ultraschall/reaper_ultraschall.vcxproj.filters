@@ -191,9 +191,6 @@
     <ClInclude Include="framework\IService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\Malloc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="framework\ResourceId.h">
       <Filter>Header Files</Filter>
     </ClInclude>

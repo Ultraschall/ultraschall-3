@@ -225,7 +225,6 @@
     <ClInclude Include="framework\IApplication.h" />
     <ClInclude Include="framework\IConfigurationService.h" />
     <ClInclude Include="framework\IService.h" />
-    <ClInclude Include="framework\Malloc.h" />
     <ClInclude Include="framework\ResourceId.h" />
     <ClInclude Include="framework\ResourceManager.h" />
     <ClInclude Include="framework\ServiceFactory.h" />
