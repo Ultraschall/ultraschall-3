@@ -32,15 +32,10 @@
 
 namespace ultraschall { namespace reaper {
 
-bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const std::string& standardProperties)
+bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const StandardMediaProperties& standardProperties)
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
-   PRECONDITION_RETURN(standardProperties.empty() == false, false);
 
-   std::vector<std::string> tokens = framework::StringTokenize(standardProperties, '\n');
-   PRECONDITION_RETURN(tokens.empty() == false, false);
-   PRECONDITION_RETURN(tokens.size() >= 5, false);
-   
    bool success = false;
    
    MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
@@ -49,34 +44,34 @@ bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const
       success = MP3_InsertPodcastFrame(context);
       if(true == success)
       {
-         success = MP3_InsertTextFrame(context, "TIT2", tokens[0]); // title
+         success = MP3_InsertTextFrame(context, "TIT2", standardProperties.title); // title
       }
       
       if(true == success)
       {
-         success = MP3_InsertTextFrame(context, "TPE1", tokens[1]); // artist
+         success = MP3_InsertTextFrame(context, "TPE1", standardProperties.author); // artist
       }
       
       if(true == success)
       {
-         success = MP3_InsertTextFrame(context, "TALB", tokens[2]); // album
+         success = MP3_InsertTextFrame(context, "TALB", standardProperties.track); // album
       }
 
       if(true == success)
       {
-         success = MP3_InsertTextFrame(context, "TDRC", tokens[3]); // date
+         success = MP3_InsertTextFrame(context, "TDRC", standardProperties.date); // date
       }
 
       if(true == success)
       {
-         success = MP3_InsertTextFrame(context, "TCON", tokens[4]); // genre
+         success = MP3_InsertTextFrame(context, "TCON", standardProperties.content); // genre
       }
 
       if(true == success)
       {
-         if(tokens.size() > 5)
+         if(standardProperties.comments.empty() == false)
          {
-            success = MP3_InsertCommentsFrame(context, "COMM", tokens[5]); // comment
+            success = MP3_InsertCommentsFrame(context, "COMM", standardProperties.comments); // comment
          }
       }
 

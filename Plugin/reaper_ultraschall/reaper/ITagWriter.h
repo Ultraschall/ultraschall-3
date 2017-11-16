@@ -32,10 +32,20 @@
 
 namespace ultraschall { namespace reaper {
    
+  struct StandardMediaProperties
+  {
+    std::string title;     // TIT2
+    std::string author;    // TPE1 
+    std::string track;     // TALB
+    std::string date;      // TDRC
+    std::string content;   // TCON
+    std::string comments;  // COMM
+  };
+
 class ITagWriter : public framework::IUnknown
 {
 public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const std::string& standardProperties) = 0;
+   virtual bool InsertStandardProperties(const std::string& targetName, const StandardMediaProperties& standardProperties) = 0;
    
    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage) = 0;
    

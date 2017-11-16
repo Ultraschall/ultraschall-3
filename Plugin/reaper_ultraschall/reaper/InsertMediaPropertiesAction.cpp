@@ -35,198 +35,222 @@
 #include "ITagWriter.h"
 
 namespace ultraschall {
-   namespace reaper {
-      
-static DeclareCustomAction<InsertMediaPropertiesAction> action;
+  namespace reaper {
 
-ServiceStatus InsertMediaPropertiesAction::Execute()
-{
-   ProjectManager& projectManager = ProjectManager::Instance();
-   Project currentProject = projectManager.CurrentProject();
-   const std::string targetName = FindTargetFile(currentProject);
-   if(targetName.empty() == false)
-   {
-      ITagWriter* pTagWriter = CreateTagWriter(targetName);
-      if(pTagWriter != nullptr)
+    static DeclareCustomAction<InsertMediaPropertiesAction> action;
+
+    ServiceStatus InsertMediaPropertiesAction::Execute()
+    {
+      ProjectManager& projectManager = ProjectManager::Instance();
+      Project currentProject = projectManager.CurrentProject();
+      const std::string targetName = FindTargetFile(currentProject);
+      if(targetName.empty() == false)
       {
-         int successfulActions = 0;
-         
-         const std::string projectNotes = currentProject.Notes();
-         if(projectNotes.empty() == false)
-         {
-            if(pTagWriter->InsertStandardProperties(targetName, projectNotes) == true)
+        ITagWriter* pTagWriter = CreateTagWriter(targetName);
+        if(pTagWriter != nullptr)
+        {
+          int successfulActions = 0;
+
+          const std::string projectNotes = currentProject.Notes();
+          if(projectNotes.empty() == false)
+          {
+            std::vector<std::string> tokens = framework::StringTokenize(projectNotes, '\n');
+            if((tokens.empty() == false) && (tokens.size() >= 5))
             {
-               successfulActions++;
+              //std::string title;     // TIT2
+              //std::string author;    // TPE1 
+              //std::string track;     // TALB
+              //std::string date;      // TDRC
+              //std::string content;   // TCON
+              //std::string comments;  // COMM
+
+              StandardMediaProperties standardProperties;
+              standardProperties.title =  tokens[0];
+              standardProperties.author = tokens[1];
+              standardProperties.track = tokens[2];
+              standardProperties.date = tokens[3];
+              standardProperties.content = tokens[4];
+
+              if(tokens.size() > 5)
+              {
+                standardProperties.comments = tokens[5];
+              }
+
+              if(pTagWriter->InsertStandardProperties(targetName, standardProperties) == true)
+              {
+                successfulActions++;
+              }
+              else
+              {
+                NotificationWindow::Show("Failed to insert standard properties.", true);
+              }
             }
-            else
-            {
-               NotificationWindow::Show("Failed to insert standard properties.", true);
-            }
-         }
-         else
-         {
+          }
+          else
+          {
             NotificationWindow::Show("Failed to read standard properties.", true);
-         }
-            
-         const std::string coverImage = FindCoverImage(currentProject);
-         if(coverImage.empty() == false)
-         {
+          }
+
+          const std::string coverImage = FindCoverImage(currentProject);
+          if(coverImage.empty() == false)
+          {
             if(pTagWriter->InsertCoverImage(targetName, coverImage) == true)
             {
-               successfulActions++;
+              successfulActions++;
             }
             else
             {
-               NotificationWindow::Show("Failed to insert cover image.", true);
+              NotificationWindow::Show("Failed to insert cover image.", true);
             }
-         }
-         else
-         {
+          }
+          else
+          {
             NotificationWindow::Show("Failed to read cover image.", true);
-         }
-         
-         const std::vector<Marker> tags = currentProject.QueryAllMarkers();
-         if(tags.empty() == false)
-         {
+          }
+
+          const std::vector<Marker> tags = currentProject.QueryAllMarkers();
+          if(tags.empty() == false)
+          {
             if(pTagWriter->InsertChapterMarkers(targetName, tags, true) == true)
             {
-               successfulActions++;
+              successfulActions++;
             }
             else
             {
-               NotificationWindow::Show("Failed to export chapter markers.", true);
+              NotificationWindow::Show("Failed to export chapter markers.", true);
             }
-         }
-         else
-         {
+          }
+          else
+          {
             NotificationWindow::Show("Failed to read chapter markers.", true);
-         }
+          }
 
-         framework::SafeRelease(pTagWriter);
-         
-         if(successfulActions > 0)
-         {
+          framework::SafeRelease(pTagWriter);
+
+          if(successfulActions > 0)
+          {
             NotificationWindow::Show("The media file has been updated successfully.");
-         }
+          }
+        }
       }
-   }
-   
-   return SERVICE_SUCCESS;
-}
-     
-std::string InsertMediaPropertiesAction::FindTargetFile(const Project& project)
-{
-   const std::string projectFolder = project.FolderName();
-   const std::string projectName = project.Name();
-   
-   PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
-   PRECONDITION_RETURN(projectName.empty() == false, std::string());
-   
-   std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
-   if(FileManager::FileExists(targetName) == false)
-   {
-      targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp4";
+
+      return SERVICE_SUCCESS;
+    }
+
+    std::string InsertMediaPropertiesAction::FindTargetFile(const Project& project)
+    {
+      const std::string projectFolder = project.FolderName();
+      const std::string projectName = project.Name();
+
+      PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
+      PRECONDITION_RETURN(projectName.empty() == false, std::string());
+
+      std::string targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp3";
       if(FileManager::FileExists(targetName) == false)
       {
-         targetName = FileManager::BrowseForMP3Files("Select Output File...");
+        targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp4";
+        if(FileManager::FileExists(targetName) == false)
+        {
+          targetName = FileManager::BrowseForMP3Files("Select Output File...");
+        }
+        else
+        {
+          targetName.clear();
+        }
       }
-      else
+
+      return targetName;
+    }
+
+    std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
+    {
+      const std::string projectFolder = project.FolderName();
+      const std::string projectName = project.Name();
+
+      PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
+      PRECONDITION_RETURN(projectName.empty() == false, std::string());
+
+      std::string coverImage;
+
+      std::vector<std::string> imageNames;
+      imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
+      imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
+      imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
+      imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
+      imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
+      imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
+      const size_t imageIndex = FileManager::FileExists(imageNames);
+      if(imageIndex != -1)
       {
-         targetName.clear();
+        coverImage = imageNames[imageIndex];
       }
-   }
-   
-   return targetName;
-}
 
-std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
-{
-   const std::string projectFolder = project.FolderName();
-   const std::string projectName = project.Name();
-  
-   PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
-   PRECONDITION_RETURN(projectName.empty() == false, std::string());
+      return coverImage;
+    }
 
-   std::string coverImage;
-   
-   std::vector<std::string> imageNames;
-   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
-   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
-   imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
-   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
-   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
-   imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
-   const size_t imageIndex = FileManager::FileExists(imageNames);
-   if(imageIndex != -1)
-   {
-      coverImage = imageNames[imageIndex];
-   }
-   
-   return coverImage;
-}
+    ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targetName)
+    {
+      PRECONDITION_RETURN(targetName.empty() == false, nullptr);
+      PRECONDITION_RETURN(targetName.length() > 4, nullptr);
 
-ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targetName)
-{
-   PRECONDITION_RETURN(targetName.empty() == false, nullptr);
-   PRECONDITION_RETURN(targetName.length() > 4, nullptr);
+      ITagWriter* tagWriter = nullptr;
 
-   ITagWriter* tagWriter = nullptr;
-   
-   const TARGET_TYPE targetType = EvaluateFileType(targetName);
-   if(targetType == MP3_TARGET)
-   {
-      tagWriter = new MP3TagWriter();
-   }
-   else if(targetType == MP4_TARGET)
-   {
-      tagWriter = new MP4TagWriter();
-   }
-   
-   return tagWriter;
-}
-      
-std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
-{
-   std::string firstStage = targetName;
-   std::string secondStage = framework::StringTrimRight(firstStage);
-   return framework::StringLowercase(secondStage);
-}
-      
-InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const std::string& targetName)
-{
-   PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
-   
-   TARGET_TYPE type = INVALID_TARGET_TYPE;
-   
-   const std::string cookedTargetName = NormalizeTargetName(targetName);
-   const size_t extensionOffset = targetName.find(".");
-   if(extensionOffset != std::string::npos)
-   {
-      const std::string fileExtension = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
-      if(fileExtension.empty() == false)
+      const TARGET_TYPE targetType = EvaluateFileType(targetName);
+      if(targetType == MP3_TARGET)
       {
-         if(fileExtension == "mp3")
-         {
+        tagWriter = new MP3TagWriter();
+      }
+      else if(targetType == MP4_TARGET)
+      {
+        tagWriter = new MP4TagWriter();
+      }
+
+      return tagWriter;
+    }
+
+    std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
+    {
+      std::string firstStage = targetName;
+      std::string secondStage = framework::StringTrimRight(firstStage);
+      return framework::StringLowercase(secondStage);
+    }
+
+    InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const std::string& targetName)
+    {
+      PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
+
+      TARGET_TYPE type = INVALID_TARGET_TYPE;
+
+      const std::string cookedTargetName = NormalizeTargetName(targetName);
+      const size_t extensionOffset = targetName.find(".");
+      if(extensionOffset != std::string::npos)
+      {
+        const std::string fileExtension = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
+        if(fileExtension.empty() == false)
+        {
+          if(fileExtension == "mp3")
+          {
             type = MP3_TARGET;
-         }
-         else if(fileExtension == "mp4")
-         {
+          }
+          else if(fileExtension == "mp4")
+          {
             type = MP4_TARGET;
-         }
-         else if(fileExtension == "m4a")
-         {
+          }
+          else if(fileExtension == "m4a")
+          {
             type = MP4_TARGET;
-         }
-         else if(fileExtension == "m4v")
-         {
+          }
+          else if(fileExtension == "m4v")
+          {
             type = MP4_TARGET;
-         }
+          }
+        }
       }
-   }
 
-   return type;
+      return type;
+    }
+
+  }
 }
-
-}}
 
 
