@@ -205,7 +205,7 @@ bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, con
    TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(frameId);
    if(textFrame != nullptr)
    {
-      framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(text);
+      framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
       const char* rawStringData = reinterpret_cast<const char*>(convertedString.data());
       unsigned int rawStringSize =  static_cast<unsigned int>(convertedString.size() * sizeof(char16_t));
       TagLib::ByteVector stringData(rawStringData, rawStringSize);
@@ -233,7 +233,7 @@ bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id,
    TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
    if(commentsFrame != nullptr)
    {
-      framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(text);
+      framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
       TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
       commentsFrame->setLanguage(TagLib::ByteVector::fromCString("eng"));
       commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
@@ -268,7 +268,7 @@ bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, 
       TagLib::ID3v2::TextIdentificationFrame* embeddedFrame = new TagLib::ID3v2::TextIdentificationFrame(embeddedFrameId);
       if(embeddedFrame != nullptr)
       {
-         framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM(text);
+         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
          TagLib::ByteVector rawStringData((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
          embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
          embeddedFrame->setText(TagLib::String(rawStringData, TagLib::String::Type::UTF16));
@@ -305,7 +305,7 @@ bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vect
       id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
       if(embeddedFrame != nullptr)
       {
-         framework::UnicodeString convertedString = framework::MakeUnicodeStringWithBOM("toplevel toc");
+         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM("toplevel toc");
          TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
          embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
          embeddedFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
