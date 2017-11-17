@@ -385,12 +385,16 @@ namespace ultraschall
     {
       PRECONDITION_RETURN(str.empty() == false, UnicodeString2());
 
-      UnicodeString result;
+      UnicodeString2 result;
 
       try
       {
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-        result = UnicodeString2(stringConverter.from_bytes(str));
+        std::u16string buffer = stringConverter.from_bytes(str);
+        if(buffer.empty() == false)
+        {
+           result = UnicodeString2(reinterpret_cast<const uint8_t*>(buffer.c_str()), buffer.size());
+        }
       }
       catch(std::range_error&)
       {
@@ -416,7 +420,11 @@ namespace ultraschall
       try
       {
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
-        result = UnicodeStringSz2(stringConverter.from_bytes(str));
+        std::u16string buffer = stringConverter.from_bytes(str);
+        if(buffer.empty() == false)
+        {
+         result = UnicodeStringSz2(reinterpret_cast<const uint8_t*>(buffer.c_str()), buffer.size());
+        }
       }
       catch(std::range_error&)
       {

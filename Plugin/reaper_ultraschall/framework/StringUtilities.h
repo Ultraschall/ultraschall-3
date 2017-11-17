@@ -187,7 +187,7 @@ namespace ultraschall
       {
         if(str.empty() == false)
         {
-          data_ = allocator_type::AllocCopy(str.c_str(), str.size());
+          data_ = allocator_type::AllocCopy(reinterpret_cast<const uint8_t*>(str.c_str()), str.size());
           if(data_ != nullptr)
           {
             size_ = str.size();
