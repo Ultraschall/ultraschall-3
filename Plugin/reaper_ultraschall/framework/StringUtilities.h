@@ -35,212 +35,290 @@
 
 namespace ultraschall
 {
-   namespace framework
-   {
-      
+  namespace framework
+  {
+
 #define _MAKE_TEXT(str) #str
 #define MAKE_TEXT(str) _MAKE_TEXT(str)
-      
-      inline std::vector<std::string> StringTokenize(const std::string &input, const char delimiter)
+
+    inline std::vector<std::string> StringTokenize(const std::string &input, const char delimiter)
+    {
+      std::vector<std::string> tokens;
+      std::stringstream stream(input);
+      std::string token;
+
+      while(std::getline(stream, token, delimiter))
       {
-         std::vector<std::string> tokens;
-         std::stringstream stream(input);
-         std::string token;
-         
-         while(std::getline(stream, token, delimiter))
-         {
-            tokens.push_back(token);
-         }
-         
-         return tokens;
+        tokens.push_back(token);
       }
-      
-      // trim from start
-      static inline std::string &StringTrimLeft(std::string &s)
+
+      return tokens;
+    }
+
+    // trim from start
+    static inline std::string &StringTrimLeft(std::string &s)
+    {
+      s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+      return s;
+    }
+
+    // trim from end
+    static inline std::string &StringTrimRight(std::string &s)
+    {
+      s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+      return s;
+    }
+
+    // trim from both ends
+    static inline std::string &StringTrim(std::string &s)
+    {
+      return StringTrimLeft(StringTrimRight(s));
+    }
+
+    static inline void StringReplace(std::string &str, const std::string &source, const std::string &target)
+    {
+      size_t start_pos = 0;
+      while((start_pos = str.find(source, start_pos)) != std::string::npos)
       {
-         s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
-         return s;
+        str.replace(start_pos, source.length(), target);
+        start_pos += target.length();
       }
-      
-      // trim from end
-      static inline std::string &StringTrimRight(std::string &s)
+    }
+
+    static inline int StringToInt(const std::string& str)
+    {
+      int result = -1;
+
+      if(str.empty() == false)
       {
-         s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
-         return s;
+        std::istringstream is(str);
+        is >> result;
       }
-      
-      // trim from both ends
-      static inline std::string &StringTrim(std::string &s)
-      {
-         return StringTrimLeft(StringTrimRight(s));
-      }
-      
-      static inline void StringReplace(std::string &str, const std::string &source, const std::string &target)
-      {
-         size_t start_pos = 0;
-         while((start_pos = str.find(source, start_pos)) != std::string::npos)
-         {
-            str.replace(start_pos, source.length(), target);
-            start_pos += target.length();
-         }
-      }
-      
-      static inline int StringToInt(const std::string& str)
-      {
-         int result = -1;
-         
-         if(str.empty() == false)
-         {
-            std::istringstream is(str);
-            is >> result;
-         }
-         
-         return result;
-      }
-      
-      std::string StringLowercase(const std::string& str);
-      std::string StringUppercase(const std::string& str);
-      
+
+      return result;
+    }
+
+    std::string StringLowercase(const std::string& str);
+    std::string StringUppercase(const std::string& str);
+
 #ifdef ULTRASCHALL_PLATFORM_MACOS
-      typedef char16_t UnicodeChar;
-      typedef std::u16string UnicodeString;
+    typedef char16_t UnicodeChar;
+    typedef std::u16string UnicodeString;
 #else
-      typedef wchar_t UnicodeChar;
-      typedef std::wstring UnicodeString;
+    typedef wchar_t UnicodeChar;
+    typedef std::wstring UnicodeString;
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
-      
-      UnicodeString MakeUnicodeString(const std::string &src);
-      
-      UnicodeString MakeUTF16StringWithBOM(const std::string &src);
-      
-      std::string MakeUTF8String(const UnicodeString &src);
-      
-      std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString);
-      
-      std::string UnicodeStringToAnsiString(const std::string& unicodeString, int codepage = 0);
-      
-      struct UnicodeString2
+
+    UnicodeString MakeUnicodeString(const std::string &src);
+
+    UnicodeString MakeUTF16StringWithBOM(const std::string &src);
+
+    std::string MakeUTF8String(const UnicodeString &src);
+
+    std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString);
+
+    std::string UnicodeStringToAnsiString(const std::string& unicodeString, int codepage = 0);
+
+    //---------------------------------------------------------------------------------------------
+    // 3.1
+    //---------------------------------------------------------------------------------------------
+
+    template<typename I, bool SZ = false> struct UnicodeString2AllocatorT
+    {
+      typedef I item_type;
+      static const size_t ITEM_SIZE = sizeof(item_type);
+      static const size_t INVALID_SIZE = static_cast<size_t>(-1);
+
+      static item_type* Alloc(const size_t itemCount)
       {
-         uint8_t* data_;
-         size_t size_;
-         
-         static const size_t INVALID_STRING_SIZE = static_cast<size_t>(-1);
-         
-         UnicodeString2() : data_(nullptr), size_(INVALID_STRING_SIZE)
-         {
-         }
-         
-         UnicodeString2(const std::string& str) : data_(nullptr), size_(INVALID_STRING_SIZE)
-         {
-            data_ = new uint8_t[str.size()]();
-            if(data_ != nullptr)
-            {
-               memmove(data_, str.c_str(), ((str.size() > 0) ? str.size() : 1) * sizeof(uint8_t));
-               size_ = str.size();
-            }
-         }
-         
-         UnicodeString2(const uint8_t* data, const size_t size) : data_(nullptr), size_(INVALID_STRING_SIZE)
-         {
-            if((data != nullptr) && (size != INVALID_STRING_SIZE))
-            {
-               data_ = new uint8_t[size]();
-               if(data_ != nullptr)
-               {
-                  memmove(data_, data, size * sizeof(uint8_t));
-                  size_ = size;
-               }
-            }
-         }
-         
-         ~UnicodeString2()
-         {
-            SafeDeleteArray(data_);
-            size_ = INVALID_STRING_SIZE;
-         }
-         
-         UnicodeString2(const UnicodeString2& rhs) : data_(nullptr), size_(INVALID_STRING_SIZE)
-         {
-            *this = rhs;
-         }
-         
-         void operator=(const UnicodeString2& rhs)
-         {
-            PRECONDITION(rhs.data_ != nullptr);
-            PRECONDITION(rhs.size_ != INVALID_STRING_SIZE);
-            
-            SafeDeleteArray(data_);
-            size_ = INVALID_STRING_SIZE;
-            
-            data_ = new uint8_t[rhs.size_]();
-            if(data_ != nullptr)
-            {
-               memmove(data_, rhs.data_, rhs.size_ * sizeof(uint8_t));
-               size_ = rhs.size_;
-            }
-         }
-         
-         UnicodeString2 operator+(const UnicodeString2& rhs) const
-         {
-            UnicodeString2 result;
-            
-            if((rhs.data_ != nullptr) && (rhs.size_ != INVALID_STRING_SIZE))
-            {
-               if((data_ != nullptr) && (size_ != INVALID_STRING_SIZE))
-               {
-                  uint8_t* combinedData = new uint8_t[size_ + rhs.size_]();
-                  if(combinedData != nullptr)
-                  {
-                     memmove(combinedData, data_, size_);
-                     memmove(&combinedData[size_], rhs.data_, rhs.size_);
-                     
-                     result = UnicodeString2(combinedData, size_ + rhs.size_);
-                     
-                     SafeDeleteArray(combinedData);
-                  }
-               }
-               else
-               {
-                  result = rhs;
-               }
-            }
-            else
-            {
-               result = *this;
-            }
-            
-            return result;
-         }
-         
-         inline const uint8_t* data() const
-         {
-            return data_;
-         }
-         
-         inline size_t size() const
-         {
-            return size_;
-         }
-         
-         inline void clear()
-         {
-            SafeDeleteArray(data_);
-            size_ = INVALID_STRING_SIZE;
-         }
-         
-         inline bool empty() const
-         {
-            return (nullptr == data_) || (INVALID_STRING_SIZE == size_) || (0 == size_);
-         }
-      };
-      
-      UnicodeString2 MakeUTF16String2(const std::string& str);
-      UnicodeString2 MakeUTF16String2WithBOM(const std::string& str);
+        PRECONDITION_RETURN(itemCount > 0, nullptr);
 
-      UnicodeString2 MakeUTF8String2(const std::string& str);
-      UnicodeString2 MakeUTF8String2WithBOM(const std::string& str);
+        const size_t targetItemCount = (SZ == true) ? (itemCount + 1) : itemCount;
+        return reinterpret_cast<item_type*>(calloc(targetItemCount, ITEM_SIZE));
+      }
 
-   }
+      static item_type* AllocCopy(const item_type* items, const size_t itemCount)
+      {
+        PRECONDITION_RETURN(items != nullptr, nullptr);
+        PRECONDITION_RETURN(itemCount > 0, nullptr);
+
+        item_type* target = Alloc(itemCount);
+        if(target != nullptr)
+        {
+          const size_t targetSize = ITEM_SIZE * ((SZ == true) ? itemCount + 1 : itemCount);
+          memmove(target, items, targetSize);
+        }
+
+        return target;
+      }
+
+      static const void Free(item_type*& ptr)
+      {
+        PRECONDITION(ptr != nullptr);
+
+        free(ptr);
+        ptr = nullptr;
+      }
+
+      static size_t ItemSize()
+      {
+        return ITEM_SIZE;
+      }
+    };
+
+    typedef UnicodeString2AllocatorT<uint8_t> UnicodeString2Allocator;
+    typedef UnicodeString2AllocatorT<uint8_t, true> UnicodeStringSz2Allocator;
+
+    template<typename A> struct UnicodeString2T
+    {
+      typedef A allocator_type;
+      typedef typename A::item_type item_type;
+
+      item_type* data_;
+      size_t size_;
+
+      static const size_t INVALID_STRING_SIZE = static_cast<size_t>(-1);
+
+      UnicodeString2T() : data_(nullptr), size_(INVALID_STRING_SIZE)
+      {
+      }
+
+      explicit UnicodeString2T(const std::string& str) : data_(nullptr), size_(INVALID_STRING_SIZE)
+      {
+        if(str.empty() == false)
+        {
+          data_ = allocator_type::AllocCopy(str.c_str(), str.size());
+          if(data_ != nullptr)
+          {
+            size_ = str.size();
+          }
+        }
+      }
+
+      UnicodeString2T(const item_type* data, const size_t dataSize) : data_(nullptr), size_(INVALID_STRING_SIZE)
+      {
+        if((data != nullptr) && (dataSize != INVALID_STRING_SIZE))
+        {
+          data_ = allocator_type::AllocCopy(data, dataSize);
+          if(data_ != nullptr)
+          {
+            size_ = dataSize;
+          }
+        }
+      }
+
+      ~UnicodeString2T()
+      {
+        Clear();
+      }
+
+      UnicodeString2T(const UnicodeString2T& rhs) : data_(nullptr), size_(INVALID_STRING_SIZE)
+      {
+        *this = rhs;
+      }
+
+      void operator=(const UnicodeString2T& rhs)
+      {
+        PRECONDITION(rhs.data_ != nullptr);
+        PRECONDITION(rhs.size_ != INVALID_STRING_SIZE);
+
+        Clear();
+
+        data_ = allocator_type::AllocCopy(rhs.data_, rhs.size_);
+        if(data_ != nullptr)
+        {
+          size_ = rhs.size_;
+        }
+      }
+
+      UnicodeString2T operator+(const UnicodeString2T& rhs) const
+      {
+        UnicodeString2T result;
+
+        if((rhs.data_ != nullptr) && (rhs.size_ != INVALID_STRING_SIZE))
+        {
+          if((data_ != nullptr) && (size_ != INVALID_STRING_SIZE))
+          {
+            item_type* combinedData = allocator_type::Alloc(size_ + rhs.size_);
+            if(combinedData != nullptr)
+            {
+              memmove(combinedData, data_, size_);
+              memmove(&combinedData[size_], rhs.data_, rhs.size_);
+
+              result = UnicodeString2T(combinedData, size_ + rhs.size_);
+
+              allocator_type::Free(combinedData);
+            }
+          }
+          else
+          {
+            result = rhs;
+          }
+        }
+        else
+        {
+          result = *this;
+        }
+
+        return result;
+      }
+
+      inline const item_type* Data() const
+      {
+        return data_;
+      }
+
+      inline size_t Size() const
+      {
+        return size_;
+      }
+
+      inline void Clear()
+      {
+        allocator_type::Free(data_);
+        size_ = INVALID_STRING_SIZE;
+      }
+
+      inline bool Empty() const
+      {
+        return (nullptr == data_) || (INVALID_STRING_SIZE == size_) || (0 == size_);
+      }
+    };
+
+    typedef UnicodeString2T<UnicodeString2Allocator> UnicodeString2;
+
+    UnicodeString2 MakeUTF16String2(const std::string& str);
+    UnicodeString2 MakeUTF8String2(const std::string& str);
+
+    inline UnicodeString2 MakeUTF16String2WithBOM(const std::string& str)
+    {
+      static const uint8_t bom[2] = { 0xff, 0xfe };
+      return UnicodeString2(bom, sizeof(bom)) + MakeUTF16String2(str);
+    }
+
+    inline UnicodeString2 MakeUTF8String2WithBOM(const std::string& str)
+    {
+      static const uint8_t bom[3] = { 0xef, 0xbb, 0xbf };
+      return UnicodeString2(bom, sizeof(bom)) + MakeUTF8String2(str);
+    }
+
+    typedef UnicodeString2T<UnicodeStringSz2Allocator> UnicodeStringSz2;
+
+    UnicodeStringSz2 MakeUTF16StringSz2(const std::string& str);
+    UnicodeStringSz2 MakeUTF8StringSz2(const std::string& str);
+
+    inline UnicodeStringSz2 MakeUTF16StringSz2WithBOM(const std::string& str)
+    {
+      static const uint8_t bom[2] = { 0xff, 0xfe };
+      return UnicodeStringSz2(bom, sizeof(bom)) + MakeUTF16StringSz2(str);
+    }
+
+    inline UnicodeStringSz2 MakeUTF8StringSz2WithBOM(const std::string& str)
+    {
+      static const uint8_t bom[3] = { 0xef, 0xbb, 0xbf };
+      return UnicodeStringSz2(bom, sizeof(bom)) + MakeUTF8StringSz2(str);
+    }
+  }
 }
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
