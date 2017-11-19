@@ -45,6 +45,10 @@ The various DAWs (digital audio workstations) have their own pros and cons in te
 * **Effects:** The essential effects for podcasts are integrated directly: expander (composed of soft gate, compressor and limiter) and parametric EQ. The effects are Non-destructive and can be adjusted for each track at any time. Useful settings for these filters are included.
 * **Multitrack export:** Export your finished project either as mono, stereo or multitrack file. In the latter case, each speaker track can be optimized by [Auphonic](https://auphonic.com/).
 
+### Installation
+
+* Detailed **Installation instructions** can be found [here](INSTALL.html)
+
 ### Contact us
 
 Ultraschall is Open Source.

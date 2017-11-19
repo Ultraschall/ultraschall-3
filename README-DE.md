@@ -73,6 +73,10 @@ Diese Distribution krempelt viele Bereiche von Reaper um - man muss umlernen, eg
 
 Begleitend sei unser Screencast empfohlen, in dem ich auf Details eingehe. Fragen gern an mich oder noch besser im Forum <https://sendegate.de/c/ultraschall>
 
+### Installation
+
+Die ausführliche Installationsanleitung befindet sich [hier](INSTALL-DE.html)
+
 ### Credits:
 
 Das grandiose Logodesign und das Farbset stammen von @[graphorama](https://twitter.com/graphorama). Weiterer Dank geht an die Betatester:
