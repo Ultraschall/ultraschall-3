@@ -75,7 +75,7 @@ Begleitend sei unser Screencast empfohlen, in dem ich auf Details eingehe. Frage
 
 ### Installation
 
-Die ausführliche Installationsanleitung befindet sich [hier](INSTALL-DE.md)
+Die ausführliche Installationsanleitung befindet sich [hier](INSTALL-DE.html)
 
 ### Credits:
 
