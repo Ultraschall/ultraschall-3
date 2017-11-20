@@ -141,7 +141,7 @@ std::string FileManager::BrowseForFiles(const framework::ResourceId id)
     return BrowseForFiles(message);
 }
 
-std::string FileManager::BrowseForMP3Files(const std::string &title)
+std::string FileManager::BrowseForTargetAudioFiles(const std::string &title)
 {
     std::string path;
 
@@ -179,12 +179,16 @@ std::string FileManager::BrowseForMP3Files(const std::string &title)
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
         pfod->SetTitle(stringConverter.from_bytes(title).c_str());
 
-        COMDLG_FILTERSPEC filters[2] = {0};
+        COMDLG_FILTERSPEC filters[4] = {0};
         filters[0].pszName = L"MP3 file";
         filters[0].pszSpec = L"*.mp3";
-        filters[1].pszName = L"All files";
-        filters[1].pszSpec = L"*.*";
-        pfod->SetFileTypes(2, filters);
+        filters[1].pszName = L"MP4 file";
+        filters[1].pszSpec = L"*.mp4";
+        filters[2].pszName = L"M4A file";
+        filters[2].pszSpec = L"*.m4a";
+        filters[3].pszName = L"All files";
+        filters[3].pszSpec = L"*.*";
+        pfod->SetFileTypes(4, filters);
 
         FILEOPENDIALOGOPTIONS fos = FOS_STRICTFILETYPES | FOS_FILEMUSTEXIST;
         pfod->SetOptions(fos);

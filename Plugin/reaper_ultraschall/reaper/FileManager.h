@@ -40,7 +40,7 @@ public:
 
    static std::string BrowseForFiles(const framework::ResourceId id);
    static std::string BrowseForFiles(const std::string& title);
-   static std::string BrowseForMP3Files(const std::string& title);
+   static std::string BrowseForTargetAudioFiles(const std::string& title);
    static std::string BrowseForImageFiles(const std::string& title);
 
    static std::string BrowseForFolder(const framework::ResourceId id, const std::string& folder);

@@ -147,7 +147,7 @@ std::string Project::Name() const
    const std::string file = FileName();
    if (file.empty() == false)
    {
-      result = file.substr(0, file.find('.', 0));
+     result = file.substr(0, file.rfind('.'));
    }
 
    return result;

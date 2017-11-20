@@ -57,13 +57,6 @@ namespace ultraschall {
             std::vector<std::string> tokens = framework::StringTokenize(projectNotes, '\n');
             if((tokens.empty() == false) && (tokens.size() >= 5))
             {
-              //std::string title;     // TIT2
-              //std::string author;    // TPE1 
-              //std::string track;     // TALB
-              //std::string date;      // TDRC
-              //std::string content;   // TCON
-              //std::string comments;  // COMM
-
               StandardMediaProperties standardProperties;
               standardProperties.title =  tokens[0];
               standardProperties.author = tokens[1];
@@ -88,7 +81,7 @@ namespace ultraschall {
           }
           else
           {
-            NotificationWindow::Show("Failed to read standard properties.", true);
+            NotificationWindow::Show("Couldn't find ID3V2 information in current project.", false);
           }
 
           const std::string coverImage = FindCoverImage(currentProject);
@@ -105,7 +98,7 @@ namespace ultraschall {
           }
           else
           {
-            NotificationWindow::Show("Failed to read cover image.", true);
+            NotificationWindow::Show("Couldn't find cover image.", false);
           }
 
           const std::vector<Marker> tags = currentProject.QueryAllMarkers();
@@ -122,7 +115,7 @@ namespace ultraschall {
           }
           else
           {
-            NotificationWindow::Show("Failed to read chapter markers.", true);
+            NotificationWindow::Show("Couldn't find chapter marker definitions in current project.", false);
           }
 
           framework::SafeRelease(pTagWriter);
@@ -151,7 +144,7 @@ namespace ultraschall {
         targetName = FileManager::AppendPath(projectFolder, projectName) + ".mp4";
         if(FileManager::FileExists(targetName) == false)
         {
-          targetName = FileManager::BrowseForMP3Files("Select Output File...");
+          targetName = FileManager::BrowseForTargetAudioFiles("Select Output File...");
         }
         else
         {
@@ -222,7 +215,7 @@ namespace ultraschall {
       TARGET_TYPE type = INVALID_TARGET_TYPE;
 
       const std::string cookedTargetName = NormalizeTargetName(targetName);
-      const size_t extensionOffset = targetName.find(".");
+      const size_t extensionOffset = targetName.rfind(".");
       if(extensionOffset != std::string::npos)
       {
         const std::string fileExtension = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
