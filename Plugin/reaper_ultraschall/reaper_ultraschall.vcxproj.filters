@@ -171,6 +171,9 @@
     <ClCompile Include="reaper\MP3_Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reaper\ImageTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\BinaryFileReader.h">
@@ -375,6 +378,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\MP3_Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reaper\ImageTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
