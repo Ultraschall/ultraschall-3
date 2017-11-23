@@ -7,7 +7,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * REAPER: **Unterstützung der Versin 5.62**
 *Ultraschall 3.1 ist für die Version 5.62 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
 * Editing: **Alternative Darstellung der Wellenform**
-*Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.*
+*Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.* [[Video]](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
 * Editing: **Spectral Editing**
 * Editing: **Zeitauswahl editieren an Kanten**
 *Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden.*

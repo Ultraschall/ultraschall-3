@@ -25,10 +25,10 @@
 ]]
  
 
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
+
 
 ------------------------------------------------------
 -- Open a URL in a browser - OS agnostic
@@ -89,20 +89,21 @@ function check_values()
   local startscreen
   local updatecheck
 
-  startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
-  
-  if GUI.Val("checkers")[1] == true  and startscreen == "0" then      -- ckeckbox is activated
-    reaper.SetExtState("ultraschall_start", "startscreen", "1", true)
+  A,startscreen = ultraschall.GetUSExternalState("ultraschall_start", "startscreen")
+  if GUI.Val("checkers")[1] == true  and (startscreen == "0" or startscreen=="-1") then      -- ckeckbox is activated
+    ultraschall.SetUSExternalState("ultraschall_start", "startscreen", "1", true)
   elseif GUI.Val("checkers")[1] == false and startscreen == "1" then    -- ckeckbox is deactivated
-    reaper.SetExtState("ultraschall_start", "startscreen", "0", true)
+    ultraschall.SetUSExternalState("ultraschall_start", "startscreen", "0", true)
   end
 
   updatecheck = reaper.GetExtState("ultraschall_update", "update_check")
   
-  if GUI.Val("checkers2")[1] == true  and updatecheck == "0" then      -- ckeckbox is activated
+  if GUI.Val("checkers2")[1] == true  and (updatecheck == "0" or updatecheck=="") then      -- ckeckbox is activated
     reaper.SetExtState("ultraschall_update", "update_check", "1", true)
+    ultraschall.SetUSExternalState("ultraschall_update", "update_check", "1", true)
   elseif GUI.Val("checkers2")[1] == false and updatecheck == "1" then    -- ckeckbox is deactivated
     reaper.SetExtState("ultraschall_update", "update_check", "0", true)
+    ultraschall.SetUSExternalState("ultraschall_update", "update_check", "0", true)
   end
 
 end
@@ -151,23 +152,23 @@ GUI.x, GUI.y = (screen_w - GUI.w) / 2, (screen_h - GUI.h) / 2
   
 GUI.elms = {
   
---     name          = element type          x      y    w    h     caption               ...other params...
-  logo      = GUI.Pic:new(      240,10, 0, 0, 1, script_path.."us.png"),
-  label           = GUI.Lbl:new(          165,  160,               "Ultraschall 3.1 - Miedinger - was successfully installed.", 0),
-  label2           = GUI.Lbl:new(          135,  220,               "Visit the Podcast menu to explore the user interface and features.", 0),
-  label3           = GUI.Lbl:new(          210,  240,               "Use Project templates for a quick setup.", 0),
-  label4           = GUI.Lbl:new(          265,  290,               "If you need assistance:", 0),
-  checkers      = GUI.Checklist:new(     20, 380, 240, 30,      "", "Show this Screen on Start", 4),
-  checkers2      = GUI.Checklist:new(     405, 380, 240, 30,      "", "Automatically check for updates", 4),
-  tutorials        = GUI.Btn:new(          30, 320, 190, 40,      "Tutorials", open_url, "http://ultraschall.fm/tutorials/"),
-  twitter        = GUI.Btn:new(          242, 320, 190, 40,      "Twitter", open_url, "https://twitter.com/ultraschall_fm"),
-  forum          = GUI.Btn:new(          455, 320, 190, 40,      "Userforum", open_url, "https://sendegate.de/c/ultraschall"),
+--     name          = element type          x    y    w   h  zoom    caption                                                              ...other params...
+  logo             = GUI.Pic:new(          240,  10,   0,  0,    1,   script_path.."us.png"),
+  label            = GUI.Lbl:new(          165, 160,                  "Ultraschall 3.1 - Miedinger - was successfully installed.",          0),
+  label2           = GUI.Lbl:new(          135, 220,                  "Visit the Podcast menu to explore the user interface and features.", 0),
+  label3           = GUI.Lbl:new(          210, 240,                  "Use Project templates for a quick setup.",                           0),
+  label4           = GUI.Lbl:new(          265, 290,                  "If you need assistance:",                                            0),
+  checkers         = GUI.Checklist:new(     20, 380, 240, 30,         "",                                                                   "Show this Screen on Start", 4),
+  checkers2        = GUI.Checklist:new(    405, 380, 240, 30,         "",                                                                   "Automatically check for updates", 4),
+  tutorials        = GUI.Btn:new(           30, 320, 190, 40,         "Tutorials",                                                          open_url, "http://ultraschall.fm/tutorials/"),
+  twitter          = GUI.Btn:new(          242, 320, 190, 40,         "Twitter",                                                            open_url, "https://twitter.com/ultraschall_fm"),
+  forum            = GUI.Btn:new(          455, 320, 190, 40,         "Userforum",                                                          open_url, "https://sendegate.de/c/ultraschall"),
 }
 
 
 versionsTable = get_versions()
 version_items = build_menu(versionsTable)
-GUI.elms.versions  = GUI.Btn:new(          276, 185, 120, 24,      " Show Details", show_menu, version_items)
+GUI.elms.versions  = GUI.Btn:new(          276, 185, 120, 24,         " Show Details",                                                      show_menu, version_items)
 
 -- open_info(build_info(versionsTable),"Version Info for cut & paste")
 
@@ -176,11 +177,14 @@ GUI.elms.versions  = GUI.Btn:new(          276, 185, 120, 24,      " Show Detail
 
 ---- Put all of your own functions and whatever here ----
 
-if reaper.GetExtState("ultraschall_start", "startscreen") == "1" then
+A,USStart=ultraschall.GetUSExternalState("ultraschall_start", "startscreen")
+USUpdate=reaper.GetExtState("ultraschall_update", "update_check")
+
+if USStart == "1" or USStart == "-1" then
   GUI.Val("checkers",true)
 end
 
-if reaper.GetExtState("ultraschall_update", "update_check") == "1" then
+if USUpdate == "1" or USUpdate =="" then
   GUI.Val("checkers2",true)
 end
 

@@ -16,7 +16,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTH ER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
@@ -27,14 +27,15 @@
 -- Toggles external state, that signal the Start/Stop and Start/Pause-scripts, 
 -- that safemode shall be applied or not.
 
-state=reaper.GetExtState("Ultraschall_Transport", "Safemode_Toggle")
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
-if state=="ON" or state=="" then -- If SafeMode is ON or was never set, turn it OFF
-  reaper.SetExtState("Ultraschall_Transport", "Safemode_Toggle", "OFF", true)
+A,state=ultraschall.GetUSExternalState("Ultraschall_Transport", "Safemode_Toggle")
+
+if state=="ON" or state=="" or state=="-1" then -- If SafeMode is ON or was never set, turn it OFF
+  ultraschall.SetUSExternalState("Ultraschall_Transport", "Safemode_Toggle", "OFF")
 
 elseif state=="OFF" then -- If SafeMode is OFF, turn it ON
-  reaper.SetExtState("Ultraschall_Transport", "Safemode_Toggle", "ON", true)
-  
+  ultraschall.SetUSExternalState("Ultraschall_Transport", "Safemode_Toggle", "ON")
 end
-
-state=reaper.GetExtState("Ultraschall_Transport", "Safemode_Toggle")

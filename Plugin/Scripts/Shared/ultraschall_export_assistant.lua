@@ -125,7 +125,7 @@ if img_index then     -- there is an episode-image
 	chapters           = GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
 	metadata           = GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_Ultraschall_Edit_ID3_Tags"),
 	-- image                = GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_Ultraschall_Open_Project_Folder"),
-	finalize           = GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
+	finalize           = GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MEDIA_PROPERTIES"),
 }
 
 else
@@ -141,7 +141,7 @@ else
 	chapters           = GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
 	metadata           = GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_Ultraschall_Edit_ID3_Tags"),
 	image                = GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_Ultraschall_Open_Project_Folder"),
-	finalize           = GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
+	finalize           = GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MEDIA_PROPERTIES"),
 }
 
 end

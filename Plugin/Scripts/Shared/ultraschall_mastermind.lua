@@ -31,7 +31,7 @@ function Msg(val)
 end
 
 
---Mastermind for ultraschall Version 1.1
+--Mastermind 1.2 for ultraschall
 debug=false
 function dbg(text)
     if debug then reaper.ShowConsoleMsg(tostring(text).."\n") end
@@ -164,7 +164,10 @@ end
 -- *************************************************************************************
 
 function MainLoop()
-  local MouseButtonLeftDown=gfx.mouse_cap&1==1
+  MouseButtonLeftDown=gfx.mouse_cap&1==1
+  if MouseButtonLeftDown==false then
+    RedrawBoard()
+  end
   mx,my=gfx.mouse_x,gfx.mouse_y
   mxn=mx-15 myn=my-52 -- nomalized coords
   local is_inside=(mxn <0 or myn<0 or mxn>4*42-1 or myn>10*42-1)==false
@@ -281,8 +284,5 @@ lastMouseButtonLeftDown=gfx.mouse_cap&1==1
 GenerateCode()
 Round=1
 RedrawBoard()
-reaper.defer(MainLoop)
-
-
-
+MainLoop()
 

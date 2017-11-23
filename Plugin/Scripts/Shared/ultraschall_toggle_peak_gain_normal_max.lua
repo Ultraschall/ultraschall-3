@@ -30,8 +30,6 @@ function Msg(val)
   reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
-
-
 reaper.Undo_BeginBlock()
   use_three_steps=1 --if you just need 2 steps set to 0
   retval,value=reaper.GetProjExtState(0, "Ultraschall", "PeakGain")  --check if peakgain is full or normal
@@ -65,3 +63,4 @@ reaper.Undo_BeginBlock()
   end  
   reaper.SetProjExtState(0, "Ultraschall", "PeakGain", newvalue)
 reaper.Undo_EndBlock("Toggle Peakgain", 0)
+

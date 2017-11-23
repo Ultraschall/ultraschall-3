@@ -24,11 +24,10 @@
 ################################################################################
 ]]
  
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
 
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
 state = reaper.GetToggleCommandStateEx(sec, cmd)                           
@@ -43,8 +42,9 @@ if state <= 0 then
 	reaper.SetToggleCommandState(sec, cmd, 1)
 end  
 
-reaper.SetExtState("ultraschall_gui", "views", cmd, true)
-reaper.SetExtState("ultraschall_gui", "sec", sec, true)
+ultraschall.SetUSExternalState("ultraschall_gui", "views", cmd, true)
+ultraschall.SetUSExternalState("ultraschall_gui", "sec", sec, true)
+ultraschall.SetUSExternalState("ultraschall_gui", "view", "record", true)
 
 reaper.SetToggleCommandState(sec, ID_1, 0)
 reaper.SetToggleCommandState(sec, ID_3, 0)

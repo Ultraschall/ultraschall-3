@@ -24,11 +24,10 @@
 ################################################################################
 ]]
  
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
 
 reaper.Undo_BeginBlock() -- Begining of the undo block. Leave it at the top of your main function.
 
@@ -72,7 +71,9 @@ end
 
 m = reaper.GetMasterTrack(0)                                                  --streaming is always on the master track
 os = reaper.GetOS()
-sec = tonumber(reaper.GetExtState("ultraschall_gui", "sec"))
+A,sec = ultraschall.GetUSExternalState("ultraschall_gui", "sec")
+if sec=="-1" then sec="0" end
+sec=tonumber(sec)
 
 if string.match(os, "OSX") then 
 	fx_slot = reaper.TrackFX_GetByName(m, "ITSR: StudioLinkOnAir", 1)      --get the slot of the StudioLink effect. If there is none: initiate one.

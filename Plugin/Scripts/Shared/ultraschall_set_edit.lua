@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 # 
-# Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2014-2017 Ultraschall (http://ultraschall.fm)
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,18 +25,24 @@
 ]]
 
 
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
+
+a,A=ultraschall.GetUSExternalState("ultraschall_follow", "state")
+
 if reaper.GetPlayState() == 0 or reaper.GetPlayState() == 2 then -- 0 = Stop, 2 = Pause
 	current_position = reaper.GetCursorPosition() -- Position of edit-cursor
 else
-	current_position = reaper.GetPlayPosition() -- Position of play-cursor
+    if A=="0" or A=="-1" then -- follow mode is active
+		current_position = reaper.GetPlayPosition() -- Position of play-cursor
+--     elseif reaper.GetPlayState()~=0 then
+--          current_position = reaper.GetPlayPosition() -- Position of play-cursor
+	else
+		current_position = reaper.GetCursorPosition() -- Position of edit-cursor
+	end
 end
 
-os = reaper.GetOS()
-if string.match(os, "OSX") then 
-	color = 0xFF0000|0x1000000
-else
-	color = 0x0000FF|0x1000000
-end
-
+color = ultraschall.ConvertColor(255,0,0) -- set color of edit markers to red
 reaper.AddProjectMarker2(0, false, current_position, 0, "_Edit", 0, color) -- set red edit-marker
 

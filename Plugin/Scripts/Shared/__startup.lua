@@ -24,16 +24,15 @@
 ################################################################################
 ]]
  
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
 
 theme_version_now = 20170402 -- version of this theme
 
 -- reaper.SetExtState("ultraschall_versions", "theme", theme_version_now, true)
--- not a godd idea: something went wrong during the installation of the theme, so don't fix but reinstall
+-- not a good idea: something went wrong during the installation of the theme, so don't fix but reinstall
 
 error_msg = false
 
@@ -43,13 +42,13 @@ error_msg = false
 
 theme_version = reaper.GetExtState("ultraschall_versions", "theme")
 plugin_version = reaper.GetExtState("ultraschall_versions", "plugin")
-view = tonumber(reaper.GetExtState("ultraschall_gui", "views"))
-sec = tonumber(reaper.GetExtState("ultraschall_gui", "sec"))
-mouse = tonumber(reaper.GetExtState("ultraschall_mouse", "state"))
-first_start = reaper.GetExtState("ultraschall_start", "firststart")
-startscreen = reaper.GetExtState("ultraschall_start", "startscreen")
-follow = tonumber(reaper.GetExtState("ultraschall_follow", "state"))
-
+A,views = ultraschall.GetUSExternalState("ultraschall_gui", "views")
+A,view = ultraschall.GetUSExternalState("ultraschall_gui", "view")
+A,sec = ultraschall.GetUSExternalState("ultraschall_gui", "sec")
+A,mouse = ultraschall.GetUSExternalState("ultraschall_mouse", "state")
+A,first_start = ultraschall.GetUSExternalState("ultraschall_start", "firststart")
+A,startscreen = ultraschall.GetUSExternalState("ultraschall_start", "startscreen")
+A,follow = ultraschall.GetUSExternalState("ultraschall_follow", "state")
 
 if theme_version ~= tostring(theme_version_now) then 
   error_msg = "Your ULTRASCHALL THEME is out of date. \n\nULTRASCHALL wil NOT work properly until you fix this. \n\nPlease get the latest release on http://ultraschall.fm/install/" 
@@ -74,29 +73,42 @@ if error_msg then
     title = "Ultraschall Configuration Problem"
      result = reaper.ShowMessageBox( error_msg, title, type )
 
-elseif first_start == "true" or startscreen == "1" then
+elseif first_start == "true" or startscreen == "1" or startscreen == "-1" then
   start_id = reaper.NamedCommandLookup("_Ultraschall_StartScreen")
   reaper.Main_OnCommand(start_id,0)   --Show Startscreen    
 end
 
-
+if sec=="-1" then sec=0 end
+if view=="-1" then view="setup" end
+if views=="-1" then views=55849 end
 
 --------------------------
 -- Restore GUI and Buttons
 --------------------------
 
-if view then
-  reaper.SetToggleCommandState(sec, view, 1)
-  reaper.RefreshToolbar2(sec, view)
+
+
+if views then
+  reaper.SetToggleCommandState(sec, views, 1)
+  reaper.RefreshToolbar2(sec, views)
+  if view == "setup" then
+    reaper.Main_OnCommand(40454,0)      --(re)load Setup Screenset
+  elseif view == "record" then
+    reaper.Main_OnCommand(40455,0)      --(re)load Setup Screenset
+  elseif view == "edit" then
+    reaper.Main_OnCommand(40456,0)      --(re)load Setup Screenset
+  elseif view == "story" then
+    reaper.Main_OnCommand(40457,0)      --(re)load Setup Screenset
+  end
 end
 
-if mouse <= 0 then -- selection is activated
+if tonumber(mouse) <= 0 then -- selection is activated
   mouse_id = reaper.NamedCommandLookup("_Ultraschall_Toggle_Mouse_Selection")
   reaper.SetToggleCommandState(sec, mouse_id, 1)
   reaper.RefreshToolbar2(sec, mouse_id)
 end
 
-if follow <= 0 then -- follow is activated
+if tonumber(follow) <= 0 then -- follow is activated
   follow_id = reaper.NamedCommandLookup("_Ultraschall_Toggle_Follow")
   reaper.SetToggleCommandState(sec, follow_id, 1)
   reaper.RefreshToolbar2(sec, follow_id)
@@ -143,6 +155,11 @@ if string.find(curtheme, "ReaperThemeZip", 1) then
   reaper.OpenColorThemeFile(themeadress)
 end
 
+-- start Followmode-reset-backgroundscript
+  follow_reset_cmdid=reaper.NamedCommandLookup("_Ultraschall_Toggle_Reset")
+  reaper.SetExtState("ultraschall_follow", "state2", follow, false)
+  reaper.Main_OnCommand(follow_reset_cmdid,0)
+
 
 --------------------------
 -- First start actions
@@ -150,9 +167,8 @@ end
 
 -- not really needed right now, but maybe in coming releases
 
-if first_start == "true" then
-  reaper.SetExtState("ultraschall_start", "firststart", "false", true)  -- there will be only one first start
+if first_start == "true" or first_start == "-1" then
+  ultraschall.SetUSExternalState("ultraschall_start", "firststart", "false", true)  -- there will be only one first start
 end
-
 
 

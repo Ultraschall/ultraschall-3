@@ -24,24 +24,22 @@
 ################################################################################
 ]]
  
-
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
 is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
-state = reaper.GetToggleCommandStateEx(sec, cmd)  					
+state = reaper.GetToggleCommandStateEx(sec, cmd)                           
 
-if state <= 0 then 													
+if state <= 0 then                                                                  
 	reaper.SetToggleCommandState(sec, cmd, 1)
-	reaper.Main_OnCommand(39019,0) 	--change mode to select
+	reaper.Main_OnCommand(39029,0)      --change mode to select
 else
 	reaper.SetToggleCommandState(sec, cmd, 0)
-	reaper.Main_OnCommand(39013,0) 	--change mode to move
+	reaper.Main_OnCommand(39013,0)      --change mode to move
 end  
 
-reaper.SetExtState("ultraschall_mouse", "state", state, true)
+ultraschall.SetUSExternalState("ultraschall_mouse", "state", state, true)
 
 reaper.RefreshToolbar2(sec, cmd)
 

@@ -24,11 +24,31 @@
 ################################################################################
 ]]
 
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
+
+
+a,A=ultraschall.GetUSExternalState("ultraschall_follow", "state")
 
 if reaper.GetPlayState() == 0 or reaper.GetPlayState() == 2 then -- 0 = Stop, 2 = Pause
 	current_position = reaper.GetCursorPosition() -- Position of edit-cursor
 else
-	current_position = reaper.GetPlayPosition() -- Position of play-cursor
+    if A=="0" then -- follow mode is active
+		current_position = reaper.GetPlayPosition() -- Position of play-cursor
+--     elseif reaper.GetPlayState()~=0 then
+--          current_position = reaper.GetPlayPosition() -- Position of play-cursor
+	else
+		current_position = reaper.GetCursorPosition() -- Position of edit-cursor
+	end
 end
 
-reaper.AddProjectMarker(0, false, current_position, 0 , "", -1)
+markercount=ultraschall.CountNormalMarkers_NumGap()
+
+
+
+--reaper.AddProjectMarker(0, false, current_position, 0 , "", -1) --Old Code
+reaper.AddProjectMarker2(0, false, current_position, 0, "", markercount, 0)
+
+
+

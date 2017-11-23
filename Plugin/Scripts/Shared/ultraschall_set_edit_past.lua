@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 # 
-# Copyright (c) 2014-2015 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2014-2017 Ultraschall (http://ultraschall.fm)
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,10 @@
 ################################################################################
 ]]
 
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
+
 
 if reaper.GetPlayState() == 0 or reaper.GetPlayState() == 2 then  -- 0 = Stop, 2 = Pause
 	current_position = reaper.GetCursorPosition() -- Position of edit-cursor
@@ -31,19 +35,12 @@ else
 	current_position = reaper.GetPlayPosition() -- Position of play-cursor
 end
 
-
 if current_position > 120 then
 	past_position = current_position - 120 -- set past-marker 2 minutes back in time
 else
 	past_position = current_position -- ignore for the first 2 minutes
 end
 
-os = reaper.GetOS()
-if string.match(os, "OSX") then 
-	color = 0x6666aa|0x1000000
-else
-	color = 0xaa6666|0x1000000
-end
-
+color = ultraschall.ConvertColor(110,110,220)
 
 reaper.AddProjectMarker2(0, false, past_position, 0, "_Past", 0, color) -- set blue past-marker

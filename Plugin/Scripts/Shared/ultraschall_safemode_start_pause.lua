@@ -24,11 +24,10 @@
 ################################################################################
 ]]
 
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
 
--- Print Message to console (debugging)
-function Msg(val)
-  reaper.ShowConsoleMsg(tostring(val).."\n")
-end
 
 --[[reaper.GetPlayState()
 
@@ -57,12 +56,12 @@ state = reaper.GetPlayState()
     msg = "Stop the currently running recording. No more audio will be recorded to disk."
 
 -- Safe-Mode Toggle-Logic
-SafeModeToggleState=reaper.GetExtState("Ultraschall_Transport", "Safemode_Toggle") -- Get the Safemode-Toggle-State
+A,SafeModeToggleState=ultraschall.GetUSExternalState("Ultraschall_Transport", "Safemode_Toggle") -- Get the Safemode-Toggle-State
 
 if SafeModeToggleState=="OFF" then -- If Safe-Mode is OFF, show no message-box
     result = 6
     
-elseif SafeModeToggleState=="ON" or SafeModeToggleState=="" then -- If Safe-Mode is ON or was never toggled, show the message-box
+elseif SafeModeToggleState=="ON" or SafeModeToggleState=="" or SafeModeToggleState=="-1" then -- If Safe-Mode is ON or was never toggled, show the message-box
     result=reaper.ShowMessageBox( msg, title, type )
 end
 
