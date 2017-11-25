@@ -37,6 +37,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden, die bisherige Reihenfolge bleibt dabei erhalten.*
 * Theme: **Tooltips optimiert**
 *Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt.*
+* Theme: **Anzeige des Recording-Formates**
+*In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden.* 
 * Easter Egg: **Wenns mal wieder länger dauert**
 *Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen.*
 
