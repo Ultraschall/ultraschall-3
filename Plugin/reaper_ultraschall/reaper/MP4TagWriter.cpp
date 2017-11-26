@@ -64,7 +64,7 @@ bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const
       MP4Close(mp4_handle);
    }
 
-   return false;
+   return success;
 }
 
 static MP4TagArtworkType getMp4ImageFormat (const uint8_t* data, const size_t dataSize)
@@ -139,7 +139,7 @@ bool MP4TagWriter::InsertCoverImage(const std::string& targetName, const std::st
       MP4Close(mp4_handle);
    }
 
-   return false;
+   return success;
 }
 
 
