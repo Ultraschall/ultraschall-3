@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */; };
 		420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */; };
-		421D3FC91FCAD49800F03688 /* libmp4v2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D3FC81FCAD49800F03688 /* libmp4v2.dylib */; };
 		421D3FCC1FCAD67D00F03688 /* ImageTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 421D3FCA1FCAD67C00F03688 /* ImageTools.h */; };
 		421D3FCD1FCAD67D00F03688 /* ImageTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
@@ -151,7 +150,6 @@
 /* Begin PBXFileReference section */
 		420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMediaPropertiesAction.cpp; path = reaper/InsertMediaPropertiesAction.cpp; sourceTree = "<group>"; };
 		420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMediaPropertiesAction.h; path = reaper/InsertMediaPropertiesAction.h; sourceTree = "<group>"; };
-		421D3FC81FCAD49800F03688 /* libmp4v2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmp4v2.dylib; path = ../3rd_party/mp4v2/lib/macos/debug/libmp4v2.dylib; sourceTree = "<group>"; };
 		421D3FCA1FCAD67C00F03688 /* ImageTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTools.h; path = reaper/ImageTools.h; sourceTree = "<group>"; };
 		421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageTools.cpp; path = reaper/ImageTools.cpp; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 		422A07221E4B6E1500D758FE /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = ../3rd_party/zlib/src/unzip.c; sourceTree = "<group>"; };
 		422A07241E4B6E4F00D758FE /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ../3rd_party/zlib/src/ioapi.c; sourceTree = "<group>"; };
 		42327A621E53A04B00092214 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
-		42327A641E53A05700092214 /* libexpat.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libexpat.tbd; path = usr/lib/libexpat.tbd; sourceTree = SDKROOT; };
 		42327A671E53ACC900092214 /* SystemProperties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SystemProperties.cpp; path = reaper/SystemProperties.cpp; sourceTree = "<group>"; };
 		42327A681E53ACC900092214 /* SystemProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemProperties.h; path = reaper/SystemProperties.h; sourceTree = "<group>"; };
 		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
@@ -232,7 +229,6 @@
 		424F7CB21BF3631D004DBA2F /* SoundboardVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundboardVersionCheck.h; path = reaper/SoundboardVersionCheck.h; sourceTree = "<group>"; };
 		4252BB5B1E4BB20F0051CAB4 /* UpdateCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateCheck.cpp; path = reaper/UpdateCheck.cpp; sourceTree = "<group>"; };
 		4252BB5C1E4BB20F0051CAB4 /* UpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateCheck.h; path = reaper/UpdateCheck.h; sourceTree = "<group>"; };
-		425300271E6DF2F6007B3ECF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4254C9891BF28BCE00B1EF1F /* SWSVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SWSVersionCheck.cpp; path = reaper/SWSVersionCheck.cpp; sourceTree = "<group>"; };
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryFileReader.cpp; path = framework/BinaryFileReader.cpp; sourceTree = "<group>"; };
@@ -285,7 +281,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				421D3FC91FCAD49800F03688 /* libmp4v2.dylib in Frameworks */,
 				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
 				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
 				422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */,
@@ -307,10 +302,7 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				421D3FC81FCAD49800F03688 /* libmp4v2.dylib */,
-				425300271E6DF2F6007B3ECF /* libiconv.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
-				42327A641E53A05700092214 /* libexpat.tbd */,
 				42327A621E53A04B00092214 /* libcurl.tbd */,
 				422A07201E4B6D5E00D758FE /* libz.tbd */,
 			);
@@ -808,7 +800,10 @@
 					../3rd_party/taglib/lib/macos/debug,
 					../3rd_party/mp4v2/lib/macos/debug,
 				);
-				OTHER_LDFLAGS = "-ltag-static-x64-debug";
+				OTHER_LDFLAGS = (
+					"-ltag-static-x64-debug",
+					"-lmp4v2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -829,7 +824,10 @@
 					../3rd_party/taglib/lib/macos/release,
 					../3rd_party/mp4v2/lib/macos/release,
 				);
-				OTHER_LDFLAGS = "-ltag-static-x64-release";
+				OTHER_LDFLAGS = (
+					"-ltag-static-x64-release",
+					"-lmp4v2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
