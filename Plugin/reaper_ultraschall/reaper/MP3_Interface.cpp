@@ -25,6 +25,7 @@
 #include "MP3_Interface.h"
 #include "StringUtilities.h"
 #include "BinaryFileReader.h"
+#include "ImageTools.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -79,23 +80,25 @@ const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize)
    PRECONDITION_RETURN(dataSize > 0, nullptr);
    
    const char* mimeType = nullptr;
-   
-   if(dataSize >= 2)
+
+   switch (FindImageFormat (data, dataSize))
    {
-      if((data[0] == 0xff) && (data[1] == 0xd8))
+      case ImageFormat::Jpeg:
       {
          mimeType = "image/jpeg";
+         break;
       }
-      
-      if(dataSize >= 8)
+      case ImageFormat::Png:
       {
-         if((data[0] == 0x89) && (data[1] == 0x50) && (data[2] == 0x4e) && (data[3] == 0x47))
-         {
-            mimeType = "image/png";
-         }
+         mimeType = "image/png";
+         break;
+      }
+      default:
+      {
+         break;
       }
    }
-   
+
    return mimeType;
 }
    

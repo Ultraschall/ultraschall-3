@@ -104,14 +104,14 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;..\3rd_party\mp4v2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;libz-static-x64-debug.lib;libcurl-static-x64-debug.lib;libtag-static-x64-debug.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration);..\3rd_party\mp4v2\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>version.lib;libz-static-x64-debug.lib;libcurl-static-x64-debug.lib;libtag-static-x64-debug.lib;libmp4v2.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(OutDir)$(TargetName)$(TargetExt) C:\Users\heiko\AppData\Roaming\REAPER\UserPlugins\$(TargetName)$(TargetExt)</Command>
@@ -146,7 +146,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;..\3rd_party\mp4v2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
@@ -154,8 +154,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>version.lib;libz-static-x64-release.lib;libcurl-static-x64-release.lib;libtag-static-x64-release.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\3rd_party\zlib\lib\win32\$(Configuration);..\3rd_party\curl\lib\win32\$(Configuration);..\3rd_party\taglib\lib\win32\$(Configuration);..\3rd_party\mp4v2\lib\win32\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>version.lib;libz-static-x64-release.lib;libcurl-static-x64-release.lib;libtag-static-x64-release.lib;libmp4v2.lib;ws2_32.lib;crypt32.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
@@ -184,6 +184,7 @@
     <ClCompile Include="reaper\CustomActionFactory.cpp" />
     <ClCompile Include="reaper\CustomActionManager.cpp" />
     <ClCompile Include="reaper\FileManager.cpp" />
+    <ClCompile Include="reaper\ImageTools.cpp" />
     <ClCompile Include="reaper\InsertChapterMarkersAction.cpp" />
     <ClCompile Include="reaper\InsertMediaPropertiesAction.cpp" />
     <ClCompile Include="reaper\MP3TagWriter.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="reaper\FileManager.h" />
     <ClInclude Include="reaper\ICustomAction.h" />
     <ClInclude Include="reaper\ICommand.h" />
+    <ClInclude Include="reaper\ImageTools.h" />
     <ClInclude Include="reaper\InsertChapterMarkersAction.h" />
     <ClInclude Include="reaper\InsertMediaPropertiesAction.h" />
     <ClInclude Include="reaper\ITagWriter.h" />
