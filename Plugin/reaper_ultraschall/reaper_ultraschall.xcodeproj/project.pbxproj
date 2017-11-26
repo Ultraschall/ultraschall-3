@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */; };
 		420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */; };
+		421D3FC91FCAD49800F03688 /* libmp4v2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 421D3FC81FCAD49800F03688 /* libmp4v2.dylib */; };
+		421D3FCC1FCAD67D00F03688 /* ImageTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 421D3FCA1FCAD67C00F03688 /* ImageTools.h */; };
+		421D3FCD1FCAD67D00F03688 /* ImageTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
 		422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06BC1E4B683C00D758FE /* VersionHandler.h */; };
 		422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */; };
@@ -148,6 +151,9 @@
 /* Begin PBXFileReference section */
 		420E078B1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertMediaPropertiesAction.cpp; path = reaper/InsertMediaPropertiesAction.cpp; sourceTree = "<group>"; };
 		420E078C1E4F246A00FEF003 /* InsertMediaPropertiesAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertMediaPropertiesAction.h; path = reaper/InsertMediaPropertiesAction.h; sourceTree = "<group>"; };
+		421D3FC81FCAD49800F03688 /* libmp4v2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmp4v2.dylib; path = ../3rd_party/mp4v2/lib/macos/debug/libmp4v2.dylib; sourceTree = "<group>"; };
+		421D3FCA1FCAD67C00F03688 /* ImageTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTools.h; path = reaper/ImageTools.h; sourceTree = "<group>"; };
+		421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageTools.cpp; path = reaper/ImageTools.cpp; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
 		422A06BC1E4B683C00D758FE /* VersionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionHandler.h; path = reaper/VersionHandler.h; sourceTree = "<group>"; };
 		422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CloseProjectCommand.cpp; path = reaper/CloseProjectCommand.cpp; sourceTree = "<group>"; };
@@ -279,6 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				421D3FC91FCAD49800F03688 /* libmp4v2.dylib in Frameworks */,
 				42327A661E53A0D000092214 /* AppKit.framework in Frameworks */,
 				42327A631E53A04B00092214 /* libcurl.tbd in Frameworks */,
 				422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */,
@@ -300,6 +307,7 @@
 		422A071F1E4B6D5E00D758FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				421D3FC81FCAD49800F03688 /* libmp4v2.dylib */,
 				425300271E6DF2F6007B3ECF /* libiconv.tbd */,
 				42E655011ACEE32A00231F3D /* AppKit.framework */,
 				42327A641E53A05700092214 /* libexpat.tbd */,
@@ -369,6 +377,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */,
+				421D3FCA1FCAD67C00F03688 /* ImageTools.h */,
 				42F83CD61F659BBF009F2ECC /* ITagWriter.h */,
 				423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */,
 				423D883D1E54DDA800AF8A41 /* MP3_Interface.h */,
@@ -520,6 +530,7 @@
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
 				422A070E1E4B69F100D758FE /* SetShownoteMarkerAction.h in Headers */,
+				421D3FCC1FCAD67D00F03688 /* ImageTools.h in Headers */,
 				4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */,
 				422A07041E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h in Headers */,
 				422A07001E4B69F100D758FE /* ReplaceChapterMarkersAction.h in Headers */,
@@ -643,6 +654,7 @@
 				42F83CDA1F659BE1009F2ECC /* MP4TagWriter.cpp in Sources */,
 				423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */,
 				422A06FF1E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp in Sources */,
+				421D3FCD1FCAD67D00F03688 /* ImageTools.cpp in Sources */,
 				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */,
@@ -709,6 +721,7 @@
 					../3rd_party/taglib/include/mpeg/id3v2,
 					../3rd_party/taglib/include/mpeg/id3v2/frames,
 					../3rd_party/taglib/include/bindings/c,
+					../3rd_party/mp4v2/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -769,6 +782,7 @@
 					../3rd_party/taglib/include/mpeg/id3v2,
 					../3rd_party/taglib/include/mpeg/id3v2/frames,
 					../3rd_party/taglib/include/bindings/c,
+					../3rd_party/mp4v2/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -790,7 +804,10 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/debug;
+				LIBRARY_SEARCH_PATHS = (
+					../3rd_party/taglib/lib/macos/debug,
+					../3rd_party/mp4v2/lib/macos/debug,
+				);
 				OTHER_LDFLAGS = "-ltag-static-x64-debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -808,7 +825,10 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = ../3rd_party/taglib/lib/macos/release;
+				LIBRARY_SEARCH_PATHS = (
+					../3rd_party/taglib/lib/macos/release,
+					../3rd_party/mp4v2/lib/macos/release,
+				);
 				OTHER_LDFLAGS = "-ltag-static-x64-release";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
