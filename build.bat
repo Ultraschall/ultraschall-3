@@ -35,6 +35,7 @@ pushd ..\REAPER\
 call build.bat rebuild release x64
 popd
 copy ..\REAPER\Plugin\reaper_ultraschall\x64\Release\reaper_ultraschall.dll Payload\Plugin
+copy ..\REAPER\Plugin\3rd_party\mp4v2\lib\win32\release\libmp4v2.dll Payload\Plugin
 
 rem Build Ultraschall Soundboard
 pushd ..\Soundboard\

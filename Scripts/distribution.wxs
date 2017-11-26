@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Wix 
+<Wix
    xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <?define VersionNumber="!(bind.FileVersion.ReaperExtensionDll)" ?>
    <!--
@@ -30,6 +30,7 @@
                <Directory Id="ReaperPluginFolder" Name="Plugins">
                   <Component Id="ReaperExtension" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
                      <File Id="ReaperExtensionDll" Name="reaper_ultraschall.dll" DiskId="1" Source="Payload\Plugin\reaper_ultraschall.dll"/>
+                     <File Id="UltaschallMP4Dll" Name="libmp4v2.dll" DiskId="1" Source="Payload\Plugin\libmp4v2.dll"/>
                   </Component>
                   <Component Id="SWSExtension" Guid="1796BA37-8113-4CCD-A5EC-AAF52AA4B326" Win64="yes">
                      <File Id="SWSExtensionDll" Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll"/>
