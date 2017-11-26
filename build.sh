@@ -62,9 +62,6 @@ pushd ../Soundboard
 ./Build/build_mac_plugin.sh
 popd
 
-# Create Ultraschall MP4V2 package
-pkgbuild --root ../REAPER/Plugin/3rd_party/mp4v2/lib/macos/release --identifier fm.ultraschall.Plugin.MP4V2 --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginMP4V2.pkg
-
 # Create Ultraschall Soundboard package
 pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-Ins/Components ./Build/UltraschallSoundboard.pkg
 

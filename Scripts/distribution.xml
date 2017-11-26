@@ -13,7 +13,6 @@
    <pkg-ref id="fm.ultraschall.Soundboard.Extras" version="3.1.0">UltraschallSoundboardExtras.pkg</pkg-ref>
    <pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
    <pkg-ref id="net.sf.lame.Encoder" version="3.98.3">LAME.pkg</pkg-ref>
-   <pkg-ref id="fm.ultraschall.Plugin.MP4V2" version="3.98.3">UltraschallPluginMP4V2.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.1.0">UltraschallPluginExtension.pkg</pkg-ref>
    <pkg-ref id="fm.ultraschall.Resources" version="3.1.0">UltraschallResources.pkg</pkg-ref>
    <pkg-ref id="com.mj-s.sws" version="2.9.6">SWS_Extension-2.9.6.pkg</pkg-ref>
@@ -25,7 +24,6 @@
       <line choice="com.itsr.StudioLink.Component"/>
       <line choice="net.sf.lame.Encoder"/>
       <line choice="fm.ultraschall.Plugin.Extension"/>
-      <line choice="fm.ultraschall.Plugin.MP4V2"/>
       <line choice="fm.ultraschall.Resources"/>
       <line choice="com.mj-s.sws"/>
       <line choice="com.mj-s.sws.Scripts"/>
@@ -45,9 +43,6 @@
    </choice>
    <choice id="fm.ultraschall.Plugin.Extension" visible="true" title="Ultraschall REAPER Extension" description="Ultraschall REAPER Extension. Adds import and export of chapter markers to REAPER 5." start_selected="true">
       <pkg-ref id="fm.ultraschall.Plugin.Extension"/>
-   </choice>
-   <choice id="fm.ultraschall.Plugin.MP4V2" visible="true" title="Ultraschall MP4 Support" description="Ultraschall MP4 Support. Adds export of chapter markers to MP4s." start_selected="true">
-      <pkg-ref id="fm.ultraschall.Plugin.MP4V2"/>
    </choice>
    <choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="Additional documents and images." start_selected="true">
       <pkg-ref id="fm.ultraschall.Resources"/>
