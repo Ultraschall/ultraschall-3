@@ -59,7 +59,7 @@ private:
    {
    }
     
-   static std::string FindTargetFile(const Project& project);
+   static std::vector<std::string> FindTargetFiles(const Project& project);
 
    static std::string FindCoverImage(const Project& project);
    
