@@ -103,7 +103,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;_DEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;..\3rd_party\mp4v2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -145,7 +145,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_USRDLL;REAPER_ULTRASCHALL_EXPORTS;ULTRASCHALL_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\reaper_extension_sdk\jmde;framework;reaper;..\3rd_party\zlib\include;..\3rd_party\curl\include;..\3rd_party\taglib\include;..\3rd_party\taglib\include\toolkit;..\3rd_party\taglib\include\mpeg;..\3rd_party\taglib\include\mpeg\id3v2;..\3rd_party\taglib\include\mpeg\id3v2\frames;..\3rd_party\taglib\include\bindings\c;..\3rd_party\mp4v2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
