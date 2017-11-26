@@ -5,6 +5,14 @@ if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dyl
 	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/reaper_ultraschall.dylib
 fi
 
+if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/libmp3lame.dylib ]; then
+	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/libmp3lame.dylib
+fi
+
+if [ -f ~/Library/Application\ Support/REAPER/UserPlugins/libmp4v2.dylib ]; then
+	rm -f ~/Library/Application\ Support/REAPER/UserPlugins/libmp4v2.dylib
+fi
+
 if [ -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py ]; then
 	rm -f ~/Library/Application\ Support/REAPER/Scripts/ultraschall_delete_last_marker.py
 fi
