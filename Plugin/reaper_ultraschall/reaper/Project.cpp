@@ -28,6 +28,7 @@
 #include <StringUtilities.h>
 
 #include "Project.h"
+#include "Application.h"
 #include "ReaperEntryPoints.h"
 #include "FileManager.h"
 
@@ -269,8 +270,14 @@ std::vector<Marker> Project::QueryAllMarkers() const
    int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
    while (nextIndex > 0)
    {
-      const std::string markerName = name;
-      if (("_Edit" != markerName) && (color != 0x01ff0000)) // remove edit markers
+      static const size_t MAX_CHAPTER_NAME_LENGTH = 255;
+      std::string markerName = name;
+      if (markerName.size() > MAX_CHAPTER_NAME_LENGTH)
+      {
+        markerName = markerName.substr(0, MAX_CHAPTER_NAME_LENGTH);
+      }
+
+      if (("_Edit" != markerName) && (color != static_cast<int>(Application::GetEditMarkerColor()))) // remove edit markers
       {
          allMarkers.push_back(Marker(position, markerName, color));
       }
