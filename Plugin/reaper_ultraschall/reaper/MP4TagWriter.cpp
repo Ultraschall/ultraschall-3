@@ -158,7 +158,7 @@ static std::vector<MP4Chapter_t> convertToMp4Chapters (const std::vector<Marker>
    // will be further truncated to 255 byte length disregarding any possible utf8 multibtye characters.
    // So we have to take care of properly truncating to that size ourselfes beforehand.
    // This function does not do so itself but expects such truncated input.
-   const size_t maxTitleBytes = min (255, MP4V2_CHAPTER_TITLE_MAX);
+   const size_t maxTitleBytes = std::min (255, MP4V2_CHAPTER_TITLE_MAX);
 
 
    double current_chapter_start = 0.;
@@ -177,7 +177,7 @@ static std::vector<MP4Chapter_t> convertToMp4Chapters (const std::vector<Marker>
          chapter.duration = static_cast<uint32_t> (duration * 1000.);
 
          const framework::UnicodeString2 title_utf8 = framework::MakeUTF8String2 (chapterMarkers[i].Name());
-         const size_t size = min (title_utf8.size_, maxTitleBytes);
+         const size_t size = std::min (title_utf8.size_, maxTitleBytes);
 
          memmove (chapter.title, title_utf8.data_, size);
          chapter.title[size] = 0;
