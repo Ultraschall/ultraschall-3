@@ -407,6 +407,15 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
    return ok;
 }
 
+uint32_t Application::GetEditMarkerColor()
+{
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+  return 0x01ff0000;
+#else
+  return 0x010000ff;
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+}
+
 }
 }
 

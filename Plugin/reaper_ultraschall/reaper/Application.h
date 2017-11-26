@@ -74,6 +74,8 @@ public:
    std::string TimestampToString(const double timestamp) const;
    double StringToTimestamp(const std::string& input) const;
 
+   static uint32_t GetEditMarkerColor();
+
 private:
    Application();
 
