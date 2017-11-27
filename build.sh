@@ -71,9 +71,6 @@ pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extr
 # Create ITSR StudioLink package
 pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-Ins/Components ./Build/StudioLink.pkg
 
-# Create LAME package
-pkgbuild --root ./3rdParty/LAME/Macintosh --identifier net.sf.lame.Encoder --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/LAME.pkg
-
 # Create SWS REAPER Plugin Extension package
 chmod 755 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
 pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/SWS_Extension-2.9.6.pkg

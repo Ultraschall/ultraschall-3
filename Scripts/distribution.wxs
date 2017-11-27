@@ -36,9 +36,6 @@
                      <File Id="SWSExtensionScript" Name="sws_python.py" DiskId="1" Source="3rdParty\SWS\Windows\sws_python.py"/>
                   </Component>
                </Directory>
-               <Component Id="LAMEMP3Encoder" Guid="237AB7ED-155C-44DD-888F-3CD7FC87B730" Win64="yes">
-                  <File Id="LAMEMP3EncoderDll" Name="libmp3lame.dll" DiskId="1" Source="3rdParty\LAME\Windows\libmp3lame.dll"/>
-               </Component>
             </Directory>
             <Directory Id="SteinbergApplicationFolder" Name="Steinberg">
                <Directory Id="SteinbergVstFolder" Name="VstPlugins">
@@ -102,7 +99,6 @@
          <ComponentRef Id="SoundboardVst"/>
          <ComponentRef Id="SWSExtension"/>
          <ComponentRef Id="StudioLinkVst"/>
-         <ComponentRef Id="LAMEMP3Encoder"/>
          <ComponentRef Id="UltraschallRelease"/>
          <ComponentRef Id="UltraschallReleaseAddons"/>
       </Feature>
