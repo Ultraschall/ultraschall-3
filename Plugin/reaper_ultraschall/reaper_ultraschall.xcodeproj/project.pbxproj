@@ -104,6 +104,8 @@
 		4284E9F91BF4B58C0056345A /* ThemeVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */; };
 		4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284EA021BF4D0E00056345A /* TextFileWriter.cpp */; };
 		4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4284EA031BF4D0E00056345A /* TextFileWriter.h */; };
+		428E0F5F1FCC29AE0051559A /* BasicMediaInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 428E0F5D1FCC29AE0051559A /* BasicMediaInformation.h */; };
+		428E0F601FCC29AE0051559A /* BasicMediaInformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 428E0F5E1FCC29AE0051559A /* BasicMediaInformation.cpp */; };
 		42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 42915BD61BDC040A00916876 /* NotificationPanel.h */; };
 		42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationPanel.mm */; };
 		429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB0861BDBCDCE005EA658 /* CustomAction.cpp */; };
@@ -244,6 +246,8 @@
 		4284E9F71BF4B58C0056345A /* ThemeVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeVersionCheck.h; path = reaper/ThemeVersionCheck.h; sourceTree = "<group>"; };
 		4284EA021BF4D0E00056345A /* TextFileWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextFileWriter.cpp; path = framework/TextFileWriter.cpp; sourceTree = "<group>"; };
 		4284EA031BF4D0E00056345A /* TextFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFileWriter.h; path = framework/TextFileWriter.h; sourceTree = "<group>"; };
+		428E0F5D1FCC29AE0051559A /* BasicMediaInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicMediaInformation.h; path = reaper/BasicMediaInformation.h; sourceTree = "<group>"; };
+		428E0F5E1FCC29AE0051559A /* BasicMediaInformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BasicMediaInformation.cpp; path = reaper/BasicMediaInformation.cpp; sourceTree = "<group>"; };
 		42915BD61BDC040A00916876 /* NotificationPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationPanel.h; path = reaper/NotificationPanel.h; sourceTree = "<group>"; };
 		42915BD71BDC040A00916876 /* NotificationPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationPanel.mm; path = reaper/NotificationPanel.mm; sourceTree = "<group>"; };
 		429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = reaper_ultraschall.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -369,6 +373,8 @@
 		42F19A5F1ABEE7FA00231F3D /* Reaper */ = {
 			isa = PBXGroup;
 			children = (
+				428E0F5E1FCC29AE0051559A /* BasicMediaInformation.cpp */,
+				428E0F5D1FCC29AE0051559A /* BasicMediaInformation.h */,
 				421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */,
 				421D3FCA1FCAD67C00F03688 /* ImageTools.h */,
 				42F83CD61F659BBF009F2ECC /* ITagWriter.h */,
@@ -518,6 +524,7 @@
 				42F83CD51F659B96009F2ECC /* MP3TagWriter.h in Headers */,
 				424C82F71AC8085D00231F3D /* IService.h in Headers */,
 				420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */,
+				428E0F5F1FCC29AE0051559A /* BasicMediaInformation.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
 				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
@@ -640,6 +647,7 @@
 				422A07091E4B69F100D758FE /* SetEditMarkerAction.cpp in Sources */,
 				429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */,
 				4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */,
+				428E0F601FCC29AE0051559A /* BasicMediaInformation.cpp in Sources */,
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
 				422A06F21E4B69F100D758FE /* InsertChapterMarkersAction.cpp in Sources */,
 				422A06C91E4B69C100D758FE /* CommandManager.cpp in Sources */,
