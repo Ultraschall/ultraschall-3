@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,63 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-#define __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
+#define __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
 
-#include <Framework.h>
-#include "ITagWriter.h"
+#include <string>
 
-namespace ultraschall { namespace reaper {
-   
-class MP3TagWriter : public ITagWriter
+namespace ultraschall {
+namespace reaper {
+
+class BasicMediaInformation
 {
 public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
-   
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
-   
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
-   
-protected:
-   virtual ~MP3TagWriter()
+   BasicMediaInformation();
+   ~BasicMediaInformation();
+
+   static BasicMediaInformation ParseString(const std::string& str);
+
+   inline const std::string& Title() const
    {
+      return title_;
    }
+
+   inline const std::string& Author() const
+   {
+      return author_;
+   }
+
+   inline const std::string& Track() const
+   {
+      return track_;
+   }
+
+   inline const std::string& Date() const
+   {
+      return date_;
+   }
+
+   inline const std::string& Content() const
+   {
+      return content_;
+   }
+
+   inline const std::string& Comments() const
+   {
+      return comments_;
+   }
+
+private:
+   std::string title_;     // TIT2
+   std::string author_;    // TPE1 
+   std::string track_;     // TALB
+   std::string date_;      // TDRC
+   std::string content_;   // TCON
+   std::string comments_;  // COMM
 };
-   
-}}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+}
+}
 
+#endif // #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
 

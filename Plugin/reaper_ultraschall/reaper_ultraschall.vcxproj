@@ -208,6 +208,7 @@
     <ClCompile Include="reaper\SetHistoricalMarkerAction.cpp" />
     <ClCompile Include="reaper\SetShownoteMarkerAction.cpp" />
     <ClCompile Include="reaper\SoundboardVersionCheck.cpp" />
+    <ClCompile Include="reaper\BasicMediaInformation.cpp" />
     <ClCompile Include="reaper\SWSVersionCheck.cpp" />
     <ClCompile Include="reaper\SystemProperties.cpp" />
     <ClCompile Include="reaper\ThemeVersionCheck.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="reaper\SetHistoricalMarkerAction.h" />
     <ClInclude Include="reaper\SetShownoteMarkerAction.h" />
     <ClInclude Include="reaper\SoundboardVersionCheck.h" />
+    <ClInclude Include="reaper\BasicMediaInformation.h" />
     <ClInclude Include="reaper\SWSVersionCheck.h" />
     <ClInclude Include="reaper\SystemProperties.h" />
     <ClInclude Include="reaper\ThemeVersionCheck.h" />

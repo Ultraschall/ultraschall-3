@@ -32,7 +32,7 @@
 
 namespace ultraschall { namespace reaper {
    
-bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const StandardMediaProperties& standardProperties)
+bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties)
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
    
@@ -46,12 +46,12 @@ bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const
       {
          if (MP4TagsFetch( tags, mp4_handle))
          {
-            success = MP4TagsSetName (tags, standardProperties.title.c_str());
-            success &= MP4TagsSetArtist (tags, standardProperties.author.c_str());
-            success &= MP4TagsSetAlbum (tags, standardProperties.track.c_str());
-            success &= MP4TagsSetReleaseDate (tags, standardProperties.date.c_str());
-            success &= MP4TagsSetGenre (tags, standardProperties.content.c_str());
-            success &= MP4TagsSetComments (tags, standardProperties.comments.c_str());
+            success = MP4TagsSetName (tags, standardProperties.Title().c_str());
+            success &= MP4TagsSetArtist (tags, standardProperties.Author().c_str());
+            success &= MP4TagsSetAlbum (tags, standardProperties.Track().c_str());
+            success &= MP4TagsSetReleaseDate (tags, standardProperties.Date().c_str());
+            success &= MP4TagsSetGenre (tags, standardProperties.Content().c_str());
+            success &= MP4TagsSetComments (tags, standardProperties.Comments().c_str());
       
             if (success == true)
             {

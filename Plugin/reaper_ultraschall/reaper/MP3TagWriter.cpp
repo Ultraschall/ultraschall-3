@@ -33,7 +33,7 @@
 namespace ultraschall {
   namespace reaper {
 
-    bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const StandardMediaProperties& standardProperties)
+    bool MP3TagWriter::InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties)
     {
       PRECONDITION_RETURN(targetName.empty() == false, false);
 
@@ -43,34 +43,34 @@ namespace ultraschall {
       if(context != nullptr)
       {
         success = MP3_InsertPodcastFrame(context);
-        if((true == success) && (standardProperties.title.empty() == false))
+        if((true == success) && (standardProperties.Title().empty() == false))
         {
-          success = MP3_InsertTextFrame(context, "TIT2", standardProperties.title); // title
+          success = MP3_InsertTextFrame(context, "TIT2", standardProperties.Title()); // title
         }
 
-        if((true == success) && (standardProperties.author.empty() == false))
+        if((true == success) && (standardProperties.Author().empty() == false))
         {
-          success = MP3_InsertTextFrame(context, "TPE1", standardProperties.author); // artist
+          success = MP3_InsertTextFrame(context, "TPE1", standardProperties.Author()); // artist
         }
 
-        if((true == success) && (standardProperties.track.empty() == false))
+        if((true == success) && (standardProperties.Track().empty() == false))
         {
-          success = MP3_InsertTextFrame(context, "TALB", standardProperties.track); // album
+          success = MP3_InsertTextFrame(context, "TALB", standardProperties.Track()); // album
         }
 
-        if((true == success) && (standardProperties.date.empty() == false))
+        if((true == success) && (standardProperties.Date().empty() == false))
         {
-          success = MP3_InsertTextFrame(context, "TDRC", standardProperties.date); // date
+          success = MP3_InsertTextFrame(context, "TDRC", standardProperties.Date()); // date
         }
 
-        if((true == success) && (standardProperties.content.empty() == false))
+        if((true == success) && (standardProperties.Content().empty() == false))
         {
-          success = MP3_InsertTextFrame(context, "TCON", standardProperties.content); // genre
+          success = MP3_InsertTextFrame(context, "TCON", standardProperties.Content()); // genre
         }
 
-        if((true == success) && (standardProperties.comments.empty() == false))
+        if((true == success) && (standardProperties.Comments().empty() == false))
         {
-          success = MP3_InsertCommentsFrame(context, "COMM", standardProperties.comments); // comment
+          success = MP3_InsertCommentsFrame(context, "COMM", standardProperties.Comments()); // comment
         }
 
         if(true == success)

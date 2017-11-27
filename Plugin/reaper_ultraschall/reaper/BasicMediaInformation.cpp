@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,44 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-#define __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+#include <vector>
+#include <StringUtilities.h>
+#include "BasicMediaInformation.h"
 
-#include <Framework.h>
-#include "ITagWriter.h"
+namespace ultraschall {
+namespace reaper {
 
-namespace ultraschall { namespace reaper {
-   
-class MP3TagWriter : public ITagWriter
+BasicMediaInformation::BasicMediaInformation()
 {
-public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
-   
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
-   
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
-   
-protected:
-   virtual ~MP3TagWriter()
+}
+
+BasicMediaInformation::~BasicMediaInformation()
+{
+}
+
+BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
+{
+   BasicMediaInformation result;
+
+   if(str.empty() == false)
    {
+      std::vector<std::string> tokens = framework::StringTokenize(str, '\n');
+      if((tokens.empty() == false) && (tokens.size() >= 5))
+      {
+         result.title_ = tokens[0];
+         result.author_ = tokens[1];
+         result.track_ = tokens[2];
+         result.date_ = tokens[3];
+         result.content_ = tokens[4];
+
+         if(tokens.size() > 5)
+         {
+            result.comments_ = tokens[5];
+         }
+      }
    }
-};
-   
+
+   return result;
+}
+
 }}
-
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-
-
