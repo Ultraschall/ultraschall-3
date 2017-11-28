@@ -28,7 +28,6 @@
 
 #include <TextFileReader.h>
 #include <StringUtilities.h>
-#include <ResourceManager.h>
 
 #include "InsertChapterMarkersAction.h"
 #include "CustomActionFactory.h"

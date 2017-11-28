@@ -23,7 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "MP4TagWriter.h"
-
+#include "ByteStream.h"
 #include "BinaryFileReader.h"
 #include "StringUtilities.h"
 #include "ImageTools.h"
@@ -107,7 +107,7 @@ bool MP4TagWriter::InsertCoverImage(const std::string& targetName, const std::st
       {
          if (MP4TagsFetch( tags, mp4_handle))
          {
-            framework::Stream* imageData = framework::BinaryFileReader::ReadBytes(coverImage);
+            framework::ByteStream* imageData = framework::BinaryFileReader::ReadBytes(coverImage);
             if(imageData != nullptr)
             {
                MP4TagArtwork mp4ArtWork;

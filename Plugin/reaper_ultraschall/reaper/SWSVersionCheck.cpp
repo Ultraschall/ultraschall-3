@@ -23,7 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <zlib.h>
-#include <Stream.h>
+#include <ByteStream.h>
 #include <BinaryFileReader.h>
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
@@ -98,7 +98,7 @@ bool SWSVersionCheck()
 
    if(FileManager::FileExists(swsPlugin2_8UserPath) == true)
    {
-      framework::Stream* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
+      framework::ByteStream* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
       if(pStream != 0)
       {
 #ifdef ULTRASCHALL_PLATFORM_MACOS

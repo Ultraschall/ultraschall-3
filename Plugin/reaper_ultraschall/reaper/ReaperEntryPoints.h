@@ -80,15 +80,6 @@ private:
    static bool LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 };
 
-class ReaperProjectEntryPoints
-{
-public:
-   ReaperProjectEntryPoints();
-
-private:
-   static project_config_extension_t projectConfigExtension_;
-};
-
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__

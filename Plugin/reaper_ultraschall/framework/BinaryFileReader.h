@@ -24,14 +24,14 @@
 #ifndef __ULTRASCHALL_FRAMEWORK_BINARY_FILE_READER_H_INCL__
 #define __ULTRASCHALL_FRAMEWORK_BINARY_FILE_READER_H_INCL__
 
-#include <Stream.h>
-
 namespace ultraschall { namespace framework {
-   
+
+class ByteStream;
+
 class BinaryFileReader
 {
 public:
-   static Stream* ReadBytes(const std::string& filename);
+   static ByteStream* ReadBytes(const std::string& filename);
 };
    
 }}

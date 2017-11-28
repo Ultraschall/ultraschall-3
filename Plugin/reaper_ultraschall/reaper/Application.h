@@ -26,23 +26,16 @@
 #define __ULTRASCHALL_REAPER_APPLICATION_H_INCL__
 
 #include <Framework.h>
-#include <IActivationService.h>
-#include <IConfigurationService.h>
-#include <TranscriptItem.h>
 
 #include "CustomActionManager.h"
 #include "CustomActionFactory.h"
-
-#include "CommandManager.h"
-#include "CommandFactory.h"
 
 namespace framework = ultraschall::framework;
 
 namespace ultraschall {
 namespace reaper {
 
-class Application : public framework::IActivationService,
-                    public framework::IConfigurationService
+class Application
 {
 public:
    virtual ~Application();
@@ -52,14 +45,10 @@ public:
    ServiceStatus Start();
    void Stop();
 
-   virtual ServiceStatus Configure();
-   
    template<class CustomActionType> ServiceStatus RegisterCustomAction() const;
    template<class CommandType> ServiceStatus RegisterCommand(const int32_t commandId) const;
 
    static bool OnCustomAction(const int32_t id);
-   static bool OnStartCommand(const int32_t id);
-   static bool OnStopCommand(const int32_t id);
 
    template<class CustomActionType> void InvokeCustomAction() const;
 

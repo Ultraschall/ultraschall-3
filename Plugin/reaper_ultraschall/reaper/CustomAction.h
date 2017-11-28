@@ -27,8 +27,6 @@
 
 #include <string>
 
-#include <ResourceManager.h>
-
 #include "ICustomAction.h"
 #include "CustomActionFactory.h"
 

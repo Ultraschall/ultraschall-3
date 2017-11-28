@@ -23,11 +23,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ReaperEntryPoints.h"
-#include "TraceUtilities.h"
 
 #include "Application.h"
 #include "ProjectManager.h"
-#include "ProjectCallback.h"
 
 namespace reaper_api 
 {
@@ -77,16 +75,6 @@ static bool OnCustomAction(KbdSectionInfo*, int commandId, int, int, int, HWND)
    return Application::OnCustomAction(commandId);
 }
 
-static bool OnStartCommand(int commandId, int)
-{
-   return Application::OnStartCommand(commandId);
-}
-   
-static bool OnStopCommand(int commandId, int)
-{
-   return Application::OnStopCommand(commandId);
-}
-
 bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const std::string& entryPointName)
 {
    PRECONDITION_RETURN(ppi != nullptr, false);
@@ -99,8 +87,6 @@ bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const 
    }
    else
    {
-      Trace1(TRACE_LEVEL_ERROR, "Failed to load entry point: \"%s\"", entryPointName.c_str());
-
       return false;
    }
 }
@@ -110,12 +96,7 @@ bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const 
 const bool __ep_loaded__ = ImportReaperEntryPoint(__rp__, (void*&)__ep__, __ep_name__); \
 if((__ep_loaded__ == false) || (nullptr == __ep__)) \
 { \
-Trace1(TRACE_LEVEL_ERROR, "FAILED to load REAPER entry point \"%s\".", __ep_name__); \
 return false; \
-} \
-else \
-{ \
-Trace1(TRACE_LEVEL_DEBUG, "Successfully loaded REAPER entry point \"%s\".", __ep_name__); \
 } \
 }
 
@@ -155,8 +136,6 @@ bool ReaperEntryPoints::LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::DeleteExtState, "DeleteExtState");
 
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
-   reaper_api::plugin_register("hookcommand", (void*)OnStartCommand);
-   reaper_api::plugin_register("hookpostcommand", (void*)OnStopCommand);
 
    return true;
 }
@@ -165,69 +144,7 @@ REAPER_PLUGIN_HINSTANCE ReaperEntryPoints::instance_ = 0;
 
 bool ReaperEntryPoints::Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
-   const bool result = ReaperEntryPoints::LoadEntryPoints(instance, pPluginInfo);
-   static ReaperProjectEntryPoints projectEntryPointes;
-
-   return result;
-}
-
-#if 0
-static bool ProcessExtensionLine(const char *line, ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
-{
-   PRECONDITION_RETURN(line != 0, false);
-   PRECONDITION_RETURN(ctx != 0, false);
-   PRECONDITION_RETURN(false == isUndo, false);
-
-   bool processed = false;
-
-   const ProjectManager& projectManager = ProjectManager::Instance();
-   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
-   if(currentProjectReference != nullptr)
-   {
-      processed = ProjectCallback::ProcessExtensionLine(currentProjectReference, line, *ctx);
-   }
-
-   return processed;
-}
-
-static void SaveExtensionConfig(ProjectStateContext *ctx, bool isUndo, struct project_config_extension_t*)
-{
-   PRECONDITION(ctx != 0);
-   PRECONDITION(false == isUndo);
-
-   const ProjectManager& projectManager = ProjectManager::Instance();
-   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
-   if(currentProjectReference != nullptr)
-   {
-      ProjectCallback::SaveExtensionConfig(currentProjectReference, *ctx);
-   }
-}
-
-static void BeginLoadProjectState(bool isUndo, struct project_config_extension_t*)
-{
-   PRECONDITION(false == isUndo);
-
-   const ProjectManager& projectManager = ProjectManager::Instance();
-   ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
-   if(currentProjectReference != nullptr)
-   {
-      ProjectCallback::BeginLoadProjectState(currentProjectReference);
-   }
-}
-#endif
-
-project_config_extension_t ReaperProjectEntryPoints::projectConfigExtension_ = { 0 };
-
-ReaperProjectEntryPoints::ReaperProjectEntryPoints()
-{
-#if 0
-   projectConfigExtension_.BeginLoadProjectState = BeginLoadProjectState;
-   projectConfigExtension_.ProcessExtensionLine = ProcessExtensionLine;
-   projectConfigExtension_.SaveExtensionConfig = SaveExtensionConfig;
-   projectConfigExtension_.userData = 0;
-
-   reaper_api::plugin_register("projectconfig", (void*)&projectConfigExtension_);
-#endif
+   return ReaperEntryPoints::LoadEntryPoints(instance, pPluginInfo);
 }
 
 }}

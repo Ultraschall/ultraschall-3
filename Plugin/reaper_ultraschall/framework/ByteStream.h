@@ -21,8 +21,8 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef __ULTRASCHALL_FRAMEWORK_STREAM_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_STREAM_H_INCL__
+#ifndef __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
 
 #include <zlib.h>
 #include <IUnknown.h>
@@ -31,10 +31,10 @@
 namespace ultraschall {
   namespace framework {
 
-    class Stream : public IUnknown
+    class ByteStream : public IUnknown
     {
     public:
-      Stream(const size_t dataSize) :
+      ByteStream(const size_t dataSize) :
         dataSize_(dataSize), data_(new uint8_t[dataSize_]())
       {
       }
@@ -81,7 +81,7 @@ namespace ultraschall {
       }
 
     protected:
-      virtual ~Stream()
+      virtual ~ByteStream()
       {
         dataSize_ = 0;
         SafeDeleteArray(data_);
@@ -95,4 +95,4 @@ namespace ultraschall {
   }
 }
 
-#endif // #ifdef __ULTRASCHALL_FRAMEWORK_STREAM_H_INCL__
+#endif // #ifdef __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__

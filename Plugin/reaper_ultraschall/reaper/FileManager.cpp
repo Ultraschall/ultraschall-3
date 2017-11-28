@@ -28,7 +28,6 @@
 #include <codecvt>
 
 #include <Framework.h>
-#include <ResourceManager.h>
 #include <StringUtilities.h>
 
 #include "Application.h"
@@ -132,13 +131,6 @@ std::string FileManager::BrowseForImageFiles(const std::string &title)
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
     return framework::UnicodeStringToAnsiString(path);
-}
-
-std::string FileManager::BrowseForFiles(const framework::ResourceId id)
-{
-    framework::ResourceManager &resourceManager = framework::ResourceManager::Instance();
-    const std::string message = resourceManager.GetLocalizedString(id);
-    return BrowseForFiles(message);
 }
 
 std::string FileManager::BrowseForTargetAudioFiles(const std::string &title)
@@ -293,13 +285,6 @@ std::string FileManager::BrowseForFiles(const std::string &title)
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
     return framework::UnicodeStringToAnsiString(path);
-}
-
-std::string FileManager::BrowseForFolder(const framework::ResourceId id, const std::string &folder)
-{
-    framework::ResourceManager &resourceManager = framework::ResourceManager::Instance();
-    const std::string message = resourceManager.GetLocalizedString(id);
-    return BrowseForFolder(message, folder);
 }
 
 std::string FileManager::BrowseForFolder(const std::string &title, const std::string &folder)

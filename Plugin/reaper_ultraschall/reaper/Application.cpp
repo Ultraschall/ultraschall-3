@@ -25,8 +25,6 @@
 #include <string>
 #include <iomanip>
 
-#include <ServiceManager.h>
-#include <ResourceManager.h>
 #include <StringUtilities.h>
 #include <TextFileReader.h>
 
@@ -37,7 +35,6 @@
 #include "FileManager.h"
 #include "NotificationWindow.h"
 #include "CustomActionManager.h"
-#include "CommandManager.h"
 #include "UpdateCheck.h"
 #include "SystemProperties.h"
 
@@ -97,46 +94,6 @@ bool Application::OnCustomAction(const int32_t id)
    }
 
    return executed;
-}
-
-bool Application::OnStartCommand(const int32_t id)
-{
-   PRECONDITION_RETURN(ICommand::ValidateCommandId(id) != false, false);
-
-   bool executed = false;
-
-   CommandManager& manager = CommandManager::Instance();
-   ICommand* pCommand = 0;
-   ServiceStatus status = manager.LookupCommand(id, pCommand);
-   if(ServiceSucceeded(status) && (pCommand != 0))
-   {
-      pCommand->StartCommand();
-      framework::SafeRelease(pCommand);
-      executed = true;
-   }
-
-   //return executed;
-   return false;
-}
-
-bool Application::OnStopCommand(const int32_t id)
-{
-   PRECONDITION_RETURN(ICommand::ValidateCommandId(id) != false, false);
-
-   bool executed = false;
-
-   CommandManager& manager = CommandManager::Instance();
-   ICommand* pCommand = 0;
-   ServiceStatus status = manager.LookupCommand(id, pCommand);
-   if(ServiceSucceeded(status) && (pCommand != 0))
-   {
-      pCommand->StopCommand();
-      framework::SafeRelease(pCommand);
-      executed = true;
-   }
-
-   //return executed;
-   return false;
 }
 
 std::string Application::GetExportPathName() const
@@ -322,13 +279,6 @@ double Application::StringToTimestamp(const std::string& input) const
 {
    PRECONDITION_RETURN(input.empty() == false, -1);
    return reaper_api::parse_timestr(input.c_str());
-}
-
-ServiceStatus Application::Configure()
-{
-   framework::ResourceManager& resourceManager = framework::ResourceManager::Instance();
-   resourceManager.SetLanguage("en-EN");
-   return SERVICE_SUCCESS;
 }
 
 bool Application::HealthCheck()

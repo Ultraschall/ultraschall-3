@@ -26,7 +26,6 @@
 #define __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__
 
 #include <string>
-#include <ResourceId.h>
 
 namespace ultraschall { namespace reaper {
     

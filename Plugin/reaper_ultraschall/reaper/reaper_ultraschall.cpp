@@ -22,7 +22,6 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <TraceUtilities.h>
 #include <ServiceStatus.h>
 
 #include "Application.h"
@@ -47,61 +46,35 @@ extern "C"
 
 		if(pPluginInfo != 0)
 		{
-         Trace0(TRACE_LEVEL_INFO, "Ultraschall is starting-up...");
-
 			static bool started = false;
 			if(false == started)
 			{
             if(reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
             {
-               Trace0(TRACE_LEVEL_INFO, "REAPER connection established.");
-
                if(reaper::QuerySetPluginVersion() == true)
                {
-                  Trace0(TRACE_LEVEL_INFO, "Theme/Plugin versions successfully matched.");
-
-                  if(ServiceSucceeded(application.Configure()))
+                  if(ServiceSucceeded(application.Start()))
                   {
-                     if(ServiceSucceeded(application.Start()))
-                     {
-                        application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'InsertChapterMarkersAction' activated.");
+                     application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
+                     application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
+                     application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
+                     application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
 
-                        application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersAction' activated.");
-
-                        application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'SaveChapterMarkersToProjectAction' activated.");
-
-                        application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
-                        Trace0(TRACE_LEVEL_INFO, "'InsertMediaPropertiesAction' activated.");
-
-                        started = true;
-                     }
+                     started = true;
                   }
                }
-               else
-               {
-                  Trace0(TRACE_LEVEL_ERROR, "Failed to match Theme/Plugin versions.");
-               }
-
             }
             else
             {
-               Trace0(TRACE_LEVEL_ERROR, "Failed to establish REAPER connection.");
                std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
                reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
             }
 			}
 
-         Trace0(TRACE_LEVEL_INFO, "done.");
-         
          return 1;
 		}
 		else
 		{
-         Trace0(TRACE_LEVEL_INFO, "Ultraschall is shutting down...");
-         
          static bool stopped = false;
 			if(false == stopped)
 			{
@@ -109,8 +82,6 @@ extern "C"
 				stopped = true;
 			}
 
-         Trace0(TRACE_LEVEL_INFO, "done.");
-         
          return 0;
 		}
 	}
