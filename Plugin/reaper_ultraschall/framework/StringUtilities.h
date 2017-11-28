@@ -146,7 +146,7 @@ namespace ultraschall
         if(target != nullptr)
         {
           const size_t targetSize = ITEM_SIZE * ((SZ == true) ? itemCount + 1 : itemCount);
-          memmove(target, items, targetSize);
+          memmove(target, items, itemCount);
         }
 
         return target;

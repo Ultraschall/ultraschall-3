@@ -46,13 +46,24 @@ bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const
       {
          if (MP4TagsFetch( tags, mp4_handle))
          {
-            success = MP4TagsSetName (tags, standardProperties.Title().c_str());
-            success &= MP4TagsSetArtist (tags, standardProperties.Author().c_str());
-            success &= MP4TagsSetAlbum (tags, standardProperties.Track().c_str());
-            success &= MP4TagsSetReleaseDate (tags, standardProperties.Date().c_str());
-            success &= MP4TagsSetGenre (tags, standardProperties.Content().c_str());
-            success &= MP4TagsSetComments (tags, standardProperties.Comments().c_str());
-      
+            framework::UnicodeStringSz2 unicodeString = framework::MakeUTF8StringSz2(standardProperties.Title());
+            success = MP4TagsSetName(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
+            unicodeString = framework::MakeUTF8StringSz2(standardProperties.Author());
+            success = MP4TagsSetArtist(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
+            unicodeString = framework::MakeUTF8StringSz2(standardProperties.Track());
+            success = MP4TagsSetAlbum(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
+            unicodeString = framework::MakeUTF8StringSz2(standardProperties.Date());
+            success = MP4TagsSetReleaseDate(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
+            unicodeString = framework::MakeUTF8StringSz2(standardProperties.Content());
+            success = MP4TagsSetGenre(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
+            unicodeString = framework::MakeUTF8StringSz2(standardProperties.Comments());
+            success = MP4TagsSetComments(tags, reinterpret_cast<const char*>(unicodeString.Data()));
+
             if (success == true)
             {
                success = MP4TagsStore(tags, mp4_handle);
@@ -176,11 +187,14 @@ static std::vector<MP4Chapter_t> convertToMp4Chapters (const std::vector<Marker>
       {
          chapter.duration = static_cast<uint32_t> (duration * 1000.);
 
-         const framework::UnicodeString2 title_utf8 = framework::MakeUTF8String2 (chapterMarkers[i].Name());
-         const size_t size = std::min (title_utf8.size_, maxTitleBytes);
-
-         memmove (chapter.title, title_utf8.data_, size);
-         chapter.title[size] = 0;
+         const std::string& markerName = chapterMarkers[i].Name();
+         if(markerName.empty() == false)
+         {
+            const size_t markerNameSize = std::min(markerName.size(), maxTitleBytes);
+            memset(chapter.title, 0, (markerNameSize + 1) * sizeof(char));
+            memmove(chapter.title, markerName.c_str(), markerNameSize);
+            chapter.title[markerNameSize] = '\0';
+         }
       }
       mp4_chapters.push_back(chapter);
 
