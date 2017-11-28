@@ -13,54 +13,20 @@
 		421D3FCD1FCAD67D00F03688 /* ImageTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */; };
 		422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BB1E4B683C00D758FE /* VersionHandler.cpp */; };
 		422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06BC1E4B683C00D758FE /* VersionHandler.h */; };
-		422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */; };
-		422A06C61E4B69C100D758FE /* CloseProjectCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06C01E4B69C100D758FE /* CloseProjectCommand.h */; };
-		422A06C71E4B69C100D758FE /* CommandFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06C11E4B69C100D758FE /* CommandFactory.cpp */; };
-		422A06C81E4B69C100D758FE /* CommandFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06C21E4B69C100D758FE /* CommandFactory.h */; };
-		422A06C91E4B69C100D758FE /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06C31E4B69C100D758FE /* CommandManager.cpp */; };
-		422A06CA1E4B69C100D758FE /* CommandManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06C41E4B69C100D758FE /* CommandManager.h */; };
 		422A06F11E4B69F100D758FE /* ICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06CB1E4B69F100D758FE /* ICommand.h */; };
 		422A06F21E4B69F100D758FE /* InsertChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06CC1E4B69F100D758FE /* InsertChapterMarkersAction.cpp */; };
 		422A06F31E4B69F100D758FE /* InsertChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06CD1E4B69F100D758FE /* InsertChapterMarkersAction.h */; };
 		422A06F41E4B69F100D758FE /* Marker.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06CE1E4B69F100D758FE /* Marker.h */; };
-		422A06F51E4B69F100D758FE /* NewProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06CF1E4B69F100D758FE /* NewProjectCommand.cpp */; };
-		422A06F61E4B69F100D758FE /* NewProjectCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06D01E4B69F100D758FE /* NewProjectCommand.h */; };
-		422A06F71E4B69F100D758FE /* OpenProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06D11E4B69F100D758FE /* OpenProjectCommand.cpp */; };
-		422A06F81E4B69F100D758FE /* OpenProjectCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06D21E4B69F100D758FE /* OpenProjectCommand.h */; };
 		422A06F91E4B69F100D758FE /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06D31E4B69F100D758FE /* Project.cpp */; };
 		422A06FA1E4B69F100D758FE /* Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06D41E4B69F100D758FE /* Project.h */; };
-		422A06FB1E4B69F100D758FE /* ProjectCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06D51E4B69F100D758FE /* ProjectCallback.cpp */; };
-		422A06FC1E4B69F100D758FE /* ProjectCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06D61E4B69F100D758FE /* ProjectCallback.h */; };
 		422A06FD1E4B69F100D758FE /* ProjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06D71E4B69F100D758FE /* ProjectManager.cpp */; };
 		422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06D81E4B69F100D758FE /* ProjectManager.h */; };
-		422A06FF1E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06D91E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp */; };
-		422A07001E4B69F100D758FE /* ReplaceChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06DA1E4B69F100D758FE /* ReplaceChapterMarkersAction.h */; };
 		422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06DB1E4B69F100D758FE /* SaveChapterMarkersAction.cpp */; };
 		422A07021E4B69F100D758FE /* SaveChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06DC1E4B69F100D758FE /* SaveChapterMarkersAction.h */; };
 		422A07031E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06DD1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp */; };
 		422A07041E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06DE1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h */; };
-		422A07051E4B69F100D758FE /* SaveProjectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06DF1E4B69F100D758FE /* SaveProjectCommand.cpp */; };
-		422A07061E4B69F100D758FE /* SaveProjectCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06E01E4B69F100D758FE /* SaveProjectCommand.h */; };
-		422A07071E4B69F100D758FE /* SetChapterMarkerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06E11E4B69F100D758FE /* SetChapterMarkerAction.cpp */; };
-		422A07081E4B69F100D758FE /* SetChapterMarkerAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06E21E4B69F100D758FE /* SetChapterMarkerAction.h */; };
-		422A07091E4B69F100D758FE /* SetEditMarkerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06E31E4B69F100D758FE /* SetEditMarkerAction.cpp */; };
-		422A070A1E4B69F100D758FE /* SetEditMarkerAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06E41E4B69F100D758FE /* SetEditMarkerAction.h */; };
-		422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06E51E4B69F100D758FE /* SetHistoricalMarkerAction.cpp */; };
-		422A070C1E4B69F100D758FE /* SetHistoricalMarkerAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06E61E4B69F100D758FE /* SetHistoricalMarkerAction.h */; };
-		422A070D1E4B69F100D758FE /* SetShownoteMarkerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06E71E4B69F100D758FE /* SetShownoteMarkerAction.cpp */; };
-		422A070E1E4B69F100D758FE /* SetShownoteMarkerAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06E81E4B69F100D758FE /* SetShownoteMarkerAction.h */; };
-		422A070F1E4B69F100D758FE /* ToggleChapterMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06E91E4B69F100D758FE /* ToggleChapterMarkersAction.cpp */; };
-		422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06EA1E4B69F100D758FE /* ToggleChapterMarkersAction.h */; };
-		422A07111E4B69F100D758FE /* ToggleEditMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06EB1E4B69F100D758FE /* ToggleEditMarkersAction.cpp */; };
-		422A07121E4B69F100D758FE /* ToggleEditMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06EC1E4B69F100D758FE /* ToggleEditMarkersAction.h */; };
-		422A07131E4B69F100D758FE /* ToggleShownoteMarkersAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06ED1E4B69F100D758FE /* ToggleShownoteMarkersAction.cpp */; };
-		422A07141E4B69F100D758FE /* ToggleShownoteMarkersAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06EE1E4B69F100D758FE /* ToggleShownoteMarkersAction.h */; };
-		422A07151E4B69F100D758FE /* UndoMarkerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A06EF1E4B69F100D758FE /* UndoMarkerAction.cpp */; };
-		422A07161E4B69F100D758FE /* UndoMarkerAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A06F01E4B69F100D758FE /* UndoMarkerAction.h */; };
 		422A071B1E4B6B7000D758FE /* IUnknown.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A07171E4B6B7000D758FE /* IUnknown.h */; };
 		422A071C1E4B6B7000D758FE /* Platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A07181E4B6B7000D758FE /* Platform.h */; };
-		422A071D1E4B6B7000D758FE /* TraceUltilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 422A07191E4B6B7000D758FE /* TraceUltilities.cpp */; };
-		422A071E1E4B6B7000D758FE /* TraceUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 422A071A1E4B6B7000D758FE /* TraceUtilities.h */; };
 		422A07211E4B6D5E00D758FE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 422A07201E4B6D5E00D758FE /* libz.tbd */; };
 		422A07231E4B6E1500D758FE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 422A07221E4B6E1500D758FE /* unzip.c */; };
 		422A07251E4B6E4F00D758FE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 422A07241E4B6E4F00D758FE /* ioapi.c */; };
@@ -70,18 +36,8 @@
 		42327A6A1E53ACC900092214 /* SystemProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A681E53ACC900092214 /* SystemProperties.h */; };
 		42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42327A6B1E53B21900092214 /* TimeUtilities.cpp */; };
 		42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 42327A6C1E53B21900092214 /* TimeUtilities.h */; };
-		423A5A481B518AAB00231F3D /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 423A5A471B518AAB00231F3D /* IApplication.h */; };
 		423D883E1E54DDA800AF8A41 /* MP3_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */; };
 		423D883F1E54DDA800AF8A41 /* MP3_Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 423D883D1E54DDA800AF8A41 /* MP3_Interface.h */; };
-		423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B01B51508C00231F3D /* IConfigurationService.h */; };
-		423F32B31B51509D00231F3D /* IActivationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 423F32B21B51509D00231F3D /* IActivationService.h */; };
-		423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423F32B41B51869500231F3D /* ServiceManager.cpp */; };
-		423F32B71B51877800231F3D /* ServiceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 423F32B61B51877800231F3D /* ServiceFactory.cpp */; };
-		4242E97A1BAC99D700382B79 /* TranscriptItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4242E9781BAC99D700382B79 /* TranscriptItem.cpp */; };
-		4242E97B1BAC99D700382B79 /* TranscriptItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4242E9791BAC99D700382B79 /* TranscriptItem.h */; };
-		424C82F71AC8085D00231F3D /* IService.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C82EE1AC8085D00231F3D /* IService.h */; };
-		424C82F91AC8085D00231F3D /* ServiceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C82F01AC8085D00231F3D /* ServiceFactory.h */; };
-		424C82FB1AC8085D00231F3D /* ServiceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C82F21AC8085D00231F3D /* ServiceManager.h */; };
 		424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C82F31AC8085D00231F3D /* ServiceStatus.h */; };
 		424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 424C83001AC8086F00231F3D /* FileManager.cpp */; };
 		424C830C1AC8086F00231F3D /* FileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 424C83011AC8086F00231F3D /* FileManager.h */; };
@@ -93,11 +49,6 @@
 		4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */; };
 		4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */; };
 		4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4255EB481BF27C1F001CC39E /* BinaryFileReader.h */; };
-		4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4255EB4C1BF27E1C001CC39E /* Stream.h */; };
-		425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 425A03B31B4047F000231F3D /* ResourceId.cpp */; };
-		425A03B81B4047F000231F3D /* ResourceId.h in Headers */ = {isa = PBXBuildFile; fileRef = 425A03B41B4047F000231F3D /* ResourceId.h */; };
-		425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 425A03B51B4047F000231F3D /* ResourceManager.cpp */; };
-		425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 425A03B61B4047F000231F3D /* ResourceManager.h */; };
 		4269F9591B221C0E00231F3D /* StringUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4269F9571B221C0E00231F3D /* StringUtilities.cpp */; };
 		4269F95A1B221C0E00231F3D /* StringUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4269F9581B221C0E00231F3D /* StringUtilities.h */; };
 		4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */; };
@@ -156,54 +107,20 @@
 		421D3FCB1FCAD67D00F03688 /* ImageTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageTools.cpp; path = reaper/ImageTools.cpp; sourceTree = "<group>"; };
 		422A06BB1E4B683C00D758FE /* VersionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = VersionHandler.cpp; path = reaper/VersionHandler.cpp; sourceTree = "<group>"; };
 		422A06BC1E4B683C00D758FE /* VersionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionHandler.h; path = reaper/VersionHandler.h; sourceTree = "<group>"; };
-		422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CloseProjectCommand.cpp; path = reaper/CloseProjectCommand.cpp; sourceTree = "<group>"; };
-		422A06C01E4B69C100D758FE /* CloseProjectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CloseProjectCommand.h; path = reaper/CloseProjectCommand.h; sourceTree = "<group>"; };
-		422A06C11E4B69C100D758FE /* CommandFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandFactory.cpp; path = reaper/CommandFactory.cpp; sourceTree = "<group>"; };
-		422A06C21E4B69C100D758FE /* CommandFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandFactory.h; path = reaper/CommandFactory.h; sourceTree = "<group>"; };
-		422A06C31E4B69C100D758FE /* CommandManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandManager.cpp; path = reaper/CommandManager.cpp; sourceTree = "<group>"; };
-		422A06C41E4B69C100D758FE /* CommandManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandManager.h; path = reaper/CommandManager.h; sourceTree = "<group>"; };
 		422A06CB1E4B69F100D758FE /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICommand.h; path = reaper/ICommand.h; sourceTree = "<group>"; };
 		422A06CC1E4B69F100D758FE /* InsertChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InsertChapterMarkersAction.cpp; path = reaper/InsertChapterMarkersAction.cpp; sourceTree = "<group>"; };
 		422A06CD1E4B69F100D758FE /* InsertChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertChapterMarkersAction.h; path = reaper/InsertChapterMarkersAction.h; sourceTree = "<group>"; };
 		422A06CE1E4B69F100D758FE /* Marker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Marker.h; path = reaper/Marker.h; sourceTree = "<group>"; };
-		422A06CF1E4B69F100D758FE /* NewProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewProjectCommand.cpp; path = reaper/NewProjectCommand.cpp; sourceTree = "<group>"; };
-		422A06D01E4B69F100D758FE /* NewProjectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewProjectCommand.h; path = reaper/NewProjectCommand.h; sourceTree = "<group>"; };
-		422A06D11E4B69F100D758FE /* OpenProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenProjectCommand.cpp; path = reaper/OpenProjectCommand.cpp; sourceTree = "<group>"; };
-		422A06D21E4B69F100D758FE /* OpenProjectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenProjectCommand.h; path = reaper/OpenProjectCommand.h; sourceTree = "<group>"; };
 		422A06D31E4B69F100D758FE /* Project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Project.cpp; path = reaper/Project.cpp; sourceTree = "<group>"; };
 		422A06D41E4B69F100D758FE /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Project.h; path = reaper/Project.h; sourceTree = "<group>"; };
-		422A06D51E4B69F100D758FE /* ProjectCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectCallback.cpp; path = reaper/ProjectCallback.cpp; sourceTree = "<group>"; };
-		422A06D61E4B69F100D758FE /* ProjectCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectCallback.h; path = reaper/ProjectCallback.h; sourceTree = "<group>"; };
 		422A06D71E4B69F100D758FE /* ProjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectManager.cpp; path = reaper/ProjectManager.cpp; sourceTree = "<group>"; };
 		422A06D81E4B69F100D758FE /* ProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectManager.h; path = reaper/ProjectManager.h; sourceTree = "<group>"; };
-		422A06D91E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReplaceChapterMarkersAction.cpp; path = reaper/ReplaceChapterMarkersAction.cpp; sourceTree = "<group>"; };
-		422A06DA1E4B69F100D758FE /* ReplaceChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReplaceChapterMarkersAction.h; path = reaper/ReplaceChapterMarkersAction.h; sourceTree = "<group>"; };
 		422A06DB1E4B69F100D758FE /* SaveChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveChapterMarkersAction.cpp; path = reaper/SaveChapterMarkersAction.cpp; sourceTree = "<group>"; };
 		422A06DC1E4B69F100D758FE /* SaveChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveChapterMarkersAction.h; path = reaper/SaveChapterMarkersAction.h; sourceTree = "<group>"; };
 		422A06DD1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveChapterMarkersToProjectAction.cpp; path = reaper/SaveChapterMarkersToProjectAction.cpp; sourceTree = "<group>"; };
 		422A06DE1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveChapterMarkersToProjectAction.h; path = reaper/SaveChapterMarkersToProjectAction.h; sourceTree = "<group>"; };
-		422A06DF1E4B69F100D758FE /* SaveProjectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveProjectCommand.cpp; path = reaper/SaveProjectCommand.cpp; sourceTree = "<group>"; };
-		422A06E01E4B69F100D758FE /* SaveProjectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveProjectCommand.h; path = reaper/SaveProjectCommand.h; sourceTree = "<group>"; };
-		422A06E11E4B69F100D758FE /* SetChapterMarkerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetChapterMarkerAction.cpp; path = reaper/SetChapterMarkerAction.cpp; sourceTree = "<group>"; };
-		422A06E21E4B69F100D758FE /* SetChapterMarkerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetChapterMarkerAction.h; path = reaper/SetChapterMarkerAction.h; sourceTree = "<group>"; };
-		422A06E31E4B69F100D758FE /* SetEditMarkerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetEditMarkerAction.cpp; path = reaper/SetEditMarkerAction.cpp; sourceTree = "<group>"; };
-		422A06E41E4B69F100D758FE /* SetEditMarkerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetEditMarkerAction.h; path = reaper/SetEditMarkerAction.h; sourceTree = "<group>"; };
-		422A06E51E4B69F100D758FE /* SetHistoricalMarkerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetHistoricalMarkerAction.cpp; path = reaper/SetHistoricalMarkerAction.cpp; sourceTree = "<group>"; };
-		422A06E61E4B69F100D758FE /* SetHistoricalMarkerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetHistoricalMarkerAction.h; path = reaper/SetHistoricalMarkerAction.h; sourceTree = "<group>"; };
-		422A06E71E4B69F100D758FE /* SetShownoteMarkerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetShownoteMarkerAction.cpp; path = reaper/SetShownoteMarkerAction.cpp; sourceTree = "<group>"; };
-		422A06E81E4B69F100D758FE /* SetShownoteMarkerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetShownoteMarkerAction.h; path = reaper/SetShownoteMarkerAction.h; sourceTree = "<group>"; };
-		422A06E91E4B69F100D758FE /* ToggleChapterMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ToggleChapterMarkersAction.cpp; path = reaper/ToggleChapterMarkersAction.cpp; sourceTree = "<group>"; };
-		422A06EA1E4B69F100D758FE /* ToggleChapterMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleChapterMarkersAction.h; path = reaper/ToggleChapterMarkersAction.h; sourceTree = "<group>"; };
-		422A06EB1E4B69F100D758FE /* ToggleEditMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ToggleEditMarkersAction.cpp; path = reaper/ToggleEditMarkersAction.cpp; sourceTree = "<group>"; };
-		422A06EC1E4B69F100D758FE /* ToggleEditMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleEditMarkersAction.h; path = reaper/ToggleEditMarkersAction.h; sourceTree = "<group>"; };
-		422A06ED1E4B69F100D758FE /* ToggleShownoteMarkersAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ToggleShownoteMarkersAction.cpp; path = reaper/ToggleShownoteMarkersAction.cpp; sourceTree = "<group>"; };
-		422A06EE1E4B69F100D758FE /* ToggleShownoteMarkersAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleShownoteMarkersAction.h; path = reaper/ToggleShownoteMarkersAction.h; sourceTree = "<group>"; };
-		422A06EF1E4B69F100D758FE /* UndoMarkerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UndoMarkerAction.cpp; path = reaper/UndoMarkerAction.cpp; sourceTree = "<group>"; };
-		422A06F01E4B69F100D758FE /* UndoMarkerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UndoMarkerAction.h; path = reaper/UndoMarkerAction.h; sourceTree = "<group>"; };
 		422A07171E4B6B7000D758FE /* IUnknown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnknown.h; path = framework/IUnknown.h; sourceTree = "<group>"; };
 		422A07181E4B6B7000D758FE /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = framework/Platform.h; sourceTree = "<group>"; };
-		422A07191E4B6B7000D758FE /* TraceUltilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceUltilities.cpp; path = framework/TraceUltilities.cpp; sourceTree = "<group>"; };
-		422A071A1E4B6B7000D758FE /* TraceUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TraceUtilities.h; path = framework/TraceUtilities.h; sourceTree = "<group>"; };
 		422A07201E4B6D5E00D758FE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		422A07221E4B6E1500D758FE /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = ../3rd_party/zlib/src/unzip.c; sourceTree = "<group>"; };
 		422A07241E4B6E4F00D758FE /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ../3rd_party/zlib/src/ioapi.c; sourceTree = "<group>"; };
@@ -212,18 +129,8 @@
 		42327A681E53ACC900092214 /* SystemProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemProperties.h; path = reaper/SystemProperties.h; sourceTree = "<group>"; };
 		42327A6B1E53B21900092214 /* TimeUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtilities.cpp; path = framework/TimeUtilities.cpp; sourceTree = "<group>"; };
 		42327A6C1E53B21900092214 /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtilities.h; path = framework/TimeUtilities.h; sourceTree = "<group>"; };
-		423A5A471B518AAB00231F3D /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IApplication.h; path = framework/IApplication.h; sourceTree = "<group>"; };
 		423D883C1E54DDA800AF8A41 /* MP3_Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MP3_Interface.cpp; path = reaper/MP3_Interface.cpp; sourceTree = "<group>"; };
 		423D883D1E54DDA800AF8A41 /* MP3_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP3_Interface.h; path = reaper/MP3_Interface.h; sourceTree = "<group>"; };
-		423F32B01B51508C00231F3D /* IConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IConfigurationService.h; path = framework/IConfigurationService.h; sourceTree = "<group>"; };
-		423F32B21B51509D00231F3D /* IActivationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IActivationService.h; path = framework/IActivationService.h; sourceTree = "<group>"; };
-		423F32B41B51869500231F3D /* ServiceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceManager.cpp; path = framework/ServiceManager.cpp; sourceTree = "<group>"; };
-		423F32B61B51877800231F3D /* ServiceFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceFactory.cpp; path = framework/ServiceFactory.cpp; sourceTree = "<group>"; };
-		4242E9781BAC99D700382B79 /* TranscriptItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TranscriptItem.cpp; path = framework/TranscriptItem.cpp; sourceTree = "<group>"; };
-		4242E9791BAC99D700382B79 /* TranscriptItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TranscriptItem.h; path = framework/TranscriptItem.h; sourceTree = "<group>"; };
-		424C82EE1AC8085D00231F3D /* IService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IService.h; path = framework/IService.h; sourceTree = "<group>"; };
-		424C82F01AC8085D00231F3D /* ServiceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceFactory.h; path = framework/ServiceFactory.h; sourceTree = "<group>"; };
-		424C82F21AC8085D00231F3D /* ServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceManager.h; path = framework/ServiceManager.h; sourceTree = "<group>"; };
 		424C82F31AC8085D00231F3D /* ServiceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceStatus.h; path = framework/ServiceStatus.h; sourceTree = "<group>"; };
 		424C83001AC8086F00231F3D /* FileManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = FileManager.cpp; path = reaper/FileManager.cpp; sourceTree = "<group>"; };
 		424C83011AC8086F00231F3D /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileManager.h; path = reaper/FileManager.h; sourceTree = "<group>"; };
@@ -235,11 +142,6 @@
 		4254C98A1BF28BCE00B1EF1F /* SWSVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSVersionCheck.h; path = reaper/SWSVersionCheck.h; sourceTree = "<group>"; };
 		4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryFileReader.cpp; path = framework/BinaryFileReader.cpp; sourceTree = "<group>"; };
 		4255EB481BF27C1F001CC39E /* BinaryFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryFileReader.h; path = framework/BinaryFileReader.h; sourceTree = "<group>"; };
-		4255EB4C1BF27E1C001CC39E /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stream.h; path = framework/Stream.h; sourceTree = "<group>"; };
-		425A03B31B4047F000231F3D /* ResourceId.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ResourceId.cpp; path = framework/ResourceId.cpp; sourceTree = "<group>"; };
-		425A03B41B4047F000231F3D /* ResourceId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResourceId.h; path = framework/ResourceId.h; sourceTree = "<group>"; };
-		425A03B51B4047F000231F3D /* ResourceManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ResourceManager.cpp; path = framework/ResourceManager.cpp; sourceTree = "<group>"; };
-		425A03B61B4047F000231F3D /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResourceManager.h; path = framework/ResourceManager.h; sourceTree = "<group>"; };
 		4269F9571B221C0E00231F3D /* StringUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringUtilities.cpp; path = framework/StringUtilities.cpp; sourceTree = "<group>"; };
 		4269F9581B221C0E00231F3D /* StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtilities.h; path = framework/StringUtilities.h; sourceTree = "<group>"; };
 		4284E9F61BF4B58C0056345A /* ThemeVersionCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThemeVersionCheck.cpp; path = reaper/ThemeVersionCheck.cpp; sourceTree = "<group>"; };
@@ -339,33 +241,16 @@
 				42327A6C1E53B21900092214 /* TimeUtilities.h */,
 				422A07171E4B6B7000D758FE /* IUnknown.h */,
 				422A07181E4B6B7000D758FE /* Platform.h */,
-				422A07191E4B6B7000D758FE /* TraceUltilities.cpp */,
-				422A071A1E4B6B7000D758FE /* TraceUtilities.h */,
 				4284EA021BF4D0E00056345A /* TextFileWriter.cpp */,
 				4284EA031BF4D0E00056345A /* TextFileWriter.h */,
 				42FB15761BD65A65004DFF99 /* TextFileReader.cpp */,
 				42FB15771BD65A65004DFF99 /* TextFileReader.h */,
-				425A03B31B4047F000231F3D /* ResourceId.cpp */,
-				425A03B41B4047F000231F3D /* ResourceId.h */,
-				425A03B51B4047F000231F3D /* ResourceManager.cpp */,
-				425A03B61B4047F000231F3D /* ResourceManager.h */,
 				4269F9571B221C0E00231F3D /* StringUtilities.cpp */,
 				4269F9581B221C0E00231F3D /* StringUtilities.h */,
-				424C82EE1AC8085D00231F3D /* IService.h */,
-				424C82F01AC8085D00231F3D /* ServiceFactory.h */,
-				423F32B61B51877800231F3D /* ServiceFactory.cpp */,
-				424C82F21AC8085D00231F3D /* ServiceManager.h */,
-				423F32B41B51869500231F3D /* ServiceManager.cpp */,
 				424C82F31AC8085D00231F3D /* ServiceStatus.h */,
 				42F19A601ABEE81500231F3D /* Framework.h */,
-				423F32B01B51508C00231F3D /* IConfigurationService.h */,
-				423F32B21B51509D00231F3D /* IActivationService.h */,
-				423A5A471B518AAB00231F3D /* IApplication.h */,
-				4242E9781BAC99D700382B79 /* TranscriptItem.cpp */,
-				4242E9791BAC99D700382B79 /* TranscriptItem.h */,
 				4255EB471BF27C1F001CC39E /* BinaryFileReader.cpp */,
 				4255EB481BF27C1F001CC39E /* BinaryFileReader.h */,
-				4255EB4C1BF27E1C001CC39E /* Stream.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -386,46 +271,14 @@
 				422A06CC1E4B69F100D758FE /* InsertChapterMarkersAction.cpp */,
 				422A06CD1E4B69F100D758FE /* InsertChapterMarkersAction.h */,
 				422A06CE1E4B69F100D758FE /* Marker.h */,
-				422A06CF1E4B69F100D758FE /* NewProjectCommand.cpp */,
-				422A06D01E4B69F100D758FE /* NewProjectCommand.h */,
-				422A06D11E4B69F100D758FE /* OpenProjectCommand.cpp */,
-				422A06D21E4B69F100D758FE /* OpenProjectCommand.h */,
 				422A06D31E4B69F100D758FE /* Project.cpp */,
 				422A06D41E4B69F100D758FE /* Project.h */,
-				422A06D51E4B69F100D758FE /* ProjectCallback.cpp */,
-				422A06D61E4B69F100D758FE /* ProjectCallback.h */,
 				422A06D71E4B69F100D758FE /* ProjectManager.cpp */,
 				422A06D81E4B69F100D758FE /* ProjectManager.h */,
-				422A06D91E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp */,
-				422A06DA1E4B69F100D758FE /* ReplaceChapterMarkersAction.h */,
 				422A06DB1E4B69F100D758FE /* SaveChapterMarkersAction.cpp */,
 				422A06DC1E4B69F100D758FE /* SaveChapterMarkersAction.h */,
 				422A06DD1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp */,
 				422A06DE1E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h */,
-				422A06DF1E4B69F100D758FE /* SaveProjectCommand.cpp */,
-				422A06E01E4B69F100D758FE /* SaveProjectCommand.h */,
-				422A06E11E4B69F100D758FE /* SetChapterMarkerAction.cpp */,
-				422A06E21E4B69F100D758FE /* SetChapterMarkerAction.h */,
-				422A06E31E4B69F100D758FE /* SetEditMarkerAction.cpp */,
-				422A06E41E4B69F100D758FE /* SetEditMarkerAction.h */,
-				422A06E51E4B69F100D758FE /* SetHistoricalMarkerAction.cpp */,
-				422A06E61E4B69F100D758FE /* SetHistoricalMarkerAction.h */,
-				422A06E71E4B69F100D758FE /* SetShownoteMarkerAction.cpp */,
-				422A06E81E4B69F100D758FE /* SetShownoteMarkerAction.h */,
-				422A06E91E4B69F100D758FE /* ToggleChapterMarkersAction.cpp */,
-				422A06EA1E4B69F100D758FE /* ToggleChapterMarkersAction.h */,
-				422A06EB1E4B69F100D758FE /* ToggleEditMarkersAction.cpp */,
-				422A06EC1E4B69F100D758FE /* ToggleEditMarkersAction.h */,
-				422A06ED1E4B69F100D758FE /* ToggleShownoteMarkersAction.cpp */,
-				422A06EE1E4B69F100D758FE /* ToggleShownoteMarkersAction.h */,
-				422A06EF1E4B69F100D758FE /* UndoMarkerAction.cpp */,
-				422A06F01E4B69F100D758FE /* UndoMarkerAction.h */,
-				422A06BF1E4B69C100D758FE /* CloseProjectCommand.cpp */,
-				422A06C01E4B69C100D758FE /* CloseProjectCommand.h */,
-				422A06C11E4B69C100D758FE /* CommandFactory.cpp */,
-				422A06C21E4B69C100D758FE /* CommandFactory.h */,
-				422A06C31E4B69C100D758FE /* CommandManager.cpp */,
-				422A06C41E4B69C100D758FE /* CommandManager.h */,
 				422A06BB1E4B683C00D758FE /* VersionHandler.cpp */,
 				422A06BC1E4B683C00D758FE /* VersionHandler.h */,
 				424C83001AC8086F00231F3D /* FileManager.cpp */,
@@ -476,30 +329,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */,
-				4242E97B1BAC99D700382B79 /* TranscriptItem.h in Headers */,
 				424C82FC1AC8085D00231F3D /* ServiceStatus.h in Headers */,
 				422A06FA1E4B69F100D758FE /* Project.h in Headers */,
 				42F83CD71F659BBF009F2ECC /* ITagWriter.h in Headers */,
 				424C830C1AC8086F00231F3D /* FileManager.h in Headers */,
-				422A07061E4B69F100D758FE /* SaveProjectCommand.h in Headers */,
 				424F7CB41BF3631D004DBA2F /* SoundboardVersionCheck.h in Headers */,
-				423F32B11B51508C00231F3D /* IConfigurationService.h in Headers */,
-				425A03B81B4047F000231F3D /* ResourceId.h in Headers */,
-				422A07081E4B69F100D758FE /* SetChapterMarkerAction.h in Headers */,
 				422A06F31E4B69F100D758FE /* InsertChapterMarkersAction.h in Headers */,
-				422A070A1E4B69F100D758FE /* SetEditMarkerAction.h in Headers */,
-				422A06C81E4B69C100D758FE /* CommandFactory.h in Headers */,
 				422A071C1E4B6B7000D758FE /* Platform.h in Headers */,
-				422A070C1E4B69F100D758FE /* SetHistoricalMarkerAction.h in Headers */,
-				422A071E1E4B6B7000D758FE /* TraceUtilities.h in Headers */,
-				422A07121E4B69F100D758FE /* ToggleEditMarkersAction.h in Headers */,
 				422A071B1E4B6B7000D758FE /* IUnknown.h in Headers */,
-				422A06CA1E4B69C100D758FE /* CommandManager.h in Headers */,
-				425A03BA1B4047F000231F3D /* ResourceManager.h in Headers */,
 				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
 				429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */,
 				4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */,
-				422A07141E4B69F100D758FE /* ToggleShownoteMarkersAction.h in Headers */,
 				422A06F11E4B69F100D758FE /* ICommand.h in Headers */,
 				422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */,
 				4284EA051BF4D0E00056345A /* TextFileWriter.h in Headers */,
@@ -511,34 +351,20 @@
 				42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */,
 				42327A6A1E53ACC900092214 /* SystemProperties.h in Headers */,
 				42F19A7C1ABEE82200231F3D /* ReaperEntryPoints.h in Headers */,
-				424C82F91AC8085D00231F3D /* ServiceFactory.h in Headers */,
 				422A06F41E4B69F100D758FE /* Marker.h in Headers */,
 				42F19A7F1ABEE82200231F3D /* ICustomAction.h in Headers */,
-				422A06F61E4B69F100D758FE /* NewProjectCommand.h in Headers */,
 				4284E9F91BF4B58C0056345A /* ThemeVersionCheck.h in Headers */,
-				422A06FC1E4B69F100D758FE /* ProjectCallback.h in Headers */,
-				4255EB4E1BF27E1C001CC39E /* Stream.h in Headers */,
-				422A07161E4B69F100D758FE /* UndoMarkerAction.h in Headers */,
-				423F32B31B51509D00231F3D /* IActivationService.h in Headers */,
 				42327A6E1E53B21900092214 /* TimeUtilities.h in Headers */,
 				42F83CD51F659B96009F2ECC /* MP3TagWriter.h in Headers */,
-				424C82F71AC8085D00231F3D /* IService.h in Headers */,
 				420E078E1E4F246A00FEF003 /* InsertMediaPropertiesAction.h in Headers */,
 				428E0F5F1FCC29AE0051559A /* BasicMediaInformation.h in Headers */,
 				42F30D7B1BF23886003CBF13 /* ReaperVersionCheck.h in Headers */,
 				422A06FE1E4B69F100D758FE /* ProjectManager.h in Headers */,
-				422A07101E4B69F100D758FE /* ToggleChapterMarkersAction.h in Headers */,
-				422A070E1E4B69F100D758FE /* SetShownoteMarkerAction.h in Headers */,
 				421D3FCC1FCAD67D00F03688 /* ImageTools.h in Headers */,
 				4252BB5E1E4BB20F0051CAB4 /* UpdateCheck.h in Headers */,
 				422A07041E4B69F100D758FE /* SaveChapterMarkersToProjectAction.h in Headers */,
-				422A07001E4B69F100D758FE /* ReplaceChapterMarkersAction.h in Headers */,
 				42F19A7A1ABEE82200231F3D /* CustomActionManager.h in Headers */,
-				424C82FB1AC8085D00231F3D /* ServiceManager.h in Headers */,
 				4254C98C1BF28BCE00B1EF1F /* SWSVersionCheck.h in Headers */,
-				422A06C61E4B69C100D758FE /* CloseProjectCommand.h in Headers */,
-				422A06F81E4B69F100D758FE /* OpenProjectCommand.h in Headers */,
-				423A5A481B518AAB00231F3D /* IApplication.h in Headers */,
 				42F83CDB1F659BE1009F2ECC /* MP4TagWriter.h in Headers */,
 				423D883F1E54DDA800AF8A41 /* MP3_Interface.h in Headers */,
 			);
@@ -607,55 +433,33 @@
 				42327A6D1E53B21900092214 /* TimeUtilities.cpp in Sources */,
 				422A06BD1E4B683C00D758FE /* VersionHandler.cpp in Sources */,
 				42F30D7A1BF23886003CBF13 /* ReaperVersionCheck.cpp in Sources */,
-				422A07151E4B69F100D758FE /* UndoMarkerAction.cpp in Sources */,
 				4255EB491BF27C1F001CC39E /* BinaryFileReader.cpp in Sources */,
-				422A07051E4B69F100D758FE /* SaveProjectCommand.cpp in Sources */,
-				422A07111E4B69F100D758FE /* ToggleEditMarkersAction.cpp in Sources */,
-				422A070F1E4B69F100D758FE /* ToggleChapterMarkersAction.cpp in Sources */,
 				422A07031E4B69F100D758FE /* SaveChapterMarkersToProjectAction.cpp in Sources */,
-				425A03B71B4047F000231F3D /* ResourceId.cpp in Sources */,
 				42FB15781BD65A65004DFF99 /* TextFileReader.cpp in Sources */,
-				425A03B91B4047F000231F3D /* ResourceManager.cpp in Sources */,
 				42F19A791ABEE82200231F3D /* CustomActionManager.cpp in Sources */,
 				424F7CB31BF3631D004DBA2F /* SoundboardVersionCheck.cpp in Sources */,
-				422A06FB1E4B69F100D758FE /* ProjectCallback.cpp in Sources */,
 				424C830B1AC8086F00231F3D /* FileManager.cpp in Sources */,
-				422A06C71E4B69C100D758FE /* CommandFactory.cpp in Sources */,
 				42F19A751ABEE82200231F3D /* Application.cpp in Sources */,
 				42F83CD41F659B96009F2ECC /* MP3TagWriter.cpp in Sources */,
 				4284EA041BF4D0E00056345A /* TextFileWriter.cpp in Sources */,
-				422A06F71E4B69F100D758FE /* OpenProjectCommand.cpp in Sources */,
 				42327A691E53ACC900092214 /* SystemProperties.cpp in Sources */,
 				422A07251E4B6E4F00D758FE /* ioapi.c in Sources */,
-				422A07071E4B69F100D758FE /* SetChapterMarkerAction.cpp in Sources */,
 				A9B2A1151C9619E30049E984 /* PluginVersionCheck.cpp in Sources */,
 				420E078D1E4F246A00FEF003 /* InsertMediaPropertiesAction.cpp in Sources */,
-				422A06F51E4B69F100D758FE /* NewProjectCommand.cpp in Sources */,
 				42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */,
-				422A06C51E4B69C100D758FE /* CloseProjectCommand.cpp in Sources */,
 				422A07231E4B6E1500D758FE /* unzip.c in Sources */,
 				42F19A771ABEE82200231F3D /* CustomActionFactory.cpp in Sources */,
 				4269F9591B221C0E00231F3D /* StringUtilities.cpp in Sources */,
-				4242E97A1BAC99D700382B79 /* TranscriptItem.cpp in Sources */,
-				423F32B71B51877800231F3D /* ServiceFactory.cpp in Sources */,
 				42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */,
 				422A06F91E4B69F100D758FE /* Project.cpp in Sources */,
-				422A070D1E4B69F100D758FE /* SetShownoteMarkerAction.cpp in Sources */,
-				422A071D1E4B6B7000D758FE /* TraceUltilities.cpp in Sources */,
-				422A07131E4B69F100D758FE /* ToggleShownoteMarkersAction.cpp in Sources */,
 				42F19A7B1ABEE82200231F3D /* ReaperEntryPoints.cpp in Sources */,
-				422A07091E4B69F100D758FE /* SetEditMarkerAction.cpp in Sources */,
 				429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */,
 				4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */,
 				428E0F601FCC29AE0051559A /* BasicMediaInformation.cpp in Sources */,
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
 				422A06F21E4B69F100D758FE /* InsertChapterMarkersAction.cpp in Sources */,
-				422A06C91E4B69C100D758FE /* CommandManager.cpp in Sources */,
 				42F83CDA1F659BE1009F2ECC /* MP4TagWriter.cpp in Sources */,
-				423F32B51B51869500231F3D /* ServiceManager.cpp in Sources */,
-				422A06FF1E4B69F100D758FE /* ReplaceChapterMarkersAction.cpp in Sources */,
 				421D3FCD1FCAD67D00F03688 /* ImageTools.cpp in Sources */,
-				422A070B1E4B69F100D758FE /* SetHistoricalMarkerAction.cpp in Sources */,
 				422A07011E4B69F100D758FE /* SaveChapterMarkersAction.cpp in Sources */,
 				4252BB5D1E4BB20F0051CAB4 /* UpdateCheck.cpp in Sources */,
 				423D883E1E54DDA800AF8A41 /* MP3_Interface.cpp in Sources */,

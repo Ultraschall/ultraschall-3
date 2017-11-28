@@ -46,7 +46,6 @@ public:
    void Stop();
 
    template<class CustomActionType> ServiceStatus RegisterCustomAction() const;
-   template<class CommandType> ServiceStatus RegisterCommand(const int32_t commandId) const;
 
    static bool OnCustomAction(const int32_t id);
 
@@ -115,25 +114,6 @@ template<class CustomActionType> ServiceStatus Application::RegisterCustomAction
          
          framework::SafeRelease(pCustomAction);
       }
-   }
-
-   return status;
-}
-
-template<class CommandType> ServiceStatus Application::RegisterCommand(const int32_t commandId) const
-{
-   PRECONDITION_RETURN(ICommand::ValidateCommandId(commandId) != false, SERVICE_INVALID_ARGUMENT);
-
-   ServiceStatus status = SERVICE_FAILURE;
-
-   ICommand* pCommand = 0;
-   status = CommandType::CreateCommand(pCommand);
-   if(ServiceSucceeded(status) && (pCommand != 0))
-   {
-      CommandManager& manager = CommandManager::Instance();
-      status = manager.RegisterCommand(commandId, pCommand);
-
-      framework::SafeRelease(pCommand);
    }
 
    return status;
