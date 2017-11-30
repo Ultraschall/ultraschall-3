@@ -113,7 +113,25 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
    }
    else
    {
-      NotificationWindow::Show("All media files have been updated successfully.");
+      std::stringstream os;
+      os << "The following media files have been updated successfully:\r\n\r\n";
+      for(size_t k = 0; k < targetNames.size(); k++)
+      {
+         const std::string::size_type offset = targetNames[k].rfind(FileManager::PathSeparator());
+         if(offset != std::string::npos)
+         {
+            const std::string& targetName = targetNames[k].substr(offset + 1, targetNames[k].size()); // skip separator
+            os << targetName;
+            if(k < (targetNames.size() - 1))
+            {
+               os << "\r\n";
+            }
+         }
+      }
+
+      os << "\r\n";
+
+      NotificationWindow::Show(os.str());
    }
 
    return SERVICE_SUCCESS;
