@@ -32,7 +32,7 @@ copy "..\REAPER\Resources\Ultraschall Webbanner.png" "Payload\Addons\Ultraschall
 rem Build Ultraschall REAPER Plug-in
 md Payload\Plugin > nul
 pushd ..\REAPER\
-call build.bat rebuild release x64
+call build.bat build release x64
 popd
 copy ..\REAPER\Plugin\reaper_ultraschall\x64\Release\reaper_ultraschall.dll Payload\Plugin
 
