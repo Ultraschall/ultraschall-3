@@ -37,36 +37,49 @@
 -- if the state is set to "recognized", the checking happens that could lead to stopping of the followmode
 -- this state is set to "started" by the script "ultraschall_toggle_follow.lua".
 
-count=15 -- as the script has to check the current shown-time in the arrange-view three times,
-         -- this count is a delay-factor between these three checks
-         -- make higher, if it creates false positives on faster computers
-         -- minimum value is 6, 15 or higher is recommended
+count=2  -- as the script has to check the current shown-time in the arrange-view three times,
+         -- this count calculates the delay-factor between these three checks
+         -- try higher, if it creates false positives
+         -- count is the timeframe to check for scrolling in seconds
+         -- minimum value is 1, 2 or higher is recommended
 
-if count<6 then reaper.MB("Variable \"count\" must be bigger or equal 6!","Error",0) return end
+if count<1 then reaper.MB("Variable \"count\" must be bigger or equal 1!","Error",0) return end
 
         
 --initialize the variables
 cmdID=reaper.NamedCommandLookup("_Ultraschall_Toggle_Follow") -- Get Command-ID of Follow-Mode-Script
 
-count2= (math.floor(count/2))-1   -- calculates the second checkpoint-count, in relation to the value-count of "count"
-count3= (math.floor(count/2)*2)-1 -- calculates the third checkpoint-count, in relation to the value-count of "count"
+count2= count/3--(math.floor(count/2))-1   -- calculates the second checkpoint-count, in relation to the value-count of "count"
+count3= (count/3)*2--(math.floor(count/2)*2)-1 -- calculates the third checkpoint-count, in relation to the value-count of "count"
 
 Start1, End1 = "","" -- first checkpoint
 Start2, End2 = "","" -- second checkpoint
 Start3, End3 = "","" -- third checkpoint
 A=0                  -- counting variable
 Zoom=reaper.GetHZoomLevel()
+Position_Start=reaper.time_precise()
 
 function main()
 --  reaper.ShowConsoleMsg(reaper.GetExtState("ultraschall_follow", "started").."\n")
-  if reaper.GetExtState("ultraschall_follow", "state2")=="0" and reaper.GetPlayState()~=0 then A=A+1 -- if followmode is on, start counting the countingvariable A
+  if reaper.GetExtState("ultraschall_follow", "state2")=="0" and reaper.GetPlayState()~=0 then 
+    --A=A+1 -- if followmode is on, start counting the countingvariable A
+    if reaper.time_precise()-Position_Start>=0 and reaper.time_precise()-Position_Start<count2 then A=0.1
+    elseif reaper.time_precise()-Position_Start>=count2 and reaper.time_precise()-Position_Start<count3 then A=count2
+    elseif reaper.time_precise()-Position_Start>=count3 and reaper.time_precise()-Position_Start<count then A=count3
+    else
+      A=count
+    end
+--    if reaper.time_precise()-Position_Start>count2 then A=count3 end
     playposition=reaper.GetPlayPosition()
   --  start,ende = reaper.GetSet_ArrangeView2(0, false, 0, 0)
-    
+    -- reaper.ShowConsoleMsg(reaper.GetExtState("ultraschall_follow", "started").."\n")
     if reaper.GetHZoomLevel()~=Zoom then Zoom=reaper.GetHZoomLevel() 
       reaper.SetExtState("ultraschall_follow", "started", "started", false) 
       A=0
-    elseif A==1 then Start1, End1 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set first checkpoint
+      Start1, End1 = "","" -- first checkpoint
+      Start2, End2 = "","" -- second checkpoint
+      Start3, End3 = "","" -- third checkpoint
+    elseif A==0.1 then Start1, End1 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set first checkpoint
     elseif A==count2 then Start2, End2 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set second checkpoint
     elseif A==count3 then Start3, End3 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set third checkpoint
     elseif A==count then -- if maximum count has been reached:
@@ -89,7 +102,7 @@ function main()
         -- setting the external state ultraschall_follow->started to started (as the followmode script does, when started)
         reaper.SetExtState("ultraschall_follow", "started", "started", false)
         -- reaper.ShowConsoleMsg("start&end=same\n")
-      elseif (Start1~=Start2 or Start2~=Start3) and reaper.GetPlayState()&2~=2 and reaper.GetExtState("ultraschall_follow", "started")=="started" then 
+      elseif (Start1~=Start2 and Start2~=Start3) and reaper.GetPlayState()&2~=2 and reaper.GetExtState("ultraschall_follow", "started")=="started" then 
         -- as soon as the movement of the checkpoints have begun, reset the external state ultraschall_follow->started to recognised, so this script
         -- knows, when to start checking and resetting the FollowMode
         reaper.SetExtState("ultraschall_follow", "started", "recognized", false)
@@ -113,6 +126,7 @@ function main()
       Start2, End2 = "",""
       Start3, End3 = "",""
       A=0 
+      Position_Start=reaper.time_precise()
     end
   elseif A>0 then
     A=0  -- if followmode is off, reset countingvariable A to 0

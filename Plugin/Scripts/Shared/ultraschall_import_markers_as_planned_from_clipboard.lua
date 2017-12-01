@@ -56,12 +56,14 @@ dofile(script_path .. "ultraschall_helper_functions.lua")
 ----------------------------
 reaper.Undo_BeginBlock()
 
-os = reaper.GetOS()
-if string.match(os, "OSX") then 
-  color = 0x00FF88|0x1000000
-else
-  color = 0x88FF00|0x1000000
-end
+--os = reaper.GetOS()
+--if string.match(os, "OSX") then 
+--  color = 0x00FF88|0x1000000
+--else
+--  color = 0x88FF00|0x1000000
+--end
+
+color=ultraschall.ConvertColor(100,255,0)
 
 clipboard_string=ultraschall.GetStringFromClipboard_SWS() 
 --clipboard_string="0:00:02.050 Test1\n   Katze1\nKatze2   \n00:04:00 Test2"

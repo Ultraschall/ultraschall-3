@@ -72,15 +72,15 @@ function buildTable()
 	
 
 --     name          = element type          x      y    w    h     caption               ...other params...
-	--logo			= GUI.Pic:new(			484,280, 80, 80, img_ratio, img_adress, runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
+	--logo			= GUI.Pic:new(			484,280, 80, 80, img_ratio, img_adress, runcommand, "_Ultraschall_Open_Project_Folder"),
 	label           = GUI.Lbl:new(          120,  50+y_offset,  "Use routing snapshots to manage different recording situations.", 0),
 	label2 			= GUI.Lbl:new(			110,  70+y_offset,	"These snapshots save and recall all information of the routing matrix:", 0),
 	label3          = GUI.Lbl:new(          60,  130+y_offset,  "Preshow\n\n\n\nRecording\n\n\n\nAftershow\n\n\n\nEditing", 0),
 	--label4          = GUI.Lbl:new(          30,  70+y_offset,               "Follow these simple steps:", 0),
 
 	--chapters      	= GUI.Btn:new(          430, 185+y_offset, 190, 40,      "View Chapters", runcommand, "_SWSMARKERLIST1"),
-	--metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_RSd0ee00a4ab7a2619e32ba3a9d27e1786123274da"),
-	-- image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_RS410ef7587f335d359f2df776d1e58b01ca7443bc"),
+	--metadata      	= GUI.Btn:new(          430, 250+y_offset, 190, 40,      "Edit ID3V2 Metadata", runcommand, "_Ultraschall_Edit_ID3_Tags"),
+	-- image      		= GUI.Btn:new(          430, 315+y_offset, 190, 40,      "Open Project Folder", runcommand, "_Ultraschall_Open_Project_Folder"),
 	--finalize      	= GUI.Btn:new(          430, 412+y_offset, 190, 40,      "Finalize MP3!", runcommand, "_ULTRASCHALL_INSERT_MP3_CHAPTER_MARKERS"),
 }
 

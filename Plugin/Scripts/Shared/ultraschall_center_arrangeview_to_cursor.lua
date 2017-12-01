@@ -23,47 +23,34 @@
 # 
 ################################################################################
 ]]
- 
--- little helpers
+
+-- sets Arrangeview to that the cursor-position is centered if the cursor is not visible
+-- when stopped, it will take the edit-cursor, when playing/recording, it will take the play-cursor instead
+
 
 local info = debug.getinfo(1,'S');
 script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
 dofile(script_path .. "ultraschall_helper_functions.lua")
 
--- main
-followstate = ConsolidateFollowState()
+a,A=ultraschall.GetUSExternalState("ultraschall_follow", "state")
 
+start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
+length=(end_time-start_time)/2
 
-is_new,name,sec,cmd,rel,res,val = reaper.get_action_context()
--- state = reaper.GetToggleCommandStateEx(sec, cmd)                           
-
-
-
-if followstate <= 0 then                                                                  
-	reaper.SetToggleCommandState(sec, cmd, 1)
-	reaper.Main_OnCommand(40036, 0) -- View: Toggle auto-view-scroll during playback
-	reaper.Main_OnCommand(40262, 0) -- Toggle auto-view-scroll while recording
-	reaper.Main_OnCommand(41817, 0) -- Toggle continuous-scrolling
-	runcommand("_BR_FOCUS_ARRANGE_WND")
-	reaper.Main_OnCommand(40150,0) -- Got to play position
-	start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
-	length=(end_time-start_time)/2
-	reaper.BR_SetArrangeView(0, (reaper.GetPlayPosition()-length), (reaper.GetPlayPosition()+length))
+if reaper.GetPlayState() == 0 or reaper.GetPlayState() == 2 then -- 0 = Stop, 2 = Pause
+	if reaper.GetCursorPosition() < start_time or reaper.GetCursorPosition() > end_time then -- Cursor is not visible
+		reaper.BR_SetArrangeView(0, (reaper.GetCursorPosition()-length), (reaper.GetCursorPosition()+length))
+	end
 else
-	reaper.SetToggleCommandState(sec, cmd, 0)
-	reaper.Main_OnCommand(40036, 0) -- View: Toggle auto-view-scroll during playback
-	reaper.Main_OnCommand(40262, 0) -- Toggle auto-view-scroll while recording
-	reaper.Main_OnCommand(41817, 0) -- Toggle continuous-scrolling
-	runcommand("_BR_FOCUS_ARRANGE_WND")
-	
+    if A=="0" or A=="-1" then -- follow mode is active
+    	if reaper.GetPlayPosition() < start_time or reaper.GetPlayPosition() > end_time then -- Cursor is not visible
+				reaper.BR_SetArrangeView(0, (reaper.GetPlayPosition()-length), (reaper.GetPlayPosition()+length))
+			end
+	else
+			if reaper.GetCursorPosition() < start_time or reaper.GetCursorPosition() > end_time then -- Cursor is not visible
+				reaper.BR_SetArrangeView(0, (reaper.GetCursorPosition()-length), (reaper.GetCursorPosition()+length))
+			end
+	end
 end
-
-ultraschall.GetUSExternalState("ultraschall_follow", "state", followstate)
-reaper.SetExtState("ultraschall_follow", "state2", followstate, false)
-if followstate==0 then reaper.SetExtState("ultraschall_follow", "started", "started", false) end
-reaper.RefreshToolbar2(sec, cmd)
-
--- Msg(cmd)
-
 
 

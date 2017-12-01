@@ -149,11 +149,11 @@ reaper.SNM_MoveOrRemoveTrackFX(m, fx_slot, 0)
 
 -- is the ReaperThemeZip loaded? Only then (probably on first start) reload the ReaperTheme to get the colors working 
 
-curtheme = reaper.GetLastColorThemeFile()
-if string.find(curtheme, "ReaperThemeZip", 1) then
+-- curtheme = reaper.GetLastColorThemeFile()
+-- if string.find(curtheme, "ReaperThemeZip", 1) then
   themeadress = reaper.GetResourcePath() .. "/ColorThemes/Ultraschall_3.1.ReaperTheme"
   reaper.OpenColorThemeFile(themeadress)
-end
+-- end
 
 -- start Followmode-reset-backgroundscript
   follow_reset_cmdid=reaper.NamedCommandLookup("_Ultraschall_Toggle_Reset")
