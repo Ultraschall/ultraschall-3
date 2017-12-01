@@ -76,12 +76,20 @@ namespace ultraschall {
                std::stringstream os;
                os << "Ultraschall can't find a suitable media file.";
                os << "\r\n\r\n";
-               os << "The current project might not have been rendered to disk yet.";
+               os << "Please select an alternative media file from the file selection dialog after closing this message.";
                os << "\r\n\r\n";
                
                NotificationWindow::Show(os.str(), true);
+               
+               const std::string targetName = FileManager::BrowseForTargetAudioFiles("Select media file...");
+               if(targetName.empty() == false)
+               {
+                  targetNames_.push_back(targetName);
+               }
+               
             }
-            else if(ConfigureAssets() == true)
+            
+            if((targetNames_.empty() == false) && (ConfigureAssets() == true))
             {
                std::vector<ErrorRecord> errorRecords;
                

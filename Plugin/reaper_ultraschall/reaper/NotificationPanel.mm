@@ -29,25 +29,27 @@
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle: @"Dismiss"];
         [alert setMessageText: message];
         [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
-    }];
+//        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+   [alert runModal];
+//    }];
 }
 
 + (void) showWithMessage:(NSString*)message info:(NSString*)info asError:(BOOL)error
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle: @"Dismiss"];
         [alert setMessageText: message];
         [alert setInformativeText: info];
         [alert setAlertStyle: (error == YES) ? NSCriticalAlertStyle : NSInformationalAlertStyle];
-        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
-    }];
+//        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] completionHandler:nil];
+   [alert runModal];
+//    }];
 }
 
 @end
