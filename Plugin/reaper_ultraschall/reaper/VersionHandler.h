@@ -48,8 +48,6 @@ class VersionHandler
    static std::string StudioLinkOnAirVersion();
 
    static std::string SWSVersion();
-
-   static std::string LAMEVersion();
 };
 }
 }

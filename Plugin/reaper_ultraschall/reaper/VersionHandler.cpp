@@ -170,14 +170,5 @@ std::string VersionHandler::SWSVersion()
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
-std::string VersionHandler::LAMEVersion()
-{
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\libmp3lame.dll";
-   return FileManager::ReadVersionFromFile(path);
-#else
-   return "3.98.3";
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-}
 }
 }

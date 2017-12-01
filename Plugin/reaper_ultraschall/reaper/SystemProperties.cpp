@@ -218,12 +218,6 @@ void UpdateBillOfMaterials()
       bom.push_back("StudioLink OnAir Plug-in " + itemVersion);
    }
    
-   itemVersion = VersionHandler::LAMEVersion();
-   if(itemVersion.empty() == false)
-   {
-      bom.push_back("LAME MP3 Encoder " + itemVersion);
-   }
-   
    itemVersion = VersionHandler::SWSVersion();
    if(itemVersion.empty() == false)
    {
