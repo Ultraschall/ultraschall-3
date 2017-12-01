@@ -35,6 +35,7 @@ BasicMediaInformation::BasicMediaInformation()
 
 BasicMediaInformation::~BasicMediaInformation()
 {
+   Reset();
 }
 
 BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
@@ -62,4 +63,21 @@ BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
    return result;
 }
 
+bool BasicMediaInformation::Validate() const
+{
+   return (title_.empty() == false) && (author_.empty() == false) &&
+   (track_.empty() == false) && (date_.empty() == false) &&
+   (content_.empty() == false);
+}
+   
+void BasicMediaInformation::Reset()
+{
+   title_.clear();
+   author_.clear();
+   track_.clear();
+   date_.clear();
+   content_.clear();
+   comments_.clear();
+}
+   
 }}

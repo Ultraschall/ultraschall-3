@@ -64,76 +64,77 @@ static DeclareCustomAction<InsertMediaPropertiesAction> action;
 
 ServiceStatus InsertMediaPropertiesAction::Execute()
 {
-   std::vector<ErrorRecord> errorRecords;
-
-   ProjectManager& projectManager = ProjectManager::Instance();
-   Project currentProject = projectManager.CurrentProject();
-   const std::vector<std::string> targetNames = FindTargetFiles(currentProject);
-   for(size_t i = 0; i < targetNames.size(); i++)
+   if(ConfigureAssets() == true)
    {
-      const std::string& targetName = targetNames[i];
-
-      ITagWriter* pTagWriter = CreateTagWriter(targetNames[i]);
-      if(pTagWriter != nullptr)
+      std::vector<ErrorRecord> errorRecords;
+      
+      ProjectManager& projectManager = ProjectManager::Instance();
+      Project currentProject = projectManager.CurrentProject();
+      
+      for(size_t i = 0; i < targetNames_.size(); i++)
       {
-         BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
-         if(pTagWriter->InsertStandardProperties(targetName, properties) == false)
+         const std::string& targetName = targetNames_[i];
+         
+         ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
+         if(pTagWriter != nullptr)
          {
-            errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert tags."));
-         }
-
-         const std::string coverImage = FindCoverImage(currentProject);
-         if(coverImage.empty() == false)
-         {
-            if(pTagWriter->InsertCoverImage(targetName, coverImage) == false)
+            BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
+            if(pTagWriter->InsertStandardProperties(targetName, properties) == false)
             {
-               errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert cover image."));
+               errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert tags."));
             }
-         }
-
-         const std::vector<Marker> tags = currentProject.QueryAllMarkers();
-         if(tags.empty() == false)
-         {
-            if(pTagWriter->InsertChapterMarkers(targetName, tags, true) == false)
+            
+            if(cover_.empty() == false)
             {
-               errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert chapter markers."));
+               if(pTagWriter->InsertCoverImage(targetName, cover_) == false)
+               {
+                  errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert cover image."));
+               }
             }
-         }
-
-         framework::SafeRelease(pTagWriter);
-      }
-   }
-
-   if(errorRecords.size() > 0)
-   {
-      for(size_t j = 0; j < errorRecords.size(); j++)
-      {
-         NotificationWindow::Show(errorRecords[j].Message(), errorRecords[j].Target(), true);
-      }
-   }
-   else
-   {
-      std::stringstream os;
-      os << "The following media files have been updated successfully:\r\n\r\n";
-      for(size_t k = 0; k < targetNames.size(); k++)
-      {
-         const std::string::size_type offset = targetNames[k].rfind(FileManager::PathSeparator());
-         if(offset != std::string::npos)
-         {
-            const std::string& targetName = targetNames[k].substr(offset + 1, targetNames[k].size()); // skip separator
-            os << targetName;
-            if(k < (targetNames.size() - 1))
+            
+            if(chapters_.empty() == false)
             {
-               os << "\r\n";
+               if(pTagWriter->InsertChapterMarkers(targetName, chapters_, true) == false)
+               {
+                  errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert chapter markers."));
+               }
             }
+            
+            framework::SafeRelease(pTagWriter);
          }
       }
-
-      os << "\r\n";
-
-      NotificationWindow::Show(os.str());
+      
+      if(errorRecords.size() > 0)
+      {
+         for(size_t j = 0; j < errorRecords.size(); j++)
+         {
+            NotificationWindow::Show(errorRecords[j].Message(), errorRecords[j].Target(), true);
+         }
+      }
+      else
+      {
+         std::stringstream os;
+         os << "The following media files have been updated successfully:\r\n\r\n";
+         for(size_t k = 0; k < targetNames_.size(); k++)
+         {
+            const std::string::size_type offset = targetNames_[k].rfind(FileManager::PathSeparator());
+            if(offset != std::string::npos)
+            {
+               const std::string& targetName = targetNames_[k].substr(offset + 1, targetNames_[k].size()); // skip separator
+               os << targetName;
+               if(k < (targetNames_.size() - 1))
+               {
+                  os << "\r\n";
+               }
+            }
+         }
+         
+         os << "\r\n";
+         
+         NotificationWindow::Show(os.str());
+      }
    }
-
+   
    return SERVICE_SUCCESS;
 }
 
@@ -245,6 +246,71 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
    return type;
 }
 
+bool InsertMediaPropertiesAction::ConfigureAssets()
+{
+   bool result = true;
+   
+   ResetAssets();
+   
+   ProjectManager& projectManager = ProjectManager::Instance();
+   Project currentProject = projectManager.CurrentProject();
+   
+   targetNames_ = FindTargetFiles(currentProject);
+   if(targetNames_.empty() == true)
+   {
+      const std::string message = "Can't find a single target file!";
+      NotificationWindow::Show(message.c_str(), true); // target files are mandatory, at least one.
+
+      result = false;
+   }
+   
+   if(true == result)
+   {
+      id3v2_ = BasicMediaInformation::ParseString(currentProject.Notes());
+      if(id3v2_.Validate() == false)
+      {
+         const std::string message = "ID3v2 tags have not been defined yet.";
+         NotificationWindow::Show(message.c_str(), true); // id3v2 tags are mandatory
+         
+         result = false;
+      }
+   }
+   
+   if(true == result)
+   {
+      cover_ = FindCoverImage(currentProject);
+      if(cover_.empty() == true)
+      {
+         const std::string message = "Cover image is missing.";
+         NotificationWindow::Show(message.c_str(), false); // cover is optional
+         
+         result = true;
+      }
+   }
+   
+   if(true == result)
+   {
+      chapters_ = currentProject.QueryAllMarkers();
+      if(chapters_.empty() == true)
+      {
+         const std::string message = "No chapters, you fool!";
+         NotificationWindow::Show(message.c_str(), false); // chapters are optional
+         
+         result = false;
+      }
+   }
+   
+   return result;
+}
+
+void InsertMediaPropertiesAction::ResetAssets()
+{
+   targetNames_.clear();
+   id3v2_.Reset();
+   cover_.clear();
+   chapters_.clear();
+}
+   
 }
 }
 

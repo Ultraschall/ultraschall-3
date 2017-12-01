@@ -38,6 +38,9 @@ public:
 
    static BasicMediaInformation ParseString(const std::string& str);
 
+   bool Validate() const;
+   void Reset();
+   
    inline const std::string& Title() const
    {
       return title_;

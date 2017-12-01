@@ -58,7 +58,15 @@ private:
    InsertMediaPropertiesAction()
    {
    }
-    
+   
+   bool ConfigureAssets();
+   void ResetAssets();
+   
+   std::vector<std::string> targetNames_;
+   std::string cover_;
+   std::vector<Marker> chapters_;
+   BasicMediaInformation id3v2_;
+   
    static std::vector<std::string> FindTargetFiles(const Project& project);
 
    static std::string FindCoverImage(const Project& project);
