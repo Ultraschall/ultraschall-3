@@ -45,13 +45,29 @@ BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
    if(str.empty() == false)
    {
       std::vector<std::string> tokens = framework::StringTokenize(str, '\n');
-      if((tokens.empty() == false) && (tokens.size() >= 5))
+      if(tokens.empty() == false)
       {
          result.title_ = tokens[0];
-         result.author_ = tokens[1];
-         result.track_ = tokens[2];
-         result.date_ = tokens[3];
-         result.content_ = tokens[4];
+
+         if(tokens.size() > 1)
+         {
+           result.author_ = tokens[1];
+         }
+
+         if(tokens.size() > 2)
+         {
+           result.track_ = tokens[2];
+         }
+
+         if(tokens.size() > 3)
+         {
+           result.date_ = tokens[3];
+         }
+
+         if(tokens.size() > 4)
+         {
+           result.content_ = tokens[4];
+         }
 
          if(tokens.size() > 5)
          {
@@ -65,8 +81,8 @@ BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
 
 bool BasicMediaInformation::Validate() const
 {
-   return (title_.empty() == false) && (author_.empty() == false) &&
-   (track_.empty() == false) && (date_.empty() == false) &&
+   return (title_.empty() == false) || (author_.empty() == false) ||
+   (track_.empty() == false) || (date_.empty() == false) ||
    (content_.empty() == false);
 }
    
