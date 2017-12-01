@@ -42,6 +42,8 @@ else
 	end
 end
 
+runcommand("_Ultraschall_Center_Arrangeview_To_Cursor") -- scroll to cursor if not visible
+
 retval, retvals_csv = reaper.GetUserInputs("Insert chapter marker", 1, "Name of this chapter marker:", "") -- User input box
 
 if retval == true then -- User pressed ok          
