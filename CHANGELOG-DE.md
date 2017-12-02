@@ -43,8 +43,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden.* 
 * Theme: **Umschalten des Arm-Status für alle Tracks**
 *Mit dem Shortcut `shift`+`a` können alle Tracks für eine Aufnahme scharfgeschaltet werden bzw. die Scharfschaltung aufgehoben werden. Das Umschalten funktioniert nur, wenn keine Aufnahme läuft. Dass neue Tracks automatisch scharf geschaltet werden, kann in den Settings deaktiviert werden.*
-* Theme: **Anzeige der Envelope-Spurentyp**
-*Bei Envelope Spuren werden nun deren Namen angezeigt - also etwa Mute, Volume etc.* 
+* Theme: **Envelope-Spuren**
+*Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden.*
 * Easter Egg: **Wenns mal wieder länger dauert**
 *Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen.*
 
