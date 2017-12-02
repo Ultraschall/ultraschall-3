@@ -17,6 +17,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 *Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted.*
 * Editing: **Folgen-Modus**
 *Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne dass Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor.*
+* Editing: **Kapitelmarken**
+*Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben. Kapitelmarken können zusätzlich zu `m` auch mit `cmd`+`m` gesetzt werden, um sicher zu stellen dass der Focus in jedem Fall auf der Timeline steht.*
 * Editing: **Lautstärke-Zoom der Wellenform**
 *Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten.*
 * Editing: **Zoom zu Edit-Cursor**
