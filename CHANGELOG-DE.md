@@ -24,7 +24,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Zoom zu Edit-Cursor**
 *Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück.*
 * Editing: **Doppelklick für Play**
-*Ein Doppelklick in der Zeitleiste spielt ab der angeklickten Position ab.*
+*Ein Doppelklick in der Zeitleiste oder dem Editierfenster spielt ab der angeklickten Position ab.*
 * Theme: **Anzeige ausgewählter Items optimiert**
 *Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung.*
 * Theme: **Master-Kanal im Mixer immer sichtbar**
