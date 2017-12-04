@@ -90,6 +90,12 @@ function muteselectedItems()
       -- delete points between in/out and set new ones
       reaper.DeleteEnvelopePointRange(MuteTrackEnvelope, mute_start, mute_end)
       
+      -- check if there’s a point at the beginning, if not set one to unmute
+      point_at_zero=reaper.GetEnvelopePointByTime(MuteTrackEnvelope, 0.0)
+      if point_at_zero<0 then
+        reaper.InsertEnvelopePoint(MuteTrackEnvelope, 0.0, 1 , 1, 0, false)
+      end
+
       --set START Point
       --reaper.InsertEnvelopePoint(MuteTrackEnvelope, mute_start, 1, 1, 0, false, false)
       reaper.InsertEnvelopePoint(MuteTrackEnvelope, mute_start, 0, 1, 0, false, false)
@@ -137,6 +143,15 @@ function muteselectedTracks()
     reaper.SetEnvelopeStateChunk(MuteTrackEnvelope, Env_XML, false)
     ret,value_at_out_point=reaper.Envelope_Evaluate(MuteTrackEnvelope, time_selection_end, 0, 0)
     
+    -- delete points between in/out
+    reaper.DeleteEnvelopePointRange(MuteTrackEnvelope, time_selection_start, time_selection_end)
+    
+    -- check if there’s a point at the beginning, if not set one to unmute
+    point_at_zero=reaper.GetEnvelopePointByTime(MuteTrackEnvelope, 0.0)
+    if point_at_zero<0 then
+      reaper.InsertEnvelopePoint(MuteTrackEnvelope, 0.0, 1 , 1, 0, false)
+    end
+
     --set START Point
     reaper.InsertEnvelopePoint(MuteTrackEnvelope, time_selection_start, 0, 1, 0, false, false)
     
