@@ -45,10 +45,12 @@ if followstate <= 0 then
 	reaper.Main_OnCommand(40262, 0) -- Toggle auto-view-scroll while recording
 	reaper.Main_OnCommand(41817, 0) -- Toggle continuous-scrolling
 	runcommand("_BR_FOCUS_ARRANGE_WND")
-	reaper.Main_OnCommand(40150,0) -- Got to play position
-	start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
-	length=(end_time-start_time)/2
-	reaper.BR_SetArrangeView(0, (reaper.GetPlayPosition()-length), (reaper.GetPlayPosition()+length))
+	reaper.Main_OnCommand(40150,0) -- Go to play position
+	if reaper.GetPlayState()~=0 then 
+		start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
+		length=(end_time-start_time)/2
+		reaper.BR_SetArrangeView(0, (reaper.GetPlayPosition()-length), (reaper.GetPlayPosition()+length))
+	end
 else
 	reaper.SetToggleCommandState(sec, cmd, 0)
 	reaper.Main_OnCommand(40036, 0) -- View: Toggle auto-view-scroll during playback

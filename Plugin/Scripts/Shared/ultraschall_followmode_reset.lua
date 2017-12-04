@@ -37,13 +37,13 @@
 -- if the state is set to "recognized", the checking happens that could lead to stopping of the followmode
 -- this state is set to "started" by the script "ultraschall_toggle_follow.lua".
 
-count=2  -- as the script has to check the current shown-time in the arrange-view three times,
+count=1  -- as the script has to check the current shown-time in the arrange-view three times,
          -- this count calculates the delay-factor between these three checks
          -- try higher, if it creates false positives
-         -- count is the timeframe to check for scrolling in seconds
-         -- minimum value is 1, 2 or higher is recommended
+         -- count is the timeframe to check for scrolling in seconds, can be given in float.
+         -- minimum value is 0.6, 2 or higher is recommended
 
-if count<1 then reaper.MB("Variable \"count\" must be bigger or equal 1!","Error",0) return end
+if count<0.6 then reaper.MB("Variable \"count\" must be bigger or equal 0.6!","Error",0) return end
 
         
 --initialize the variables
@@ -58,9 +58,9 @@ Start3, End3 = "","" -- third checkpoint
 A=0                  -- counting variable
 Zoom=reaper.GetHZoomLevel()
 Position_Start=reaper.time_precise()
+EditcursorPos=reaper.GetCursorPosition()
 
 function main()
---  reaper.ShowConsoleMsg(reaper.GetExtState("ultraschall_follow", "started").."\n")
   if reaper.GetExtState("ultraschall_follow", "state2")=="0" and reaper.GetPlayState()~=0 then 
     --A=A+1 -- if followmode is on, start counting the countingvariable A
     if reaper.time_precise()-Position_Start>=0 and reaper.time_precise()-Position_Start<count2 then A=0.1
@@ -69,16 +69,53 @@ function main()
     else
       A=count
     end
---    if reaper.time_precise()-Position_Start>count2 then A=count3 end
     playposition=reaper.GetPlayPosition()
-  --  start,ende = reaper.GetSet_ArrangeView2(0, false, 0, 0)
-    -- reaper.ShowConsoleMsg(reaper.GetExtState("ultraschall_follow", "started").."\n")
+    Editcursor_current=reaper.GetCursorPosition()
     if reaper.GetHZoomLevel()~=Zoom then Zoom=reaper.GetHZoomLevel() 
+      -- if user has zoomed in or out, keep followmode rolling by setting external-state ultraschall_follow->started to started
       reaper.SetExtState("ultraschall_follow", "started", "started", false) 
       A=0
       Start1, End1 = "","" -- first checkpoint
       Start2, End2 = "","" -- second checkpoint
       Start3, End3 = "","" -- third checkpoint
+    elseif EditcursorPos~=Editcursor_current then
+      -- if user changes position of the editcursor(by clicking or moving with arrowkeys), end followmode as
+      -- long as the click didn't happen in the ruler.
+
+      window, segment, details = reaper.BR_GetMouseCursorContext()
+      mousepos=reaper.BR_GetMouseCursorContext_Position()
+      reaper.ClearConsole()
+      
+      -- Reaper seems to work with greater precision in projecttime than we can use do in Lua, 
+      -- so I have to trick it somehow into using lower precision, as otherwise, it will never 
+      -- find out, if the mouseposition==editcursor
+      mousepos=tostring(mousepos)
+      T1=mousepos:match("(.*)%.")
+      T2=mousepos:match("%.(.*)")
+      mousepos=tonumber(T1.."."..T2:sub(1,7))
+
+      Editcursor_temp=tostring(Editcursor_current)
+      T1=Editcursor_temp:match("(.*)%.")
+      T2=Editcursor_temp:match("%.(.*)")
+      Editcursor_temp=tonumber(T1.."."..T2:sub(1,7))
+      
+      if window=="arrange" and  Editcursor_temp==mousepos then 
+        -- if editcursor got repositioned by clicking somewhere, except the ruler, stop followmode
+        -- will have no effect, if the editcursor is moved by something else than the mouse,
+        -- as it will check, whether the changed position of the cursor matches the mouse-position
+      
+         reaper.SetExtState("ultraschall_follow", "started", "started", false)
+        reaper.Main_OnCommand(cmdID, 0)
+      else
+        -- else, keep the followmode going
+        reaper.SetExtState("ultraschall_follow", "started", "started", false)
+        Start1, End1 = "",""
+        Start2, End2 = "",""
+        Start3, End3 = "",""
+        A=0 
+        Position_Start=reaper.time_precise()--]]
+      end
+      EditcursorPos=reaper.GetCursorPosition()
     elseif A==0.1 then Start1, End1 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set first checkpoint
     elseif A==count2 then Start2, End2 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set second checkpoint
     elseif A==count3 then Start3, End3 = reaper.GetSet_ArrangeView2(0, false, 0, 0) -- set third checkpoint
@@ -96,21 +133,17 @@ function main()
       elseif Start1==0 and Start2==0 and Start3== 0 then
         -- if arrange view starts at project-position 0, don't stop when not scrolling. Workaround for zoomout-cases.
         reaper.SetExtState("ultraschall_follow", "started", "started", false)
-        -- reaper.ShowConsoleMsg("startend=0\n")
       elseif Start1==Start2 and Start2==Start2 and End1==End2 and End2==End3 and reaper.GetPlayState()&2==2 and reaper.GetExtState("ultraschall_follow", "started")~="started" then 
         -- if Start and End of all three checkpoints are the same and playstate is(!) paused, assume, the followmode has just been started
         -- setting the external state ultraschall_follow->started to started (as the followmode script does, when started)
         reaper.SetExtState("ultraschall_follow", "started", "started", false)
-        -- reaper.ShowConsoleMsg("start&end=same\n")
       elseif (Start1~=Start2 and Start2~=Start3) and reaper.GetPlayState()&2~=2 and reaper.GetExtState("ultraschall_follow", "started")=="started" then 
         -- as soon as the movement of the checkpoints have begun, reset the external state ultraschall_follow->started to recognised, so this script
         -- knows, when to start checking and resetting the FollowMode
         reaper.SetExtState("ultraschall_follow", "started", "recognized", false)
-        -- reaper.ShowConsoleMsg("recognized\n")
       elseif Start1==Start2 and Start2==Start2 and End1==End2 and End2==End3 and reaper.GetPlayState()&2~=2 and reaper.GetExtState("ultraschall_follow", "started")~="started" then 
         -- if Start and End of all three checkpoints are the same and playstate is not paused, run the followmode-script
         reaper.Main_OnCommand(cmdID, 0)
-        -- reaper.ShowConsoleMsg("stop\n")
       elseif playposition==0 and reaper.GetPlayState()~=0 then
         -- edgecase, when position is at 0 and play/rec is not stopped(when using "got to start of project"), reset
         -- the external state ultraschall_follow->started to started (as the followmode script does, when started)
@@ -118,8 +151,9 @@ function main()
       elseif (playposition<start or playposition>ende) and start~=0.0 and reaper.GetHZoomLevel()<20000 then -- and reaper.GetPlayState()&2~=2 and reaper.GetExtState("ultraschall_follow", "started")=="started" then
         -- when playcursor is outside the timerange of the arrange-window, set followmode to off
         reaper.Main_OnCommand(cmdID, 0)
-        -- reaper.ShowConsoleMsg(reaper.GetHZoomLevel())
-        -- reaper.ShowConsoleMsg("fehltwas\n"..start.." "..ende)
+      elseif playposition>((ende-start)*0.53)+start then --and reaper.GetExtState("ultraschall_follow", "started")~="started" then
+        -- if the playcursor is at 53% of the arrangeview(as seen from the left), stop followmode
+        reaper.Main_OnCommand(cmdID, 0)
       end
       -- reset variables
       Start1, End1 = "",""
@@ -130,7 +164,9 @@ function main()
     end
   elseif A>0 then
     A=0  -- if followmode is off, reset countingvariable A to 0
-  
+  else
+    EditcursorPos=reaper.GetCursorPosition() -- if followmode is off, get the current position of the editcursor. Otherwise, turning followmode on
+                                             -- results in immediate turning off of followmode
   end
   
   reaper.defer(main)
