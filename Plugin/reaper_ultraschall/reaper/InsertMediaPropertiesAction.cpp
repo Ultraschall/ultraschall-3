@@ -79,7 +79,7 @@ namespace ultraschall {
                os << "Please select an alternative media file from the file selection dialog after closing this message.";
                os << "\r\n\r\n";
                
-               NotificationWindow::Show(os.str(), true);
+               NotificationWindow::Show(os.str(), false);
                
                const std::string targetName = FileManager::BrowseForTargetAudioFiles("Select media file...");
                if(targetName.empty() == false)
@@ -130,6 +130,7 @@ namespace ultraschall {
                {
                   for(size_t j = 0; j < errorRecords.size(); j++)
                   {
+                     //FIXME: display ONE error dialog with all error messages
                      NotificationWindow::Show(errorRecords[j].Message(), errorRecords[j].Target(), true);
                   }
                }
@@ -153,7 +154,7 @@ namespace ultraschall {
                   
                   os << "\r\n";
                   
-                  NotificationWindow::Show(os.str());
+                  NotificationWindow::Show(os.str(), false);
                }
             }
          }
