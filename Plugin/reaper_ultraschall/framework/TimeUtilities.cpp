@@ -143,10 +143,17 @@ uint16_t StringToUint16(const std::string& str, const int lowerLimit = 0, const 
 
    if(str.empty() == false)
    {
-      const int number = std::stoi(str);
-      if((number >= lowerLimit) && (number <= upperLimit))
+      try
       {
-         result = (uint16_t)number;
+         const int number = std::stoi(str);
+         if((number >= lowerLimit) && (number <= upperLimit))
+         {
+            result = (uint16_t)number;
+         }
+      }
+      catch(std::invalid_argument&)
+      {
+         result = 0xffff;
       }
    }
 
@@ -159,10 +166,18 @@ uint8_t StringToUint8(const std::string& str, const int lowerLimit = 0, const in
 
    if(str.empty() == false)
    {
-      const int number = std::stoi(str);
-      if((number >= lowerLimit) && (number <= upperLimit))
+      try
       {
-         result = (uint8_t)number;
+         const int number = std::stoi(str);
+         if((number >= lowerLimit) && (number <= upperLimit))
+         {
+            result = (uint8_t)number;
+         }
+
+      }
+      catch(std::invalid_argument&)
+      {
+         result = 0xff;
       }
    }
 
