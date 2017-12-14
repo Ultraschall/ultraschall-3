@@ -380,6 +380,24 @@ std::string FileManager::AppendPath(const std::string &prefix, const std::string
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 }
 
+std::string FileManager::StripPath(const std::string& path)
+{
+   std::string shortName;
+   
+   if(path.empty() == false)
+   {
+      shortName = path;
+
+      const std::string::size_type offset = path.rfind(FileManager::PathSeparator());
+      if(offset != std::string::npos)
+      {
+         shortName = path.substr(offset + 1, path.size()); // skip separator
+      }
+   }
+   
+   return shortName;
+}
+
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 std::string FileManager::UserHomeDirectory()
 {

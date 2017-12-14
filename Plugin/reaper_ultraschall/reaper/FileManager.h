@@ -43,7 +43,8 @@ public:
    static std::string BrowseForFolder(const std::string& title, const std::string& folder);
 
    static std::string AppendPath(const std::string& prefix, const std::string& append);
-
+   static std::string StripPath(const std::string& path);
+   
    static std::string UserHomeDirectory();
    static std::string UserApplicationSupportDirectory();
    static std::string SystemApplicationSupportDirectory();
