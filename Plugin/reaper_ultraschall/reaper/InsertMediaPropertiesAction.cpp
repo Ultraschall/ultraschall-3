@@ -27,6 +27,7 @@
 
 #include <Framework.h>
 #include <StringUtilities.h>
+#include <TimeUtilities.h>
 
 #include "InsertMediaPropertiesAction.h"
 #include "CustomActionFactory.h"
@@ -86,75 +87,96 @@ namespace ultraschall {
                {
                   targetNames_.push_back(targetName);
                }
-               
             }
             
             if((targetNames_.empty() == false) && (ConfigureAssets() == true))
             {
-               std::vector<ErrorRecord> errorRecords;
-               
-               for(size_t i = 0; i < targetNames_.size(); i++)
+               std::vector<std::string> errorMessages;
+               if(ValidateChapterMarkers(errorMessages) == true)
                {
-                  const std::string& targetName = targetNames_[i];
+                  std::vector<ErrorRecord> errorRecords;
                   
-                  ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
-                  if(pTagWriter != nullptr)
+                  for(size_t i = 0; i < targetNames_.size(); i++)
                   {
-                     BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
-                     if(pTagWriter->InsertStandardProperties(targetName, properties) == false)
-                     {
-                        errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert tags."));
-                     }
+                     const std::string& targetName = targetNames_[i];
                      
-                     if(cover_.empty() == false)
+                     ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
+                     if(pTagWriter != nullptr)
                      {
-                        if(pTagWriter->InsertCoverImage(targetName, cover_) == false)
+                        BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
+                        if(pTagWriter->InsertStandardProperties(targetName, properties) == false)
                         {
-                           errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert cover image."));
+                           errorRecords.push_back(ErrorRecord(targetName, "Failed to insert tags."));
                         }
-                     }
-                     
-                     if(chapters_.empty() == false)
-                     {
-                        if(pTagWriter->InsertChapterMarkers(targetName, chapters_, true) == false)
+                        
+                        if(cover_.empty() == false)
                         {
-                           errorRecords.push_back(ErrorRecord(targetName, ": Failed to insert chapter markers."));
+                           if(pTagWriter->InsertCoverImage(targetName, cover_) == false)
+                           {
+                              errorRecords.push_back(ErrorRecord(targetName, "Failed to insert cover image."));
+                           }
                         }
+                        
+                        if(chapters_.empty() == false)
+                        {
+                           if(pTagWriter->InsertChapterMarkers(targetName, chapters_, true) == false)
+                           {
+                              errorRecords.push_back(ErrorRecord(targetName, "Failed to insert chapter markers."));
+                           }
+                        }
+                        
+                        framework::SafeRelease(pTagWriter);
                      }
-                     
-                     framework::SafeRelease(pTagWriter);
                   }
-               }
-               
-               if(errorRecords.size() > 0)
-               {
-                  for(size_t j = 0; j < errorRecords.size(); j++)
+                  
+                  if(errorRecords.size() > 0)
                   {
-                     //FIXME: display ONE error dialog with all error messages
-                     NotificationWindow::Show(errorRecords[j].Message(), errorRecords[j].Target(), true);
-                  }
-               }
-               else
-               {
-                  std::stringstream os;
-                  os << "The following media files have been updated successfully:\r\n\r\n";
-                  for(size_t k = 0; k < targetNames_.size(); k++)
-                  {
-                     const std::string::size_type offset = targetNames_[k].rfind(FileManager::PathSeparator());
-                     if(offset != std::string::npos)
+                     for(size_t j = 0; j < errorRecords.size(); j++)
                      {
-                        const std::string& targetName = targetNames_[k].substr(offset + 1, targetNames_[k].size()); // skip separator
-                        os << targetName;
+                        std::stringstream os;
+                        os << "Ultraschall found the following errors while processing media files:";
+                        os << "\r\n\r\n";
+                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message() << "\r\n";
+                        os << "\r\n\r\n";
+
+                        NotificationWindow::Show(os.str(), true);
+                     }
+                  }
+                  else
+                  {
+                     std::stringstream os;
+                     os << "The following media files have been updated successfully:\r\n\r\n";
+                     for(size_t k = 0; k < targetNames_.size(); k++)
+                     {
+                        os << FileManager::StripPath(targetNames_[k]);
                         if(k < (targetNames_.size() - 1))
                         {
                            os << "\r\n";
                         }
                      }
+                     
+                     os << "\r\n";
+                     
+                     NotificationWindow::Show(os.str(), false);
                   }
-                  
-                  os << "\r\n";
-                  
-                  NotificationWindow::Show(os.str(), false);
+               }
+               else
+               {
+                  if(errorMessages.empty() == false)
+                  {
+                     std::ostringstream os;
+                     os << "Ultraschall failed to validate chapter markers.";
+                     os << "\r\n\r\n";
+                     
+                     for(size_t l = 0; l < errorMessages.size(); l++)
+                     {
+                        os << errorMessages[l];
+                     }
+                     
+                     os << "\r\n\r\n";
+                     
+                     NotificationWindow::Show(os.str(), true);
+                  }
                }
             }
          }
@@ -359,6 +381,42 @@ namespace ultraschall {
          chapters_.clear();
       }
       
+      bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string>& errorMessages)
+      {
+         PRECONDITION_RETURN(chapters_.empty() == false, false);
+
+         bool valid = true;
+         errorMessages.clear();
+         
+         for(size_t i = 0; i < chapters_.size(); i++)
+         {
+            const Marker& current = chapters_[i];
+            const std::string safeName = current.Name();
+            const double safePosition = current.Position();
+            
+            if(current.Position() < 0)
+            {
+               std::stringstream os;
+               os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
+               errorMessages.push_back(os.str());
+               
+               valid = false;
+            }
+            
+            if(current.Name().empty() == true)
+            {
+               std::stringstream os;
+               os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
+               os << "\r\n";
+               errorMessages.push_back(os.str());
+               
+               valid = false;
+            }
+         }
+         
+         return valid;
+      }
+
    }
 }
 

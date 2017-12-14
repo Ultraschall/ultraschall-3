@@ -83,6 +83,8 @@ private:
    } TARGET_TYPE;
    
    static TARGET_TYPE EvaluateFileType(const std::string& targetName);
+   
+   bool ValidateChapterMarkers(std::vector<std::string>& errorRecords);
 };
       
 }}
