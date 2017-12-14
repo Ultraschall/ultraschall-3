@@ -93,7 +93,8 @@ productbuild --distribution ./Scripts/distribution.xml --resources ./Resources -
 # rm -rf ./Build
 
 # Create final signed installer package
-mv -f ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
+productsign --sign "Developer ID Installer: Heiko Panjas (8J2G689FCZ)" ./Payload/Ultraschall-unsigned.pkg ./Payload/$ULTRASCHALL_RELEASE.pkg
+rm -f ./Payload/Ultraschall-unsigned.pkg
 
 # Create installer disk image
 hdiutil create -format UDRW -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_RELEASE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
@@ -101,6 +102,12 @@ hdiutil create -format UDRW -srcfolder ./Payload -fs HFS+ -volname $ULTRASCHALL_
 # Mount installer disk image
 mkdir -p ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 hdiutil attach -mountpoint ./$ULTRASCHALL_RELEASE_INTERMEDIATE ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
+
+# Create signature on uninstall script
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Uninstall.command
+
+# Create signature on removal script
+codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASCHALL_RELEASE_INTERMEDIATE/Remove\ legacy\ audio\ devices.command
 
 echo Creating disk layout...
 echo '
