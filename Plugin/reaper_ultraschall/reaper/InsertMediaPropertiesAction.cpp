@@ -155,7 +155,7 @@ namespace ultraschall {
                         }
                      }
                      
-                     os << "\r\n";
+                     os << "\r\n\r\n";
                      
                      NotificationWindow::Show(os.str(), false);
                   }
@@ -416,7 +416,6 @@ namespace ultraschall {
          
          return valid;
       }
-
    }
 }
 
