@@ -152,3 +152,4 @@ rm -rf ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 rm -rf ./Payload
 rm -rf ./Intermediate
+rm -rf ./Build
