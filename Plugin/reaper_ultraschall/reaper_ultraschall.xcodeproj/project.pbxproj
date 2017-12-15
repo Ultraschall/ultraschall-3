@@ -59,8 +59,6 @@
 		428E0F601FCC29AE0051559A /* BasicMediaInformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 428E0F5E1FCC29AE0051559A /* BasicMediaInformation.cpp */; };
 		42915BD81BDC040A00916876 /* NotificationPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 42915BD61BDC040A00916876 /* NotificationPanel.h */; };
 		42915BD91BDC040A00916876 /* NotificationPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42915BD71BDC040A00916876 /* NotificationPanel.mm */; };
-		429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 429EB0861BDBCDCE005EA658 /* CustomAction.cpp */; };
-		429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 429EB0871BDBCDCE005EA658 /* CustomAction.h */; };
 		42A988CA1AF286D500231F3D /* NotificationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42A988C81AF286D500231F3D /* NotificationWindow.cpp */; };
 		42A988CB1AF286D500231F3D /* NotificationWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 42A988C91AF286D500231F3D /* NotificationWindow.h */; };
 		42DBC6901ACEE96100231F3D /* reaper_ultraschall.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */; };
@@ -153,8 +151,6 @@
 		42915BD61BDC040A00916876 /* NotificationPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationPanel.h; path = reaper/NotificationPanel.h; sourceTree = "<group>"; };
 		42915BD71BDC040A00916876 /* NotificationPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationPanel.mm; path = reaper/NotificationPanel.mm; sourceTree = "<group>"; };
 		429A7C591ABEE63B00231F3D /* reaper_ultraschall.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = reaper_ultraschall.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		429EB0861BDBCDCE005EA658 /* CustomAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomAction.cpp; path = reaper/CustomAction.cpp; sourceTree = "<group>"; };
-		429EB0871BDBCDCE005EA658 /* CustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAction.h; path = reaper/CustomAction.h; sourceTree = "<group>"; };
 		42A988C81AF286D500231F3D /* NotificationWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = NotificationWindow.cpp; path = reaper/NotificationWindow.cpp; sourceTree = "<group>"; };
 		42A988C91AF286D500231F3D /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationWindow.h; path = reaper/NotificationWindow.h; sourceTree = "<group>"; };
 		42E655011ACEE32A00231F3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -295,8 +291,6 @@
 				42F19A731ABEE82200231F3D /* reaper_ultraschall.cpp */,
 				42A988C81AF286D500231F3D /* NotificationWindow.cpp */,
 				42A988C91AF286D500231F3D /* NotificationWindow.h */,
-				429EB0861BDBCDCE005EA658 /* CustomAction.cpp */,
-				429EB0871BDBCDCE005EA658 /* CustomAction.h */,
 				42915BD61BDC040A00916876 /* NotificationPanel.h */,
 				42915BD71BDC040A00916876 /* NotificationPanel.mm */,
 				42F30D781BF23886003CBF13 /* ReaperVersionCheck.cpp */,
@@ -338,7 +332,6 @@
 				422A071C1E4B6B7000D758FE /* Platform.h in Headers */,
 				422A071B1E4B6B7000D758FE /* IUnknown.h in Headers */,
 				42FB15791BD65A65004DFF99 /* TextFileReader.h in Headers */,
-				429EB0891BDBCDCE005EA658 /* CustomAction.h in Headers */,
 				4255EB4A1BF27C1F001CC39E /* BinaryFileReader.h in Headers */,
 				422A06F11E4B69F100D758FE /* ICommand.h in Headers */,
 				422A06BE1E4B683C00D758FE /* VersionHandler.h in Headers */,
@@ -453,7 +446,6 @@
 				42F19A821ABEE82200231F3D /* reaper_ultraschall.cpp in Sources */,
 				422A06F91E4B69F100D758FE /* Project.cpp in Sources */,
 				42F19A7B1ABEE82200231F3D /* ReaperEntryPoints.cpp in Sources */,
-				429EB0881BDBCDCE005EA658 /* CustomAction.cpp in Sources */,
 				4284E9F81BF4B58C0056345A /* ThemeVersionCheck.cpp in Sources */,
 				428E0F601FCC29AE0051559A /* BasicMediaInformation.cpp in Sources */,
 				4254C98B1BF28BCE00B1EF1F /* SWSVersionCheck.cpp in Sources */,
