@@ -30,9 +30,6 @@
     <ClCompile Include="reaper\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reaper\CustomAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reaper\CustomActionFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -138,9 +135,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reaper\CustomAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="reaper\CustomActionFactory.h">

@@ -170,7 +170,6 @@
     <ClCompile Include="framework\TextFileWriter.cpp" />
     <ClCompile Include="framework\TimeUtilities.cpp" />
     <ClCompile Include="reaper\Application.cpp" />
-    <ClCompile Include="reaper\CustomAction.cpp" />
     <ClCompile Include="reaper\CustomActionFactory.cpp" />
     <ClCompile Include="reaper\CustomActionManager.cpp" />
     <ClCompile Include="reaper\FileManager.cpp" />
@@ -211,7 +210,6 @@
     <ClInclude Include="framework\TextFileWriter.h" />
     <ClInclude Include="framework\TimeUtilities.h" />
     <ClInclude Include="reaper\Application.h" />
-    <ClInclude Include="reaper\CustomAction.h" />
     <ClInclude Include="reaper\CustomActionFactory.h" />
     <ClInclude Include="reaper\CustomActionManager.h" />
     <ClInclude Include="reaper\FileManager.h" />
