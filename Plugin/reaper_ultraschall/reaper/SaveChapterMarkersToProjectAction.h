@@ -28,34 +28,40 @@
 #include "ICustomAction.h"
 
 namespace ultraschall {
-   namespace reaper {
+namespace reaper {
 
 class SaveChapterMarkersToProjectAction : public ICustomAction
 {
 public:
-   static const char* UniqueId()
-   {
-      return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-   }
+  static const char* UniqueId()
+  {
+    return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
+  }
 
-   static const char* UniqueName()
-   {
-      return "ULTRASCHALL: Save chapter markers to project folder";
-   }
+  static const char* UniqueName()
+  {
+    return "ULTRASCHALL: Save chapter markers to project folder";
+  }
 
-   static ICustomAction* CreateCustomAction()
-   {
-      return new SaveChapterMarkersToProjectAction();
-   }
+  static ICustomAction* CreateCustomAction()
+  {
+    return new SaveChapterMarkersToProjectAction();
+  }
 
-   virtual ServiceStatus Execute() override;
+  virtual ServiceStatus Execute() override;
 
 private:
-	SaveChapterMarkersToProjectAction()
-   {
-   }
+  SaveChapterMarkersToProjectAction()
+  {
+  }
+
+  std::vector<Marker> chapters_;
+  bool ConfigureAssets();
+  void ResetAssets();
+  bool ValidateChapterMarkers(std::vector<std::string>& errorMessages);
 };
 
-}}
+}
+}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__

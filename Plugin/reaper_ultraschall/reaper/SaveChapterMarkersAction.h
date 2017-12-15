@@ -53,6 +53,11 @@ private:
 	SaveChapterMarkersAction()
    {
    }
+
+  std::vector<Marker> chapters_;
+  bool ConfigureAssets();
+  void ResetAssets();
+  bool ValidateChapterMarkers(std::vector<std::string>& errorMessages);
 };
 
 }}
