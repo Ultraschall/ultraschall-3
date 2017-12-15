@@ -296,19 +296,19 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ");
 
    const std::string information3("\
-The Ultraschall REAPER Extension requires REAPER 5.40\
+The Ultraschall REAPER Extension requires REAPER 5.70\
 ");
 
    const std::string information4("\
-If you want to use the Ultraschall REAPER extension, you must install REAPER 5.40\
+If you want to use the Ultraschall REAPER extension, you must install REAPER 5.70\
 ");
 
    const std::string information5("\
-The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.40\
+The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.70\
 ");
 
    const std::string information6("\
-If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.40\
+If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.70\
 ");
 
    const std::string information7("\
