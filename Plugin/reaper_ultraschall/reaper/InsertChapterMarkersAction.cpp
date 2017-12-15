@@ -73,9 +73,9 @@ ServiceStatus InsertChapterMarkersAction::Execute()
                   name = items[1];
                }
                
-               for(size_t i = 2; i < items.size(); i++)
+               for(size_t j = 2; j < items.size(); j++)
                {
-                  name += " " + items[i];
+                  name += " " + items[j];
                }
                
                tags.push_back(Marker(position, name, 0));
