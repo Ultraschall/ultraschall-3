@@ -46,18 +46,30 @@ end
 
 function notes2csv ()
   local csv = ""
-  linenumber=1
+  local array = {}
+  local count=0
   notes = reaper.GetSetProjectNotes(0, false, "")
     for line in notes:gmatch"[^\n]*" do
+    count=count+1
       csv = csv .. "," .. line --escapeCSV(line)
+      array[count]=line
     end
     
     retval= string.sub(csv, 2) -- remove first ","
-  return retval
+    
+  return retval, count, array
 end
 
+
+
 function csv2lines (line)
-  pos=0
+    title = line:match("(.-),")
+    artist= line:match(".-,(.-),")
+    album = line:match(".-,.-,(.-),")
+    year  = line:match(".-,.-,.-,(.-),")
+    genre =   line:match(".-,.-,.-,.-,(.-),")
+    comment = line:match(".-,.-,.-,.-,.-,(.*)")
+--[[  pos=0
   pos_old=1
   clean=""
   for i=1, 5,1 do
@@ -69,13 +81,63 @@ function csv2lines (line)
   --check field 6
   substring=string.sub(line,pos_old)
   clean=clean..substring
-  return clean
+  ]]
+  return title.."\n"..artist.."\n"..album.."\n"..year.."\n"..genre.."\n"..comment
+end
+
+function checkevencharacters(string,character)
+  local count=0
+  local even=true
+  for i=1, string.len(string) do
+    if string:sub(i,i)==character then       
+      if even==true then even=false
+      else even=true
+      end
+    end
+  end
+  return even
 end
 
 --reaper.ShowConsoleMsg("") --clear console
-dialog_ret_vals = notes2csv() --default values
+dialog_ret_vals, count, dialog_retvals_array = notes2csv() --default values
 
-retval, result = reaper.GetUserInputs("Edit ID3 Podcast Metadata", 6, "Title (no comma allowed):,Artist (no comma allowed):,Album (Podcast, no comma allowed):,Year (no comma allowed):,Genre (no comma allowed):,Comment (no comma allowed):", dialog_ret_vals)
+retval, result = reaper.GetUserInputs("Edit ID3 Podcast Metadata", 6, "Title (no comma allowed):,Artist (no comma allowed):,Podcast (no comma allowed):,Year (no comma allowed):,Genre (no comma allowed):,Comment:", dialog_ret_vals)
+
+count=0
+temp=-1
+old_pos=0
+pos=0
+if retval == true then
+  pos=result:match(".-,.-,.-,.-,.-,()")
+  firstvals=result:sub(1,pos-1)
+  restvals=result:sub(pos,-1)
+  pos=restvals:match(".-,()")
+  if pos~=nil then restvals="\""..restvals.."\"" end
+  if restvals:match("\"\".*\"\"")~=nil then restvals=restvals:sub(2,-2) end
+  
+  
+  even=checkevencharacters(firstvals:match(".-,"),"\"")
+  if even==false then firstvals=firstvals:match("(.-),").."\""..firstvals:match(".-(,.*)") end
+
+  even=checkevencharacters(firstvals:match(".-,(.-,)"),"\"")
+  if even==false then firstvals=firstvals:match("(.-,.-),").."\""..firstvals:match(".-,.-(,.*)") end
+
+  even=checkevencharacters(firstvals:match(".-,.-,(.-,)"),"\"")
+  if even==false then firstvals=firstvals:match("(.-,.-,.-),").."\""..firstvals:match(".-,.-,.-(,.*)") end
+
+  even=checkevencharacters(firstvals:match(".-,.-,.-,(.-,)"),"\"")
+  if even==false then firstvals=firstvals:match("(.-,.-,.-,.-),").."\""..firstvals:match(".-,.-,.-,.-(,.*)") end
+  
+  even=checkevencharacters(firstvals:match(".-,.-,.-,.-,(.-,)"),"\"")
+  if even==false then firstvals=firstvals:match("(.-,.-,.-,.-,.-),").."\""..firstvals:match(".-,.-,.-,.-,.-(,.*)") end
+  
+  even=checkevencharacters(restvals,"\"")
+  if even==false then restvals=restvals.."\"" end
+  
+  notes = reaper.GetSetProjectNotes(0, true, csv2lines(firstvals..restvals)) -- write new notes  
+end
+
+--[[
 if retval == true then
   --step through field 1-5 and check if the numer of " is even. Add a " to the end if needed.
   pos=0
@@ -103,11 +165,17 @@ if retval == true then
     for i=1, 5,1 do
       pos=string.find(result,",",pos+1)
     end
-    newresult=string.sub(result,1,pos).."\""..string.sub(result,pos+1).."\""
+    temp=string.sub(result,pos+1,-1)
+    if temp:match("\"\".*\"\"")~=nil then newresult=string.sub(result,1,pos)..temp:sub(2,-2)
+    else newresult=string.sub(result,1,pos)..string.sub(result,pos+1)
+    end
+    reaper.MB(newresult,result,0)
     result=newresult
+    --reaper.MB(string.sub(result,pos+1,-1),"",0)
   end
 
 
 
   notes = reaper.GetSetProjectNotes(0, true, csv2lines(result)) -- write new notes
 end
+--]]
