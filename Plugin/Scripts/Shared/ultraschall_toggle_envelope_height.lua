@@ -35,14 +35,33 @@ dofile(script_path .. "ultraschall_helper_functions.lua")
 -- now, we set the minimum height of all envelopes in the project
 -- set to nil, to use the user settings instead
   defheight=24
+  defmaxheight=70
 
 -------------------------------------
 --reaper.Undo_BeginBlock() -- Begining of the undo block. Leave it at the top of your main function.
 -------------------------------------
 
+ToggleHeight=""
+
+--get current toggle state, set to true, if not existing yet
+A,ToggleState=ultraschall.GetUSExternalState("ultraschall_envelope", "EnvelopeToggleState")
+if ToggleState=="-1" or ToggleState=="true" then 
+  ToggleState="true" 
+  ultraschall.SetUSExternalState("ultraschall_envelope", "EnvelopeToggleState", "false") 
+else
+  ultraschall.SetUSExternalState("ultraschall_envelope", "EnvelopeToggleState", "true")
+end
+if ToggleState=="true" then 
+  A,ToggleHeight=ultraschall.GetUSExternalState("ultraschall_envelope", "EnvelopeMinHeight")
+  if ToggleHeight=="-1" then ToggleHeight=defheight end
+else
+  A,ToggleHeight=ultraschall.GetUSExternalState("ultraschall_envelope", "EnvelopeMaxHeight")
+  if ToggleHeight=="-1" then ToggleHeight=defmaxheight end
+end
+
+
 --get all current envelopes
   TEnvAr, CountTracks, FstTrack, MstTrack=ultraschall.GetAllTrackEnvelopes()
-
 
 -- now we check the first trackenvelope(either from a track or master-track), if it is compacted or not
 -- this will be the basis for setting all other envelope's-compactible states
@@ -55,12 +74,8 @@ dofile(script_path .. "ultraschall_helper_functions.lua")
   
   retval, str = reaper.GetEnvelopeStateChunk(TrackEnvelope, "", false) -- get statechunk of first envelope in the project
   compacted=str:match("LANEHEIGHT .- (.-)%c") -- get compacted-state of first envelope in the project
-  
--- now, we do the toggling
-  if compacted=="0" then compacted="1"
-  else compacted="0"
-  end  
-  
+
+
 -- now, we set the height, as well as the compactible state of all envelope-tracks
   for i=0, CountTracks do
     for a=0, TEnvAr[i][0] do
@@ -75,7 +90,7 @@ dofile(script_path .. "ultraschall_helper_functions.lua")
       else height=defheight
       end
 
-      newstr=part1.."LANEHEIGHT "..height.." "..compacted.."\n"..part2 -- insert new height and compacted-state
+      newstr=part1.."LANEHEIGHT "..ToggleHeight.." 0\n"..part2 -- insert new height and compacted-state
       retval, str2 = reaper.SetEnvelopeStateChunk(TEnvAr[i][1][a], newstr, false) -- set envelope to new settings
     end
   end
