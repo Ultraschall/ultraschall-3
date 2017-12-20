@@ -2,51 +2,80 @@
 
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-## 3.1 Miedinger - 2017-November
+## 3.1 Miedinger - 2017-Dezember
 
 * REAPER: **Unterstützung der Version 5.62**
 *Ultraschall 3.1 ist für die Version 5.62 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig.* **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, *die Ultraschall-Erweiterungen werden dann deaktiviert.*
+
 * Editing: **Alternative Darstellung der Wellenform**
 *Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen.* [[Video]](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
-* Editing: **Spectral Editing**
+
 * Editing: **Zeitauswahl editieren an Kanten**
 *Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden.*
+
 * Editing: **Zeitauswahl selektiert direkt auch Items**
 *Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt.*
+
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
 *Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted.*
+
 * Editing: **Folgen-Modus**
 *Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne dass Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor.*
+
 * Editing: **Kapitelmarken**
-*Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben. Kapitelmarken können zusätzlich zu `m` auch mit `cmd`+`m` gesetzt werden, um sicher zu stellen dass der Focus in jedem Fall auf der Timeline steht.*
+*Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben so dass man sieht, wo die Marker gesetzt werden.*
+
+* Editing: **Kapitelmarken immer an Play-/Record-Cursor setzen**
+*Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich, um sie etwa auf ein Midi-Interface zu legen.*
+
 * Editing: **Lautstärke-Zoom der Wellenform**
 *Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten.*
+
 * Editing: **Zoom zu Edit-Cursor**
 *Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück.*
+
 * Editing: **Doppelklick für Play**
 *Ein Doppelklick in der Zeitleiste oder dem Editierfenster spielt ab der angeklickten Position ab.*
+
+* Editing: **Verschieben von Items über Tastatur**
+*Mit den Tasten `alt`+`links` bzw. `alt`+`rechts` können markierte items in der Timeline verschoben werden. Über die Taste `n` erreicht man ein Einstellungsfenster, mit dem man die Laufweite festlegen kann.*
+
 * Theme: **Anzeige ausgewählter Items optimiert**
 *Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung.*
+
 * Theme: **Master-Kanal im Mixer immer sichtbar**
 *In allen Views ist nun auch der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mix ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird.*
+
 * Theme: **RecArm Verhalten optimiert**
 *Wenn neue Tracks über das Podcast-Menü oder ober den Shortcut `cmd`+`t` angelegt werden, sind sie wie bisher direkt für die Aufnahme scharf geschaltet (RecArm). Legt man Tracks über Doppelklick im linken Spurbereich oder im Mixer an, oder über drag & drop, so sind sie nicht direkt scharfgeschaltet.*
+
+* Theme: **Ultraclock**
+*Im View "Recording" wird eine erweiterte Uhr angezeigt - sie zeigt wie bisher die aktuelle Position des Play-/Record-/Edit-Cursors, jedoch zusätzlich den aktuellen Transport-Status (Stop, Pause, Play, Record, Loop) in Farbe. Darüber ist die aktuelle Uhrzeit zu sehen - nützlich, um Start oder Ende einer Live-Sendung perfekt zu timen.*
+
 * Mastering: **Ultraschall Dynamics2 Effekt**
 *Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.)*
+
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
 *beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken.*
+
 * Kapitelmarken: **Setzen geplanter Kapitelmarken**
 *Mit dem Shortcut `b` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cursors (abhängig vom Folgen-Modus (siehe oben)) gesetzt.*
+
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
 *Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden; die bisherige Reihenfolge bleibt dabei erhalten.*
+
 * Theme: **Tooltips optimiert**
 *Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt.*
+
 * Theme: **Anzeige des Recording-Formates**
 *In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden.* 
+
 * Theme: **Umschalten des Arm-Status für alle Tracks**
 *Mit dem Shortcut `shift`+`a` können alle Tracks für eine Aufnahme scharfgeschaltet werden bzw. die Scharfschaltung aufgehoben werden. Das Umschalten funktioniert nur, wenn keine Aufnahme läuft. Dass neue Tracks automatisch scharf geschaltet werden, kann in den Settings deaktiviert werden.*
+
 * Theme: **Envelope-Spuren**
 *Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden.*
+
 * Easter Egg: **Wenns mal wieder länger dauert**
 *Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen.*
 
