@@ -4,8 +4,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 ## 3.1 Miedinger - 2017-Dezember
 
-* REAPER: **Unterstützung der Version 5.62**
-  _Ultraschall 3.1 ist für die Version 5.62 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig._ **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, _die Ultraschall-Erweiterungen werden dann deaktiviert._
+* REAPER: **Unterstützung der Version 5.70**
+  _Ultraschall 3.1 ist für die Version 5.70 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig._ **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, _die Ultraschall-Erweiterungen werden dann deaktiviert._
 
 * Editing: **Alternative Darstellung der Wellenform**
   _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ [[Video]](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)

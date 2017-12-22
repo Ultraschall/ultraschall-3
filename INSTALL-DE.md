@@ -1,4 +1,4 @@
-# Installation von Ultraschall 3.1.0
+# Installation von Ultraschall 3.1
 
 Die Installation von Ultraschall umfasst **drei zwingend notwendige Schritte (Windows: vier)**.
 Diese Schritte werden auch in einem [Screencast-Video](https://youtu.be/RTshDTPBMes) erklärt.
@@ -11,7 +11,7 @@ Diese Schritte werden auch in einem [Screencast-Video](https://youtu.be/RTshDTPB
 
 ### REAPER aktualisieren / installieren
 
-Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REAPER. Ultraschall 3.1.0 läuft nur mit der Version REAPER 5.70.
+Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REAPER. Ultraschall 3.1 läuft nur mit der Version REAPER 5.70.
 
 [**REAPER Version v5.70 OS X 64-bit herunterladen**](http://www.reaper.fm/files/5.x/reaper570_x86_64.dmg)
 
@@ -23,11 +23,11 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 
 ### Ultraschall laden und den Ultraschall-Installer starten.
 
-Unsere Ultraschall 3.1.0 Distribution laden und das `.dmg` starten:
+Unsere Ultraschall 3.1 Distribution laden und das `.dmg` starten:
 
-[**Ultraschall 3.1.0 herunterladen**](http://url.ultraschall-podcast.de/us310)
+[**Ultraschall 3.1 herunterladen**](http://url.ultraschall-podcast.de/us31)
 
-* Im sich öffnenden Fenster unser Installationsprogramm `Ultraschall-3.1.0.pkg` starten und durchlaufen lassen.
+* Im sich öffnenden Fenster unser Installationsprogramm `Ultraschall-3.1.pkg` starten und durchlaufen lassen.
 * **Achtung:** Sollte die Installation am Ende eine Fehlermeldung ausgeben, bitte einmal macOS neu booten und den Installer erneut durchlaufen lassen.
 * Wenn man nach diesem Schritt REAPER startet, wird man mit Fehlermeldungen begrüßt - daher **unbedingt fortfahren** mit Schritt 3:
 
@@ -36,7 +36,7 @@ Unsere Ultraschall 3.1.0 Distribution laden und das `.dmg` starten:
 ### Die REAPER Ultraschall-Konfiguration installieren
 
 * REAPER starten. Es erscheint eine Warnmeldung, dass das Theme noch nicht installiert wurde bzw. nur eine veraltete Version gefunden wurde.
-* Nun die Datei `Ultraschall_3.0.ReaperConfigZip` aus dem noch geöffneten `.dmg`-Fenster in das **geöffnete REAPER Hauptfenster ziehen** und `Importieren` klicken.
+* Nun die Datei `Ultraschall_3.1.ReaperConfigZip` aus dem noch geöffneten `.dmg`-Fenster in das **geöffnete REAPER Hauptfenster ziehen** und `Importieren` klicken.
 
 # 4.
 
@@ -69,7 +69,7 @@ Wenn man in Ultraschall eine rein in Software modellierte SKYPE N-1 Schaltung um
 
 ### REAPER aktualisieren / installieren
 
-Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REAPER. Ultraschall 3.1.0 läuft nur mit der Version REAPER 5.70.
+Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REAPER. Ultraschall 3.1 läuft nur mit der Version REAPER 5.70.
 
 [**REAPER v5.70 Windows 64-Bit herunterladen**](http://www.reaper.fm/files/5.x/reaper570_x64-install.exe)
 
@@ -81,9 +81,9 @@ Das Open-Source-Projekt Ultraschall erweitert die kommerzielle Musiksoftware REA
 
 ### Ultraschall laden und den Ultraschall-Installer starten.
 
-Unsere Ultraschall 3.1.0 Distribution laden und das `.msi` starten:
+Unsere Ultraschall 3.1 Distribution laden und das `.msi` starten:
 
-[**Ultraschall-3.1.0.msi (24.1 MB) herunterladen**](http://url.ultraschall-podcast.de/us310win)
+[**Ultraschall-3.1.msi (24.1 MB) herunterladen**](http://url.ultraschall-podcast.de/us31win)
 
 * Den Installer starten und durchlaufen lassen.
 * Wenn man nach diesem Schritt REAPER startet, wird man mit Fehlermeldungen begrüßt - daher **unbedingt fortfahren** mit Schritt 3:
