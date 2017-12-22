@@ -32,7 +32,7 @@ end
 
 local info = debug.getinfo(1,'S');
 script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
-url = "http://url.ultraschall-podcast.de/keymap"
+url = "http://url.ultraschall-podcast.de/keymap31"
 
   local OS=reaper.GetOS()
   if OS=="OSX32" or OS=="OSX64" then
