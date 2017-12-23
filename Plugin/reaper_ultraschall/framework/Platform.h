@@ -30,22 +30,10 @@
 #else
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#endif // #ifndef _WIN32
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
 namespace ultraschall {
 namespace framework {
-
-class PlatformException
-{
-public:
-	PlatformException(const char* expectedPlatform) :
-      expectedPlatform_(expectedPlatform)
-	{
-	}
-
-private:
-   const char* expectedPlatform_;
-};
 
 }
 }
