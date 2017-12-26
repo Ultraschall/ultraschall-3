@@ -121,7 +121,18 @@ function showmenu()
   
   if ret>0 then -- a line was clicked
     if ret>3 then ret2=ret+1 end -- seperator does not have an id ...
-    if uc_menu[ret2].checked~=NIL then uc_menu[ret2].checked=not uc_menu[ret2].checked end
+    if uc_menu[ret2].checked~=NIL then 
+    	uc_menu[ret2].checked=not uc_menu[ret2].checked 
+    	preset=0
+    	for i=1,3 do 
+    		if uc_menu[i].checked then preset=preset+2^(i-1) -- build preset from menu
+    		end
+    	end
+    	if gfx.dock(-1)&1==1 then is_docked="true" else is_docked="false" end
+  		ultraschall.SetUSExternalState("ultraschall_clock", "preset", preset)     --save state preset
+  		ultraschall.SetUSExternalState("ultraschall_clock", "docked", is_docked)  --save state docked
+
+    end
   end
   
   return ret
@@ -228,7 +239,7 @@ function MainLoop()
 end
 
 function exit_clock()
-  if gfx.dock(-1)&1==1 then is_docked="true" else is_docked="false" end
+  -- if gfx.dock(-1)&1==1 then is_docked="true" else is_docked="false" end
   -- ultraschall.SetUSExternalState("ultraschall_clock", "preset", preset)     --save state preset
   -- ultraschall.SetUSExternalState("ultraschall_clock", "docked", is_docked)  --save state docked
   gfx.quit()
