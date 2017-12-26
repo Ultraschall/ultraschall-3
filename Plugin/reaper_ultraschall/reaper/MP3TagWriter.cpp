@@ -43,32 +43,32 @@ namespace ultraschall {
       if(context != nullptr)
       {
         success = MP3_InsertPodcastFrame(context);
-        if((true == success) && (standardProperties.Title().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertTextFrame(context, "TIT2", standardProperties.Title()); // title
         }
 
-        if((true == success) && (standardProperties.Author().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertTextFrame(context, "TPE1", standardProperties.Author()); // artist
         }
 
-        if((true == success) && (standardProperties.Track().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertTextFrame(context, "TALB", standardProperties.Track()); // album
         }
 
-        if((true == success) && (standardProperties.Date().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertTextFrame(context, "TDRC", standardProperties.Date()); // date
         }
 
-        if((true == success) && (standardProperties.Content().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertTextFrame(context, "TCON", standardProperties.Content()); // genre
         }
 
-        if((true == success) && (standardProperties.Comments().empty() == false))
+        if(true == success)
         {
           success = MP3_InsertCommentsFrame(context, "COMM", standardProperties.Comments()); // comment
         }

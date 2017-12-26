@@ -218,9 +218,6 @@ namespace ultraschall
 
       void operator=(const UnicodeString2T& rhs)
       {
-        PRECONDITION(rhs.data_ != nullptr);
-        PRECONDITION(rhs.size_ != INVALID_STRING_SIZE);
-
         Clear();
 
         data_ = allocator_type::AllocCopy(rhs.data_, rhs.size_);

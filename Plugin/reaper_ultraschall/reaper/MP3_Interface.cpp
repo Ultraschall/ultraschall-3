@@ -198,25 +198,31 @@ bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, con
    PRECONDITION_RETURN(context != nullptr, false);
    PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(id.empty() == false, false);
-   PRECONDITION_RETURN(text.empty() == false, false);
    
    bool success = false;
    
    MP3_RemoveFrames(context, id.c_str());
    
-   const char* frameIdString = id.c_str();
-   TagLib::ByteVector frameId = TagLib::ByteVector::fromCString(frameIdString);
-   TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(frameId);
-   if(textFrame != nullptr)
+   if(text.empty() == false)
    {
-      framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
-      const char* rawStringData = reinterpret_cast<const char*>(convertedString.data());
-      unsigned int rawStringSize =  static_cast<unsigned int>(convertedString.size() * sizeof(char16_t));
-      TagLib::ByteVector stringData(rawStringData, rawStringSize);
-      textFrame->setTextEncoding(TagLib::String::Type::UTF16);
-      textFrame->setText(TagLib::String(stringData, TagLib::String::Type::UTF16));
-      
-      context->tag_->addFrame(textFrame);
+      const char* frameIdString = id.c_str();
+      TagLib::ByteVector frameId = TagLib::ByteVector::fromCString(frameIdString);
+      TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(frameId);
+      if(textFrame != nullptr)
+      {
+         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
+         const char* rawStringData = reinterpret_cast<const char*>(convertedString.data());
+         unsigned int rawStringSize =  static_cast<unsigned int>(convertedString.size() * sizeof(char16_t));
+         TagLib::ByteVector stringData(rawStringData, rawStringSize);
+         textFrame->setTextEncoding(TagLib::String::Type::UTF16);
+         textFrame->setText(TagLib::String(stringData, TagLib::String::Type::UTF16));
+         
+         context->tag_->addFrame(textFrame);
+         success = true;
+      }
+   }
+   else
+   {
       success = true;
    }
    
@@ -228,22 +234,28 @@ bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id,
    PRECONDITION_RETURN(context != nullptr, false);
    PRECONDITION_RETURN(context->tag_ != nullptr, false);
    PRECONDITION_RETURN(id.empty() == false, false);
-   PRECONDITION_RETURN(text.empty() == false, false);
    
    bool success = false;
    
    MP3_RemoveFrames(context, id.c_str());
-   
-   TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
-   if(commentsFrame != nullptr)
+
+   if(text.empty() == false)
    {
-      framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
-      TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
-      commentsFrame->setLanguage(TagLib::ByteVector::fromCString("eng"));
-      commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
-      commentsFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
-      
-      context->tag_->addFrame(commentsFrame);
+      TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
+      if(commentsFrame != nullptr)
+      {
+         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
+         TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
+         commentsFrame->setLanguage(TagLib::ByteVector::fromCString("eng"));
+         commentsFrame->setTextEncoding(TagLib::String::Type::UTF16);
+         commentsFrame->setText(TagLib::String(stream, TagLib::String::Type::UTF16));
+         
+         context->tag_->addFrame(commentsFrame);
+         success = true;
+      }
+   }
+   else
+   {
       success = true;
    }
    
