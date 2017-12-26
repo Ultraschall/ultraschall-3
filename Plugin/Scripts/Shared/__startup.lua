@@ -92,13 +92,17 @@ if views then
   reaper.SetToggleCommandState(sec, views, 1)
   reaper.RefreshToolbar2(sec, views)
   if view == "setup" then
-    reaper.Main_OnCommand(40454,0)      --(re)load Setup Screenset
+    -- reaper.Main_OnCommand(40454,0)      --(re)load Setup Screenset
+    runcommand("_Ultraschall_Set_View_Setup")
   elseif view == "record" then
-    reaper.Main_OnCommand(40455,0)      --(re)load Setup Screenset
+    -- reaper.Main_OnCommand(40455,0)      --(re)load Record Screenset
+    runcommand("_Ultraschall_Set_View_Record")
   elseif view == "edit" then
-    reaper.Main_OnCommand(40456,0)      --(re)load Setup Screenset
+    -- reaper.Main_OnCommand(40456,0)      --(re)load Setup Screenset
+    runcommand("_Ultraschall_Set_View_Edit")
   elseif view == "story" then
-    reaper.Main_OnCommand(40457,0)      --(re)load Setup Screenset
+    -- reaper.Main_OnCommand(40457,0)      --(re)load Setup Screenset
+    runcommand("_Ultraschall_Set_View_Story")
   end
 end
 
