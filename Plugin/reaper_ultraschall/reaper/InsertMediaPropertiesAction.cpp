@@ -325,7 +325,7 @@ namespace ultraschall {
             chapters_ = currentProject.QueryAllMarkers();
             if(chapters_.empty() == true)
             {
-               const std::string message = "No chapters, you fool!";
+               const std::string message = "No chapters have been set.";
                messages.push_back(message);
                invalidAssetCount++;
             }
@@ -394,7 +394,9 @@ namespace ultraschall {
             const std::string safeName = current.Name();
             const double safePosition = current.Position();
             
-            if(current.Position() < 0)
+            ProjectManager& projectManager = ProjectManager::Instance();
+            Project currentProject = projectManager.CurrentProject();
+            if(currentProject.IsValidPosition(current.Position()) == false)
             {
                std::stringstream os;
                os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";

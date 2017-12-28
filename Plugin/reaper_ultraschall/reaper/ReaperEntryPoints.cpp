@@ -51,12 +51,12 @@ namespace reaper_api
    int (*AddProjectMarker2)(ReaProject* proj, bool isrgn, double pos, double rgnend, const char* name, int wantidx, int color);
    bool (*SetProjectMarker3)(ReaProject* proj, int markrgnindexnumber, bool isrgn, double pos, double rgnend, const char* name, int color);
    bool (*DeleteProjectMarker)(ReaProject* proj, int markrgnindexnumber, bool isrgn);
-   void(*GetLastMarkerAndCurRegion)(ReaProject* proj, double time, int* markeridxOut, int* regionidxOut);
-   bool(*DeleteProjectMarkerByIndex)(ReaProject* proj, int markrgnidx);
+   void (*GetLastMarkerAndCurRegion)(ReaProject* proj, double time, int* markeridxOut, int* regionidxOut);
+   bool (*DeleteProjectMarkerByIndex)(ReaProject* proj, int markrgnidx);
 
-   int(*GetPlayStateEx)(ReaProject* proj);
-   double(*GetCursorPositionEx)(ReaProject* proj);
-   double(*GetPlayPositionEx)(ReaProject* proj);
+   int (*GetPlayStateEx)(ReaProject* proj);
+   double (*GetCursorPositionEx)(ReaProject* proj);
+   double (*GetPlayPositionEx)(ReaProject* proj);
    
    void (*GetSetProjectNotes)(ReaProject* proj, bool set, char* notesNeedBig, int notesNeedBig_sz);
    int (*SetProjExtState)(ReaProject* proj, const char* extname, const char* key, const char* value);
@@ -66,6 +66,9 @@ namespace reaper_api
    void (*SetExtState)(const char* section, const char* key, const char* value, bool persist);
    const char* (*GetExtState)(const char* section, const char* key);
    void (*DeleteExtState)(const char* section, const char* key, bool persist);
+   
+   MediaItem* (*GetMediaItem)(ReaProject* proj, int itemidx);
+   double (*GetMediaItemInfo_Value)(MediaItem* item, const char* parmname);
 }
 
 namespace ultraschall { namespace reaper {
@@ -134,6 +137,8 @@ bool ReaperEntryPoints::LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::SetExtState, "SetExtState");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetExtState, "GetExtState");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::DeleteExtState, "DeleteExtState");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetMediaItem, "GetMediaItem");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetMediaItemInfo_Value, "GetMediaItemInfo_Value");
 
    reaper_api::plugin_register("hookcommand2", (void*)OnCustomAction);
 

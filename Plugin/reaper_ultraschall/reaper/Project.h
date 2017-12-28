@@ -70,7 +70,9 @@ public:
 
    static const double INVALID_POSITION;
    double CurrentPosition() const;
-
+   double MaxPosition() const;
+   bool IsValidPosition(const double position);
+   
    static const int SHOWNOTE_MARKER_COLOR = 0x0145a564;
    static const int EDIT_MARKER_COLOR = 0x01ff0000;
    static const int CHAPTER_MARKER_COLOR = 0x01808080;

@@ -207,6 +207,37 @@ double Project::CurrentPosition() const
    return position;
 }
 
+double Project::MaxPosition() const
+{
+   PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
+   
+   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
+   double position = 0;
+
+   int index = 0;
+   MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+   while(mediaItem != nullptr)
+   {
+      double length = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
+      if(length > position)
+      {
+         position = length;
+      }
+      
+      mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+   }
+   
+   return position;
+}
+
+bool Project::IsValidPosition(const double position)
+{
+   PRECONDITION_RETURN(projectReference_ != 0, false);
+
+   return (position > 0) && (position <= MaxPosition());
+}
+
+   
 bool Project::UndoMarker()
 {
    PRECONDITION_RETURN(projectReference_ != 0, false);
