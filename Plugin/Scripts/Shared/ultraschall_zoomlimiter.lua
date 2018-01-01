@@ -1,7 +1,7 @@
 --[[
 ################################################################################
 # 
-# Copyright (c) 2014-2017 Ultraschall (http://ultraschall.fm)
+# Copyright (c) 2014-2018 Ultraschall (http://ultraschall.fm)
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -12,7 +12,7 @@
 # 
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+# s
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,27 +23,47 @@
 # 
 ################################################################################
 ]]
- 
-local info = debug.getinfo(1,'S');
-script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
-dofile(script_path .. "ultraschall_helper_functions.lua")
 
-refresh= 0.5 --in seconds
-
-function MainLoop()
-  time = reaper.time_precise()
-  if time > lasttime + refresh then
-    lasttime = time
-    length = reaper.GetProjectLength(0)
-    zoom = reaper.GetHZoomLevel()
-    projzoom = (length ^ -1) * 742
-    -- Msg(length..","..zoom..","..projzoom)
-    if zoom < projzoom * 0.8 then
-      reaper.Main_OnCommand(40295, 0)
-    end
-  end
-  reaper.defer(MainLoop) 
+-- Print Message to console (debugging)
+function Msg(val)
+  reaper.ShowConsoleMsg(tostring(val).."\n")
 end
 
-lasttime=reaper.time_precise()-1
-reaper.defer(MainLoop)
+-- Adjusts zoom stepwise.
+-- Will limit the zoom out from 0 to projectlengt+edit/play-cursor, depending on what is the last.
+
+    steplength = 0.4 -- factor to adjust the steplength of the zoom
+    length=0
+    
+    --get end of project or position of play/editcursor in the project, depending on what is the last
+    if reaper.GetPlayState()~=0 and reaper.GetPlayState()&4==4 and reaper.GetProjectLength()<reaper.GetPlayPosition() and reaper.GetPlayPosition()>reaper.GetCursorPosition() then 
+      length=reaper.GetPlayPosition()
+    elseif reaper.GetProjectLength()<reaper.GetCursorPosition() then 
+      length=reaper.GetCursorPosition()
+    else
+      length=reaper.GetProjectLength()
+    end
+    
+    _,_,_,_,mode,res,val = reaper.get_action_context()
+    if mode==-1 and res==-1 and val==-1 then val=0 end
+    
+    val = val * steplength
+
+    start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
+        
+    if val<0 and end_time-start_time>length then
+        -- reaper.Main_OnCommand(40295,0)
+        reaper.SetExtState("ultraschall_follow", "started", "started", false)
+    else
+        reaper.adjustZoom(val, 0, false, -1)
+        start_time, end_time = reaper.GetSet_ArrangeView2(0, false, 0, 0)
+        
+        if val < 0 and end_time-start_time>=length then
+            -- reaper.Main_OnCommand(40295,0)
+            reaper.SetExtState("ultraschall_follow", "started", "started", false)
+        end
+    end
+
+ reaper.UpdateTimeline()
+ reaper.UpdateArrange()
+ 
