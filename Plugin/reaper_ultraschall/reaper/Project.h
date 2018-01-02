@@ -70,6 +70,7 @@ public:
 
    static const double INVALID_POSITION;
    double CurrentPosition() const;
+   double MinPosition() const;
    double MaxPosition() const;
    bool IsValidPosition(const double position);
    
