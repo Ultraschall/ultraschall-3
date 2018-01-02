@@ -400,6 +400,7 @@ namespace ultraschall {
             {
                std::stringstream os;
                os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
+               os << "\r\n";
                errorMessages.push_back(os.str());
                
                valid = false;
