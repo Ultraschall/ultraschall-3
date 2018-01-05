@@ -47,7 +47,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Insbesondere bei einem `Pinch-Zoom` auf dem Trackpad konnte es leicht passieren, dass man viel zu weit herausgezoomt hat und sein Projekt nicht wieder gefunden hat. Der maximale Zoom-Out ist nun auf die Projektlänge begrenzt (ganzes Projekt sichtbar). Über `alt`+`Pinch-Zoom` erhält man die bisherige, unlimitierte Zoomfunktion._
 
 * Theme: **Zoom zu Cursor**
- _Mit dem `Pinch-Zoom` wird wie bisher immer an die Stelle gezoomt, an der sich der Mauszeiger befindet. Nutzt man hingegen die Zoomfunktion über die Tastatur `+` bzw. `-`, so wird zur Position des Cursors gezoomt._
+ _Mit dem `Pinch-Zoom` wird wie bisher immer an die Stelle gezoomt, an der sich der Mauszeiger befindet. Nutzt man hingegen die Zoomfunktion über die Tastatur `+` bzw. `-`, so wird zur Position des Cursors gezoomt. Der Shortcut `^` Springt ohne Zoom zum Edit-/Rec-/Play-Cursor._
 
 * Theme: **Master-Kanal im Mixer immer sichtbar**
   _In allen Views ist nun auch der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mix ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird._
@@ -81,9 +81,15 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Theme: **Envelope-Spuren**
   _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden._
+  
+* Editing: **Umschalten der Playrate**
+  _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Dank an leonidlezner!_
 
 * Easter Egg: **Wenns mal wieder länger dauert**
   _Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen._
+  
+* Sonstiges: **Bugfixes und Optimierungen**
+  _Diverse kleinere Optimierungen, insbesondere von Sonderfällen. Zuviele Details würden Sie nur beunruhigen._
 
 ## 3.0.3 Miedinger - 2017-April-6
 
