@@ -24,15 +24,25 @@
 ################################################################################
 ]]
 
--- toggle the playrate from 1.0 to 1.5 and back
+-- toggle the playrate from 1.0 to a user defined value and back, preset is 1.5
 
 reaper.Undo_BeginBlock()
 
-local val = 1.5 -- fast Playrate
+local info = debug.getinfo(1,'S');
+script_path = info.source:match[[^@?(.*[\/])[^\/]-$]]
+dofile(script_path .. "ultraschall_helper_functions.lua")
+
+len, AlternativeRate = ultraschall.GetUSExternalState("ultraschall_playrate", "AlternativeRate")
+
 local old_val = reaper.Master_GetPlayRate(0) -- get the actual playrate
 
-if old_val == val then  -- its already fast
-    val = 1.0 -- toggle to slow
+if old_val == 1 then 
+	val = tonumber(AlternativeRate)
+elseif old_val ~= tonumber(AlternativeRate) then -- someone changed the playrate via slider
+	ultraschall.SetUSExternalState("ultraschall_playrate", "AlternativeRate", old_val)  --save state docked    
+	val = 1.0
+else
+	val = 1.0
 end
 
 reaper.CSurf_OnPlayRateChange( val )  -- set new playrate
