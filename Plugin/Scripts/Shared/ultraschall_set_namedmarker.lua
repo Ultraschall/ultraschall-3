@@ -42,11 +42,12 @@ else
 	end
 end
 
-runcommand("_Ultraschall_Center_Arrangeview_To_Cursor") -- scroll to cursor if not visible
-
 retval, retvals_csv = reaper.GetUserInputs("Insert chapter marker", 1, "Name of this chapter marker:", "") -- User input box
 
 if retval == true then -- User pressed ok          
 	markername = retvals_csv
-	reaper.AddProjectMarker(0, false, current_position, 0 , markername, -1) -- Place named marker
+	-- reaper.AddProjectMarker(0, false, current_position, 0 , markername, -1) -- Place named marker
+	markercount=ultraschall.CountNormalMarkers_NumGap()
+	reaper.AddProjectMarker2(0, false, current_position, 0, markername, markercount, 0)
+	runcommand("_Ultraschall_Center_Arrangeview_To_Cursor") -- scroll to cursor if not visible
 end -- Else = user pressed cancel, so nothing to do here.
