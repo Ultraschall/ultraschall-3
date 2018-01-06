@@ -26,7 +26,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben so dass man sieht, wo die Marker gesetzt werden._
 
 * Editing: **Kapitelmarken immer an Play-/Record-Cursor setzen**
-  _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich, um sie etwa auf ein Midi-Interface zu legen._
+  _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
 
 * Editing: **Lautstärke-Zoom der Wellenform**
   _Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten._
@@ -59,7 +59,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Im View "Recording" wird eine erweiterte Uhr angezeigt - sie zeigt wie bisher die aktuelle Position des Play-/Record-/Edit-Cursors, jedoch zusätzlich den aktuellen Transport-Status (Stop, Pause, Play, Record, Loop) in Farbe. Darüber ist die aktuelle Uhrzeit zu sehen - nützlich, um Start oder Ende einer Live-Sendung perfekt zu timen. Mit der rechten Maustaste können über ein Kontextmenü die angezeigten Informationen angepasst werden._
 
 * Mastering: **Ultraschall Dynamics2 Effekt**
-  _Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.)_
+  _Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der Clipping abfängt._
 
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
   _beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken._
