@@ -69,6 +69,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
   _Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden; die bisherige Reihenfolge bleibt dabei erhalten._
+  
+* Kapitelmarken: **Kapitelmarkenverwaltung**
+  _Um während des Abhörens in Ruhe bestehende Kapitelmarken editieren zu können, wurde das Auto-Play Feature der Kapitelmarken in der Kapitelmarkenliste deaktiviert. Das Abspielen läuft nun einfach weiter, egal wie man die Kapitelmarken bearbeitet. Um wie bisher schnell zu einer Kapitelmarke in der Timeline zu springen, klickt man doppelt rechts neben der Marke im freien Bereich der Liste. Die Marken sind nun zur besseren Orientierung durchnummeriert, die Nummern landen nicht in den Texten._
 
 * Theme: **Tooltips optimiert**
   _Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt._
@@ -83,7 +86,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden._
   
 * Editing: **Umschalten der Playrate**
-  _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Dank an leonidlezner!_
+  _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Wem das zu schnell ist: man kann auch einen anderen Wert am Playrate-Schieber einstellen und ebenfalls per `alt`+`j` speichern/umschalten. Der Wert bleibt erhalten. Dank an leonidlezner!_
 
 * Easter Egg: **Wenns mal wieder länger dauert**
   _Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen._
