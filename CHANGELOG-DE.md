@@ -16,15 +16,18 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Zeitauswahl selektiert direkt auch Items**
   _Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt._
+  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
 
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
+  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_with_Time_Selection.gif)
 
 * Editing: **Folgen-Modus**
   _Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne dass Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor._
 
 * Editing: **Kapitelmarken**
   _Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben so dass man sieht, wo die Marker gesetzt werden._
+  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
 
 * Editing: **Kapitelmarken immer an Play-/Record-Cursor setzen**
   _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
