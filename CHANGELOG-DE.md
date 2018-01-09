@@ -8,21 +8,28 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Ultraschall 3.1 ist für die Version 5.70 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig._ **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, _die Ultraschall-Erweiterungen werden dann deaktiviert._
 
 * Editing: **Alternative Darstellung der Wellenform**
-  _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ [[Video]](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
+  _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ 
+
+  ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
+  
 
 * Editing: **Zeitauswahl editieren an Kanten**
   _Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden._
-  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Adjust_Time_Selection.gif)
+
+  ![Adjust Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Adjust_Time_Selection.gif)
+
 
 * Editing: **Zeitauswahl selektiert direkt auch Items**
   _Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt._
-  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
+  
+  ![Select Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
+
 
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
   
-  
-  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_with_Time_Selection.gif)
+  ![Mute Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_with_Time_Selection.gif)
+ 
 
 * Editing: **Folgen-Modus**
   _Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne dass Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor._
