@@ -28,7 +28,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
   
-  ![Mute Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_with_Time_Selection.gif)
+  ![Mute Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_Items_with_Time_Selection.gif)
  
 
 * Editing: **Folgen-Modus**
