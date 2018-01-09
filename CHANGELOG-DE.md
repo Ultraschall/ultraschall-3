@@ -12,6 +12,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Zeitauswahl editieren an Kanten**
   _Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden._
+  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Adjust_Time_Selection.gif)
 
 * Editing: **Zeitauswahl selektiert direkt auch Items**
   _Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt._
