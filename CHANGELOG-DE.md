@@ -20,6 +20,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
+  
+  
   [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_with_Time_Selection.gif)
 
 * Editing: **Folgen-Modus**
@@ -27,7 +29,9 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Kapitelmarken**
   _Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben so dass man sieht, wo die Marker gesetzt werden._
-  [[Video]](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
+  
+  ![Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
+  
 
 * Editing: **Kapitelmarken immer an Play-/Record-Cursor setzen**
   _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
