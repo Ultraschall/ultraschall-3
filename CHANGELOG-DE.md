@@ -45,24 +45,39 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Lautstärke-Zoom der Wellenform**
   _Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten._
+ 
+   ![Toggle Peak Gain](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Peak_Gain.gif) 
+ 
 
 * Editing: **Zoom zu Edit-Cursor**
   _Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück._
 
+   ![Toggle Arrange Zoom](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arrange_Zoom.gif) 
+
 * Editing: **Doppelklick für Play**
   _Ein Doppelklick in der Zeitleiste oder dem Editierfenster spielt ab der angeklickten Position ab._
+
+   ![Double-Click to Play](http://ultraschall.fm/wp-content/uploads/2018/01/Double_Click_to_Play.gif) 
 
 * Editing: **Verschieben von Items über Tastatur**
   _Mit den Tasten `alt`+`links` bzw. `alt`+`rechts` können markierte items in der Timeline verschoben werden. Über die Taste `n` erreicht man ein Einstellungsfenster, mit dem man die Laufweite festlegen kann._
 
+   ![Nudge Items](http://ultraschall.fm/wp-content/uploads/2018/01/Nudge_Items.gif) 
+
 * Theme: **Anzeige ausgewählter Items optimiert**
   _Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung._
+  
+   ![Select Items](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items.gif)   
   
 * Theme: **Begrenzung des Zoom-Out**
   _Insbesondere bei einem `Pinch-Zoom` auf dem Trackpad konnte es leicht passieren, dass man viel zu weit herausgezoomt hat und sein Projekt nicht wieder gefunden hat. Der maximale Zoom-Out ist nun auf die Projektlänge begrenzt (ganzes Projekt sichtbar). Über `alt`+`Pinch-Zoom` erhält man die bisherige, unlimitierte Zoomfunktion._
 
+   ![Zoom Limiter](http://ultraschall.fm/wp-content/uploads/2018/01/Zoom_Limiter.gif)
+
 * Theme: **Zoom zu Cursor**
  _Mit dem `Pinch-Zoom` wird wie bisher immer an die Stelle gezoomt, an der sich der Mauszeiger befindet. Nutzt man hingegen die Zoomfunktion über die Tastatur `+` bzw. `-`, so wird zur Position des Cursors gezoomt. Der Shortcut `^` Springt ohne Zoom zum Edit-/Rec-/Play-Cursor._
+
+   ![Zoom to Cursor](http://ultraschall.fm/wp-content/uploads/2018/01/Zoom_to_Cursor.gif)
 
 * Theme: **Master-Kanal im Mixer immer sichtbar**
   _In allen Views ist nun auch der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mix ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird._
