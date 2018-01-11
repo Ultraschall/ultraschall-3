@@ -82,14 +82,25 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Theme: **Master-Kanal im Mixer immer sichtbar**
   _In allen Views ist nun auch der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mix ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird._
 
+  ![Master Mix and RMS Display](http://ultraschall.fm/wp-content/uploads/2018/01/Master_Mix_and_RMS.gif)
+
 * Theme: **RecArm Verhalten optimiert**
   _Wenn neue Tracks über das Podcast-Menü oder ober den Shortcut `cmd`+`t` angelegt werden, sind sie wie bisher direkt für die Aufnahme scharf geschaltet (RecArm). Legt man Tracks über Doppelklick im linken Spurbereich oder im Mixer an, oder über drag & drop, so sind sie nicht direkt scharfgeschaltet._
+  
+  ![Auto Arm new Tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Auto_Arm_New_Tracks.gif)  
+    
+* Theme: **Umschalten des RecArm-Status für alle Tracks**
+  _Mit dem Shortcut `shift`+`a` können alle Tracks für eine Aufnahme scharfgeschaltet werden bzw. die Scharfschaltung aufgehoben werden. Das Umschalten funktioniert nur, wenn keine Aufnahme läuft._
+
+  ![Toggle Arm all tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arm_all_Tracks.gif)  
 
 * Theme: **Ultraclock**
   _Im View "Recording" wird eine erweiterte Uhr angezeigt - sie zeigt wie bisher die aktuelle Position des Play-/Record-/Edit-Cursors, jedoch zusätzlich den aktuellen Transport-Status (Stop, Pause, Play, Record, Loop) in Farbe. Darüber ist die aktuelle Uhrzeit zu sehen - nützlich, um Start oder Ende einer Live-Sendung perfekt zu timen. Mit der rechten Maustaste können über ein Kontextmenü die angezeigten Informationen angepasst werden._
 
+  ![Ultraclock](http://ultraschall.fm/wp-content/uploads/2018/01/Ultraclock.gif)  
+
 * Mastering: **Ultraschall Dynamics2 Effekt**
-  _Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der Clipping abfängt._
+  _Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
 
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
   _beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken._
@@ -109,11 +120,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Theme: **Anzeige des Recording-Formates**
   _In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden._
 
-* Theme: **Umschalten des Arm-Status für alle Tracks**
-  _Mit dem Shortcut `shift`+`a` können alle Tracks für eine Aufnahme scharfgeschaltet werden bzw. die Scharfschaltung aufgehoben werden. Das Umschalten funktioniert nur, wenn keine Aufnahme läuft. Dass neue Tracks automatisch scharf geschaltet werden, kann in den Settings deaktiviert werden._
-
 * Theme: **Envelope-Spuren**
-  _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden._
+  _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden - vergleichbar zum Umschalten der Trackhöhe mit `h`._
   
 * Editing: **Umschalten der Playrate**
   _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Wem das zu schnell ist: man kann auch einen anderen Wert am Playrate-Schieber einstellen und ebenfalls per `alt`+`j` speichern/umschalten. Der Wert bleibt erhalten. Dank an leonidlezner!_
