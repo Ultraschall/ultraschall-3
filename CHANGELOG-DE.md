@@ -99,32 +99,50 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
   ![Ultraclock](http://ultraschall.fm/wp-content/uploads/2018/01/Ultraclock.gif)  
 
-* Mastering: **Ultraschall Dynamics2 Effekt**
-  _Der Dynamics-Effekt der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
+* Mastering: **Ultraschall Dynamics2 Loudness Normalization**
+  _Der Dynamics-Effekt zum Vereinheitlichen der Lautstärke von Spuren der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der digitales Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
+
+  ![Ultraschall Dynamics 2 Loudness Normalization](http://ultraschall.fm/wp-content/uploads/2018/01/dynamics2b.gif)  
 
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
   _beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken._
 
+  ![Import planned Markers from Clipboard](http://ultraschall.fm/wp-content/uploads/2018/01/Import_from_Clipboard.gif)  
+
 * Kapitelmarken: **Setzen geplanter Kapitelmarken**
   _Mit dem Shortcut `b` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cursors (abhängig vom Folgen-Modus (siehe oben)) gesetzt._
+
+  ![Set planned Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Planned_Markers2.gif)  
 
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
   _Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden; die bisherige Reihenfolge bleibt dabei erhalten._
   
+  ![Set all Markers to Planning Stage](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Planned.gif)
+  
 * Kapitelmarken: **Kapitelmarkenverwaltung**
   _Um während des Abhörens in Ruhe bestehende Kapitelmarken editieren zu können, wurde das Auto-Play Feature der Kapitelmarken in der Kapitelmarkenliste deaktiviert. Das Abspielen läuft nun einfach weiter, egal wie man die Kapitelmarken bearbeitet. Um wie bisher schnell zu einer Kapitelmarke in der Timeline zu springen, klickt man doppelt rechts neben der Marke im freien Bereich der Liste. Die Marken sind nun zur besseren Orientierung durchnummeriert, die Nummern landen nicht in den Texten._
+
+  ![Edit Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Edit_markers.gif)
 
 * Theme: **Tooltips optimiert**
   _Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt._
 
+  ![Tooltips](http://ultraschall.fm/wp-content/uploads/2018/01/tooltipps.gif)
+  
 * Theme: **Anzeige des Recording-Formates**
   _In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden._
+
+  ![Recording Info](http://ultraschall.fm/wp-content/uploads/2018/01/Recinfo.gif)
 
 * Theme: **Envelope-Spuren**
   _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden - vergleichbar zum Umschalten der Trackhöhe mit `h`._
   
+  ![Envelope Info](http://ultraschall.fm/wp-content/uploads/2018/01/Envelope_Info.gif)
+  
 * Editing: **Umschalten der Playrate**
   _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Wem das zu schnell ist: man kann auch einen anderen Wert am Playrate-Schieber einstellen und ebenfalls per `alt`+`j` speichern/umschalten. Der Wert bleibt erhalten. Dank an leonidlezner!_
+
+  ![Envelope Info](http://ultraschall.fm/wp-content/uploads/2018/01/Switch_Playrate.gif)
 
 * Easter Egg: **Wenns mal wieder länger dauert**
   _Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen._
