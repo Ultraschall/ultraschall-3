@@ -59,7 +59,7 @@ Ultraschall is Open Source.
 - Twitter: @[ultraschall_fm](https://twitter.com/ultraschall_fm)
 - GitHub: <https://github.com/Ultraschall/REAPER>
 - Support Forum: <https://sendegate.de/c/ultraschall>
-- Project Website, download and blog: <http:ultraschall.fm>
+- Project Website, download and blog: <http://ultraschall.fm>
 - Tutorial Screencast on [Youtube](https://www.youtube.com/playlist?list=PLrHlJxVCzpcUF8e0pbt60uSK26JNxbFzG)
 
 ### Credits:
