@@ -15,8 +15,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Editing: **Alternative Darstellung der Wellenform**
   _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ 
 
-
-  ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
+  ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2018/01/Rectify_Peaks.gif)
   
 * Editing: **Zeitauswahl editieren an Kanten**
   _Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden._
