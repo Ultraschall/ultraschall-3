@@ -7,23 +7,25 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * REAPER: **Unterstützung der Version 5.70**
   _Ultraschall 3.1 ist für die Version 5.70 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig._ **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, _die Ultraschall-Erweiterungen werden dann deaktiviert._
 
+* Export (Mac): **Export und Tagging von m4a**
+  _Es können nun auf macOS im Render-Assistenten auch m4a-Dateien generiert werden. Im Export-Assistenten werden diese genauso wie bisher MP3 mit Kapitelmarken, Metadaten und Epispodencover versehen._
+
+  ![m4a Export](http://ultraschall.fm/wp-content/uploads/2018/01/m4a_export.gif)
+
 * Editing: **Alternative Darstellung der Wellenform**
   _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ 
 
   ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2017/11/Rectify-Peaks.gif)
   
-
 * Editing: **Zeitauswahl editieren an Kanten**
   _Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden._
 
   ![Adjust Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Adjust_Time_Selection.gif)
 
-
 * Editing: **Zeitauswahl selektiert direkt auch Items**
   _Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt._
   
   ![Select Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
-
 
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
@@ -40,7 +42,6 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   
   ![Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
   
-
 * Editing: **Kapitelmarken immer an Play-/Record-Cursor setzen**
   _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
 
@@ -50,7 +51,6 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   _Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten._
  
    ![Toggle Peak Gain](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Peak_Gain.gif) 
- 
 
 * Editing: **Zoom zu Edit-Cursor**
   _Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück._
