@@ -383,8 +383,6 @@ namespace ultraschall {
       
       bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string>& errorMessages)
       {
-         PRECONDITION_RETURN(chapters_.empty() == false, false);
-
          bool valid = true;
          errorMessages.clear();
          
