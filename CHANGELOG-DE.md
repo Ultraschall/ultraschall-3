@@ -168,8 +168,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   ![Edit Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Edit_markers.gif)
 
 
-
-
+* Soundboard: **Sortierung unter macOS High Sierra**
+  _Die Sortierung der einzelnen Sounds erfolgt nun auch unter macOS High Sierra wieder alphabetisch nach Dateinamen. Es wird nur noch der jeweils angegebene Ordner ausgelesen und in das Soundboard importiert, nicht wie bisher auch sämtliche Unterordner._
 
 * Sonstiges: **Tastatur-Shortcuts überarbeitet**
   _Die Übersicht für alle relevanten [Tastatur-Shortcuts](http://url.ultraschall-podcast.de/keymap31) in Ultraschall wurde aktualisiert und erweitert._
