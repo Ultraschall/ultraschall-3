@@ -1,6 +1,153 @@
 # Ultraschall Changelog
 
-Please consult our tutorial videos (German) for detailed advice: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
+The following features will be presented in detail in our Ultraschall tutorial videos:
+[tp://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
+
+
+## 3.1 Miedinger - 2017-December
+
+* REAPER: **Support for version 5.70** _Ultraschall 3.1 has been optimized for REAPER version 5.70. It will not run with any other versions or REAPER._ **We strongly advise to avoid manual REAPER updates in the future**. _This will lead to the Ultraschall extension being disabled._
+
+* Theme: **Master Channel always visible in the Mixer** _The Master channel in the mixer is now visible by default in all views without having to toggle the visibility using the Tab key. The Master channel is divided into two sections: the normal output signal is displayed in the center, and a RMS meter with an average of 2,000 milliseconds is located to the left and right. In combination with the new Ultraschall Dynamics2 effect this enables you to determine whether you constantly achieve the desired -16LUFS. The actual measurement is carried out in RMS instead of LUFS, however this is still accurate enough to provide a practical approximation for vocal recordings. The states are marked by color: Blue- up to -18 LUFS (mix is too quiet) Green- -18 to -14 LUFS (mix volume is properly set) Yellow- -14 to -12 LUFS (mix is too loud, this level should only be reached occasionally) Orange: -12 to 0 LUFS (mix is considerably too loud). The desired mix only occasionally leaves the green zone when there is talking._
+
+  ![Master Mix and RMS Display](http://ultraschall.fm/wp-content/uploads/2018/01/Master_Mix_and_RMS.gif)
+
+* Mastering: **Ultraschall Dynamics2 Loudness Normalization** _The Dynamics effect for loudness normalization of tracks in the 3.0 Release has received a major overhaul: three sliders now let you control the target volume (typically -16dB LUFS), noise floor (volume threshold at which a signal is considered noise) and a noise gate (steeper or slower or off). The effect has also been updated with a limiter to avoid digital clipping._ You can save custom preference – even per track – as presets as well._
+
+  ![Ultraschall Dynamics 2 Loudness Normalization](http://ultraschall.fm/wp-content/uploads/2018/01/dynamics2b.gif)  
+
+* Export (Mac): **Exporting and Tagging of m4a** _In macOS in the Render Assistant you can now generate m4a files as well. The Export Assistent will include chapter markers, meta data and episode cover just as is the case with mp3 files.
+
+  ![m4a Export](http://ultraschall.fm/wp-content/uploads/2018/01/m4a_export.gif)
+
+
+
+* Theme: **Optimized View of selected Items** _Selected items will no longer be highlighted by brightness, but rather by a golden frame._
+  
+   ![Select Items](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items.gif)  
+
+* Theme: **Alternative wave form view** _Use the shortcut `alt`+`shift`+`h` to change the wave form in such a way that the waves will no longer extend in both directions from the center line, but rather up from the bottom line._ 
+
+  ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2018/01/Rectify_Peaks.gif)
+
+* Theme: **Wave Form Display as Spectograph** _By means of the Peak Display Settings you can display a spectrograph alongside the typical wave form – ideal to identify hum or buzz noise._
+ 
+ ![Spectograph](http://ultraschall.fm/wp-content/uploads/2018/01/Spektrogramm.gif) 
+
+* Theme: **Volume Zoom of the Wave Form** _Using the shortcut `alt`+`h` you can vertically zoom the wave form in two steps. Doing so might make editing of very quiet passages easier for you._
+ 
+   ![Toggle Peak Gain](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Peak_Gain.gif) 
+
+* Editing: **Zoom to Edit Cursor** _Using the shortcut `z` you can directly zoom in to the Edit cursor for fine editing at a suitable zoom level. Pressing `z` again will zoom back out to the previous zoom level._
+
+   ![Toggle Arrange Zoom](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arrange_Zoom.gif) 
+
+* Theme: **Limiting Zoom-Out** _Particularly when `pinch-zooming` using the trackpad you might happen to zoom out too far, making it difficult to find your project. The maximum zoom-out is now limited to project length (project completely visible). Using `alt`+`pinch-zoom` you can use the tradition unlimited zoom feature._
+
+   ![Zoom Limiter](http://ultraschall.fm/wp-content/uploads/2018/01/Zoom_Limiter.gif)
+
+* Theme: **Zoom to Playhead** _Using `pinch-zoom` you still zoom in to the position of the mouse cursor. Using the keyboard zoom via the `+` and `-` keys however you zoom to the playhead position. Using the `^` key will move to the Edit, Record or playhead without zooming._
+
+   ![Zoom to Playhead](http://ultraschall.fm/wp-content/uploads/2018/01/Zoom_to_Cursor.gif)
+
+* Theme: **Ultraclock** _The "Recording" view shows an advanced clock - it shows the current position of the playhead as before, but also the current transport status (stop, pause, play, record, loop) in color. Furthermore the current time is shown – handy for planning start and end of a live broadcast. Use the right mouse button to open a context menu for adjusting the displayed information._
+
+  ![Ultraclock](http://ultraschall.fm/wp-content/uploads/2018/01/Ultraclock.gif)  
+
+* Theme: **Optimized Tooltips** _All button now feature practical tool tips when hovering over them with your mouse cursor._
+
+  ![Tool Tips](http://ultraschall.fm/wp-content/uploads/2018/01/tooltipps.gif)
+  
+* Theme: **Display of the Recording Format** _The right hand side of the menu bar now also shows the used recording format alongside the free disk space. Standard for typically gain staged recordings is FLAC (lossless compression) in 16bit at 48KHz. Feel free to adjust this to 24bit if you are in need of more headroom from the higher bit rate._
+
+  ![Recording Info](http://ultraschall.fm/wp-content/uploads/2018/01/Recinfo.gif)
+
+* Theme: **Envelope Tracks** _Envelope tracks now show their type names such as “Mute”, “Volume”, etc. Using `shift`+`h` you can toggle the height - similar to changing track height using `h`._
+  
+  ![Envelope Info](http://ultraschall.fm/wp-content/uploads/2018/01/Envelope_Info.gif)
+
+* Theme: **Optimized RecArm Behavior** _When creating new track using the Podcast menu or the shortcut `cmd`+`t`, these are still enabled for recording (RecArm). When creating a track using a double click in the left track area or via the mixer or drag & drop, these will not be record enabled._
+  
+  ![Auto Arm new Tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Auto_Arm_New_Tracks.gif)  
+    
+* Theme: **Switching the RecArm Status for all Tracks** _Using the `shift`+`a` shortcut you can arm all tracks for recording or disarm them respectively if they have been armed before. Switching the status only works when not recording.
+
+  ![Toggle RecArm all Tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arm_all_Tracks.gif)  
+  
+* Theme: **Toggling the Playback Speed** _Using the `alt`+`j` shortcut you can toggle between 1.0x and 1.5x playback speed. If this is too fast: you can simply enter a different value on the play rate slider and toggle using `alt` + `j`. This value will be preserved. A big Thanks to leonidlezner!_
+
+  ![Envelope Info](http://ultraschall.fm/wp-content/uploads/2018/01/Switch_Playrate.gif)
+
+
+
+
+
+
+ 
+* Editing: **Follow Mode** _Using `cmd`+`f`or the relevant new icon you can enable or disable the Follow mode. Enabling will cause the timeline to jump to the current position of the play or record head and scoll along to keep track of the play head. Disabling will detach the timeline from the play head so you can work on other areas within the project without having to stop playback or recording. All chapter marker features will relate to the position of the Edit cursor and no longer the play/record cursor._
+
+  ![Follow Mode](http://ultraschall.fm/wp-content/uploads/2018/01/follow.gif)
+
+
+
+  
+* Editing: **Edit time selection on the edges** _You can now grab and move a time selection from both of the outer edges._
+
+  ![Adjust Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Adjust_Time_Selection.gif)
+
+* Editing: **Time selection will automatically select items** _When you mark a certain time selection with the Time Selection tool enabled, the actual item will automatically be selected. Marking a time selection over multiple items will select all these items respectively._
+  
+  ![Select Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
+
+* Editing: **Muting selected items along the time selection** _Using `cmd`+`y` you can mute the time selection across all selected items. Using `cmd`+`shift`+`y` you can unmute this time selection again._
+  
+  ![Mute Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_Items_with_Time_Selection.gif)
+ 
+* Editing: **Double Click to Play** _Double clicking in the timeline or editing window will start playback from the clicked position._
+
+  ![Double Click to Play](http://ultraschall.fm/wp-content/uploads/2018/01/Double_Click_to_Play.gif) 
+
+* Editing: **Moving Items using the Keyboard** _Using the `alt`+`left` or `alt`+`right` keys respectively you can move items within the timeline. Press the `n` key to open a preference window for setting the increments._
+
+  ![Nudge Items](http://ultraschall.fm/wp-content/uploads/2018/01/Nudge_Items.gif)  
+ 
+ 
+
+
+
+* Chapter Markers: **Importing planned Chapter Markers from the Clipboard** _You can now import any text from the clipboard as a planned chapter marker (green color) into the project. Line breaks determine the individual markers._
+
+  ![Import planned Markers from Clipboard](http://ultraschall.fm/wp-content/uploads/2018/01/Import_from_Clipboard.gif)  
+
+* Chapter Markers: **Placing planned Chapter Markers** _Using the `b` shortcut you can place the next prepared marker at the current playhead or edit cursor position (depending on the follow mode, see above)._
+
+  ![Set planned Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Planned_Markers2.gif)  
+
+* Chapter Markers: **Converting all Markers to planner Chapter Markers** _All markers in the project can be converted to green planned chapter markers. The existing order will be unaffected._
+  
+  ![Set all Markers to Planning Stage](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Planned.gif)
+  
+* Chapter Markers: **Visibility of Chapter Markers during Placement** _When placing chapter markers at the playhead or edit cursor while being outside the visible area, the timeline will be moved to the relevant position so you can actually see where you have placed the marker._
+  
+  ![Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
+  
+* Chapter Markers: **Always place Chapter Markets at Play/Record Cursor position** _By using the `cmd` key you can always place chapter markers at the pay/record cursor position (i.e. `cmd`+`m`, `cmd`+`e` and `cmd`+`shift`+`m` respectively). The Follow mode (see above) will be ignored in this case and the viewport won’t change. These features are particulary suitable to be assigned to a Midi interface._
+
+  ![Always set Markers to Play/Rec Position](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Play.gif)
+
+* Chapter Markers: **Chapter Marker Management** _In order to be able to edit existing chapter markers during listen through, the auto play feature of chapter markers in the chapter marker list will be disabled. Playback will simply resume no matter how you edit the chapter markers. To quickly jump to a chapter marker in the timeline, simply double click to the right of the marker in the free list area. The markers will be numbered for better orientation. The numbers won’t make it into the texts._
+
+  ![Edit Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Edit_markers.gif)
+
+
+
+
+
+* Misc: **Enhanced Keyboard Shortcuts** _The overview of all relevant [keyboard shortcuts](http://url.ultraschall-podcast.de/keymap31) in Ultraschall has been updated and expanded._
+
+* Easter Egg: **Should you take your time** _Easter comes sooner than you might think. Using the `alt`+`cmd`+`shift`+`u` shortcut you can sweeten your wait._
+  
+* Misc: **Bug Fixes and Optimization** _Several smaller enhancements, particularly for special cases. Too many details might even unsettle you._
 
 ## 3.0.3 Miedinger - 2017-März-
 
