@@ -13,7 +13,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
   ![Master Mix and RMS Display](http://ultraschall.fm/wp-content/uploads/2018/01/Master_Mix_and_RMS.gif)
 
 * Mastering: **Ultraschall Dynamics2 Loudness Normalization**
-  _Der Dynamics-Effekt zum Vereinheitlichen der Lautstärke von Spuren der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen.) Der Effekt hat zudem einen Limiter-Effekt eingebaut der digitales Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
+  _Der Dynamics-Effekt zum Vereinheitlichen der Lautstärke von Spuren der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen. Der Effekt hat zudem einen Limiter-Effekt eingebaut der digitales Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
 
   ![Ultraschall Dynamics 2 Loudness Normalization](http://ultraschall.fm/wp-content/uploads/2018/01/dynamics2b.gif)  
 
