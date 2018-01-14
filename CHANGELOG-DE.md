@@ -34,6 +34,11 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
   ![Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2018/01/Rectify_Peaks.gif)
 
+* Theme: **Darstellung der Wellenform als Spektogramm**
+ _Mit Hilfe der Peak Display Settings kann man sich ergänzend zur normalen Wellenform ein Spektrogramm anzeigen lassen - hilfreich, um etwa Brummgeräusche zu identifizieren._
+ 
+ ![Spektogramm](http://ultraschall.fm/wp-content/uploads/2018/01/Spektrogramm.gif) 
+
 * Theme: **Lautstärke-Zoom der Wellenform**
   _Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten._
  
@@ -166,8 +171,8 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 
 
-
-
+* Sonstiges: **Tastatur-Shortcuts überarbeitet**
+  _Die Übersicht für alle relevanten [Tastatur-Shortcuts](http://url.ultraschall-podcast.de/keymap31) in Ultraschall wurde aktualisiert und erweitert._
 
 * Easter Egg: **Wenns mal wieder länger dauert**
   _Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen._
