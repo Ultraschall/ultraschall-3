@@ -82,12 +82,11 @@ end
 
 if sec=="-1" then sec=0 end
 if view=="-1" then view="setup" end
-if views=="-1" then views=55849 end
+if views=="-1" then views=55796 end
 
 --------------------------
 -- Restore GUI and Buttons
 --------------------------
-
 
 
 if views then
