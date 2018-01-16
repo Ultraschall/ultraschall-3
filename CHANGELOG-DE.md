@@ -2,20 +2,20 @@
 
 Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-Videos erklärt: [http://ultraschall.fm/tutorials/](http://ultraschall.fm/tutorials/)
 
-## 3.1 Miedinger - 2017-Dezember
+## 3.1 Miedinger - 2018-Januar
 
 * REAPER: **Unterstützung der Version 5.70**
   _Ultraschall 3.1 ist für die Version 5.70 von REAPER optimiert. Alle anderen Versionen sind nicht lauffähig._ **Von einem manuellen Update von REAPER ist daher in Zukunft unbedingt abzusehen**, _die Ultraschall-Erweiterungen werden dann deaktiviert._
 
 * Theme: **Master-Kanal im Mixer immer sichtbar**
   _In allen Views ist nun auch der Master-Kanal direkt rechts im Mixer sichtbar und muss nicht mehr über einen Tab umgeschaltet werden. Der Master-Kanal ist in der Anzeige zweigeteilt: in der Mitte das normale aktuelle Signal, breiter links und rechts daneben eine RMS-Anzeige mit dem Mittel von 2000 Millisekunden. Dies ermöglicht in Kombination mit dem neuen Ultraschall Dynamics2 Effekt eine schnelle Einordnung, ob die gewünschen -16LUFS konstant erreicht oder über-/unterschritten werden. Die Messung erfolgt zwar nicht in LUFS sondern in RMS, was aber als Näherungswert in der Praxis für Sprachaufnahmen ausreicht. Farblich werden folgende Zustände unterschieden: Blau-bis -18 LUFS (Mix ist zu leise) Grün- -18 bis -14 LUFS Aufnahme ist perfekt in der Lautstärke Gelb- -14 bis -12 LUFS (Aufnahme ist zu laut, sollte nur selten erreicht werden) Orange: -12 bis 0 LUFS (Aufnahme ist deutlich zu laut). Gewünscht ist ein Mix, bei dem die Aussteuerung im Master nur selten die grüne Zone verlässt wenn gesprochen wird._
-  
+
 	[Video: Master Mix and RMS Display](http://ultraschall.fm/wp-content/uploads/2018/01/Master_Mix_and_RMS.gif)
 
 * Mastering: **Ultraschall Dynamics2 Loudness Normalization**
   _Der Dynamics-Effekt zum Vereinheitlichen der Lautstärke von Spuren der 3.0 Release wurde erheblich erweitert: über drei Schieberegler lassen sich nun Target-Lautstärke (normalerweise: -16LUFS), Noisefloor (Trennwert, ab dem ein Signal als Rauschen/Störung interpretiert wird und nicht als Stimme) sowie Noisegate (steiler oder flacher bzw. aus) je nach Anforderung einstellen. Der Effekt hat zudem einen Limiter-Effekt eingebaut der digitales Clipping abfängt. Eigene Einstellungen können - auch pro Spur - als Preset gespeichert werden._
 
-  [Video: Ultraschall Dynamics 2 Loudness Normalization](http://ultraschall.fm/wp-content/uploads/2018/01/dynamics2b.gif)  
+  [Video: Ultraschall Dynamics 2 Loudness Normalization](http://ultraschall.fm/wp-content/uploads/2018/01/dynamics2b.gif)
 
 * Export (Mac): **Export und Tagging von m4a**
   _Es können nun auf macOS im Render-Assistenten auch m4a-Dateien generiert werden. Im Export-Assistenten werden diese genauso wie bisher MP3 mit Kapitelmarken, Metadaten und Epispodencover versehen._
@@ -26,28 +26,28 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Theme: **Anzeige ausgewählter Items optimiert**
   _Nur echt mit der Goldkante: ausgewählte Items werden nicht mehr durch Helligkeit hervorgehoben, sondern durch eine gut sichbare goldene Umrahmung._
-  
-  [Video: Select Items](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items.gif)  
+
+  [Video: Select Items](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items.gif)
 
 * Theme: **Alternative Darstellung der Wellenform**
-  _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._ 
+  _Mit dem Shortcut `alt`+`shift`+`h` kann die Darstellung der Wellenform so umgestellt werden, dass die Peaks nicht von der Mitte sondern der Grundlinie aus wachsen._
 
   [Video: Rectify Peaks](http://ultraschall.fm/wp-content/uploads/2018/01/Rectify_Peaks.gif)
 
 * Theme: **Darstellung der Wellenform als Spektogramm**
  _Mit Hilfe der Peak Display Settings kann man sich ergänzend zur normalen Wellenform ein Spektrogramm anzeigen lassen - hilfreich, um etwa Brummgeräusche zu identifizieren._
- 
-  [Video: Spektogramm](http://ultraschall.fm/wp-content/uploads/2018/01/Spektrogramm.gif) 
+
+  [Video: Spektogramm](http://ultraschall.fm/wp-content/uploads/2018/01/Spektrogramm.gif)
 
 * Theme: **Lautstärke-Zoom der Wellenform**
   _Mit dem Shortcut `alt`+`h` wird die Ansicht der Wellenform vertikal in zwei Stufen gezoomt. Man kann damit auch sehr leise Passagen gut sichtbar und editierbar schalten._
- 
-  [Video: Toggle Peak Gain](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Peak_Gain.gif) 
+
+  [Video: Toggle Peak Gain](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Peak_Gain.gif)
 
 * Editing: **Zoom zu Edit-Cursor**
   _Mit dem Shortcut `z` wird direkt zu einer für Feinschnitt passenden Zoomstufe zum Edit-Cursor hin gezoomt. Nochmaliges Drücken von `z` springt wieder in die vorherige Zoomstufe zurück._
 
-  [Video: Toggle Arrange Zoom](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arrange_Zoom.gif) 
+  [Video: Toggle Arrange Zoom](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arrange_Zoom.gif)
 
 * Theme: **Begrenzung des Zoom-Out**
   _Insbesondere bei einem `Pinch-Zoom` auf dem Trackpad konnte es leicht passieren, dass man viel zu weit herausgezoomt hat und sein Projekt nicht wieder gefunden hat. Der maximale Zoom-Out ist nun auf die Projektlänge begrenzt (ganzes Projekt sichtbar). Über `alt`+`Pinch-Zoom` erhält man die bisherige, unlimitierte Zoomfunktion._
@@ -62,13 +62,13 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 * Theme: **Ultraclock**
   _Im View "Recording" wird eine erweiterte Uhr angezeigt - sie zeigt wie bisher die aktuelle Position des Play-/Record-/Edit-Cursors, jedoch zusätzlich den aktuellen Transport-Status (Stop, Pause, Play, Record, Loop) in Farbe. Darüber ist die aktuelle Uhrzeit zu sehen - nützlich, um Start oder Ende einer Live-Sendung perfekt zu timen. Mit der rechten Maustaste können über ein Kontextmenü die angezeigten Informationen angepasst werden._
 
-    [Video: Ultraclock](http://ultraschall.fm/wp-content/uploads/2018/01/Ultraclock.gif)  
+    [Video: Ultraclock](http://ultraschall.fm/wp-content/uploads/2018/01/Ultraclock.gif)
 
 * Theme: **Tooltips optimiert**
   _Alle Buttons haben jetzt aussagekräftige Tooltipps wenn man mit dem Mauszeiger länger darauf verweilt._
 
     [Video: Tooltips](http://ultraschall.fm/wp-content/uploads/2018/01/tooltipps.gif)
-  
+
 * Theme: **Anzeige des Recording-Formates**
   _In der Menüleiste wird nun rechts nicht nur der noch freie Speicherplatz angezeigt, sondern auch das verwendete Recording-Format. Als Standard ist für normal ausgesteuerte Aufnahmen FLAC (verlustfreie Kompression), 16Bit 48KHz eingestellt. Natürlich kann dies für anspruchsvollere Aufnahmesituationen etwa auf 24Bit angehoben werden._
 
@@ -76,19 +76,19 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Theme: **Envelope-Spuren**
   _Bei Envelope Spuren werden nun deren Typnamen angezeigt - also etwa "Mute", "Volume" etc. Mit dem Shortcut `shift`+`h` kann ihre Höhe umgeschaltet werden - vergleichbar zum Umschalten der Trackhöhe mit `h`._
-  
+
     [Video: Envelope Info](http://ultraschall.fm/wp-content/uploads/2018/01/Envelope_Info.gif)
 
 * Theme: **RecArm Verhalten optimiert**
   _Wenn neue Tracks über das Podcast-Menü oder ober den Shortcut `cmd`+`t` angelegt werden, sind sie wie bisher direkt für die Aufnahme scharf geschaltet (RecArm). Legt man Tracks über Doppelklick im linken Spurbereich oder im Mixer an, oder über drag & drop, so sind sie nicht direkt scharfgeschaltet._
-  
-    [Video: Auto Arm new Tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Auto_Arm_New_Tracks.gif)  
-    
+
+    [Video: Auto Arm new Tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Auto_Arm_New_Tracks.gif)
+
 * Theme: **Umschalten des RecArm-Status für alle Tracks**
   _Mit dem Shortcut `shift`+`a` können alle Tracks für eine Aufnahme scharfgeschaltet werden bzw. die Scharfschaltung aufgehoben werden. Das Umschalten funktioniert nur, wenn keine Aufnahme läuft._
 
-    [Video: Toggle Arm all tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arm_all_Tracks.gif)  
-  
+    [Video: Toggle Arm all tracks](http://ultraschall.fm/wp-content/uploads/2018/01/Toggle_Arm_all_Tracks.gif)
+
 * Theme: **Umschalten der Playrate**
   _Mit dem Shortcut `alt`+`j` kann die Playrate von 1.0 zu 1.5 und zurück geschaltet werden. Wem das zu schnell ist: man kann auch einen anderen Wert am Playrate-Schieber einstellen und ebenfalls per `alt`+`j` speichern/umschalten. Der Wert bleibt erhalten. Dank an leonidlezner!_
 
@@ -99,7 +99,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 
 
- 
+
 * Editing: **Folgen-Modus**
   _Mit `cmd`+`f`oder dem entsprechenden neuen Icon wird der Folgen-Modus aktiviert oder deaktiviert. Ein Aktivieren führt immer dazu, dass die Timeline zur aktuellen Position des Play- oder Record-Cursors springt und die Timeline ab dann mitscrollt. Ein deaktivieren entkoppelt die Timeline vom Abspielen oder Aufnehmen - man kann somit andere Stellen im Projekt bearbeiten, ohne dass Wiedergabe oder Aufnahme stoppt. Sämtliche Kapitelmarken-Funktionen beziehen sich ab dann auch auf die Position des Edit-Cursors, nicht wie sonst auf Play-/Record-Cursor._
 
@@ -107,7 +107,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 
 
-  
+
 * Editing: **Zeitauswahl editieren an Kanten**
   _Eine Zeitauswahl kann nun überall an den beiden äußeren Kanten angefasst und verschoben werden._
 
@@ -115,48 +115,48 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Editing: **Zeitauswahl selektiert direkt auch Items**
   _Wenn das Zeitauswahl-Werkzeug aktiviert ist, und man damit über ein Item zieht um eine Zeitauswahl vorzunehmen, wird nun auch direkt das entsprechende Item ausgewählt. Zieht man über mehrere Items, werden diese gemeinsam mit ausgewählt._
-  
+
     [Video: Select Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Select_Items_with_Time_Selection.gif)
 
 * Editing: **Muten ausgewählter Items entlang der Zeitauswahl**
   _Mit `cmd`+`y` werden alle ausgewählten Items gemutet, und zwar über den Zeitraum der Zeitauswahl. Mit `cmd`+`shift`+`y` wird eine Zeitauswahl wieder unmuted._
-  
+
     [Video: Mute Items with Time Selection](http://ultraschall.fm/wp-content/uploads/2018/01/Mute_Items_with_Time_Selection.gif)
- 
+
 * Editing: **Doppelklick für Play**
   _Ein Doppelklick in der Zeitleiste oder dem Editierfenster spielt ab der angeklickten Position ab._
 
-    [Video: Double-Click to Play](http://ultraschall.fm/wp-content/uploads/2018/01/Double_Click_to_Play.gif) 
+    [Video: Double-Click to Play](http://ultraschall.fm/wp-content/uploads/2018/01/Double_Click_to_Play.gif)
 
 * Editing: **Verschieben von Items über Tastatur**
   _Mit den Tasten `alt`+`links` bzw. `alt`+`rechts` können markierte items in der Timeline verschoben werden. Über die Taste `n` erreicht man ein Einstellungsfenster, mit dem man die Laufweite festlegen kann._
 
-    [Video: Nudge Items](http://ultraschall.fm/wp-content/uploads/2018/01/Nudge_Items.gif)  
- 
- 
+    [Video: Nudge Items](http://ultraschall.fm/wp-content/uploads/2018/01/Nudge_Items.gif)
+
+
 
 
 
 * Kapitelmarken: **Importieren geplanter Kapitelmarken aus der Zwischenablage**
   _beliebige Texte können aus der Zwischenablage als geplante Kapitelmarken (grüne Farbe) in das Projekt eingefügt werden. Zeilenumbrüche definieren die einzelnen Marken._
 
-    [Video: Import planned Markers from Clipboard](http://ultraschall.fm/wp-content/uploads/2018/01/Import_from_Clipboard.gif)  
+    [Video: Import planned Markers from Clipboard](http://ultraschall.fm/wp-content/uploads/2018/01/Import_from_Clipboard.gif)
 
 * Kapitelmarken: **Setzen geplanter Kapitelmarken**
   _Mit dem Shortcut `b` wird die jeweils nächste vorbereitete Marke an die aktuelle Position des Play-/Record-Cursors bzw des Edit-Cursors (abhängig vom Folgen-Modus (siehe oben)) gesetzt._
 
-    [Video: Set planned Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Planned_Markers2.gif)  
+    [Video: Set planned Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Planned_Markers2.gif)
 
 * Kapitelmarken: **Umwandeln aller Marker in geplante Kapitelmarken**
   _Alle im Projekt befindlichen Marker können in grüne vorbereitete Marker verwandelt werden; die bisherige Reihenfolge bleibt dabei erhalten._
-  
+
     [Video: Set all Markers to Planning Stage](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Planned.gif)
-  
+
 * Kapitelmarken: **Sichtbarkeit von Kapitelmarken beim Setzen**
   _Werden Kapitelmarken an Play- oder Edit-Cursor gesetzt, während diese außerhalb des sichtbaren Bereiches sind, wird die Timeline an die entsprechende Stelle verschoben so dass man sieht, wo die Marker gesetzt werden._
-  
+
     [Video: Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
-  
+
 * Kapitelmarken: **Kapitelmarken immer an Play-/Record-Cursor setzen**
   _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
 
@@ -176,7 +176,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 
 * Easter Egg: **Wenns mal wieder länger dauert**
   _Ostern kommt plötzlich und unerwartet. Mit dem Shortcut `alt`+`cmd`+`shift`+`u` kann man sich die Wartezeit etwas verkürzen._
-  
+
 * Sonstiges: **Bugfixes und Optimierungen**
   _Diverse kleinere Optimierungen, insbesondere von Sonderfällen. Zuviele Details würden Sie nur beunruhigen._
 
