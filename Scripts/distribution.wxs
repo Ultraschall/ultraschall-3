@@ -72,8 +72,11 @@
                </Component>
                <Directory Id="UltraschallAddonsFolder" Name="Add-ons">
                   <Component Id="UltraschallReleaseAddons" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
-                     <File Id="MicroBanner" Name="Ultraschall Microbanner 80x15.png" DiskId="1" Source="Payload\Addons\Ultraschall Microbanner 80x15.png"/>
-                     <File Id="WebBanner" Name="Ultraschall Webbanner.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.png"/>
+                     <File Id="ResAppIcon" Name="Ultraschall App-Icon.png" DiskId="1" Source="Payload\Addons\Ultraschall App-Icon.png"/>
+                     <File Id="ResWebbanner" Name="Ultraschall Webbanner.pdf" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner.pdf"/>
+                     <File Id="ResWebbanner400" Name="Ultraschall Webbanner 400px.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner 400px.png"/>
+                     <File Id="ResWebbanner800" Name="Ultraschall Webbanner 800px.png" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner 800px.png"/>
+                     <File Id="ResWebbanner2000" Name="Ultraschall Webbanner 2000px.jpg" DiskId="1" Source="Payload\Addons\Ultraschall Webbanner 2000px.jpg"/>
                   </Component>
                </Directory>
             </Directory>
