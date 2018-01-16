@@ -143,7 +143,7 @@ Die nachfolgenden Features werden ausführlich in unseren Ultraschall-Tutorial-V
 	[Video: Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
 
 * Kapitelmarken: **Kapitelmarken immer an Play-/Record-Cursor setzen**
-  _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
+  _Kapitelmarken können durch zusätzliche Verwendung von `cmd` immer an die Position des Play-/Record-Cursor gesetzt werden (also `cmd`+`m`, `cmd`+`e`, `cmd`+`b` sowie `cmd`+`shift`+`m`). Der Follow-Modus (siehe oben) wird dabei ignoriert und auch der Viewport ändert sich nicht. Diese Funktionen eignen sich gut, um sie etwa auf ein Midi-Interface zu legen._
 
 	[Video: Set Markers always to Play/Rec Position](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Play.gif)
 

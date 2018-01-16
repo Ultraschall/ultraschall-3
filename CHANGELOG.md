@@ -144,7 +144,7 @@ The following features will be presented in detail in our Ultraschall tutorial v
 	[Video: Show Positioning of Markers](http://ultraschall.fm/wp-content/uploads/2018/01/Show_Positioning_of_Markers.gif)
 
 * Chapter Markers: **Always place Chapter Markets at Play/Record Cursor position**
-  _By using the `cmd` key you can always place chapter markers at the pay/record cursor position (i.e. `cmd`+`m`, `cmd`+`e` and `cmd`+`shift`+`m` respectively). The Follow mode (see above) will be ignored in this case and the viewport won’t change. These features are particulary suitable to be assigned to a Midi interface._
+  _By using the `cmd` key you can always place chapter markers at the pay/record cursor position (i.e. `cmd`+`m`, `cmd`+`e`, `cmd`+`b` and `cmd`+`shift`+`m` respectively). The Follow mode (see above) will be ignored in this case and the viewport won’t change. These features are particulary suitable to be assigned to a Midi interface._
 
 	[Video: Always set Markers to Play/Rec Position](http://ultraschall.fm/wp-content/uploads/2018/01/Set_Markers_to_Play.gif)
 
