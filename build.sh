@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-3.1-rc3
+export ULTRASCHALL_RELEASE=Ultraschall-3.1-rc6
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -43,8 +43,11 @@ cp ../REAPER/Scripts/Remove\ legacy\ audio\ devices.command ./Payload/Remove\ le
 # Copy resources to payload 'Add-ons' directory
 cp ../REAPER/Documentation/Keymap.pdf ./Payload/Add-ons/Ultraschall\ Keyboard\ Layout.pdf
 cp ../REAPER/Documentation/Keymap.pptx ./Payload/Add-ons/Ultraschall\ Keyboard\ Layout.pptx
-cp ../REAPER/Resources/Ultraschall\ Microbanner\ 80x15.png ./Payload/Add-ons/Ultraschall\ Microbanner\ 80x15.png
-cp ../REAPER/Resources/Ultraschall\ Webbanner.png ./Payload/Add-ons/Ultraschall\ Webbanner.png
+cp ../REAPER/Resources/Ultraschall\ App-Icon.png ./Payload/Add-ons/Ultraschall\ App-Icon.png
+cp ../REAPER/Resources/Ultraschall\ Webbanner.pdf ./Payload/Add-ons/Ultraschall\ Webbanner.pdf
+cp ../REAPER/Resources/Ultraschall\ Webbanner\ 400px.png ./Payload/Add-ons/Ultraschall\ Webbanner\ 400px.png
+cp ../REAPER/Resources/Ultraschall\ Webbanner\ 800px.png ./Payload/Add-ons/Ultraschall\ Webbanner\ 800px.png
+cp ../REAPER/Resources/Ultraschall\ Webbanner\ 2000px.jpg ./Payload/Add-ons/Ultraschall\ Webbanner\ 2000px.jpg
 
 # Copy REAPER theme to payload directory
 cp ../REAPER/Themes/Ultraschall_3.1_MAC.ReaperConfigZip ./Payload/Ultraschall_3.1.ReaperConfigZip
@@ -112,7 +115,7 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 echo Creating disk layout...
 echo '
    tell application "Finder"
-     tell disk "Ultraschall-3.1-rc3.intermediate"
+     tell disk "Ultraschall-3.1-rc6.intermediate"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
@@ -121,7 +124,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.1-rc3.pkg" of container window to {50, 30}
+           set position of item "Ultraschall-3.1-rc6.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.1.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}

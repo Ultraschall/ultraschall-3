@@ -1,6 +1,6 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.1-rc3
+set ULTRASCHALL_RELEASE_LABEL=Ultraschall-3.1-rc6
 
 del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
 
@@ -20,14 +20,18 @@ rem Resources
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\README.html ..\REAPER\README.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\INSTALL.html ..\REAPER\INSTALL.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=Payload\CHANGELOG.html ..\REAPER\CHANGELOG.md
+
 copy ..\REAPER\Themes\Ultraschall_3.1_WIN.ReaperConfigZip Payload\Ultraschall_3.1.ReaperConfigZip
 
 rem Ultraschall Add-ons
 md Payload\Addons > nul
 copy "..\REAPER\Documentation\Keymap.pdf" "Payload\Addons\Ultraschall Keyboard Layout.pdf"
 copy "..\REAPER\Documentation\Keymap.pptx" "Payload\Addons\Ultraschall Keyboard Layout.pptx"
-copy "..\REAPER\Resources\Ultraschall Microbanner 80x15.png" "Payload\Addons\Ultraschall Microbanner 80x15.png"
-copy "..\REAPER\Resources\Ultraschall Webbanner.png" "Payload\Addons\Ultraschall Webbanner.png"
+copy "..\REAPER\Resources\Ultraschall App-Icon.png" "Payload\Addons\Ultraschall App-Icon.png"
+copy "..\REAPER\Resources\Ultraschall Webbanner.pdf" "Payload\Addons\Ultraschall Webbanner.pdf"
+copy "..\REAPER\Resources\Ultraschall Webbanner 400px.png" "Payload\Addons\Ultraschall Webbanner 400px.png"
+copy "..\REAPER\Resources\Ultraschall Webbanner 800px.png" "Payload\Addons\Ultraschall Webbanner 800px.png"
+copy "..\REAPER\Resources\Ultraschall Webbanner 2000px.jpg" "Payload\Addons\Ultraschall Webbanner 2000px.jpg"
 
 rem Build Ultraschall REAPER Plug-in
 md Payload\Plugin > nul
