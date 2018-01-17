@@ -1,6 +1,3 @@
-[![Build Status](https://ultraschall.visualstudio.com/_apis/public/build/definitions/4336a2f9-e0e7-4ede-bebf-e2551cd6cb73/23/badge)](https://ultraschall.visualstudio.com/_apis/public/build/definitions/4336a2f9-e0e7-4ede-bebf-e2551cd6cb73/23/badge)
-[![Build Status](https://ultraschall.visualstudio.com/_apis/public/build/definitions/4336a2f9-e0e7-4ede-bebf-e2551cd6cb73/22/badge)](https://ultraschall.visualstudio.com/_apis/public/build/definitions/4336a2f9-e0e7-4ede-bebf-e2551cd6cb73/22/badge)
-
 # Ultraschall: The podcasting extensions for the Reaper DAW
 
 [Podlove](http://podlove.org/) and [Auphonic](https://auphonic.com/) handed us podcast producers powerful tools, but an optimized environment for the actual recording and production of the podcasts was missing.
