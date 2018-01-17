@@ -437,3 +437,21 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 
+.DS_Store
+*.swp
+*.lock
+profile
+
+
+####
+# Installer output files that should never be committed
+#
+
+*.pkg
+!3rdParty/Hub/UltraschallHub-2015-11-12.pkg
+*.dmg
+*.dmg.gz
+*.dmg.zip
+*.msi
+.vscode/
+

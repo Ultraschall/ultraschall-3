@@ -1,5 +1,0 @@
-language: objective-c
-script: "./build.sh"
-osx_image: xcode8.1
-notifications:
-  slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
