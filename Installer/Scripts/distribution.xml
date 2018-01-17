@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-   <title>Ultraschall 3.1</title>
+   <title>ULTRASCHALL 3.1 alpha1</title>
    <organization>fm.ultraschall</organization>
    <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
    <domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true"/>
@@ -9,17 +9,15 @@
    <!-- Define documents displayed at various steps -->
    <license file="license.html" mime-type="text/html"/>
    <!-- List all component packages -->
-   <pkg-ref id="fm.ultraschall.Soundboard.Component" version="3.1.0">UltraschallSoundboard.pkg</pkg-ref>
-   <pkg-ref id="fm.ultraschall.Soundboard.Extras" version="3.1.0">UltraschallSoundboardExtras.pkg</pkg-ref>
-   <pkg-ref id="com.itsr.StudioLink.Component" version="16.4.0">StudioLink.pkg</pkg-ref>
-   <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.1.0">UltraschallPluginExtension.pkg</pkg-ref>
-   <pkg-ref id="fm.ultraschall.Resources" version="3.1.0">UltraschallResources.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Soundboard.Component" version="3.1.1">UltraschallSoundboard.pkg</pkg-ref>
+   <pkg-ref id="com.itsr.StudioLink.Component" version="17.0.3">StudioLink.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.1.1">UltraschallPluginExtension.pkg</pkg-ref>
+   <pkg-ref id="fm.ultraschall.Resources" version="3.1.1">UltraschallResources.pkg</pkg-ref>
    <pkg-ref id="com.mj-s.sws" version="2.9.6">SWS_Extension-2.9.6.pkg</pkg-ref>
    <pkg-ref id="com.mj-s.sws.Scripts" version="2.9.6">SWS_ExtensionScripts-2.9.6.pkg</pkg-ref>
    <!-- List them again here. They can now be organised as a hierarchy if you want. -->
    <choices-outline>
       <line choice="fm.ultraschall.Soundboard.Component"/>
-      <line choice="fm.ultraschall.Soundboard.Extras"/>
       <line choice="com.itsr.StudioLink.Component"/>
       <line choice="fm.ultraschall.Plugin.Extension"/>
       <line choice="fm.ultraschall.Resources"/>
@@ -29,9 +27,6 @@
    <!-- Define each choice above -->
    <choice id="fm.ultraschall.Soundboard.Component" visible="true" title="Ultraschall Soundboard" description="Ultraschall Soundboard Plug-in." start_selected="true">
       <pkg-ref id="fm.ultraschall.Soundboard.Component"/>
-   </choice>
-   <choice id="fm.ultraschall.Soundboard.Extras" visible="true" title="Ultraschall Soundboard Extras" description="Ultraschall Soundboard TouchOSC templates and additional sounds." start_selected="true">
-      <pkg-ref id="fm.ultraschall.Soundboard.Extras"/>
    </choice>
    <choice id="com.itsr.StudioLink.Component" visible="true" title="StudioLink" description="StudioLink Plug-in." start_selected="true">
       <pkg-ref id="com.itsr.StudioLink.Component"/>

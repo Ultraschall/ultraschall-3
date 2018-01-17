@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=Ultraschall-3.1
+export ULTRASCHALL_RELEASE=ULTRASCHALL-3.1.1-alpha1
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -30,7 +30,7 @@ mkdir ./Payload
 mkdir ./Payload/Add-ons
 
 # Build and copy release notes to payload directory
-pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/README.html ../REAPER/README.md
+pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/README.html ../README.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/INSTALL.html ../REAPER/INSTALL.md
 pandoc --from=markdown --to=html --standalone --self-contained --css=../REAPER/Tools/ultraschall.css --output=./Payload/CHANGELOG.html ../REAPER/CHANGELOG.md
 
@@ -61,15 +61,7 @@ xcodebuild -project ../REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.xcode
 pkgbuild --root ../REAPER/Plugin/reaper_ultraschall/Build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./Build/UltraschallPluginExtension.pkg
 
 # Create Ultraschall Soundboard package
-pushd ../Soundboard
-./Build/build_mac_plugin.sh
-popd
-
-# Create Ultraschall Soundboard package
-pkgbuild --root ../Soundboard/Files/AudioUnit --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-Ins/Components ./Build/UltraschallSoundboard.pkg
-
-# Create Ultraschall Soundboard extras package
-pkgbuild --root ../Soundboard/Extras --identifier fm.ultraschall.Soundboard.Extras --install-location /Library/Application\ Support/Ultraschall ./Build/UltraschallSoundboardExtras.pkg
+pkgbuild --root ./3rdParty/Soundboard/Macintosh --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-Ins/Components ./Build/UltraschallSoundboard.pkg
 
 # Create ITSR StudioLink package
 pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink.Components --install-location /Library/Audio/Plug-Ins/Components ./Build/StudioLink.pkg
@@ -115,7 +107,7 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 echo Creating disk layout...
 echo '
    tell application "Finder"
-     tell disk "Ultraschall-3.1.intermediate"
+     tell disk "ULTRASCHALL-3.1.1-alpha1.intermediate"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
@@ -124,7 +116,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "Ultraschall-3.1.pkg" of container window to {50, 30}
+           set position of item "ULTRASCHALL-3.1.1-alpha1.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.1.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}

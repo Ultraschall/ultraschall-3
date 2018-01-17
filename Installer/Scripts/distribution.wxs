@@ -44,7 +44,7 @@
                      <File Id="StudioLinkOnAirVstDll" Name="studio-link-onair.dll" DiskId="1" Source="3rdParty\StudioLink\Windows\studio-link-onair.dll"/>
                   </Component>
                   <Component Id="SoundboardVst" Guid="32A0FDE3-106F-498F-A780-CA59D7C40A64" Win64="yes">
-                     <File Id="SoundboardVstDll" Name="Soundboard64.dll" DiskId="1" Source="Payload\Soundboard\Soundboard64.dll"/>
+                     <File Id="SoundboardVstDll" Name="Soundboard64.dll" DiskId="1" Source="3rdParty\Soundboard\Windows\Soundboard64.dll"/>
                   </Component>
                </Directory>
             </Directory>
