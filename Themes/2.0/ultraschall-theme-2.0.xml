@@ -1,0 +1,39 @@
+<toolbars>
+	<toolbar id="Main toolbar" title="Schnitt der Markierung">
+		<toolbaritem id="0" action="40295" label="View: Zoom out project" icon="00_toolbar_Zoom.png"/>
+		<separator id="1"/>
+		<toolbaritem id="2" action="_S&M_CYCLACTION_4" label="ULT Ripple ONE" icon="00_toolbar_Ripple_one.png"/>
+		<toolbaritem id="3" action="_S&M_CYCLACTION_3" label="ULT Ripple ALL" icon="00_toolbar_Ripple_all.png"/>
+		<separator id="4"/>
+		<toolbaritem id="5" action="40157" label="Markers: Insert marker at current position" icon="00_toolbar_Marker.png"/>
+		<toolbaritem id="6" action="_69c31e419c0b40b78575b7894fc6bd8d" label="Custom: ultraschall_set_edit.py" icon="00_toolbar_glue.png" />
+		<toolbaritem id="7" action="40012" label="Item: Split items at edit or play cursor" icon="00_toolbar_Cut.png"/>
+		<toolbaritem id="8" action="40201" label="Time selection: Remove contents of time selection (moving later items)" icon="toolbar_cut_selection.png"/>
+		<toolbaritem id="9" action="_S&M_CYCLACTION_10" label="ULT Mute" icon="00_toolbar_Mute.png"/>
+	</toolbar>
+	<toolbar id="Floating toolbar 1" title="Toolbar 1">
+		<toolbaritem id="0" action="40422" label="View: Show screen/track/item sets window" icon="toolbar_ultraschall_views.png"/>
+		<toolbaritem id="1" action="_S&M_CYCLACTION_1" label="ULTRASCHALL: Setup-Ansicht" icon="00_toolbar_Fader.png"/>
+		<toolbaritem id="2" action="_S&M_CYCLACTION_2" label="ULTRASCHALL: Aufnahmeansicht" icon="00_toolbar_tape.png"/>
+		<toolbaritem id="3" action="_S&M_CYCLACTION_5" label="ULTRASCHALL: Produktionsansicht" icon="00_toolbar_Trim.png"/>
+	</toolbar>
+</toolbars>
+<menus>
+	<menu id="Main file" title="&File">
+		<menuitem id="0" action="40023" label="New project"/>
+		<menuitem id="1" action="40025" label="Open project..."/>
+		<menuitem id="2" action="40026" label="Save project"/>
+		<menuitem id="3" action="40022" label="Save project as..."/>
+		<menu id="4" title="Project templates">
+			<menuitem id="5" action="40394" label="Save project as template..."/>
+			<separator id="6"/>
+			<menuitem id="7" action="48000" label="(project template list)"/>
+		</menu>
+		<menu id="9" title="Recent projects">
+			<menuitem id="10" action="44000" label="(recent project list)"/>
+		</menu>
+		<separator id="12"/>
+		<menuitem id="13" action="40021" label="Project settings..."/>
+		<menuitem id="14" action="40015" label="Render..."/>
+	</menu>
+</menus>
