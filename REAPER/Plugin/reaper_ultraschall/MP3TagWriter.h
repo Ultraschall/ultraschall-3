@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) 2017 Ultraschall ultraschall.fm
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,47 +22,31 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
-#include <fstream>
-#include <ByteStream.h>
-#include <BinaryFileReader.h>
+#ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+#define __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
 
-namespace ultraschall { namespace framework {
-   
-ByteStream* BinaryFileReader::ReadBytes(const std::string& filename)
+#include "Framework.h"
+#include "ITagWriter.h"
+
+namespace ultraschall { namespace reaper {
+
+class MP3TagWriter : public ITagWriter
 {
-   ByteStream* pStream = 0;
-   
-   std::ifstream file(filename, std::ios::in | std::ios::binary | std::ios::ate);
-   if(file.is_open() == true)
-   {
-      const std::ifstream::pos_type fileSize = file.tellg();
-      file.seekg(std::ios::beg);
-      uint8_t* buffer = new uint8_t[fileSize];
-      if(buffer != 0)
-      {
-         file.read(reinterpret_cast<char*>(buffer), fileSize);
-         if(file)
-         {
-            pStream = new ByteStream(fileSize);
-            if(pStream != 0)
-            {
-               const bool succeeded = pStream->Write(0, buffer, fileSize);
-               if(succeeded == false)
-               {
-                  SafeRelease(pStream);
-               }
-            }
-         }
-         
-         SafeDeleteArray(buffer);
-      }
-      
-      file.close();
-   }
+public:
+   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
 
-   return pStream;
-}
-   
+   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
+
+   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
+
+protected:
+   virtual ~MP3TagWriter()
+   {
+   }
+};
+
 }}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+
 

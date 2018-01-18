@@ -23,8 +23,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <zlib.h>
-#include <ByteStream.h>
-#include <BinaryFileReader.h>
+#include "ByteStream.h"
+#include "BinaryFileReader.h"
 #include "SWSVersionCheck.h"
 #include "FileManager.h"
 
@@ -78,7 +78,7 @@ std::string FindSWSPluginPath()
    }
    else
    {
-      swsPluginPath = FileManager::AppendPath(FindUltraschallPluginDirectory(), "reaper_sws64.dll"); 
+      swsPluginPath = FileManager::AppendPath(FindUltraschallPluginDirectory(), "reaper_sws64.dll");
    }
 
    return swsPluginPath;
@@ -94,7 +94,7 @@ bool SWSVersionCheck()
       "/REAPER/UserPlugins/reaper_sws_extension.dylib";
 #else
    const std::string swsPlugin2_8UserPath = FindSWSPluginPath();
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32 
+#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
 
    if(FileManager::FileExists(swsPlugin2_8UserPath) == true)
    {

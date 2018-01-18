@@ -25,8 +25,8 @@
 #define __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
 
 #include <zlib.h>
-#include <IUnknown.h>
-#include <Framework.h>
+#include "IUnknown.h"
+#include "Framework.h"
 
 namespace ultraschall {
   namespace framework {

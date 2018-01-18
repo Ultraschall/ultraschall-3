@@ -25,8 +25,8 @@
 #include <string>
 #include <iomanip>
 
-#include <StringUtilities.h>
-#include <TextFileReader.h>
+#include "StringUtilities.h"
+#include "TextFileReader.h"
 
 #include "Application.h"
 #include "ReaperEntryPoints.h"

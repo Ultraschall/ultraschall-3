@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,32 +21,28 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+#include <string>
+#include <fstream>
+#include <sstream>
+#include "TextFileWriter.h"
 
-#ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-#define __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+namespace ultraschall { namespace framework {
 
-#include <Framework.h>
-#include "ITagWriter.h"
-
-namespace ultraschall { namespace reaper {
-   
-class MP3TagWriter : public ITagWriter
+void TextFileWriter::WriteLines(const std::string& filename, const std::vector<std::string>& lines)
 {
-public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
-   
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
-   
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
-   
-protected:
-   virtual ~MP3TagWriter()
-   {
-   }
-};
-   
+    if(filename.empty() == false)
+    {
+        std::ofstream os(filename.c_str());
+
+        for(size_t i = 0; i < lines.size(); i++)
+        {
+            os << lines[i];
+//            os << std::endl;
+            os << "\r\n";
+        }
+
+       os.close();
+    }
+}
+
 }}
-
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-
-

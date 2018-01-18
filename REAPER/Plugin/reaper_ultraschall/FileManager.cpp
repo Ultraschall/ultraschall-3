@@ -27,9 +27,8 @@
 #include <fstream>
 #include <codecvt>
 
-#include <Framework.h>
-#include <StringUtilities.h>
-
+#include "Framework.h"
+#include "StringUtilities.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "ReaperEntryPoints.h"
@@ -320,7 +319,7 @@ std::string FileManager::BrowseForFolder(const std::string &title, const std::st
     {
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
         pfod->SetTitle(stringConverter.from_bytes(title).c_str());
-       
+
         if(folder.empty() == false)
         {
             IShellItem *psi = nullptr;
@@ -383,7 +382,7 @@ std::string FileManager::AppendPath(const std::string &prefix, const std::string
 std::string FileManager::StripPath(const std::string& path)
 {
    std::string shortName;
-   
+
    if(path.empty() == false)
    {
       shortName = path;
@@ -394,7 +393,7 @@ std::string FileManager::StripPath(const std::string& path)
          shortName = path.substr(offset + 1, path.size()); // skip separator
       }
    }
-   
+
    return shortName;
 }
 

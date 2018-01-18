@@ -23,7 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <vector>
-#include <StringUtilities.h>
+#include "StringUtilities.h"
 #include "BasicMediaInformation.h"
 
 namespace ultraschall {
@@ -85,7 +85,7 @@ bool BasicMediaInformation::Validate() const
    (track_.empty() == false) || (date_.empty() == false) ||
    (content_.empty() == false);
 }
-   
+
 void BasicMediaInformation::Reset()
 {
    title_.clear();
@@ -95,5 +95,5 @@ void BasicMediaInformation::Reset()
    content_.clear();
    comments_.clear();
 }
-   
+
 }}

@@ -24,9 +24,8 @@
 
 #include <sstream>
 
-#include <Framework.h>
-#include <StringUtilities.h>
-
+#include "Framework.h"
+#include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "ReaperEntryPoints.h"
 #include "NotificationWindow.h"

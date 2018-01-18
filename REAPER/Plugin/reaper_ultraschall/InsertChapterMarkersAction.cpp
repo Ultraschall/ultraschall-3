@@ -1,17 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,16 +19,15 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
 #include <vector>
 #include <fstream>
 
-#include <TextFileReader.h>
-#include <StringUtilities.h>
-
+#include "TextFileReader.h"
+#include "StringUtilities.h"
 #include "InsertChapterMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "Marker.h"
@@ -44,23 +43,23 @@ static DeclareCustomAction<InsertChapterMarkersAction> action;
 ServiceStatus InsertChapterMarkersAction::Execute()
 {
    ServiceStatus status = SERVICE_FAILURE;
-   
+
    const std::string path = FileManager::BrowseForFiles("Import chapter markers...");
    PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
    const ProjectManager& projectManager = ProjectManager::Instance();
    Project currentProject = projectManager.CurrentProject();
-   
+
    std::vector<Marker> tags;
    std::vector<std::string> errorMessages;
-   
+
    const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
    if(lines.empty() == false)
    {
       for(size_t i = 0; i < lines.size(); i++)
       {
          const std::string& line = lines[i];
-         
+
          const std::vector<std::string> items = framework::StringTokenize(line, ' ');
          if(items.size() > 0)
          {
@@ -72,12 +71,12 @@ ServiceStatus InsertChapterMarkersAction::Execute()
                {
                   name = items[1];
                }
-               
+
                for(size_t j = 2; j < items.size(); j++)
                {
                   name += " " + items[j];
                }
-               
+
                tags.push_back(Marker(position, name, 0));
             }
             else
@@ -95,7 +94,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
       os << "The file '" << path << "' does not contain any chapter markers";
       errorMessages.push_back(os.str());
    }
-   
+
    size_t addedTags = 0;
    for(size_t i = 0; i < tags.size(); i++)
    {
@@ -118,12 +117,12 @@ ServiceStatus InsertChapterMarkersAction::Execute()
       std::stringstream os;
       os << "The chapter marker import failed:";
       os << "\r\n\r\n";
-      
+
       for(size_t i = 0; i < errorMessages.size(); i++)
       {
          os << errorMessages[i] << "\r\n";
       }
-      
+
       os << "\r\n\r\n";
 
       NotificationWindow::Show(os.str(), true);
@@ -133,7 +132,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
       NotificationWindow::Show("The chapter markers have been added successfully.");
       status = SERVICE_SUCCESS;
    }
-   
+
    return status;
 }
 

@@ -1,17 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,7 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef __ULTRASCHALL_REAPER_PROJECT_H_INCL__
@@ -27,8 +27,7 @@
 
 #include <vector>
 
-#include <Framework.h>
-
+#include "Framework.h"
 #include "ReaperEntryPoints.h"
 #include "Marker.h"
 
@@ -63,8 +62,8 @@ public:
    static const uint32_t SHOW_EDIT_MARKERS         = 0x00000002;
    static const uint32_t SHOW_SHOWNOTE_MARKERS     = 0x00000004;
    static const uint32_t SHOW_HISTORICAL_MARKERS   = 0x00000008;
-   static const uint32_t SHOW_ALL_MARKERS          = SHOW_CHAPTER_MARKERS | 
-                                                     SHOW_EDIT_MARKERS | 
+   static const uint32_t SHOW_ALL_MARKERS          = SHOW_CHAPTER_MARKERS |
+                                                     SHOW_EDIT_MARKERS |
                                                      SHOW_SHOWNOTE_MARKERS |
                                                      SHOW_HISTORICAL_MARKERS;
 
@@ -73,7 +72,7 @@ public:
    double MinPosition() const;
    double MaxPosition() const;
    bool IsValidPosition(const double position);
-   
+
    static const int SHOWNOTE_MARKER_COLOR = 0x0145a564;
    static const int EDIT_MARKER_COLOR = 0x01ff0000;
    static const int CHAPTER_MARKER_COLOR = 0x01808080;
@@ -100,7 +99,7 @@ public:
    inline std::vector<Marker> ShownoteMarkers() const;
 
    std::string Notes() const;
-   
+
 private:
    ProjectHandle projectReference_;
    uint32_t markerStatus_;

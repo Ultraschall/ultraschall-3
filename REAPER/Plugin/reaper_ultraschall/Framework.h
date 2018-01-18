@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,32 +22,57 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MP4_TAG_WRITER_H_INCL__
-#define __ULTRASCHALL_REAPER_MP4_TAG_WRITER_H_INCL__
+#ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__
+#define __ULTRASCHALL_FRAMEWORK_H_INCL__
 
-#include <Framework.h>
-#include "ITagWriter.h"
+#include "Platform.h"
 
-namespace ultraschall { namespace reaper {
-   
-class MP4TagWriter : public ITagWriter
+#include <cstdint>
+#include <cstdlib>
+
+#include <string>
+#include <vector>
+#include <map>
+
+namespace ultraschall { namespace framework {
+
+#define PRECONDITION(a) \
+{ \
+   if((a) == 0) \
+   { \
+      return; \
+   } \
+}
+
+#define PRECONDITION_RETURN(a, b) \
+{ \
+   if((a) == 0) \
+      { \
+      return (b); \
+      } \
+}
+
+template<class PointerType> inline static void SafeDelete(PointerType*& ptr)
 {
-public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
-   
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
-   
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
-   
-protected:
-   virtual ~MP4TagWriter()
+   delete ptr;
+   ptr = 0;
+}
+
+template<class PointerType> inline static void SafeDeleteArray(PointerType*& ptr)
+{
+   delete [] ptr;
+   ptr = 0;
+}
+
+template<class ReferenceCountedType> inline static void SafeRelease(ReferenceCountedType*& ptr)
+{
+   if(ptr != 0)
    {
+      ptr->Release();
+      ptr = 0;
    }
-};
-   
+}
+
 }}
 
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
-
-
-
+#endif // #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__

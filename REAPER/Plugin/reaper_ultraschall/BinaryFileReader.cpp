@@ -21,28 +21,48 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
 #include <string>
 #include <fstream>
-#include <sstream>
-#include <TextFileWriter.h>
+#include "ByteStream.h"
+#include "BinaryFileReader.h"
 
 namespace ultraschall { namespace framework {
 
-void TextFileWriter::WriteLines(const std::string& filename, const std::vector<std::string>& lines)
+ByteStream* BinaryFileReader::ReadBytes(const std::string& filename)
 {
-    if(filename.empty() == false)
-    {
-        std::ofstream os(filename.c_str());
-        
-        for(size_t i = 0; i < lines.size(); i++)
-        {
-            os << lines[i];
-//            os << std::endl;
-            os << "\r\n";
-        }
-       
-       os.close();
-    }
+   ByteStream* pStream = 0;
+
+   std::ifstream file(filename, std::ios::in | std::ios::binary | std::ios::ate);
+   if(file.is_open() == true)
+   {
+      const std::ifstream::pos_type fileSize = file.tellg();
+      file.seekg(std::ios::beg);
+      uint8_t* buffer = new uint8_t[fileSize];
+      if(buffer != 0)
+      {
+         file.read(reinterpret_cast<char*>(buffer), fileSize);
+         if(file)
+         {
+            pStream = new ByteStream(fileSize);
+            if(pStream != 0)
+            {
+               const bool succeeded = pStream->Write(0, buffer, fileSize);
+               if(succeeded == false)
+               {
+                  SafeRelease(pStream);
+               }
+            }
+         }
+
+         SafeDeleteArray(buffer);
+      }
+
+      file.close();
+   }
+
+   return pStream;
 }
 
 }}
+

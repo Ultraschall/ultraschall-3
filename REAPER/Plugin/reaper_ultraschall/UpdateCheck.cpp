@@ -34,9 +34,8 @@
 #include <curl/easy.h>
 #include <curl/curlbuild.h>
 
-#include <Framework.h>
-#include <StringUtilities.h>
-
+#include "Framework.h"
+#include "StringUtilities.h"
 #include "UpdateCheck.h"
 #include "VersionHandler.h"
 #include "NotificationWindow.h"
@@ -83,7 +82,7 @@ void UpdateCheck()
             std::istringstream is(lastUpdateCheck);
             double lastUpdateCheckTimestamp = 0;
             is >> lastUpdateCheckTimestamp;
-            
+
             static const double delta = 60 * 60 * 24;
             const double now = QueryCurrentDateTimeAsSeconds();
             if ((now - lastUpdateCheckTimestamp) >= delta)
@@ -108,10 +107,10 @@ void UpdateCheck()
             curl_easy_setopt(curlHandle, CURLOPT_NOSIGNAL, 1);
             curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "deflate");
             curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
-            
+
             std::stringstream out;
             curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
-            
+
             CURLcode res = curl_easy_perform(curlHandle);
             if(res == CURLE_OK)
             {
@@ -128,10 +127,10 @@ void UpdateCheck()
                   }
                }
             }
-            
+
             curl_easy_cleanup(curlHandle);
             curlHandle = nullptr;
-            
+
             std::ostringstream os;
             os << QueryCurrentDateTimeAsSeconds();
             lastUpdateCheck = os.str();

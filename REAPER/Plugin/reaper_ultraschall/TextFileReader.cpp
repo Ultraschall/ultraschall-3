@@ -21,58 +21,40 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-#ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_H_INCL__
-
-#include <Platform.h>
-
-#include <cstdint>
-#include <cstdlib>
-
 #include <string>
-#include <vector>
-#include <map>
+#include <fstream>
+#include <sstream>
+#include "TextFileReader.h"
 
 namespace ultraschall { namespace framework {
 
-#define PRECONDITION(a) \
-{ \
-   if((a) == 0) \
-   { \
-      return; \
-   } \
-}
-
-#define PRECONDITION_RETURN(a, b) \
-{ \
-   if((a) == 0) \
-      { \
-      return (b); \
-      } \
-}
-
-template<class PointerType> inline static void SafeDelete(PointerType*& ptr)
+std::string TextFileReader::Read(const std::string& filename)
 {
-   delete ptr;
-   ptr = 0;
-}
+   std::stringstream str;
 
-template<class PointerType> inline static void SafeDeleteArray(PointerType*& ptr)
-{
-   delete [] ptr;
-   ptr = 0;
-}
-
-template<class ReferenceCountedType> inline static void SafeRelease(ReferenceCountedType*& ptr)
-{
-   if(ptr != 0)
+   std::ifstream inputStream(filename.c_str());
+   std::string line;
+   while(std::getline(inputStream, line))
    {
-      ptr->Release();
-      ptr = 0;
+      str << line << std::endl;
    }
+
+   return str.str();
+}
+
+std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
+{
+   std::vector<std::string> lines;
+
+   std::ifstream inputStream(filename.c_str());
+   std::string line;
+   while(std::getline(inputStream, line))
+   {
+      lines.push_back(line);
+   }
+
+   return lines;
 }
 
 }}
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_H_INCL__

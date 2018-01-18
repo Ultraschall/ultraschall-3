@@ -25,8 +25,8 @@
 #include <string>
 #include <zlib.h>
 #include <unzip.h>
-#include <StringUtilities.h>
-#include <TextFileReader.h>
+#include "StringUtilities.h"
+#include "TextFileReader.h"
 #include "ThemeVersionCheck.h"
 #include "FileManager.h"
 
@@ -36,9 +36,9 @@ namespace reaper {
 std::string QueryThemeVersion()
 {
    std::string result;
-   
+
    std::string versionString;
-   
+
 #ifndef ULTRASCHALL_PLATFORM_WIN32
    const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
 #else
@@ -85,25 +85,25 @@ std::string QueryThemeVersion()
                               versionString = fileBuffer;
                               decoded = true;
                            }
-                           
+
                            free(fileBuffer);
                            fileBuffer = 0;
                         }
                      }
-                     
+
                      unzCloseCurrentFile(themeFile);
                   }
                }
             }
-            
+
             zipError = unzGoToNextFile(themeFile);
          }
-         
+
          unzClose(themeFile);
          themeFile = 0;
       }
    }
-   
+
    if(versionString.empty() == false)
    {
       const std::vector<std::string> versionTokens = framework::StringTokenize(versionString, ':');

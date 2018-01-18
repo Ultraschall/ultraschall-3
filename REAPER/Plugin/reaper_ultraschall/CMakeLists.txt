@@ -22,38 +22,38 @@ if(WIN32)
 endif()
 
 set(SOURCES
-  framework/BinaryFileReader.cpp
-  framework/StringUtilities.cpp
-  framework/TextFileReader.cpp
-  framework/TextFileWriter.cpp
-  framework/TimeUtilities.cpp
-  reaper/Application.cpp
-  reaper/BasicMediaInformation.cpp
-  reaper/CustomActionFactory.cpp
-  reaper/CustomActionManager.cpp
-  reaper/FileManager.cpp
-  reaper/ImageTools.cpp
-  reaper/InsertChapterMarkersAction.cpp
-  reaper/InsertMediaPropertiesAction.cpp
-  reaper/MP3TagWriter.cpp
-  reaper/MP3_Interface.cpp
-  reaper/MP4TagWriter.cpp
-  reaper/NotificationPanel.mm
-  reaper/NotificationWindow.cpp
-  reaper/PluginVersionCheck.cpp
-  reaper/Project.cpp
-  reaper/ProjectManager.cpp
-  reaper/ReaperEntryPoints.cpp
-  reaper/ReaperVersionCheck.cpp
-  reaper/SWSVersionCheck.cpp
-  reaper/SaveChapterMarkersAction.cpp
-  reaper/SaveChapterMarkersToProjectAction.cpp
-  reaper/SoundboardVersionCheck.cpp
-  reaper/SystemProperties.cpp
-  reaper/ThemeVersionCheck.cpp
-  reaper/UpdateCheck.cpp
-  reaper/VersionHandler.cpp
-  reaper/reaper_ultraschall.cpp
+  BinaryFileReader.cpp
+  StringUtilities.cpp
+  TextFileReader.cpp
+  TextFileWriter.cpp
+  TimeUtilities.cpp
+  Application.cpp
+  BasicMediaInformation.cpp
+  CustomActionFactory.cpp
+  CustomActionManager.cpp
+  FileManager.cpp
+  ImageTools.cpp
+  InsertChapterMarkersAction.cpp
+  InsertMediaPropertiesAction.cpp
+  MP3TagWriter.cpp
+  MP3_Interface.cpp
+  MP4TagWriter.cpp
+  NotificationPanel.mm
+  NotificationWindow.cpp
+  PluginVersionCheck.cpp
+  Project.cpp
+  ProjectManager.cpp
+  ReaperEntryPoints.cpp
+  ReaperVersionCheck.cpp
+  SWSVersionCheck.cpp
+  SaveChapterMarkersAction.cpp
+  SaveChapterMarkersToProjectAction.cpp
+  SoundboardVersionCheck.cpp
+  SystemProperties.cpp
+  ThemeVersionCheck.cpp
+  UpdateCheck.cpp
+  VersionHandler.cpp
+  reaper_ultraschall.cpp
   ../3rd_party/zlib/src/ioapi.c
   ../3rd_party/zlib/src/unzip.c
 )
@@ -61,7 +61,7 @@ set(SOURCES
 if(WIN32)
   set(ADDITIONAL_SOURCES reaper_ultraschall.rc)
 elseif(APPLE)
-  set(ADDITIONAL_SOURCES reaper/NotificationPanel.mm)
+  set(ADDITIONAL_SOURCES NotificationPanel.mm)
 endif()
 
 add_library(reaper_ultraschall SHARED ${SOURCES} ${ADDITIONAL_SOURCES})
@@ -74,12 +74,12 @@ elseif(APPLE)
   add_compile_options(-mmacosx-version-min=10.11)
 
   set_source_files_properties(
-    reaper/FileManager.cpp
-    reaper/NotificationWindow.cpp
-    reaper/VersionHandler.cpp
-    reaper/ReaperVersionCheck.cpp
-    reaper/SoundboardVersionCheck.cpp
-    reaper/PluginVersionCheck.cpp
+    FileManager.cpp
+    NotificationWindow.cpp
+    VersionHandler.cpp
+    ReaperVersionCheck.cpp
+    SoundboardVersionCheck.cpp
+    PluginVersionCheck.cpp
     PROPERTIES COMPILE_FLAGS "-x objective-c++"
   )
 endif()

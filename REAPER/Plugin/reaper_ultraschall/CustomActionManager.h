@@ -21,40 +21,47 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <TextFileReader.h>
 
-namespace ultraschall { namespace framework {
+#ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
+#define __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
 
-std::string TextFileReader::Read(const std::string& filename)
+#include <mutex>
+#include <map>
+
+#include "ServiceStatus.h"
+#include "ICustomAction.h"
+
+namespace ultraschall { namespace reaper {
+
+class CustomActionManager
 {
-   std::stringstream str;
-   
-   std::ifstream inputStream(filename.c_str());
-   std::string line;
-   while(std::getline(inputStream, line))
-   {
-      str << line << std::endl;
-   }
-   
-   return str.str();
-}
+public:
+   static CustomActionManager& Instance();
 
-std::vector<std::string> TextFileReader::ReadLines(const std::string& filename)
-{
-   std::vector<std::string> lines;
-   
-   std::ifstream inputStream(filename.c_str());
-   std::string line;
-   while(std::getline(inputStream, line))
-   {
-      lines.push_back(line);
-   }
-   
-   return lines;
-}
+   ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
+
+   void UnregisterCustomAction(const int32_t id);
+   void UnregisterCustomAction(const std::string& name);
+   void UnregisterAllCustomActions();
+
+   ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
+   ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
+
+protected:
+   virtual ~CustomActionManager();
+
+private:
+   CustomActionManager();
+
+   CustomActionManager(const CustomActionManager&);
+   CustomActionManager& operator=(const CustomActionManager&);
+
+   std::map<int32_t, ICustomAction*> customActions_;
+   std::map<std::string, int32_t> customActionIds_;
+   mutable std::recursive_mutex customActionsLock_;
+};
 
 }}
+
+#endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
 
