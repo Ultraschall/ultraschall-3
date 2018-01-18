@@ -453,5 +453,7 @@ profile
 *.dmg.gz
 *.dmg.zip
 *.msi
-.vscode/
+.cmaketools.json
+settings.json
+!c_cpp_properties.json
 
