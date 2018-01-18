@@ -25,6 +25,15 @@
 #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
 #define __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
 
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef min
+#undef min
+#endif // #ifdef min
+#ifdef max
+#undef max
+#endif // #ifdef max
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+
 #include <string>
 #include <sstream>
 #include <algorithm>

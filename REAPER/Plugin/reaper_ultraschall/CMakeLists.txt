@@ -69,8 +69,10 @@ add_library(reaper_ultraschall SHARED ${SOURCES} ${ADDITIONAL_SOURCES})
 if(WIN32)
   add_definitions(-DULTRASCHALL_PLATFORM_WIN32)
 elseif(APPLE)
+
   add_definitions(-DULTRASCHALL_PLATFORM_MACOS)
   add_compile_options(-mmacosx-version-min=10.11)
+
   set_source_files_properties(
     reaper/FileManager.cpp
     reaper/NotificationWindow.cpp

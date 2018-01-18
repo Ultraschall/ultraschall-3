@@ -25,6 +25,9 @@
 #import "NotificationPanel.h"
 #import <WebKit/WebKit.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @implementation NotificationPanel
 
 + (void) showWithMessage:(NSString*)message asError:(BOOL)error
@@ -51,5 +54,7 @@
    [alert runModal];
 //    }];
 }
+
+#pragma clang diagnostic pop
 
 @end

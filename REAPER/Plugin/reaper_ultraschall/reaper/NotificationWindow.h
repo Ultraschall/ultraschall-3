@@ -25,10 +25,20 @@
 #ifndef __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__
 #define __ULTRASCHALL_REAPER_NOTIFICATION_WINDOW_H_INCL__
 
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef min
+#undef min
+#endif // #ifdef min
+#ifdef max
+#undef max
+#endif // #ifdef max
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+
+
 #include <string>
 
 namespace ultraschall { namespace reaper {
-    
+
 class NotificationWindow
 {
 public:
