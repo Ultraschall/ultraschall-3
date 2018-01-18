@@ -38,7 +38,6 @@ set(SOURCES
   MP3TagWriter.cpp
   MP3_Interface.cpp
   MP4TagWriter.cpp
-  NotificationPanel.mm
   NotificationWindow.cpp
   PluginVersionCheck.cpp
   Project.cpp
@@ -85,23 +84,24 @@ elseif(APPLE)
 endif()
 
 if(WIN32)
-  find_library(Z_LIB_DEBUG z-static-x64-debug "../3rd_party/zlib/lib/win32/debug")
-  find_library(Z_LIB_RELEASE z-static-x64-debug "../3rd_party/zlib/lib/win32/release")
+  find_library(Z_LIB_DEBUG libz-static-x64-debug "../3rd_party/zlib/lib/win32/debug")
+  find_library(Z_LIB_RELEASE libz-static-x64-release "../3rd_party/zlib/lib/win32/release")
 
-  find_library(CURL_LIB_DEBUG curl-static-x64-debug "../3rd_party/curl/lib/win32/debug")
-  find_library(CURL_LIB_RELEASE curl-static-x64-debug "../3rd_party/curl/lib/win32/release")
+  find_library(CURL_LIB_DEBUG libcurl-static-x64-debug "../3rd_party/curl/lib/win32/debug")
+  find_library(CURL_LIB_RELEASE libcurl-static-x64-release "../3rd_party/curl/lib/win32/release")
 
   find_library(MP4V2_LIB_DEBUG libmp4v2 "../3rd_party/mp4v2/lib/win32/debug")
   find_library(MP4V2_LIB_RELEASE libmp4v2 "../3rd_party/mp4v2/lib/win32/release")
 
-  find_library(TAG_LIB_DEBUG tag-static-x64-debug "../3rd_party/taglib/lib/win32/debug")
-  find_library(TAG_LIB_RELEASE tag-static-x64-debug "../3rd_party/taglib/lib/win32/release")
+  find_library(TAG_LIB_DEBUG libtag-static-x64-debug "../3rd_party/taglib/lib/win32/debug")
+  find_library(TAG_LIB_RELEASE libtag-static-x64-release "../3rd_party/taglib/lib/win32/release")
 
   target_link_libraries(reaper_ultraschall
-    debug ${Z_LIB_DEBUG}     optimized ${Z_LIB_RELEASe}
+    debug ${Z_LIB_DEBUG}     optimized ${Z_LIB_RELEASE}
     debug ${CURL_LIB_DEBUG}  optimized ${CURL_LIB_RELEASE}
     debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
     debug ${TAG_LIB_DEBUG}   optimized ${TAG_LIB_RELEASE}
+    version.lib ws2_32.lib crypt32.lib wldap32.lib
 )
 else()
   target_link_libraries(reaper_ultraschall "-framework AppKit")
