@@ -25,8 +25,7 @@
 #ifndef __ULTRASCHALL_PLATFORM_H_INCL__
 #define __ULTRASCHALL_PLATFORM_H_INCL__
 
-#ifndef ULTRASCHALL_PLATFORM_WIN32
-#define NOMINMAX
+#ifdef ULTRASCHALL_PLATFORM_MACOS
 #ifdef min
 #undef min
 #endif // #ifdef min
@@ -35,8 +34,9 @@
 #endif // #ifdef max
 #else
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 #include <windows.h>
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
 namespace ultraschall {
 namespace framework {
