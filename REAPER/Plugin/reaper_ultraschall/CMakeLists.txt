@@ -119,8 +119,8 @@ else()
   find_library(MP4V2_LIB_DEBUG mp4v2 "../3rd_party/mp4v2/lib/macos/debug")
   find_library(MP4V2_LIB_RELEASE mp4v2 "../3rd_party/mp4v2/lib/macos/release")
 
-  find_library(TAG_LIB_DEBUG tag-static-x64-debug "../3rd_party/taglib/lib/macos/debug")
-  find_library(TAG_LIB_RELEASE tag-static-x64-release "../3rd_party/taglib/lib/macos/release")
+  find_library(TAG_LIB_DEBUG tag "../3rd_party/taglib/lib/macos/debug")
+  find_library(TAG_LIB_RELEASE tag "../3rd_party/taglib/lib/macos/release")
 
   target_link_libraries(reaper_ultraschall
     debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
