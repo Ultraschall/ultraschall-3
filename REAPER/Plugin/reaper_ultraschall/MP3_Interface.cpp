@@ -284,7 +284,7 @@ bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, 
       TagLib::ID3v2::TextIdentificationFrame* embeddedFrame = new TagLib::ID3v2::TextIdentificationFrame(embeddedFrameId);
       if(embeddedFrame != nullptr)
       {
-         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
+         framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM2(text);
          TagLib::ByteVector rawStringData((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
          embeddedFrame->setTextEncoding(TagLib::String::Type::UTF16);
          embeddedFrame->setText(TagLib::String(rawStringData, TagLib::String::Type::UTF16));

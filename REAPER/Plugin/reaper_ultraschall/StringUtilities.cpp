@@ -87,9 +87,35 @@ namespace ultraschall
       return result;
     }
 
+    UnicodeString MakeUnicodeString2(const std::string &src)
+    {
+        UnicodeString result;
+
+        try
+        {
+#ifdef ULTRASCHALL_PLATFORM_MACOS
+            std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
+            result = stringConverter.from_bytes(src);
+#else
+            result = UnicodeStringToWideUnicodeString(src);
+#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+        }
+        catch(std::range_error &)
+        {
+            result.clear();
+        }
+
+        return result;
+    }
+
     UnicodeString MakeUTF16StringWithBOM(const std::string &src)
     {
       return UTF16_BOM + MakeUnicodeString(src);
+    }
+
+    UnicodeString MakeUTF16StringWithBOM2(const std::string &src)
+    {
+        return UTF16_BOM + MakeUnicodeString2(src);
     }
 
     std::string MakeUTF8String(const UnicodeString &src)
@@ -177,31 +203,56 @@ namespace ultraschall
       return unicodeString;
     }
 
+    std::wstring UnicodeStringToWideUnicodeString(const std::string& unicodeString)
+    {
+        PRECONDITION_RETURN(unicodeString.empty() == false, std::wstring());
+
+        std::wstring wideUnicodeString;
+
+        const int wideStringBufferLength = MultiByteToWideChar(CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), 0, 0);
+        if(wideStringBufferLength > 0)
+        {
+            WCHAR *wideStringBuffer = (WCHAR *)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
+            if(wideStringBuffer != nullptr)
+            {
+                int convertedBytes = MultiByteToWideChar(CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), wideStringBuffer, wideStringBufferLength);
+                if(convertedBytes > 0)
+                {
+                    wideUnicodeString = wideStringBuffer;
+                }
+
+                free(wideStringBuffer);
+                wideStringBuffer = nullptr;
+            }
+        }
+
+        return wideUnicodeString;
+    }
+
     std::wstring AnsiStringToWideUnicodeString(const std::string &ansiString)
     {
-      std::wstring wideUnicodeString;
+        PRECONDITION_RETURN(ansiString.empty() == false, std::wstring());
 
-      if(ansiString.empty() == false)
-      {
+        std::wstring wideUnicodeString;
+
         const int wideStringBufferLength = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), 0, 0);
         if(wideStringBufferLength > 0)
         {
-          WCHAR *wideStringBuffer = (WCHAR *)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
-          if(wideStringBuffer != nullptr)
-          {
-            int convertedBytes = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), wideStringBuffer, wideStringBufferLength);
-            if(convertedBytes > 0)
+            WCHAR *wideStringBuffer = (WCHAR *)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
+            if(wideStringBuffer != nullptr)
             {
-              wideUnicodeString = wideStringBuffer;
+                int convertedBytes = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), wideStringBuffer, wideStringBufferLength);
+                if(convertedBytes > 0)
+                {
+                    wideUnicodeString = wideStringBuffer;
+                }
+
+                free(wideStringBuffer);
+                wideStringBuffer = nullptr;
             }
-
-            free(wideStringBuffer);
-            wideStringBuffer = nullptr;
-          }
         }
-      }
 
-      return wideUnicodeString;
+        return wideUnicodeString;
     }
 
     std::string UnicodeStringToAnsiString(const std::string &str, int codepage)
