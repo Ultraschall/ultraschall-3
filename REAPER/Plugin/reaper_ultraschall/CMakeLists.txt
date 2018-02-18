@@ -38,7 +38,6 @@ set(SOURCES
   MP3TagWriter.cpp
   MP4TagWriter.cpp
   MP3_Interface.cpp
-  MP4_Interface.cpp
   NotificationWindow.cpp
   PluginVersionCheck.cpp
   Project.cpp
@@ -59,8 +58,10 @@ set(SOURCES
 )
 
 if(WIN32)
-  set(ADDITIONAL_SOURCES 
+  set(ADDITIONAL_SOURCES
     reaper_ultraschall.rc
+    MP4_Interface.cpp
+    MP4_Interface.h
     MP4_EncodingSession.cpp
     MP4_EncodingSession.h
   )
@@ -105,9 +106,9 @@ if(WIN32)
     debug ${CURL_LIB_DEBUG}  optimized ${CURL_LIB_RELEASE}
     debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
     debug ${TAG_LIB_DEBUG}   optimized ${TAG_LIB_RELEASE}
-    version.lib 
-    ws2_32.lib 
-    crypt32.lib 
+    version.lib
+    ws2_32.lib
+    crypt32.lib
     wldap32.lib
     mfplat.lib
     mf.lib
