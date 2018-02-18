@@ -70,7 +70,7 @@ bool QuerySetPluginVersion()
    }
    else
    {
-      const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL wil NOT work properly until you fix this.\n\nPlease proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
+      const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
       NotificationWindow::Show(str);
 
       result = false;
