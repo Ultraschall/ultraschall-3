@@ -211,22 +211,22 @@ double Project::MinPosition() const
    PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
 
    ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double position = MaxPosition();
+   double minPosition = MaxPosition();
 
    int index = 0;
    MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
    while(mediaItem != nullptr)
    {
       double startPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION");
-      if(startPosition < position)
+      if(startPosition < minPosition)
       {
-         position = startPosition;
+         minPosition = startPosition;
       }
 
       mediaItem = reaper_api::GetMediaItem(projectReference, index++);
    }
 
-   return position;
+   return minPosition;
 }
 
 double Project::MaxPosition() const
@@ -234,30 +234,30 @@ double Project::MaxPosition() const
    PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
 
    ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double position = 0;
+   double maxPosition = 0;
 
    int index = 0;
    MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
    while(mediaItem != nullptr)
    {
-      double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") +
+      const double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") +
                            reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
-      if(endPosition > position)
+      if(endPosition > maxPosition)
       {
-         position = endPosition;
+         maxPosition = endPosition;
       }
 
       mediaItem = reaper_api::GetMediaItem(projectReference, index++);
    }
 
-   return position;
+   return maxPosition;
 }
 
 bool Project::IsValidPosition(const double position)
 {
    PRECONDITION_RETURN(projectReference_ != 0, false);
 
-   return (position >= MinPosition()) && (position <= MaxPosition());
+   return (position >= 0) && (position <= MaxPosition());
 }
 
 
