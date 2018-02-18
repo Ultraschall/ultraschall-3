@@ -128,8 +128,8 @@ else()
   )
 endif()
 
-#set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
-set_target_properties(reaper_ultraschall PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
+#set_target_properties(reaper_ultraschall PROPERTIES VERSION ${PROJECT_VERSION})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
