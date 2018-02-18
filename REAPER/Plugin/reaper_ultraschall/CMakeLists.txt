@@ -36,8 +36,9 @@ set(SOURCES
   InsertChapterMarkersAction.cpp
   InsertMediaPropertiesAction.cpp
   MP3TagWriter.cpp
-  MP3_Interface.cpp
   MP4TagWriter.cpp
+  MP3_Interface.cpp
+  MP4_Interface.cpp
   NotificationWindow.cpp
   PluginVersionCheck.cpp
   Project.cpp
@@ -58,7 +59,11 @@ set(SOURCES
 )
 
 if(WIN32)
-  set(ADDITIONAL_SOURCES reaper_ultraschall.rc)
+  set(ADDITIONAL_SOURCES 
+    reaper_ultraschall.rc
+    MP4_EncodingSession.cpp
+    MP4_EncodingSession.h
+  )
 elseif(APPLE)
   set(ADDITIONAL_SOURCES NotificationPanel.mm)
 endif()
@@ -68,7 +73,6 @@ add_library(reaper_ultraschall SHARED ${SOURCES} ${ADDITIONAL_SOURCES})
 if(WIN32)
   add_definitions(-DULTRASCHALL_PLATFORM_WIN32)
 elseif(APPLE)
-
   add_definitions(-DULTRASCHALL_PLATFORM_MACOS)
   add_compile_options(-mmacosx-version-min=10.11)
 
@@ -101,7 +105,14 @@ if(WIN32)
     debug ${CURL_LIB_DEBUG}  optimized ${CURL_LIB_RELEASE}
     debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
     debug ${TAG_LIB_DEBUG}   optimized ${TAG_LIB_RELEASE}
-    version.lib ws2_32.lib crypt32.lib wldap32.lib
+    version.lib 
+    ws2_32.lib 
+    crypt32.lib 
+    wldap32.lib
+    mfplat.lib
+    mf.lib
+    mfuuid.lib
+    shlwapi.lib
 )
 else()
   target_link_libraries(reaper_ultraschall "-framework AppKit")

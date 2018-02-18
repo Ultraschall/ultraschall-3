@@ -51,13 +51,13 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,1,0,0
- PRODUCTVERSION 3,1,0,0
+ FILEVERSION 3,1,1,0
+ PRODUCTVERSION 3,1,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
- FILEFLAGS 0x1L
+ FILEFLAGS 0x3L
 #else
- FILEFLAGS 0x0L
+ FILEFLAGS 0x2L
 #endif
  FILEOS 0x40004L
  FILETYPE 0x2L
@@ -69,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "ultraschall.fm"
             VALUE "FileDescription", "Ultraschall REAPER Extension"
-            VALUE "FileVersion", "3.1.0.0"
+            VALUE "FileVersion", "3.1.1.0"
             VALUE "InternalName", "reaper_u.dll"
-            VALUE "LegalCopyright", "Copyright (C) 2017 ultraschall.fm"
+            VALUE "LegalCopyright", "Copyright (C) 2018 ultraschall.fm"
             VALUE "OriginalFilename", "reaper_ultraschall.dll"
             VALUE "ProductName", "Ultraschall"
-            VALUE "ProductVersion", "3.1.0.0"
+            VALUE "ProductVersion", "3.1.1.0"
         END
     END
     BLOCK "VarFileInfo"

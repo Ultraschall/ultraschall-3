@@ -119,14 +119,18 @@ namespace ultraschall
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
     UnicodeString MakeUnicodeString(const std::string &src);
+    UnicodeString MakeUnicodeString2(const std::string &src);
 
     UnicodeString MakeUTF16StringWithBOM(const std::string &src);
+    UnicodeString MakeUTF16StringWithBOM2(const std::string &src);
 
     std::string MakeUTF8String(const UnicodeString &src);
 
     std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString);
 
     std::string UnicodeStringToAnsiString(const std::string& unicodeString, int codepage = 0);
+
+    std::wstring UnicodeStringToWideUnicodeString(const std::string& unicodeString);
 
     //---------------------------------------------------------------------------------------------
     // 3.1
