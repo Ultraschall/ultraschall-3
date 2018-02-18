@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) ultraschall.fm (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -87,7 +87,7 @@ std::string VersionHandler::PluginVersion()
 
    return pluginVersion;
 #else
-   return "3.1";
+   return "3.1.1";
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 

@@ -32,33 +32,40 @@
 namespace ultraschall {
 namespace reaper {
 
-std::string QueryRawReaperVersion() {
+std::string QueryRawReaperVersion()
+{
   std::string version;
 
   const std::vector<std::string> tokens =
       framework::StringTokenize(reaper_api::GetAppVersion(), '/');
   const size_t MIN_VERSION_TOKEN_COUNT = 1;
-  if (tokens.size() >= MIN_VERSION_TOKEN_COUNT) {
+  if (tokens.size() >= MIN_VERSION_TOKEN_COUNT)
+  {
     version = tokens[0];
   }
 
   return version;
 }
 
-bool ReaperVersionCheck() {
+bool ReaperVersionCheck()
+{
   bool result = false;
 
   std::string versionString = QueryRawReaperVersion();
-  if (versionString.empty() == false) {
+  if (versionString.empty() == false)
+  {
     std::vector<std::string> tokens =
         framework::StringTokenize(versionString, '.');
-    if (tokens.size() == 2) {
+    if (tokens.size() >= 2)
+    {
       const int REQUIRED_REAPER_MAJOR_VERSION = 5;
       const int REQUIRED_REAPER_MINOR_VERSION = 70;
-      if ((framework::StringToInt(tokens[0]) ==
-           REQUIRED_REAPER_MAJOR_VERSION) &&
-          (framework::StringToInt(tokens[1]) >=
-           REQUIRED_REAPER_MINOR_VERSION)) {
+       const int majorVersion = framework::StringToInt(tokens[0]);
+       const int minorVersion = framework::StringToInt(tokens[1]);
+
+      if ((REQUIRED_REAPER_MAJOR_VERSION == majorVersion) &&
+          (REQUIRED_REAPER_MINOR_VERSION <= minorVersion))
+      {
         result = true;
       }
     }
@@ -66,5 +73,5 @@ bool ReaperVersionCheck() {
 
   return result;
 }
-}
-}
+
+}}
