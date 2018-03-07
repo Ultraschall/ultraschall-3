@@ -62,29 +62,16 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 double QueryCurrentTimeAsSeconds()
 {
    const std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
-   const std::chrono::duration<double> ticks = currentTime.time_since_epoch();
-   return ticks.count();
-}
-
-double StringToDouble(const std::string& str)
-{
-   double result = -1;
-   
-   if(str.empty() == false)
-   {
-      std::istringstream is;
-      is >> result;
-   }
-   
-   return result;
+   const std::chrono::duration<double> seconds = std::chrono::duration_cast<std::chrono::seconds>(currentTime.time_since_epoch());
+   return seconds.count();
 }
 
 void UpdateCheck()
 {
-   bool updateCheckRequired = false;
-
-   if(GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
+   if (GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
+      bool updateCheckRequired = false;
+      
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
       if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
@@ -93,7 +80,7 @@ void UpdateCheck()
          {
             static const double ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
-            const double previousTimestamp = StringToDouble(previousUpdateCheckpoint);
+            const double previousTimestamp = std::stod(previousUpdateCheckpoint);
             if (previousTimestamp > 0)
             {
                const double now = QueryCurrentTimeAsSeconds();
@@ -110,7 +97,7 @@ void UpdateCheck()
          updateCheckRequired = true;
       }
 
-      if (updateCheckRequired == true)
+      if (true == updateCheckRequired)
       {
          void *curlHandle = curl_easy_init();
          if (curlHandle != nullptr)
