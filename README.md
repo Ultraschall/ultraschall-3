@@ -62,3 +62,26 @@ Ultraschall is Open Source.
 ### Credits:
 
 Our grandiose logo and color scheme was designed by @[graphorama](https://twitter.com/graphorama).
+
+
+### Build
+## macOS
+### Ultraschall Plugin
+```
+cd ultraschall-3/REAPER/Plugin/reaper_ultraschall
+```
+
+Create build dir:
+```
+mkdir -p build
+```
+
+Create Xcode project:
+```
+cmake -G Xcode .
+```
+
+#### Build & Run from Xcode:
+1. Make a copy of the reaper_ultraschall Scheme
+2. Symlink `reaper_ultraschall.dylib` from the build directory to Reaper Plugins dir: `ln -s build/Debug/reaper_ultraschall.dylib ~/Library/Application\ Support/REAPER/UserPlugins/`
+3. Set the “Exectuable” for your Scheme to REAPER64.app
