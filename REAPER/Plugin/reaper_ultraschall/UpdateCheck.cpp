@@ -78,21 +78,39 @@ void UpdateCheck()
          const std::string previousUpdateCheckpoint = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
          if (previousUpdateCheckpoint.empty() == false)
          {
-            static const double ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-
-            const double previousTimestamp = std::stod(previousUpdateCheckpoint);
-            if (previousTimestamp > 0)
-            {
-               const double now = QueryCurrentTimeAsSeconds();
-               const double delta = (now - previousTimestamp);
-               if (delta > ONE_DAY_IN_SECONDS)
-               {
-                  updateCheckRequired = true;
-               }
-            }
+             try
+             {
+                 const double previousTimestamp = std::stod(previousUpdateCheckpoint);
+                 if(previousTimestamp > 0)
+                 {
+                     const double now = QueryCurrentTimeAsSeconds();
+                     const double delta = (now - previousTimestamp);
+                     static const double ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+                     if(delta > ONE_DAY_IN_SECONDS) // standard timeout (24h)
+                     {
+                         updateCheckRequired = true;
+                     }
+                 }
+                 else // inconsistency in reaper-extstate.ini (timeout less or equal to zero make no sense), force update check
+                 {
+                     updateCheckRequired = true;
+                 }
+             }
+             catch(std::invalid_argument&) // inconsistency in reaper-extstate.ini (number format), force update check
+             {
+                 updateCheckRequired = true;
+             }
+             catch(std::out_of_range&) // inconsistency in reaper-extstate.ini (overflow), force update check
+             {
+                 updateCheckRequired = true;
+             }
+         }
+         else // inconsistency in reaper-extstate.ini, force update check
+         {
+             updateCheckRequired = true;
          }
       }
-      else
+      else // initial status, force update check
       {
          updateCheckRequired = true;
       }
