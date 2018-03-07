@@ -68,32 +68,22 @@ double QueryCurrentDateTimeAsSeconds()
 
 void UpdateCheck()
 {
-   bool updateCheckRequired = false;
-   std::string lastUpdateCheck;
+   bool updateCheckRequired = true;
 
    if(GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
       if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
-         lastUpdateCheck = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
+         const std::string lastUpdateCheck = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
          if (lastUpdateCheck.empty() == false)
          {
-            std::istringstream is(lastUpdateCheck);
-            double lastUpdateCheckTimestamp = 0;
-            is >> lastUpdateCheckTimestamp;
+            const double lastUpdateCheckTimestamp = std::stod(lastUpdateCheck.c_str());
 
             static const double delta = 60 * 60 * 24;
             const double now = QueryCurrentDateTimeAsSeconds();
-            if ((now - lastUpdateCheckTimestamp) >= delta)
-            {
-               updateCheckRequired = true;
-            }
+            updateCheckRequired = (now - lastUpdateCheckTimestamp) >= delta;
          }
-      }
-      else
-      {
-         updateCheckRequired = true;
       }
 
       if (updateCheckRequired == true)
@@ -126,15 +116,13 @@ void UpdateCheck()
                      NotificationWindow::Show(message);
                   }
                }
+
+               const std::string now = std::to_string((unsigned long long)QueryCurrentDateTimeAsSeconds());
+               SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, now, true);
             }
 
             curl_easy_cleanup(curlHandle);
             curlHandle = nullptr;
-
-            std::ostringstream os;
-            os << QueryCurrentDateTimeAsSeconds();
-            lastUpdateCheck = os.str();
-            SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
          }
       }
    }
