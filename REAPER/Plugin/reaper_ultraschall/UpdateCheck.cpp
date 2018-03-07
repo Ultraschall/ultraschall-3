@@ -68,10 +68,9 @@ double QueryCurrentDateTimeAsSeconds()
 
 void UpdateCheck()
 {
-   bool updateCheckRequired = true;
-
    if(GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
+      bool updateCheckRequired = true;
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
       if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
