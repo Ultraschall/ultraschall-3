@@ -59,35 +59,49 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
    return size * nmemb;
 }
 
-double QueryCurrentDateTimeAsSeconds()
+double QueryCurrentTimeAsSeconds()
 {
-   std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
-   std::chrono::duration<double> ticks = currentTime.time_since_epoch();
+   const std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
+   const std::chrono::duration<double> ticks = currentTime.time_since_epoch();
    return ticks.count();
+}
+
+double StringToDouble(const std::string& str)
+{
+   double result = -1;
+   
+   if(str.empty() == false)
+   {
+      std::istringstream is;
+      is >> result;
+   }
+   
+   return result;
 }
 
 void UpdateCheck()
 {
    bool updateCheckRequired = false;
-   std::string lastUpdateCheck;
 
    if(GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
       if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
-         lastUpdateCheck = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
-         if (lastUpdateCheck.empty() == false)
+         const std::string previousUpdateCheckpoint = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
+         if (previousUpdateCheckpoint.empty() == false)
          {
-            std::istringstream is(lastUpdateCheck);
-            double lastUpdateCheckTimestamp = 0;
-            is >> lastUpdateCheckTimestamp;
+            static const double ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
-            static const double delta = 60 * 60 * 24;
-            const double now = QueryCurrentDateTimeAsSeconds();
-            if ((now - lastUpdateCheckTimestamp) >= delta)
+            const double previousTimestamp = StringToDouble(previousUpdateCheckpoint);
+            if (previousTimestamp > 0)
             {
-               updateCheckRequired = true;
+               const double now = QueryCurrentTimeAsSeconds();
+               const double delta = (now - previousTimestamp);
+               if (delta > ONE_DAY_IN_SECONDS)
+               {
+                  updateCheckRequired = true;
+               }
             }
          }
       }
@@ -99,7 +113,7 @@ void UpdateCheck()
       if (updateCheckRequired == true)
       {
          void *curlHandle = curl_easy_init();
-         if(curlHandle != nullptr)
+         if (curlHandle != nullptr)
          {
             const std::string url = "https://ultraschall.io/ultraschall_release.txt";
             curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
@@ -111,11 +125,11 @@ void UpdateCheck()
             std::stringstream out;
             curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
 
-            CURLcode res = curl_easy_perform(curlHandle);
-            if(res == CURLE_OK)
+            const CURLcode res = curl_easy_perform(curlHandle);
+            if (res == CURLE_OK)
             {
                std::string remoteVersion = out.str();
-               if(remoteVersion.empty() == false)
+               if (remoteVersion.empty() == false)
                {
                   framework::StringTrim(remoteVersion);
                   const std::string localVersion = VersionHandler::PluginVersion();
@@ -131,10 +145,12 @@ void UpdateCheck()
             curl_easy_cleanup(curlHandle);
             curlHandle = nullptr;
 
-            std::ostringstream os;
-            os << QueryCurrentDateTimeAsSeconds();
-            lastUpdateCheck = os.str();
-            SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, lastUpdateCheck, true);
+            const double nextTimestamp = QueryCurrentTimeAsSeconds();
+            const std::string nextUpdateCheckpoint = std::to_string(nextTimestamp);
+            if (nextUpdateCheckpoint.empty() == false)
+            {
+               SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint, true);
+            }
          }
       }
    }
