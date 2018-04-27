@@ -324,7 +324,7 @@ std::vector<Marker> Project::QueryAllMarkers() const
    int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
    while (nextIndex > 0)
    {
-      static const size_t MAX_CHAPTER_NAME_LENGTH = 255;
+      static const size_t MAX_CHAPTER_NAME_LENGTH = 62; // limitation in taglib/id3v2
       std::string markerName = name;
       if (markerName.size() > MAX_CHAPTER_NAME_LENGTH)
       {
