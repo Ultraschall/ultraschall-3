@@ -166,8 +166,8 @@ static std::vector<MP4Chapter_t> convertToMp4Chapters (const std::vector<Marker>
 {
    // mp4v2 library has a define named MP4V2_CHAPTER_TITLE_MAX which is 1023
    // However when mp4v2 library is writing Nero chapter in MP4File::AddNeroChapter() the title
-   // will be further truncated to 255 byte length disregarding any possible utf8 multibtye characters.
-   // So we have to take care of properly truncating to that size ourselfes beforehand.
+   // will be further truncated to 255 byte length disregarding any possible utf8 multi-byte characters.
+   // So we have to take care of properly truncating to that size ourselves beforehand.
    // This function does not do so itself but expects such truncated input.
    const size_t maxTitleBytes = std::min (255, MP4V2_CHAPTER_TITLE_MAX);
 
