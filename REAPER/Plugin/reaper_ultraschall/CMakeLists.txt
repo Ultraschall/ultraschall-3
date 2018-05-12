@@ -140,8 +140,11 @@ else()
   )
 endif()
 
-set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
-#set_target_properties(reaper_ultraschall PROPERTIES VERSION ${PROJECT_VERSION})
+if(WIN32)
+  set_target_properties(reaper_ultraschall PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
+else()
+   set_target_properties(reaper_ultraschall PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV(HOME)/Library/Application Support/REAPER/UserPlugins")
+endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
