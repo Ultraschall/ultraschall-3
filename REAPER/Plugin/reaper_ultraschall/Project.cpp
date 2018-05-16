@@ -147,7 +147,7 @@ std::string Project::Name() const
    const std::string file = FileName();
    if (file.empty() == false)
    {
-     result = file.substr(0, file.rfind('.'));
+      result = file.substr(0, file.rfind('.'));
    }
 
    return result;
@@ -214,11 +214,11 @@ double Project::MinPosition() const
    double minPosition = MaxPosition();
 
    int index = 0;
-   MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while(mediaItem != nullptr)
+   MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+   while (mediaItem != nullptr)
    {
       double startPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION");
-      if(startPosition < minPosition)
+      if (startPosition < minPosition)
       {
          minPosition = startPosition;
       }
@@ -237,12 +237,12 @@ double Project::MaxPosition() const
    double maxPosition = 0;
 
    int index = 0;
-   MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while(mediaItem != nullptr)
+   MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+   while (mediaItem != nullptr)
    {
       const double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") +
-                           reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
-      if(endPosition > maxPosition)
+                                 reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
+      if (endPosition > maxPosition)
       {
          maxPosition = endPosition;
       }
@@ -259,7 +259,6 @@ bool Project::IsValidPosition(const double position)
 
    return (position >= 0) && (position <= MaxPosition());
 }
-
 
 bool Project::UndoMarker()
 {
@@ -328,10 +327,12 @@ std::vector<Marker> Project::QueryAllMarkers() const
       std::string markerName = name;
       if (markerName.size() > MAX_CHAPTER_NAME_LENGTH)
       {
-        markerName = markerName.substr(0, MAX_CHAPTER_NAME_LENGTH);
+         markerName = markerName.substr(0, MAX_CHAPTER_NAME_LENGTH);
       }
 
-      if (("_Edit" != markerName) && (color != static_cast<int>(Application::GetEditMarkerColor()))) // remove edit markers
+      if (("_Edit" != markerName) &&                                      // remove edit markers
+          (false == isRegion) &&                                          // remove regions
+          (color != static_cast<int>(Application::GetEditMarkerColor()))) // include only chapter markers
       {
          allMarkers.push_back(Marker(position, markerName, color));
       }
@@ -445,5 +446,5 @@ void Project::UpdateVisibleMarkers(const uint32_t mask)
       }
    });
 }
-}
-}
+} // namespace reaper
+} // namespace ultraschall
