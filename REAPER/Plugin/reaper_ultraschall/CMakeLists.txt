@@ -1,8 +1,15 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.11.0)
 project(reaper_ultraschall VERSION 3.1.1)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(WIN32)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
+elseif(APPLE)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/Library/Application\ Support/REAPER/UserPlugins")
+endif()
+
 
 include_directories(
   framework
@@ -71,6 +78,8 @@ endif()
 
 add_library(reaper_ultraschall SHARED ${SOURCES} ${ADDITIONAL_SOURCES})
 
+set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
+
 if(WIN32)
   add_definitions(-DULTRASCHALL_PLATFORM_WIN32)
 elseif(APPLE)
@@ -115,7 +124,7 @@ if(WIN32)
     mfuuid.lib
     shlwapi.lib
 )
-else()
+elseif(APPLE)
   target_link_libraries(reaper_ultraschall "-framework AppKit")
 
   find_package(zlib)
@@ -140,12 +149,3 @@ else()
   )
 endif()
 
-if(WIN32)
-  set_target_properties(reaper_ultraschall PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
-else()
-   set_target_properties(reaper_ultraschall PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV(HOME)/Library/Application Support/REAPER/UserPlugins")
-endif()
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
