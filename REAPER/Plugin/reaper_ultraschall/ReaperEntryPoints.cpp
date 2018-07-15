@@ -1,17 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
-// 
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
-// 
+//
+// Copyright (c) Ultraschall (http://ultraschall.fm)
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,7 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ReaperEntryPoints.h"
@@ -27,13 +27,14 @@
 #include "Application.h"
 #include "ProjectManager.h"
 
-namespace reaper_api 
+namespace reaper_api
 {
    HWND (*GetMainHwnd)();
 
    int (*plugin_register)(const char* name, void* infostruct);
-   
+
    const char* (*GetAppVersion)();
+    const char* (*GetExePath)();
 
    void (*GetProjectPath)(char* buf, int buf_sz);
    void (*GetProjectPathEx)(ReaProject* proj, char* buf, int buf_sz);
@@ -57,16 +58,16 @@ namespace reaper_api
    int (*GetPlayStateEx)(ReaProject* proj);
    double (*GetCursorPositionEx)(ReaProject* proj);
    double (*GetPlayPositionEx)(ReaProject* proj);
-   
+
    void (*GetSetProjectNotes)(ReaProject* proj, bool set, char* notesNeedBig, int notesNeedBig_sz);
    int (*SetProjExtState)(ReaProject* proj, const char* extname, const char* key, const char* value);
    int (*GetProjExtState)(ReaProject* proj, const char* extname, const char* key, char* valOutNeedBig, int valOutNeedBig_sz);
-   
+
    bool (*HasExtState)(const char* section, const char* key);
    void (*SetExtState)(const char* section, const char* key, const char* value, bool persist);
    const char* (*GetExtState)(const char* section, const char* key);
    void (*DeleteExtState)(const char* section, const char* key, bool persist);
-   
+
    MediaItem* (*GetMediaItem)(ReaProject* proj, int itemidx);
    double (*GetMediaItemInfo_Value)(MediaItem* item, const char* parmname);
 }
@@ -113,6 +114,7 @@ bool ReaperEntryPoints::LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetMainHwnd, "GetMainHwnd");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::plugin_register, "plugin_register");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetAppVersion, "GetAppVersion");
+   LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetExePath, "GetExePath");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetProjectPath, "GetProjectPath");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::GetProjectPathEx, "GetProjectPathEx");
    LOAD_AND_VERIFY_REAPER_ENTRY_POINT(ppi, reaper_api::EnumProjects, "EnumProjects");
