@@ -4,12 +4,11 @@ project(reaper_ultraschall VERSION 3.1.1)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(WIN32)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
-elseif(APPLE)
+if(APPLE)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/Library/Application\ Support/REAPER/UserPlugins")
+else()
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
 endif()
-
 
 include_directories(
   framework
@@ -148,4 +147,3 @@ elseif(APPLE)
     debug ${TAG_LIB_DEBUG}   optimized ${TAG_LIB_RELEASE}
   )
 endif()
-
