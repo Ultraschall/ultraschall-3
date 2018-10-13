@@ -28,42 +28,42 @@ echo Done.
 
 echo Copying Ultraschall Theme...
 mkdir theme
-copy ..\..\REAPER\Themes\Ultraschall_3.1_WIN.ReaperConfigZip theme\Ultraschall_3.1.ReaperConfigZip > nul
+copy ..\..\Themes\Ultraschall_3.1_WIN.ReaperConfigZip theme\Ultraschall_3.1.ReaperConfigZip > nul
 if not errorlevel 0 goto failed
 echo Done.
 
 echo Copying Ultraschall Add-ons...
 mkdir add-ons
-copy "..\..\REAPER\Documentation\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
+copy "..\..\Documentation\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Documentation\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
+copy "..\..\Documentation\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Resources\Ultraschall App-Icon.png" "add-ons\Ultraschall App-Icon.png" > nul
+copy "..\..\Resources\Ultraschall App-Icon.png" "add-ons\Ultraschall App-Icon.png" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Resources\Ultraschall Webbanner.pdf" "add-ons\Ultraschall Webbanner.pdf" > nul
+copy "..\..\Resources\Ultraschall Webbanner.pdf" "add-ons\Ultraschall Webbanner.pdf" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Resources\Ultraschall Webbanner 400px.png" "add-ons\Ultraschall Webbanner 400px.png" > nul
+copy "..\..\Resources\Ultraschall Webbanner 400px.png" "add-ons\Ultraschall Webbanner 400px.png" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Resources\Ultraschall Webbanner 800px.png" "add-ons\Ultraschall Webbanner 800px.png" > nul
+copy "..\..\Resources\Ultraschall Webbanner 800px.png" "add-ons\Ultraschall Webbanner 800px.png" > nul
 if not errorlevel 0 goto failed
-copy "..\..\REAPER\Resources\Ultraschall Webbanner 2000px.jpg" "add-ons\Ultraschall Webbanner 2000px.jpg" > nul
+copy "..\..\Resources\Ultraschall Webbanner 2000px.jpg" "add-ons\Ultraschall Webbanner 2000px.jpg" > nul
 if not errorlevel 0 goto failed
 echo Done.
 
 echo Building Ultraschall documentation files...
 mkdir resources
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\README.html ..\..\README.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\README.html ..\..\README.md
 if not errorlevel 0 goto failed
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\INSTALL.html ..\..\REAPER\INSTALL.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\INSTALL.html ..\..\INSTALL.md
 if not errorlevel 0 goto failed
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\CHANGELOG.html ..\..\REAPER\CHANGELOG.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\CHANGELOG.html ..\..\CHANGELOG.md
 if not errorlevel 0 goto failed
 echo Done.
 
 echo Building Ultraschall REAPER Plug-in...
 md plug-in
 pushd plug-in
-cmake -G "Visual Studio 15 2017 Win64" ..\..\..\REAPER\Plugin\reaper_ultraschall > nul
+cmake -G "Visual Studio 15 2017 Win64" ..\..\..\Plugin\reaper_ultraschall > nul
 if not errorlevel 0 goto failed
 cmake --build . --target reaper_ultraschall --config Release > nul
 if not errorlevel 0 goto failed
