@@ -1,50 +1,93 @@
 @echo off
 
-set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.1.1-alpha1
+echo **********************************************************************
+echo *                                                                    *
+echo *            BUILDING ULTRASCHALL INSTALLER PACKAGE                  *
+echo *                                                                    *
+echo **********************************************************************
 
-del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi 2> nul
+rem Specify name of installer package
+set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.1.1-preview-1
 
-rem clean-up payload folder in case something went wrong before
-rd /s /q payload 2> nul
-md payload > nul
+rem Remove previously created installer package
+if exist %ULTRASCHALL_RELEASE_LABEL%.msi del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi
 
-rem clean-up build folder in case something went wrong before
-rd /s /q Build 2> nul
-md Build > nul
+rem Clean-up _payload folder in case the last build went wrong
+rmdir /s /q _payload 2>nul
+if not errorlevel 0 goto failed
+rem Create folder for intermediate data
+mkdir _payload
+rem Enter _payload folder
+pushd _payload
 
-rem Visual Studio CRT
-md payload\VCRedist > nul
-copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.12.25810\MergeModules\Microsoft_VC141_CRT_x64.msm" payload\VCRedist
+echo Copying Microsoft Visual C++ 2017 CRT...
+md vcredist
+copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.15.26706\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
+if not errorlevel 0 goto failed
+echo Done.
 
-rem Resources
-pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=payload\README.html ..\README.md
-pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=payload\INSTALL.html ..\REAPER\INSTALL.md
-pandoc --from=markdown --to=html --standalone --self-contained --css=..\REAPER\Tools\ultraschall.css --output=payload\CHANGELOG.html ..\REAPER\CHANGELOG.md
+echo Copying Ultraschall Theme...
+mkdir theme
+copy ..\..\REAPER\Themes\Ultraschall_3.1_WIN.ReaperConfigZip theme\Ultraschall_3.1.ReaperConfigZip > nul
+if not errorlevel 0 goto failed
+echo Done.
 
-copy ..\REAPER\Themes\Ultraschall_3.1_WIN.ReaperConfigZip payload\Ultraschall_3.1.ReaperConfigZip
+echo Copying Ultraschall Add-ons...
+mkdir add-ons
+copy "..\..\REAPER\Documentation\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Documentation\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Resources\Ultraschall App-Icon.png" "add-ons\Ultraschall App-Icon.png" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Resources\Ultraschall Webbanner.pdf" "add-ons\Ultraschall Webbanner.pdf" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Resources\Ultraschall Webbanner 400px.png" "add-ons\Ultraschall Webbanner 400px.png" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Resources\Ultraschall Webbanner 800px.png" "add-ons\Ultraschall Webbanner 800px.png" > nul
+if not errorlevel 0 goto failed
+copy "..\..\REAPER\Resources\Ultraschall Webbanner 2000px.jpg" "add-ons\Ultraschall Webbanner 2000px.jpg" > nul
+if not errorlevel 0 goto failed
+echo Done.
 
-rem Ultraschall Add-ons
-md payload\Addons > nul
-copy "..\REAPER\Documentation\Keymap.pdf" "payload\Addons\Ultraschall Keyboard Layout.pdf"
-copy "..\REAPER\Documentation\Keymap.pptx" "payload\Addons\Ultraschall Keyboard Layout.pptx"
-copy "..\REAPER\Resources\Ultraschall App-Icon.png" "payload\Addons\Ultraschall App-Icon.png"
-copy "..\REAPER\Resources\Ultraschall Webbanner.pdf" "payload\Addons\Ultraschall Webbanner.pdf"
-copy "..\REAPER\Resources\Ultraschall Webbanner 400px.png" "payload\Addons\Ultraschall Webbanner 400px.png"
-copy "..\REAPER\Resources\Ultraschall Webbanner 800px.png" "payload\Addons\Ultraschall Webbanner 800px.png"
-copy "..\REAPER\Resources\Ultraschall Webbanner 2000px.jpg" "payload\Addons\Ultraschall Webbanner 2000px.jpg"
+echo Building Ultraschall documentation files...
+mkdir resources
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\README.html ..\..\README.md
+if not errorlevel 0 goto failed
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\INSTALL.html ..\..\REAPER\INSTALL.md
+if not errorlevel 0 goto failed
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\REAPER\Tools\ultraschall.css --output=resources\CHANGELOG.html ..\..\REAPER\CHANGELOG.md
+if not errorlevel 0 goto failed
+echo Done.
 
-rem Build Ultraschall REAPER Plug-in
-md payload\Plugin > nul
-pushd ..\REAPER\
-call build.bat build release x64
+echo Building Ultraschall REAPER Plug-in...
+md plug-in
+pushd plug-in
+cmake -G "Visual Studio 15 2017 Win64" ..\..\..\REAPER\Plugin\reaper_ultraschall > nul
+if not errorlevel 0 goto failed
+cmake --build . --target reaper_ultraschall --config Release > nul
+if not errorlevel 0 goto failed
 popd
-copy ..\REAPER\Plugin\reaper_ultraschall\x64\Release\reaper_ultraschall.dll payload\Plugin
+echo Done.
 
-rem Build installer package
-candle -nologo -arch x64 -out Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
-light -nologo -ext WixUIExtension -cultures:en-us -loc Scripts\distribution_en-us.wxl -spdb Build\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi
+rem Leave _payload folder
+popd
 
-rem Clean-up
-rd /s /q Build > nul
-rd /s /q payload > nul
+echo Building installer package...
+candle -nologo -arch x64 -out _payload\%ULTRASCHALL_RELEASE_LABEL%.wixobj Scripts\distribution.wxs
+if not errorlevel 0 goto failed
+light -nologo -sw1076 -ext WixUIExtension -cultures:en-us -spdb _payload\%ULTRASCHALL_RELEASE_LABEL%.wixobj -out %ULTRASCHALL_RELEASE_LABEL%.msi
+if not errorlevel 0 goto failed
+echo Done.
 
+rem Clean-up if build completed successfully
+rd /s /q _payload
+set ULTRASCHALL_RELEASE_LABEL=
+goto end
+
+:failed
+echo !!! FAILURE !!!
+goto end
+
+:end
+echo .
