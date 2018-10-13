@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11.0)
+cmake_minimum_required(VERSION 3.12.0)
 project(reaper_ultraschall VERSION 3.1.1)
 
 set(CMAKE_CXX_STANDARD 14)
