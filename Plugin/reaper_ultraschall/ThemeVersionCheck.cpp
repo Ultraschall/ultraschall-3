@@ -43,7 +43,7 @@ std::string QueryThemeVersion()
    const std::string applicationSupportDirectory = FileManager::RoamingAppDataDirectory();
 #else // #ifdef ULTRASCHALL_PLATFORM_WIN32
    const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
-#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
    if(applicationSupportDirectory.empty() == false)
    {
@@ -54,7 +54,7 @@ std::string QueryThemeVersion()
 #else // #ifdef ULTRASCHALL_PLATFORM_WIN32
        const std::string themeControlFile
            = applicationSupportDirectory + "/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip";
-#endif // #ifdef   ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
       unzFile themeFile = unzOpen(themeControlFile.c_str());
       if(themeFile != 0)

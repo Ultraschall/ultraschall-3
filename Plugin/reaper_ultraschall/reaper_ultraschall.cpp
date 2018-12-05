@@ -99,5 +99,5 @@ BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
 	}
 	return TRUE;
 }
-#endif
-
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32

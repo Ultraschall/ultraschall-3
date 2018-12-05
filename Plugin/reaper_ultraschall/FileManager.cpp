@@ -538,6 +538,7 @@ std::string FileManager::ReadVersionFromFile(const std::string &path)
 
     return version;
 }
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 }

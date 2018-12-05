@@ -29,6 +29,7 @@
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 #define CURL_STATICLIB
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #include <curl/curl.h>
 #include <curl/easy.h>
@@ -71,7 +72,7 @@ void UpdateCheck()
    if (GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
    {
       bool updateCheckRequired = false;
-      
+
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
       if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {

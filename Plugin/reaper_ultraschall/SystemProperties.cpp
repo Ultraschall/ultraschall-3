@@ -197,7 +197,7 @@ void UpdateBillOfMaterials()
    if (itemVersion.empty() == false) {
        bom.push_back(itemVersion);
    }
-#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
    itemVersion = VersionHandler::SoundboardVersion();
    if(itemVersion.empty() == false)

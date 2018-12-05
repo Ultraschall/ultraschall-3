@@ -83,7 +83,8 @@ std::string FindSWSPluginPath()
 
    return swsPluginPath;
 }
-#endif
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 bool SWSVersionCheck()
 {
@@ -105,7 +106,7 @@ bool SWSVersionCheck()
           static const uint64_t originalCrc = 2821342186;
 #else // #ifdef ULTRASCHALL_PLATFORM_WIN32
           static const uint64_t originalCrc = 3206585461;
-#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
          const uint64_t crc = pStream->CRC32();
          if(originalCrc == crc)
          {

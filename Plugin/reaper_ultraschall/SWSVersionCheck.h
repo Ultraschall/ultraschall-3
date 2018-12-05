@@ -30,7 +30,8 @@ namespace ultraschall {
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 std::string FindUltraschallPluginPath();
-#endif
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 bool SWSVersionCheck();
 
