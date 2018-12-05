@@ -100,7 +100,7 @@ namespace ultraschall {
                      const std::string& targetName = targetNames_[i];
 
                      ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
-                     if(pTagWriter != nullptr)
+                     if(pTagWriter != 0)
                      {
                         BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
                         if(pTagWriter->InsertStandardProperties(targetName, properties) == false)
@@ -239,10 +239,10 @@ namespace ultraschall {
 
       ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targetName)
       {
-         PRECONDITION_RETURN(targetName.empty() == false, nullptr);
-         PRECONDITION_RETURN(targetName.length() > 4, nullptr);
+         PRECONDITION_RETURN(targetName.empty() == false, 0);
+         PRECONDITION_RETURN(targetName.length() > 4, 0);
 
-         ITagWriter* tagWriter = nullptr;
+         ITagWriter* tagWriter = 0;
 
          const TARGET_TYPE targetType = EvaluateFileType(targetName);
          if(targetType == MP3_TARGET)

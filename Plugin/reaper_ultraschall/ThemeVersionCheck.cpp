@@ -39,21 +39,22 @@ std::string QueryThemeVersion()
 
    std::string versionString;
 
-#ifndef ULTRASCHALL_PLATFORM_WIN32
-   const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
-#else
+#ifdef ULTRASCHALL_PLATFORM_WIN32
    const std::string applicationSupportDirectory = FileManager::RoamingAppDataDirectory();
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+   const std::string applicationSupportDirectory = FileManager::UserApplicationSupportDirectory();
+#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
 
    if(applicationSupportDirectory.empty() == false)
    {
-#ifndef ULTRASCHALL_PLATFORM_WIN32
-      const std::string themeControlFile = applicationSupportDirectory +
-        "/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip";
-#else
-       const std::string themeControlFile = applicationSupportDirectory +
-           "\\REAPER\\ColorThemes\\Ultraschall_3.1.ReaperThemeZip";
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
+
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+       const std::string themeControlFile
+           = applicationSupportDirectory + "\\REAPER\\ColorThemes\\Ultraschall_3.1.ReaperThemeZip";
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+       const std::string themeControlFile
+           = applicationSupportDirectory + "/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip";
+#endif // #ifdef   ULTRASCHALL_PLATFORM_WIN32
 
       unzFile themeFile = unzOpen(themeControlFile.c_str());
       if(themeFile != 0)

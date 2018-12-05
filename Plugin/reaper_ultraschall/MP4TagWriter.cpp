@@ -119,7 +119,7 @@ bool MP4TagWriter::InsertCoverImage(const std::string& targetName, const std::st
          if (MP4TagsFetch( tags, mp4_handle))
          {
             framework::ByteStream* imageData = framework::BinaryFileReader::ReadBytes(coverImage);
-            if(imageData != nullptr)
+            if(imageData != 0)
             {
                MP4TagArtwork mp4ArtWork;
                mp4ArtWork.size = static_cast<uint32_t> (imageData->DataSize());

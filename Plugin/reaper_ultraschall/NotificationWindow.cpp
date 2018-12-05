@@ -25,35 +25,38 @@
 #include "ReaperEntryPoints.h"
 #include "NotificationWindow.h"
 
-#ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #import "NotificationPanel.h"
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 namespace ultraschall {
 namespace reaper {
 
 void NotificationWindow::Show(const std::string& message, const bool isError)
 {
-#ifdef ULTRASCHALL_PLATFORM_MACOS
-  [NotificationPanel showWithMessage : [NSString stringWithUTF8String : message.c_str()]
-    asError : isError ? YES : NO];
-#else
-  if(reaper_api::GetMainHwnd != nullptr)
-  {
-    MessageBox(reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension", (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
-  }
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+    if (reaper_api::GetMainHwnd != 0) {
+        MessageBox(
+            reaper_api::GetMainHwnd(), message.c_str(), "Ultraschall REAPER Extension",
+            (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+    }
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+    [NotificationPanel showWithMessage:[NSString stringWithUTF8String:message.c_str()] asError:isError ? YES : NO];
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 void NotificationWindow::Show(const std::string& message, const std::string& information, const bool isError)
 {
-#ifdef ULTRASCHALL_PLATFORM_MACOS
-  [NotificationPanel showWithMessage : [NSString stringWithUTF8String : message.c_str()]
-    info : [NSString stringWithUTF8String : information.c_str()]
-    asError : isError ? YES : NO];
-#else
-  MessageBox(reaper_api::GetMainHwnd(), information.c_str(), message.c_str(), (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+    MessageBox(
+        reaper_api::GetMainHwnd(), information.c_str(), message.c_str(),
+        (isError == true) ? MB_ICONERROR : MB_ICONINFORMATION);
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+    [NotificationPanel showWithMessage:[NSString stringWithUTF8String:message.c_str()]
+                                  info:[NSString stringWithUTF8String:information.c_str()]
+                               asError:isError ? YES : NO];
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 }

@@ -89,24 +89,23 @@ bool SWSVersionCheck()
 {
    bool result = false;
 
-#ifndef ULTRASCHALL_PLATFORM_WIN32
-   const std::string swsPlugin2_8UserPath = FileManager::UserApplicationSupportDirectory() +
-      "/REAPER/UserPlugins/reaper_sws_extension.dylib";
-#else
+#ifdef ULTRASCHALL_PLATFORM_WIN32
    const std::string swsPlugin2_8UserPath = FindSWSPluginPath();
-#endif // #ifndef ULTRASCHALL_PLATFORM_WIN32
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+   const std::string swsPlugin2_8UserPath
+       = FileManager::UserApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
    if(FileManager::FileExists(swsPlugin2_8UserPath) == true)
    {
       framework::ByteStream* pStream = framework::BinaryFileReader::ReadBytes(swsPlugin2_8UserPath);
       if(pStream != 0)
       {
-#ifdef ULTRASCHALL_PLATFORM_MACOS
-         static const uint64_t originalCrc = 3206585461;
-#else
-         static const uint64_t originalCrc = 2821342186;
-#endif // #ifndef ULTRASCHALL_PLATFORM_MACOS
-
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+          static const uint64_t originalCrc = 2821342186;
+#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+          static const uint64_t originalCrc = 3206585461;
+#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
          const uint64_t crc = pStream->CRC32();
          if(originalCrc == crc)
          {

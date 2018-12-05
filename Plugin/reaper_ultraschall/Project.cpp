@@ -49,7 +49,7 @@ Project::Project(ProjectHandle projectReference) : projectReference_(projectRefe
 
 Project::~Project()
 {
-   projectReference_ = nullptr;
+   projectReference_ = 0;
 }
 
 Project::Project(const Project &rhs)
@@ -69,7 +69,7 @@ Project &Project::operator=(const Project &rhs)
 
 bool Project::Validate(const Project &project)
 {
-   return project.projectReference_ != nullptr;
+   return project.projectReference_ != 0;
 }
 
 std::string Project::FullPathName() const
@@ -215,7 +215,7 @@ double Project::MinPosition() const
 
    int index = 0;
    MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while (mediaItem != nullptr)
+   while (mediaItem != 0)
    {
       double startPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION");
       if (startPosition < minPosition)
@@ -238,7 +238,7 @@ double Project::MaxPosition() const
 
    int index = 0;
    MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while (mediaItem != nullptr)
+   while (mediaItem != 0)
    {
       const double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") +
                                  reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
@@ -309,14 +309,14 @@ class AutoPreventUIRefresh
 
 std::vector<Marker> Project::QueryAllMarkers() const
 {
-   PRECONDITION_RETURN(projectReference_ != nullptr, std::vector<Marker>());
+   PRECONDITION_RETURN(projectReference_ != 0, std::vector<Marker>());
 
    std::vector<Marker> allMarkers;
 
    bool isRegion = false;
    double position = 0;
    double duration = 0;
-   const char *name = nullptr;
+   const char *name = 0;
    int number = 0;
    int color = 0;
 
@@ -345,7 +345,7 @@ std::vector<Marker> Project::QueryAllMarkers() const
 
 void Project::UpdateAllMarkers()
 {
-   PRECONDITION(projectReference_ != nullptr);
+   PRECONDITION(projectReference_ != 0);
 
    DeleteAllMarkers();
 
@@ -355,7 +355,7 @@ void Project::UpdateAllMarkers()
       bool isRegion = false;
       double position = 0;
       double duration = 0;
-      const char *name = nullptr;
+      const char *name = 0;
       int number = 0;
       int color = 0;
 

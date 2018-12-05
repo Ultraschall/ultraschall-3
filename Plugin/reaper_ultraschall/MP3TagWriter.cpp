@@ -40,7 +40,7 @@ namespace ultraschall {
       bool success = false;
 
       MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
-      if(context != nullptr)
+      if(context != 0)
       {
         success = MP3_InsertPodcastFrame(context);
         if(true == success)
@@ -94,7 +94,7 @@ namespace ultraschall {
       bool success = false;
 
       MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
-      if(context != nullptr)
+      if(context != 0)
       {
         success = MP3_InsertCoverPictureFrame(context, coverImage);
         if(true == success)
@@ -121,7 +121,7 @@ namespace ultraschall {
       bool success = false;
 
       MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
-      if(context != nullptr)
+      if(context != 0)
       {
         if(true == replace)
         {

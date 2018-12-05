@@ -81,11 +81,11 @@ static bool OnCustomAction(KbdSectionInfo*, int commandId, int, int, int, HWND)
 
 bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const std::string& entryPointName)
 {
-   PRECONDITION_RETURN(ppi != nullptr, false);
+   PRECONDITION_RETURN(ppi != 0, false);
    PRECONDITION_RETURN(entryPointName.empty() == false, false);
 
    (*((void **)&(entryPoint)) = (void *)ppi->GetFunc(entryPointName.c_str()));
-   if(entryPoint != nullptr)
+   if(entryPoint != 0)
    {
       return true;
    }
@@ -98,7 +98,7 @@ bool ImportReaperEntryPoint(reaper_plugin_info_t* ppi, void*& entryPoint, const 
 #define LOAD_AND_VERIFY_REAPER_ENTRY_POINT(__rp__, __ep__, __ep_name__) \
 { \
 const bool __ep_loaded__ = ImportReaperEntryPoint(__rp__, (void*&)__ep__, __ep_name__); \
-if((__ep_loaded__ == false) || (nullptr == __ep__)) \
+if((__ep_loaded__ == false) || (0 == __ep__)) \
 { \
 return false; \
 } \
@@ -106,8 +106,8 @@ return false; \
 
 bool ReaperEntryPoints::LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* ppi)
 {
-   PRECONDITION_RETURN(instance != nullptr, false);
-   PRECONDITION_RETURN(ppi != nullptr, false);
+   PRECONDITION_RETURN(instance != 0, false);
+   PRECONDITION_RETURN(ppi != 0, false);
 
    instance_ = instance;
 

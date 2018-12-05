@@ -109,7 +109,7 @@ ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICu
       if(pfn != 0)
       {
          pCustomAction = (*pfn)();
-         if(pCustomAction != nullptr)
+         if(pCustomAction != 0)
          {
             status = SERVICE_SUCCESS;
          }

@@ -36,7 +36,7 @@ struct MP3_EXPORT_CONTEXT
    TagLib::MPEG::File targetFile_;
    TagLib::ID3v2::Tag* tag_;
    
-   MP3_EXPORT_CONTEXT(const std::string& targetName) : targetFile_(targetName.c_str()), tag_(nullptr)
+   MP3_EXPORT_CONTEXT(const std::string& targetName) : targetFile_(targetName.c_str()), tag_(0)
    {
       if(targetFile_.isOpen() == true)
       {
@@ -46,7 +46,7 @@ struct MP3_EXPORT_CONTEXT
    
    ~MP3_EXPORT_CONTEXT()
    {
-      tag_ = nullptr;
+      tag_ = 0;
    }
 };
    
@@ -54,15 +54,15 @@ static const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize)
 
 MP3_EXPORT_CONTEXT* MP3_StartTransaction(const std::string& targetName)
 {
-   PRECONDITION_RETURN(targetName.empty() == false, nullptr);
+   PRECONDITION_RETURN(targetName.empty() == false, 0);
    
    return new MP3_EXPORT_CONTEXT(targetName);
 }
 
 bool MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    
    const bool success = context->targetFile_.save(TagLib::MPEG::File::ID3v2, true, 3);
    framework::SafeDelete(context);
@@ -77,10 +77,10 @@ void MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context)
 
 const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize)
 {
-   PRECONDITION_RETURN(data != nullptr, nullptr);
-   PRECONDITION_RETURN(dataSize > 0, nullptr);
+   PRECONDITION_RETURN(data != 0, 0);
+   PRECONDITION_RETURN(dataSize > 0, 0);
    
-   const char* mimeType = nullptr;
+   const char* mimeType = 0;
 
    switch (FindImageFormat (data, dataSize))
    {
@@ -110,11 +110,11 @@ uint32_t MP3_QueryTargetDuration(const std::string& target)
    uint32_t duration = 0;
    
    TagLib::FileRef mp3(target.c_str());
-   if((mp3.isNull() == false) && (mp3.audioProperties() != nullptr))
+   if((mp3.isNull() == false) && (mp3.audioProperties() != 0))
    {
       
       TagLib::AudioProperties* properties = mp3.audioProperties();
-      if(properties != nullptr)
+      if(properties != 0)
       {
          duration = properties->length() * 1000;
       }
@@ -132,7 +132,7 @@ void MP3_RemoveFrames(const std::string& target, const std::string& frameId)
    if(mp3.isOpen() == true)
    {
       id3v2::Tag *id3v2 = mp3.ID3v2Tag();
-      if(id3v2 != nullptr)
+      if(id3v2 != 0)
       {
          std::vector<id3v2::Frame*> foundFrames;
          
@@ -140,7 +140,7 @@ void MP3_RemoveFrames(const std::string& target, const std::string& frameId)
          for(unsigned int i = 0; i < frames.size(); i++)
          {
             id3v2::Frame* frame = frames[i];
-            if(frame != nullptr)
+            if(frame != 0)
             {
                foundFrames.push_back(frame);
             }
@@ -162,8 +162,8 @@ void MP3_RemoveFrames(const std::string& target, const std::string& frameId)
    
 bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    
    bool success = false;
@@ -174,7 +174,7 @@ bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id)
    for(unsigned int i = 0; i < frames.size(); i++)
    {
       id3v2::Frame* frame = frames[i];
-      if(frame != nullptr)
+      if(frame != 0)
       {
          selectedFrames.push_back(frame);
       }
@@ -195,8 +195,8 @@ bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id)
    
 bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    
    bool success = false;
@@ -208,7 +208,7 @@ bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, con
       const char* frameIdString = id.c_str();
       TagLib::ByteVector frameId = TagLib::ByteVector::fromCString(frameIdString);
       TagLib::ID3v2::TextIdentificationFrame* textFrame = new TagLib::ID3v2::TextIdentificationFrame(frameId);
-      if(textFrame != nullptr)
+      if(textFrame != 0)
       {
          framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
          const char* rawStringData = reinterpret_cast<const char*>(convertedString.data());
@@ -231,8 +231,8 @@ bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, con
  
 bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    
    bool success = false;
@@ -242,7 +242,7 @@ bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id,
    if(text.empty() == false)
    {
       TagLib::ID3v2::CommentsFrame* commentsFrame = new TagLib::ID3v2::CommentsFrame(TagLib::String::Type::UTF16);
-      if(commentsFrame != nullptr)
+      if(commentsFrame != 0)
       {
          framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM(text);
          TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
@@ -264,8 +264,8 @@ bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id,
 
 bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(id.empty() == false, false);
    PRECONDITION_RETURN(text.empty() == false, false);
    PRECONDITION_RETURN(startTime != 0xffffffff, false);
@@ -277,12 +277,12 @@ bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, 
    const uint32_t endOffset = 0xffffffff;
    TagLib::ByteVector chapterId = TagLib::ByteVector::fromCString(id.c_str());
    id3v2::ChapterFrame* chapterFrame = new id3v2::ChapterFrame(chapterId, startTime, endTime, startOffset, endOffset);
-   if(chapterFrame != nullptr)
+   if(chapterFrame != 0)
    {
       const char* embeddedFrameIdString = "TIT2";
       TagLib::ByteVector embeddedFrameId = TagLib::ByteVector::fromCString(embeddedFrameIdString);
       TagLib::ID3v2::TextIdentificationFrame* embeddedFrame = new TagLib::ID3v2::TextIdentificationFrame(embeddedFrameId);
-      if(embeddedFrame != nullptr)
+      if(embeddedFrame != 0)
       {
          framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM2(text);
          TagLib::ByteVector rawStringData((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
@@ -301,8 +301,8 @@ bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, 
    
 bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vector<std::string>& tableOfContentsItems)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(tableOfContentsItems.empty() == false, false);
    
    bool success = false;
@@ -311,7 +311,7 @@ bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vect
    
    TagLib::ByteVector tableOfContentsId = TagLib::ByteVector::fromCString("toc");
    TagLib::ID3v2::TableOfContentsFrame* tableOfContentsFrame = new TagLib::ID3v2::TableOfContentsFrame(tableOfContentsId);
-   if(tableOfContentsFrame != nullptr)
+   if(tableOfContentsFrame != 0)
    {
       for(size_t j = 0; j < tableOfContentsItems.size(); j++)
       {
@@ -319,7 +319,7 @@ bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vect
       }
       
       id3v2::TextIdentificationFrame* embeddedFrame = new id3v2::TextIdentificationFrame(TagLib::ByteVector::fromCString("TIT2"));
-      if(embeddedFrame != nullptr)
+      if(embeddedFrame != 0)
       {
          framework::UnicodeString convertedString = framework::MakeUTF16StringWithBOM("toplevel toc");
          TagLib::ByteVector stream((const char*)convertedString.c_str(), (unsigned int)(convertedString.size() * sizeof(char16_t)));
@@ -338,15 +338,15 @@ bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vect
 
 bool MP3_InsertPodcastFrame(MP3_EXPORT_CONTEXT* context)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
 
    bool success = false;
    
    MP3_RemoveFrames(context, "PCST");
    
    TagLib::ID3v2::PodcastFrame* podcastFrame = new TagLib::ID3v2::PodcastFrame();
-   if(podcastFrame != nullptr)
+   if(podcastFrame != 0)
    {
       context->tag_->addFrame(podcastFrame);
       success = true;
@@ -357,8 +357,8 @@ bool MP3_InsertPodcastFrame(MP3_EXPORT_CONTEXT* context)
    
 bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string& image)
 {
-   PRECONDITION_RETURN(context != nullptr, false);
-   PRECONDITION_RETURN(context->tag_ != nullptr, false);
+   PRECONDITION_RETURN(context != 0, false);
+   PRECONDITION_RETURN(context->tag_ != 0, false);
    PRECONDITION_RETURN(image.empty() == false, false);
    
    bool success = false;
@@ -366,10 +366,10 @@ bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string&
    MP3_RemoveFrames(context, "APIC");
    
    TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame();
-   if(frame != nullptr)
+   if(frame != 0)
    {
       framework::ByteStream* imageData = framework::BinaryFileReader::ReadBytes(image);
-      if(imageData != nullptr)
+      if(imageData != 0)
       {
          uint8_t imageHeader[10] = {0};
          const size_t imageHeaderSize = 10;

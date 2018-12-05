@@ -78,7 +78,7 @@ std::string ProjectManager::CurrentProjectName() const
 
 bool ProjectManager::InsertProject(ProjectHandle projectReference)
 {
-   PRECONDITION_RETURN(projectReference != nullptr, false);
+   PRECONDITION_RETURN(projectReference != 0, false);
 
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
@@ -87,7 +87,7 @@ bool ProjectManager::InsertProject(ProjectHandle projectReference)
 
 const Project& ProjectManager::LookupProject(ProjectHandle projectReference) const
 {
-   PRECONDITION_RETURN(projectReference != nullptr, INVALID_PROJECT);
+   PRECONDITION_RETURN(projectReference != 0, INVALID_PROJECT);
 
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
    const ProjectReferenceDictionary::const_iterator projectReferenceIterator = projectReferences_.find(projectReference);
@@ -101,7 +101,7 @@ const Project& ProjectManager::LookupProject(ProjectHandle projectReference) con
 
 void ProjectManager::RemoveProject(ProjectHandle projectReference)
 {
-   PRECONDITION(projectReference != nullptr);
+   PRECONDITION(projectReference != 0);
 
    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 

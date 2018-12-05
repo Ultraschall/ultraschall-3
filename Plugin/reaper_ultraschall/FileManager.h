@@ -44,7 +44,8 @@ public:
 
    static std::string AppendPath(const std::string& prefix, const std::string& append);
    static std::string StripPath(const std::string& path);
-   
+   static std::vector<std::string> SplitPath(const std::string& path);
+
    static std::string UserHomeDirectory();
    static std::string UserApplicationSupportDirectory();
    static std::string SystemApplicationSupportDirectory();

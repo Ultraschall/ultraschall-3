@@ -29,7 +29,7 @@ namespace reaper {
 
 ImageFormat FindImageFormat(const uint8_t* data, const size_t dataSize)
 {
-   PRECONDITION_RETURN(data != nullptr, ImageFormat::Unknown);
+   PRECONDITION_RETURN(data != 0, ImageFormat::Unknown);
    PRECONDITION_RETURN(dataSize > 0, ImageFormat::Unknown);
 
    ImageFormat format = ImageFormat::Unknown;

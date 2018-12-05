@@ -191,13 +191,13 @@ void UpdateBillOfMaterials()
       bom.push_back("Ultraschall REAPER Theme " + itemVersion);
    }
 
-#ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
    itemVersion = VersionHandler::HubVersion();
-   if(itemVersion.empty() == false)
-   {
-      bom.push_back(itemVersion);
+   if (itemVersion.empty() == false) {
+       bom.push_back(itemVersion);
    }
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#endif // #ifdef                   ULTRASCHALL_PLATFORM_WIN32
 
    itemVersion = VersionHandler::SoundboardVersion();
    if(itemVersion.empty() == false)

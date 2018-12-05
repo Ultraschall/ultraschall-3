@@ -118,7 +118,7 @@ void UpdateCheck()
       if (true == updateCheckRequired)
       {
          void *curlHandle = curl_easy_init();
-         if (curlHandle != nullptr)
+         if (curlHandle != 0)
          {
             const std::string url = "https://ultraschall.io/ultraschall_release.txt";
             curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
@@ -148,7 +148,7 @@ void UpdateCheck()
             }
 
             curl_easy_cleanup(curlHandle);
-            curlHandle = nullptr;
+            curlHandle = 0;
 
             const double nextTimestamp = QueryCurrentTimeAsSeconds();
             const std::string nextUpdateCheckpoint = std::to_string(nextTimestamp);
