@@ -5,7 +5,7 @@
     <!-- The URL for add/remove programs -->
     <?define InfoURL="http://ultraschall.fm/" ?>
     <?define VersionNumber="!(bind.FileVersion.ReaperUltraschallDll)" ?>
-    <?define ProductName="ULTRASCHALL-3.1.1-preview-1" ?>
+    <?define ProductName="ULTRASCHALL-3.1.1-preview-2" ?>
     <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.VersionNumber)" Manufacturer="ultraschall.fm" UpgradeCode="$(var.UpgradeCode)">
         <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="Podcasting Extensions for the REAPER DAW" Comments="Installs the Ultraschall REAPER Extension $(var.VersionNumber)" />
         <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />

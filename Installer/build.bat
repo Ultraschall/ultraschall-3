@@ -7,7 +7,7 @@ echo *                                                                    *
 echo **********************************************************************
 
 rem Specify name of installer package
-set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.1.1-preview-1
+set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.1.1-preview-2
 
 rem Remove previously created installer package
 if exist %ULTRASCHALL_RELEASE_LABEL%.msi del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi
@@ -22,7 +22,7 @@ pushd _payload
 
 echo Copying Microsoft Visual C++ 2017 CRT...
 md vcredist
-copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.15.26706\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
+copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.16.27012\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
 if not errorlevel 0 goto failed
 echo Done.
 
