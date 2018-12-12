@@ -52,7 +52,15 @@ Application& Application::Instance()
 
 ServiceStatus Application::Start()
 {
-    PRECONDITION_RETURN(HealthCheck(), SERVICE_FAILURE);
+    ServiceStatus status = SERVICE_FAILURE;
+    if (ExperimentalSafetyLevel() == false)
+    {
+        if(HealthCheck() == false)
+        {
+            return status;
+        }
+    }
+
     UpdateBillOfMaterials();
     UpdateCheck();
 
@@ -75,8 +83,10 @@ bool Application::OnCustomAction(const int32_t id)
     CustomActionManager& manager       = CustomActionManager::Instance();
     ICustomAction*       pCustomAction = 0;
     ServiceStatus        status        = manager.LookupCustomAction(id, pCustomAction);
-    if (ServiceSucceeded(status) && (pCustomAction != 0)) {
-        if (ICustomAction::RegisterProject() == true) {
+    if (ServiceSucceeded(status) && (pCustomAction != 0))
+    {
+        if (ICustomAction::RegisterProject() == true)
+        {
             pCustomAction->Execute();
             executed = true;
         }
@@ -93,7 +103,8 @@ std::string Application::GetExportPathName() const
 
     char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
     reaper_api::GetProjectPath(buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-    if (strlen(buffer) > 0) {
+    if (strlen(buffer) > 0)
+    {
         projectPath = buffer;
     }
 
@@ -106,7 +117,8 @@ std::string Application::GetProjectPathName() const
 
     char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
     reaper_api::EnumProjects(-1, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-    if (strlen(buffer) > 0) {
+    if (strlen(buffer) > 0)
+    {
         result = buffer;
     }
 
@@ -118,9 +130,11 @@ std::string Application::GetProjectFileName() const
     std::string result;
 
     const std::string projectPath = GetProjectPathName();
-    if (projectPath.empty() == false) {
+    if (projectPath.empty() == false)
+    {
         const std::vector<std::string> pathComponents = FileManager::SplitPath(projectPath);
-        if (pathComponents.empty() == false) {
+        if (pathComponents.empty() == false)
+        {
             result = pathComponents[pathComponents.size() - 1];
         }
     }
@@ -133,12 +147,16 @@ std::string Application::GetProjectFolderName() const
     std::string result;
 
     const std::string projectPath = GetProjectPathName();
-    if (projectPath.empty() == false) {
+    if (projectPath.empty() == false)
+    {
         const std::vector<std::string> pathComponents = FileManager::SplitPath(projectPath);
-        if (pathComponents.empty() == false) {
-            for (size_t i = 0; i < pathComponents.size() - 1; i++) {
+        if (pathComponents.empty() == false)
+        {
+            for (size_t i = 0; i < pathComponents.size() - 1; i++)
+            {
                 result += pathComponents[i];
-                if (i < pathComponents.size() - 2) {
+                if (i < pathComponents.size() - 2)
+                {
                     result += FileManager::PathSeparator();
                 }
             }
@@ -153,7 +171,8 @@ std::string Application::GetProjectName() const
     std::string result;
 
     const std::string projectFile = GetProjectFileName();
-    if (projectFile.empty() == false) {
+    if (projectFile.empty() == false)
+    {
         result = projectFile.substr(0, projectFile.find('.', 0));
     }
 
@@ -177,8 +196,10 @@ struct Timestamp
         Timestamp timestamp;
 
         std::vector<std::string> buffer = framework::StringTokenize(items[0], '.');
-        for (size_t i = 0; i < buffer.size(); ++i) {
-            switch (i) {
+        for (size_t i = 0; i < buffer.size(); ++i)
+        {
+            switch (i)
+            {
                 case 0:
                     timestamp.seconds = std::atoi(buffer[0].c_str());
                     break;
@@ -192,8 +213,10 @@ struct Timestamp
             }
         }
 
-        for (size_t i = 0; i < items.size(); ++i) {
-            switch (i) {
+        for (size_t i = 0; i < items.size(); ++i)
+        {
+            switch (i)
+            {
                 case 1:
                     timestamp.minutes = std::atoi(items[1].c_str());
                     break;
@@ -229,7 +252,8 @@ std::string Application::TimestampToString(const double timestamp) const
 
     char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
     reaper_api::format_timestr_pos(timestamp, buffer, MAX_REAPER_STRING_BUFFER_SIZE, 0);
-    if (strlen(buffer) > 0) {
+    if (strlen(buffer) > 0)
+    {
         result = Timestamp::FromString(buffer).ToString();
     }
 
@@ -278,35 +302,40 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 ");
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
     const std::string swsPlugin2_8SystemPath
         = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
-    if ((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true)) {
+    if ((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
+    {
         NotificationWindow::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
         ok = false;
     }
 
     const std::string swsPlugin2_7SystemPath
         = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
-    if ((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true)) {
+    if ((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
+    {
         NotificationWindow::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
         ok = false;
     }
 
     const std::string ultraschallPluginSystemPath
         = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
-    if ((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true)) {
+    if ((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
+    {
         NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
         ok = false;
     }
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
-    if ((true == ok) && (ReaperVersionCheck() == false)) {
+    if ((true == ok) && (ReaperVersionCheck() == false))
+    {
         NotificationWindow::Show(message, information3 + " " + information4, true);
         ok = false;
     }
 
-    if ((true == ok) && (SWSVersionCheck() == false)) {
+    if ((true == ok) && (SWSVersionCheck() == false))
+    {
         NotificationWindow::Show(message, information7, true);
         ok = false;
     }
@@ -318,7 +347,7 @@ uint32_t Application::GetEditMarkerColor()
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
     return 0x01ff0000;
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
     return 0x010000ff;
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }

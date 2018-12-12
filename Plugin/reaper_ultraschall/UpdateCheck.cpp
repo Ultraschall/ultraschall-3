@@ -69,14 +69,14 @@ double QueryCurrentTimeAsSeconds()
 
 void UpdateCheck()
 {
-   if (GetBooleanSystemProperty(UPDATE_SECTION_NAME, "update_check") == true)
+   if (SystemProperty<bool>::Get(UPDATE_SECTION_NAME, "update_check") == true)
    {
       bool updateCheckRequired = false;
 
       static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
-      if (HasSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
+      if (SystemProperty<std::string>::Exists(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
       {
-         const std::string previousUpdateCheckpoint = GetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
+         const std::string previousUpdateCheckpoint = SystemProperty<std::string>::Get(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
          if (previousUpdateCheckpoint.empty() == false)
          {
              try
@@ -86,7 +86,7 @@ void UpdateCheck()
                  {
                      const double now = QueryCurrentTimeAsSeconds();
                      const double delta = (now - previousTimestamp);
-                     static const double ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+                     static const double ONE_DAY_IN_SECONDS = 60.0 * 60.0 * 24.0;
                      if(delta > ONE_DAY_IN_SECONDS) // standard timeout (24h)
                      {
                          updateCheckRequired = true;
@@ -141,7 +141,7 @@ void UpdateCheck()
                   const std::string localVersion = VersionHandler::PluginVersion();
                   if(remoteVersion > localVersion)
                   {
-                     std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the new version ";
+                     std::string message = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the updated version ";
                      message += remoteVersion + ".";
                      NotificationWindow::Show(message);
                   }
@@ -155,7 +155,7 @@ void UpdateCheck()
             const std::string nextUpdateCheckpoint = std::to_string(nextTimestamp);
             if (nextUpdateCheckpoint.empty() == false)
             {
-               SetSystemProperty(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint, true);
+               SystemProperty<std::string>::Set(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint, true);
             }
          }
       }
