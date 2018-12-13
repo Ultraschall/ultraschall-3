@@ -43,7 +43,7 @@ BreakConstructorInitializersBeforeComma: false
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterColon
 BreakStringLiterals: true
-ColumnLimit: 120
+ColumnLimit: 160
 CommentPragmas: '^ IWYU pragma:'
 # CommentPragmas: ".*"
 CompactNamespaces: true
@@ -88,7 +88,7 @@ PenaltyBreakString: 1000
 PenaltyBreakTemplateDeclaration: 10
 PenaltyExcessCharacter: 1000000
 # PenaltyExcessCharacter: 50
-PenaltyReturnTypeOnItsOwnLine: 60
+PenaltyReturnTypeOnItsOwnLine: 120
 # RawStringFormat:
 # end what's this
 PointerAlignment: Left
