@@ -40,8 +40,7 @@ public:
         return reaper_api::HasExtState(section.c_str(), key.c_str());
     }
 
-    static void
-        Set(const std::string& section, const std::string& key, const std::string& value, const bool save = false)
+    static void Set(const std::string& section, const std::string& key, const std::string& value, const bool save = false)
     {
         PRECONDITION(key.empty() == false);
         PRECONDITION(value.empty() == false);
@@ -69,17 +68,50 @@ static const char* UPDATE_SECTION_NAME   = "ultraschall_update";
 static const char* BOM_SECTION_NAME      = "ultraschall_bom";
 bool               QuerySetPluginVersion();
 
-static const char* SAFETY_LEVEL_SECTION_NAME = "ultraschall_safety";
+static const char* SAFETY_SECTION_NAME = "ultraschall_safety";
 
-typedef enum {
-    STRICT_SAFETY_LEVEL       = 0,
-    RELAXED_SAFETY_LEVEL      = 1,
-    EXPERIMENTAL_SAFETY_LEVEL = 2
-} ULTRASCHALL_SAFETY_LEVEL;
+typedef enum { STRICT_SAFETY_LEVEL = 0, RELAXED_SAFETY_LEVEL = 1, EXPERIMENTAL_SAFETY_LEVEL = 2 } ULTRASCHALL_SAFETY_LEVEL;
 
-bool StrictSafetyLevel();
-bool RelaxedSafetyLevel();
-bool ExperimentalSafetyLevel();
+class SafetyLevel
+{
+public:
+    inline static bool IsStrict()
+    {
+        return Query() <= STRICT_SAFETY_LEVEL;
+    }
+
+    inline static bool IsRelaxed()
+    {
+        return Query() <= RELAXED_SAFETY_LEVEL;
+    }
+
+    inline static bool IsExperimental()
+    {
+        return Query() >= EXPERIMENTAL_SAFETY_LEVEL;
+    }
+
+private:
+    static ULTRASCHALL_SAFETY_LEVEL Query();
+};
+
+typedef enum { BASIC_SAFETY_MODE = 0, ADVANCED_SAFETY_MODE = 1 } ULTRASCHALL_SAFETY_MODE;
+
+class SafetyMode
+{
+public:
+    inline static bool IsBasic()
+    {
+        return Query() == BASIC_SAFETY_MODE;
+    }
+
+    inline static bool IsAdvanced()
+    {
+        return IsBasic() == false;
+    }
+
+private:
+    static ULTRASCHALL_SAFETY_MODE Query();
+};
 
 void UpdateBillOfMaterials();
 

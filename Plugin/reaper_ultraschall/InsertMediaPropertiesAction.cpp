@@ -132,8 +132,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                         std::stringstream os;
                         os << "Ultraschall found the following errors while processing media files:";
                         os << "\r\n\r\n";
-                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message()
-                           << "\r\n";
+                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message() << "\r\n";
                         os << "\r\n\r\n";
 
                         NotificationWindow::Show(os.str(), true);
@@ -141,35 +140,41 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                 }
                 else
                 {
-                    std::stringstream os;
-                    os << "The following media files have been updated successfully:\r\n\r\n";
-                    for (size_t k = 0; k < targetNames_.size(); k++)
+                    if (SafetyMode::IsBasic() == true)
                     {
-                        os << FileManager::StripPath(targetNames_[k]);
-                        if (k < (targetNames_.size() - 1))
+                        std::stringstream os;
+                        os << "The following media files have been updated successfully:\r\n\r\n";
+                        for (size_t k = 0; k < targetNames_.size(); k++)
                         {
-                            os << "\r\n";
+                            os << FileManager::StripPath(targetNames_[k]);
+                            if (k < (targetNames_.size() - 1))
+                            {
+                                os << "\r\n";
+                            }
                         }
-                    }
-                    os << "\r\n\r\n";
+                        os << "\r\n\r\n";
 
-                    NotificationWindow::Show(os.str(), false);
+                        NotificationWindow::Show(os.str(), false);
+                    }
                 }
             }
             else
             {
-                if (errorMessages.empty() == false)
+                if (SafetyLevel::IsStrict() == true)
                 {
-                    std::ostringstream os;
-                    os << "Ultraschall failed to validate chapter markers.";
-                    os << "\r\n\r\n";
-                    for (size_t l = 0; l < errorMessages.size(); l++)
+                    if (errorMessages.empty() == false)
                     {
-                        os << errorMessages[l];
-                    }
-                    os << "\r\n\r\n";
+                        std::ostringstream os;
+                        os << "Ultraschall failed to validate chapter markers.";
+                        os << "\r\n\r\n";
+                        for (size_t l = 0; l < errorMessages.size(); l++)
+                        {
+                            os << errorMessages[l];
+                        }
+                        os << "\r\n\r\n";
 
-                    NotificationWindow::Show(os.str(), true);
+                        NotificationWindow::Show(os.str(), true);
+                    }
                 }
             }
         }
@@ -237,7 +242,7 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targ
     PRECONDITION_RETURN(targetName.empty() == false, 0);
     PRECONDITION_RETURN(targetName.length() > 4, 0);
 
-    ITagWriter* tagWriter = 0;
+    ITagWriter*       tagWriter  = 0;
     const TARGET_TYPE targetType = EvaluateFileType(targetName);
     if (targetType == MP3_TARGET)
     {
@@ -262,7 +267,7 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
 {
     PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
 
-    TARGET_TYPE type = INVALID_TARGET_TYPE;
+    TARGET_TYPE       type             = INVALID_TARGET_TYPE;
     const std::string cookedTargetName = NormalizeTargetName(targetName);
     const size_t      extensionOffset  = targetName.rfind(".");
     if (extensionOffset != std::string::npos)
@@ -322,7 +327,7 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
             invalidAssetCount++;
         }
 
-        if (RelaxedSafetyLevel() == false)
+        if (SafetyLevel::IsStrict() == true)
         {
             if (invalidAssetCount >= 3)
             {
@@ -386,7 +391,7 @@ bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string
     bool valid = true;
     errorMessages.clear();
 
-    if (RelaxedSafetyLevel() == false)
+    if (SafetyLevel::IsStrict() == true)
     {
         for (size_t i = 0; i < chapters_.size(); i++)
         {
@@ -399,8 +404,7 @@ bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string
             if (currentProject.IsValidPosition(current.Position()) == false)
             {
                 std::stringstream os;
-                os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown"))
-                   << "' is out of track range.";
+                os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
                 os << "\r\n";
                 errorMessages.push_back(os.str());
 

@@ -57,7 +57,7 @@ private:
   std::vector<Marker> chapters_;
   bool ConfigureAssets();
   void ResetAssets();
-  bool ValidateChapterMarkers(std::vector<std::string>& errorMessages);
+  std::vector<std::string> ValidateChapterMarkers();
 };
 
 }}
