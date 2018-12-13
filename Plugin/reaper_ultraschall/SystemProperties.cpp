@@ -44,13 +44,13 @@ static const char* STRICT_SAFETY_LEVEL_VALUE_NAME       = "strict";
 static const char* RELAXED_SAFETY_LEVEL_VALUE_NAME      = "relaxed";
 static const char* EXPERIMENTAL_SAFETY_LEVEL_VALUE_NAME = "experimental";
 
-ULTRASCHALL_SAFETY_LEVEL QuerySafetyLevel()
+ULTRASCHALL_SAFETY_LEVEL SafetyLevel::Query()
 {
     ULTRASCHALL_SAFETY_LEVEL safetyLevel = STRICT_SAFETY_LEVEL;
 
-    if (reaper_api::HasExtState(SAFETY_LEVEL_SECTION_NAME, SAFETY_LEVEL_KEY_NAME) == true)
+    if (SystemProperty<std::string>::Exists(SAFETY_SECTION_NAME, SAFETY_LEVEL_KEY_NAME) == true)
     {
-        const std::string safetyModeValue = reaper_api::GetExtState(SAFETY_LEVEL_SECTION_NAME, SAFETY_LEVEL_KEY_NAME);
+        const std::string safetyModeValue = SystemProperty<std::string>::Get(SAFETY_SECTION_NAME, SAFETY_LEVEL_KEY_NAME);
         if (safetyModeValue == EXPERIMENTAL_SAFETY_LEVEL_VALUE_NAME)
         {
             safetyLevel = EXPERIMENTAL_SAFETY_LEVEL;
@@ -64,44 +64,51 @@ ULTRASCHALL_SAFETY_LEVEL QuerySafetyLevel()
     return safetyLevel;
 }
 
-bool StrictSafetyLevel()
-{
-    return QuerySafetyLevel() <= STRICT_SAFETY_LEVEL;
-}
+static const char* SAFETY_MODE_KEY_NAME            = "mode";
+static const char* BASIC_SAFETY_MODE_VALUE_NAME    = "basic";
+static const char* ADVANCED_SAFETY_MODE_VALUE_NAME = "advanced";
 
-bool RelaxedSafetyLevel()
+ULTRASCHALL_SAFETY_MODE SafetyMode::Query()
 {
-    return QuerySafetyLevel() <= RELAXED_SAFETY_LEVEL;
-}
+    ULTRASCHALL_SAFETY_MODE safetyMode = BASIC_SAFETY_MODE;
 
-bool ExperimentalSafetyLevel()
-{
-    return QuerySafetyLevel() >= EXPERIMENTAL_SAFETY_LEVEL;
+    if (SystemProperty<std::string>::Exists(SAFETY_SECTION_NAME, SAFETY_MODE_KEY_NAME) == true)
+    {
+        const std::string safetyModeValue = SystemProperty<std::string>::Get(SAFETY_SECTION_NAME, SAFETY_MODE_KEY_NAME);
+        if (safetyModeValue == BASIC_SAFETY_MODE_VALUE_NAME)
+        {
+            safetyMode = BASIC_SAFETY_MODE;
+        }
+        else if (safetyModeValue == ADVANCED_SAFETY_MODE_VALUE_NAME)
+        {
+            safetyMode = ADVANCED_SAFETY_MODE;
+        }
+    }
+
+    return safetyMode;
 }
 
 bool QuerySetPluginVersion()
 {
     bool result = false;
 
-    if (reaper_api::HasExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
+    if (SystemProperty<std::string>::Exists(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
     {
-        const std::string themeVersion = reaper_api::GetExtState(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
+        const std::string themeVersion = SystemProperty<std::string>::Get(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
         if (themeVersion == VERSION_VALUE_NAME)
         {
-            reaper_api::SetExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
+            SystemProperty<std::string>::Set(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
             // quick sanity check
-            result = reaper_api::HasExtState(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
+            result = SystemProperty<std::string>::Exists(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
         }
         else
         {
-            if (ExperimentalSafetyLevel() == false)
+            if (SafetyLevel::IsExperimental() == false)
             {
                 std::ostringstream str;
-                str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion
-                    << ") and PLUGIN (" << VERSION_VALUE_NAME
-                    << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing "
-                       "the "
-                       "new theme or check the installation guide on http://ultraschall.fm/install/";
+                str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion << ") and PLUGIN (" << VERSION_VALUE_NAME
+                    << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation "
+                       "guide on http://ultraschall.fm/install/";
                 NotificationWindow::Show(str.str());
 
                 result = false;
@@ -114,12 +121,10 @@ bool QuerySetPluginVersion()
     }
     else
     {
-        if (ExperimentalSafetyLevel() == false)
+        if (SafetyLevel::IsExperimental() == false)
         {
-            const std::string str
-                = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix "
-                  "this.\n\nPlease "
-                  "proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
+            const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by "
+                                    "installing the theme or check the installation guide on http://ultraschall.fm/install/";
             NotificationWindow::Show(str);
 
             result = false;
@@ -186,11 +191,9 @@ void UpdateBillOfMaterials()
         {
             for (int i = 1; i <= 23; i++)
             {
-                if (SystemProperty<std::string>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i))
-                    == true)
+                if (SystemProperty<std::string>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i)) == true)
                 {
-                    SystemProperty<std::string>::Delete(
-                        BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i), true);
+                    SystemProperty<std::string>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i), true);
                 }
             }
         }

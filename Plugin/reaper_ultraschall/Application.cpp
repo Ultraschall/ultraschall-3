@@ -53,7 +53,7 @@ Application& Application::Instance()
 ServiceStatus Application::Start()
 {
     ServiceStatus status = SERVICE_FAILURE;
-    if (ExperimentalSafetyLevel() == false)
+    if (SafetyLevel::IsExperimental() == false)
     {
         if(HealthCheck() == false)
         {
