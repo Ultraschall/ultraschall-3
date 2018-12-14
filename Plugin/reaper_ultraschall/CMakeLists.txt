@@ -28,16 +28,17 @@ project(reaper_ultraschall VERSION 3.1.1)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(APPLE)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/Library/Application\ Support/REAPER/UserPlugins")
-else()
+if(WIN32)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
+elseif(APPLE)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/Library/Application\ Support/REAPER/UserPlugins")
+elseif(LINUX)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/.config/REAPER/UserPlugins")
 endif()
 
-include_directories(
+set(COMMON_INCLUDES
   framework
   ../reaper_extension_sdk/jmde
-  ../3rd_party/zlib/include
   ../3rd_party/taglib/include
   ../3rd_party/taglib/include/toolkit
   ../3rd_party/taglib/include/mpeg
@@ -48,10 +49,26 @@ include_directories(
 )
 
 if(WIN32)
-  include_directories(../3rd_party/curl/include)
+  if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    set(EXTRA_INCLUDES ../3rd_party/wxwidgets/lib/win32/debug/mswud)
+  else()
+    set(EXTRA_INCLUDES ../3rd_party/wxwidgets/lib/win32/release/mswu)
+  endif()
+  set(EXTRA_INCLUDES ${EXTRA_INCLUDES}
+    ../3rd_party/wxwidgets/include/msvc
+    ../3rd_party/wxwidgets/include
+    ../3rd_party/zlib/include
+    ../3rd_party/curl/include
+    )
+elseif(APPLE)
+# TODO
+elseif(LINUX)
+# TODO
 endif()
 
-set(SOURCES
+include_directories(${COMMON_INCLUDES} ${EXTRA_INCLUDES})
+
+set(COMMON_SOURCES
   BinaryFileReader.cpp
   StringUtilities.cpp
   TextFileReader.cpp
@@ -68,6 +85,7 @@ set(SOURCES
   MP3TagWriter.cpp
   MP4TagWriter.cpp
   MP3_Interface.cpp
+  MessageDialog.cpp
   NotificationWindow.cpp
   PluginVersionCheck.cpp
   Project.cpp
@@ -88,23 +106,21 @@ set(SOURCES
 )
 
 if(WIN32)
-  set(ADDITIONAL_SOURCES
+  set(EXTRA_SOURCES
     reaper_ultraschall.rc
-    MP4_Interface.cpp
-    MP4_Interface.h
-    MP4_EncodingSession.cpp
-    MP4_EncodingSession.h
   )
 elseif(APPLE)
-  set(ADDITIONAL_SOURCES NotificationPanel.mm)
+  set(EXTRA_SOURCES NotificationPanel.mm)
+elseif(LINUX)
+# TODO
 endif()
 
-add_library(reaper_ultraschall SHARED ${SOURCES} ${ADDITIONAL_SOURCES})
+add_library(reaper_ultraschall SHARED ${COMMON_SOURCES} ${EXTRA_SOURCES})
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
 
 if(WIN32)
-  add_definitions(-DULTRASCHALL_PLATFORM_WIN32)
+  add_definitions(-DULTRASCHALL_PLATFORM_WIN32 -D_CRT_SECURE_NO_WARNINGS)
 elseif(APPLE)
   add_definitions(-DULTRASCHALL_PLATFORM_MACOS)
   add_compile_options(-mmacosx-version-min=10.11)
@@ -118,6 +134,8 @@ elseif(APPLE)
     PluginVersionCheck.cpp
     PROPERTIES COMPILE_FLAGS "-x objective-c++"
   )
+elseif(LINUX)
+# TODO
 endif()
 
 if(WIN32)
@@ -133,11 +151,27 @@ if(WIN32)
   find_library(TAG_LIB_DEBUG libtag-static-x64-debug "../3rd_party/taglib/lib/win32/debug")
   find_library(TAG_LIB_RELEASE libtag-static-x64-release "../3rd_party/taglib/lib/win32/release")
 
+  find_library(WXBASE_LIB_DEBUG wxbase31ud.lib "../3rd_party/wxwidgets/lib/win32/debug")
+  find_library(WXBASE_LIB_RELEASE wxbase31u.lib "../3rd_party/wxwidgets/lib/win32/release")
+
+  find_library(WXCORE_LIB_DEBUG wxmsw31ud_core.lib "../3rd_party/wxwidgets/lib/win32/debug")
+  find_library(WXCORE_LIB_RELEASE wxmsw31u_core.lib "../3rd_party/wxwidgets/lib/win32/release")
+
+  find_library(WXPNG_LIB_DEBUG wxpngd.lib "../3rd_party/wxwidgets/lib/win32/debug")
+  find_library(WXPNG_LIB_RELEASE wxpng.lib "../3rd_party/wxwidgets/lib/win32/release")
+
+  find_library(WXZLIB_LIB_DEBUG wxzlibd.lib "../3rd_party/wxwidgets/lib/win32/debug")
+  find_library(WXZLIB_LIB_RELEASE wxzlib.lib "../3rd_party/wxwidgets/lib/win32/release")
+
   target_link_libraries(reaper_ultraschall
-    debug ${Z_LIB_DEBUG}     optimized ${Z_LIB_RELEASE}
-    debug ${CURL_LIB_DEBUG}  optimized ${CURL_LIB_RELEASE}
-    debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
-    debug ${TAG_LIB_DEBUG}   optimized ${TAG_LIB_RELEASE}
+    debug ${Z_LIB_DEBUG}      optimized ${Z_LIB_RELEASE}
+    debug ${CURL_LIB_DEBUG}   optimized ${CURL_LIB_RELEASE}
+    debug ${MP4V2_LIB_DEBUG}  optimized ${MP4V2_LIB_RELEASE}
+    debug ${TAG_LIB_DEBUG}    optimized ${TAG_LIB_RELEASE}
+    debug ${WXBASE_LIB_DEBUG} optimized ${WXBASE_LIB_RELEASE}
+    debug ${WXCORE_LIB_DEBUG} optimized ${WXCORE_LIB_RELEASE}
+    debug ${WXPNG_LIB_DEBUG} optimized ${WXPNG_LIB_RELEASE}
+    debug ${WXZLIB_LIB_DEBUG} optimized ${WXZLIB_LIB_RELEASE}
     version.lib
     ws2_32.lib
     crypt32.lib
@@ -146,6 +180,9 @@ if(WIN32)
     mf.lib
     mfuuid.lib
     shlwapi.lib
+    comctl32.lib
+    comdlg32.lib
+    rpcrt4.lib
 )
 elseif(APPLE)
   target_link_libraries(reaper_ultraschall "-framework AppKit")
@@ -165,6 +202,48 @@ elseif(APPLE)
 
   find_library(TAG_LIB_DEBUG tag "../3rd_party/taglib/lib/macos/debug")
   find_library(TAG_LIB_RELEASE tag "../3rd_party/taglib/lib/macos/release")
+
+  find_library(WXBASE_LIB_DEBUG wxbase31ud.lib "../3rd_party/wxwidgets/lib/macos/debug")
+  find_library(WXBASE_LIB_RELEASE wxbase31u.lib "../3rd_party/wxwidgets/lib/macos/release")
+
+  find_library(WXCORE_LIB_DEBUG wxmsw31ud_core.lib "../3rd_party/wxwidgets/lib/macos/debug")
+  find_library(WXCORE_LIB_RELEASE wxmsw31u_core.lib "../3rd_party/wxwidgets/lib/macos/release")
+
+  find_library(WXPNG_LIB_DEBUG wxpngd.lib "../3rd_party/wxwidgets/lib/macos/debug")
+  find_library(WXPNG_LIB_RELEASE wxpng.lib "../3rd_party/wxwidgets/lib/macos/release")
+
+  find_library(WXZLIB_LIB_DEBUG wxzlibd.lib "../3rd_party/wxwidgets/lib/macos/debug")
+  find_library(WXZLIB_LIB_RELEASE wxzlib.lib "../3rd_party/wxwidgets/lib/macos/release")
+
+  target_link_libraries(reaper_ultraschall
+    debug ${MP4V2_LIB_DEBUG}  optimized ${MP4V2_LIB_RELEASE}
+    debug ${TAG_LIB_DEBUG}    optimized ${TAG_LIB_RELEASE}
+    debug ${WXBASE_LIB_DEBUG} optimized ${WXBASE_LIB_RELEASE}
+    debug ${WXCORE_LIB_DEBUG} optimized ${WXCORE_LIB_RELEASE}
+    debug ${WXPNG_LIB_DEBUG}  optimized ${WXPNG_LIB_RELEASE}
+    debug ${WXZLIB_LIB_DEBUG} optimized ${WXZLIB_LIB_RELEASE}
+  )
+elseif(LINUX)
+  find_package(zlib)
+  if(ZLIB_FOUND)
+    target_link_libraries(reaper_ultraschall ${ZLIB_LIBRARIES})
+  endif()
+
+  find_package(curl)
+  if(CURL_FOUND)
+    target_link_libraries(reaper_ultraschall ${CURL_LIBRARIES})
+  endif()
+
+  find_package(wxwidgets)
+  if(WXWIDGETS_FOUND)
+    target_link_libraries(reaper_ultraschall ${WXWIDGETS_LIBRARIES})
+  endif()
+
+  find_library(MP4V2_LIB_DEBUG mp4v2 "../3rd_party/mp4v2/lib/linux/debug")
+  find_library(MP4V2_LIB_RELEASE mp4v2 "../3rd_party/mp4v2/lib/linux/release")
+
+  find_library(TAG_LIB_DEBUG tag "../3rd_party/taglib/lib/linux/debug")
+  find_library(TAG_LIB_RELEASE tag "../3rd_party/taglib/lib/linux/release")
 
   target_link_libraries(reaper_ultraschall
     debug ${MP4V2_LIB_DEBUG} optimized ${MP4V2_LIB_RELEASE}
