@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ namespace ultraschall {
    namespace reaper {
 
 class ITagWriter;
-      
+
 class InsertMediaPropertiesAction : public ICustomAction
 {
 public:
@@ -41,52 +41,52 @@ public:
    {
       return "ULTRASCHALL_INSERT_MEDIA_PROPERTIES";
    }
-   
+
    static const char* UniqueName()
    {
       return "ULTRASCHALL: Insert media properties into target...";
    }
-   
+
    static ICustomAction* CreateCustomAction()
    {
       return new InsertMediaPropertiesAction();
    }
-   
+
    virtual ServiceStatus Execute() override;
-   
+
 private:
    InsertMediaPropertiesAction()
    {
    }
-   
+
    bool ConfigureAssets();
    void ResetAssets();
-   
+
    std::vector<std::string> targetNames_;
    std::string cover_;
    std::vector<Marker> chapters_;
    BasicMediaInformation id3v2_;
-   
+
    static std::vector<std::string> FindTargetFiles(const Project& project);
 
    static std::string FindCoverImage(const Project& project);
-   
+
    static ITagWriter* CreateTagWriter(const std::string& targetName);
-   
+
    static std::string NormalizeTargetName(const std::string& targetName);
-   
+
    typedef enum {
       MP3_TARGET,
       MP4_TARGET,
       INVALID_TARGET_TYPE,
       MAX_TARGET_TYPE = INVALID_TARGET_TYPE
    } TARGET_TYPE;
-   
+
    static TARGET_TYPE EvaluateFileType(const std::string& targetName);
-   
+
    bool ValidateChapterMarkers(std::vector<std::string>& errorRecords);
 };
-      
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__

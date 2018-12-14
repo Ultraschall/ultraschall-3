@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -61,4 +61,3 @@ void NotificationWindow::Show(const std::string& message, const std::string& inf
 
 }
 }
-

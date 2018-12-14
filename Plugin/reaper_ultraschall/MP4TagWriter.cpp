@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,11 +31,11 @@
 #include <mp4v2/mp4v2.h>
 
 namespace ultraschall { namespace reaper {
-   
+
 bool MP4TagWriter::InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties)
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
-   
+
    bool success = false;
 
    const MP4FileHandle mp4_handle = MP4Modify(targetName.c_str());
@@ -107,7 +107,7 @@ bool MP4TagWriter::InsertCoverImage(const std::string& targetName, const std::st
 {
    PRECONDITION_RETURN(targetName.empty() == false, false);
    PRECONDITION_RETURN(coverImage.empty() == false, false);
-   
+
    bool success = false;
 
    MP4FileHandle mp4_handle = MP4Modify(targetName.c_str());
@@ -227,10 +227,5 @@ bool MP4TagWriter::InsertChapterMarkers(const std::string& targetName, const std
 
    return success;
 }
-   
+
 }}
-
-
-
-
-

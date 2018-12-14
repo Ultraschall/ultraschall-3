@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,8 +37,7 @@ uint32_t StringToMilliseconds(const std::string& str);
 std::string SecondsToString(const double seconds, const bool roundSeconds = false);
 
 double StringToSeconds(const std::string& str);
-   
+
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_TIME_UTILITIES_H_INCL__
-

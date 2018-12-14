@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall ultraschall.fm
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,4 +51,3 @@ protected:
 }}
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
-

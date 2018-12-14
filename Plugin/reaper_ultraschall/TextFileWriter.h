@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2016 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,4 +38,3 @@ public:
 }}
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_TEXT_FILE_WRITER_H_INCL__
-

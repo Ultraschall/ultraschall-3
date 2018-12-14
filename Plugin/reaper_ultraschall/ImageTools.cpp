@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,14 +33,14 @@ ImageFormat FindImageFormat(const uint8_t* data, const size_t dataSize)
    PRECONDITION_RETURN(dataSize > 0, ImageFormat::Unknown);
 
    ImageFormat format = ImageFormat::Unknown;
-   
+
    if(dataSize >= 2)
    {
       if((data[0] == 0xff) && (data[1] == 0xd8))
       {
          format = ImageFormat::Jpeg;
       }
-      
+
       if(dataSize >= 8)
       {
          if((data[0] == 0x89) && (data[1] == 0x50) && (data[2] == 0x4e) && (data[3] == 0x47))
@@ -49,9 +49,8 @@ ImageFormat FindImageFormat(const uint8_t* data, const size_t dataSize)
          }
       }
    }
-   
+
    return format;
 }
 
 }}
-

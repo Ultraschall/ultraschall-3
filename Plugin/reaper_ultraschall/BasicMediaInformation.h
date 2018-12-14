@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ public:
 
    bool Validate() const;
    void Reset();
-   
+
    inline const std::string& Title() const
    {
       return title_;
@@ -73,7 +73,7 @@ public:
 
 private:
    std::string title_;     // TIT2
-   std::string author_;    // TPE1 
+   std::string author_;    // TPE1
    std::string track_;     // TALB
    std::string date_;      // TDRC
    std::string content_;   // TCON
@@ -84,4 +84,3 @@ private:
 }
 
 #endif // #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
-

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ public:
   HRESULT Wait(DWORD timeout);
 
 private:
-  MP4EncodingSession(); 
+  MP4EncodingSession();
   virtual ~MP4EncodingSession();
 
   HRESULT Initialize();

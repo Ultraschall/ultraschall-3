@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -79,11 +79,11 @@ static ULTRASCHALL_TIMESTAMP MillisecondsToTimestamp(const uint32_t milliseconds
    PRECONDITION_RETURN((minutes / (1000 * 60)) <= UINT8_MAX, ULTRASCHALL_TIMESTAMP());
    ts.minutes = static_cast<uint8_t>(minutes / (1000 * 60));
    const uint32_t seconds = minutes % (1000 * 60);
-   
+
    PRECONDITION_RETURN((seconds / 1000) <= UINT8_MAX, ULTRASCHALL_TIMESTAMP());
    ts.seconds = static_cast<uint8_t>(seconds / 1000);
    const uint32_t ms = seconds % 1000;
-   
+
    PRECONDITION_RETURN(ms <= UINT16_MAX, ULTRASCHALL_TIMESTAMP());
    ts.milliseconds = static_cast<uint16_t>(ms);
 
@@ -242,7 +242,7 @@ std::string SecondsToString(const double seconds, const bool roundSeconds)
 {
    std::string str = "<Out of range>";
 
-   const double offset = (roundSeconds == true) ? 0.5 : 0; 
+   const double offset = (roundSeconds == true) ? 0.5 : 0;
    if((seconds >= 0) && (seconds < ((60 * 60 * 24) - offset)))
    {
       ULTRASCHALL_TIMESTAMP timestamp = SecondsToTimestamp(seconds);
@@ -266,4 +266,3 @@ double StringToSeconds(const std::string& str)
 }
 
 }}
-

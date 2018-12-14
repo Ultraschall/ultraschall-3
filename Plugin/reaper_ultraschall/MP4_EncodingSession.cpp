@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ template <class T> void SafeRelease(T **ppi)
   }
 }
 
-MP4EncodingSession::MP4EncodingSession() : 
+MP4EncodingSession::MP4EncodingSession() :
   refCount_(1), pSession_(0), pClock_(0), status_(S_OK), waitHandle_(0)
 {
 }
@@ -272,4 +272,3 @@ HRESULT MP4EncodingSession::Wait(DWORD timeout)
 }
 
 }}
-

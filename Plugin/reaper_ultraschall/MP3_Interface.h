@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2017 Ultraschall (http://ultraschall.fm)
+// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ namespace ultraschall {
 namespace reaper {
 
 struct MP3_EXPORT_CONTEXT;
-   
+
 MP3_EXPORT_CONTEXT* MP3_StartTransaction(const std::string& targetName);
 bool MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context);
 void MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context);
