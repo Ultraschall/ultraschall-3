@@ -1,9 +1,0 @@
-mp4v2 library
--------------
-
-   Origin: https://github.com/TechSmith/mp4v2
-   Version: Repository State from 11 Mai 2017. Thats two checkins after v3.0.3.0
-
-   That repository is a continuation of the orignal repository at
-   https://code.google.com/archive/p/mp4v2/downloads
-   which stopped development in 2012:

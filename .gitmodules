@@ -1,0 +1,15 @@
+[submodule "Plugin/3rd_party/wxwidgets"]
+	path = Plugin/3rd_party/wxwidgets
+	url = https://github.com/wxWidgets/wxWidgets.git
+[submodule "Plugin/3rd_party/zlib"]
+	path = Plugin/3rd_party/zlib
+	url = https://github.com/winlibs/zlib.git
+[submodule "Plugin/3rd_party/curl"]
+	path = Plugin/3rd_party/curl
+	url = https://github.com/winlibs/cURL.git
+[submodule "Plugin/3rd_party/taglib"]
+	path = Plugin/3rd_party/taglib
+	url = https://github.com/taglib/taglib.git
+[submodule "Plugin/3rd_party/mp4v2"]
+	path = Plugin/3rd_party/mp4v2
+	url = https://github.com/TechSmith/mp4v2.git
