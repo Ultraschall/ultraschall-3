@@ -33,7 +33,6 @@
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #include <curl/curl.h>
 #include <curl/easy.h>
-#include <curl/curlbuild.h>
 
 #include "Framework.h"
 #include "StringUtilities.h"
