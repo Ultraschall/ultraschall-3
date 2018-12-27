@@ -83,7 +83,7 @@ $ git checkout tags/v3.1.2 -b v3.1.2
 $ git submodule update --init --recursive
 $ copy include/wx/msw/setup0.h include/wx/msw/setup.h
 
-$ pushd
+$ pushd build/msw
 $ nmake /f makefile.vc BUILD=debug
 $ popd
 
