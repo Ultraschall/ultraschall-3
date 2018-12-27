@@ -461,3 +461,9 @@ settings.json
 REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrlbm
 REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrldb
 REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrlprj
+
+Plugin/_ext/zlib/
+Plugin/_ext/curl/
+Plugin/_ext/taglib/
+Plugin/_ext/mp4v2/
+Plugin/_ext/wxwidgets/
