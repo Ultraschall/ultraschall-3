@@ -44,6 +44,40 @@ static const char* STRICT_SAFETY_LEVEL_VALUE_NAME       = "strict";
 static const char* RELAXED_SAFETY_LEVEL_VALUE_NAME      = "relaxed";
 static const char* EXPERIMENTAL_SAFETY_LEVEL_VALUE_NAME = "experimental";
 
+template<> std::string SystemProperty<std::string>::Get(const std::string& section, const std::string& key)
+{
+    return RawValue(section, key);
+}
+
+template<> bool SystemProperty<bool>::Get(const std::string& section, const std::string& key)
+{
+    bool value = false;
+
+    const std::string& rawValue = RawValue(section, key);
+    if (rawValue.empty() == false)
+    {
+        if ((framework::StringLowercase(rawValue) == "true") || (framework::StringToInt(rawValue) != 0))
+        {
+            value = true;
+        }
+    }
+
+    return value;
+}
+
+template<> int SystemProperty<int>::Get(const std::string& section, const std::string& key)
+{
+    int value = 0;
+
+    const std::string rawValue = RawValue(section, key);
+    if (rawValue.empty() == false)
+    {
+        value = framework::StringToInt(rawValue);
+    }
+
+    return value;
+}
+
 ULTRASCHALL_SAFETY_LEVEL SafetyLevel::Query()
 {
     ULTRASCHALL_SAFETY_LEVEL safetyLevel = STRICT_SAFETY_LEVEL;
@@ -136,40 +170,6 @@ bool QuerySetPluginVersion()
     }
 
     return result;
-}
-
-template<> std::string SystemProperty<std::string>::Get(const std::string& section, const std::string& key)
-{
-    return RawValue(section, key);
-}
-
-template<> bool SystemProperty<bool>::Get(const std::string& section, const std::string& key)
-{
-    bool value = false;
-
-    const std::string& rawValue = RawValue(section, key);
-    if (rawValue.empty() == false)
-    {
-        if ((framework::StringLowercase(rawValue) == "true") || (framework::StringToInt(rawValue) != 0))
-        {
-            value = true;
-        }
-    }
-
-    return value;
-}
-
-template<> int SystemProperty<int>::Get(const std::string& section, const std::string& key)
-{
-    int value = 0;
-
-    const std::string rawValue = RawValue(section, key);
-    if (rawValue.empty() == false)
-    {
-        value = framework::StringToInt(rawValue);
-    }
-
-    return value;
 }
 
 void UpdateBillOfMaterials()

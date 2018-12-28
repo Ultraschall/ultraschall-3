@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=ULTRASCHALL-3.1.1-preview-1
+export ULTRASCHALL_RELEASE=ULTRASCHALL-3.2-preview-1
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
@@ -109,7 +109,7 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 echo Creating disk layout...
 echo '
    tell application "Finder"
-     tell disk "ULTRASCHALL-3.1.1-preview-1.intermediate"
+     tell disk "ULTRASCHALL-3.2-preview-1.intermediate"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
@@ -118,7 +118,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "ULTRASCHALL-3.1.1-preview-1.pkg" of container window to {50, 30}
+           set position of item "ULTRASCHALL-3.2-preview-1.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.1.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}
