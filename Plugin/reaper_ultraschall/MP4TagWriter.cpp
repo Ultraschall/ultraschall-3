@@ -28,6 +28,8 @@
 #include "StringUtilities.h"
 #include "ImageTools.h"
 
+#define MP4V2_EXPORTS 0
+#define MP4V2_NO_STDINT_DEFS 1
 #include <mp4v2/mp4v2.h>
 
 namespace ultraschall { namespace reaper {
