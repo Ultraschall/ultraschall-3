@@ -28,22 +28,183 @@ project(reaper_ultraschall VERSION 3.2)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    set(ULTRASCHALL_BUILD_TYPE Debug)
-else()
-    set(ULTRASCHALL_BUILD_TYPE Release)
-endif()
+include(ExternalProject)
+
+# configure zlib
+
+set(CURRENT_EXTERNAL_PROJECT zlib)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+ExternalProject_Add(zlib
+    PREFIX libz
+	GIT_REPOSITORY https://github.com/madler/zlib.git
+    GIT_TAG v1.2.11
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
+)
+
+ExternalProject_Get_Property(zlib SOURCE_DIR)
+ExternalProject_Get_Property(zlib BINARY_DIR)
+
+set(LIBZ_INCLUDE_PATH
+    ${BINARY_DIR}
+    ${SOURCE_DIR}
+    ${SOURCE_DIR}/contrib/minizip
+)
+
+set(LIBZ_LIBRARY_DEBUG       ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/zlibstaticd.lib)
+set(LIBZ_LIBRARY_RELEASE     ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/zlibstatic.lib)
+set(LIBZ_LIBRARY_SOURCE_PATH ${SOURCE_DIR})
+
+message(STATUS "LIBZ_INCLUDE_PATH        = ${LIBZ_INCLUDE_PATH}")
+message(STATUS "LIBZ_LIBRARY_DEBUG       = ${LIBZ_LIBRARY_DEBUG}")
+message(STATUS "LIBZ_LIBRARY_RELEASE     = ${LIBZ_LIBRARY_RELEASE}")
+message(STATUS "LIBZ_LIBRARY_SOURCE_PATH = ${LIBZ_LIBRARY_SOURCE_PATH}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure curl
+
+set(CURRENT_EXTERNAL_PROJECT curl)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+ExternalProject_Add(curl
+    PREFIX libcurl
+	GIT_REPOSITORY https://github.com/curl/curl.git
+	GIT_TAG curl-7_63_0
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+	CMAKE_ARGS -DBUILD_CURL_EXE=OFF -DBUILD_SHARED_LIBS=OFF -DHTTP_ONLY=ON -DENABLE_IPV6=ON -DBUILD_TESTING=OFF
+)
+
+ExternalProject_Get_Property(curl SOURCE_DIR)
+ExternalProject_Get_Property(curl BINARY_DIR)
+
+set(LIBCURL_INCLUDE_PATH ${SOURCE_DIR}/include)
+
+set(LIBCURL_LIBRARY_DEBUG   ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libcurl-d.lib)
+set(LIBCURL_LIBRARY_RELEASE ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libcurl.lib)
+
+message(STATUS "LIBCURL_INCLUDE_PATH    = ${LIBCURL_INCLUDE_PATH}")
+message(STATUS "LIBCURL_LIBRARY_DEBUG   = ${LIBCURL_LIBRARY_DEBUG}")
+message(STATUS "LIBCURL_LIBRARY_RELEASE = ${LIBCURL_LIBRARY_RELEASE}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure mp4v2
+
+set(CURRENT_EXTERNAL_PROJECT mp4v2)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+include(ExternalProject)
+ExternalProject_Add(mp4v2
+    PREFIX libmp4v2
+	GIT_REPOSITORY https://github.com/Ultraschall/mp4v2.git
+	GIT_TAG v4.0.0-prerelease1
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DMP4V2_EXPORTS=0 -DMP4V2_NO_STDINT_DEFS=1
+)
+
+ExternalProject_Get_Property(mp4v2 SOURCE_DIR)
+ExternalProject_Get_Property(mp4v2 BINARY_DIR)
+
+set(LIBMP4V2_INCLUDE_PATH ${SOURCE_DIR}/include)
+
+set(LIBMP4V2_LIBRARY_DEBUG   ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/mp4v2.lib)
+set(LIBMP4V2_LIBRARY_RELEASE ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/mp4v2.lib)
+
+message(STATUS "LIBMP4V2_INCLUDE_PATH    = ${LIBMP4V2_INCLUDE_PATH}")
+message(STATUS "LIBMP4V2_LIBRARY_DEBUG   = ${LIBMP4V2_LIBRARY_DEBUG}")
+message(STATUS "LIBMP4V2_LIBRARY_RELEASE = ${LIBMP4V2_LIBRARY_RELEASE}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure taglib
+
+set(CURRENT_EXTERNAL_PROJECT taglib)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+include(ExternalProject)
+ExternalProject_Add(taglib
+    PREFIX libtag
+	GIT_REPOSITORY https://github.com/taglib/taglib.git
+	GIT_TAG v1.11.1
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_BINDINGS=OFF
+)
+
+ExternalProject_Get_Property(taglib SOURCE_DIR)
+ExternalProject_Get_Property(taglib BINARY_DIR)
+
+set(LIBTAG_INCLUDE_PATH
+    ${BINARY_DIR} # taglib_config.h
+    ${SOURCE_DIR}/taglib
+    ${SOURCE_DIR}/taglib/toolkit
+    ${SOURCE_DIR}/taglib/mpeg
+    ${SOURCE_DIR}/taglib/mpeg/id3v2
+    ${SOURCE_DIR}/taglib/mpeg/id3v2/frames
+)
+
+set(LIBTAG_LIBRARY_DEBUG   ${BINARY_DIR}/taglib/${CMAKE_BUILD_TYPE}/tag.lib)
+set(LIBTAG_LIBRARY_RELEASE ${BINARY_DIR}/taglib/${CMAKE_BUILD_TYPE}/tag.lib)
+
+message(STATUS "LIBTAG_INCLUDE_PATH    = ${LIBTAG_INCLUDE_PATH}")
+message(STATUS "LIBTAG_LIBRARY_DEBUG   = ${LIBTAG_LIBRARY_DEBUG}")
+message(STATUS "LIBTAG_LIBRARY_RELEASE = ${LIBTAG_LIBRARY_RELEASE}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure json11
+
+set(CURRENT_EXTERNAL_PROJECT json11)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+ExternalProject_Add(json11
+    PREFIX libjson11
+	GIT_REPOSITORY https://github.com/dropbox/json11.git
+    GIT_TAG v1.0.0
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
+)
+
+ExternalProject_Get_Property(json11 SOURCE_DIR)
+ExternalProject_Get_Property(json11 BINARY_DIR)
+
+set(LIBJSON11_INCLUDE_PATH ${SOURCE_DIR})
+
+set(LIBJSON11_LIBRARY_DEBUG   ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/json11.lib)
+set(LIBJSON11_LIBRARY_RELEASE ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/json11.lib)
+
+message(STATUS "LIBJSON11_INCLUDE_PATH    = ${LIBJSON11_INCLUDE_PATH}")
+message(STATUS "LIBJSON11_LIBRARY_DEBUG   = ${LIBJSON11_LIBRARY_DEBUG}")
+message(STATUS "LIBJSON11_LIBRARY_RELEASE = ${LIBJSON11_LIBRARY_RELEASE}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/_ext/reaper_extension_sdk/jmde)
+
+message(STATUS "REAPER_INCLUDE_PATH = ${REAPER_INCLUDE_PATH}")
+
+include_directories(
+    ${LIBZ_INCLUDE_PATH}
+    ${LIBCURL_INCLUDE_PATH}
+    ${LIBMP4V2_INCLUDE_PATH}
+    ${LIBTAG_INCLUDE_PATH}
+    ${LIBJSON11_INCLUDE_PATH}
+    ${REAPER_INCLUDE_PATH}
+)
 
 set(ULTRASCHALL_PATH ${CMAKE_SOURCE_DIR})
 set(ULTRASCHALL_EXT_PATH ${ULTRASCHALL_PATH}/_ext)
 set(ULTRASCHALL_SRC_PATH ${ULTRASCHALL_PATH}/reaper_ultraschall)
-
-if(WIN32)
-    include(${CMAKE_SOURCE_DIR}/_scripts/win32/prereqs.cmake)
-elseif(APPLE)
-    include(_scripts/macos/prereqs.cmake)
-elseif(UNIX)
-    include(_scripts/linux/prereqs.cmake)
-endif()
 
 add_subdirectory(reaper_ultraschall)
