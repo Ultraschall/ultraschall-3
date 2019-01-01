@@ -90,6 +90,7 @@ add_dependencies(${PROJECT_NAME} curl-build)
 add_dependencies(${PROJECT_NAME} mp4v2-build)
 add_dependencies(${PROJECT_NAME} taglib-build)
 add_dependencies(${PROJECT_NAME} json11-build)
+add_dependencies(${PROJECT_NAME} wxwidgets-build)
 
 if(WIN32)
     set(EXTRA_LIBRARIES
@@ -119,12 +120,14 @@ if(CMAKE_BUILD_TYPE MATCHES "Debug")
     set(LIBMP4V2_LIBRARY ${LIBMP4V2_LIBRARY_DEBUG})
     set(LIBTAG_LIBRARY ${LIBTAG_LIBRARY_DEBUG})
     set(LIBJSON11_LIBRARY ${LIBJSON11_LIBRARY_DEBUG})
+    set(LIBWXWIDGETS_LIBRARY ${LIBWXWIDGETS_LIBRARY_DEBUG})
 else()
     set(LIBZ_LIBRARY ${LIBZ_LIBRARY_RELEASE})
     set(LIBCURL_LIBRARY ${LIBCURL_LIBRARY_RELEASE})
     set(LIBMP4V2_LIBRARY ${LIBMP4V2_LIBRARY_RELEASE})
     set(LIBTAG_LIBRARY ${LIBTAG_LIBRARY_RELEASE})
     set(LIBJSON11_LIBRARY ${LIBJSON11_LIBRARY_RELEASE})
+    set(LIBWXWIDGETS_LIBRARY ${LIBWXWIDGETS_LIBRARY_RELEASE})
 endif()
 
 target_link_libraries(reaper_ultraschall
@@ -133,6 +136,7 @@ target_link_libraries(reaper_ultraschall
     ${LIBMP4V2_LIBRARY}
     ${LIBTAG_LIBRARY}
     ${LIBJSON11_LIBRARY}
+    ${LIBWXWIDGETS_LIBRARY}
     ${EXTRA_LIBRARIES}
 )
 

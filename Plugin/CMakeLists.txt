@@ -190,6 +190,41 @@ message(STATUS "LIBJSON11_LIBRARY_RELEASE = ${LIBJSON11_LIBRARY_RELEASE}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
+# configure wxwidgets
+
+set(CURRENT_EXTERNAL_PROJECT wxwidgets)
+message("------------------------------------------------------------------------------")
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+ExternalProject_Add(wxwidgets
+    PREFIX libwxwidgets
+	GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+    GIT_TAG v3.1.2
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DwxBUILD_SAMPLES=OFF -DwxBUILD_TESTS=OFF -DwxBUILD_DEMOS=OFF -DwxBUILD_INSTALL=OFF -DwxBUILD_MSVC_MULTIPROC=ON -DwxUSE_STL=ON -DwxUSE_STD_CONTAINERS=ON
+)
+
+ExternalProject_Get_Property(wxwidgets SOURCE_DIR)
+ExternalProject_Get_Property(wxwidgets BINARY_DIR)
+
+set(LIBWXWIDGETS_INCLUDE_PATH ${SOURCE_DIR}/include)
+
+set(LIBWXWIDGETS_LIBRARY_DEBUG
+    ${BINARY_DIR}/lib/vc_x64_lib/wxbase31ud.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31ud_core.lib
+)
+set(LIBWXWIDGETS_LIBRARY_RELEASE
+    ${BINARY_DIR}/lib/vc_x64_lib/wxbase31u.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31u_core.lib
+)
+
+message(STATUS "LIBWXWIDGETS_INCLUDE_PATH    = ${LIBWXWIDGETS_INCLUDE_PATH}")
+message(STATUS "LIBWXWIDGETS_LIBRARY_DEBUG   = ${LIBWXWIDGETS_LIBRARY_DEBUG}")
+message(STATUS "LIBWXWIDGETS_LIBRARY_RELEASE = ${LIBWXWIDGETS_LIBRARY_RELEASE}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
 set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/_ext/reaper_extension_sdk/jmde)
 
 message(STATUS "REAPER_INCLUDE_PATH = ${REAPER_INCLUDE_PATH}")
@@ -200,6 +235,7 @@ include_directories(
     ${LIBMP4V2_INCLUDE_PATH}
     ${LIBTAG_INCLUDE_PATH}
     ${LIBJSON11_INCLUDE_PATH}
+    ${LIBWXWIDGETS_INCLUDE_PATH}
     ${REAPER_INCLUDE_PATH}
 )
 
