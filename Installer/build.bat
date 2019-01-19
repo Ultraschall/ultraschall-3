@@ -7,7 +7,7 @@ echo *                                                                    *
 echo **********************************************************************
 
 rem Specify name of installer package
-set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.1.1-preview-2
+set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.2-preview-3
 
 rem Remove previously created installer package
 if exist %ULTRASCHALL_RELEASE_LABEL%.msi del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi
@@ -34,9 +34,9 @@ echo Done.
 
 echo Copying Ultraschall Add-ons...
 mkdir add-ons
-copy "..\..\Documentation\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
+copy "..\..\Docs\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
 if not errorlevel 0 goto failed
-copy "..\..\Documentation\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
+copy "..\..\Docs\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
 if not errorlevel 0 goto failed
 copy "..\..\Resources\Ultraschall App-Icon.png" "add-ons\Ultraschall App-Icon.png" > nul
 if not errorlevel 0 goto failed
@@ -63,9 +63,9 @@ echo Done.
 echo Building Ultraschall REAPER Plug-in...
 md plug-in
 pushd plug-in
-cmake -G "Visual Studio 15 2017 Win64" ..\..\..\Plugin\reaper_ultraschall > nul
+cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release ..\..\..\Plugin > nul
 if not errorlevel 0 goto failed
-cmake --build . --target reaper_ultraschall --config Release > nul
+cmake --build . --target reaper_ultraschall --config Release -j > nul
 if not errorlevel 0 goto failed
 popd
 echo Done.

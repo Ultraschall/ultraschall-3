@@ -24,6 +24,53 @@
 
 # configure plugin build
 
+set(COMMON_INCLUDES
+    Application.h
+    BasicMediaInformation.h
+    BinaryFileReader.h
+    ByteStream.h
+    CustomActionFactory.h
+    CustomActionManager.h
+    FileManager.h
+    Framework.h
+    ICommand.h
+    ICustomAction.h
+    ImageTools.h
+    InsertChapterMarkersAction.h
+    InsertMediaPropertiesAction.h
+    ITagWriter.h
+    IUnknown.h
+    Marker.h
+    MessageDialog.h
+    MP3_Interface.h
+    MP3TagWriter.h
+    MP4TagWriter.h
+    NotificationPanel.h
+    NotificationWindow.h
+    Platform.h
+    PluginVersionCheck.h
+    Project.h
+    ProjectManager.h
+    reaper_plugin_functions.h
+    ReaperEntryPoints.h
+    ReaperVersionCheck.h
+    resource.h
+    SaveChapterMarkersAction.h
+    SaveChapterMarkersToProjectAction.h
+    ServiceStatus.h
+    SoundboardVersionCheck.h
+    StringUtilities.h
+    SWSVersionCheck.h
+    SystemProperties.h
+    taglib_include.h
+    TextFileReader.h
+    TextFileWriter.h
+    ThemeVersionCheck.h
+    TimeUtilities.h
+    UpdateCheck.h
+    VersionHandler.h
+)
+
 set(COMMON_SOURCES
     BinaryFileReader.cpp
     StringUtilities.cpp
@@ -83,7 +130,7 @@ elseif(UNIX)
     add_definitions(-DULTRASCHALL_PLATFORM_UNIX)
 endif()
 
-add_library(reaper_ultraschall SHARED ${COMMON_SOURCES} ${EXTRA_SOURCES})
+add_library(reaper_ultraschall SHARED ${COMMON_INCLUDES} ${COMMON_SOURCES} ${EXTRA_SOURCES})
 
 add_dependencies(${PROJECT_NAME} zlib-build)
 add_dependencies(${PROJECT_NAME} curl-build)
@@ -141,3 +188,6 @@ target_link_libraries(reaper_ultraschall
 )
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
+
+source_group("Header Files" ${COMMON_INCLUDES})
+source_group("Source Files" ${COMMON_SOURCES} ${EXTRA_SOURCES})

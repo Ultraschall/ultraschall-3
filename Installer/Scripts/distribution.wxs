@@ -5,7 +5,7 @@
     <!-- The URL for add/remove programs -->
     <?define InfoURL="http://ultraschall.fm/" ?>
     <?define VersionNumber="!(bind.FileVersion.ReaperUltraschallDll)" ?>
-    <?define ProductName="ULTRASCHALL-3.1.1-preview-2" ?>
+    <?define ProductName="ULTRASCHALL-3.2-preview-3" ?>
     <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.VersionNumber)" Manufacturer="ultraschall.fm" UpgradeCode="$(var.UpgradeCode)">
         <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="Podcasting Extensions for the REAPER DAW" Comments="Installs the Ultraschall REAPER Extension $(var.VersionNumber)" />
         <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
@@ -32,7 +32,7 @@
                         <Component Id="ReaperPluginsComponent" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
                             <RemoveFolder Id="RemoveReaperPluginsComponent" Directory="ReaperPluginsFolder" On="uninstall" />
                             <RegistryValue Root="HKCU" Key="Software\Ultraschall" Name="Uninstall" Type="string" Value="1.0.0.0" KeyPath="yes" />
-                            <File Id="ReaperUltraschallDll" Name="reaper_ultraschall.dll" DiskId="1" Source="_payload\plug-in\Release\reaper_ultraschall.dll" />
+                            <File Id="ReaperUltraschallDll" Name="reaper_ultraschall.dll" DiskId="1" Source="_payload\plug-in\reaper_ultraschall\Release\reaper_ultraschall.dll" />
                             <File Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll" />
                         </Component>
                     </Directory>

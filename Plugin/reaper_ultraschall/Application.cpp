@@ -99,16 +99,16 @@ bool Application::OnCustomAction(const int32_t id)
 
 std::string Application::GetExportPathName() const
 {
-    std::string projectPath;
+    std::string result;
 
     char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
     reaper_api::GetProjectPath(buffer, MAX_REAPER_STRING_BUFFER_SIZE);
     if (strlen(buffer) > 0)
     {
-        projectPath = buffer;
+        result = buffer;
     }
 
-    return projectPath;
+    return result;
 }
 
 std::string Application::GetProjectPathName() const

@@ -7,5 +7,5 @@ if not exist "build" (
 )
 
 pushd build
-cmake --build . -j
+cmake --build . --target reaper_ultraschall --config Debug -j
 popd
