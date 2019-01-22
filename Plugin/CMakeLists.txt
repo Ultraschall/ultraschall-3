@@ -41,7 +41,6 @@ include(ExternalProject)
 # configure zlib
 
 set(CURRENT_EXTERNAL_PROJECT zlib)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 ExternalProject_Add(zlib
@@ -76,7 +75,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 # configure curl
 
 set(CURRENT_EXTERNAL_PROJECT curl)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 ExternalProject_Add(curl
@@ -105,7 +103,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 # configure mp4v2
 
 set(CURRENT_EXTERNAL_PROJECT mp4v2)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 include(ExternalProject)
@@ -135,7 +132,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 # configure taglib
 
 set(CURRENT_EXTERNAL_PROJECT taglib)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 include(ExternalProject)
@@ -172,7 +168,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 # configure json11
 
 set(CURRENT_EXTERNAL_PROJECT json11)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 ExternalProject_Add(json11
@@ -201,7 +196,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 # configure wxwidgets
 
 set(CURRENT_EXTERNAL_PROJECT wxwidgets)
-message("------------------------------------------------------------------------------")
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
 ExternalProject_Add(wxwidgets
