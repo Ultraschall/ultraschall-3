@@ -216,15 +216,22 @@ ExternalProject_Add(wxwidgets
 ExternalProject_Get_Property(wxwidgets SOURCE_DIR)
 ExternalProject_Get_Property(wxwidgets BINARY_DIR)
 
-set(LIBWXWIDGETS_INCLUDE_PATH ${SOURCE_DIR}/include)
+set(LIBWXWIDGETS_INCLUDE_PATH
+    ${BINARY_DIR}/lib/vc_x64_lib/mswud
+    ${SOURCE_DIR}/include
+)
 
 set(LIBWXWIDGETS_LIBRARY_DEBUG
     ${BINARY_DIR}/lib/vc_x64_lib/wxbase31ud.lib
     ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31ud_core.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxpngd.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxzlibd.lib
 )
 set(LIBWXWIDGETS_LIBRARY_RELEASE
     ${BINARY_DIR}/lib/vc_x64_lib/wxbase31u.lib
     ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31u_core.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxpng.lib
+    ${BINARY_DIR}/lib/vc_x64_lib/wxzlib.lib
 )
 
 message(STATUS "LIBWXWIDGETS_INCLUDE_PATH    = ${LIBWXWIDGETS_INCLUDE_PATH}")

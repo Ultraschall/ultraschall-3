@@ -29,11 +29,11 @@
 
 #include "Application.h"
 #include "FileManager.h"
-#include "NotificationWindow.h"
 #include "ProjectManager.h"
 #include "SaveChapterMarkersToProjectAction.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -68,22 +68,24 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
                 }
                 else
                 {
-                    NotificationWindow::Show("Failed to export chapter markers.", true);
+#ifndef ULTRASCHALL_BROADCASTER
+                    ui::Message::Error("Failed to export chapter markers.");
+#endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
 
                 os.close();
 
                 status = SERVICE_SUCCESS;
 
-                if (SafetyMode::IsBasic() == true)
-                {
-                    NotificationWindow::Show("The chapter markers have been saved successfully.");
-                }
+#ifndef ULTRASCHALL_BROADCASTER
+                ui::Message::Notification("The chapter markers have been saved successfully.");
+#endif // #ifndef ULTRASCHALL_BROADCASTER
             }
             else
             {
                 if (errorMessages.empty() == false)
                 {
+#ifndef ULTRASCHALL_BROADCASTER
                     std::ostringstream os;
                     os << "Ultraschall failed to validate chapter markers.";
                     os << "\r\n\r\n";
@@ -95,18 +97,19 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 
                     os << "\r\n\r\n";
 
-                    NotificationWindow::Show(os.str(), true);
+                    ui::Message::Error(os.str());
+#endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
         }
         else
         {
-            NotificationWindow::Show("The project has no name yet. Please save the project and try again.");
+            ui::Message::Notification("The project has no name yet. Please save the project and try again.");
         }
     }
     else
     {
-        NotificationWindow::Show("The project has no name yet. Please save the project and try again.");
+        ui::Message::Notification("The project has no name yet. Please save the project and try again.");
     }
 
     return status;
@@ -130,49 +133,45 @@ bool SaveChapterMarkersToProjectAction::ConfigureAssets()
             invalidAssetCount++;
         }
 
-        if (SafetyLevel::IsStrict() == true)
+#ifndef ULTRASCHALL_BROADCASTER
+        if (invalidAssetCount >= 1)
         {
-            if (invalidAssetCount >= 1)
+            std::stringstream os;
+            os << "Your project does not meet the minimum requirements for the export to continue.";
+            os << "\r\n\r\n";
+            os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
+            os << "\r\n\r\n";
+
+            ui::Message::Error(os.str());
+
+            result = false;
+        }
+        else if (messages.size() > 0)
+        {
+            std::stringstream os;
+
+            os << "Ultraschall has found the following non-critical issues and will continue after you close this message:\r\n\r\n";
+            for (size_t i = 0; i < messages.size(); i++)
             {
-                std::stringstream os;
-                os << "Your project does not meet the minimum requirements for the export to continue.";
-                os << "\r\n\r\n";
-                os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
-                os << "\r\n\r\n";
-
-                NotificationWindow::Show(os.str(), true);
-
-                result = false;
+                os << (i + 1) << ") " << messages[i] << "\r\n";
             }
-            else if (messages.size() > 0)
-            {
-                std::stringstream os;
 
-                os << "Ultraschall has found the following non-critical issues and will continue after you close this message:\r\n\r\n";
-                for (size_t i = 0; i < messages.size(); i++)
-                {
-                    os << (i + 1) << ") " << messages[i] << "\r\n";
-                }
+            os << "\r\n\r\n";
 
-                os << "\r\n\r\n";
+            ui::Message::Notification(os.str());
 
-                NotificationWindow::Show(os.str(), false);
-
-                result = true;
-            }
-            else
-            {
-                result = true;
-            }
+            result = true;
         }
         else
         {
             result = true;
         }
     }
+#endif // #ifndef ULTRASCHALL_BROADCASTER
+
     else
     {
-        NotificationWindow::Show("The REAPER project must be saved before the export can continue", true);
+        ui::Message::Error("The REAPER project must be saved before the export can continue");
 
         result = false;
     }

@@ -30,10 +30,10 @@
 #include "Framework.h"
 #include "ITagWriter.h"
 #include "InsertMediaPropertiesAction.h"
-#include "NotificationWindow.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -68,6 +68,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
         ResetAssets();
 
         targetNames_ = FindTargetFiles(currentProject);
+#ifndef ULTRASCHALL_BROADCASTER
         if (targetNames_.empty() == true)
         {
             std::stringstream os;
@@ -76,7 +77,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
             os << "Please select an alternative media file from the file selection dialog after closing this message.";
             os << "\r\n\r\n";
 
-            NotificationWindow::Show(os.str(), false);
+            ui::Message::Notification(os.str());
 
             const std::string targetName = FileManager::BrowseForTargetAudioFiles("Select media file...");
             if (targetName.empty() == false)
@@ -84,6 +85,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                 targetNames_.push_back(targetName);
             }
         }
+#endif // #ifndef ULTRASCHALL_BROADCASTER
 
         if ((targetNames_.empty() == false) && (ConfigureAssets() == true))
         {
@@ -127,6 +129,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
 
                 if (errorRecords.size() > 0)
                 {
+#ifndef ULTRASCHALL_BROADCASTER
                     for (size_t j = 0; j < errorRecords.size(); j++)
                     {
                         std::stringstream os;
@@ -135,53 +138,53 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                         os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message() << "\r\n";
                         os << "\r\n\r\n";
 
-                        NotificationWindow::Show(os.str(), true);
+                        ui::Message::Error(os.str());
                     }
+#endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
                 else
                 {
-                    if (SafetyMode::IsBasic() == true)
-                    {
-                        std::stringstream os;
-                        os << "The following media files have been updated successfully:\r\n\r\n";
-                        for (size_t k = 0; k < targetNames_.size(); k++)
-                        {
-                            os << FileManager::StripPath(targetNames_[k]);
-                            if (k < (targetNames_.size() - 1))
-                            {
-                                os << "\r\n";
-                            }
-                        }
-                        os << "\r\n\r\n";
+#ifndef ULTRASCHALL_BROADCASTER
 
-                        NotificationWindow::Show(os.str(), false);
+                    std::stringstream os;
+                    os << "The following media files have been updated successfully:\r\n\r\n";
+                    for (size_t k = 0; k < targetNames_.size(); k++)
+                    {
+                        os << FileManager::StripPath(targetNames_[k]);
+                        if (k < (targetNames_.size() - 1))
+                        {
+                            os << "\r\n";
+                        }
                     }
+                    os << "\r\n\r\n";
+
+                    ui::Message::Notification(os.str());
+#endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
             else
             {
-                if (SafetyLevel::IsStrict() == true)
+                if (errorMessages.empty() == false)
                 {
-                    if (errorMessages.empty() == false)
+#ifndef ULTRASCHALL_BROADCASTER
+                    std::ostringstream os;
+                    os << "Ultraschall failed to validate chapter markers.";
+                    os << "\r\n\r\n";
+                    for (size_t l = 0; l < errorMessages.size(); l++)
                     {
-                        std::ostringstream os;
-                        os << "Ultraschall failed to validate chapter markers.";
-                        os << "\r\n\r\n";
-                        for (size_t l = 0; l < errorMessages.size(); l++)
-                        {
-                            os << errorMessages[l];
-                        }
-                        os << "\r\n\r\n";
-
-                        NotificationWindow::Show(os.str(), true);
+                        os << errorMessages[l];
                     }
+                    os << "\r\n\r\n";
+
+                    ui::Message::Error(os.str());
+#endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
         }
     }
     else
     {
-        NotificationWindow::Show("The REAPER project must be saved before the export can continue", true);
+        ui::Message::Error("The REAPER project must be saved before the export can continue");
     }
 
     return SERVICE_SUCCESS;
@@ -327,41 +330,36 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
             invalidAssetCount++;
         }
 
-        if (SafetyLevel::IsStrict() == true)
+        if (invalidAssetCount >= 3)
         {
-            if (invalidAssetCount >= 3)
+#ifndef ULTRASCHALL_BROADCASTER
+            std::stringstream os;
+            os << "Your project does not meet the minimum requirements for the export to continue.";
+            os << "\r\n\r\n";
+            os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
+            os << "\r\n\r\n";
+
+            ui::Message::Error(os.str());
+#endif // #ifndef ULTRASCHALL_BROADCASTER
+            result = false;
+        }
+        else if (messages.size() > 0)
+        {
+#ifndef ULTRASCHALL_BROADCASTER
+            std::stringstream os;
+
+            os << "Ultraschall has found the following non-critical issues and will continue after you close "
+                  "this message:\r\n\r\n";
+            for (size_t i = 0; i < messages.size(); i++)
             {
-                std::stringstream os;
-                os << "Your project does not meet the minimum requirements for the export to continue.";
-                os << "\r\n\r\n";
-                os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
-                os << "\r\n\r\n";
-
-                NotificationWindow::Show(os.str(), true);
-
-                result = false;
+                os << (i + 1) << ") " << messages[i] << "\r\n";
             }
-            else if (messages.size() > 0)
-            {
-                std::stringstream os;
 
-                os << "Ultraschall has found the following non-critical issues and will continue after you close "
-                      "this message:\r\n\r\n";
-                for (size_t i = 0; i < messages.size(); i++)
-                {
-                    os << (i + 1) << ") " << messages[i] << "\r\n";
-                }
+            os << "\r\n\r\n";
 
-                os << "\r\n\r\n";
-
-                NotificationWindow::Show(os.str(), false);
-
-                result = true;
-            }
-            else
-            {
-                result = true;
-            }
+            ui::Message::Notification(os.str());
+#endif // #ifndef ULTRASCHALL_BROADCASTER
+            result = true;
         }
         else
         {
@@ -370,8 +368,9 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
     }
     else
     {
-        NotificationWindow::Show("The REAPER project must be saved before the export can continue", true);
-
+#ifndef ULTRASCHALL_BROADCASTER
+        ui::Message::Error("The REAPER project must be saved before the export can continue");
+#endif // #ifndef ULTRASCHALL_BROADCASTER
         result = false;
     }
 
@@ -391,35 +390,32 @@ bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string
     bool valid = true;
     errorMessages.clear();
 
-    if (SafetyLevel::IsStrict() == true)
+    for (size_t i = 0; i < chapters_.size(); i++)
     {
-        for (size_t i = 0; i < chapters_.size(); i++)
+        const Marker&     current      = chapters_[i];
+        const std::string safeName     = current.Name();
+        const double      safePosition = current.Position();
+
+        ProjectManager& projectManager = ProjectManager::Instance();
+        Project         currentProject = projectManager.CurrentProject();
+        if (currentProject.IsValidPosition(current.Position()) == false)
         {
-            const Marker&     current      = chapters_[i];
-            const std::string safeName     = current.Name();
-            const double      safePosition = current.Position();
+            std::stringstream os;
+            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
+            os << "\r\n";
+            errorMessages.push_back(os.str());
 
-            ProjectManager& projectManager = ProjectManager::Instance();
-            Project         currentProject = projectManager.CurrentProject();
-            if (currentProject.IsValidPosition(current.Position()) == false)
-            {
-                std::stringstream os;
-                os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
-                os << "\r\n";
-                errorMessages.push_back(os.str());
+            valid = false;
+        }
 
-                valid = false;
-            }
+        if (current.Name().empty() == true)
+        {
+            std::stringstream os;
+            os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
+            os << "\r\n";
+            errorMessages.push_back(os.str());
 
-            if (current.Name().empty() == true)
-            {
-                std::stringstream os;
-                os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
-                os << "\r\n";
-                errorMessages.push_back(os.str());
-
-                valid = false;
-            }
+            valid = false;
         }
     }
 

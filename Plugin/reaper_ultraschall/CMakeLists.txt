@@ -45,8 +45,6 @@ set(COMMON_INCLUDES
     MP3_Interface.h
     MP3TagWriter.h
     MP4TagWriter.h
-    NotificationPanel.h
-    NotificationWindow.h
     Platform.h
     PluginVersionCheck.h
     Project.h
@@ -68,6 +66,7 @@ set(COMMON_INCLUDES
     ThemeVersionCheck.h
     TimeUtilities.h
     UpdateCheck.h
+    UIMessage.h
     VersionHandler.h
 )
 
@@ -88,7 +87,6 @@ set(COMMON_SOURCES
     MP3TagWriter.cpp
     MP4TagWriter.cpp
     MP3_Interface.cpp
-    NotificationWindow.cpp
     PluginVersionCheck.cpp
     Project.cpp
     ProjectManager.cpp
@@ -101,6 +99,7 @@ set(COMMON_SOURCES
     SystemProperties.cpp
     ThemeVersionCheck.cpp
     UpdateCheck.cpp
+    UIMessage.cpp
     VersionHandler.cpp
     reaper_ultraschall.cpp
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c
@@ -119,7 +118,6 @@ elseif(APPLE)
     add_compile_options(-mmacosx-version-min=10.11)
     set_source_files_properties(
         FileManager.cpp
-        NotificationWindow.cpp
         VersionHandler.cpp
         ReaperVersionCheck.cpp
         SoundboardVersionCheck.cpp

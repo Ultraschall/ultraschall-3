@@ -22,82 +22,83 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ServiceStatus.h"
 #include "Application.h"
-#include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
+#include "ServiceStatus.h"
+#include "UIMessage.h"
 
 #include "CustomActionManager.h"
 
 #include "InsertChapterMarkersAction.h"
+#include "InsertMediaPropertiesAction.h"
 #include "SaveChapterMarkersAction.h"
 #include "SaveChapterMarkersToProjectAction.h"
-#include "InsertMediaPropertiesAction.h"
 #include "SystemProperties.h"
 
 namespace reaper = ultraschall::reaper;
 
-extern "C"
+extern "C" {
+REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
-	REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t *pPluginInfo)
-	{
-		reaper::Application& application = reaper::Application::Instance();
+    reaper::Application& application = reaper::Application::Instance();
 
-		if(pPluginInfo != 0)
-		{
-			static bool started = false;
-			if(false == started)
-			{
-            if(reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
+    if (pPluginInfo != 0)
+    {
+        static bool started = false;
+        if (false == started)
+        {
+            if (reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
             {
-               if(reaper::QuerySetPluginVersion() == true)
-               {
-                  if(ServiceSucceeded(application.Start()))
-                  {
-                     application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
-                     application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
-                     application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
-                     application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
+                if (reaper::QuerySetPluginVersion() == true)
+                {
+                    if (ServiceSucceeded(application.Start()))
+                    {
+                        application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
+                        application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
+                        application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
+                        application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
 
-                     started = true;
-                  }
-               }
+                        started = true;
+                    }
+                }
             }
             else
             {
-               std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
-               reaper::NotificationWindow::Show("Ultraschall failed to load!", errorReason, true);
+#ifndef ULTRASCHALL_BROADCASTER
+                std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
+                reaper::ui::Message::Error("Ultraschall failed to load!", errorReason);
+#endif // #ifndef ULTRASCHALL_BROADCASTER
             }
-			}
+        }
 
-         return 1;
-		}
-		else
-		{
-         static bool stopped = false;
-			if(false == stopped)
-			{
-				application.Stop();
-				stopped = true;
-			}
+        return 1;
+    }
+    else
+    {
+        static bool stopped = false;
+        if (false == stopped)
+        {
+            application.Stop();
+            stopped = true;
+        }
 
-         return 0;
-		}
-	}
+        return 0;
+    }
+}
 }
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
 {
-	switch(ul_reason_for_call)
-	{
-	case DLL_PROCESS_ATTACH:
-	case DLL_THREAD_ATTACH:
-	case DLL_THREAD_DETACH:
-	case DLL_PROCESS_DETACH:
-		break;
-	}
-	return TRUE;
+    switch (ul_reason_for_call)
+    {
+        case DLL_PROCESS_ATTACH:
+        case DLL_THREAD_ATTACH:
+        case DLL_THREAD_DETACH:
+        case DLL_PROCESS_DETACH:
+            break;
+    }
+    return TRUE;
 }
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32

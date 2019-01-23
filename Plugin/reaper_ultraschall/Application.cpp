@@ -31,14 +31,15 @@
 #include "Application.h"
 #include "CustomActionManager.h"
 #include "FileManager.h"
-#include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
 #include "ReaperVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "SystemProperties.h"
+#include "UIMessage.h"
 #include "UpdateCheck.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall {
+namespace reaper {
 
 Application::Application() {}
 
@@ -52,19 +53,19 @@ Application& Application::Instance()
 
 ServiceStatus Application::Start()
 {
+#ifndef ULTRASCHALL_BROADCASTER
     ServiceStatus status = SERVICE_FAILURE;
-    if (SafetyLevel::IsExperimental() == false)
+    if (HealthCheck() == true)
     {
-        if(HealthCheck() == false)
-        {
-            return status;
-        }
+        UpdateBillOfMaterials();
+        UpdateCheck();
+        status = SERVICE_SUCCESS;
     }
 
-    UpdateBillOfMaterials();
-    UpdateCheck();
-
+    return status;
+#else
     return SERVICE_SUCCESS;
+#endif // #ifndef ULTRASCHALL_BROADCASTER
 }
 
 void Application::Stop() {}
@@ -303,24 +304,21 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 #else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-    const std::string swsPlugin2_8SystemPath
-        = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
     if ((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string swsPlugin2_7SystemPath
-        = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
+    const std::string swsPlugin2_7SystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
     if ((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string ultraschallPluginSystemPath
-        = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
+    const std::string ultraschallPluginSystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
     if ((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
@@ -330,13 +328,13 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
     if ((true == ok) && (ReaperVersionCheck() == false))
     {
-        NotificationWindow::Show(message, information3 + " " + information4, true);
+        ui::Message::Error(message, information3 + " " + information4);
         ok = false;
     }
 
     if ((true == ok) && (SWSVersionCheck() == false))
     {
-        NotificationWindow::Show(message, information7, true);
+        ui::Message::Error(message, information7);
         ok = false;
     }
 
@@ -352,4 +350,5 @@ uint32_t Application::GetEditMarkerColor()
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
-}} // namespace ultraschall::reaper
+} // namespace ultraschall
+} // namespace ultraschall

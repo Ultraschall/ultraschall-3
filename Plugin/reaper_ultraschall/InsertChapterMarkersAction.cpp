@@ -30,12 +30,12 @@
 #include "FileManager.h"
 #include "InsertChapterMarkersAction.h"
 #include "Marker.h"
-#include "NotificationWindow.h"
 #include "ProjectManager.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TextFileReader.h"
 #include "TimeUtilities.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -124,15 +124,13 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 
         os << "\r\n\r\n";
 
-        NotificationWindow::Show(os.str(), true);
+        ui::Message::Error(os.str());
     }
     else
     {
-        if (SafetyMode::IsBasic() == true)
-        {
-            NotificationWindow::Show("The chapter markers have been added successfully.");
-        }
-
+#ifndef ULTRASCHALL_BROADCASTER
+        ui::Message::Notification("The chapter markers have been added successfully.");
+#endif // #ifndef ULTRASCHALL_BROADCASTER
         status = SERVICE_SUCCESS;
     }
 

@@ -25,12 +25,12 @@
 #include <sstream>
 
 #include "Framework.h"
-#include "NotificationWindow.h"
 #include "ReaperEntryPoints.h"
 #include "ReaperVersionCheck.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "ThemeVersionCheck.h"
+#include "UIMessage.h"
 #include "VersionHandler.h"
 
 namespace ultraschall { namespace reaper {
@@ -38,55 +38,6 @@ namespace ultraschall { namespace reaper {
 static const char* THEME_VERSION_KEY_NAME  = "theme";
 static const char* PLUGIN_VERSION_KEY_NAME = "plugin";
 static const char* VERSION_VALUE_NAME      = "20180114";
-
-static const char* SAFETY_LEVEL_KEY_NAME                = "level";
-static const char* STRICT_SAFETY_LEVEL_VALUE_NAME       = "strict";
-static const char* RELAXED_SAFETY_LEVEL_VALUE_NAME      = "relaxed";
-static const char* EXPERIMENTAL_SAFETY_LEVEL_VALUE_NAME = "experimental";
-
-ULTRASCHALL_SAFETY_LEVEL SafetyLevel::Query()
-{
-    ULTRASCHALL_SAFETY_LEVEL safetyLevel = STRICT_SAFETY_LEVEL;
-
-    if (SystemProperty<std::string>::Exists(SAFETY_SECTION_NAME, SAFETY_LEVEL_KEY_NAME) == true)
-    {
-        const std::string safetyModeValue = SystemProperty<std::string>::Get(SAFETY_SECTION_NAME, SAFETY_LEVEL_KEY_NAME);
-        if (safetyModeValue == EXPERIMENTAL_SAFETY_LEVEL_VALUE_NAME)
-        {
-            safetyLevel = EXPERIMENTAL_SAFETY_LEVEL;
-        }
-        else if (safetyModeValue == RELAXED_SAFETY_LEVEL_VALUE_NAME)
-        {
-            safetyLevel = RELAXED_SAFETY_LEVEL;
-        }
-    }
-
-    return safetyLevel;
-}
-
-static const char* SAFETY_MODE_KEY_NAME            = "mode";
-static const char* BASIC_SAFETY_MODE_VALUE_NAME    = "basic";
-static const char* ADVANCED_SAFETY_MODE_VALUE_NAME = "advanced";
-
-ULTRASCHALL_SAFETY_MODE SafetyMode::Query()
-{
-    ULTRASCHALL_SAFETY_MODE safetyMode = BASIC_SAFETY_MODE;
-
-    if (SystemProperty<std::string>::Exists(SAFETY_SECTION_NAME, SAFETY_MODE_KEY_NAME) == true)
-    {
-        const std::string safetyModeValue = SystemProperty<std::string>::Get(SAFETY_SECTION_NAME, SAFETY_MODE_KEY_NAME);
-        if (safetyModeValue == BASIC_SAFETY_MODE_VALUE_NAME)
-        {
-            safetyMode = BASIC_SAFETY_MODE;
-        }
-        else if (safetyModeValue == ADVANCED_SAFETY_MODE_VALUE_NAME)
-        {
-            safetyMode = ADVANCED_SAFETY_MODE;
-        }
-    }
-
-    return safetyMode;
-}
 
 bool QuerySetPluginVersion()
 {
@@ -103,36 +54,28 @@ bool QuerySetPluginVersion()
         }
         else
         {
-            if (SafetyLevel::IsExperimental() == false)
-            {
-                std::ostringstream str;
-                str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion << ") and PLUGIN (" << VERSION_VALUE_NAME
-                    << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation "
-                       "guide on http://ultraschall.fm/install/";
-                NotificationWindow::Show(str.str());
-
-                result = false;
-            }
-            else
-            {
-                result = true;
-            }
+#ifndef ULTRASCHALL_BROADCASTER
+            std::ostringstream str;
+            str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion << ") and PLUGIN (" << VERSION_VALUE_NAME
+                << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation "
+                   "guide on http://ultraschall.fm/install/";
+            ui::Message::Error(str.str());
+            result = false;
+#else  // #ifndef ULTRASCHALL_BROADCASTER
+            result = true;
+#endif // #ifndef ULTRASCHALL_BROADCASTER
         }
     }
     else
     {
-        if (SafetyLevel::IsExperimental() == false)
-        {
-            const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by "
-                                    "installing the theme or check the installation guide on http://ultraschall.fm/install/";
-            NotificationWindow::Show(str);
-
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
+#ifndef ULTRASCHALL_BROADCASTER
+        const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by "
+                                "installing the theme or check the installation guide on http://ultraschall.fm/install/";
+        ui::Message::Error(str);
+        result = false;
+#else  // #ifndef ULTRASCHALL_BROADCASTER
+        result = true;
+#endif // #ifndef ULTRASCHALL_BROADCASTER
     }
 
     return result;
