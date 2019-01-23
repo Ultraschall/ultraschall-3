@@ -33,7 +33,7 @@
 #include "SaveChapterMarkersToProjectAction.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -69,7 +69,7 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
                 else
                 {
 #ifndef ULTRASCHALL_BROADCASTER
-                    ui::Message::Error("Failed to export chapter markers.");
+                    UIMessageDialog::ShowError("Failed to export chapter markers.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
 
@@ -78,7 +78,7 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
                 status = SERVICE_SUCCESS;
 
 #ifndef ULTRASCHALL_BROADCASTER
-                ui::Message::Notification("The chapter markers have been saved successfully.");
+                UIMessageDialog::Show("The chapter markers have been saved successfully.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             }
             else
@@ -97,19 +97,19 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 
                     os << "\r\n\r\n";
 
-                    ui::Message::Error(os.str());
+                    UIMessageDialog::ShowError(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
         }
         else
         {
-            ui::Message::Notification("The project has no name yet. Please save the project and try again.");
+            UIMessageDialog::Show("The project has no name yet. Please save the project and try again.");
         }
     }
     else
     {
-        ui::Message::Notification("The project has no name yet. Please save the project and try again.");
+        UIMessageDialog::Show("The project has no name yet. Please save the project and try again.");
     }
 
     return status;
@@ -142,7 +142,7 @@ bool SaveChapterMarkersToProjectAction::ConfigureAssets()
             os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
             os << "\r\n\r\n";
 
-            ui::Message::Error(os.str());
+            UIMessageDialog::ShowError(os.str());
 
             result = false;
         }
@@ -158,7 +158,7 @@ bool SaveChapterMarkersToProjectAction::ConfigureAssets()
 
             os << "\r\n\r\n";
 
-            ui::Message::Notification(os.str());
+            UIMessageDialog::Show(os.str());
 
             result = true;
         }
@@ -171,7 +171,7 @@ bool SaveChapterMarkersToProjectAction::ConfigureAssets()
 
     else
     {
-        ui::Message::Error("The REAPER project must be saved before the export can continue");
+        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
 
         result = false;
     }

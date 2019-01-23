@@ -25,12 +25,16 @@
 #include "StringUtilities.h"
 #include <codecvt>
 
+#include "wx/wx.h"
+
+
 namespace ultraschall { namespace framework {
 
 std::string StringLowercase(const std::string& str)
 {
     std::string convertedString = str;
-    if (convertedString.empty() == false) {
+    if (convertedString.empty() == false)
+    {
         std::transform(convertedString.begin(), convertedString.end(), convertedString.begin(), ::tolower);
     }
 
@@ -40,7 +44,8 @@ std::string StringLowercase(const std::string& str)
 std::string StringUppercase(const std::string& str)
 {
     std::string convertedString = str;
-    if (convertedString.empty() == false) {
+    if (convertedString.empty() == false)
+    {
         std::transform(convertedString.begin(), convertedString.end(), convertedString.begin(), ::toupper);
     }
 
@@ -65,15 +70,17 @@ UnicodeString MakeUnicodeString(const std::string& src)
 {
     UnicodeString result;
 
-    try {
+    try
+    {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
         result = AnsiStringToWideUnicodeString(src);
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
         result = stringConverter.from_bytes(src);
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
     }
-    catch (std::range_error&) {
+    catch (std::range_error&)
+    {
         result.clear();
     }
 
@@ -84,15 +91,17 @@ UnicodeString MakeUnicodeString2(const std::string& src)
 {
     UnicodeString result;
 
-    try {
+    try
+    {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
         result = UnicodeStringToWideUnicodeString(src);
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
         result = stringConverter.from_bytes(src);
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
     }
-    catch (std::range_error&) {
+    catch (std::range_error&)
+    {
         result.clear();
     }
 
@@ -114,21 +123,25 @@ std::string MakeUTF8String(const UnicodeString& src)
     std::string result;
 
     size_t offset = 0;
-    if (src.size() > 1) {
-        if (src[0] == (UnicodeChar)0xfffe) {
+    if (src.size() > 1)
+    {
+        if (src[0] == (UnicodeChar)0xfffe)
+        {
             offset = 1;
         }
     }
 
-    try {
+    try
+    {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> stringConverter;
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
         result = stringConverter.to_bytes(&src[offset]);
     }
-    catch (std::range_error&) {
+    catch (std::range_error&)
+    {
         result.clear();
     }
 
@@ -141,23 +154,27 @@ std::string AnsiStringToUnicodeString(const std::string& str)
 {
     std::string unicodeString;
 
-    if (str.empty() == false) {
+    if (str.empty() == false)
+    {
         const int wideStringBufferLength = MultiByteToWideChar(CP_ACP, 0, str.c_str(), (int)str.length(), 0, 0);
-        if (wideStringBufferLength > 0) {
+        if (wideStringBufferLength > 0)
+        {
             WCHAR* wideStringBuffer = (WCHAR*)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
-            if (wideStringBuffer != 0) {
-                int convertedBytes = MultiByteToWideChar(
-                    CP_ACP, 0, str.c_str(), (int)str.length(), wideStringBuffer, wideStringBufferLength);
-                if (convertedBytes > 0) {
-                    const int narrowStringBufferLength
-                        = WideCharToMultiByte(CP_UTF8, 0, wideStringBuffer, wideStringBufferLength, 0, 0, 0, 0);
-                    if (narrowStringBufferLength > 0) {
+            if (wideStringBuffer != 0)
+            {
+                int convertedBytes = MultiByteToWideChar(CP_ACP, 0, str.c_str(), (int)str.length(), wideStringBuffer, wideStringBufferLength);
+                if (convertedBytes > 0)
+                {
+                    const int narrowStringBufferLength = WideCharToMultiByte(CP_UTF8, 0, wideStringBuffer, wideStringBufferLength, 0, 0, 0, 0);
+                    if (narrowStringBufferLength > 0)
+                    {
                         CHAR* narrowStringBuffer = (CHAR*)calloc(sizeof(CHAR), narrowStringBufferLength + 1);
-                        if (narrowStringBuffer != 0) {
-                            convertedBytes = WideCharToMultiByte(
-                                CP_UTF8, 0, wideStringBuffer, wideStringBufferLength, narrowStringBuffer,
-                                narrowStringBufferLength, 0, 0);
-                            if (convertedBytes > 0) {
+                        if (narrowStringBuffer != 0)
+                        {
+                            convertedBytes
+                                = WideCharToMultiByte(CP_UTF8, 0, wideStringBuffer, wideStringBufferLength, narrowStringBuffer, narrowStringBufferLength, 0, 0);
+                            if (convertedBytes > 0)
+                            {
                                 unicodeString = narrowStringBuffer;
                             }
 
@@ -182,15 +199,15 @@ std::wstring UnicodeStringToWideUnicodeString(const std::string& unicodeString)
 
     std::wstring wideUnicodeString;
 
-    const int wideStringBufferLength
-        = MultiByteToWideChar(CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), 0, 0);
-    if (wideStringBufferLength > 0) {
+    const int wideStringBufferLength = MultiByteToWideChar(CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), 0, 0);
+    if (wideStringBufferLength > 0)
+    {
         WCHAR* wideStringBuffer = (WCHAR*)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
-        if (wideStringBuffer != 0) {
-            int convertedBytes = MultiByteToWideChar(
-                CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), wideStringBuffer,
-                wideStringBufferLength);
-            if (convertedBytes > 0) {
+        if (wideStringBuffer != 0)
+        {
+            int convertedBytes = MultiByteToWideChar(CP_UTF8, 0, unicodeString.c_str(), (int)unicodeString.length(), wideStringBuffer, wideStringBufferLength);
+            if (convertedBytes > 0)
+            {
                 wideUnicodeString = wideStringBuffer;
             }
 
@@ -208,14 +225,15 @@ std::wstring AnsiStringToWideUnicodeString(const std::string& ansiString)
 
     std::wstring wideUnicodeString;
 
-    const int wideStringBufferLength
-        = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), 0, 0);
-    if (wideStringBufferLength > 0) {
+    const int wideStringBufferLength = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), 0, 0);
+    if (wideStringBufferLength > 0)
+    {
         WCHAR* wideStringBuffer = (WCHAR*)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
-        if (wideStringBuffer != 0) {
-            int convertedBytes = MultiByteToWideChar(
-                CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), wideStringBuffer, wideStringBufferLength);
-            if (convertedBytes > 0) {
+        if (wideStringBuffer != 0)
+        {
+            int convertedBytes = MultiByteToWideChar(CP_ACP, 0, ansiString.c_str(), (int)ansiString.length(), wideStringBuffer, wideStringBufferLength);
+            if (convertedBytes > 0)
+            {
                 wideUnicodeString = wideStringBuffer;
             }
 
@@ -231,23 +249,27 @@ std::string UnicodeStringToAnsiString(const std::string& str, int codepage)
 {
     std::string ansiString;
 
-    if (str.empty() == false) {
+    if (str.empty() == false)
+    {
         const int wideStringBufferLength = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.length(), 0, 0);
-        if (wideStringBufferLength > 0) {
+        if (wideStringBufferLength > 0)
+        {
             WCHAR* wideStringBuffer = (WCHAR*)calloc(sizeof(WCHAR), wideStringBufferLength + 1);
-            if (wideStringBuffer != 0) {
-                int convertedBytes = MultiByteToWideChar(
-                    CP_UTF8, 0, str.c_str(), (int)str.length(), wideStringBuffer, wideStringBufferLength);
-                if (convertedBytes > 0) {
-                    const int narrowStringBufferLength
-                        = WideCharToMultiByte(codepage, 0, wideStringBuffer, wideStringBufferLength, 0, 0, 0, 0);
-                    if (narrowStringBufferLength > 0) {
+            if (wideStringBuffer != 0)
+            {
+                int convertedBytes = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.length(), wideStringBuffer, wideStringBufferLength);
+                if (convertedBytes > 0)
+                {
+                    const int narrowStringBufferLength = WideCharToMultiByte(codepage, 0, wideStringBuffer, wideStringBufferLength, 0, 0, 0, 0);
+                    if (narrowStringBufferLength > 0)
+                    {
                         CHAR* narrowStringBuffer = (CHAR*)calloc(sizeof(CHAR), narrowStringBufferLength + 1);
-                        if (narrowStringBuffer != 0) {
+                        if (narrowStringBuffer != 0)
+                        {
                             convertedBytes = WideCharToMultiByte(
-                                codepage, 0, wideStringBuffer, wideStringBufferLength, narrowStringBuffer,
-                                narrowStringBufferLength, 0, 0);
-                            if (convertedBytes > 0) {
+                                codepage, 0, wideStringBuffer, wideStringBufferLength, narrowStringBuffer, narrowStringBufferLength, 0, 0);
+                            if (convertedBytes > 0)
+                            {
                                 ansiString = narrowStringBuffer;
                             }
 
@@ -273,12 +295,14 @@ UnicodeString2 MakeUTF16String2(const std::string& str)
     UnicodeString2 result;
 
     int size = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), 0, 0);
-    if (size > 0) {
+    if (size > 0)
+    {
         wchar_t* data = new wchar_t[size]();
-        if (data != 0) {
-            int numCharsConverted
-                = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data, size);
-            if (numCharsConverted > 0) {
+        if (data != 0)
+        {
+            int numCharsConverted = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data, size);
+            if (numCharsConverted > 0)
+            {
                 result = UnicodeString2((uint8_t*)data, size * sizeof(wchar_t));
             }
 
@@ -296,19 +320,23 @@ UnicodeString2 MakeUTF8String2(const std::string& str)
     UnicodeString2 result;
 
     int size16 = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), 0, 0);
-    if (size16 > 0) {
+    if (size16 > 0)
+    {
         wchar_t* data16 = new wchar_t[size16]();
-        if (data16 != 0) {
-            int numCharsConverted
-                = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data16, size16);
-            if (numCharsConverted > 0) {
+        if (data16 != 0)
+        {
+            int numCharsConverted = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data16, size16);
+            if (numCharsConverted > 0)
+            {
                 int size8 = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, 0, 0, 0, 0);
-                if (size8 > 0) {
+                if (size8 > 0)
+                {
                     char* data8 = new char[size8]();
-                    if (data8 != 0) {
-                        numCharsConverted
-                            = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, data8, size8, 0, 0);
-                        if (numCharsConverted > 0) {
+                    if (data8 != 0)
+                    {
+                        numCharsConverted = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, data8, size8, 0, 0);
+                        if (numCharsConverted > 0)
+                        {
                             result = UnicodeString2((uint8_t*)data8, size8);
                         }
 
@@ -331,12 +359,14 @@ UnicodeStringSz2 MakeUTF16StringSz2(const std::string& str)
     UnicodeStringSz2 result;
 
     int size = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), 0, 0);
-    if (size > 0) {
+    if (size > 0)
+    {
         wchar_t* data = new wchar_t[size]();
-        if (data != 0) {
-            int numCharsConverted
-                = (size_t)MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data, size);
-            if (numCharsConverted > 0) {
+        if (data != 0)
+        {
+            int numCharsConverted = (size_t)MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), data, size);
+            if (numCharsConverted > 0)
+            {
                 result = UnicodeStringSz2((uint8_t*)data, size * sizeof(wchar_t));
             }
 
@@ -354,19 +384,23 @@ UnicodeStringSz2 MakeUTF8StringSz2(const std::string& str)
     UnicodeStringSz2 result;
 
     int size16 = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), 0, 0);
-    if (size16 > 0) {
+    if (size16 > 0)
+    {
         wchar_t* data16 = new wchar_t[size16]();
-        if (data16 != 0) {
-            int numCharsConverted = MultiByteToWideChar(
-                CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), (LPWSTR)data16, size16);
-            if (numCharsConverted > 0) {
+        if (data16 != 0)
+        {
+            int numCharsConverted = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str.c_str(), (int)str.size(), (LPWSTR)data16, size16);
+            if (numCharsConverted > 0)
+            {
                 int size8 = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, 0, 0, 0, 0);
-                if (size8 > 0) {
+                if (size8 > 0)
+                {
                     char* data8 = new char[size8]();
-                    if (data8 != 0) {
-                        numCharsConverted
-                            = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, data8, size8, 0, 0);
-                        if (numCharsConverted > 0) {
+                    if (data8 != 0)
+                    {
+                        numCharsConverted = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data16, size16, data8, size8, 0, 0);
+                        if (numCharsConverted > 0)
+                        {
                             result = UnicodeStringSz2((uint8_t*)data8, size8);
                         }
 
@@ -381,7 +415,7 @@ UnicodeStringSz2 MakeUTF8StringSz2(const std::string& str)
 
     return result;
 }
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
 std::string AnsiStringToUnicodeString(const std::string& ansiString)
 {
     return ansiString;
@@ -398,14 +432,17 @@ UnicodeString2 MakeUTF16String2(const std::string& str)
 
     UnicodeString2 result;
 
-    try {
+    try
+    {
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
         std::u16string buffer = stringConverter.from_bytes(str);
-        if (buffer.empty() == false) {
+        if (buffer.empty() == false)
+        {
             result = UnicodeString2(reinterpret_cast<const uint8_t*>(buffer.c_str()), buffer.size());
         }
     }
-    catch (std::range_error&) {
+    catch (std::range_error&)
+    {
         result.Clear();
     }
 
@@ -425,14 +462,17 @@ UnicodeStringSz2 MakeUTF16StringSz2(const std::string& str)
 
     UnicodeStringSz2 result;
 
-    try {
+    try
+    {
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> stringConverter;
         std::u16string buffer = stringConverter.from_bytes(str);
-        if (buffer.empty() == false) {
+        if (buffer.empty() == false)
+        {
             result = UnicodeStringSz2(reinterpret_cast<const uint8_t*>(buffer.c_str()), buffer.size());
         }
     }
-    catch (std::range_error&) {
+    catch (std::range_error&)
+    {
         result.Clear();
     }
 
@@ -447,4 +487,4 @@ UnicodeStringSz2 MakeUTF8StringSz2(const std::string& str)
 }
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
-}}     // namespace ultraschall::framework
+}} // namespace ultraschall::framework

@@ -38,7 +38,7 @@
 #include "ReaperEntryPoints.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 #include "UpdateCheck.h"
 #include "VersionHandler.h"
 
@@ -140,7 +140,7 @@ void UpdateCheck()
                             std::string message
                                 = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the updated version ";
                             message += remoteVersion + ".";
-                        ui::Message::Notification(message);
+                        UIMessageDialog::Show(message);
                         }
                     }
                 }

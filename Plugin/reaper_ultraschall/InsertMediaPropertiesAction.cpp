@@ -33,7 +33,8 @@
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
+#include "UIFileDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -77,9 +78,10 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
             os << "Please select an alternative media file from the file selection dialog after closing this message.";
             os << "\r\n\r\n";
 
-            ui::Message::Notification(os.str());
+            UIMessageDialog::Show(os.str());
 
-            const std::string targetName = FileManager::BrowseForTargetAudioFiles("Select media file...");
+            UIFileDialog      fileDialog("Select audio file");
+            const std::string targetName = fileDialog.BrowseForAudio();
             if (targetName.empty() == false)
             {
                 targetNames_.push_back(targetName);
@@ -138,7 +140,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                         os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message() << "\r\n";
                         os << "\r\n\r\n";
 
-                        ui::Message::Error(os.str());
+                        UIMessageDialog::ShowError(os.str());
                     }
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
@@ -158,7 +160,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                     }
                     os << "\r\n\r\n";
 
-                    ui::Message::Notification(os.str());
+                    UIMessageDialog::Show(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
@@ -176,7 +178,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                     }
                     os << "\r\n\r\n";
 
-                    ui::Message::Error(os.str());
+                    UIMessageDialog::ShowError(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 }
             }
@@ -184,7 +186,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
     }
     else
     {
-        ui::Message::Error("The REAPER project must be saved before the export can continue");
+        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
     }
 
     return SERVICE_SUCCESS;
@@ -339,7 +341,7 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
             os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
             os << "\r\n\r\n";
 
-            ui::Message::Error(os.str());
+            UIMessageDialog::ShowError(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             result = false;
         }
@@ -357,7 +359,7 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
 
             os << "\r\n\r\n";
 
-            ui::Message::Notification(os.str());
+            UIMessageDialog::Show(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             result = true;
         }
@@ -369,7 +371,7 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
     else
     {
 #ifndef ULTRASCHALL_BROADCASTER
-        ui::Message::Error("The REAPER project must be saved before the export can continue");
+        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
         result = false;
     }

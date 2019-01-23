@@ -30,7 +30,7 @@
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "ThemeVersionCheck.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 #include "VersionHandler.h"
 
 namespace ultraschall { namespace reaper {
@@ -59,7 +59,7 @@ bool QuerySetPluginVersion()
             str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion << ") and PLUGIN (" << VERSION_VALUE_NAME
                 << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation "
                    "guide on http://ultraschall.fm/install/";
-            ui::Message::Error(str.str());
+            UIMessageDialog::ShowError(str.str());
             result = false;
 #else  // #ifndef ULTRASCHALL_BROADCASTER
             result = true;
@@ -71,7 +71,7 @@ bool QuerySetPluginVersion()
 #ifndef ULTRASCHALL_BROADCASTER
         const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by "
                                 "installing the theme or check the installation guide on http://ultraschall.fm/install/";
-        ui::Message::Error(str);
+        UIMessageDialog::ShowError(str);
         result = false;
 #else  // #ifndef ULTRASCHALL_BROADCASTER
         result = true;

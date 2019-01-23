@@ -22,37 +22,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
-#define __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
+#include "UIDialog.h"
 
-#include <string>
-#include <vector>
+#include "Framework.h"
+#include "ReaperEntryPoints.h"
+
+#include "wx/wx.h"
 
 namespace ultraschall { namespace reaper {
 
-class FileManager
+UIDialog::UIDialog () : parent_ (new wxWindow ()) {
+    PRECONDITION(parent_ != 0);
+    parent_->AssociateHandle(reaper_api::GetMainHwnd());
+}
+
+UIDialog::~UIDialog()
 {
-public:
-    static char GetPathSeparator();
-
-    static std::string              AppendPath(const std::string& prefix, const std::string& append);
-    static std::string              StripPath(const std::string& path);
-    static std::vector<std::string> SplitPath(const std::string& path);
-
-    static std::string UserHomeDirectory();
-    static std::string UserApplicationSupportDirectory();
-    static std::string SystemApplicationSupportDirectory();
-
-    static std::string ProgramFilesDirectory();
-    static std::string RoamingAppDataDirectory();
-
-    static bool                     FileExists(const std::string& path);
-    static size_t                   FileExists(const std::vector<std::string>& paths);
-    static std::vector<std::string> ReadFile(const std::string& filename);
-
-    static std::string ReadVersionFromFile(const std::string& path);
-};
+    PRECONDITION(parent_ != 0);
+    parent_->DissociateHandle();
+    delete parent_;
+    parent_ = 0;
+}
 
 }} // namespace ultraschall::reaper
-
-#endif // #ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__

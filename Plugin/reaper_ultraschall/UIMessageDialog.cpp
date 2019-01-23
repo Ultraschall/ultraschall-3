@@ -22,39 +22,43 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 #include "Framework.h"
 
 #include "wx/wx.h"
 
-namespace ultraschall { namespace reaper { namespace ui {
+namespace ultraschall { namespace reaper {
 
-const std::string Message::UI_MESSAGE_CAPTION("Ultraschall");
+const std::string UIMessageDialog::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
 
-void Message::Notification(const std::string& message)
+void UIMessageDialog::Show(int32_t style, const std::string& message, const std::string& details)
 {
     PRECONDITION(message.empty() == false);
-    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_CAPTION.c_str()), wxICON_INFORMATION);
+    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()), style);
 }
 
-void Message::Notification(const std::string& message, const std::string& description)
+void UIMessageDialog::Show(const std::string& message, const std::string& description)
 {
     PRECONDITION(message.empty() == false);
-    PRECONDITION(description.empty() == false);
-    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_CAPTION.c_str()), wxICON_INFORMATION);
+
+    UIMessageDialog messageDialog;
+    messageDialog.Show(wxICON_INFORMATION, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
 }
 
-void Message::Error(const std::string& message)
+void UIMessageDialog::ShowWarning(const std::string& message, const std::string& description)
 {
     PRECONDITION(message.empty() == false);
-    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_CAPTION.c_str()), wxICON_ERROR);
+
+    UIMessageDialog messageDialog;
+    messageDialog.Show(wxICON_WARNING, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
 }
 
-void Message::Error(const std::string& message, const std::string& description)
+void UIMessageDialog::ShowError(const std::string& message, const std::string& description)
 {
     PRECONDITION(message.empty() == false);
-    PRECONDITION(description.empty() == false);
-    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_CAPTION.c_str()), wxICON_ERROR);
+
+    UIMessageDialog messageDialog;
+    messageDialog.Show(wxICON_ERROR, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
 }
 
-}}} // namespace ultraschall::reaper::ui
+}} // namespace ultraschall::reaper

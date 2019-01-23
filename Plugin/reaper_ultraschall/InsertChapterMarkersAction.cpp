@@ -35,7 +35,8 @@
 #include "SystemProperties.h"
 #include "TextFileReader.h"
 #include "TimeUtilities.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
+#include "UIFileDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -45,7 +46,8 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 {
     ServiceStatus status = SERVICE_FAILURE;
 
-    const std::string path = FileManager::BrowseForFiles("Import chapter markers...");
+    UIFileDialog      fileDialog("Import chapter markers");
+    const std::string path = fileDialog.BrowseForChapters();
     PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
     const ProjectManager& projectManager = ProjectManager::Instance();
@@ -124,12 +126,12 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 
         os << "\r\n\r\n";
 
-        ui::Message::Error(os.str());
+        UIMessageDialog::ShowError(os.str());
     }
     else
     {
 #ifndef ULTRASCHALL_BROADCASTER
-        ui::Message::Notification("The chapter markers have been added successfully.");
+        UIMessageDialog::Show("The chapter markers have been added successfully.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
         status = SERVICE_SUCCESS;
     }

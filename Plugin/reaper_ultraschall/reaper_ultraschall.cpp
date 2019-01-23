@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "ReaperEntryPoints.h"
 #include "ServiceStatus.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 
 #include "CustomActionManager.h"
 
@@ -66,7 +66,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE in
             {
 #ifndef ULTRASCHALL_BROADCASTER
                 std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
-                reaper::ui::Message::Error("Ultraschall failed to load!", errorReason);
+                reaper::UIMessageDialog::ShowError("Ultraschall failed to load!", errorReason);
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             }
         }

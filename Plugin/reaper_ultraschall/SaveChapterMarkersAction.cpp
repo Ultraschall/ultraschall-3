@@ -33,7 +33,8 @@
 #include "SaveChapterMarkersAction.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
-#include "UIMessage.h"
+#include "UIFileDialog.h"
+#include "UIMessageDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -52,7 +53,8 @@ ServiceStatus SaveChapterMarkersAction::Execute()
     const std::string projectName   = currentProject.Name();
     if ((initialFolder.empty() == false) && (projectName.empty() == false))
     {
-        targetPath = FileManager::BrowseForFolder("Export chapter markers...", initialFolder);
+        UIFileDialog fileDialog("Export chapter markers", initialFolder);
+        targetPath = fileDialog.BrowseForDirectory();
         if (targetPath.empty() == false)
         {
             targetPath = FileManager::AppendPath(targetPath, projectName + ".chapters.txt");
@@ -61,16 +63,14 @@ ServiceStatus SaveChapterMarkersAction::Execute()
         else
         {
 #ifndef ULTRASCHALL_BROADCASTER
-            ui::Message::Notification("The export operation has been canceled.");
+            UIMessageDialog::Show("The export operation has been canceled.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             status = SERVICE_FAILURE;
         }
     }
     else
     {
-#ifndef ULTRASCHALL_BROADCASTER
-        ui::Message::Notification("The project must be saved before the chapter marker export can run.");
-#endif // #ifndef ULTRASCHALL_BROADCASTER
+        UIMessageDialog::Show("The project must be saved before the chapter marker export can run.");
         status = SERVICE_FAILURE;
     }
 
@@ -93,7 +93,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
                 os.close();
 
 #ifndef ULTRASCHALL_BROADCASTER
-                ui::Message::Notification("The chapter markers have been saved successfully.");
+                UIMessageDialog::Show("The chapter markers have been saved successfully.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
 
                 status = SERVICE_SUCCESS;
@@ -101,7 +101,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
             else
             {
 #ifndef ULTRASCHALL_BROADCASTER
-                ui::Message::Error("Failed to export chapter markers.");
+                UIMessageDialog::ShowError("Failed to export chapter markers.");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
                 status = SERVICE_FAILURE;
             }
@@ -120,7 +120,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
 
             os << "\r\n\r\n";
 
-            ui::Message::Error(os.str());
+            UIMessageDialog::ShowError(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
         }
     }
@@ -150,12 +150,12 @@ bool SaveChapterMarkersAction::ConfigureAssets()
         {
 #ifndef ULTRASCHALL_BROADCASTER
             std::stringstream os;
-                os << "Your project does not meet the minimum requirements for the export to continue.";
-                os << "\r\n\r\n";
-                os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
-                os << "\r\n\r\n";
+            os << "Your project does not meet the minimum requirements for the export to continue.";
+            os << "\r\n\r\n";
+            os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
+            os << "\r\n\r\n";
 
-                ui::Message::Error(os.str());
+            UIMessageDialog::ShowError(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             result = false;
         }
@@ -164,15 +164,15 @@ bool SaveChapterMarkersAction::ConfigureAssets()
 #ifndef ULTRASCHALL_BROADCASTER
             std::stringstream os;
 
-                os << "Ultraschall has found the following non-critical issues and will continue after you close this message:\r\n\r\n";
-                for (size_t i = 0; i < messages.size(); i++)
-                {
-                    os << (i + 1) << ") " << messages[i] << "\r\n";
-                }
+            os << "Ultraschall has found the following non-critical issues and will continue after you close this message:\r\n\r\n";
+            for (size_t i = 0; i < messages.size(); i++)
+            {
+                os << (i + 1) << ") " << messages[i] << "\r\n";
+            }
 
-                os << "\r\n\r\n";
+            os << "\r\n\r\n";
 
-                ui::Message::Notification(os.str());
+            UIMessageDialog::Show(os.str());
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             result = true;
         }
@@ -184,7 +184,7 @@ bool SaveChapterMarkersAction::ConfigureAssets()
     else
     {
 #ifndef ULTRASCHALL_BROADCASTER
-        ui::Message::Error("The REAPER project must be saved before the export can continue");
+        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
 #endif // #ifndef ULTRASCHALL_BROADCASTER
         result = false;
     }

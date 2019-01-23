@@ -22,25 +22,34 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_UI_MESSAGE_H_INCL__
-#define __ULTRASCHALL_UI_MESSAGE_H_INCL__
+#ifndef __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__
+#define __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__
 
 #include <string>
 
-namespace ultraschall { namespace reaper { namespace ui {
+#include "UIDialog.h"
 
-class Message
+namespace ultraschall { namespace reaper {
+
+class UIFileDialog : public UIDialog
 {
 public:
-    static void Notification(const std::string& message);
-    static void Notification(const std::string& message, const std::string& description);
-    static void Error(const std::string& message);
-    static void Error(const std::string& message, const std::string& description);
+    UIFileDialog(const std::string& caption, const std::string& initialDirectory = "");
+    virtual ~UIFileDialog() {}
+
+    std::string BrowseForChapters();
+    std::string BrowseForAudio();
+    std::string BrowseForPicture();
+
+    std::string BrowseForDirectory();
 
 private:
-    static const std::string UI_MESSAGE_CAPTION;
+    std::string caption_;
+    std::string initialDirectory_;
+
+    std::string BrowseForFile(const std::string& fileExtensions);
 };
 
-}}} // namespace ultraschall::reaper::ui
+}} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_UI_MESSAGE_H_INCL__
+#endif // #ifndef __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__

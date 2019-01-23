@@ -66,7 +66,9 @@ set(COMMON_INCLUDES
     ThemeVersionCheck.h
     TimeUtilities.h
     UpdateCheck.h
-    UIMessage.h
+    UIDialog.h
+    UIFileDialog.h
+    UIMessageDialog.h
     VersionHandler.h
 )
 
@@ -99,7 +101,9 @@ set(COMMON_SOURCES
     SystemProperties.cpp
     ThemeVersionCheck.cpp
     UpdateCheck.cpp
-    UIMessage.cpp
+    UIDialog.cpp
+    UIFileDialog.cpp
+    UIMessageDialog.cpp
     VersionHandler.cpp
     reaper_ultraschall.cpp
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c

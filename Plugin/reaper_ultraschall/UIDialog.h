@@ -22,37 +22,31 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
-#define __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
+#ifndef __ULTRASCHALL_UI_DIALOG_H_INCL__
+#define __ULTRASCHALL_UI_DIALOG_H_INCL__
 
-#include <string>
-#include <vector>
+class wxWindow;
 
 namespace ultraschall { namespace reaper {
 
-class FileManager
+class UIDialog
 {
 public:
-    static char GetPathSeparator();
+    UIDialog();
+    virtual ~UIDialog();
 
-    static std::string              AppendPath(const std::string& prefix, const std::string& append);
-    static std::string              StripPath(const std::string& path);
-    static std::vector<std::string> SplitPath(const std::string& path);
+protected:
+    inline wxWindow* GetParent() const;
 
-    static std::string UserHomeDirectory();
-    static std::string UserApplicationSupportDirectory();
-    static std::string SystemApplicationSupportDirectory();
-
-    static std::string ProgramFilesDirectory();
-    static std::string RoamingAppDataDirectory();
-
-    static bool                     FileExists(const std::string& path);
-    static size_t                   FileExists(const std::vector<std::string>& paths);
-    static std::vector<std::string> ReadFile(const std::string& filename);
-
-    static std::string ReadVersionFromFile(const std::string& path);
+private:
+    wxWindow* parent_;
 };
+
+inline wxWindow* UIDialog::GetParent() const
+{
+    return parent_;
+}
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
+#endif // #ifndef __ULTRASCHALL_UI_MESSAGE_H_INCL__

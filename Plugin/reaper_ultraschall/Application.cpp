@@ -35,8 +35,11 @@
 #include "ReaperVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "SystemProperties.h"
-#include "UIMessage.h"
+#include "UIMessageDialog.h"
 #include "UpdateCheck.h"
+
+
+#include "StringUtilities.h"
 
 namespace ultraschall {
 namespace reaper {
@@ -158,7 +161,7 @@ std::string Application::GetProjectFolderName() const
                 result += pathComponents[i];
                 if (i < pathComponents.size() - 2)
                 {
-                    result += FileManager::PathSeparator();
+                    result += FileManager::GetPathSeparator();
                 }
             }
         }
@@ -328,13 +331,13 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
     if ((true == ok) && (ReaperVersionCheck() == false))
     {
-        ui::Message::Error(message, information3 + " " + information4);
+        UIMessageDialog::ShowError(message, information3 + " " + information4);
         ok = false;
     }
 
     if ((true == ok) && (SWSVersionCheck() == false))
     {
-        ui::Message::Error(message, information7);
+        UIMessageDialog::ShowError(message, information7);
         ok = false;
     }
 

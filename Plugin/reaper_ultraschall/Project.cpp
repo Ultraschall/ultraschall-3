@@ -102,7 +102,7 @@ std::string Project::FolderName() const
    const std::string fullPath = FullPathName();
    if (fullPath.empty() == false)
    {
-      const char pathSeparator = FileManager::PathSeparator();
+      const char pathSeparator = FileManager::GetPathSeparator();
       const std::vector<std::string> pathComponents = framework::StringTokenize(fullPath, pathSeparator);
       if (pathComponents.empty() == false)
       {
@@ -127,7 +127,7 @@ std::string Project::FileName() const
    const std::string fullPath = FullPathName();
    if (fullPath.empty() == false)
    {
-      const char pathSeparator = FileManager::PathSeparator();
+      const char pathSeparator = FileManager::GetPathSeparator();
       const std::vector<std::string> pathComponents = framework::StringTokenize(fullPath, pathSeparator);
       if (pathComponents.empty() == false)
       {
