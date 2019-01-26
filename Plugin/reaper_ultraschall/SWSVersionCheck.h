@@ -25,17 +25,17 @@
 #ifndef __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
 #define __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
 
-namespace ultraschall {
-    namespace reaper {
+#include "Common.h"
+
+namespace ultraschall { namespace reaper {
 
 #ifdef ULTRASCHALL_PLATFORM_WIN32
 std::string FindUltraschallPluginPath();
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
 bool SWSVersionCheck();
 
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
