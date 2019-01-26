@@ -22,105 +22,99 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Framework.h"
 #include "CustomActionFactory.h"
-#include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-CustomActionFactory::CustomActionFactory()
-{
-}
+CustomActionFactory::CustomActionFactory() {}
 
-CustomActionFactory::~CustomActionFactory()
-{
-}
+CustomActionFactory::~CustomActionFactory() {}
 
 CustomActionFactory& CustomActionFactory::Instance()
 {
-   static CustomActionFactory self;
-   return self;
+    static CustomActionFactory self;
+    return self;
 }
 
 ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
 {
-   PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
-   PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FAILURE;
+    ServiceStatus status = SERVICE_FAILURE;
 
-   const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.find(id);
-   if (functions_.end() == i)
-   {
-      functions_.insert(std::pair<std::string, CREATE_CUSTOM_ACTION_FUNCTION>(id, pfn));
-      status = SERVICE_SUCCESS;
-   }
-   else
-   {
-      status = SERVICE_FACTORY_NOT_FOUND;
-   }
+    const FunctionDictionary::const_iterator i = functions_.find(id);
+    if (functions_.end() == i)
+    {
+        functions_.insert(std::pair<std::string, CREATE_CUSTOM_ACTION_FUNCTION>(id, pfn));
+        status = SERVICE_SUCCESS;
+    }
+    else
+    {
+        status = SERVICE_FACTORY_NOT_FOUND;
+    }
 
-   return status;
+    return status;
 }
 
 void CustomActionFactory::UnregisterCustomAction(const std::string& id)
 {
-   PRECONDITION(functions_.empty() == false);
-   PRECONDITION(id.empty() == false);
+    PRECONDITION(functions_.empty() == false);
+    PRECONDITION(id.empty() == false);
 
-   const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.find(id);
-   if (functions_.end() != functionIterator)
-   {
-      functions_.erase(functionIterator);
-   }
+    const FunctionDictionary::const_iterator functionIterator = functions_.find(id);
+    if (functions_.end() != functionIterator)
+    {
+        functions_.erase(functionIterator);
+    }
 }
 
 void CustomActionFactory::UnregisterAllCustomActions()
 {
-   const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   while(functions_.empty() == false)
-   {
-      const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator functionIterator = functions_.begin();
-      if(functions_.end() != functionIterator)
-      {
-         functions_.erase(functionIterator);
-      }
-   }
+    while (functions_.empty() == false)
+    {
+        const FunctionDictionary::const_iterator functionIterator = functions_.begin();
+        if (functions_.end() != functionIterator)
+        {
+            functions_.erase(functionIterator);
+        }
+    }
 }
 
 ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
 {
-   PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FACTORY_CREATE_FAILED;
+    ServiceStatus status = SERVICE_FACTORY_CREATE_FAILED;
 
-   const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(functionsLock_);
 
-   pCustomAction = 0;
-   const std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION>::const_iterator i = functions_.find(id);
-   if (functions_.end() != i)
-   {
-      CREATE_CUSTOM_ACTION_FUNCTION pfn = i->second;
-      if(pfn != 0)
-      {
-         pCustomAction = (*pfn)();
-         if(pCustomAction != 0)
-         {
-            status = SERVICE_SUCCESS;
-         }
-      }
-   }
-   else
-   {
-      status = SERVICE_FACTORY_NOT_FOUND;
-   }
+    pCustomAction                              = 0;
+    const FunctionDictionary::const_iterator i = functions_.find(id);
+    if (functions_.end() != i)
+    {
+        CREATE_CUSTOM_ACTION_FUNCTION pfn = i->second;
+        if (pfn != 0)
+        {
+            pCustomAction = (*pfn)();
+            if (pCustomAction != 0)
+            {
+                status = SERVICE_SUCCESS;
+            }
+        }
+    }
+    else
+    {
+        status = SERVICE_FACTORY_NOT_FOUND;
+    }
 
-   return status;
+    return status;
 }
 
-}}
+}} // namespace ultraschall::reaper

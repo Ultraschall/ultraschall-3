@@ -22,26 +22,48 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_PLATFORM_H_INCL__
-#define __ULTRASCHALL_PLATFORM_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_PLATFORM_H_INCL__
+#define __ULTRASCHALL_REAPER_PLATFORM_H_INCL__
 
-#ifdef ULTRASCHALL_PLATFORM_MACOS
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#else // #ifdef _WIN32
+#ifdef _APPLE_
 #ifdef min
 #undef min
 #endif // #ifdef min
 #ifdef max
 #undef max
 #endif // #ifdef max
-#else
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <windows.h>
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+#else  // #ifdef _APPLE_
+// TODO linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
 
-namespace ultraschall {
-namespace framework {
+#include "Common.h"
 
-}
-}
+namespace ultraschall { namespace reaper {
 
-#endif // #ifndef __ULTRASCHALL_PLATFORM_H_INCL__
+class Platform
+{
+public:
+    static const std::string THEME_PATH;
+    static const std::string SOUNDBOARD_PATH;
+    static const std::string SWS_PATH;
+    static const std::string PLUGIN_PATH;
+    static const std::string STUDIO_LINK_PATH;
+    static const std::string STUDIO_LINK_ONAIR_PATH;
+
+    static std::string ProgramFilesDirectory();
+    static std::string UserDataDirectory();
+
+    static char PathSeparator();
+
+    static bool FileExists(const std::string& path);
+    static std::string ReadFileVersion(const std::string& path);
+};
+
+}} // namespace ultraschall::reaper
+
+#endif // #ifndef __ULTRASCHALL_REAPER_PLATFORM_H_INCL__

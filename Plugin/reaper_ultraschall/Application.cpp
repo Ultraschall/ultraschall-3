@@ -22,27 +22,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <iomanip>
-#include <string>
-
 #include "StringUtilities.h"
-#include "TextFileReader.h"
-
 #include "Application.h"
 #include "CustomActionManager.h"
 #include "FileManager.h"
 #include "ReaperEntryPoints.h"
-#include "ReaperVersionCheck.h"
 #include "SWSVersionCheck.h"
 #include "SystemProperties.h"
 #include "UIMessageDialog.h"
 #include "UpdateCheck.h"
-
-
+#include "VersionHandler.h"
 #include "StringUtilities.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
 Application::Application() {}
 
@@ -95,7 +87,7 @@ bool Application::OnCustomAction(const int32_t id)
             executed = true;
         }
 
-        framework::SafeRelease(pCustomAction);
+        SafeRelease(pCustomAction);
     }
 
     return executed;
@@ -136,7 +128,7 @@ std::string Application::GetProjectFileName() const
     const std::string projectPath = GetProjectPathName();
     if (projectPath.empty() == false)
     {
-        const std::vector<std::string> pathComponents = FileManager::SplitPath(projectPath);
+        const StringArray pathComponents = FileManager::SplitPath(projectPath);
         if (pathComponents.empty() == false)
         {
             result = pathComponents[pathComponents.size() - 1];
@@ -153,7 +145,7 @@ std::string Application::GetProjectFolderName() const
     const std::string projectPath = GetProjectPathName();
     if (projectPath.empty() == false)
     {
-        const std::vector<std::string> pathComponents = FileManager::SplitPath(projectPath);
+        const StringArray pathComponents = FileManager::SplitPath(projectPath);
         if (pathComponents.empty() == false)
         {
             for (size_t i = 0; i < pathComponents.size() - 1; i++)
@@ -161,7 +153,7 @@ std::string Application::GetProjectFolderName() const
                 result += pathComponents[i];
                 if (i < pathComponents.size() - 2)
                 {
-                    result += FileManager::GetPathSeparator();
+                    result += FileManager::PathSeparator();
                 }
             }
         }
@@ -194,12 +186,12 @@ struct Timestamp
 
     static Timestamp FromString(const std::string& str)
     {
-        std::vector<std::string> items = framework::StringTokenize(str, ':');
+        StringArray items = StringTokenize(str, ':');
         std::reverse(items.begin(), items.end());
 
         Timestamp timestamp;
 
-        std::vector<std::string> buffer = framework::StringTokenize(items[0], '.');
+        StringArray buffer = StringTokenize(items[0], '.');
         for (size_t i = 0; i < buffer.size(); ++i)
         {
             switch (i)
@@ -305,29 +297,29 @@ The installation of the Ultraschall REAPER extension has been corrupted. \
 Please reinstall the Ultraschall REAPER extension using the original or an updated installer.\
 ");
 
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-    const std::string swsPlugin2_8SystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+// TODO: checks for legacy installations of ultraschall. remove in 4.x
+#ifdef _APPLE_
+    const std::string swsPlugin2_8SystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
     if ((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string swsPlugin2_7SystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
+    const std::string swsPlugin2_7SystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
     if ((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string ultraschallPluginSystemPath = FileManager::SystemApplicationSupportDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
+    const std::string ultraschallPluginSystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
     if ((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
         ok = false;
     }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#endif // #ifdef _APPLE_
 
     if ((true == ok) && (ReaperVersionCheck() == false))
     {
@@ -344,6 +336,31 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
     return ok;
 }
 
+bool Application::ReaperVersionCheck()
+{
+    bool result = false;
+
+    std::string versionString = VersionHandler::ReaperVersion();
+    if (versionString.empty() == false)
+    {
+        StringArray tokens = StringTokenize(versionString, '.');
+        if (tokens.size() >= 2)
+        {
+            const int REQUIRED_REAPER_MAJOR_VERSION = 5;
+            const int REQUIRED_REAPER_MINOR_VERSION = 70;
+            const int majorVersion                  = StringToInt(tokens[0]);
+            const int minorVersion                  = StringToInt(tokens[1]);
+
+            if ((REQUIRED_REAPER_MAJOR_VERSION == majorVersion) && (REQUIRED_REAPER_MINOR_VERSION <= minorVersion))
+            {
+                result = true;
+            }
+        }
+    }
+
+    return result;
+}
+
 uint32_t Application::GetEditMarkerColor()
 {
 #ifdef ULTRASCHALL_PLATFORM_WIN32
@@ -353,5 +370,4 @@ uint32_t Application::GetEditMarkerColor()
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
-} // namespace ultraschall
-} // namespace ultraschall
+}} // namespace ultraschall::reaper

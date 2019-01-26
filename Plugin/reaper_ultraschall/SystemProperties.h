@@ -25,7 +25,7 @@
 #ifndef __ULTRASCHALL_REAPER_SYSTEM_PROPERTIES_H_INCL__
 #define __ULTRASCHALL_REAPER_SYSTEM_PROPERTIES_H_INCL__
 
-#include <string>
+#include "Common.h"
 
 namespace ultraschall { namespace reaper {
 

@@ -51,7 +51,7 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
         const std::string projectName = currentProject.Name();
         if ((projectName.empty() == false) && (ConfigureAssets() == true))
         {
-            std::vector<std::string> errorMessages = ValidateChapterMarkers();
+            StringArray errorMessages = ValidateChapterMarkers();
             if (errorMessages.empty() == false)
             {
                 const std::string fullPath = FileManager::AppendPath(projectFolder, projectName + ".chapters.txt");
@@ -60,7 +60,7 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
                 {
                     for (size_t i = 0; i < chapters_.size(); i++)
                     {
-                        const std::string timestamp = framework::SecondsToString(chapters_[i].Position());
+                        const std::string timestamp = SecondsToString(chapters_[i].Position());
                         const std::string item      = timestamp + " " + chapters_[i].Name();
 
                         os << item << std::endl;
@@ -118,7 +118,7 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 bool SaveChapterMarkersToProjectAction::ConfigureAssets()
 {
     bool                     result = false;
-    std::vector<std::string> messages;
+    StringArray messages;
     size_t                   invalidAssetCount = 0;
 
     ProjectManager& projectManager = ProjectManager::Instance();
@@ -184,11 +184,11 @@ void SaveChapterMarkersToProjectAction::ResetAssets()
     chapters_.clear();
 }
 
-std::vector<std::string> SaveChapterMarkersToProjectAction::ValidateChapterMarkers()
+StringArray SaveChapterMarkersToProjectAction::ValidateChapterMarkers()
 {
-    PRECONDITION_RETURN(chapters_.empty() == false, std::vector<std::string>());
+    PRECONDITION_RETURN(chapters_.empty() == false, StringArray());
 
-    std::vector<std::string> errorMessages;
+    StringArray errorMessages;
 
     for (size_t i = 0; i < chapters_.size(); i++)
     {
@@ -208,7 +208,7 @@ std::vector<std::string> SaveChapterMarkersToProjectAction::ValidateChapterMarke
         if (current.Name().empty() == true)
         {
             std::stringstream os;
-            os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
+            os << "Chapter marker at '" << SecondsToString(safePosition) << "' has no name.";
             os << "\r\n";
             errorMessages.push_back(os.str());
         }

@@ -25,42 +25,42 @@
 #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
 #define __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
 
-#include <mutex>
-#include <map>
-
-#include "ServiceStatus.h"
+#include "Common.h"
 #include "ICustomAction.h"
+#include "ServiceStatus.h"
 
 namespace ultraschall { namespace reaper {
 
 class CustomActionManager
 {
 public:
-   static CustomActionManager& Instance();
+    static CustomActionManager& Instance();
 
-   ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
+    ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
 
-   void UnregisterCustomAction(const int32_t id);
-   void UnregisterCustomAction(const std::string& name);
-   void UnregisterAllCustomActions();
+    void UnregisterCustomAction(const int32_t id);
+    void UnregisterCustomAction(const std::string& name);
+    void UnregisterAllCustomActions();
 
-   ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
-   ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
+    ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
+    ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
 
 protected:
-   virtual ~CustomActionManager();
+    virtual ~CustomActionManager();
 
 private:
-   CustomActionManager();
+    CustomActionManager();
 
-   CustomActionManager(const CustomActionManager&);
-   CustomActionManager& operator=(const CustomActionManager&);
+    CustomActionManager(const CustomActionManager&);
+    CustomActionManager& operator=(const CustomActionManager&);
 
-   std::map<int32_t, ICustomAction*> customActions_;
-   std::map<std::string, int32_t> customActionIds_;
-   mutable std::recursive_mutex customActionsLock_;
+    typedef std::map<int32_t, ICustomAction*> CustomActionDictionary; 
+    CustomActionDictionary                    customActions_;
+    typedef std::map<std::string, int32_t>    CustomActionIdDictionary;
+    CustomActionIdDictionary customActionIds_;
+    mutable std::recursive_mutex      customActionsLock_;
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__

@@ -25,12 +25,12 @@
 #ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_H_INCL__
 #define __ULTRASCHALL_REAPER_UPDATE_CHECK_H_INCL__
 
-namespace ultraschall {
-namespace reaper {
+#include "Common.h"
+
+namespace ultraschall { namespace reaper {
 
 void UpdateCheck();
 
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_UPDATE_CHECK_H_INCL__

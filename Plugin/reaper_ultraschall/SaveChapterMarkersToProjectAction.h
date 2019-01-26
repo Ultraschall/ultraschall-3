@@ -25,6 +25,7 @@
 #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
 
+#include "Common.h"
 #include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
@@ -55,7 +56,7 @@ private:
     std::vector<Marker>      chapters_;
     bool                     ConfigureAssets();
     void                     ResetAssets();
-    std::vector<std::string> ValidateChapterMarkers();
+    StringArray ValidateChapterMarkers();
 };
 
 }} // namespace ultraschall::reaper

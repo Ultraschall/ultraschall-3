@@ -22,78 +22,72 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <vector>
-#include "StringUtilities.h"
 #include "BasicMediaInformation.h"
+#include "StringUtilities.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
-BasicMediaInformation::BasicMediaInformation()
-{
-}
+BasicMediaInformation::BasicMediaInformation() {}
 
 BasicMediaInformation::~BasicMediaInformation()
 {
-   Reset();
+    Reset();
 }
 
 BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
 {
-   BasicMediaInformation result;
+    BasicMediaInformation result;
 
-   if(str.empty() == false)
-   {
-      std::vector<std::string> tokens = framework::StringTokenize(str, '\n');
-      if(tokens.empty() == false)
-      {
-         result.title_ = tokens[0];
+    if (str.empty() == false)
+    {
+        StringArray tokens = StringTokenize(str, '\n');
+        if (tokens.empty() == false)
+        {
+            result.title_ = tokens[0];
 
-         if(tokens.size() > 1)
-         {
-           result.author_ = tokens[1];
-         }
+            if (tokens.size() > 1)
+            {
+                result.author_ = tokens[1];
+            }
 
-         if(tokens.size() > 2)
-         {
-           result.track_ = tokens[2];
-         }
+            if (tokens.size() > 2)
+            {
+                result.track_ = tokens[2];
+            }
 
-         if(tokens.size() > 3)
-         {
-           result.date_ = tokens[3];
-         }
+            if (tokens.size() > 3)
+            {
+                result.date_ = tokens[3];
+            }
 
-         if(tokens.size() > 4)
-         {
-           result.content_ = tokens[4];
-         }
+            if (tokens.size() > 4)
+            {
+                result.content_ = tokens[4];
+            }
 
-         if(tokens.size() > 5)
-         {
-            result.comments_ = tokens[5];
-         }
-      }
-   }
+            if (tokens.size() > 5)
+            {
+                result.comments_ = tokens[5];
+            }
+        }
+    }
 
-   return result;
+    return result;
 }
 
 bool BasicMediaInformation::Validate() const
 {
-   return (title_.empty() == false) || (author_.empty() == false) ||
-   (track_.empty() == false) || (date_.empty() == false) ||
-   (content_.empty() == false);
+    return (title_.empty() == false) || (author_.empty() == false) || (track_.empty() == false) || (date_.empty() == false) || (content_.empty() == false);
 }
 
 void BasicMediaInformation::Reset()
 {
-   title_.clear();
-   author_.clear();
-   track_.clear();
-   date_.clear();
-   content_.clear();
-   comments_.clear();
+    title_.clear();
+    author_.clear();
+    track_.clear();
+    date_.clear();
+    content_.clear();
+    comments_.clear();
 }
 
-}}
+}} // namespace ultraschall::reaper

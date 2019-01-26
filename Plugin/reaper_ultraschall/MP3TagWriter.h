@@ -25,7 +25,7 @@
 #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
 #define __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
 
-#include "Framework.h"
+#include "Common.h"
 #include "ITagWriter.h"
 
 namespace ultraschall { namespace reaper {
@@ -33,18 +33,16 @@ namespace ultraschall { namespace reaper {
 class MP3TagWriter : public ITagWriter
 {
 public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
+    virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
 
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
+    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
 
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
+    virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
 
 protected:
-   virtual ~MP3TagWriter()
-   {
-   }
+    virtual ~MP3TagWriter() {}
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__

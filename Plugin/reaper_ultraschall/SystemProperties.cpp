@@ -24,12 +24,9 @@
 
 #include <sstream>
 
-#include "Framework.h"
 #include "ReaperEntryPoints.h"
-#include "ReaperVersionCheck.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "ThemeVersionCheck.h"
 #include "UIMessageDialog.h"
 #include "VersionHandler.h"
 
@@ -93,7 +90,7 @@ template<> bool SystemProperty<bool>::Get(const std::string& section, const std:
     const std::string& rawValue = RawValue(section, key);
     if (rawValue.empty() == false)
     {
-        if ((framework::StringLowercase(rawValue) == "true") || (framework::StringToInt(rawValue) != 0))
+        if ((StringLowercase(rawValue) == "true") || (StringToInt(rawValue) != 0))
         {
             value = true;
         }
@@ -109,7 +106,7 @@ template<> int SystemProperty<int>::Get(const std::string& section, const std::s
     const std::string rawValue = RawValue(section, key);
     if (rawValue.empty() == false)
     {
-        value = framework::StringToInt(rawValue);
+        value = StringToInt(rawValue);
     }
 
     return value;
@@ -154,27 +151,18 @@ void UpdateBillOfMaterials()
         }
     }
 
-    std::vector<std::string> bom;
+    StringArray bom;
     std::string              itemVersion = VersionHandler::PluginVersion();
     if (itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall REAPER Extension " + itemVersion);
     }
 
-    itemVersion = QueryThemeVersion();
+    itemVersion = VersionHandler::ThemeVersion();
     if (itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall REAPER Theme " + itemVersion);
     }
-
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-    itemVersion = VersionHandler::HubVersion();
-    if (itemVersion.empty() == false)
-    {
-        bom.push_back(itemVersion);
-    }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
     itemVersion = VersionHandler::SoundboardVersion();
     if (itemVersion.empty() == false)
@@ -200,7 +188,7 @@ void UpdateBillOfMaterials()
         bom.push_back("SWS REAPER Extension " + itemVersion);
     }
 
-    itemVersion = QueryRawReaperVersion();
+    itemVersion = VersionHandler::ReaperVersion();
     if (itemVersion.empty() == false)
     {
         bom.push_back("REAPER " + itemVersion);

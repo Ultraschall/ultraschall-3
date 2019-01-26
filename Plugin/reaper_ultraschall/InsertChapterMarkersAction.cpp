@@ -33,10 +33,10 @@
 #include "ProjectManager.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "TextFileReader.h"
 #include "TimeUtilities.h"
-#include "UIMessageDialog.h"
+#include "FileUtilities.h"
 #include "UIFileDialog.h"
+#include "UIMessageDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -54,19 +54,19 @@ ServiceStatus InsertChapterMarkersAction::Execute()
     Project               currentProject = projectManager.CurrentProject();
 
     std::vector<Marker>      tags;
-    std::vector<std::string> errorMessages;
+    StringArray errorMessages;
 
-    const std::vector<std::string> lines = framework::TextFileReader::ReadLines(path);
+    const StringArray lines = ReadTextFile(path);
     if (lines.empty() == false)
     {
         for (size_t i = 0; i < lines.size(); i++)
         {
             const std::string& line = lines[i];
 
-            const std::vector<std::string> items = framework::StringTokenize(line, ' ');
+            const StringArray items = StringTokenize(line, ' ');
             if (items.size() > 0)
             {
-                const double position = framework::StringToSeconds(items[0]);
+                const double position = StringToSeconds(items[0]);
                 if (position >= 0)
                 {
                     std::string name;
@@ -108,7 +108,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
         else
         {
             std::stringstream os;
-            os << "Chapter marker '" << tags[i].Name() << "' at position '" << framework::SecondsToString(tags[i].Position()) << "' could not be added.";
+            os << "Chapter marker '" << tags[i].Name() << "' at position '" << SecondsToString(tags[i].Position()) << "' could not be added.";
             errorMessages.push_back(os.str());
         }
     }

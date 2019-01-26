@@ -21,36 +21,33 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_BYTE_STREAM_H_INCL__
+#define __ULTRASCHALL_REAPER_BYTE_STREAM_H_INCL__
 
 #include <zlib.h>
-#include "IUnknown.h"
-#include "Framework.h"
 
-namespace ultraschall {
-  namespace framework {
+#include "Common.h"
+#include "SharedObject.h"
 
-    class ByteStream : public IUnknown
+namespace ultraschall { namespace reaper {
+
+class ByteStream : public SharedObject
+{
+public:
+    ByteStream(const size_t dataSize) : dataSize_(dataSize), data_(new uint8_t[dataSize_]()) {}
+
+    size_t DataSize() const
     {
-    public:
-      ByteStream(const size_t dataSize) :
-        dataSize_(dataSize), data_(new uint8_t[dataSize_]())
-      {
-      }
-
-      size_t DataSize() const
-      {
         return dataSize_;
-      }
+    }
 
-      const uint8_t* Data() const
-      {
+    const uint8_t* Data() const
+    {
         return data_;
-      }
+    }
 
-      bool Write(const size_t offset, const uint8_t* buffer, const size_t bufferSize)
-      {
+    bool Write(const size_t offset, const uint8_t* buffer, const size_t bufferSize)
+    {
         PRECONDITION_RETURN(data_ != nullptr, false);
         PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
         PRECONDITION_RETURN(buffer != nullptr, false);
@@ -58,10 +55,10 @@ namespace ultraschall {
         const size_t itemSize = sizeof(uint8_t);
         memmove(&data_[offset * itemSize], buffer, bufferSize * itemSize);
         return true;
-      }
+    }
 
-      bool Read(const size_t offset, uint8_t* buffer, const size_t bufferSize)
-      {
+    bool Read(const size_t offset, uint8_t* buffer, const size_t bufferSize)
+    {
         PRECONDITION_RETURN(data_ != nullptr, false);
         PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
         PRECONDITION_RETURN(buffer != nullptr, false);
@@ -69,30 +66,29 @@ namespace ultraschall {
         const size_t itemSize = sizeof(uint8_t);
         memmove(buffer, &data_[offset * itemSize], bufferSize * itemSize);
         return true;
-      }
+    }
 
-      uint64_t CRC32() const
-      {
+    uint64_t CRC32() const
+    {
         PRECONDITION_RETURN(data_ != nullptr, UINT64_MAX);
         PRECONDITION_RETURN(dataSize_ > 0, UINT64_MAX);
 
         uint64_t crc = crc32(0, Z_NULL, 0);
         return crc32(static_cast<uLong>(crc), data_, static_cast<uInt>(dataSize_));
-      }
+    }
 
-    protected:
-      virtual ~ByteStream()
-      {
+protected:
+    virtual ~ByteStream()
+    {
         dataSize_ = 0;
         SafeDeleteArray(data_);
-      }
+    }
 
-    private:
-      size_t dataSize_;
-      uint8_t* data_;
-    };
+private:
+    size_t   dataSize_;
+    uint8_t* data_;
+};
 
-  }
-}
+}} // namespace ultraschall::reaper
 
-#endif // #ifdef __ULTRASCHALL_FRAMEWORK_BYTE_STREAM_H_INCL__
+#endif // #ifdef __ULTRASCHALL_REAPER_BYTE_STREAM_H_INCL__

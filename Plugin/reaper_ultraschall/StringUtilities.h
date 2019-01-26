@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_STRING_UTILITIES_H_INCL__
+#define __ULTRASCHALL_REAPER_STRING_UTILITIES_H_INCL__
 
 #ifdef ULTRASCHALL_PLATFORM_MACOS
 #ifdef min
@@ -34,22 +34,16 @@
 #endif // #ifdef max
 #endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
 
-#include <algorithm>
-#include <cctype>
-#include <functional>
-#include <sstream>
-#include <string>
+#include "Common.h"
 
-#include "Framework.h"
-
-namespace ultraschall { namespace framework {
+namespace ultraschall { namespace reaper {
 
 #define _MAKE_TEXT(str) #str
 #define MAKE_TEXT(str) _MAKE_TEXT(str)
 
-inline std::vector<std::string> StringTokenize(const std::string& input, const char delimiter)
+inline StringArray StringTokenize(const std::string& input, const char delimiter)
 {
-    std::vector<std::string> tokens;
+    StringArray tokens;
     std::stringstream        stream(input);
     std::string              token;
 
@@ -323,6 +317,6 @@ inline UnicodeStringSz2 MakeUTF8StringSz2WithBOM(const std::string& str)
     return UnicodeStringSz2(bom, sizeof(bom)) + MakeUTF8StringSz2(str);
 }
 
-}} // namespace ultraschall::framework
+}} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_STRING_UTILITIES_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_STRING_UTILITIES_H_INCL__

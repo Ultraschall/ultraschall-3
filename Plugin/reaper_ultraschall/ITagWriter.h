@@ -25,29 +25,27 @@
 #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 #define __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 
-#include "Framework.h"
-#include "IUnknown.h"
-#include "ServiceStatus.h"
-#include "Marker.h"
+#include "Common.h"
 #include "BasicMediaInformation.h"
+#include "SharedObject.h"
+#include "Marker.h"
+#include "ServiceStatus.h"
 
 namespace ultraschall { namespace reaper {
 
-class ITagWriter : public framework::IUnknown
+class ITagWriter : public SharedObject
 {
 public:
-   virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties) = 0;
+    virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties) = 0;
 
-   virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage) = 0;
+    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage) = 0;
 
-   virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace) = 0;
+    virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace) = 0;
 
 protected:
-   virtual ~ITagWriter()
-   {
-   }
+    virtual ~ITagWriter() {}
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__

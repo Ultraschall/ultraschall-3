@@ -32,29 +32,27 @@ namespace ultraschall { namespace reaper {
 class InsertChapterMarkersAction : public ICustomAction
 {
 public:
-   static const char* UniqueId()
-   {
-      return "ULTRASCHALL_INSERT_CHAPTERS";
-   }
+    static const char* UniqueId()
+    {
+        return "ULTRASCHALL_INSERT_CHAPTERS";
+    }
 
-   static const char* UniqueName()
-   {
-      return "ULTRASCHALL: Import chapter markers...";
-   }
+    static const char* UniqueName()
+    {
+        return "ULTRASCHALL: Import chapter markers...";
+    }
 
-   static ICustomAction* CreateCustomAction()
-   {
-      return new InsertChapterMarkersAction();
-   }
+    static ICustomAction* CreateCustomAction()
+    {
+        return new InsertChapterMarkersAction();
+    }
 
-   virtual ServiceStatus Execute() override;
+    virtual ServiceStatus Execute() override;
 
 private:
-	InsertChapterMarkersAction()
-   {
-   }
+    InsertChapterMarkersAction() {}
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTER_MARKERS_ACTION_H_INCL__

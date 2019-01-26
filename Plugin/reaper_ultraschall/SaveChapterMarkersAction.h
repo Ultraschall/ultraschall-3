@@ -25,6 +25,7 @@
 #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__
 
+#include "Common.h"
 #include "ICustomAction.h"
 
 namespace ultraschall { namespace reaper {
@@ -32,34 +33,32 @@ namespace ultraschall { namespace reaper {
 class SaveChapterMarkersAction : public ICustomAction
 {
 public:
-   static const char* UniqueId()
-   {
-      return "ULTRASCHALL_SAVE_CHAPTERS";
-   }
+    static const char* UniqueId()
+    {
+        return "ULTRASCHALL_SAVE_CHAPTERS";
+    }
 
-   static const char* UniqueName()
-   {
-      return "ULTRASCHALL: Export chapter markers...";
-   }
+    static const char* UniqueName()
+    {
+        return "ULTRASCHALL: Export chapter markers...";
+    }
 
-   static ICustomAction* CreateCustomAction()
-   {
-      return new SaveChapterMarkersAction();
-   }
+    static ICustomAction* CreateCustomAction()
+    {
+        return new SaveChapterMarkersAction();
+    }
 
-   virtual ServiceStatus Execute() override;
+    virtual ServiceStatus Execute() override;
 
 private:
-	SaveChapterMarkersAction()
-   {
-   }
+    SaveChapterMarkersAction() {}
 
-  std::vector<Marker> chapters_;
-  bool ConfigureAssets();
-  void ResetAssets();
-  std::vector<std::string> ValidateChapterMarkers();
+    std::vector<Marker>      chapters_;
+    bool                     ConfigureAssets();
+    void                     ResetAssets();
+    StringArray ValidateChapterMarkers();
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_ACTION_H_INCL__

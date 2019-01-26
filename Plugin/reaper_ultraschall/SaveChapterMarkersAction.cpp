@@ -76,7 +76,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
 
     if ((SERVICE_SUCCESS == status) && (ConfigureAssets() == true))
     {
-        std::vector<std::string> errorMessages = ValidateChapterMarkers();
+        StringArray errorMessages = ValidateChapterMarkers();
         if (errorMessages.empty() == false)
         {
             std::ofstream os(targetPath, std::ios::out);
@@ -84,7 +84,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
             {
                 for (size_t i = 0; i < chapters_.size(); i++)
                 {
-                    const std::string timestamp = framework::SecondsToString(chapters_[i].Position());
+                    const std::string timestamp = SecondsToString(chapters_[i].Position());
                     const std::string item      = timestamp + " " + chapters_[i].Name();
 
                     os << item << std::endl;
@@ -131,7 +131,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
 bool SaveChapterMarkersAction::ConfigureAssets()
 {
     bool                     result = false;
-    std::vector<std::string> messages;
+    StringArray messages;
     size_t                   invalidAssetCount = 0;
 
     ProjectManager& projectManager = ProjectManager::Instance();
@@ -197,11 +197,11 @@ void SaveChapterMarkersAction::ResetAssets()
     chapters_.clear();
 }
 
-std::vector<std::string> SaveChapterMarkersAction::ValidateChapterMarkers()
+StringArray SaveChapterMarkersAction::ValidateChapterMarkers()
 {
-    PRECONDITION_RETURN(chapters_.empty() == false, std::vector<std::string>());
+    PRECONDITION_RETURN(chapters_.empty() == false, StringArray());
 
-    std::vector<std::string> errorMessages;
+    StringArray errorMessages;
 
     for (size_t i = 0; i < chapters_.size(); i++)
     {
@@ -221,7 +221,7 @@ std::vector<std::string> SaveChapterMarkersAction::ValidateChapterMarkers()
         if (current.Name().empty() == true)
         {
             std::stringstream os;
-            os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
+            os << "Chapter marker at '" << SecondsToString(safePosition) << "' has no name.";
             os << "\r\n";
             errorMessages.push_back(os.str());
         }

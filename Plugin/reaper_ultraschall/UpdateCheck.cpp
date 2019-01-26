@@ -22,19 +22,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <chrono>
-#include <ctime>
-#include <sstream>
-#include <string>
-
-#ifdef ULTRASCHALL_PLATFORM_WIN32
+#ifdef _WIN32
 #define CURL_STATICLIB
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef _WIN32
+#endif // #ifdef _WIN32
 #include <curl/curl.h>
 #include <curl/easy.h>
 
-#include "Framework.h"
+#include "Common.h"
+#include "Platform.h"
 #include "ReaperEntryPoints.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
@@ -133,14 +129,14 @@ void UpdateCheck()
                     std::string remoteVersion = out.str();
                     if (remoteVersion.empty() == false)
                     {
-                        framework::StringTrim(remoteVersion);
+                        StringTrim(remoteVersion);
                         const std::string localVersion = VersionHandler::PluginVersion();
                         if (remoteVersion > localVersion)
                         {
                             std::string message
                                 = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the updated version ";
                             message += remoteVersion + ".";
-                        UIMessageDialog::Show(message);
+                            UIMessageDialog::Show(message);
                         }
                     }
                 }

@@ -22,429 +22,428 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <string>
 #include <algorithm>
+#include <string>
 
-#include "StringUtilities.h"
-#include "Project.h"
 #include "Application.h"
-#include "ReaperEntryPoints.h"
 #include "FileManager.h"
+#include "Project.h"
+#include "ReaperEntryPoints.h"
+#include "StringUtilities.h"
 
-namespace ultraschall
-{
-namespace reaper
-{
+namespace ultraschall { namespace reaper {
 
 const double Project::INVALID_POSITION = -1;
 
-Project::Project() : projectReference_(0)
-{
-}
+Project::Project() : nativeReference_(0) {}
 
-Project::Project(ProjectHandle projectReference) : projectReference_(projectReference)
+Project::Project(void* nativeReference) : nativeReference_(nativeReference)
 {
-   UpdateAllMarkers();
+    UpdateAllMarkers();
 }
 
 Project::~Project()
 {
-   projectReference_ = 0;
+    nativeReference_ = 0;
 }
 
-Project::Project(const Project &rhs)
+Project::Project(const Project& rhs)
 {
-   *this = rhs;
+    *this = rhs;
 }
 
-Project &Project::operator=(const Project &rhs)
+Project& Project::operator=(const Project& rhs)
 {
-   if (this != &rhs)
-   {
-      projectReference_ = rhs.projectReference_;
-   }
+    if (this != &rhs)
+    {
+        nativeReference_ = rhs.nativeReference_;
+    }
 
-   return *this;
+    return *this;
 }
 
-bool Project::Validate(const Project &project)
+bool Project::Validate(const Project& project)
 {
-   return project.projectReference_ != 0;
+    return project.nativeReference_ != 0;
 }
 
 std::string Project::FullPathName() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, std::string());
+    PRECONDITION_RETURN(nativeReference_ != 0, std::string());
 
-   std::string result;
+    std::string result;
 
-   static const size_t MAX_REAPER_STRING_BUFFER_SIZE = 4096;
-   char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
-   int index = 0;
-   ReaProject *externalReference = reaper_api::EnumProjects(index++, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-   while ((externalReference != 0) && (result.empty() == true))
-   {
-      if (externalReference == projectReference_)
-      {
-         result = buffer;
-      }
+    static const size_t MAX_REAPER_STRING_BUFFER_SIZE         = 4096;
+    char                buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
+    int                 index                                 = 0;
+    ReaProject*         externalReference                     = reaper_api::EnumProjects(index++, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
+    while ((externalReference != 0) && (result.empty() == true))
+    {
+        if (externalReference == nativeReference_)
+        {
+            result = buffer;
+        }
 
-      externalReference = reaper_api::EnumProjects(index++, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-   }
+        externalReference = reaper_api::EnumProjects(index++, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
+    }
 
-   return framework::UnicodeStringToAnsiString(result);
+    return UnicodeStringToAnsiString(result);
 }
 
 std::string Project::FolderName() const
 {
-   std::string result;
+    std::string result;
 
-   const std::string fullPath = FullPathName();
-   if (fullPath.empty() == false)
-   {
-      const char pathSeparator = FileManager::GetPathSeparator();
-      const std::vector<std::string> pathComponents = framework::StringTokenize(fullPath, pathSeparator);
-      if (pathComponents.empty() == false)
-      {
-         for (size_t i = 0; i < pathComponents.size() - 1; i++)
-         {
-            result += pathComponents[i];
-            if (i < pathComponents.size() - 2)
+    const std::string fullPath = FullPathName();
+    if (fullPath.empty() == false)
+    {
+        const char        pathSeparator  = FileManager::PathSeparator();
+        const StringArray pathComponents = StringTokenize(fullPath, pathSeparator);
+        if (pathComponents.empty() == false)
+        {
+            for (size_t i = 0; i < pathComponents.size() - 1; i++)
             {
-               result += pathSeparator;
+                result += pathComponents[i];
+                if (i < pathComponents.size() - 2)
+                {
+                    result += pathSeparator;
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   return result;
+    return result;
 }
 
 std::string Project::FileName() const
 {
-   std::string result;
+    std::string result;
 
-   const std::string fullPath = FullPathName();
-   if (fullPath.empty() == false)
-   {
-      const char pathSeparator = FileManager::GetPathSeparator();
-      const std::vector<std::string> pathComponents = framework::StringTokenize(fullPath, pathSeparator);
-      if (pathComponents.empty() == false)
-      {
-         result = pathComponents[pathComponents.size() - 1];
-      }
-   }
+    const std::string fullPath = FullPathName();
+    if (fullPath.empty() == false)
+    {
+        const char        pathSeparator  = FileManager::PathSeparator();
+        const StringArray pathComponents = StringTokenize(fullPath, pathSeparator);
+        if (pathComponents.empty() == false)
+        {
+            result = pathComponents[pathComponents.size() - 1];
+        }
+    }
 
-   return result;
+    return result;
 }
 
 std::string Project::Name() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, std::string());
+    PRECONDITION_RETURN(nativeReference_ != 0, std::string());
 
-   std::string result;
+    std::string result;
 
-   const std::string file = FileName();
-   if (file.empty() == false)
-   {
-      result = file.substr(0, file.rfind('.'));
-   }
+    const std::string file = FileName();
+    if (file.empty() == false)
+    {
+        result = file.substr(0, file.rfind('.'));
+    }
 
-   return result;
+    return result;
 }
 
 std::string Project::Notes() const
 {
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
+    PRECONDITION_RETURN(nativeReference_ != 0, std::string());
 
-   static const size_t MAX_PROJECT_NOTES_SIZE = 4096;
-   char projectNotes[MAX_PROJECT_NOTES_SIZE] = {0};
-   reaper_api::GetSetProjectNotes(projectReference, false, projectNotes, (int)MAX_PROJECT_NOTES_SIZE);
-   std::string notes = projectNotes;
-   notes.erase(std::remove(notes.begin(), notes.end(), '\r'), notes.end());
-   return framework::UnicodeStringToAnsiString(notes);
+    ReaProject*         projectReference                     = reinterpret_cast<ReaProject*>(nativeReference_);
+    static const size_t MAX_PROJECT_NOTES_SIZE               = 4096;
+    char                projectNotes[MAX_PROJECT_NOTES_SIZE] = {0};
+    reaper_api::GetSetProjectNotes(projectReference, false, projectNotes, (int)MAX_PROJECT_NOTES_SIZE);
+    std::string notes = projectNotes;
+    notes.erase(std::remove(notes.begin(), notes.end(), '\r'), notes.end());
+    return UnicodeStringToAnsiString(notes);
 }
 
-bool Project::InsertMarker(const Marker &marker)
+bool Project::InsertMarker(const Marker& marker)
 {
-   allMarkers_.push_back(marker);
-   UpdateVisibleMarkers(MarkerStatus());
-   return false;
+    allMarkers_.push_back(marker);
+    UpdateVisibleMarkers(MarkerStatus());
+    return false;
 }
 
-bool Project::InsertMarker(const std::string &name, const int /*color*/, const double position)
+bool Project::InsertMarker(const std::string& name, const int /*color*/, const double position)
 {
-   PRECONDITION_RETURN(projectReference_ != 0, false);
-   PRECONDITION_RETURN(name.empty() == false, false);
+    PRECONDITION_RETURN(nativeReference_ != 0, false);
+    PRECONDITION_RETURN(name.empty() == false, false);
 
-   double actualPosition = position;
-   if (actualPosition == INVALID_POSITION)
-   {
-      actualPosition = CurrentPosition();
-   }
+    double actualPosition = position;
+    if (actualPosition == INVALID_POSITION)
+    {
+        actualPosition = CurrentPosition();
+    }
 
-   const int index = reaper_api::AddProjectMarker2(projectReference_, false, actualPosition, 0, name.c_str(), -1, 0);
-   return index != -1;
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    const int   index            = reaper_api::AddProjectMarker2(projectReference, false, actualPosition, 0, name.c_str(), -1, 0);
+    return index != -1;
 }
 
 double Project::CurrentPosition() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
+    PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double position = INVALID_POSITION;
-   const int playState = reaper_api::GetPlayStateEx(projectReference);
-   if ((playState == 0) || (playState == 2))
-   {
-      position = reaper_api::GetCursorPositionEx(projectReference);
-   }
-   else
-   {
-      position = reaper_api::GetPlayPositionEx(projectReference);
-   }
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    double      position         = INVALID_POSITION;
+    const int   playState        = reaper_api::GetPlayStateEx(projectReference);
+    if ((playState == 0) || (playState == 2))
+    {
+        position = reaper_api::GetCursorPositionEx(projectReference);
+    }
+    else
+    {
+        position = reaper_api::GetPlayPositionEx(projectReference);
+    }
 
-   return position;
+    return position;
 }
 
 double Project::MinPosition() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
+    PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double minPosition = MaxPosition();
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    double      minPosition      = MaxPosition();
 
-   int index = 0;
-   MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while (mediaItem != 0)
-   {
-      double startPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION");
-      if (startPosition < minPosition)
-      {
-         minPosition = startPosition;
-      }
+    int        index     = 0;
+    MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+    while (mediaItem != 0)
+    {
+        double startPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION");
+        if (startPosition < minPosition)
+        {
+            minPosition = startPosition;
+        }
 
-      mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   }
+        mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+    }
 
-   return minPosition;
+    return minPosition;
 }
 
 double Project::MaxPosition() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, INVALID_POSITION);
+    PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double maxPosition = 0;
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    double      maxPosition      = 0;
 
-   int index = 0;
-   MediaItem *mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   while (mediaItem != 0)
-   {
-      const double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") +
-                                 reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
-      if (endPosition > maxPosition)
-      {
-         maxPosition = endPosition;
-      }
+    int        index     = 0;
+    MediaItem* mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+    while (mediaItem != 0)
+    {
+        const double endPosition = reaper_api::GetMediaItemInfo_Value(mediaItem, "D_POSITION") + reaper_api::GetMediaItemInfo_Value(mediaItem, "D_LENGTH");
+        if (endPosition > maxPosition)
+        {
+            maxPosition = endPosition;
+        }
 
-      mediaItem = reaper_api::GetMediaItem(projectReference, index++);
-   }
+        mediaItem = reaper_api::GetMediaItem(projectReference, index++);
+    }
 
-   return maxPosition;
+    return maxPosition;
 }
 
 bool Project::IsValidPosition(const double position)
 {
-   PRECONDITION_RETURN(projectReference_ != 0, false);
+    PRECONDITION_RETURN(nativeReference_ != 0, false);
 
-   return (position >= 0) && (position <= MaxPosition());
+    return (position >= 0) && (position <= MaxPosition());
 }
 
 bool Project::UndoMarker()
 {
-   PRECONDITION_RETURN(projectReference_ != 0, false);
+    PRECONDITION_RETURN(nativeReference_ != 0, false);
 
-   bool success = false;
+    bool success = false;
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   double currentPosition = CurrentPosition();
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    double      currentPosition  = CurrentPosition();
 
-   int markerIndex = -1;
-   reaper_api::GetLastMarkerAndCurRegion(projectReference, currentPosition, &markerIndex, 0);
-   if (markerIndex != -1)
-   {
-      success = reaper_api::DeleteProjectMarkerByIndex(projectReference, markerIndex);
-   }
+    int markerIndex = -1;
+    reaper_api::GetLastMarkerAndCurRegion(projectReference, currentPosition, &markerIndex, 0);
+    if (markerIndex != -1)
+    {
+        success = reaper_api::DeleteProjectMarkerByIndex(projectReference, markerIndex);
+    }
 
-   return success;
+    return success;
 }
 
 std::vector<Marker> Project::FilterMarkers(const int color) const
 {
-   std::vector<Marker> result;
+    std::vector<Marker> result;
 
-   std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker &marker) {
-      if (marker.Color() == color)
-      {
-         result.push_back(marker);
-      }
-   });
+    std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker& marker) {
+        if (marker.Color() == color)
+        {
+            result.push_back(marker);
+        }
+    });
 
-   return result;
+    return result;
 }
 
 class AutoPreventUIRefresh
 {
- public:
-   AutoPreventUIRefresh()
-   {
-      reaper_api::PreventUIRefresh(1);
-   }
+public:
+    AutoPreventUIRefresh()
+    {
+        reaper_api::PreventUIRefresh(1);
+    }
 
-   virtual ~AutoPreventUIRefresh()
-   {
-      reaper_api::PreventUIRefresh(-1);
-   }
+    virtual ~AutoPreventUIRefresh()
+    {
+        reaper_api::PreventUIRefresh(-1);
+    }
 };
 
 std::vector<Marker> Project::QueryAllMarkers() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, std::vector<Marker>());
+    PRECONDITION_RETURN(nativeReference_ != 0, std::vector<Marker>());
 
-   std::vector<Marker> allMarkers;
+    std::vector<Marker> allMarkers;
 
-   bool isRegion = false;
-   double position = 0;
-   double duration = 0;
-   const char *name = 0;
-   int number = 0;
-   int color = 0;
+    bool        isRegion = false;
+    double      position = 0;
+    double      duration = 0;
+    const char* name     = 0;
+    int         number   = 0;
+    int         color    = 0;
 
-   int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
-   while (nextIndex > 0)
-   {
-      static const size_t MAX_CHAPTER_NAME_LENGTH = 62; // limitation in taglib/id3v2
-      std::string markerName = name;
-      if (markerName.size() > MAX_CHAPTER_NAME_LENGTH)
-      {
-         markerName = markerName.substr(0, MAX_CHAPTER_NAME_LENGTH);
-      }
+    ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+    int         nextIndex        = reaper_api::EnumProjectMarkers3(projectReference, 0, &isRegion, &position, &duration, &name, &number, &color);
+    while (nextIndex > 0)
+    {
+        static const size_t MAX_CHAPTER_NAME_LENGTH = 62; // limitation in taglib/id3v2
+        std::string         markerName              = name;
+        if (markerName.size() > MAX_CHAPTER_NAME_LENGTH)
+        {
+            markerName = markerName.substr(0, MAX_CHAPTER_NAME_LENGTH);
+        }
 
-      if (("_Edit" != markerName) &&                                      // remove edit markers
-          (false == isRegion) &&                                          // remove regions
-          (color != static_cast<int>(Application::GetEditMarkerColor()))) // include only chapter markers
-      {
-         allMarkers.push_back(Marker(position, markerName, color));
-      }
+        if (("_Edit" != markerName) &&                                      // remove edit markers
+            (false == isRegion) &&                                          // remove regions
+            (color != static_cast<int>(Application::GetEditMarkerColor()))) // include only chapter markers
+        {
+            allMarkers.push_back(Marker(position, markerName, color));
+        }
 
-      nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
-   }
+        nextIndex = reaper_api::EnumProjectMarkers3(projectReference, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
+    }
 
-   return allMarkers;
+    return allMarkers;
 }
 
 void Project::UpdateAllMarkers()
 {
-   PRECONDITION(projectReference_ != 0);
+    PRECONDITION(nativeReference_ != 0);
 
-   DeleteAllMarkers();
+    DeleteAllMarkers();
 
-   const size_t noMarkers = CountVisibleMarkers();
-   if (noMarkers > 0)
-   {
-      bool isRegion = false;
-      double position = 0;
-      double duration = 0;
-      const char *name = 0;
-      int number = 0;
-      int color = 0;
+    const size_t noMarkers = CountVisibleMarkers();
+    if (noMarkers > 0)
+    {
+        bool        isRegion = false;
+        double      position = 0;
+        double      duration = 0;
+        const char* name     = 0;
+        int         number   = 0;
+        int         color    = 0;
 
-      int nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, 0, &isRegion, &position, &duration, &name, &number, &color);
-      while (nextIndex > 0)
-      {
-         allMarkers_.push_back(Marker(position, name, color));
-         nextIndex = reaper_api::EnumProjectMarkers3(projectReference_, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
-      }
-   }
+        ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+        int         nextIndex        = reaper_api::EnumProjectMarkers3(projectReference, 0, &isRegion, &position, &duration, &name, &number, &color);
+        while (nextIndex > 0)
+        {
+            allMarkers_.push_back(Marker(position, name, color));
+            nextIndex = reaper_api::EnumProjectMarkers3(projectReference, nextIndex, &isRegion, &position, &duration, &name, &number, &color);
+        }
+    }
 }
 
 void Project::DeleteAllMarkers()
 {
-   allMarkers_.clear();
+    allMarkers_.clear();
 }
 
 size_t Project::CountVisibleMarkers() const
 {
-   PRECONDITION_RETURN(projectReference_ != 0, static_cast<size_t>(-1));
+    PRECONDITION_RETURN(nativeReference_ != 0, static_cast<size_t>(-1));
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   int numProjectMarkers = 0;
-   reaper_api::CountProjectMarkers(projectReference, &numProjectMarkers, 0);
-   return static_cast<size_t>(numProjectMarkers);
+    ReaProject* projectReference  = reinterpret_cast<ReaProject*>(nativeReference_);
+    int         numProjectMarkers = 0;
+    reaper_api::CountProjectMarkers(projectReference, &numProjectMarkers, 0);
+    return static_cast<size_t>(numProjectMarkers);
 }
 
 void Project::DeleteVisibleMarkers()
 {
-   PRECONDITION(projectReference_ != 0);
+    PRECONDITION(nativeReference_ != 0);
 
-   AutoPreventUIRefresh();
+    AutoPreventUIRefresh();
 
-   ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-   const size_t numProjectMarkers = CountVisibleMarkers();
-   for (size_t i = 0; i < numProjectMarkers; i++)
-   {
-      reaper_api::DeleteProjectMarkerByIndex(projectReference, static_cast<int>(i));
-   }
+    ReaProject*  projectReference  = reinterpret_cast<ReaProject*>(nativeReference_);
+    const size_t numProjectMarkers = CountVisibleMarkers();
+    for (size_t i = 0; i < numProjectMarkers; i++)
+    {
+        reaper_api::DeleteProjectMarkerByIndex(projectReference, int(i));
+    }
 }
 
 void Project::UpdateVisibleMarkers(const uint32_t mask)
 {
-   AutoPreventUIRefresh();
+    PRECONDITION(nativeReference_ != 0);
 
-   DeleteVisibleMarkers();
+    AutoPreventUIRefresh();
 
-   markerStatus_ = mask;
-   std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker &marker) {
-      bool insert = false;
+    DeleteVisibleMarkers();
 
-      if (markerStatus_ & SHOW_CHAPTER_MARKERS)
-      {
-         if (marker.Color() == CHAPTER_MARKER_COLOR)
-         {
-            insert = true;
-         }
-      }
+    markerStatus_ = mask;
+    std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker& marker) {
+        bool insert = false;
 
-      if (MarkerStatus() & SHOW_EDIT_MARKERS)
-      {
-         if (marker.Color() == EDIT_MARKER_COLOR)
-         {
-            insert = true;
-         }
-      }
+        if (markerStatus_ & SHOW_CHAPTER_MARKERS)
+        {
+            if (marker.Color() == CHAPTER_MARKER_COLOR)
+            {
+                insert = true;
+            }
+        }
 
-      if (MarkerStatus() & SHOW_SHOWNOTE_MARKERS)
-      {
-         if (marker.Color() == SHOWNOTE_MARKER_COLOR)
-         {
-            insert = true;
-         }
-      }
+        if (MarkerStatus() & SHOW_EDIT_MARKERS)
+        {
+            if (marker.Color() == EDIT_MARKER_COLOR)
+            {
+                insert = true;
+            }
+        }
 
-      if (MarkerStatus() & SHOW_HISTORICAL_MARKERS)
-      {
-         if (marker.Color() == HISTORICAL_MARKER_COLOR)
-         {
-            insert = true;
-         }
-      }
+        if (MarkerStatus() & SHOW_SHOWNOTE_MARKERS)
+        {
+            if (marker.Color() == SHOWNOTE_MARKER_COLOR)
+            {
+                insert = true;
+            }
+        }
 
-      if (true == insert)
-      {
-         ReaProject *projectReference = reinterpret_cast<ReaProject *>(projectReference_);
-         reaper_api::AddProjectMarker2(projectReference, false, marker.Position(), 0, marker.Name().c_str(), -1, marker.Color());
-      }
-   });
+        if (MarkerStatus() & SHOW_HISTORICAL_MARKERS)
+        {
+            if (marker.Color() == HISTORICAL_MARKER_COLOR)
+            {
+                insert = true;
+            }
+        }
+
+        if (true == insert)
+        {
+            ReaProject* projectReference = reinterpret_cast<ReaProject*>(nativeReference_);
+            reaper_api::AddProjectMarker2(projectReference, false, marker.Position(), 0, marker.Name().c_str(), -1, marker.Color());
+        }
+    });
 }
-} // namespace reaper
-} // namespace ultraschall
+}} // namespace ultraschall::reaper

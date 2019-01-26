@@ -22,15 +22,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_SERVICE_STATUS_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_SERVICE_STATUS_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_SERVICE_STATUS_H_INCL__
+#define __ULTRASCHALL_REAPER_SERVICE_STATUS_H_INCL__
 
-#include <cstdint>
+#include "Common.h"
 
 typedef uint32_t ServiceStatus;
 
 #define SERVICE_STATUS_CODE(facility, code) ((facility) | (code))
-#define DEFINE_SERVICE_STATUS(status, facility, code) extern ServiceStatus (status) = SERVICE_STATUS_CODE((facility), (code))
+#define DEFINE_SERVICE_STATUS(status, facility, code) extern ServiceStatus(status) = SERVICE_STATUS_CODE((facility), (code))
 
 // General status codes
 #define SERVICE_FRAMEWORK_FACILITY 0x00000000
@@ -55,4 +55,4 @@ typedef uint32_t ServiceStatus;
 #define ServiceSucceeded(status) ((status) == SERVICE_SUCCESS)
 #define ServiceFailed(status) ((status) != SERVICE_SUCCESS)
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_SERVICE_STATUS__H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_SERVICE_STATUS_H_INCL__

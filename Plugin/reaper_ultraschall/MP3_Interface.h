@@ -25,19 +25,18 @@
 #ifndef __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
 #define __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__
 
-#include <string>
-#include <vector>
 #include "taglib_include.h"
+
+#include "Common.h"
 #include "Marker.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
 struct MP3_EXPORT_CONTEXT;
 
 MP3_EXPORT_CONTEXT* MP3_StartTransaction(const std::string& targetName);
-bool MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context);
-void MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context);
+bool                MP3_CommitTransaction(MP3_EXPORT_CONTEXT*& context);
+void                MP3_AbortTransaction(MP3_EXPORT_CONTEXT*& context);
 
 uint32_t MP3_QueryTargetDuration(const std::string& targetName);
 
@@ -47,10 +46,10 @@ bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const std::string& id);
 bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text);
 bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text);
 bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const std::string& id, const std::string& text, const uint32_t startTime, const uint32_t endTime);
-bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const std::vector<std::string>& tableOfContentsItems);
+bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const StringArray& tableOfContentsItems);
 bool MP3_InsertPodcastFrame(MP3_EXPORT_CONTEXT* context);
 bool MP3_InsertCoverPictureFrame(MP3_EXPORT_CONTEXT* context, const std::string& image);
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MP3_INTERFACE_H_INCL__

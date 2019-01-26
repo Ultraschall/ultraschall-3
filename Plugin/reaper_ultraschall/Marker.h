@@ -25,44 +25,38 @@
 #ifndef __ULTRASCHALL_REAPER_MARKER_H_INCL__
 #define __ULTRASCHALL_REAPER_MARKER_H_INCL__
 
-#include <string>
+#include "Common.h"
 
 namespace ultraschall { namespace reaper {
 
 class Marker
 {
 public:
-   Marker() :
-      position_(-1), color_(0xffffffff)
-   {
-   }
+    Marker() : position_(-1), color_(0xffffffff) {}
 
-   Marker(const double position, const std::string& name, const int color) :
-      position_(position), name_(name), color_(color)
-   {
-   }
+    Marker(const double position, const std::string& name, const int color) : position_(position), name_(name), color_(color) {}
 
-   double Position() const
-   {
-      return position_;
-   }
+    double Position() const
+    {
+        return position_;
+    }
 
-   const std::string& Name() const
-   {
-      return name_;
-   }
+    const std::string& Name() const
+    {
+        return name_;
+    }
 
-   int Color() const
-   {
-      return color_;
-   }
+    int Color() const
+    {
+        return color_;
+    }
 
 private:
-   double position_;
-   std::string name_;
-   int color_;
+    double      position_;
+    std::string name_;
+    int         color_;
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MARKER_H_INCL__

@@ -27,8 +27,7 @@
 
 #include "wx/wx.h"
 
-
-namespace ultraschall { namespace framework {
+namespace ultraschall { namespace reaper {
 
 std::string StringLowercase(const std::string& str)
 {
@@ -487,4 +486,4 @@ UnicodeStringSz2 MakeUTF8StringSz2(const std::string& str)
 }
 #endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 
-}} // namespace ultraschall::framework
+}} // namespace ultraschall::reaper

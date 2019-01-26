@@ -25,59 +25,58 @@
 #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_FACTORY_H_INCL__
 #define __ULTRASCHALL_REAPER_CUSTOM_ACTION_FACTORY_H_INCL__
 
-#include <mutex>
-#include <map>
-
-#include "ServiceStatus.h"
-#include "ICustomAction.h"
+#include "Common.h"
 
 namespace ultraschall { namespace reaper {
+
+class ICustomAction;
 
 class CustomActionFactory
 {
 public:
-   static CustomActionFactory& Instance();
+    static CustomActionFactory& Instance();
 
-   typedef ICustomAction* (*CREATE_CUSTOM_ACTION_FUNCTION)();
+    typedef ICustomAction* (*CREATE_CUSTOM_ACTION_FUNCTION)();
 
-   ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+    ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
 
-   void UnregisterCustomAction(const std::string& id);
-   void UnregisterAllCustomActions();
+    void UnregisterCustomAction(const std::string& id);
+    void UnregisterAllCustomActions();
 
-   ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
+    ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
 
 protected:
-   virtual ~CustomActionFactory();
+    virtual ~CustomActionFactory();
 
 private:
-   CustomActionFactory();
+    CustomActionFactory();
 
-   CustomActionFactory(const CustomActionFactory&);
-   CustomActionFactory& operator=(const CustomActionFactory&);
+    CustomActionFactory(const CustomActionFactory&);
+    CustomActionFactory& operator=(const CustomActionFactory&);
 
-   std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION> functions_;
-   mutable std::recursive_mutex functionsLock_;
+    typedef std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION> FunctionDictionary;
+    FunctionDictionary                                           functions_;
+    mutable std::recursive_mutex                                 functionsLock_;
 };
 
 template<class C> class DeclareCustomAction
 {
 public:
-   typedef C custom_action_type;
+    typedef C custom_action_type;
 
-   DeclareCustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
-   }
+    DeclareCustomAction()
+    {
+        CustomActionFactory& factory = CustomActionFactory::Instance();
+        factory.RegisterCustomAction(custom_action_type::UniqueId(), custom_action_type::CreateCustomAction);
+    }
 
-   virtual ~DeclareCustomAction()
-   {
-      CustomActionFactory& factory = CustomActionFactory::Instance();
-      factory.UnregisterCustomAction(custom_action_type::UniqueId());
-   }
+    virtual ~DeclareCustomAction()
+    {
+        CustomActionFactory& factory = CustomActionFactory::Instance();
+        factory.UnregisterCustomAction(custom_action_type::UniqueId());
+    }
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_FACTORY_H_INCL__

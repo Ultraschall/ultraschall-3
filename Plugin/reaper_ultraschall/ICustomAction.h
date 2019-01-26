@@ -25,63 +25,56 @@
 #ifndef __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
-#include "IUnknown.h"
-#include "ServiceStatus.h"
+#include "Common.h"
 
 #include "ProjectManager.h"
 
-namespace framework = ultraschall::framework;
-
 namespace ultraschall { namespace reaper {
 
-class ICustomAction : public framework::IUnknown
+class ICustomAction : public SharedObject
 {
 public:
-   static bool ValidateCustomActionId(const int32_t id)
-   {
-      return id != INVALID_CUSTOM_ACTION_ID;
-   }
+    static bool ValidateCustomActionId(const int32_t id)
+    {
+        return id != INVALID_CUSTOM_ACTION_ID;
+    }
 
-   virtual ServiceStatus Execute() = 0;
+    virtual ServiceStatus Execute() = 0;
 
-   static bool RegisterProject()
-   {
-      bool registered = false;
+    static bool RegisterProject()
+    {
+        bool registered = false;
 
-      ProjectManager& projectManager = ProjectManager::Instance();
-      ProjectHandle currentProjectReference = projectManager.CurrentProjectReference();
-      if(currentProjectReference != nullptr)
-      {
-         const Project& currentProject = projectManager.LookupProject(currentProjectReference);
-         if(Project::Validate(currentProject) == false)
-         {
-            registered = projectManager.InsertProject(currentProjectReference);
-         }
-         else
-         {
-            registered = true;
-         }
-      }
+        ProjectManager& projectManager          = ProjectManager::Instance();
+        void*   currentProjectReference = projectManager.CurrentProjectReference();
+        if (currentProjectReference != nullptr)
+        {
+            const Project& currentProject = projectManager.LookupProject(currentProjectReference);
+            if (Project::Validate(currentProject) == false)
+            {
+                registered = projectManager.InsertProject(currentProjectReference);
+            }
+            else
+            {
+                registered = true;
+            }
+        }
 
-      return registered;
-   }
+        return registered;
+    }
 
 protected:
-   ICustomAction()
-   {
-   }
+    ICustomAction() {}
 
-   virtual ~ICustomAction()
-   {
-   }
+    virtual ~ICustomAction() {}
 
 private:
-   ICustomAction(const ICustomAction&);
-   ICustomAction& operator=(const ICustomAction&);
+    ICustomAction(const ICustomAction&);
+    ICustomAction& operator=(const ICustomAction&);
 
-   static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
+    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__

@@ -27,14 +27,13 @@
 
 #include "CustomActionFactory.h"
 #include "FileManager.h"
-#include "Framework.h"
 #include "ITagWriter.h"
 #include "InsertMediaPropertiesAction.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
-#include "UIMessageDialog.h"
 #include "UIFileDialog.h"
+#include "UIMessageDialog.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -91,7 +90,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
 
         if ((targetNames_.empty() == false) && (ConfigureAssets() == true))
         {
-            std::vector<std::string> errorMessages;
+            StringArray errorMessages;
             if (ValidateChapterMarkers(errorMessages) == true)
             {
                 std::vector<ErrorRecord> errorRecords;
@@ -125,7 +124,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                             }
                         }
 
-                        framework::SafeRelease(pTagWriter);
+                        SafeRelease(pTagWriter);
                     }
                 }
 
@@ -192,9 +191,9 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
     return SERVICE_SUCCESS;
 }
 
-std::vector<std::string> InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
+StringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
 {
-    std::vector<std::string> targetNames;
+    StringArray targetNames;
 
     const std::string projectFolder = project.FolderName();
     const std::string projectName   = project.Name();
@@ -226,7 +225,7 @@ std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
 
     std::string coverImage;
 
-    std::vector<std::string> imageNames;
+    StringArray imageNames;
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
@@ -264,8 +263,8 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targ
 std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
 {
     std::string firstStage  = targetName;
-    std::string secondStage = framework::StringTrimRight(firstStage);
-    return framework::StringLowercase(secondStage);
+    std::string secondStage = StringTrimRight(firstStage);
+    return StringLowercase(secondStage);
 }
 
 InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const std::string& targetName)
@@ -301,7 +300,7 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
 bool InsertMediaPropertiesAction::ConfigureAssets()
 {
     bool                     result = false;
-    std::vector<std::string> messages;
+    StringArray messages;
     size_t                   invalidAssetCount = 0;
 
     ProjectManager& projectManager = ProjectManager::Instance();
@@ -387,7 +386,7 @@ void InsertMediaPropertiesAction::ResetAssets()
     chapters_.clear();
 }
 
-bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string>& errorMessages)
+bool InsertMediaPropertiesAction::ValidateChapterMarkers(StringArray& errorMessages)
 {
     bool valid = true;
     errorMessages.clear();
@@ -413,7 +412,7 @@ bool InsertMediaPropertiesAction::ValidateChapterMarkers(std::vector<std::string
         if (current.Name().empty() == true)
         {
             std::stringstream os;
-            os << "Chapter marker at '" << framework::SecondsToString(safePosition) << "' has no name.";
+            os << "Chapter marker at '" << SecondsToString(safePosition) << "' has no name.";
             os << "\r\n";
             errorMessages.push_back(os.str());
 

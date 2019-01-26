@@ -22,14 +22,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__
-#define __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_REAPER_ENTRY_POINTS_H_INCL__
+#define __ULTRASCHALL_REAPER_REAPER_ENTRY_POINTS_H_INCL__
 
 // disable 'unreferenced formal parameter'
-#pragma warning(disable: 4100)
+#pragma warning(disable : 4100)
 // Include base SDK header
 #include <reaper_plugin.h>
-#pragma warning(default: 4100)
+#pragma warning(default : 4100)
 
 // This must be included after 'reaper_plugin.h'.
 #define REAPERAPI_DECL
@@ -76,13 +76,14 @@ namespace ultraschall { namespace reaper {
 class ReaperEntryPoints
 {
 public:
-   static REAPER_PLUGIN_HINSTANCE instance_;
+    static REAPER_PLUGIN_HINSTANCE instance_;
 
-   static bool Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+    static bool Setup(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+
 private:
-   static bool LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
+    static bool LoadEntryPoints(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo);
 };
 
-}}
+}} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_ENTRY_POINTS_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_REAPER_ENTRY_POINTS_H_INCL__

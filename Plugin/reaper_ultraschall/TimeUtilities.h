@@ -22,13 +22,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_FRAMEWORK_TIME_UTILITIES_H_INCL__
-#define __ULTRASCHALL_FRAMEWORK_TIME_UTILITIES_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_TIME_UTILITIES_H_INCL__
+#define __ULTRASCHALL_REAPER_TIME_UTILITIES_H_INCL__
 
-#include <string>
+#include "Common.h"
 
-namespace ultraschall {
-namespace framework {
+namespace ultraschall { namespace reaper {
 
 std::string MillisecondsToString(const uint32_t milliseconds, const bool roundSeconds = false);
 
@@ -38,6 +37,6 @@ std::string SecondsToString(const double seconds, const bool roundSeconds = fals
 
 double StringToSeconds(const std::string& str);
 
-}}
+}} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_FRAMEWORK_TIME_UTILITIES_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_TIME_UTILITIES_H_INCL__

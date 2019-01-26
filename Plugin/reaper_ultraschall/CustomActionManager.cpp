@@ -22,200 +22,192 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Framework.h"
 #include "CustomActionManager.h"
-#include "ICustomAction.h"
 
-namespace framework = ultraschall::framework;
+namespace ultraschall { namespace reaper {
 
-namespace ultraschall {
-namespace reaper {
-
-CustomActionManager::CustomActionManager()
-{
-}
+CustomActionManager::CustomActionManager() {}
 
 CustomActionManager::~CustomActionManager()
 {
-   UnregisterAllCustomActions();
+    UnregisterAllCustomActions();
 }
 
 CustomActionManager& CustomActionManager::Instance()
 {
-   static CustomActionManager self;
-   return self;
+    static CustomActionManager self;
+    return self;
 }
 
 ServiceStatus CustomActionManager::RegisterCustomAction(const std::string& name, int32_t id, ICustomAction* pCustomAction)
 {
-   PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, SERVICE_INVALID_ARGUMENT);
-   PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
-   PRECONDITION_RETURN(pCustomAction != 0, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
+    PRECONDITION_RETURN(pCustomAction != 0, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FAILURE;
+    ServiceStatus status = SERVICE_FAILURE;
 
-   std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   std::map<int32_t, ICustomAction*>::iterator actionIterator = customActions_.find(id);
-   if(customActions_.end() == actionIterator)
-   {
-      std::map<std::string, int32_t>::iterator idIterator = customActionIds_.find(name);
-      if(customActionIds_.end() == idIterator)
-      {
-         bool inserted = customActionIds_.insert(std::map<std::string, int32_t>::value_type(name, id)).second;
-         if(true == inserted)
-         {
-            pCustomAction->AddRef();
-            inserted = customActions_.insert(std::map<int32_t, ICustomAction*>::value_type(id, pCustomAction)).second;
-            if(true == inserted)
+    CustomActionDictionary::iterator actionIterator = customActions_.find(id);
+    if (customActions_.end() == actionIterator)
+    {
+        CustomActionIdDictionary::iterator idIterator = customActionIds_.find(name);
+        if (customActionIds_.end() == idIterator)
+        {
+            bool inserted = customActionIds_.insert(CustomActionIdDictionary::value_type(name, id)).second;
+            if (true == inserted)
             {
-               status = SERVICE_SUCCESS;
+                pCustomAction->AddRef();
+                inserted = customActions_.insert(CustomActionDictionary::value_type(id, pCustomAction)).second;
+                if (true == inserted)
+                {
+                    status = SERVICE_SUCCESS;
+                }
+                else
+                {
+                    customActionIds_.erase(name);
+                }
             }
-            else
-            {
-               customActionIds_.erase(name);
-            }
-         }
-      }
-   }
-   else
-   {
-      status = SERVICE_MANAGER_ALREADY_REGISTERED;
-   }
+        }
+    }
+    else
+    {
+        status = SERVICE_MANAGER_ALREADY_REGISTERED;
+    }
 
-   return status;
+    return status;
 }
 
 void CustomActionManager::UnregisterCustomAction(const int32_t id)
 {
-   PRECONDITION(ICustomAction::ValidateCustomActionId(id) != false);
-   PRECONDITION(customActions_.empty() == false);
-   PRECONDITION(customActionIds_.empty() == false);
+    PRECONDITION(ICustomAction::ValidateCustomActionId(id) != false);
+    PRECONDITION(customActions_.empty() == false);
+    PRECONDITION(customActionIds_.empty() == false);
 
-   const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   const std::map<int32_t, ICustomAction*>::const_iterator actionIterator = customActions_.find(id);
-   if(customActions_.end() != actionIterator)
-   {
-      ICustomAction* pCustomAction = actionIterator->second;
-      customActions_.erase(actionIterator);
-      framework::SafeRelease(pCustomAction);
-   }
+    const CustomActionDictionary::const_iterator actionIterator = customActions_.find(id);
+    if (customActions_.end() != actionIterator)
+    {
+        ICustomAction* pCustomAction = actionIterator->second;
+        customActions_.erase(actionIterator);
+        SafeRelease(pCustomAction);
+    }
 
-   std::map<std::string, int32_t>::iterator idIterator = customActionIds_.begin();
-   while(customActionIds_.end() != idIterator)
-   {
-      const int32_t actionId = idIterator->second;
-      if(id == actionId)
-      {
-         customActionIds_.erase(idIterator);
-         break;
-      }
+    CustomActionIdDictionary::iterator idIterator = customActionIds_.begin();
+    while (customActionIds_.end() != idIterator)
+    {
+        const int32_t actionId = idIterator->second;
+        if (id == actionId)
+        {
+            customActionIds_.erase(idIterator);
+            break;
+        }
 
-      idIterator++;
-   }
+        idIterator++;
+    }
 }
 
 void CustomActionManager::UnregisterCustomAction(const std::string& name)
 {
-   PRECONDITION(customActions_.empty() == false);
-   PRECONDITION(customActionIds_.empty() == false);
-   PRECONDITION(name.empty() == false);
+    PRECONDITION(customActions_.empty() == false);
+    PRECONDITION(customActionIds_.empty() == false);
+    PRECONDITION(name.empty() == false);
 
-   const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   const std::map<std::string, int32_t>::const_iterator idIterator = customActionIds_.find(name);
-   if(customActionIds_.end() != idIterator)
-   {
-      const int32_t id = idIterator->second;
-      const std::map<int32_t, ICustomAction*>::const_iterator actionIterator = customActions_.find(id);
-      if(customActions_.end() != actionIterator)
-      {
-         ICustomAction* pCustomAction = actionIterator->second;
-         customActions_.erase(actionIterator);
-         framework::SafeRelease(pCustomAction);
-      }
+    const CustomActionIdDictionary::const_iterator idIterator = customActionIds_.find(name);
+    if (customActionIds_.end() != idIterator)
+    {
+        const int32_t                                id             = idIterator->second;
+        const CustomActionDictionary::const_iterator actionIterator = customActions_.find(id);
+        if (customActions_.end() != actionIterator)
+        {
+            ICustomAction* pCustomAction = actionIterator->second;
+            customActions_.erase(actionIterator);
+            SafeRelease(pCustomAction);
+        }
 
-      customActionIds_.erase(idIterator);
-   }
+        customActionIds_.erase(idIterator);
+    }
 }
 
 void CustomActionManager::UnregisterAllCustomActions()
 {
-   const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   while(customActionIds_.empty() == false)
-   {
-      const std::map<std::string, int32_t>::const_iterator idIterator = customActionIds_.begin();
-      customActionIds_.erase(idIterator);
-   }
+    while (customActionIds_.empty() == false)
+    {
+        const CustomActionIdDictionary::const_iterator idIterator = customActionIds_.begin();
+        customActionIds_.erase(idIterator);
+    }
 
-   while(customActions_.empty() == false)
-   {
-      const std::map<int32_t, ICustomAction*>::const_iterator actionIterator = customActions_.begin();
-      ICustomAction* pCustomAction = actionIterator->second;
-      customActions_.erase(actionIterator);
-      framework::SafeRelease(pCustomAction);
-   }
+    while (customActions_.empty() == false)
+    {
+        const CustomActionDictionary::const_iterator actionIterator = customActions_.begin();
+        ICustomAction*                               pCustomAction  = actionIterator->second;
+        customActions_.erase(actionIterator);
+        SafeRelease(pCustomAction);
+    }
 }
 
 ServiceStatus CustomActionManager::LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const
 {
-   PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
-   PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);
-   PRECONDITION_RETURN(id != 0, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
+    PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);
+    PRECONDITION_RETURN(id != 0, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FAILURE;
+    ServiceStatus status = SERVICE_FAILURE;
 
-   const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   pCustomAction = 0;
-   const std::map<int32_t, ICustomAction*>::const_iterator i = customActions_.find(id);
-   if(i != customActions_.end())
-   {
-      pCustomAction = i->second;
-      if(pCustomAction != 0)
-      {
-         pCustomAction->AddRef();
-         status = SERVICE_SUCCESS;
-      }
-      else
-      {
-         status = SERVICE_MANAGER_ACQUIRE_FAILED;
-      }
-   }
-   else
-   {
-      status = SERVICE_MANAGER_NOT_FOUND;
-   }
+    pCustomAction                                  = 0;
+    const CustomActionDictionary::const_iterator i = customActions_.find(id);
+    if (i != customActions_.end())
+    {
+        pCustomAction = i->second;
+        if (pCustomAction != 0)
+        {
+            pCustomAction->AddRef();
+            status = SERVICE_SUCCESS;
+        }
+        else
+        {
+            status = SERVICE_MANAGER_ACQUIRE_FAILED;
+        }
+    }
+    else
+    {
+        status = SERVICE_MANAGER_NOT_FOUND;
+    }
 
-   return status;
+    return status;
 }
 
 ServiceStatus CustomActionManager::LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const
 {
-   PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
-   PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);
-   PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
+    PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);
+    PRECONDITION_RETURN(name.empty() == false, SERVICE_INVALID_ARGUMENT);
 
-   ServiceStatus status = SERVICE_FAILURE;
+    ServiceStatus status = SERVICE_FAILURE;
 
-   const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
+    const std::lock_guard<std::recursive_mutex> lock(customActionsLock_);
 
-   pCustomAction = 0;
-   const std::map<std::string, int32_t>::const_iterator idIterator = customActionIds_.find(name);
-   if(idIterator != customActionIds_.end())
-   {
-      const int32_t id = idIterator->second;
-      status = LookupCustomAction(id, pCustomAction);
-   }
-   else
-   {
-      status = SERVICE_MANAGER_NOT_FOUND;
-   }
+    pCustomAction                                             = 0;
+    const CustomActionIdDictionary::const_iterator idIterator = customActionIds_.find(name);
+    if (idIterator != customActionIds_.end())
+    {
+        const int32_t id = idIterator->second;
+        status           = LookupCustomAction(id, pCustomAction);
+    }
+    else
+    {
+        status = SERVICE_MANAGER_NOT_FOUND;
+    }
 
-   return status;
+    return status;
 }
 
-}
-}
+}} // namespace ultraschall::reaper

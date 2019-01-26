@@ -21,112 +21,103 @@
 // THE SOFTWARE.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#include "Framework.h"
+
 #include "ProjectManager.h"
 #include "ReaperEntryPoints.h"
 
-namespace framework = ultraschall::framework;
-
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
 const Project ProjectManager::INVALID_PROJECT;
 
-ProjectManager::ProjectManager()
-{
-}
+ProjectManager::ProjectManager() {}
 
-ProjectManager::~ProjectManager()
-{
-}
+ProjectManager::~ProjectManager() {}
 
 ProjectManager& ProjectManager::Instance()
 {
-   static ProjectManager self;
-   return self;
+    static ProjectManager self;
+    return self;
 }
 
 const Project& ProjectManager::CurrentProject() const
 {
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   ProjectHandle currentProjectReference = CurrentProjectReference();
-   return LookupProject(currentProjectReference);
+    void* currentProjectReference = CurrentProjectReference();
+    return LookupProject(currentProjectReference);
 }
 
-ProjectHandle ProjectManager::CurrentProjectReference() const
+void* ProjectManager::CurrentProjectReference() const
 {
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   return reaper_api::EnumProjects(-1, 0, 0);
+    return reaper_api::EnumProjects(-1, 0, 0);
 }
 
 std::string ProjectManager::CurrentProjectName() const
 {
-   std::string result;
+    std::string result;
 
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   const Project& currentProject = CurrentProject();
-   if(Project::Validate(currentProject) == true)
-   {
-      result = currentProject.Name();
-   }
+    const Project& currentProject = CurrentProject();
+    if (Project::Validate(currentProject) == true)
+    {
+        result = currentProject.Name();
+    }
 
-   return result;
+    return result;
 }
 
-bool ProjectManager::InsertProject(ProjectHandle projectReference)
+bool ProjectManager::InsertProject(void* projectReference)
 {
-   PRECONDITION_RETURN(projectReference != 0, false);
+    PRECONDITION_RETURN(projectReference != 0, false);
 
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   return projectReferences_.insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference))).second;
+    return projectReferences_.insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference))).second;
 }
 
-const Project& ProjectManager::LookupProject(ProjectHandle projectReference) const
+const Project& ProjectManager::LookupProject(void* projectReference) const
 {
-   PRECONDITION_RETURN(projectReference != 0, INVALID_PROJECT);
+    PRECONDITION_RETURN(projectReference != 0, INVALID_PROJECT);
 
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
-   const ProjectReferenceDictionary::const_iterator projectReferenceIterator = projectReferences_.find(projectReference);
-   if(projectReferenceIterator != projectReferences_.end())
-   {
-      return projectReferenceIterator->second;
-   }
+    std::lock_guard<std::recursive_mutex>            lock(projectReferencesLock_);
+    const ProjectReferenceDictionary::const_iterator projectReferenceIterator = projectReferences_.find(projectReference);
+    if (projectReferenceIterator != projectReferences_.end())
+    {
+        return projectReferenceIterator->second;
+    }
 
-   return INVALID_PROJECT;
+    return INVALID_PROJECT;
 }
 
-void ProjectManager::RemoveProject(ProjectHandle projectReference)
+void ProjectManager::RemoveProject(void* projectReference)
 {
-   PRECONDITION(projectReference != 0);
+    PRECONDITION(projectReference != 0);
 
-   std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
 
-   if(projectReferences_.empty() == false)
-   {
-      ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.find(projectReference);
-      if(projectReferences_.end() != projectIterator)
-      {
-         projectReferences_.erase(projectReference);
-      }
-   }
+    if (projectReferences_.empty() == false)
+    {
+        ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.find(projectReference);
+        if (projectReferences_.end() != projectIterator)
+        {
+            projectReferences_.erase(projectReference);
+        }
+    }
 }
 
 void ProjectManager::RemoveAllProjects()
 {
-   while(projectReferences_.empty() == false)
-   {
-      ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.begin();
-      if(projectReferences_.end() != projectIterator)
-      {
-         projectReferences_.erase(projectIterator);
-      }
-   }
-
+    while (projectReferences_.empty() == false)
+    {
+        ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.begin();
+        if (projectReferences_.end() != projectIterator)
+        {
+            projectReferences_.erase(projectIterator);
+        }
+    }
 }
 
-}
-}
+}} // namespace ultraschall::reaper

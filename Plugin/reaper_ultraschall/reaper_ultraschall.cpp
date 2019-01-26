@@ -35,29 +35,29 @@
 #include "SaveChapterMarkersToProjectAction.h"
 #include "SystemProperties.h"
 
-namespace reaper = ultraschall::reaper;
+void Initialize();
+void Uninitialize();
 
 extern "C" {
 REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE instance, reaper_plugin_info_t* pPluginInfo)
 {
-    reaper::Application& application = reaper::Application::Instance();
-
     if (pPluginInfo != 0)
     {
         static bool started = false;
         if (false == started)
         {
-            if (reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
+            Initialize();
+            if (ultraschall::reaper::ReaperEntryPoints::Setup(instance, pPluginInfo) == true)
             {
-                if (reaper::QuerySetPluginVersion() == true)
+                if (ultraschall::reaper::QuerySetPluginVersion() == true)
                 {
+                    ultraschall::reaper::Application& application = ultraschall::reaper::Application::Instance();
                     if (ServiceSucceeded(application.Start()))
                     {
-                        application.RegisterCustomAction<reaper::InsertChapterMarkersAction>();
-                        application.RegisterCustomAction<reaper::SaveChapterMarkersAction>();
-                        application.RegisterCustomAction<reaper::SaveChapterMarkersToProjectAction>();
-                        application.RegisterCustomAction<reaper::InsertMediaPropertiesAction>();
-
+                        application.RegisterCustomAction<ultraschall::reaper::InsertChapterMarkersAction>();
+                        application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersAction>();
+                        application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersToProjectAction>();
+                        application.RegisterCustomAction<ultraschall::reaper::InsertMediaPropertiesAction>();
                         started = true;
                     }
                 }
@@ -66,7 +66,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE in
             {
 #ifndef ULTRASCHALL_BROADCASTER
                 std::string errorReason = "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.";
-                reaper::UIMessageDialog::ShowError("Ultraschall failed to load!", errorReason);
+                ultraschall::reaper::UIMessageDialog::ShowError("Ultraschall failed to load!", errorReason);
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             }
         }
@@ -78,7 +78,9 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE in
         static bool stopped = false;
         if (false == stopped)
         {
+            ultraschall::reaper::Application& application = ultraschall::reaper::Application::Instance();
             application.Stop();
+            Uninitialize();
             stopped = true;
         }
 
@@ -87,7 +89,10 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE in
 }
 }
 
-#ifdef ULTRASCHALL_PLATFORM_WIN32
+void Initialize() {}
+void Uninitialize() {}
+
+#ifdef _WIN32
 BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
 {
     switch (ul_reason_for_call)
@@ -100,5 +105,5 @@ BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
     }
     return TRUE;
 }
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#else  // #ifdef _WIN32
+#endif // #ifdef _WIN32

@@ -25,144 +25,132 @@
 #ifndef __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 #define __ULTRASCHALL_REAPER_PROJECT_H_INCL__
 
-#include <vector>
-
-#include "Framework.h"
-#include "ReaperEntryPoints.h"
+#include "Common.h"
 #include "Marker.h"
 
-namespace framework = ultraschall::framework;
-
-namespace ultraschall {
-namespace reaper {
-
-typedef ReaProject* ProjectHandle;
+namespace ultraschall { namespace reaper {
 
 class Project
 {
 public:
-   Project();
-   Project(ProjectHandle projectReference);
-   virtual ~Project();
+    Project();
+    Project(void* nativeReference);
+    virtual ~Project();
 
-   Project(const Project& rhs);
-   Project& operator=(const Project& rhs);
+    Project(const Project& rhs);
+    Project& operator=(const Project& rhs);
 
-   static bool Validate(const Project& project);
+    static bool Validate(const Project& project);
 
-   std::string FullPathName() const;
-   std::string FolderName() const;
-   std::string FileName() const;
-   std::string Name() const;
+    std::string FullPathName() const;
+    std::string FolderName() const;
+    std::string FileName() const;
+    std::string Name() const;
 
-   inline ProjectHandle ProjectReference() const;
+    inline void* NativeReference() const;
 
-   static const uint32_t INVALID_MARKER_MASK       = 0xffffffff;
-   static const uint32_t SHOW_CHAPTER_MARKERS      = 0x00000001;
-   static const uint32_t SHOW_EDIT_MARKERS         = 0x00000002;
-   static const uint32_t SHOW_SHOWNOTE_MARKERS     = 0x00000004;
-   static const uint32_t SHOW_HISTORICAL_MARKERS   = 0x00000008;
-   static const uint32_t SHOW_ALL_MARKERS          = SHOW_CHAPTER_MARKERS |
-                                                     SHOW_EDIT_MARKERS |
-                                                     SHOW_SHOWNOTE_MARKERS |
-                                                     SHOW_HISTORICAL_MARKERS;
+    static const uint32_t INVALID_MARKER_MASK     = 0xffffffff;
+    static const uint32_t SHOW_CHAPTER_MARKERS    = 0x00000001;
+    static const uint32_t SHOW_EDIT_MARKERS       = 0x00000002;
+    static const uint32_t SHOW_SHOWNOTE_MARKERS   = 0x00000004;
+    static const uint32_t SHOW_HISTORICAL_MARKERS = 0x00000008;
+    static const uint32_t SHOW_ALL_MARKERS        = SHOW_CHAPTER_MARKERS | SHOW_EDIT_MARKERS | SHOW_SHOWNOTE_MARKERS | SHOW_HISTORICAL_MARKERS;
 
-   static const double INVALID_POSITION;
-   double CurrentPosition() const;
-   double MinPosition() const;
-   double MaxPosition() const;
-   bool IsValidPosition(const double position);
+    static const double INVALID_POSITION;
+    double              CurrentPosition() const;
+    double              MinPosition() const;
+    double              MaxPosition() const;
+    bool                IsValidPosition(const double position);
 
-   static const int SHOWNOTE_MARKER_COLOR = 0x0145a564;
-   static const int EDIT_MARKER_COLOR = 0x01ff0000;
-   static const int CHAPTER_MARKER_COLOR = 0x01808080;
-   static const int HISTORICAL_MARKER_COLOR = 0x016666aa;
+    static const int SHOWNOTE_MARKER_COLOR   = 0x0145a564;
+    static const int EDIT_MARKER_COLOR       = 0x01ff0000;
+    static const int CHAPTER_MARKER_COLOR    = 0x01808080;
+    static const int HISTORICAL_MARKER_COLOR = 0x016666aa;
 
-   inline bool InsertChapterMarker(const std::string& name, const double position = INVALID_POSITION);
-   inline bool InsertEditMarker(const double position = INVALID_POSITION);
-   inline bool InsertShownoteMarker(const double position = INVALID_POSITION);
-   inline bool InsertHistoricalMarker();
-   bool UndoMarker();
+    inline bool InsertChapterMarker(const std::string& name, const double position = INVALID_POSITION);
+    inline bool InsertEditMarker(const double position = INVALID_POSITION);
+    inline bool InsertShownoteMarker(const double position = INVALID_POSITION);
+    inline bool InsertHistoricalMarker();
+    bool        UndoMarker();
 
-   size_t CountVisibleMarkers() const;
-   void UpdateVisibleMarkers(const uint32_t mask);
-   void DeleteVisibleMarkers();
+    size_t CountVisibleMarkers() const;
+    void   UpdateVisibleMarkers(const uint32_t mask);
+    void   DeleteVisibleMarkers();
 
-   std::vector<Marker> QueryAllMarkers() const;
-   void UpdateAllMarkers();
-   void DeleteAllMarkers();
+    std::vector<Marker> QueryAllMarkers() const;
+    void                UpdateAllMarkers();
+    void                DeleteAllMarkers();
 
-   inline uint32_t MarkerStatus() const;
+    inline uint32_t MarkerStatus() const;
 
-   inline std::vector<Marker> ChapterMarkers() const;
-   inline std::vector<Marker> EditMarkers() const;
-   inline std::vector<Marker> ShownoteMarkers() const;
+    inline std::vector<Marker> ChapterMarkers() const;
+    inline std::vector<Marker> EditMarkers() const;
+    inline std::vector<Marker> ShownoteMarkers() const;
 
-   std::string Notes() const;
+    std::string Notes() const;
 
 private:
-   ProjectHandle projectReference_;
-   uint32_t markerStatus_;
+    void* nativeReference_;
+    uint32_t      markerStatus_;
 
-   typedef std::vector<Marker> MarkerArray;
-   MarkerArray allMarkers_;
+    typedef std::vector<Marker> MarkerArray;
+    MarkerArray                 allMarkers_;
 
-   bool InsertMarker(const Marker& marker);
-   bool InsertMarker(const std::string& name, const int color, const double position = INVALID_POSITION);
-   std::vector<Marker> FilterMarkers(const int color) const;
+    bool                InsertMarker(const Marker& marker);
+    bool                InsertMarker(const std::string& name, const int color, const double position = INVALID_POSITION);
+    std::vector<Marker> FilterMarkers(const int color) const;
 };
 
 inline uint32_t Project::MarkerStatus() const
 {
-   return markerStatus_;
+    return markerStatus_;
 }
 
-inline ProjectHandle Project::ProjectReference() const
+inline void* Project::NativeReference() const
 {
-   return projectReference_;
+    return nativeReference_;
 }
 
 inline bool Project::InsertChapterMarker(const std::string& name, const double position)
 {
-   return InsertMarker(name, CHAPTER_MARKER_COLOR, position);
+    return InsertMarker(name, CHAPTER_MARKER_COLOR, position);
 }
 
 inline bool Project::InsertEditMarker(const double position)
 {
-   return InsertMarker("<Edit here>", EDIT_MARKER_COLOR, position);
+    return InsertMarker("<Edit here>", EDIT_MARKER_COLOR, position);
 }
 
 inline bool Project::InsertShownoteMarker(const double position)
 {
-   return InsertMarker("<Insert Shownote here>", SHOWNOTE_MARKER_COLOR, position);
+    return InsertMarker("<Insert Shownote here>", SHOWNOTE_MARKER_COLOR, position);
 }
 
 inline bool Project::InsertHistoricalMarker()
 {
-   const double currentPosition = CurrentPosition();
-   return InsertMarker("<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
+    const double currentPosition = CurrentPosition();
+    return InsertMarker("<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
 }
 
 inline std::vector<Marker> Project::ChapterMarkers() const
 {
-   // merge chapter and historical markers
-   std::vector<Marker> result = FilterMarkers(CHAPTER_MARKER_COLOR);
-   std::vector<Marker> historicalMarkers = FilterMarkers(HISTORICAL_MARKER_COLOR);
-   result.insert(std::end(result), std::begin(historicalMarkers), std::end(historicalMarkers));
-   return result;
+    // merge chapter and historical markers
+    std::vector<Marker> result            = FilterMarkers(CHAPTER_MARKER_COLOR);
+    std::vector<Marker> historicalMarkers = FilterMarkers(HISTORICAL_MARKER_COLOR);
+    result.insert(std::end(result), std::begin(historicalMarkers), std::end(historicalMarkers));
+    return result;
 }
 
 inline std::vector<Marker> Project::EditMarkers() const
 {
-   return FilterMarkers(EDIT_MARKER_COLOR);
+    return FilterMarkers(EDIT_MARKER_COLOR);
 }
 
 inline std::vector<Marker> Project::ShownoteMarkers() const
 {
-   return FilterMarkers(SHOWNOTE_MARKER_COLOR);
+    return FilterMarkers(SHOWNOTE_MARKER_COLOR);
 }
 
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_PROJECT_H_INCL__

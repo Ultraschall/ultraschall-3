@@ -25,45 +25,41 @@
 #ifndef __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
 #define __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
 
-#include <mutex>
-#include <map>
-
+#include "Common.h"
 #include "Project.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
 class ProjectManager
 {
 public:
-   static const Project INVALID_PROJECT;
+    static const Project INVALID_PROJECT;
 
-   static ProjectManager& Instance();
+    static ProjectManager& Instance();
 
-   const Project& CurrentProject() const;
-   ProjectHandle CurrentProjectReference() const;
-   std::string CurrentProjectName() const;
+    const Project& CurrentProject() const;
+    void*  CurrentProjectReference() const;
+    std::string    CurrentProjectName() const;
 
-   bool InsertProject(ProjectHandle projectReference);
-   const Project& LookupProject(ProjectHandle projectReference) const;
-   void RemoveProject(ProjectHandle projectReference);
-   void RemoveAllProjects();
+    bool           InsertProject(void* projectReference);
+    const Project& LookupProject(void* projectReference) const;
+    void           RemoveProject(void* projectReference);
+    void           RemoveAllProjects();
 
 protected:
-   virtual ~ProjectManager();
+    virtual ~ProjectManager();
 
 private:
-   ProjectManager();
+    ProjectManager();
 
-   ProjectManager(const ProjectManager&);
-   ProjectManager& operator=(const ProjectManager&);
+    ProjectManager(const ProjectManager&) = delete;
+    ProjectManager& operator=(const ProjectManager&) = delete;
 
-   typedef std::map<void*, Project> ProjectReferenceDictionary;
-   ProjectReferenceDictionary projectReferences_;
-   mutable std::recursive_mutex projectReferencesLock_;
+    typedef std::map<void*, Project> ProjectReferenceDictionary;
+    ProjectReferenceDictionary       projectReferences_;
+    mutable std::recursive_mutex     projectReferencesLock_;
 };
 
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__

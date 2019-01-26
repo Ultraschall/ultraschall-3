@@ -25,40 +25,34 @@
 #ifndef __ULTRASCHALL_REAPER_COMMAND_H_INCL__
 #define __ULTRASCHALL_REAPER_COMMAND_H_INCL__
 
-#include <ServiceStatus.h>
-#include <IUnknown.h>
-
-namespace framework = ultraschall::framework;
+#include "SharedObject.h"
+#include "ServiceStatus.h"
 
 namespace ultraschall { namespace reaper {
 
-class ICommand : public framework::IUnknown
+class ICommand : public SharedObject
 {
 public:
-   static bool ValidateCommandId(const int32_t id)
-   {
-      return id != INVALID_COMMAND_ID;
-   }
+    static bool ValidateCommandId(const int32_t id)
+    {
+        return id != INVALID_COMMAND_ID;
+    }
 
-   virtual ServiceStatus StartCommand() = 0;
-   virtual ServiceStatus StopCommand() = 0;
+    virtual ServiceStatus StartCommand() = 0;
+    virtual ServiceStatus StopCommand()  = 0;
 
 protected:
-   ICommand()
-   {
-   }
+    ICommand() {}
 
-   virtual ~ICommand()
-   {
-   }
+    virtual ~ICommand() {}
 
 private:
-   ICommand(const ICommand&);
-   ICommand& operator=(const ICommand&);
+    ICommand(const ICommand&);
+    ICommand& operator=(const ICommand&);
 
-   static const int32_t INVALID_COMMAND_ID = 0;
+    static const int32_t INVALID_COMMAND_ID = 0;
 };
 
-}}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ICOMMAND_H_INCL__

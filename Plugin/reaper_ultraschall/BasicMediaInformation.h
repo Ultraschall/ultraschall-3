@@ -25,62 +25,60 @@
 #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
 #define __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
 
-#include <string>
+#include "Common.h"
 
-namespace ultraschall {
-namespace reaper {
+namespace ultraschall { namespace reaper {
 
 class BasicMediaInformation
 {
 public:
-   BasicMediaInformation();
-   ~BasicMediaInformation();
+    BasicMediaInformation();
+    ~BasicMediaInformation();
 
-   static BasicMediaInformation ParseString(const std::string& str);
+    static BasicMediaInformation ParseString(const std::string& str);
 
-   bool Validate() const;
-   void Reset();
+    bool Validate() const;
+    void Reset();
 
-   inline const std::string& Title() const
-   {
-      return title_;
-   }
+    inline const std::string& Title() const
+    {
+        return title_;
+    }
 
-   inline const std::string& Author() const
-   {
-      return author_;
-   }
+    inline const std::string& Author() const
+    {
+        return author_;
+    }
 
-   inline const std::string& Track() const
-   {
-      return track_;
-   }
+    inline const std::string& Track() const
+    {
+        return track_;
+    }
 
-   inline const std::string& Date() const
-   {
-      return date_;
-   }
+    inline const std::string& Date() const
+    {
+        return date_;
+    }
 
-   inline const std::string& Content() const
-   {
-      return content_;
-   }
+    inline const std::string& Content() const
+    {
+        return content_;
+    }
 
-   inline const std::string& Comments() const
-   {
-      return comments_;
-   }
+    inline const std::string& Comments() const
+    {
+        return comments_;
+    }
 
 private:
-   std::string title_;     // TIT2
-   std::string author_;    // TPE1
-   std::string track_;     // TALB
-   std::string date_;      // TDRC
-   std::string content_;   // TCON
-   std::string comments_;  // COMM
+    std::string title_;    // TIT2
+    std::string author_;   // TPE1
+    std::string track_;    // TALB
+    std::string date_;     // TDRC
+    std::string content_;  // TCON
+    std::string comments_; // COMM
 };
 
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
