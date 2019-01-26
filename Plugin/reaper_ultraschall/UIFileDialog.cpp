@@ -24,9 +24,6 @@
 
 #include "UIFileDialog.h"
 
-#include "Framework.h"
-#include "ReaperEntryPoints.h"
-
 #include "wx/filename.h"
 #include "wx/wx.h"
 

@@ -22,11 +22,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__
-#define __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UI_FILE_DIALOG_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_FILE_DIALOG_H_INCL__
 
-#include <string>
-
+#include "Common.h"
 #include "UIDialog.h"
 
 namespace ultraschall { namespace reaper {
@@ -52,4 +51,4 @@ private:
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_UI_FILE_DIALOG_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_FILE_DIALOG_H_INCL__

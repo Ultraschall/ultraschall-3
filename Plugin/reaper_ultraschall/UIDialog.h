@@ -22,8 +22,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_UI_DIALOG_H_INCL__
-#define __ULTRASCHALL_UI_DIALOG_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UI_DIALOG_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_DIALOG_H_INCL__
+
+#include "Common.h"
 
 class wxWindow;
 
@@ -49,4 +51,4 @@ inline wxWindow* UIDialog::GetParent() const
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_UI_MESSAGE_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_DIALOG_H_INCL__

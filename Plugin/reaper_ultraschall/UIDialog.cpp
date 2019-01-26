@@ -23,17 +23,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UIDialog.h"
-
-#include "Framework.h"
 #include "ReaperEntryPoints.h"
 
-#include "wx/wx.h"
+#include "wx/window.h"
 
 namespace ultraschall { namespace reaper {
 
-UIDialog::UIDialog () : parent_ (new wxWindow ()) {
+UIDialog::UIDialog() : parent_(new wxWindow())
+{
     PRECONDITION(parent_ != 0);
-    parent_->AssociateHandle(reaper_api::GetMainHwnd());
+    //parent_->AssociateHandle(reaper_api::GetMainHwnd());
 }
 
 UIDialog::~UIDialog()
