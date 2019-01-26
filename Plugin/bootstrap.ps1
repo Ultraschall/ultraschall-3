@@ -9,11 +9,11 @@ if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
     if ($LASTEXITCODE -eq 0) {
         & cmake.exe --build . --target reaper_ultraschall --config Debug -j
         if ($LASTEXITCODE -ne 0) {
-            Write-Host -ForegroundColor Red  "cmake build step failed, status = " $LASTEXITCODE
+            Write-Host -ForegroundColor Red  "The cmake build step failed, status = " $LASTEXITCODE
         }
     }
     else {
-        Write-Host -ForegroundColor Red  "cmake configure step failed, status = " $LASTEXITCODE
+        Write-Host -ForegroundColor Red  "The cmake configure step failed, status = " $LASTEXITCODE
     }
     Pop-Location
 }
