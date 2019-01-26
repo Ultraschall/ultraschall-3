@@ -27,43 +27,36 @@
 set(COMMON_INCLUDES
     Application.h
     BasicMediaInformation.h
-    BinaryFileReader.h
     ByteStream.h
+    Common.h
     CustomActionFactory.h
     CustomActionManager.h
     FileManager.h
-    Framework.h
+    FileUtilities.h
     ICommand.h
     ICustomAction.h
-    ImageTools.h
     InsertChapterMarkersAction.h
     InsertMediaPropertiesAction.h
     ITagWriter.h
-    IUnknown.h
+    SharedObject.h
     Marker.h
-    MessageDialog.h
     MP3_Interface.h
     MP3TagWriter.h
     MP4TagWriter.h
+    PictureUtilities.h
     Platform.h
-    PluginVersionCheck.h
     Project.h
     ProjectManager.h
     reaper_plugin_functions.h
     ReaperEntryPoints.h
-    ReaperVersionCheck.h
     resource.h
     SaveChapterMarkersAction.h
     SaveChapterMarkersToProjectAction.h
     ServiceStatus.h
-    SoundboardVersionCheck.h
     StringUtilities.h
     SWSVersionCheck.h
     SystemProperties.h
     taglib_include.h
-    TextFileReader.h
-    TextFileWriter.h
-    ThemeVersionCheck.h
     TimeUtilities.h
     UpdateCheck.h
     UIDialog.h
@@ -73,33 +66,28 @@ set(COMMON_INCLUDES
 )
 
 set(COMMON_SOURCES
-    BinaryFileReader.cpp
-    StringUtilities.cpp
-    TextFileReader.cpp
-    TextFileWriter.cpp
-    TimeUtilities.cpp
     Application.cpp
     BasicMediaInformation.cpp
     CustomActionFactory.cpp
     CustomActionManager.cpp
     FileManager.cpp
-    ImageTools.cpp
+    FileUtilities.cpp
     InsertChapterMarkersAction.cpp
     InsertMediaPropertiesAction.cpp
     MP3TagWriter.cpp
     MP4TagWriter.cpp
     MP3_Interface.cpp
-    PluginVersionCheck.cpp
+    PictureUtilities.cpp
+    Platform.cpp
     Project.cpp
     ProjectManager.cpp
     ReaperEntryPoints.cpp
-    ReaperVersionCheck.cpp
-    SWSVersionCheck.cpp
     SaveChapterMarkersAction.cpp
     SaveChapterMarkersToProjectAction.cpp
-    SoundboardVersionCheck.cpp
+    StringUtilities.cpp
+    SWSVersionCheck.cpp
     SystemProperties.cpp
-    ThemeVersionCheck.cpp
+    TimeUtilities.cpp
     UpdateCheck.cpp
     UIDialog.cpp
     UIFileDialog.cpp
@@ -123,8 +111,6 @@ elseif(APPLE)
     set_source_files_properties(
         FileManager.cpp
         VersionHandler.cpp
-        ReaperVersionCheck.cpp
-        SoundboardVersionCheck.cpp
         PluginVersionCheck.cpp
         PROPERTIES COMPILE_FLAGS "-x objective-c++"
     )
