@@ -25,31 +25,27 @@
 #ifndef __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__
 #define __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__
 
-#include <string>
+#include "Common.h"
 
-namespace ultraschall
-{
-namespace reaper
-{
+namespace ultraschall { namespace reaper {
 
 class VersionHandler
 {
- public:
-#ifdef ULTRASCHALL_PLATFORM_MACOS
-   static std::string HubVersion();
-#endif // #ifdef ULTRASCHALL_PLATFORM_MACOS
+public:
+    static std::string ThemeVersion();
 
-   static std::string PluginVersion();
+    static std::string PluginVersion();
 
-   static std::string SoundboardVersion();
+    static std::string ReaperVersion();
 
-   static std::string StudioLinkVersion();
+    static std::string SoundboardVersion();
 
-   static std::string StudioLinkOnAirVersion();
+    static std::string StudioLinkVersion();
 
-   static std::string SWSVersion();
+    static std::string StudioLinkOnAirVersion();
+
+    static std::string SWSVersion();
 };
-}
-}
+}} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_VERSION_HANDLER_H_INCL__

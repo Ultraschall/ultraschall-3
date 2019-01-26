@@ -24,148 +24,167 @@
 
 #include "VersionHandler.h"
 #include "FileManager.h"
+#include "Platform.h"
+#include "ReaperEntryPoints.h"
 #include "SWSVersionCheck.h"
+#include "StringUtilities.h"
 
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-#import <AppKit/AppKit.h>
-#import <Foundation/Foundation.h>
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#include <unzip.h>
+#include <zlib.h>
 
-namespace ultraschall
+namespace ultraschall { namespace reaper {
+
+std::string VersionHandler::ThemeVersion()
 {
-namespace reaper
-{
+    std::string       versionString;
+    const std::string themeControlFile = Platform::UserDataDirectory() + Platform::THEME_PATH;
+    unzFile           themeFile        = unzOpen(themeControlFile.c_str());
+    if (themeFile != nullptr)
+    {
+        bool decoded  = false;
+        int  zipError = unzGoToFirstFile(themeFile);
+        while ((UNZ_OK == zipError) && (false == decoded))
+        {
+            unz_file_info fileInfo               = {0};
+            const size_t  fileNameSize           = 4096;
+            char          fileName[fileNameSize] = {0};
+            zipError                             = unzGetCurrentFileInfo(themeFile, &fileInfo, fileName, fileNameSize, nullptr, 0, nullptr, 0);
+            if (UNZ_OK == zipError)
+            {
+                if (strcmp("Ultraschall_2/version.txt", fileName) == 0)
+                {
+                    zipError = unzOpenCurrentFile(themeFile);
+                    if (UNZ_OK == zipError)
+                    {
+                        const size_t fileBufferSize = fileInfo.uncompressed_size;
+                        if (fileBufferSize > 0)
+                        {
+                            char* fileBuffer = new char[fileBufferSize + 1]; 
+                            if (fileBuffer != nullptr)
+                            {
+                                const int readResult = unzReadCurrentFile(themeFile, fileBuffer, unsigned int(fileBufferSize));
+                                if (readResult > 0)
+                                {
+                                    versionString = fileBuffer;
+                                    decoded       = true;
+                                }
 
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-std::string VersionHandler::HubVersion()
+                                free(fileBuffer);
+                                fileBuffer = 0;
+                            }
+                        }
+
+                        unzCloseCurrentFile(themeFile);
+                    }
+                }
+            }
+
+            zipError = unzGoToNextFile(themeFile);
+        }
+
+        unzClose(themeFile);
+        themeFile = 0;
+    }
+
+    std::string themeVersion;
+    if (versionString.empty() == false)
+    {
+        const StringArray versionTokens = StringTokenize(versionString, ':');
+        if (versionTokens.size() == 2)
+        {
+            std::string version = versionTokens[1];
+            if (version.empty() == false)
+            {
+                themeVersion = StringTrim(version);
+            }
+        }
+    }
+
+    return themeVersion;
+}
+
+std::string VersionHandler::PluginVersion()
+{
+#ifdef _WIN32
+    const std::string path = "\\REAPER\\UserPlugins\\reaper_ultraschall.dll";
+    return Platform::ReadFileVersion(Platform::UserDataDirectory() + path);
+#else // #ifdef _WIN32
+#ifdef _APPLE_
+    return "3.2.0";
+#else  // #ifdef _APPLE_
+// TODO: linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
+}
+
+std::string VersionHandler::ReaperVersion()
 {
     std::string version;
 
-    if (FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist") == true) {
-        version = "AudioHub ";
-
-        NSString*     filePath = @"/Library/Audio/Plug-Ins/HAL/AudioHub.driver/Contents/Info.plist";
-        NSDictionary* plist    = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-
-        NSString* value = [plist objectForKey:@"CFBundleShortVersionString"];
-        version += [value UTF8String];
-
-        value = [plist objectForKey:@"CFBundleVersion"];
-        version += ".";
-        version += [value UTF8String];
-    }
-    else if (FileManager::FileExists("/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist") == true) {
-        version = "UltraschallHub ";
-
-        NSString*     filePath = @"/Library/Audio/Plug-Ins/HAL/UltraschallHub.driver/Contents/Info.plist";
-        NSDictionary* plist    = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-
-        NSString* value = [plist objectForKey:@"CFBundleShortVersionString"];
-        version += [value UTF8String];
-
-        value = [plist objectForKey:@"CFBundleVersion"];
-        version += ".";
-        version += [value UTF8String];
+    const StringArray tokens                  = StringTokenize(reaper_api::GetAppVersion(), '/');
+    const size_t      MIN_VERSION_TOKEN_COUNT = 1;
+    if (tokens.size() >= MIN_VERSION_TOKEN_COUNT)
+    {
+        version = tokens.at(0);
     }
 
     return version;
 }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-
-std::string VersionHandler::PluginVersion()
-{
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   std::string pluginVersion;
-
-   const std::string path = FindUltraschallPluginPath();
-   if(path.empty() == false)
-   {
-      pluginVersion = FileManager::ReadVersionFromFile(path);
-   }
-
-   return pluginVersion;
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
-   return "3.1.1";
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-}
 
 std::string VersionHandler::SoundboardVersion()
 {
-   std::string version;
-
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\Soundboard64.dll";
-   version                = FileManager::ReadVersionFromFile(path);
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-   NSURL* libraryDirectory =
-       [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] firstObject];
-   NSMutableString* filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
-   [filePath appendString:@"/Audio/Plug-Ins/Components/Soundboard.component/Contents/Info.plist"];
-   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-       NSString*     value = [plist objectForKey:@"CFBundleShortVersionString"];
-       version             = [value UTF8String];
-   }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-
-   return version;
+#ifdef _WIN32
+    const std::string path = "\\Steinberg\\VstPlugins\\Soundboard64.dll";
+#else // #ifdef _WIN32
+#ifdef _APPLE_
+    const std::string path = "/Audio/Plug-Ins/Components/Soundboard.component";
+#else  // #ifdef _APPLE_
+// TODO: linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
 }
 
 std::string VersionHandler::StudioLinkVersion()
 {
-   std::string version;
-
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link.dll";
-   version                = FileManager::ReadVersionFromFile(path);
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-   NSURL* libraryDirectory =
-       [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] firstObject];
-   NSMutableString* filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
-   [filePath appendString:@"/Audio/Plug-Ins/Components/StudioLink.component/Contents/Info.plist"];
-   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-       NSString*     value = [plist objectForKey:@"CFBundleShortVersionString"];
-       version             = [value UTF8String];
-   }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-
-   return version;
+#ifdef _WIN32
+    const std::string path = "\\Steinberg\\VstPlugins\\studio-link.dll";
+#else // #ifdef _WIN32
+#ifdef _APPLE_
+    const std::string path = "/Audio/Plug-Ins/Components/StudioLink.component";
+#else  // #ifdef _APPLE_
+// TODO: linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
 }
 
 std::string VersionHandler::StudioLinkOnAirVersion()
 {
-   std::string version;
-
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\Steinberg\\VstPlugins\\studio-link-onair.dll";
-   version                = FileManager::ReadVersionFromFile(path);
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-   NSURL* libraryDirectory =
-       [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] firstObject];
-   NSMutableString* filePath = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
-   [filePath appendString:@"/Audio/Plug-Ins/Components/StudioLinkOnAir.component/Contents/Info.plist"];
-   if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-       NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-       NSString*     value = [plist objectForKey:@"CFBundleShortVersionString"];
-       version             = [value UTF8String];
-   }
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
-
-   return version;
+#ifdef _WIN32
+    const std::string path = "\\Steinberg\\VstPlugins\\studio-link-onair.dll";
+#else // #ifdef _WIN32
+#ifdef _APPLE_
+    const std::string path = "/Audio/Plug-Ins/Components/StudioLinkOnAir.component";
+#else  // #ifdef _APPLE_
+// TODO: linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
 }
 
 std::string VersionHandler::SWSVersion()
 {
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-   const std::string path = FileManager::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
-   return FileManager::ReadVersionFromFile(path);
-#else // #ifdef ULTRASCHALL_PLATFORM_WIN32
-   return "2.9.7";
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+#ifdef _WIN32
+    const std::string path = "\\REAPER\\UserPlugins\\reaper_sws64.dll";
+    return Platform::ReadFileVersion(Platform::UserDataDirectory() + path);
+#else // #ifdef _WIN32
+#ifdef _APPLE_
+    return "2.9.7";
+#else  // #ifdef _APPLE_
+// TODO: linux
+#endif // #ifdef _APPLE_
+#endif // #ifdef _WIN32
 }
 
-}
-}
+}} // namespace ultraschall::reaper
