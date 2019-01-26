@@ -1,27 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-// Copyright (c) The Ultraschall Project (http://ultraschall.fm)
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
-////////////////////////////////////////////////////////////////////////////////
-
 // Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
@@ -49,18 +25,18 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE
+2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"
@@ -75,13 +51,13 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,1,1,0
- PRODUCTVERSION 3,1,1,0
+ FILEVERSION 3,2,0,0
+ PRODUCTVERSION 3,2,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
- FILEFLAGS 0x3L
+ FILEFLAGS 0x1L
 #else
- FILEFLAGS 0x2L
+ FILEFLAGS 0x0L
 #endif
  FILEOS 0x40004L
  FILETYPE 0x2L
@@ -93,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "ultraschall.fm"
             VALUE "FileDescription", "Ultraschall REAPER Extension"
-            VALUE "FileVersion", "3.1.1.0"
+            VALUE "FileVersion", "3.2.0.0"
             VALUE "InternalName", "reaper_u.dll"
-            VALUE "LegalCopyright", "Copyright (C) 2018 ultraschall.fm"
+            VALUE "LegalCopyright", "Copyright (C) 2019 ultraschall.fm"
             VALUE "OriginalFilename", "reaper_ultraschall.dll"
             VALUE "ProductName", "Ultraschall"
-            VALUE "ProductVersion", "3.1.1.0"
+            VALUE "ProductVersion", "3.2.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -121,3 +97,4 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
+
