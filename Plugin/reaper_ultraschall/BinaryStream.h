@@ -22,20 +22,39 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
-#define __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_BINARY_STREAM_H_INCL__
+#define __ULTRASCHALL_REAPER_BINARY_STREAM_H_INCL__
+
+#include <zlib.h>
 
 #include "Common.h"
+#include "SharedObject.h"
 
 namespace ultraschall { namespace reaper {
 
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-std::string FindUltraschallPluginPath();
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
+class BinaryStream : public SharedObject
+{
+public:
+    BinaryStream(const size_t dataSize);
 
-bool SWSVersionCheck();
+    size_t DataSize() const;
+
+    const uint8_t* Data() const;
+
+    bool Write(const size_t offset, const uint8_t* buffer, const size_t bufferSize);
+
+    bool Read(const size_t offset, uint8_t* buffer, const size_t bufferSize);
+
+    uint64_t CRC32() const;
+
+protected:
+    virtual ~BinaryStream();
+
+private:
+    size_t   dataSize_;
+    uint8_t* data_;
+};
 
 }} // namespace ultraschall::reaper
 
-#endif // __ULTRASCHALL_REAPER_SWS_VERSION_CHECK_H_INCL__
+#endif // #ifdef __ULTRASCHALL_REAPER_BINARY_STREAM_H_INCL__

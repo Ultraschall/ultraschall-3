@@ -47,10 +47,10 @@ ServiceStatus SaveChapterMarkersAction::Execute()
     const ProjectManager& projectManager = ProjectManager::Instance();
     Project               currentProject = projectManager.CurrentProject();
 
-    std::string targetPath;
+    UnicodeString targetPath;
 
-    const std::string initialFolder = currentProject.FolderName();
-    const std::string projectName   = currentProject.Name();
+    const UnicodeString initialFolder = currentProject.FolderName();
+    const UnicodeString projectName   = currentProject.Name();
     if ((initialFolder.empty() == false) && (projectName.empty() == false))
     {
         UIFileDialog fileDialog("Export chapter markers", initialFolder);
@@ -76,7 +76,7 @@ ServiceStatus SaveChapterMarkersAction::Execute()
 
     if ((SERVICE_SUCCESS == status) && (ConfigureAssets() == true))
     {
-        StringArray errorMessages = ValidateChapterMarkers();
+        UnicodeStringArray errorMessages = ValidateChapterMarkers();
         if (errorMessages.empty() == false)
         {
             std::ofstream os(targetPath, std::ios::out);
@@ -84,8 +84,8 @@ ServiceStatus SaveChapterMarkersAction::Execute()
             {
                 for (size_t i = 0; i < chapters_.size(); i++)
                 {
-                    const std::string timestamp = SecondsToString(chapters_[i].Position());
-                    const std::string item      = timestamp + " " + chapters_[i].Name();
+                    const UnicodeString timestamp = SecondsToString(chapters_[i].Position());
+                    const UnicodeString item      = timestamp + " " + chapters_[i].Name();
 
                     os << item << std::endl;
                 }
@@ -131,17 +131,17 @@ ServiceStatus SaveChapterMarkersAction::Execute()
 bool SaveChapterMarkersAction::ConfigureAssets()
 {
     bool                     result = false;
-    StringArray messages;
+    UnicodeStringArray messages;
     size_t                   invalidAssetCount = 0;
 
     ProjectManager& projectManager = ProjectManager::Instance();
     Project         currentProject = projectManager.CurrentProject();
     if (Project::Validate(currentProject) == true)
     {
-        chapters_ = currentProject.QueryAllMarkers();
+        chapters_ = currentProject.AllMarkers();
         if (chapters_.empty() == true)
         {
-            const std::string message = "No chapters have been set.";
+            const UnicodeString message = "No chapters have been set.";
             messages.push_back(message);
             invalidAssetCount++;
         }
@@ -197,16 +197,16 @@ void SaveChapterMarkersAction::ResetAssets()
     chapters_.clear();
 }
 
-StringArray SaveChapterMarkersAction::ValidateChapterMarkers()
+UnicodeStringArray SaveChapterMarkersAction::ValidateChapterMarkers()
 {
-    PRECONDITION_RETURN(chapters_.empty() == false, StringArray());
+    PRECONDITION_RETURN(chapters_.empty() == false, UnicodeStringArray());
 
-    StringArray errorMessages;
+    UnicodeStringArray errorMessages;
 
     for (size_t i = 0; i < chapters_.size(); i++)
     {
         const Marker&     current      = chapters_[i];
-        const std::string safeName     = current.Name();
+        const UnicodeString safeName     = current.Name();
         const double      safePosition = current.Position();
 
         ProjectManager& projectManager = ProjectManager::Instance();
@@ -214,7 +214,7 @@ StringArray SaveChapterMarkersAction::ValidateChapterMarkers()
         if (currentProject.IsValidPosition(current.Position()) == false)
         {
             std::stringstream os;
-            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
+            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : UnicodeString("Unknown")) << "' is out of track range.";
             errorMessages.push_back(os.str());
         }
 

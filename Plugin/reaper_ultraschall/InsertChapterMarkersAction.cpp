@@ -28,13 +28,13 @@
 
 #include "CustomActionFactory.h"
 #include "FileManager.h"
+#include "FileUtilities.h"
 #include "InsertChapterMarkersAction.h"
 #include "Marker.h"
 #include "ProjectManager.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
-#include "FileUtilities.h"
 #include "UIFileDialog.h"
 #include "UIMessageDialog.h"
 
@@ -46,36 +46,36 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 {
     ServiceStatus status = SERVICE_FAILURE;
 
-    UIFileDialog      fileDialog("Import chapter markers");
-    const std::string path = fileDialog.BrowseForChapters();
+    UIFileDialog        fileDialog("Import chapter markers");
+    const UnicodeString path = fileDialog.BrowseForChapters();
     PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
     const ProjectManager& projectManager = ProjectManager::Instance();
     Project               currentProject = projectManager.CurrentProject();
 
-    std::vector<Marker>      tags;
-    StringArray errorMessages;
+    MarkerArray        tags;
+    UnicodeStringArray errorMessages;
 
-    const StringArray lines = ReadTextFile(path);
-    if (lines.empty() == false)
+    const UnicodeStringArray lines = ReadTextFile(path);
+    if(lines.empty() == false)
     {
-        for (size_t i = 0; i < lines.size(); i++)
+        for(size_t i = 0; i < lines.size(); i++)
         {
-            const std::string& line = lines[i];
+            const UnicodeString& line = lines[i];
 
-            const StringArray items = StringTokenize(line, ' ');
-            if (items.size() > 0)
+            const UnicodeStringArray items = StringTokenize(line, ' ');
+            if(items.size() > 0)
             {
                 const double position = StringToSeconds(items[0]);
-                if (position >= 0)
+                if(position >= 0)
                 {
-                    std::string name;
-                    if (items.size() > 1)
+                    UnicodeString name;
+                    if(items.size() > 1)
                     {
                         name = items[1];
                     }
 
-                    for (size_t j = 2; j < items.size(); j++)
+                    for(size_t j = 2; j < items.size(); j++)
                     {
                         name += " " + items[j];
                     }
@@ -99,27 +99,28 @@ ServiceStatus InsertChapterMarkersAction::Execute()
     }
 
     size_t addedTags = 0;
-    for (size_t i = 0; i < tags.size(); i++)
+    for(size_t i = 0; i < tags.size(); i++)
     {
-        if (currentProject.InsertChapterMarker(tags[i].Name(), tags[i].Position()) == true)
+        if(currentProject.InsertChapterMarker(tags[i].Name(), tags[i].Position()) == true)
         {
             addedTags++;
         }
         else
         {
             std::stringstream os;
-            os << "Chapter marker '" << tags[i].Name() << "' at position '" << SecondsToString(tags[i].Position()) << "' could not be added.";
+            os << "Chapter marker '" << tags[i].Name() << "' at position '" << SecondsToString(tags[i].Position())
+               << "' could not be added.";
             errorMessages.push_back(os.str());
         }
     }
 
-    if ((tags.size() != addedTags) || (errorMessages.empty() == false))
+    if((tags.size() != addedTags) || (errorMessages.empty() == false))
     {
         std::stringstream os;
         os << "The chapter marker import failed:";
         os << "\r\n\r\n";
 
-        for (size_t i = 0; i < errorMessages.size(); i++)
+        for(size_t i = 0; i < errorMessages.size(); i++)
         {
             os << errorMessages[i] << "\r\n";
         }

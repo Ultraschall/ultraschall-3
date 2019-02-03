@@ -27,6 +27,7 @@
 
 #include "Common.h"
 #include "Marker.h"
+#include "ReaperGateway.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -34,7 +35,7 @@ class Project
 {
 public:
     Project();
-    Project(void* nativeReference);
+    Project(ProjectReference nativeReference);
     virtual ~Project();
 
     Project(const Project& rhs);
@@ -42,12 +43,12 @@ public:
 
     static bool Validate(const Project& project);
 
-    std::string FullPathName() const;
-    std::string FolderName() const;
-    std::string FileName() const;
-    std::string Name() const;
+    UnicodeString FullPathName() const;
+    UnicodeString FolderName() const;
+    UnicodeString FileName() const;
+    UnicodeString Name() const;
 
-    inline void* NativeReference() const;
+    inline ProjectReference NativeReference() const;
 
     static const uint32_t INVALID_MARKER_MASK     = 0xffffffff;
     static const uint32_t SHOW_CHAPTER_MARKERS    = 0x00000001;
@@ -67,38 +68,35 @@ public:
     static const int CHAPTER_MARKER_COLOR    = 0x01808080;
     static const int HISTORICAL_MARKER_COLOR = 0x016666aa;
 
-    inline bool InsertChapterMarker(const std::string& name, const double position = INVALID_POSITION);
+    inline bool InsertChapterMarker(const UnicodeString& name, const double position = INVALID_POSITION);
     inline bool InsertEditMarker(const double position = INVALID_POSITION);
     inline bool InsertShownoteMarker(const double position = INVALID_POSITION);
     inline bool InsertHistoricalMarker();
     bool        UndoMarker();
 
-    size_t CountVisibleMarkers() const;
-    void   UpdateVisibleMarkers(const uint32_t mask);
-    void   DeleteVisibleMarkers();
+    void   RefreshUI(const uint32_t mask);
 
-    std::vector<Marker> QueryAllMarkers() const;
-    void                UpdateAllMarkers();
-    void                DeleteAllMarkers();
+    MarkerArray AllMarkers() const;
+    void                UpdateMarkers();
 
     inline uint32_t MarkerStatus() const;
 
-    inline std::vector<Marker> ChapterMarkers() const;
-    inline std::vector<Marker> EditMarkers() const;
-    inline std::vector<Marker> ShownoteMarkers() const;
+    inline MarkerArray ChapterMarkers() const;
+    inline MarkerArray EditMarkers() const;
+    inline MarkerArray ShownoteMarkers() const;
 
-    std::string Notes() const;
+    UnicodeString Notes() const;
 
 private:
-    void* nativeReference_;
+    ProjectReference nativeReference_;
     uint32_t      markerStatus_;
 
-    typedef std::vector<Marker> MarkerArray;
+    typedef MarkerArray MarkerArray;
     MarkerArray                 allMarkers_;
 
     bool                InsertMarker(const Marker& marker);
-    bool                InsertMarker(const std::string& name, const int color, const double position = INVALID_POSITION);
-    std::vector<Marker> FilterMarkers(const int color) const;
+    bool                InsertMarker(const UnicodeString& name, const int color, const double position = INVALID_POSITION);
+    MarkerArray FilterMarkers(const int color) const;
 };
 
 inline uint32_t Project::MarkerStatus() const
@@ -106,12 +104,12 @@ inline uint32_t Project::MarkerStatus() const
     return markerStatus_;
 }
 
-inline void* Project::NativeReference() const
+inline ProjectReference Project::NativeReference() const
 {
     return nativeReference_;
 }
 
-inline bool Project::InsertChapterMarker(const std::string& name, const double position)
+inline bool Project::InsertChapterMarker(const UnicodeString& name, const double position)
 {
     return InsertMarker(name, CHAPTER_MARKER_COLOR, position);
 }
@@ -132,21 +130,21 @@ inline bool Project::InsertHistoricalMarker()
     return InsertMarker("<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
 }
 
-inline std::vector<Marker> Project::ChapterMarkers() const
+inline MarkerArray Project::ChapterMarkers() const
 {
     // merge chapter and historical markers
-    std::vector<Marker> result            = FilterMarkers(CHAPTER_MARKER_COLOR);
-    std::vector<Marker> historicalMarkers = FilterMarkers(HISTORICAL_MARKER_COLOR);
+    MarkerArray result            = FilterMarkers(CHAPTER_MARKER_COLOR);
+    MarkerArray historicalMarkers = FilterMarkers(HISTORICAL_MARKER_COLOR);
     result.insert(std::end(result), std::begin(historicalMarkers), std::end(historicalMarkers));
     return result;
 }
 
-inline std::vector<Marker> Project::EditMarkers() const
+inline MarkerArray Project::EditMarkers() const
 {
     return FilterMarkers(EDIT_MARKER_COLOR);
 }
 
-inline std::vector<Marker> Project::ShownoteMarkers() const
+inline MarkerArray Project::ShownoteMarkers() const
 {
     return FilterMarkers(SHOWNOTE_MARKER_COLOR);
 }

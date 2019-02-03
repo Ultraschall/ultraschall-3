@@ -27,7 +27,7 @@
 set(COMMON_INCLUDES
     Application.h
     BasicMediaInformation.h
-    ByteStream.h
+    BinaryStream.h
     Common.h
     CustomActionFactory.h
     CustomActionManager.h
@@ -48,12 +48,12 @@ set(COMMON_INCLUDES
     ProjectManager.h
     reaper_plugin_functions.h
     ReaperEntryPoints.h
+	ReaperGateway.h
     resource.h
     SaveChapterMarkersAction.h
     SaveChapterMarkersToProjectAction.h
     ServiceStatus.h
     StringUtilities.h
-    SWSVersionCheck.h
     SystemProperties.h
     taglib_include.h
     TimeUtilities.h
@@ -61,12 +61,14 @@ set(COMMON_INCLUDES
     UIDialog.h
     UIFileDialog.h
     UIMessageDialog.h
+	UnicodeString.h
     VersionHandler.h
 )
 
 set(COMMON_SOURCES
     Application.cpp
     BasicMediaInformation.cpp
+    BinaryStream.cpp
     CustomActionFactory.cpp
     CustomActionManager.cpp
     FileManager.cpp
@@ -80,16 +82,17 @@ set(COMMON_SOURCES
     Project.cpp
     ProjectManager.cpp
     ReaperEntryPoints.cpp
+	ReaperGateway.cpp
     SaveChapterMarkersAction.cpp
     SaveChapterMarkersToProjectAction.cpp
     StringUtilities.cpp
-    SWSVersionCheck.cpp
     SystemProperties.cpp
     TimeUtilities.cpp
     UpdateCheck.cpp
     UIDialog.cpp
     UIFileDialog.cpp
     UIMessageDialog.cpp
+	UnicodeString.cpp
     VersionHandler.cpp
     reaper_ultraschall.cpp
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c
@@ -119,10 +122,9 @@ set_source_files_properties(${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c 
 
 if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
-    add_definitions(-DULTRASCHALL_PLATFORM_WIN32 -D_CRT_SECURE_NO_WARNINGS)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 elseif(APPLE)
     set(EXTRA_SOURCES NotificationPanel.mm)
-    add_definitions(-DULTRASCHALL_PLATFORM_MACOS)
     add_compile_options(-mmacosx-version-min=10.11)
     set_source_files_properties(
         FileManager.cpp
@@ -131,7 +133,6 @@ elseif(APPLE)
         PROPERTIES COMPILE_FLAGS "-x objective-c++"
     )
 elseif(UNIX)
-    add_definitions(-DULTRASCHALL_PLATFORM_UNIX)
 endif()
 
 add_library(reaper_ultraschall SHARED

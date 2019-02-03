@@ -37,13 +37,13 @@ public:
 
     static ProjectManager& Instance();
 
-    const Project& CurrentProject() const;
-    void*  CurrentProjectReference() const;
-    std::string    CurrentProjectName() const;
+    const Project&   CurrentProject() const;
+    ProjectReference CurrentProjectReference() const;
+    UnicodeString    CurrentProjectName() const;
 
-    bool           InsertProject(void* projectReference);
-    const Project& LookupProject(void* projectReference) const;
-    void           RemoveProject(void* projectReference);
+    bool           InsertProject(ProjectReference projectReference);
+    const Project& LookupProject(ProjectReference projectReference) const;
+    void           RemoveProject(ProjectReference projectReference);
     void           RemoveAllProjects();
 
 protected:
@@ -55,9 +55,8 @@ private:
     ProjectManager(const ProjectManager&) = delete;
     ProjectManager& operator=(const ProjectManager&) = delete;
 
-    typedef std::map<void*, Project> ProjectReferenceDictionary;
-    ProjectReferenceDictionary       projectReferences_;
-    mutable std::recursive_mutex     projectReferencesLock_;
+    typedef std::map<ProjectReference, Project> ProjectReferenceDictionary;
+    ProjectReferenceDictionary                  projectReferences_;
 };
 
 }} // namespace ultraschall::reaper

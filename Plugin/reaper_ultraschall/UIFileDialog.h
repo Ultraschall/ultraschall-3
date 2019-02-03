@@ -33,20 +33,20 @@ namespace ultraschall { namespace reaper {
 class UIFileDialog : public UIDialog
 {
 public:
-    UIFileDialog(const std::string& caption, const std::string& initialDirectory = "");
+    UIFileDialog(const UnicodeString& caption, const UnicodeString& initialDirectory = "");
     virtual ~UIFileDialog() {}
 
-    std::string BrowseForChapters();
-    std::string BrowseForAudio();
-    std::string BrowseForPicture();
+    UnicodeString BrowseForChapters();
+    UnicodeString BrowseForAudio();
+    UnicodeString BrowseForPicture();
 
-    std::string BrowseForDirectory();
+    UnicodeString BrowseForDirectory();
 
 private:
-    std::string caption_;
-    std::string initialDirectory_;
+    UnicodeString caption_;
+    UnicodeString initialDirectory_;
 
-    std::string BrowseForFile(const std::string& fileExtensions);
+    UnicodeString BrowseForFile(const UnicodeString& fileExtensions);
 };
 
 }} // namespace ultraschall::reaper

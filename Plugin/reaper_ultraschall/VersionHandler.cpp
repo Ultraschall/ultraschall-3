@@ -25,47 +25,47 @@
 #include "VersionHandler.h"
 #include "FileManager.h"
 #include "Platform.h"
-#include "ReaperEntryPoints.h"
-#include "SWSVersionCheck.h"
 #include "StringUtilities.h"
+#include "ReaperGateway.h"
 
 #include <unzip.h>
 #include <zlib.h>
 
 namespace ultraschall { namespace reaper {
 
-std::string VersionHandler::ThemeVersion()
+UnicodeString VersionHandler::ThemeVersion()
 {
-    std::string       versionString;
-    const std::string themeControlFile = Platform::UserDataDirectory() + Platform::THEME_PATH;
-    unzFile           themeFile        = unzOpen(themeControlFile.c_str());
-    if (themeFile != nullptr)
+    UnicodeString       versionString;
+    const UnicodeString themeControlFile = Platform::UserDataDirectory() + Platform::THEME_PATH;
+    unzFile             themeFile        = unzOpen(U2H(themeControlFile).c_str());
+    if(themeFile != nullptr)
     {
         bool decoded  = false;
         int  zipError = unzGoToFirstFile(themeFile);
-        while ((UNZ_OK == zipError) && (false == decoded))
+        while((UNZ_OK == zipError) && (false == decoded))
         {
             unz_file_info fileInfo               = {0};
             const size_t  fileNameSize           = 4096;
             char          fileName[fileNameSize] = {0};
-            zipError                             = unzGetCurrentFileInfo(themeFile, &fileInfo, fileName, fileNameSize, nullptr, 0, nullptr, 0);
-            if (UNZ_OK == zipError)
+            zipError = unzGetCurrentFileInfo(themeFile, &fileInfo, fileName, fileNameSize, nullptr, 0, nullptr, 0);
+            if(UNZ_OK == zipError)
             {
-                if (strcmp("Ultraschall_2/version.txt", fileName) == 0)
+                if(strcmp("Ultraschall_2/version.txt", fileName) == 0)
                 {
                     zipError = unzOpenCurrentFile(themeFile);
-                    if (UNZ_OK == zipError)
+                    if(UNZ_OK == zipError)
                     {
                         const size_t fileBufferSize = fileInfo.uncompressed_size;
-                        if (fileBufferSize > 0)
+                        if(fileBufferSize > 0)
                         {
-                            char* fileBuffer = new char[fileBufferSize + 1]; 
-                            if (fileBuffer != nullptr)
+                            char* fileBuffer = new char[fileBufferSize + 1];
+                            if(fileBuffer != nullptr)
                             {
-                                const int readResult = unzReadCurrentFile(themeFile, fileBuffer, unsigned int(fileBufferSize));
-                                if (readResult > 0)
+                                const int readResult
+                                    = unzReadCurrentFile(themeFile, fileBuffer, unsigned int(fileBufferSize));
+                                if(readResult > 0)
                                 {
-                                    versionString = fileBuffer;
+                                    versionString = H2U(fileBuffer);
                                     decoded       = true;
                                 }
 
@@ -86,14 +86,14 @@ std::string VersionHandler::ThemeVersion()
         themeFile = 0;
     }
 
-    std::string themeVersion;
-    if (versionString.empty() == false)
+    UnicodeString themeVersion;
+    if(versionString.empty() == false)
     {
-        const StringArray versionTokens = StringTokenize(versionString, ':');
-        if (versionTokens.size() == 2)
+        const UnicodeStringArray versionTokens = StringTokenize(versionString, ':');
+        if(versionTokens.size() == 2)
         {
-            std::string version = versionTokens[1];
-            if (version.empty() == false)
+            UnicodeString version = versionTokens[1];
+            if(version.empty() == false)
             {
                 themeVersion = StringTrim(version);
             }
@@ -103,27 +103,23 @@ std::string VersionHandler::ThemeVersion()
     return themeVersion;
 }
 
-std::string VersionHandler::PluginVersion()
+UnicodeString VersionHandler::PluginVersion()
 {
 #ifdef _WIN32
-    const std::string path = "\\REAPER\\UserPlugins\\reaper_ultraschall.dll";
-    return Platform::ReadFileVersion(Platform::UserDataDirectory() + path);
-#else // #ifdef _WIN32
-#ifdef _APPLE_
+    return Platform::ReadFileVersion(Platform::UserDataDirectory() + Platform::PLUGIN_PATH);
+#else  // #ifdef _WIN32
     return "3.2.0";
-#else  // #ifdef _APPLE_
 // TODO: linux
-#endif // #ifdef _APPLE_
 #endif // #ifdef _WIN32
 }
 
-std::string VersionHandler::ReaperVersion()
+UnicodeString VersionHandler::ReaperVersion()
 {
-    std::string version;
+    UnicodeString version;
 
-    const StringArray tokens                  = StringTokenize(reaper_api::GetAppVersion(), '/');
-    const size_t      MIN_VERSION_TOKEN_COUNT = 1;
-    if (tokens.size() >= MIN_VERSION_TOKEN_COUNT)
+    const UnicodeStringArray tokens                  = StringTokenize(ReaperGateway::ApplicationVersion(), '/');
+    const size_t             MIN_VERSION_TOKEN_COUNT = 1;
+    if(tokens.size() >= MIN_VERSION_TOKEN_COUNT)
     {
         version = tokens.at(0);
     }
@@ -131,60 +127,58 @@ std::string VersionHandler::ReaperVersion()
     return version;
 }
 
-std::string VersionHandler::SoundboardVersion()
+UnicodeString VersionHandler::SoundboardVersion()
 {
-#ifdef _WIN32
-    const std::string path = "\\Steinberg\\VstPlugins\\Soundboard64.dll";
-#else // #ifdef _WIN32
-#ifdef _APPLE_
-    const std::string path = "/Audio/Plug-Ins/Components/Soundboard.component";
-#else  // #ifdef _APPLE_
-// TODO: linux
-#endif // #ifdef _APPLE_
-#endif // #ifdef _WIN32
-    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + Platform::SOUNDBOARD_PATH);
 }
 
-std::string VersionHandler::StudioLinkVersion()
+UnicodeString VersionHandler::StudioLinkVersion()
 {
-#ifdef _WIN32
-    const std::string path = "\\Steinberg\\VstPlugins\\studio-link.dll";
-#else // #ifdef _WIN32
-#ifdef _APPLE_
-    const std::string path = "/Audio/Plug-Ins/Components/StudioLink.component";
-#else  // #ifdef _APPLE_
-// TODO: linux
-#endif // #ifdef _APPLE_
-#endif // #ifdef _WIN32
-    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + Platform::STUDIO_LINK_PATH);
 }
 
-std::string VersionHandler::StudioLinkOnAirVersion()
+UnicodeString VersionHandler::StudioLinkOnAirVersion()
 {
-#ifdef _WIN32
-    const std::string path = "\\Steinberg\\VstPlugins\\studio-link-onair.dll";
-#else // #ifdef _WIN32
-#ifdef _APPLE_
-    const std::string path = "/Audio/Plug-Ins/Components/StudioLinkOnAir.component";
-#else  // #ifdef _APPLE_
-// TODO: linux
-#endif // #ifdef _APPLE_
-#endif // #ifdef _WIN32
-    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + path);
+    return Platform::ReadFileVersion(Platform::ProgramFilesDirectory() + Platform::STUDIO_LINK_ONAIR_PATH);
 }
 
-std::string VersionHandler::SWSVersion()
+UnicodeString VersionHandler::SWSVersion()
 {
 #ifdef _WIN32
-    const std::string path = "\\REAPER\\UserPlugins\\reaper_sws64.dll";
-    return Platform::ReadFileVersion(Platform::UserDataDirectory() + path);
+    return Platform::ReadFileVersion(Platform::UserDataDirectory() + Platform::SWS_PATH);
 #else // #ifdef _WIN32
-#ifdef _APPLE_
     return "2.9.7";
-#else  // #ifdef _APPLE_
-// TODO: linux
-#endif // #ifdef _APPLE_
 #endif // #ifdef _WIN32
+}
+
+bool VersionHandler::ReaperVersionCheck()
+{
+    bool result = false;
+
+    UnicodeString versionString = VersionHandler::ReaperVersion();
+    if(versionString.empty() == false)
+    {
+        UnicodeStringArray tokens = StringTokenize(versionString, '.');
+        if(tokens.size() >= 2)
+        {
+            const int REQUIRED_REAPER_MAJOR_VERSION = 5;
+            const int REQUIRED_REAPER_MINOR_VERSION = 70;
+            const int majorVersion                  = StringToInt(tokens[0]);
+            const int minorVersion                  = StringToInt(tokens[1]);
+
+            if((REQUIRED_REAPER_MAJOR_VERSION == majorVersion) && (REQUIRED_REAPER_MINOR_VERSION <= minorVersion))
+            {
+                result = true;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool VersionHandler::SWSVersionCheck()
+{
+    return Platform::SWSVersionCheck();
 }
 
 }} // namespace ultraschall::reaper

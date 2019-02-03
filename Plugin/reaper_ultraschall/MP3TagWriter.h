@@ -33,11 +33,13 @@ namespace ultraschall { namespace reaper {
 class MP3TagWriter : public ITagWriter
 {
 public:
-    virtual bool InsertStandardProperties(const std::string& targetName, const BasicMediaInformation& standardProperties);
+    virtual bool InsertProperties(const UnicodeString& targetName, const BasicMediaInformation& standardProperties);
 
-    virtual bool InsertCoverImage(const std::string& targetName, const std::string& coverImage);
+    virtual bool InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage);
 
-    virtual bool InsertChapterMarkers(const std::string& targetName, const std::vector<Marker>& chapterMarkers, const bool replace);
+    virtual bool InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers);
+
+    virtual bool ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers);
 
 protected:
     virtual ~MP3TagWriter() {}

@@ -36,7 +36,7 @@ CustomActionFactory& CustomActionFactory::Instance()
     return self;
 }
 
-ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
+ServiceStatus CustomActionFactory::RegisterCustomAction(const UnicodeString& id, CREATE_CUSTOM_ACTION_FUNCTION pfn)
 {
     PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
     PRECONDITION_RETURN(pfn != 0, SERVICE_INVALID_ARGUMENT);
@@ -48,7 +48,7 @@ ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, C
     const FunctionDictionary::const_iterator i = functions_.find(id);
     if (functions_.end() == i)
     {
-        functions_.insert(std::pair<std::string, CREATE_CUSTOM_ACTION_FUNCTION>(id, pfn));
+        functions_.insert(std::pair<UnicodeString, CREATE_CUSTOM_ACTION_FUNCTION>(id, pfn));
         status = SERVICE_SUCCESS;
     }
     else
@@ -59,7 +59,7 @@ ServiceStatus CustomActionFactory::RegisterCustomAction(const std::string& id, C
     return status;
 }
 
-void CustomActionFactory::UnregisterCustomAction(const std::string& id)
+void CustomActionFactory::UnregisterCustomAction(const UnicodeString& id)
 {
     PRECONDITION(functions_.empty() == false);
     PRECONDITION(id.empty() == false);
@@ -87,7 +87,7 @@ void CustomActionFactory::UnregisterAllCustomActions()
     }
 }
 
-ServiceStatus CustomActionFactory::CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const
+ServiceStatus CustomActionFactory::CreateCustomAction(const UnicodeString& id, ICustomAction*& pCustomAction) const
 {
     PRECONDITION_RETURN(id.empty() == false, SERVICE_INVALID_ARGUMENT);
 

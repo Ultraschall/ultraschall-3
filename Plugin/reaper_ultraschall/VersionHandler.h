@@ -32,19 +32,23 @@ namespace ultraschall { namespace reaper {
 class VersionHandler
 {
 public:
-    static std::string ThemeVersion();
+    static UnicodeString ThemeVersion();
 
-    static std::string PluginVersion();
+    static UnicodeString PluginVersion();
 
-    static std::string ReaperVersion();
+    static UnicodeString ReaperVersion();
 
-    static std::string SoundboardVersion();
+    static UnicodeString SoundboardVersion();
 
-    static std::string StudioLinkVersion();
+    static UnicodeString StudioLinkVersion();
 
-    static std::string StudioLinkOnAirVersion();
+    static UnicodeString StudioLinkOnAirVersion();
 
-    static std::string SWSVersion();
+    static UnicodeString SWSVersion();
+
+	static bool ReaperVersionCheck();
+
+	static bool SWSVersionCheck();
 };
 }} // namespace ultraschall::reaper
 

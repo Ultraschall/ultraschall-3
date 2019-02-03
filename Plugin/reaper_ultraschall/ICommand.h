@@ -47,8 +47,8 @@ protected:
     virtual ~ICommand() {}
 
 private:
-    ICommand(const ICommand&);
-    ICommand& operator=(const ICommand&);
+    ICommand(const ICommand&) = delete;
+    ICommand& operator=(const ICommand&) = delete;
 
     static const int32_t INVALID_COMMAND_ID = 0;
 };

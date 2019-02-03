@@ -23,30 +23,30 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "FileUtilities.h"
-#include "ByteStream.h"
+#include "BinaryStream.h"
 
 namespace ultraschall { namespace reaper {
 
-ByteStream* ReadBinaryFile(const std::string& filename)
+BinaryStream* ReadBinaryFile(const UnicodeString& filename)
 {
-    ByteStream* pStream = 0;
+    BinaryStream* pStream = 0;
 
-    std::ifstream file(filename, std::ios::in | std::ios::binary | std::ios::ate);
-    if (file.is_open() == true)
+    std::ifstream file(U2H(filename), std::ios::in | std::ios::binary | std::ios::ate);
+    if(file.is_open() == true)
     {
         const std::ifstream::pos_type fileSize = file.tellg();
         file.seekg(std::ios::beg);
         uint8_t* buffer = new uint8_t[fileSize];
-        if (buffer != 0)
+        if(buffer != 0)
         {
             file.read(reinterpret_cast<char*>(buffer), fileSize);
-            if (file)
+            if(file)
             {
-                pStream = new ByteStream(fileSize);
-                if (pStream != 0)
+                pStream = new BinaryStream(fileSize);
+                if(pStream != 0)
                 {
                     const bool succeeded = pStream->Write(0, buffer, fileSize);
-                    if (succeeded == false)
+                    if(succeeded == false)
                     {
                         SafeRelease(pStream);
                     }
@@ -62,13 +62,13 @@ ByteStream* ReadBinaryFile(const std::string& filename)
     return pStream;
 }
 
-StringArray ReadTextFile(const std::string& filename)
+UnicodeStringArray ReadTextFile(const UnicodeString& filename)
 {
-    StringArray lines;
+    UnicodeStringArray lines;
 
-    std::ifstream inputStream(filename.c_str());
-    std::string   line;
-    while (std::getline(inputStream, line))
+    std::ifstream inputStream(U2H(filename).c_str());
+    UnicodeString line;
+    while(std::getline(inputStream, line))
     {
         lines.push_back(line);
     }
@@ -76,16 +76,14 @@ StringArray ReadTextFile(const std::string& filename)
     return lines;
 }
 
-void WriteTextFile(const std::string& filename, const StringArray& lines)
+void WriteTextFile(const UnicodeString& filename, const UnicodeStringArray& lines)
 {
-    if (filename.empty() == false)
+    if(filename.empty() == false)
     {
-        std::ofstream os(filename.c_str());
-
-        for (size_t i = 0; i < lines.size(); i++)
+        std::ofstream os(U2H(filename).c_str());
+        for(size_t i = 0; i < lines.size(); i++)
         {
             os << lines[i];
-            //            os << std::endl;
             os << "\r\n";
         }
 
@@ -93,4 +91,4 @@ void WriteTextFile(const std::string& filename, const StringArray& lines)
     }
 }
 
-}}     // namespace ultraschall::reaper
+}} // namespace ultraschall::reaper

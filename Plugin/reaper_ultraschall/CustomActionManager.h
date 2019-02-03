@@ -36,14 +36,14 @@ class CustomActionManager
 public:
     static CustomActionManager& Instance();
 
-    ServiceStatus RegisterCustomAction(const std::string& name, const int32_t id, ICustomAction* pCustomAction);
+    ServiceStatus RegisterCustomAction(const UnicodeString& name, const int32_t id, ICustomAction* pCustomAction);
 
     void UnregisterCustomAction(const int32_t id);
-    void UnregisterCustomAction(const std::string& name);
+    void UnregisterCustomAction(const UnicodeString& name);
     void UnregisterAllCustomActions();
 
     ServiceStatus LookupCustomAction(const int32_t id, ICustomAction*& pCustomAction) const;
-    ServiceStatus LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const;
+    ServiceStatus LookupCustomAction(const UnicodeString& name, ICustomAction*& pCustomAction) const;
 
 protected:
     virtual ~CustomActionManager();
@@ -56,7 +56,7 @@ private:
 
     typedef std::map<int32_t, ICustomAction*> CustomActionDictionary; 
     CustomActionDictionary                    customActions_;
-    typedef std::map<std::string, int32_t>    CustomActionIdDictionary;
+    typedef std::map<UnicodeString, int32_t>    CustomActionIdDictionary;
     CustomActionIdDictionary customActionIds_;
     mutable std::recursive_mutex      customActionsLock_;
 };

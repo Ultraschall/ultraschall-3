@@ -31,7 +31,6 @@
 
 #include "Common.h"
 #include "Platform.h"
-#include "ReaperEntryPoints.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "UIMessageDialog.h"
@@ -148,7 +147,7 @@ void UpdateCheck()
                 const std::string nextUpdateCheckpoint = std::to_string(nextTimestamp);
                 if (nextUpdateCheckpoint.empty() == false)
                 {
-                    SystemProperty<std::string>::Set(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint, true);
+                    SystemProperty<std::string>::Save(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint);
                 }
             }
         }

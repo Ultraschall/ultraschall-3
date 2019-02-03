@@ -48,20 +48,24 @@ namespace ultraschall { namespace reaper {
 class Platform
 {
 public:
-    static const std::string THEME_PATH;
-    static const std::string SOUNDBOARD_PATH;
-    static const std::string SWS_PATH;
-    static const std::string PLUGIN_PATH;
-    static const std::string STUDIO_LINK_PATH;
-    static const std::string STUDIO_LINK_ONAIR_PATH;
+    static const UnicodeString THEME_PATH;
+    static const UnicodeString SOUNDBOARD_PATH;
+    static const UnicodeString SWS_PATH;
+    static const UnicodeString PLUGIN_PATH;
+    static const UnicodeString STUDIO_LINK_PATH;
+    static const UnicodeString STUDIO_LINK_ONAIR_PATH;
 
-    static std::string ProgramFilesDirectory();
-    static std::string UserDataDirectory();
+    static UnicodeString ProgramFilesDirectory();
+    static UnicodeString UserDataDirectory();
 
-    static char PathSeparator();
+    static UnicodeChar PathSeparator();
 
-    static bool FileExists(const std::string& path);
-    static std::string ReadFileVersion(const std::string& path);
+    static bool        FileExists(const UnicodeString& path);
+    static UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix);
+
+	static UnicodeString ReadFileVersion(const UnicodeString& path);
+
+	static bool SWSVersionCheck();
 };
 
 }} // namespace ultraschall::reaper

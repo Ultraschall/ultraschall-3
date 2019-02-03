@@ -29,76 +29,78 @@
 
 namespace ultraschall { namespace reaper {
 
-UIFileDialog::UIFileDialog(const std::string& caption, const std::string& initialDirectory) : caption_(caption), initialDirectory_(initialDirectory)
+UIFileDialog::UIFileDialog(const UnicodeString& caption, const UnicodeString& initialDirectory) :
+    caption_(caption), initialDirectory_(initialDirectory)
 {
-    if (caption_.empty() == true)
+    if(caption_.empty() == true)
     {
         caption_ = "Open file";
     }
 }
 
-std::string UIFileDialog::BrowseForFile(const std::string& fileExtensions)
+UnicodeString UIFileDialog::BrowseForFile(const UnicodeString& fileExtensions)
 {
-    PRECONDITION_RETURN(GetParent() != 0, std::string());
+    PRECONDITION_RETURN(GetParent() != 0, UnicodeString());
 
-    std::string filename;
+    UnicodeString filename;
 
-    std::string actualFileExtension = "All files|*.*";
-    if (fileExtensions.empty() == false)
+    UnicodeString actualFileExtension = "All files|*.*";
+    if(fileExtensions.empty() == false)
     {
         actualFileExtension = fileExtensions;
     }
 
-    wxFileDialog fileDialog(GetParent(), caption_, initialDirectory_, "", fileExtensions, wxFD_OPEN, wxDefaultPosition);
-    if (fileDialog.ShowModal() == wxID_OK)
+    wxFileDialog fileDialog(
+        GetParent(), U2H(caption_), U2H(initialDirectory_), "", U2H(actualFileExtension), wxFD_OPEN, wxDefaultPosition);
+    if(fileDialog.ShowModal() == wxID_OK)
     {
         wxString resultPath;
         resultPath.Append(fileDialog.GetDirectory());
         resultPath.Append(wxFileName::GetPathSeparator());
         resultPath.Append(fileDialog.GetFilename());
-        filename = resultPath.c_str();
+        filename = H2U(resultPath).c_str();
     }
 
     return filename;
 }
 
-std::string UIFileDialog::BrowseForChapters()
+UnicodeString UIFileDialog::BrowseForChapters()
 {
-    const std::string fileExtensions = "MP4 chapters|*.chapters.txt|"
-                                       "MP4 chapters|*.mp4chaps|"
-                                       "All files|*.*";
+    const UnicodeString fileExtensions = "MP4 chapters|*.chapters.txt|"
+                                         "MP4 chapters|*.mp4chaps|"
+                                         "All files|*.*";
     return BrowseForFile(fileExtensions);
 }
 
-std::string UIFileDialog::BrowseForAudio()
+UnicodeString UIFileDialog::BrowseForAudio()
 {
-    const std::string fileExtensions = "MP3 file|*.mp3|"
-                                       "MP4 file|*.mp4|"
-                                       "M4A file|*.m4a|"
-                                       "All files|*.*";
+    const UnicodeString fileExtensions = "MP3 file|*.mp3|"
+                                         "MP4 file|*.mp4|"
+                                         "M4A file|*.m4a|"
+                                         "All files|*.*";
     return BrowseForFile(fileExtensions);
 }
 
-std::string UIFileDialog::BrowseForPicture()
+UnicodeString UIFileDialog::BrowseForPicture()
 {
-    const std::string fileExtensions = "JPG file|*.jpg|"
-                                       "PNG file|*.png|"
-                                       "All files|*.*";
+    const UnicodeString fileExtensions = "JPG file|*.jpg|"
+                                         "PNG file|*.png|"
+                                         "All files|*.*";
     return BrowseForFile(fileExtensions);
 }
 
-std::string UIFileDialog::BrowseForDirectory()
+UnicodeString UIFileDialog::BrowseForDirectory()
 {
-    PRECONDITION_RETURN(GetParent() != 0, std::string());
+    PRECONDITION_RETURN(GetParent() != 0, UnicodeString());
 
-    std::string directory;
+    UnicodeString directory;
 
-    wxDirDialog directoryDialog(GetParent(), "Select", initialDirectory_, 0, wxDefaultPosition);
-    if (directoryDialog.ShowModal() == wxID_OK)
+    wxDirDialog directoryDialog(GetParent(), "Select", U2H(initialDirectory_), 0, wxDefaultPosition);
+    if(directoryDialog.ShowModal() == wxID_OK)
     {
         wxString resultPath;
         resultPath.Append(directoryDialog.GetPath());
-        directory = resultPath;
+        directory = H2U(resultPath);
     }
 
     return directory;

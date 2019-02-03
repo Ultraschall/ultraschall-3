@@ -33,12 +33,12 @@ namespace ultraschall { namespace reaper {
 class SaveChapterMarkersToProjectAction : public ICustomAction
 {
 public:
-    static const char* UniqueId()
+    static UnicodeString UniqueId()
     {
         return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
     }
 
-    static const char* UniqueName()
+    static UnicodeString UniqueName()
     {
         return "ULTRASCHALL: Save chapter markers to project folder";
     }
@@ -53,10 +53,10 @@ public:
 private:
     SaveChapterMarkersToProjectAction() {}
 
-    std::vector<Marker>      chapters_;
+    MarkerArray      chapters_;
     bool                     ConfigureAssets();
     void                     ResetAssets();
-    StringArray ValidateChapterMarkers();
+    UnicodeStringArray ValidateChapterMarkers();
 };
 
 }} // namespace ultraschall::reaper

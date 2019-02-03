@@ -38,12 +38,12 @@ public:
 
     typedef ICustomAction* (*CREATE_CUSTOM_ACTION_FUNCTION)();
 
-    ServiceStatus RegisterCustomAction(const std::string& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
+    ServiceStatus RegisterCustomAction(const UnicodeString& id, CREATE_CUSTOM_ACTION_FUNCTION pfn);
 
-    void UnregisterCustomAction(const std::string& id);
+    void UnregisterCustomAction(const UnicodeString& id);
     void UnregisterAllCustomActions();
 
-    ServiceStatus CreateCustomAction(const std::string& id, ICustomAction*& pCustomAction) const;
+    ServiceStatus CreateCustomAction(const UnicodeString& id, ICustomAction*& pCustomAction) const;
 
 protected:
     virtual ~CustomActionFactory();
@@ -54,7 +54,7 @@ private:
     CustomActionFactory(const CustomActionFactory&);
     CustomActionFactory& operator=(const CustomActionFactory&);
 
-    typedef std::map<std::string, CREATE_CUSTOM_ACTION_FUNCTION> FunctionDictionary;
+    typedef std::map<UnicodeString, CREATE_CUSTOM_ACTION_FUNCTION> FunctionDictionary;
     FunctionDictionary                                           functions_;
     mutable std::recursive_mutex                                 functionsLock_;
 };

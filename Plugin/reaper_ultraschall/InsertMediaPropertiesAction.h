@@ -36,12 +36,12 @@ class ITagWriter;
 class InsertMediaPropertiesAction : public ICustomAction
 {
 public:
-    static const char* UniqueId()
+    static UnicodeString UniqueId()
     {
         return "ULTRASCHALL_INSERT_MEDIA_PROPERTIES";
     }
 
-    static const char* UniqueName()
+    static UnicodeString UniqueName()
     {
         return "ULTRASCHALL: Insert media properties into target...";
     }
@@ -59,24 +59,24 @@ private:
     bool ConfigureAssets();
     void ResetAssets();
 
-    StringArray targetNames_;
-    std::string              cover_;
-    std::vector<Marker>      chapters_;
-    BasicMediaInformation    id3v2_;
+    UnicodeStringArray    targetNames_;
+    UnicodeString         cover_;
+    MarkerArray           chapters_;
+    BasicMediaInformation id3v2_;
 
-    static StringArray FindTargetFiles(const Project& project);
+    static UnicodeStringArray FindTargetFiles(const Project& project);
 
-    static std::string FindCoverImage(const Project& project);
+    static UnicodeString FindCoverImage(const Project& project);
 
-    static ITagWriter* CreateTagWriter(const std::string& targetName);
+    static ITagWriter* CreateTagWriter(const UnicodeString& targetName);
 
-    static std::string NormalizeTargetName(const std::string& targetName);
+    static UnicodeString NormalizeTargetName(const UnicodeString& targetName);
 
     typedef enum { MP3_TARGET, MP4_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
 
-    static TARGET_TYPE EvaluateFileType(const std::string& targetName);
+    static TARGET_TYPE EvaluateFileType(const UnicodeString& targetName);
 
-    bool ValidateChapterMarkers(StringArray& errorRecords);
+    bool ValidateChapterMarkers(UnicodeStringArray& errorRecords);
 };
 
 }} // namespace ultraschall::reaper

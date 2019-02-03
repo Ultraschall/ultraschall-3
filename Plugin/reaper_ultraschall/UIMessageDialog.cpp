@@ -28,36 +28,36 @@
 
 namespace ultraschall { namespace reaper {
 
-const std::string UIMessageDialog::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
+const UnicodeString UIMessageDialog::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
 
-void UIMessageDialog::Show(int32_t style, const std::string& message, const std::string& details)
+void UIMessageDialog::Show(int32_t style, const UnicodeString& message, const UnicodeString& details)
 {
     PRECONDITION(message.empty() == false);
-    wxMessageBox(wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()), style);
+    wxMessageBox(U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION), style);
 }
 
-void UIMessageDialog::Show(const std::string& message, const std::string& description)
+void UIMessageDialog::Show(const UnicodeString& message, const UnicodeString& description)
 {
     PRECONDITION(message.empty() == false);
 
     UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_INFORMATION, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
+    messageDialog.Show(wxICON_INFORMATION, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
 }
 
-void UIMessageDialog::ShowWarning(const std::string& message, const std::string& description)
+void UIMessageDialog::ShowWarning(const UnicodeString& message, const UnicodeString& description)
 {
     PRECONDITION(message.empty() == false);
 
     UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_WARNING, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
+    messageDialog.Show(wxICON_WARNING, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
 }
 
-void UIMessageDialog::ShowError(const std::string& message, const std::string& description)
+void UIMessageDialog::ShowError(const UnicodeString& message, const UnicodeString& description)
 {
     PRECONDITION(message.empty() == false);
 
     UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_ERROR, wxString(message.c_str()), wxString(UI_MESSAGE_DIALOG_CAPTION.c_str()));
+    messageDialog.Show(wxICON_ERROR, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
 }
 
 }} // namespace ultraschall::reaper

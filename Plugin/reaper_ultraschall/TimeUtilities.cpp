@@ -89,7 +89,7 @@ static ULTRASCHALL_TIMESTAMP SecondsToTimestamp(const double seconds)
     return MillisecondsToTimestamp(milliseconds);
 }
 
-std::string TimestampToString(const ULTRASCHALL_TIMESTAMP& timestamp, const bool roundSeconds)
+UnicodeString TimestampToString(const ULTRASCHALL_TIMESTAMP& timestamp, const bool roundSeconds)
 {
     ULTRASCHALL_TIMESTAMP ts = timestamp;
 
@@ -123,13 +123,13 @@ std::string TimestampToString(const ULTRASCHALL_TIMESTAMP& timestamp, const bool
     return str.str();
 }
 
-std::string MillisecondsToString(const uint32_t milliseconds, const bool roundSeconds)
+UnicodeString MillisecondsToString(const uint32_t milliseconds, const bool roundSeconds)
 {
     ULTRASCHALL_TIMESTAMP timestamp = MillisecondsToTimestamp(milliseconds);
     return TimestampToString(timestamp, roundSeconds);
 }
 
-uint16_t StringToUint16(const std::string& str, const int lowerLimit = 0, const int upperLimit = UINT16_MAX)
+uint16_t StringToUint16(const UnicodeString& str, const int lowerLimit = 0, const int upperLimit = UINT16_MAX)
 {
     uint16_t result = 0xffff;
 
@@ -152,7 +152,7 @@ uint16_t StringToUint16(const std::string& str, const int lowerLimit = 0, const 
     return result;
 }
 
-uint8_t StringToUint8(const std::string& str, const int lowerLimit = 0, const int upperLimit = UINT8_MAX)
+uint8_t StringToUint8(const UnicodeString& str, const int lowerLimit = 0, const int upperLimit = UINT8_MAX)
 {
     uint8_t result = 0xff;
 
@@ -175,11 +175,11 @@ uint8_t StringToUint8(const std::string& str, const int lowerLimit = 0, const in
     return result;
 }
 
-ULTRASCHALL_TIMESTAMP StringToTimestamp(const std::string& str)
+ULTRASCHALL_TIMESTAMP StringToTimestamp(const UnicodeString& str)
 {
     ULTRASCHALL_TIMESTAMP timestamp;
 
-    StringArray tokens = StringTokenize(str, '.');
+    UnicodeStringArray tokens = StringTokenize(str, '.');
     if (tokens.size() > 1)
     {
         timestamp.milliseconds = StringToUint16(tokens[1], 0, 999);
@@ -216,7 +216,7 @@ ULTRASCHALL_TIMESTAMP StringToTimestamp(const std::string& str)
     return timestamp;
 }
 
-uint32_t StringToMilliseconds(const std::string& str)
+uint32_t StringToMilliseconds(const UnicodeString& str)
 {
     uint32_t result = 0xffffffff;
 
@@ -229,9 +229,9 @@ uint32_t StringToMilliseconds(const std::string& str)
     return result;
 }
 
-std::string SecondsToString(const double seconds, const bool roundSeconds)
+UnicodeString SecondsToString(const double seconds, const bool roundSeconds)
 {
-    std::string str = "<Out of range>";
+    UnicodeString str = "<Out of range>";
 
     const double offset = (roundSeconds == true) ? 0.5 : 0;
     if ((seconds >= 0) && (seconds < ((60 * 60 * 24) - offset)))
@@ -243,7 +243,7 @@ std::string SecondsToString(const double seconds, const bool roundSeconds)
     return str;
 }
 
-double StringToSeconds(const std::string& str)
+double StringToSeconds(const UnicodeString& str)
 {
     double result = -1;
 

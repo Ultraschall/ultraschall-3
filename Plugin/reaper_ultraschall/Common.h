@@ -48,11 +48,9 @@
 
 #include "ServiceStatus.h"
 #include "SharedObject.h"
+#include "UnicodeString.h"
 
 namespace ultraschall { namespace reaper {
-
-typedef std::vector<std::string>           StringArray;
-typedef std::map<std::string, std::string> StringDictionary;
 
 #define PRECONDITION(a) \
     {                   \

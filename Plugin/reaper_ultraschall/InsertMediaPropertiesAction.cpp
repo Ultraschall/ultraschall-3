@@ -40,21 +40,21 @@ namespace ultraschall { namespace reaper {
 class ErrorRecord
 {
 public:
-    ErrorRecord(const std::string& target, const std::string& message) : target_(target), message_(message) {}
+    ErrorRecord(const UnicodeString& target, const UnicodeString& message) : target_(target), message_(message) {}
 
-    inline const std::string& Target() const
+    inline const UnicodeString& Target() const
     {
         return target_;
     }
 
-    inline const std::string& Message() const
+    inline const UnicodeString& Message() const
     {
         return message_;
     }
 
 private:
-    std::string target_;
-    std::string message_;
+    UnicodeString target_;
+    UnicodeString message_;
 };
 
 static DeclareCustomAction<InsertMediaPropertiesAction> action;
@@ -63,13 +63,13 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
 {
     ProjectManager& projectManager = ProjectManager::Instance();
     Project         currentProject = projectManager.CurrentProject();
-    if (Project::Validate(currentProject) == true)
+    if(Project::Validate(currentProject) == true)
     {
         ResetAssets();
 
         targetNames_ = FindTargetFiles(currentProject);
 #ifndef ULTRASCHALL_BROADCASTER
-        if (targetNames_.empty() == true)
+        if(targetNames_.empty() == true)
         {
             std::stringstream os;
             os << "Ultraschall can't find a suitable media file.";
@@ -79,46 +79,46 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
 
             UIMessageDialog::Show(os.str());
 
-            UIFileDialog      fileDialog("Select audio file");
-            const std::string targetName = fileDialog.BrowseForAudio();
-            if (targetName.empty() == false)
+            UIFileDialog        fileDialog("Select audio file");
+            const UnicodeString targetName = fileDialog.BrowseForAudio();
+            if(targetName.empty() == false)
             {
                 targetNames_.push_back(targetName);
             }
         }
 #endif // #ifndef ULTRASCHALL_BROADCASTER
 
-        if ((targetNames_.empty() == false) && (ConfigureAssets() == true))
+        if((targetNames_.empty() == false) && (ConfigureAssets() == true))
         {
-            StringArray errorMessages;
-            if (ValidateChapterMarkers(errorMessages) == true)
+            UnicodeStringArray errorMessages;
+            if(ValidateChapterMarkers(errorMessages) == true)
             {
                 std::vector<ErrorRecord> errorRecords;
 
-                for (size_t i = 0; i < targetNames_.size(); i++)
+                for(size_t i = 0; i < targetNames_.size(); i++)
                 {
-                    const std::string& targetName = targetNames_[i];
+                    const UnicodeString& targetName = targetNames_[i];
 
                     ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
-                    if (pTagWriter != 0)
+                    if(pTagWriter != 0)
                     {
                         BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
-                        if (pTagWriter->InsertStandardProperties(targetName, properties) == false)
+                        if(pTagWriter->InsertProperties(targetName, properties) == false)
                         {
                             errorRecords.push_back(ErrorRecord(targetName, "Failed to insert tags."));
                         }
 
-                        if (cover_.empty() == false)
+                        if(cover_.empty() == false)
                         {
-                            if (pTagWriter->InsertCoverImage(targetName, cover_) == false)
+                            if(pTagWriter->InsertCoverImage(targetName, cover_) == false)
                             {
                                 errorRecords.push_back(ErrorRecord(targetName, "Failed to insert cover image."));
                             }
                         }
 
-                        if (chapters_.empty() == false)
+                        if(chapters_.empty() == false)
                         {
-                            if (pTagWriter->InsertChapterMarkers(targetName, chapters_, true) == false)
+                            if(pTagWriter->ReplaceChapterMarkers(targetName, chapters_) == false)
                             {
                                 errorRecords.push_back(ErrorRecord(targetName, "Failed to insert chapter markers."));
                             }
@@ -128,15 +128,16 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                     }
                 }
 
-                if (errorRecords.size() > 0)
+                if(errorRecords.size() > 0)
                 {
 #ifndef ULTRASCHALL_BROADCASTER
-                    for (size_t j = 0; j < errorRecords.size(); j++)
+                    for(size_t j = 0; j < errorRecords.size(); j++)
                     {
                         std::stringstream os;
                         os << "Ultraschall found the following errors while processing media files:";
                         os << "\r\n\r\n";
-                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message() << "\r\n";
+                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message()
+                           << "\r\n";
                         os << "\r\n\r\n";
 
                         UIMessageDialog::ShowError(os.str());
@@ -149,10 +150,10 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
 
                     std::stringstream os;
                     os << "The following media files have been updated successfully:\r\n\r\n";
-                    for (size_t k = 0; k < targetNames_.size(); k++)
+                    for(size_t k = 0; k < targetNames_.size(); k++)
                     {
                         os << FileManager::StripPath(targetNames_[k]);
-                        if (k < (targetNames_.size() - 1))
+                        if(k < (targetNames_.size() - 1))
                         {
                             os << "\r\n";
                         }
@@ -165,13 +166,13 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
             }
             else
             {
-                if (errorMessages.empty() == false)
+                if(errorMessages.empty() == false)
                 {
 #ifndef ULTRASCHALL_BROADCASTER
                     std::ostringstream os;
                     os << "Ultraschall failed to validate chapter markers.";
                     os << "\r\n\r\n";
-                    for (size_t l = 0; l < errorMessages.size(); l++)
+                    for(size_t l = 0; l < errorMessages.size(); l++)
                     {
                         os << errorMessages[l];
                     }
@@ -191,22 +192,22 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
     return SERVICE_SUCCESS;
 }
 
-StringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
+UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
 {
-    StringArray targetNames;
+    UnicodeStringArray targetNames;
 
-    const std::string projectFolder = project.FolderName();
-    const std::string projectName   = project.Name();
+    const UnicodeString projectFolder = project.FolderName();
+    const UnicodeString projectName   = project.Name();
 
     PRECONDITION_RETURN(projectFolder.empty() == false, targetNames);
     PRECONDITION_RETURN(projectName.empty() == false, targetNames);
 
     static const size_t MAX_FILE_EXTENSIONS                 = 3;
     static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {"mp3", "mp4", "m4a"};
-    for (size_t i = 0; i < MAX_FILE_EXTENSIONS; i++)
+    for(size_t i = 0; i < MAX_FILE_EXTENSIONS; i++)
     {
-        std::string targetName = FileManager::AppendPath(projectFolder, projectName) + "." + fileExtensions[i];
-        if (FileManager::FileExists(targetName) != false)
+        UnicodeString targetName = FileManager::AppendPath(projectFolder, projectName) + "." + fileExtensions[i];
+        if(FileManager::FileExists(targetName) != false)
         {
             targetNames.push_back(targetName);
         }
@@ -215,17 +216,17 @@ StringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
     return targetNames;
 }
 
-std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
+UnicodeString InsertMediaPropertiesAction::FindCoverImage(const Project& project)
 {
-    const std::string projectFolder = project.FolderName();
-    const std::string projectName   = project.Name();
+    const UnicodeString projectFolder = project.FolderName();
+    const UnicodeString projectName   = project.Name();
 
-    PRECONDITION_RETURN(projectFolder.empty() == false, std::string());
-    PRECONDITION_RETURN(projectName.empty() == false, std::string());
+    PRECONDITION_RETURN(projectFolder.empty() == false, UnicodeString());
+    PRECONDITION_RETURN(projectName.empty() == false, UnicodeString());
 
-    std::string coverImage;
+    UnicodeString coverImage;
 
-    StringArray imageNames;
+    UnicodeStringArray imageNames;
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
     imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
@@ -233,7 +234,7 @@ std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
     imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
     imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
     const size_t imageIndex = FileManager::FileExists(imageNames);
-    if (imageIndex != -1)
+    if(imageIndex != -1)
     {
         coverImage = imageNames[imageIndex];
     }
@@ -241,18 +242,18 @@ std::string InsertMediaPropertiesAction::FindCoverImage(const Project& project)
     return coverImage;
 }
 
-ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targetName)
+ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const UnicodeString& targetName)
 {
     PRECONDITION_RETURN(targetName.empty() == false, 0);
     PRECONDITION_RETURN(targetName.length() > 4, 0);
 
     ITagWriter*       tagWriter  = 0;
     const TARGET_TYPE targetType = EvaluateFileType(targetName);
-    if (targetType == MP3_TARGET)
+    if(targetType == MP3_TARGET)
     {
         tagWriter = new MP3TagWriter();
     }
-    else if (targetType == MP4_TARGET)
+    else if(targetType == MP4_TARGET)
     {
         tagWriter = new MP4TagWriter();
     }
@@ -260,34 +261,35 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const std::string& targ
     return tagWriter;
 }
 
-std::string InsertMediaPropertiesAction::NormalizeTargetName(const std::string& targetName)
+UnicodeString InsertMediaPropertiesAction::NormalizeTargetName(const UnicodeString& targetName)
 {
-    std::string firstStage  = targetName;
-    std::string secondStage = StringTrimRight(firstStage);
+    UnicodeString firstStage  = targetName;
+    UnicodeString secondStage = StringTrimRight(firstStage);
     return StringLowercase(secondStage);
 }
 
-InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const std::string& targetName)
+InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const UnicodeString& targetName)
 {
     PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
 
-    TARGET_TYPE       type             = INVALID_TARGET_TYPE;
-    const std::string cookedTargetName = NormalizeTargetName(targetName);
-    const size_t      extensionOffset  = targetName.rfind(".");
-    if (extensionOffset != std::string::npos)
+    TARGET_TYPE         type             = INVALID_TARGET_TYPE;
+    const UnicodeString cookedTargetName = NormalizeTargetName(targetName);
+    const size_t        extensionOffset  = targetName.rfind(".");
+    if(extensionOffset != UnicodeString::npos)
     {
-        const std::string fileExtension = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
-        if (fileExtension.empty() == false)
+        const UnicodeString fileExtension
+            = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
+        if(fileExtension.empty() == false)
         {
-            if (fileExtension == "mp3")
+            if(fileExtension == "mp3")
             {
                 type = MP3_TARGET;
             }
-            else if (fileExtension == "mp4")
+            else if(fileExtension == "mp4")
             {
                 type = MP4_TARGET;
             }
-            else if (fileExtension == "m4a")
+            else if(fileExtension == "m4a")
             {
                 type = MP4_TARGET;
             }
@@ -299,39 +301,39 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
 
 bool InsertMediaPropertiesAction::ConfigureAssets()
 {
-    bool                     result = false;
-    StringArray messages;
-    size_t                   invalidAssetCount = 0;
+    bool               result = false;
+    UnicodeStringArray messages;
+    size_t             invalidAssetCount = 0;
 
     ProjectManager& projectManager = ProjectManager::Instance();
     Project         currentProject = projectManager.CurrentProject();
-    if (Project::Validate(currentProject) == true)
+    if(Project::Validate(currentProject) == true)
     {
         id3v2_ = BasicMediaInformation::ParseString(currentProject.Notes());
-        if (id3v2_.Validate() == false)
+        if(id3v2_.Validate() == false)
         {
-            const std::string message = "ID3v2 tags have not been defined yet.";
+            const UnicodeString message = "ID3v2 tags have not been defined yet.";
             messages.push_back(message);
             invalidAssetCount++;
         }
 
         cover_ = FindCoverImage(currentProject);
-        if (cover_.empty() == true)
+        if(cover_.empty() == true)
         {
-            const std::string message = "Cover image is missing.";
+            const UnicodeString message = "Cover image is missing.";
             messages.push_back(message);
             invalidAssetCount++;
         }
 
-        chapters_ = currentProject.QueryAllMarkers();
-        if (chapters_.empty() == true)
+        chapters_ = currentProject.AllMarkers();
+        if(chapters_.empty() == true)
         {
-            const std::string message = "No chapters have been set.";
+            const UnicodeString message = "No chapters have been set.";
             messages.push_back(message);
             invalidAssetCount++;
         }
 
-        if (invalidAssetCount >= 3)
+        if(invalidAssetCount >= 3)
         {
 #ifndef ULTRASCHALL_BROADCASTER
             std::stringstream os;
@@ -344,14 +346,14 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
 #endif // #ifndef ULTRASCHALL_BROADCASTER
             result = false;
         }
-        else if (messages.size() > 0)
+        else if(messages.size() > 0)
         {
 #ifndef ULTRASCHALL_BROADCASTER
             std::stringstream os;
 
             os << "Ultraschall has found the following non-critical issues and will continue after you close "
                   "this message:\r\n\r\n";
-            for (size_t i = 0; i < messages.size(); i++)
+            for(size_t i = 0; i < messages.size(); i++)
             {
                 os << (i + 1) << ") " << messages[i] << "\r\n";
             }
@@ -386,30 +388,31 @@ void InsertMediaPropertiesAction::ResetAssets()
     chapters_.clear();
 }
 
-bool InsertMediaPropertiesAction::ValidateChapterMarkers(StringArray& errorMessages)
+bool InsertMediaPropertiesAction::ValidateChapterMarkers(UnicodeStringArray& errorMessages)
 {
     bool valid = true;
     errorMessages.clear();
 
-    for (size_t i = 0; i < chapters_.size(); i++)
+    for(size_t i = 0; i < chapters_.size(); i++)
     {
-        const Marker&     current      = chapters_[i];
-        const std::string safeName     = current.Name();
-        const double      safePosition = current.Position();
+        const Marker&       current      = chapters_[i];
+        const UnicodeString safeName     = current.Name();
+        const double        safePosition = current.Position();
 
         ProjectManager& projectManager = ProjectManager::Instance();
         Project         currentProject = projectManager.CurrentProject();
-        if (currentProject.IsValidPosition(current.Position()) == false)
+        if(currentProject.IsValidPosition(current.Position()) == false)
         {
             std::stringstream os;
-            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : std::string("Unknown")) << "' is out of track range.";
+            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : UnicodeString("Unknown"))
+               << "' is out of track range.";
             os << "\r\n";
             errorMessages.push_back(os.str());
 
             valid = false;
         }
 
-        if (current.Name().empty() == true)
+        if(current.Name().empty() == true)
         {
             std::stringstream os;
             os << "Chapter marker at '" << SecondsToString(safePosition) << "' has no name.";

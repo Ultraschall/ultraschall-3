@@ -39,7 +39,7 @@ CustomActionManager& CustomActionManager::Instance()
     return self;
 }
 
-ServiceStatus CustomActionManager::RegisterCustomAction(const std::string& name, int32_t id, ICustomAction* pCustomAction)
+ServiceStatus CustomActionManager::RegisterCustomAction(const UnicodeString& name, const int32_t id, ICustomAction* pCustomAction)
 {
     PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, SERVICE_INVALID_ARGUMENT);
     PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
@@ -109,7 +109,7 @@ void CustomActionManager::UnregisterCustomAction(const int32_t id)
     }
 }
 
-void CustomActionManager::UnregisterCustomAction(const std::string& name)
+void CustomActionManager::UnregisterCustomAction(const UnicodeString& name)
 {
     PRECONDITION(customActions_.empty() == false);
     PRECONDITION(customActionIds_.empty() == false);
@@ -185,7 +185,7 @@ ServiceStatus CustomActionManager::LookupCustomAction(const int32_t id, ICustomA
     return status;
 }
 
-ServiceStatus CustomActionManager::LookupCustomAction(const std::string& name, ICustomAction*& pCustomAction) const
+ServiceStatus CustomActionManager::LookupCustomAction(const UnicodeString& name, ICustomAction*& pCustomAction) const
 {
     PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
     PRECONDITION_RETURN(customActions_.empty() == false, SERVICE_MANAGER_NOT_FOUND);

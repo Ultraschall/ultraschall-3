@@ -26,8 +26,6 @@
 #include "Application.h"
 #include "CustomActionManager.h"
 #include "FileManager.h"
-#include "ReaperEntryPoints.h"
-#include "SWSVersionCheck.h"
 #include "SystemProperties.h"
 #include "UIMessageDialog.h"
 #include "UpdateCheck.h"
@@ -65,11 +63,6 @@ ServiceStatus Application::Start()
 
 void Application::Stop() {}
 
-int32_t Application::Register(const char* name, void* pInfoStruct) const
-{
-    return reaper_api::plugin_register(name, pInfoStruct);
-}
-
 bool Application::OnCustomAction(const int32_t id)
 {
     PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, false);
@@ -91,175 +84,6 @@ bool Application::OnCustomAction(const int32_t id)
     }
 
     return executed;
-}
-
-std::string Application::GetExportPathName() const
-{
-    std::string result;
-
-    char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
-    reaper_api::GetProjectPath(buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-    if (strlen(buffer) > 0)
-    {
-        result = buffer;
-    }
-
-    return result;
-}
-
-std::string Application::GetProjectPathName() const
-{
-    std::string result;
-
-    char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
-    reaper_api::EnumProjects(-1, buffer, MAX_REAPER_STRING_BUFFER_SIZE);
-    if (strlen(buffer) > 0)
-    {
-        result = buffer;
-    }
-
-    return result;
-}
-
-std::string Application::GetProjectFileName() const
-{
-    std::string result;
-
-    const std::string projectPath = GetProjectPathName();
-    if (projectPath.empty() == false)
-    {
-        const StringArray pathComponents = FileManager::SplitPath(projectPath);
-        if (pathComponents.empty() == false)
-        {
-            result = pathComponents[pathComponents.size() - 1];
-        }
-    }
-
-    return result;
-}
-
-std::string Application::GetProjectFolderName() const
-{
-    std::string result;
-
-    const std::string projectPath = GetProjectPathName();
-    if (projectPath.empty() == false)
-    {
-        const StringArray pathComponents = FileManager::SplitPath(projectPath);
-        if (pathComponents.empty() == false)
-        {
-            for (size_t i = 0; i < pathComponents.size() - 1; i++)
-            {
-                result += pathComponents[i];
-                if (i < pathComponents.size() - 2)
-                {
-                    result += FileManager::PathSeparator();
-                }
-            }
-        }
-    }
-
-    return result;
-}
-
-std::string Application::GetProjectName() const
-{
-    std::string result;
-
-    const std::string projectFile = GetProjectFileName();
-    if (projectFile.empty() == false)
-    {
-        result = projectFile.substr(0, projectFile.find('.', 0));
-    }
-
-    return result;
-}
-
-struct Timestamp
-{
-    int hours;
-    int minutes;
-    int seconds;
-    int milliSeconds;
-
-    Timestamp() : hours(0), minutes(0), seconds(0), milliSeconds(0) {}
-
-    static Timestamp FromString(const std::string& str)
-    {
-        StringArray items = StringTokenize(str, ':');
-        std::reverse(items.begin(), items.end());
-
-        Timestamp timestamp;
-
-        StringArray buffer = StringTokenize(items[0], '.');
-        for (size_t i = 0; i < buffer.size(); ++i)
-        {
-            switch (i)
-            {
-                case 0:
-                    timestamp.seconds = std::atoi(buffer[0].c_str());
-                    break;
-
-                case 1:
-                    timestamp.milliSeconds = std::atoi(buffer[1].c_str());
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        for (size_t i = 0; i < items.size(); ++i)
-        {
-            switch (i)
-            {
-                case 1:
-                    timestamp.minutes = std::atoi(items[1].c_str());
-                    break;
-
-                case 2:
-                    timestamp.hours = std::atoi(items[2].c_str());
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        return timestamp;
-    }
-
-    std::string ToString() const
-    {
-        std::stringstream buffer;
-        buffer << std::setfill('0');
-        buffer << std::setw(2) << hours << ":";
-        buffer << std::setw(2) << minutes << ":";
-        buffer << std::setw(2) << seconds << ".";
-        buffer << std::setw(3) << milliSeconds;
-
-        return buffer.str();
-    }
-};
-
-std::string Application::TimestampToString(const double timestamp) const
-{
-    std::string result;
-
-    char buffer[MAX_REAPER_STRING_BUFFER_SIZE] = {0};
-    reaper_api::format_timestr_pos(timestamp, buffer, MAX_REAPER_STRING_BUFFER_SIZE, 0);
-    if (strlen(buffer) > 0)
-    {
-        result = Timestamp::FromString(buffer).ToString();
-    }
-
-    return result;
-}
-
-double Application::StringToTimestamp(const std::string& input) const
-{
-    PRECONDITION_RETURN(input.empty() == false, -1);
-    return reaper_api::parse_timestr(input.c_str());
 }
 
 bool Application::HealthCheck()
@@ -321,53 +145,19 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
     }
 #endif // #ifdef _APPLE_
 
-    if ((true == ok) && (ReaperVersionCheck() == false))
+    if ((true == ok) && (VersionHandler::ReaperVersionCheck() == false))
     {
         UIMessageDialog::ShowError(message, information3 + " " + information4);
         ok = false;
     }
 
-    if ((true == ok) && (SWSVersionCheck() == false))
+    if ((true == ok) && (VersionHandler::SWSVersionCheck() == false))
     {
         UIMessageDialog::ShowError(message, information7);
         ok = false;
     }
 
     return ok;
-}
-
-bool Application::ReaperVersionCheck()
-{
-    bool result = false;
-
-    std::string versionString = VersionHandler::ReaperVersion();
-    if (versionString.empty() == false)
-    {
-        StringArray tokens = StringTokenize(versionString, '.');
-        if (tokens.size() >= 2)
-        {
-            const int REQUIRED_REAPER_MAJOR_VERSION = 5;
-            const int REQUIRED_REAPER_MINOR_VERSION = 70;
-            const int majorVersion                  = StringToInt(tokens[0]);
-            const int minorVersion                  = StringToInt(tokens[1]);
-
-            if ((REQUIRED_REAPER_MAJOR_VERSION == majorVersion) && (REQUIRED_REAPER_MINOR_VERSION <= minorVersion))
-            {
-                result = true;
-            }
-        }
-    }
-
-    return result;
-}
-
-uint32_t Application::GetEditMarkerColor()
-{
-#ifdef ULTRASCHALL_PLATFORM_WIN32
-    return 0x01ff0000;
-#else  // #ifdef ULTRASCHALL_PLATFORM_WIN32
-    return 0x010000ff;
-#endif // #ifdef ULTRASCHALL_PLATFORM_WIN32
 }
 
 }} // namespace ultraschall::reaper

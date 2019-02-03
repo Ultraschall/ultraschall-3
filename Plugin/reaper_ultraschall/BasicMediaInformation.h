@@ -35,48 +35,48 @@ public:
     BasicMediaInformation();
     ~BasicMediaInformation();
 
-    static BasicMediaInformation ParseString(const std::string& str);
+    static BasicMediaInformation ParseString(const UnicodeString& str);
 
     bool Validate() const;
     void Reset();
 
-    inline const std::string& Title() const
+    inline const UnicodeString& Title() const
     {
         return title_;
     }
 
-    inline const std::string& Author() const
+    inline const UnicodeString& Author() const
     {
         return author_;
     }
 
-    inline const std::string& Track() const
+    inline const UnicodeString& Track() const
     {
         return track_;
     }
 
-    inline const std::string& Date() const
+    inline const UnicodeString& Date() const
     {
         return date_;
     }
 
-    inline const std::string& Content() const
+    inline const UnicodeString& Content() const
     {
         return content_;
     }
 
-    inline const std::string& Comments() const
+    inline const UnicodeString& Comments() const
     {
         return comments_;
     }
 
 private:
-    std::string title_;    // TIT2
-    std::string author_;   // TPE1
-    std::string track_;    // TALB
-    std::string date_;     // TDRC
-    std::string content_;  // TCON
-    std::string comments_; // COMM
+    UnicodeString title_;    // TIT2
+    UnicodeString author_;   // TPE1
+    UnicodeString track_;    // TALB
+    UnicodeString date_;     // TDRC
+    UnicodeString content_;  // TCON
+    UnicodeString comments_; // COMM
 };
 
 }} // namespace ultraschall::reaper

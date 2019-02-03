@@ -32,14 +32,14 @@ namespace ultraschall { namespace reaper {
 class FileManager
 {
 public:
-    static char PathSeparator();
+    static UnicodeChar PathSeparator();
 
-    static std::string AppendPath(const std::string& prefix, const std::string& append);
-    static std::string StripPath(const std::string& path);
-    static StringArray SplitPath(const std::string& path);
+    static UnicodeString      AppendPath(const UnicodeString& prefix, const UnicodeString& append);
+    static UnicodeString      StripPath(const UnicodeString& path);
+    static UnicodeStringArray SplitPath(const UnicodeString& path);
 
-    static bool   FileExists(const std::string& path);
-    static size_t FileExists(const StringArray& paths);
+    static bool   FileExists(const UnicodeString& path);
+    static size_t FileExists(const UnicodeStringArray& paths);
 };
 
 }} // namespace ultraschall::reaper

@@ -25,46 +25,43 @@
 #include <shlobj.h>
 #include <windows.h>
 
+#include "FileUtilities.h"
 #include "Platform.h"
-#include "StringUtilities.h"
-
 #include "wx/filename.h"
 
 namespace ultraschall { namespace reaper {
 
-#ifdef _WIN32
+const UnicodeString Platform::THEME_PATH("\\REAPER\\ColorThemes\\Ultraschall_3.1.ReaperThemeZip");
+const UnicodeString Platform::SOUNDBOARD_PATH("\\Steinberg\\VstPlugins\\Soundboard64.dll");
+const UnicodeString Platform::SWS_PATH("\\REAPER\\UserPlugins\\reaper_sws64.dll");
+const UnicodeString Platform::PLUGIN_PATH("\\REAPER\\UserPlugins\\reaper_ultraschall.dll");
+const UnicodeString Platform::STUDIO_LINK_PATH("\\Steinberg\\VstPlugins\\studio-link.dll");
+const UnicodeString Platform::STUDIO_LINK_ONAIR_PATH("\\Steinberg\\VstPlugins\\studio-link-onair.dll");
 
-const std::string Platform::THEME_PATH("\\REAPER\\ColorThemes\\Ultraschall_3.1.ReaperThemeZip");
-const std::string Platform::SOUNDBOARD_PATH("\\Steinberg\\VstPlugins\\Soundboard64.dll");
-const std::string Platform::SWS_PATH("\\REAPER\\UserPlugins\\reaper_sws64.dll");
-const std::string Platform::PLUGIN_PATH("\\REAPER\\UserPlugins\\reaper_ultraschall.dll");
-const std::string Platform::STUDIO_LINK_PATH("\\Steinberg\\VstPlugins\\studio-link.dll");
-const std::string Platform::STUDIO_LINK_ONAIR_PATH("\\Steinberg\\VstPlugins\\studio-link-onair.dll");
-
-std::string Platform::ProgramFilesDirectory()
+UnicodeString Platform::ProgramFilesDirectory()
 {
-    std::string directory;
+    UnicodeString directory;
 
-    PWSTR   unicodeString = nullptr;
-    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, nullptr, &unicodeString);
-    if (SUCCEEDED(hr))
+    WideUnicodeChar* unicodeString = nullptr;
+    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, nullptr, (PWSTR*)&unicodeString);
+    if(SUCCEEDED(hr))
     {
-        directory = MakeUTF8String(unicodeString);
+        directory = WideUnicodeStringToUnicodeString(unicodeString);
         CoTaskMemFree(unicodeString);
     }
 
     return directory;
 }
 
-std::string Platform::UserDataDirectory()
+UnicodeString Platform::UserDataDirectory()
 {
-    std::string directory;
+    UnicodeString directory;
 
-    PWSTR   unicodeString = nullptr;
-    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, &unicodeString);
-    if (SUCCEEDED(hr))
+    WideUnicodeChar*         unicodeString = nullptr;
+    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, (PWSTR*)&unicodeString);
+    if(SUCCEEDED(hr))
     {
-        directory = MakeUTF8String(unicodeString);
+        directory = WideUnicodeStringToUnicodeString(unicodeString);
         CoTaskMemFree(unicodeString);
         unicodeString = nullptr;
     }
@@ -72,20 +69,20 @@ std::string Platform::UserDataDirectory()
     return directory;
 }
 
-char Platform::PathSeparator()
+UnicodeChar Platform::PathSeparator()
 {
     return wxFileName::GetPathSeparator();
 }
 
-bool Platform::FileExists(const std::string& path)
+bool Platform::FileExists(const UnicodeString& path)
 {
     PRECONDITION_RETURN(path.empty() == false, false);
 
     bool fileExists = false;
 
-    std::string str        = path;
-    HANDLE      fileHandle = CreateFile(str.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-    if (INVALID_HANDLE_VALUE != fileHandle)
+    HANDLE      fileHandle = CreateFileA(
+        path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if(INVALID_HANDLE_VALUE != fileHandle)
     {
         fileExists = true;
         CloseHandle(fileHandle);
@@ -94,29 +91,34 @@ bool Platform::FileExists(const std::string& path)
     return fileExists;
 }
 
-std::string Platform::ReadFileVersion(const std::string& path)
+UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix)
 {
-    PRECONDITION_RETURN(path.empty() == false, std::string());
+    return prefix + PathSeparator() + appendix;
+}
 
-    std::string version;
+UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
+{
+    PRECONDITION_RETURN(path.empty() == false, UnicodeString());
+
+    UnicodeString version;
 
     DWORD       fileVersionInfoHandle = 0;
-    const DWORD fileVersionInfoSize   = GetFileVersionInfoSize(path.c_str(), &fileVersionInfoHandle);
-    if (fileVersionInfoSize > 0)
+    const DWORD fileVersionInfoSize   = GetFileVersionInfoSizeA(path.c_str(), &fileVersionInfoHandle);
+    if(fileVersionInfoSize > 0)
     {
         uint8_t* fileVersionInfo = new uint8_t[fileVersionInfoSize];
-        if (fileVersionInfo != 0)
+        if(fileVersionInfo != 0)
         {
-            if (GetFileVersionInfo(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
+            if(GetFileVersionInfoA(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
             {
                 uint8_t* versionDataPtr  = 0;
                 uint32_t versionDataSize = 0;
-                if (VerQueryValue(fileVersionInfo, "\\", (void**)&versionDataPtr, &versionDataSize))
+                if(VerQueryValueA(fileVersionInfo, "\\", (void**)&versionDataPtr, &versionDataSize))
                 {
-                    if (versionDataSize > 0)
+                    if(versionDataSize > 0)
                     {
                         const VS_FIXEDFILEINFO* fileInfo = reinterpret_cast<VS_FIXEDFILEINFO*>(versionDataPtr);
-                        if (fileInfo->dwSignature == 0xfeef04bd)
+                        if(fileInfo->dwSignature == 0xfeef04bd)
                         {
                             std::stringstream str;
                             str << ((fileInfo->dwFileVersionMS >> 16) & 0xffff) << ".";
@@ -136,85 +138,67 @@ std::string Platform::ReadFileVersion(const std::string& path)
     return version;
 }
 
-#else // #ifdef _WIN32
-
-#ifdef _APPLE_
-
-const std::string Platform::THEME_PATH("/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip");
-const std::string Platform::SOUNDBOARD_PATH("/Audio/Plug-Ins/Components/Soundboard.component");
-const std::string Platform::SWS_PATH("<unspecified>");
-const std::string Platform::PLUGIN_PATH("<unspecified>");
-const std::string Platform::STUDIO_LINK_PATH("/Audio/Plug-Ins/Components/StudioLink.component");
-const std::string Platform::STUDIO_LINK_ONAIR_PATH("/Audio/Plug-Ins/Components/StudioLinkOnAir.component");
-
-std::string Platform::UserDataDirectory()
+UnicodeString FindUltraschallPluginDirectory()
 {
-    std::string directory;
+    UnicodeString pluginDirectory;
 
-    NSString* userHomeDirectory = NSHomeDirectory();
-    directory                   = [userHomeDirectory UTF8String];
-
-    return directory;
-}
-
-#if 0
-std::string FileManager::UserApplicationSupportDirectory()
-{
-    std::string directory;
-
-    NSURL* applicationSupportDirectory =
-        [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] firstObject];
-    directory = [applicationSupportDirectory fileSystemRepresentation];
-
-    return directory;
-}
-#endif
-
-std::string Platform::ProgramFilesDirectory()
-{
-    std::string directory;
-
-    NSURL* applicationSupportDirectory =
-        [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSSystemDomainMask] firstObject];
-    directory = [applicationSupportDirectory fileSystemRepresentation];
-
-    return directory;
-}
-
-bool FileExists(const std::string& path)
-{
-    PRECONDITION_RETURN(path.empty == false, false);
-
-    bool fileExists = false;
-
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    fileExists                 = [fileManager fileExistsAtPath:[NSString stringWithUTF8String:path.c_str()]] == YES;
-}
-
-std::string Platform::ReadFileVersion(const std::string& path)
-{
-    PRECONDITION_RETURN(path.empty() == false, std::string());
-
-    std::string version;
-
-    NSURL*           libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] firstObject];
-    NSMutableString* filePath         = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
-    [filePath appendString:[NSString stringWithUTF8String:path.c_str()]];
-    [filePath appendString:@"/Contents/Info.plist"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    HMODULE moduleHandle = GetModuleHandleA("reaper_ultraschall.dll");
+    if(moduleHandle != 0)
     {
-        NSDictionary* plist = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-        NSString*     value = [plist objectForKey:@"CFBundleShortVersionString"];
-        version             = [value UTF8String];
+        CHAR        dllPath[_MAX_PATH] = {0};
+        const DWORD charCount          = GetModuleFileNameA(moduleHandle, dllPath, _MAX_PATH);
+        if(charCount > 0)
+        {
+            pluginDirectory = dllPath;
+            if(pluginDirectory.empty() == false)
+            {
+                const size_t offset = pluginDirectory.rfind('\\');
+                if(offset != std::string::npos)
+                {
+                    pluginDirectory = pluginDirectory.substr(0, offset);
+                }
+                else
+                {
+                    pluginDirectory.clear();
+                }
+            }
+        }
     }
 
-    return version;
+    return pluginDirectory;
 }
 
-#else // #ifdef _APPLE_
+bool Platform::SWSVersionCheck()
 
-#endif // #ifdef _APPLE_
+{
+    bool result = false;
 
-#endif // #ifdef _WIN32
+    UnicodeString swsPlugin2_8UserPath
+        = Platform::ProgramFilesDirectory() + "\\REAPER (x64)\\Plugins\\reaper_sws64.dll";
+    if(Platform::FileExists(swsPlugin2_8UserPath) == false)
+    {
+        swsPlugin2_8UserPath = Platform::AppendPath(FindUltraschallPluginDirectory(), "reaper_sws64.dll");
+    }
+
+    if(Platform::FileExists(swsPlugin2_8UserPath) == true)
+    {
+        reaper::BinaryStream* pStream = reaper::ReadBinaryFile(swsPlugin2_8UserPath);
+        if(pStream != 0)
+
+        {
+            static const uint64_t originalCrc = 2821342186;
+            const uint64_t        crc         = pStream->CRC32();
+            if(originalCrc == crc)
+
+            {
+                result = true;
+            }
+
+            SafeRelease(pStream);
+        }
+    }
+
+    return result;
+}
 
 }} // namespace ultraschall::reaper

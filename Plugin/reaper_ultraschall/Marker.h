@@ -34,7 +34,9 @@ class Marker
 public:
     Marker() : position_(-1), color_(0xffffffff) {}
 
-    Marker(const double position, const std::string& name, const int color) : position_(position), name_(name), color_(color) {}
+    Marker(const double position, const UnicodeString& name, const int color) :
+        position_(position), name_(name), color_(color)
+    {}
 
     double Position() const
     {
@@ -52,10 +54,12 @@ public:
     }
 
 private:
-    double      position_;
-    std::string name_;
-    int         color_;
+    double        position_;
+    UnicodeString name_;
+    int           color_;
 };
+
+typedef std::vector<Marker> MarkerArray;
 
 }} // namespace ultraschall::reaper
 

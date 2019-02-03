@@ -34,13 +34,13 @@ BasicMediaInformation::~BasicMediaInformation()
     Reset();
 }
 
-BasicMediaInformation BasicMediaInformation::ParseString(const std::string& str)
+BasicMediaInformation BasicMediaInformation::ParseString(const UnicodeString& str)
 {
     BasicMediaInformation result;
 
     if (str.empty() == false)
     {
-        StringArray tokens = StringTokenize(str, '\n');
+        UnicodeStringArray tokens = StringTokenize(str, '\n');
         if (tokens.empty() == false)
         {
             result.title_ = tokens[0];

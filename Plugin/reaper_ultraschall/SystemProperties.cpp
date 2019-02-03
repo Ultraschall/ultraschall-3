@@ -22,9 +22,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <sstream>
-
-#include "ReaperEntryPoints.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "UIMessageDialog.h"
@@ -40,21 +37,25 @@ bool QuerySetPluginVersion()
 {
     bool result = false;
 
-    if (SystemProperty<std::string>::Exists(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
+    if(SystemProperty<UnicodeString>::Exists(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
     {
-        const std::string themeVersion = SystemProperty<std::string>::Get(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
-        if (themeVersion == VERSION_VALUE_NAME)
+        const UnicodeString themeVersion
+            = SystemProperty<UnicodeString>::Get(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
+        if(themeVersion == VERSION_VALUE_NAME)
         {
-            SystemProperty<std::string>::Set(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME, true);
+            SystemProperty<UnicodeString>::Save(
+                VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME);
             // quick sanity check
-            result = SystemProperty<std::string>::Exists(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
+            result = SystemProperty<UnicodeString>::Exists(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
         }
         else
         {
 #ifndef ULTRASCHALL_BROADCASTER
             std::ostringstream str;
-            str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion << ") and PLUGIN (" << VERSION_VALUE_NAME
-                << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the new theme or check the installation "
+            str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion
+                << ") and PLUGIN (" << VERSION_VALUE_NAME
+                << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the "
+                   "new theme or check the installation "
                    "guide on http://ultraschall.fm/install/";
             UIMessageDialog::ShowError(str.str());
             result = false;
@@ -66,8 +67,10 @@ bool QuerySetPluginVersion()
     else
     {
 #ifndef ULTRASCHALL_BROADCASTER
-        const std::string str = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease proceed by "
-                                "installing the theme or check the installation guide on http://ultraschall.fm/install/";
+        const UnicodeString str
+            = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease "
+              "proceed by "
+              "installing the theme or check the installation guide on http://ultraschall.fm/install/";
         UIMessageDialog::ShowError(str);
         result = false;
 #else  // #ifndef ULTRASCHALL_BROADCASTER
@@ -78,19 +81,19 @@ bool QuerySetPluginVersion()
     return result;
 }
 
-template<> std::string SystemProperty<std::string>::Get(const std::string& section, const std::string& key)
+template<> UnicodeString SystemProperty<UnicodeString>::Get(const UnicodeString& section, const UnicodeString& key)
 {
     return RawValue(section, key);
 }
 
-template<> bool SystemProperty<bool>::Get(const std::string& section, const std::string& key)
+template<> bool SystemProperty<bool>::Get(const UnicodeString& section, const UnicodeString& key)
 {
     bool value = false;
 
-    const std::string& rawValue = RawValue(section, key);
-    if (rawValue.empty() == false)
+    const UnicodeString& rawValue = RawValue(section, key);
+    if(rawValue.empty() == false)
     {
-        if ((StringLowercase(rawValue) == "true") || (StringToInt(rawValue) != 0))
+        if((StringLowercase(rawValue) == "true") || (StringToInt(rawValue) != 0))
         {
             value = true;
         }
@@ -99,12 +102,12 @@ template<> bool SystemProperty<bool>::Get(const std::string& section, const std:
     return value;
 }
 
-template<> int SystemProperty<int>::Get(const std::string& section, const std::string& key)
+template<> int SystemProperty<int>::Get(const UnicodeString& section, const UnicodeString& key)
 {
     int value = 0;
 
-    const std::string rawValue = RawValue(section, key);
-    if (rawValue.empty() == false)
+    const UnicodeString rawValue = RawValue(section, key);
+    if(rawValue.empty() == false)
     {
         value = StringToInt(rawValue);
     }
@@ -117,90 +120,94 @@ void UpdateBillOfMaterials()
     static const char* FOUND_ITEMS_KEY_NAME = "found_items";
     static const char* ITEM_KEY_NAME_PREFIX = "item_";
 
-    if (SystemProperty<int>::Exists(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME) == true)
+    if(SystemProperty<int>::Exists(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME) == true)
     {
         const int foundItems = SystemProperty<int>::Get(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME);
-        if (foundItems > 0)
+        if(foundItems > 0)
         {
-            for (int i = 1; i <= foundItems; i++)
+            for(int i = 1; i <= foundItems; i++)
             {
-                SystemProperty<std::string>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i), true);
+                SystemProperty<UnicodeString>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i));
             }
         }
         else
         {
-            for (int i = 1; i <= 23; i++)
+            for(int i = 1; i <= 23; i++)
             {
-                if (SystemProperty<std::string>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i)) == true)
+                if(SystemProperty<UnicodeString>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i))
+                   == true)
                 {
-                    SystemProperty<std::string>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i), true);
+                    SystemProperty<UnicodeString>::Delete(
+                        BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i));
                 }
             }
         }
 
-        SystemProperty<int>::Delete(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME, true);
+        SystemProperty<int>::Delete(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME);
     }
     else
     {
-        for (unsigned int i = 1; i <= 23; i++)
+        for(unsigned int i = 1; i <= 23; i++)
         {
-            if (SystemProperty<std::string>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i)) == true)
+            if(SystemProperty<UnicodeString>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i))
+               == true)
             {
-                SystemProperty<std::string>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i), true);
+                SystemProperty<UnicodeString>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i));
             }
         }
     }
 
-    StringArray bom;
-    std::string              itemVersion = VersionHandler::PluginVersion();
-    if (itemVersion.empty() == false)
+    UnicodeStringArray   bom;
+    UnicodeString itemVersion = VersionHandler::PluginVersion();
+    if(itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall REAPER Extension " + itemVersion);
     }
 
     itemVersion = VersionHandler::ThemeVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall REAPER Theme " + itemVersion);
     }
 
     itemVersion = VersionHandler::SoundboardVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall Soundboard " + itemVersion);
     }
 
     itemVersion = VersionHandler::StudioLinkVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("StudioLink Plug-in " + itemVersion);
     }
 
     itemVersion = VersionHandler::StudioLinkOnAirVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("StudioLink OnAir Plug-in " + itemVersion);
     }
 
     itemVersion = VersionHandler::SWSVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("SWS REAPER Extension " + itemVersion);
     }
 
     itemVersion = VersionHandler::ReaperVersion();
-    if (itemVersion.empty() == false)
+    if(itemVersion.empty() == false)
     {
         bom.push_back("REAPER " + itemVersion);
     }
 
-    if (bom.empty() == false)
+    if(bom.empty() == false)
     {
-        SystemProperty<int>::Set(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME, std::to_string(bom.size()), true);
+        SystemProperty<int>::Save(BOM_SECTION_NAME, FOUND_ITEMS_KEY_NAME, std::to_string(bom.size()));
 
-        for (size_t i = 0; i < bom.size(); i++)
+        for(size_t i = 0; i < bom.size(); i++)
         {
-            SystemProperty<std::string>::Set(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i + 1), bom[i], true);
+            SystemProperty<UnicodeString>::Save(
+                BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i + 1), bom[i]);
         }
     }
 }

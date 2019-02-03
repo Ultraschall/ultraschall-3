@@ -24,32 +24,31 @@
 
 #include "Application.h"
 #include "FileManager.h"
-#include "ReaperEntryPoints.h"
 #include "StringUtilities.h"
 #include "Platform.h"
 
 namespace ultraschall { namespace reaper {
 
-char FileManager::PathSeparator()
+UnicodeChar FileManager::PathSeparator()
 {
     return Platform::PathSeparator();
 }
 
-std::string FileManager::AppendPath(const std::string& prefix, const std::string& append)
+UnicodeString FileManager::AppendPath(const UnicodeString& prefix, const UnicodeString& append)
 {
-    return prefix + PathSeparator() + append;
+    return Platform::AppendPath(prefix, append);
 }
 
-std::string FileManager::StripPath(const std::string& path)
+UnicodeString FileManager::StripPath(const UnicodeString& path)
 {
-    std::string shortName;
+    UnicodeString shortName;
 
     if (path.empty() == false)
     {
         shortName = path;
 
-        const std::string::size_type offset = path.rfind(FileManager::PathSeparator());
-        if (offset != std::string::npos)
+        const UnicodeString::size_type offset = path.rfind(FileManager::PathSeparator());
+        if (offset != UnicodeString::npos)
         {
             shortName = path.substr(offset + 1, path.size()); // skip separator
         }
@@ -58,17 +57,17 @@ std::string FileManager::StripPath(const std::string& path)
     return shortName;
 }
 
-StringArray FileManager::SplitPath(const std::string& path)
+UnicodeStringArray FileManager::SplitPath(const UnicodeString& path)
 {
     return StringTokenize(path, PathSeparator());
 }
 
-bool FileManager::FileExists(const std::string& path)
+bool FileManager::FileExists(const UnicodeString& path)
 {
     return Platform::FileExists(path);
 }
 
-size_t FileManager::FileExists(const StringArray& paths)
+size_t FileManager::FileExists(const UnicodeStringArray& paths)
 {
     size_t offset = static_cast<size_t>(-1);
 

@@ -22,20 +22,58 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_FILE_UTILITIES_H_INCL__
-#define __ULTRASCHALL_REAPER_FILE_UTILITIES_H_INCL__
-
-#include "Common.h"
 #include "BinaryStream.h"
 
 namespace ultraschall { namespace reaper {
 
-BinaryStream* ReadBinaryFile(const UnicodeString& filename);
+BinaryStream::BinaryStream(const size_t dataSize) : dataSize_(dataSize), data_(new uint8_t[dataSize_]()) {}
 
-UnicodeStringArray ReadTextFile(const UnicodeString& filename);
+BinaryStream::~BinaryStream()
+{
+    dataSize_ = 0;
+    SafeDeleteArray(data_);
+}
 
-void WriteTextFile(const UnicodeString& filename, const UnicodeStringArray& lines);
+size_t BinaryStream::DataSize() const
+{
+    return dataSize_;
+}
+
+const uint8_t* BinaryStream::Data() const
+{
+    return data_;
+}
+
+bool BinaryStream::Write(const size_t offset, const uint8_t* buffer, const size_t bufferSize)
+{
+    PRECONDITION_RETURN(data_ != nullptr, false);
+    PRECONDITION_RETURN((offset + bufferSize) <= dataSize_, false);
+    PRECONDITION_RETURN(buffer != nullptr, false);
+
+    const size_t itemSize = sizeof(uint8_t);
+    memmove(&data_[offset * itemSize], buffer, bufferSize * itemSize);
+    return true;
+}
+
+bool BinaryStream::Read(const size_t offset, uint8_t* buffer, const size_t bufferSize)
+{
+    PRECONDITION_RETURN(data_ != nullptr, false);
+    PRECONDITION_RETURN((offset + bufferSize) < dataSize_, false);
+    PRECONDITION_RETURN(buffer != nullptr, false);
+
+    const size_t itemSize = sizeof(uint8_t);
+    memmove(buffer, &data_[offset * itemSize], bufferSize * itemSize);
+    return true;
+}
+
+uint64_t BinaryStream::CRC32() const
+{
+    PRECONDITION_RETURN(data_ != nullptr, UINT64_MAX);
+    PRECONDITION_RETURN(dataSize_ > 0, UINT64_MAX);
+
+    uint64_t crc = crc32(0, Z_NULL, 0);
+    return crc32(static_cast<uLong>(crc), data_, static_cast<uInt>(dataSize_));
+}
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_FILE_UTILITIES_H_INCL__

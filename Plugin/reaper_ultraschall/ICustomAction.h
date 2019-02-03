@@ -26,7 +26,6 @@
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
 #include "Common.h"
-
 #include "ProjectManager.h"
 
 namespace ultraschall { namespace reaper {
@@ -46,11 +45,11 @@ public:
         bool registered = false;
 
         ProjectManager& projectManager          = ProjectManager::Instance();
-        void*   currentProjectReference = projectManager.CurrentProjectReference();
-        if (currentProjectReference != nullptr)
+        void*           currentProjectReference = projectManager.CurrentProjectReference();
+        if(currentProjectReference != nullptr)
         {
             const Project& currentProject = projectManager.LookupProject(currentProjectReference);
-            if (Project::Validate(currentProject) == false)
+            if(Project::Validate(currentProject) == false)
             {
                 registered = projectManager.InsertProject(currentProjectReference);
             }
@@ -69,8 +68,8 @@ protected:
     virtual ~ICustomAction() {}
 
 private:
-    ICustomAction(const ICustomAction&);
-    ICustomAction& operator=(const ICustomAction&);
+    ICustomAction(const ICustomAction&) = delete;
+    ICustomAction& operator=(const ICustomAction&) = delete; 
 
     static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };

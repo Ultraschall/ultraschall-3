@@ -32,14 +32,14 @@ namespace ultraschall { namespace reaper {
 class UIMessageDialog
 {
 public:
-    static void Show(const std::string& message, const std::string& description = "");
-    static void ShowWarning(const std::string& message, const std::string& description = "");
-    static void ShowError(const std::string& message, const std::string& description = "");
+    static void Show(const UnicodeString& message, const UnicodeString& description = "");
+    static void ShowWarning(const UnicodeString& message, const UnicodeString& description = "");
+    static void ShowError(const UnicodeString& message, const UnicodeString& description = "");
 
 private:
-    static const std::string UI_MESSAGE_DIALOG_CAPTION;
+    static const UnicodeString UI_MESSAGE_DIALOG_CAPTION;
 
-    void Show(int32_t style, const std::string& message, const std::string& details);
+    void Show(int32_t style, const UnicodeString& message, const UnicodeString& details);
 };
 
 }} // namespace ultraschall::reaper

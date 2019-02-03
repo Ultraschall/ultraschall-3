@@ -23,7 +23,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ProjectManager.h"
-#include "ReaperEntryPoints.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -41,50 +40,45 @@ ProjectManager& ProjectManager::Instance()
 
 const Project& ProjectManager::CurrentProject() const
 {
-    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
-
-    void* currentProjectReference = CurrentProjectReference();
+    ProjectReference currentProjectReference = CurrentProjectReference();
     return LookupProject(currentProjectReference);
 }
 
-void* ProjectManager::CurrentProjectReference() const
+ProjectReference ProjectManager::CurrentProjectReference() const
 {
-    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
-
-    return reaper_api::EnumProjects(-1, 0, 0);
+    return ReaperGateway::CurrentProject();
 }
 
-std::string ProjectManager::CurrentProjectName() const
+UnicodeString ProjectManager::CurrentProjectName() const
 {
-    std::string result;
-
-    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
+    UnicodeString name;
 
     const Project& currentProject = CurrentProject();
-    if (Project::Validate(currentProject) == true)
+    if(Project::Validate(currentProject) == true)
     {
-        result = currentProject.Name();
+        // TODO check whether reaper uses unicode or ansi
+        name = H2U(currentProject.Name());
     }
 
-    return result;
+    return name;
 }
 
-bool ProjectManager::InsertProject(void* projectReference)
+bool ProjectManager::InsertProject(ProjectReference projectReference)
 {
-    PRECONDITION_RETURN(projectReference != 0, false);
+    PRECONDITION_RETURN(projectReference != nullptr, false);
 
-    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
-
-    return projectReferences_.insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference))).second;
+    return projectReferences_
+        .insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference)))
+        .second;
 }
 
-const Project& ProjectManager::LookupProject(void* projectReference) const
+const Project& ProjectManager::LookupProject(ProjectReference projectReference) const
 {
-    PRECONDITION_RETURN(projectReference != 0, INVALID_PROJECT);
+    PRECONDITION_RETURN(projectReference != nullptr, INVALID_PROJECT);
 
-    std::lock_guard<std::recursive_mutex>            lock(projectReferencesLock_);
-    const ProjectReferenceDictionary::const_iterator projectReferenceIterator = projectReferences_.find(projectReference);
-    if (projectReferenceIterator != projectReferences_.end())
+    const ProjectReferenceDictionary::const_iterator projectReferenceIterator
+        = projectReferences_.find(projectReference);
+    if(projectReferenceIterator != projectReferences_.end())
     {
         return projectReferenceIterator->second;
     }
@@ -92,16 +86,14 @@ const Project& ProjectManager::LookupProject(void* projectReference) const
     return INVALID_PROJECT;
 }
 
-void ProjectManager::RemoveProject(void* projectReference)
+void ProjectManager::RemoveProject(ProjectReference projectReference)
 {
-    PRECONDITION(projectReference != 0);
+    PRECONDITION(projectReference != nullptr);
 
-    std::lock_guard<std::recursive_mutex> lock(projectReferencesLock_);
-
-    if (projectReferences_.empty() == false)
+    if(projectReferences_.empty() == false)
     {
         ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.find(projectReference);
-        if (projectReferences_.end() != projectIterator)
+        if(projectReferences_.end() != projectIterator)
         {
             projectReferences_.erase(projectReference);
         }
@@ -110,10 +102,10 @@ void ProjectManager::RemoveProject(void* projectReference)
 
 void ProjectManager::RemoveAllProjects()
 {
-    while (projectReferences_.empty() == false)
+    while(projectReferences_.empty() == false)
     {
         ProjectReferenceDictionary::const_iterator projectIterator = projectReferences_.begin();
-        if (projectReferences_.end() != projectIterator)
+        if(projectReferences_.end() != projectIterator)
         {
             projectReferences_.erase(projectIterator);
         }

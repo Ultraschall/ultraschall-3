@@ -32,12 +32,12 @@ namespace ultraschall { namespace reaper {
 class InsertChapterMarkersAction : public ICustomAction
 {
 public:
-    static const char* UniqueId()
+    static UnicodeString UniqueId()
     {
         return "ULTRASCHALL_INSERT_CHAPTERS";
     }
 
-    static const char* UniqueName()
+    static UnicodeString UniqueName()
     {
         return "ULTRASCHALL: Import chapter markers...";
     }
