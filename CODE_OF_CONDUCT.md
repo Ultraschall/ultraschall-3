@@ -2,7 +2,7 @@
 
 We apply the rules of the Berlin Code of Conduct <sup>[1](#berlin_coc)</sup>
 
-In addition, the following guidelines apply to all current and future Ultraschall participants.
+In addition, the following policies apply without exception to all current and future participants:
 
 ## Ultraschall Open Source Code of Conduct
 
@@ -20,7 +20,7 @@ Our communities welcome and support people of all backgrounds and identities. Th
 
 ### Be respectful
 
-We are a world-wide community of professionals, and we conduct ourselves professionally. Disagreement is no excuse for poor behavior and poor manners. Disrespectful and unacceptable behavior includes, but is not limited to:
+We are a community of professionals, and we conduct ourselves professionally. Disagreement is no excuse for poor behavior and poor manners. Disrespectful and unacceptable behavior includes, but is not limited to:
 
 - Violent threats or language.
 - Discriminatory or derogatory jokes and language.
@@ -41,8 +41,7 @@ This code of conduct applies to all repos and communities for Ultraschall open s
 
 ### Reporting Code of Conduct Issues
 
-We encourage all communities to resolve issues on their own whenever possible. This builds a broader and deeper understanding and ultimately a healthier interaction. In the event that an issue cannot be resolved locally, please feel free to report your concerns by contacting ultraschall@wikigeeks.de. Your report will be handled in accordance with the issue resolution process described in the Code of Conduct FAQ.
-In your report please include:
+We encourage all communities to resolve issues on their own whenever possible. This builds a broader and deeper understanding and ultimately a healthier interaction. In the event that an issue cannot be resolved locally, please feel free to report your concerns by contacting ultraschall@wikigeeks.de. Your report will be handled confidentially. In your report please include:
 
 - Your contact information.
 - Names (real, usernames or pseudonyms) of any individuals involved. If there are additional witnesses, please include them as well.
