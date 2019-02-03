@@ -44,7 +44,6 @@ set(COMMON_INCLUDES
     MP3TagWriter.h
     MP4TagWriter.h
     PictureUtilities.h
-    Platform.h
     Project.h
     ProjectManager.h
     reaper_plugin_functions.h
@@ -78,7 +77,6 @@ set(COMMON_SOURCES
     MP4TagWriter.cpp
     MP3_Interface.cpp
     PictureUtilities.cpp
-    Platform.cpp
     Project.cpp
     ProjectManager.cpp
     ReaperEntryPoints.cpp
@@ -97,6 +95,24 @@ set(COMMON_SOURCES
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c
 )
+
+include_directories(${CMAKE_CURRENT_LIST_DIR})
+
+set(PLATFORM_INLUDES Platform.h)
+
+if(WIN32)
+    include_directories(win32)
+    set(PLATFORM_INCLUDES win32/Platform.h)
+    set(PLATFORM_SOURCES win32/Platform.cpp)
+elseif(APPLE)
+    include_directories(macos)
+    set(PLATFORM_INCLUDES macos/Platform.h)
+    set(PLATFORM_SOURCES macos/Platform.cpp)
+elseif(UNIX)
+    include_directories(linux)
+    set(PLATFORM_INCLUDES linux/Platform.h)
+    set(PLATFORM_SOURCES linux/Platform.cpp)
+endif()
 
 set_source_files_properties(${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
 set_source_files_properties(${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
@@ -118,14 +134,13 @@ elseif(UNIX)
     add_definitions(-DULTRASCHALL_PLATFORM_UNIX)
 endif()
 
-add_library(reaper_ultraschall SHARED ${COMMON_INCLUDES} ${COMMON_SOURCES} ${EXTRA_SOURCES})
-
-add_dependencies(${PROJECT_NAME} zlib-build)
-add_dependencies(${PROJECT_NAME} curl-build)
-add_dependencies(${PROJECT_NAME} mp4v2-build)
-add_dependencies(${PROJECT_NAME} taglib-build)
-add_dependencies(${PROJECT_NAME} json11-build)
-add_dependencies(${PROJECT_NAME} wxwidgets-build)
+add_library(reaper_ultraschall SHARED
+    ${COMMON_INCLUDES}
+    ${COMMON_SOURCES}
+    ${PLATFORM_INCLUDES}
+    ${PLATFORM_SOURCES}
+    ${EXTRA_SOURCES}
+)
 
 if(WIN32)
     set(EXTRA_LIBRARIES
@@ -141,12 +156,9 @@ if(WIN32)
         comdlg32.lib
         rpcrt4.lib
     )
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG"$ENV{USERPROFILE}/AppData/Roaming/REAPER/UserPlugins")
 elseif(APPLE)
     set(EXTRA_LIBRARIES "-framework AppKit")
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "$ENV{HOME}/Library/Application\ Support/REAPER/UserPlugins")
 elseif(UNIX)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "ENV{HOME}/.config/REAPER/UserPlugins")
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
@@ -175,7 +187,12 @@ target_link_libraries(reaper_ultraschall
     ${EXTRA_LIBRARIES}
 )
 
-set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
-
-source_group("Header Files" ${COMMON_INCLUDES})
-source_group("Source Files" ${COMMON_SOURCES} ${EXTRA_SOURCES})
+source_group("Header Files"
+    ${COMMON_INCLUDES}
+    ${PLATFORM_INCLUDES}
+)
+source_group("Source Files"
+    ${COMMON_SOURCES}
+    ${PLATFORM_SOURCES}
+    ${EXTRA_SOURCES}
+)

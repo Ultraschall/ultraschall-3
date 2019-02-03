@@ -22,7 +22,7 @@
 #
 ################################################################################
 
-cmake_minimum_required(VERSION 3.12.0)
+cmake_minimum_required(VERSION 3.13.0)
 project(reaper_ultraschall VERSION 3.2)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -248,8 +248,13 @@ include_directories(
     ${REAPER_INCLUDE_PATH}
 )
 
-set(ULTRASCHALL_PATH ${CMAKE_SOURCE_DIR})
-set(ULTRASCHALL_EXT_PATH ${ULTRASCHALL_PATH}/_ext)
-set(ULTRASCHALL_SRC_PATH ${ULTRASCHALL_PATH}/reaper_ultraschall)
-
 add_subdirectory(reaper_ultraschall)
+
+add_dependencies(reaper_ultraschall zlib-build)
+add_dependencies(reaper_ultraschall curl-build)
+add_dependencies(reaper_ultraschall mp4v2-build)
+add_dependencies(reaper_ultraschall taglib-build)
+add_dependencies(reaper_ultraschall json11-build)
+add_dependencies(reaper_ultraschall wxwidgets-build)
+
+set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
