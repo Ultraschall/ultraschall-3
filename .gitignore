@@ -468,3 +468,6 @@ Plugin/_ext/curl/
 Plugin/_ext/taglib/
 Plugin/_ext/mp4v2/
 Plugin/_ext/wxwidgets/
+
+# exclude build instructions from ignore list
+!Docs/Build/
