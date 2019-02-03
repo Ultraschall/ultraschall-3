@@ -471,3 +471,4 @@ Plugin/_ext/wxwidgets/
 
 # exclude build instructions from ignore list
 !Docs/Build/
+!Docs/Release/
