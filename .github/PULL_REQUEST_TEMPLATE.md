@@ -1,3 +1,4 @@
+<!--
 Please make sure you have ticked all points on this checklist:
 
 - [ ] If your changes are large or otherwise disruptive: You have made sure your changes don't interfere with current development by talking it through with the maintainers, e.g. through a Brainstorming ticket
@@ -6,8 +7,11 @@ Please make sure you have ticked all points on this checklist:
 - [ ] Your PR only contains relevant changes: no unrelated files, no dead code, ideally only one commit - rebase and squash your PR if necessary!
 - [ ] Your changes follow the existing coding style
 - [ ] You have tested your changes (please state how!)
+-->
 
+<!--
 Describe your PR further using the template provided below. The more details the better!
+-->
 
 #### What does this PR do and why is it necessary?
 
