@@ -13,14 +13,14 @@ Please make sure you have ticked all points on this checklist:
 Describe your PR further using the template provided below. The more details the better!
 -->
 
-#### What does this PR do and why is it necessary?
+**What does this PR do and why is it necessary?**
 
-#### How was it tested? How can it be tested by the reviewer?
+**How was it tested? How can it be tested by the reviewer?**
 
-#### Any background context you want to provide?
+**Any background context you want to provide?**
 
-#### What are the relevant tickets if any?
+**What are the relevant tickets if any?**
 
-#### Screenshots (if appropriate)
+**Screenshots (if appropriate)**
 
-#### Further notes
+**Further notes**
