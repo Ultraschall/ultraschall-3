@@ -42,9 +42,9 @@ echo Copying Ultraschall Add-ons...
 if not exist add-ons (
     mkdir add-ons
 )
-copy "..\..\Docs\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
+copy "..\..\Docs\Release\Keymap.pdf" "add-ons\Ultraschall Keyboard Layout.pdf" > nul
 if not errorlevel 0 goto failed
-copy "..\..\Docs\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
+copy "..\..\Docs\Release\Keymap.pptx" "add-ons\Ultraschall Keyboard Layout.pptx" > nul
 if not errorlevel 0 goto failed
 copy "..\..\Resources\Ultraschall App-Icon.png" "add-ons\Ultraschall App-Icon.png" > nul
 if not errorlevel 0 goto failed
@@ -62,11 +62,11 @@ echo Building Ultraschall documentation files...
 if not exist resources (
     mkdir resources
 )
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\README.html ..\..\README.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\README.html ..\..\Docs\Release\README.md
 if not errorlevel 0 goto failed
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\INSTALL.html ..\..\INSTALL.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\INSTALL.html ..\..\Docs\Release\INSTALL.md
 if not errorlevel 0 goto failed
-pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\CHANGELOG.html ..\..\CHANGELOG.md
+pandoc --from=markdown --to=html --standalone --quiet --self-contained --css=..\..\Tools\ultraschall.css --output=resources\CHANGELOG.html ..\..\Docs\Release\CHANGELOG.md
 if not errorlevel 0 goto failed
 echo Done.
 

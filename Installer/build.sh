@@ -30,9 +30,9 @@ mkdir ./_payload
 mkdir ./_payload/Add-ons
 
 # Build and copy release notes to _payload directory
-pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/README.html ../README.md
-pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/INSTALL.html ../INSTALL.md
-pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/CHANGELOG.html ../CHANGELOG.md
+pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/README.html ../Docs/Release/README.md
+pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/INSTALL.html ../Docs/Release/INSTALL.md
+pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/CHANGELOG.html ../Docs/Release/CHANGELOG.md
 
 # Copy uninstall script to _payload directory
 cp ../Scripts/Uninstall.command ./_payload/Uninstall.command
@@ -41,8 +41,8 @@ cp ../Scripts/Uninstall.command ./_payload/Uninstall.command
 cp ../Scripts/Remove\ legacy\ audio\ devices.command ./_payload/Remove\ legacy\ audio\ devices.command
 
 # Copy resources to _payload 'Add-ons' directory
-cp ../Documentation/Keymap.pdf ./_payload/Add-ons/Ultraschall\ Keyboard\ Layout.pdf
-cp ../Documentation/Keymap.pptx ./_payload/Add-ons/Ultraschall\ Keyboard\ Layout.pptx
+cp ../Docs/Release/Keymap.pdf ./_payload/Add-ons/Ultraschall\ Keyboard\ Layout.pdf
+cp ../Docs/Release/Keymap.pptx ./_payload/Add-ons/Ultraschall\ Keyboard\ Layout.pptx
 cp ../Resources/Ultraschall\ App-Icon.png ./_payload/Add-ons/Ultraschall\ App-Icon.png
 cp ../Resources/Ultraschall\ Webbanner.pdf ./_payload/Add-ons/Ultraschall\ Webbanner.pdf
 cp ../Resources/Ultraschall\ Webbanner\ 400px.png ./_payload/Add-ons/Ultraschall\ Webbanner\ 400px.png
