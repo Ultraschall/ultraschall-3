@@ -64,23 +64,22 @@ typedef struct
 
 template<class T> ServiceStatus Application::RegisterCustomAction() const
 {
-    PRECONDITION_RETURN(T::UniqueId().empty() == false, SERVICE_INVALID_ARGUMENT);
-    PRECONDITION_RETURN(T::UniqueName().empty() == false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(T::UniqueId() != nullptr, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(T::UniqueName() != nullptr, SERVICE_INVALID_ARGUMENT);
 
     typedef T custom_action_type;
 
     ServiceStatus status = SERVICE_FAILURE;
 
-    UnicodeString        uniqueId      = custom_action_type::UniqueId();
+    const UnicodeChar*   uniqueId      = custom_action_type::UniqueId();
     CustomActionFactory& factory       = CustomActionFactory::Instance();
     ICustomAction*       pCustomAction = 0;
     status                             = factory.CreateCustomAction(uniqueId, pCustomAction);
     if(ServiceSucceeded(status) && (pCustomAction != 0))
     {
-        UnicodeString            uniqueName = custom_action_type::UniqueName();
         custom_action_register_t action     = {0};
-        action.idStr                        = U2H(uniqueId).c_str();
-        action.name                         = U2H(uniqueName).c_str();
+        action.idStr                        = uniqueId;
+        action.name                         = custom_action_type::UniqueName();
         const int32_t id                    = ReaperGateway::RegisterCustomAction("custom_action", (void*)&action);
         if(id != 0)
         {
