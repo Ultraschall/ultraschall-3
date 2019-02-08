@@ -61,6 +61,7 @@ UnicodeString VersionHandler::ThemeVersion()
                             char* fileBuffer = new char[fileBufferSize + 1];
                             if(fileBuffer != nullptr)
                             {
+                                memset(fileBuffer, 0, fileBufferSize + 1);
                                 const int readResult
                                     = unzReadCurrentFile(themeFile, fileBuffer, unsigned int(fileBufferSize));
                                 if(readResult > 0)
