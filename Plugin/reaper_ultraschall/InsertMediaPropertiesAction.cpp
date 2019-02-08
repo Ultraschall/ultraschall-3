@@ -61,9 +61,9 @@ static DeclareCustomAction<InsertMediaPropertiesAction> action;
 
 ServiceStatus InsertMediaPropertiesAction::Execute()
 {
-    ProjectManager& projectManager = ProjectManager::Instance();
-    Project         currentProject = projectManager.CurrentProject();
-    if(Project::Validate(currentProject) == true)
+    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject         currentProject = projectManager.CurrentProject();
+    if(ReaperProject::Validate(currentProject) == true)
     {
         ResetAssets();
 
@@ -192,7 +192,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
     return SERVICE_SUCCESS;
 }
 
-UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& project)
+UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const ReaperProject& project)
 {
     UnicodeStringArray targetNames;
 
@@ -216,7 +216,7 @@ UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const Project& p
     return targetNames;
 }
 
-UnicodeString InsertMediaPropertiesAction::FindCoverImage(const Project& project)
+UnicodeString InsertMediaPropertiesAction::FindCoverImage(const ReaperProject& project)
 {
     const UnicodeString projectFolder = project.FolderName();
     const UnicodeString projectName   = project.Name();
@@ -305,9 +305,9 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
     UnicodeStringArray messages;
     size_t             invalidAssetCount = 0;
 
-    ProjectManager& projectManager = ProjectManager::Instance();
-    Project         currentProject = projectManager.CurrentProject();
-    if(Project::Validate(currentProject) == true)
+    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject         currentProject = projectManager.CurrentProject();
+    if(ReaperProject::Validate(currentProject) == true)
     {
         id3v2_ = BasicMediaInformation::ParseString(currentProject.Notes());
         if(id3v2_.Validate() == false)
@@ -399,8 +399,8 @@ bool InsertMediaPropertiesAction::ValidateChapterMarkers(UnicodeStringArray& err
         const UnicodeString safeName     = current.Name();
         const double        safePosition = current.Position();
 
-        ProjectManager& projectManager = ProjectManager::Instance();
-        Project         currentProject = projectManager.CurrentProject();
+        ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+        ReaperProject         currentProject = projectManager.CurrentProject();
         if(currentProject.IsValidPosition(current.Position()) == false)
         {
             std::stringstream os;

@@ -31,17 +31,17 @@
 
 namespace ultraschall { namespace reaper {
 
-class Project
+class ReaperProject
 {
 public:
-    Project();
-    Project(ProjectReference nativeReference);
-    virtual ~Project();
+    ReaperProject();
+    ReaperProject(ProjectReference nativeReference);
+    virtual ~ReaperProject();
 
-    Project(const Project& rhs);
-    Project& operator=(const Project& rhs);
+    ReaperProject(const ReaperProject& rhs);
+    ReaperProject& operator=(const ReaperProject& rhs);
 
-    static bool Validate(const Project& project);
+    static bool Validate(const ReaperProject& project);
 
     UnicodeString FullPathName() const;
     UnicodeString FolderName() const;
@@ -99,38 +99,38 @@ private:
     MarkerArray FilterMarkers(const int color) const;
 };
 
-inline uint32_t Project::MarkerStatus() const
+inline uint32_t ReaperProject::MarkerStatus() const
 {
     return markerStatus_;
 }
 
-inline ProjectReference Project::NativeReference() const
+inline ProjectReference ReaperProject::NativeReference() const
 {
     return nativeReference_;
 }
 
-inline bool Project::InsertChapterMarker(const UnicodeString& name, const double position)
+inline bool ReaperProject::InsertChapterMarker(const UnicodeString& name, const double position)
 {
     return InsertMarker(name, CHAPTER_MARKER_COLOR, position);
 }
 
-inline bool Project::InsertEditMarker(const double position)
+inline bool ReaperProject::InsertEditMarker(const double position)
 {
     return InsertMarker("<Edit here>", EDIT_MARKER_COLOR, position);
 }
 
-inline bool Project::InsertShownoteMarker(const double position)
+inline bool ReaperProject::InsertShownoteMarker(const double position)
 {
     return InsertMarker("<Insert Shownote here>", SHOWNOTE_MARKER_COLOR, position);
 }
 
-inline bool Project::InsertHistoricalMarker()
+inline bool ReaperProject::InsertHistoricalMarker()
 {
     const double currentPosition = CurrentPosition();
     return InsertMarker("<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
 }
 
-inline MarkerArray Project::ChapterMarkers() const
+inline MarkerArray ReaperProject::ChapterMarkers() const
 {
     // merge chapter and historical markers
     MarkerArray result            = FilterMarkers(CHAPTER_MARKER_COLOR);
@@ -139,12 +139,12 @@ inline MarkerArray Project::ChapterMarkers() const
     return result;
 }
 
-inline MarkerArray Project::EditMarkers() const
+inline MarkerArray ReaperProject::EditMarkers() const
 {
     return FilterMarkers(EDIT_MARKER_COLOR);
 }
 
-inline MarkerArray Project::ShownoteMarkers() const
+inline MarkerArray ReaperProject::ShownoteMarkers() const
 {
     return FilterMarkers(SHOWNOTE_MARKER_COLOR);
 }

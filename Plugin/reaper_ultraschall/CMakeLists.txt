@@ -44,8 +44,8 @@ set(COMMON_INCLUDES
     MP3TagWriter.h
     MP4TagWriter.h
     PictureUtilities.h
-    Project.h
-    ProjectManager.h
+    ReaperProject.h
+    ReaperProjectManager.h
     reaper_plugin_functions.h
     ReaperEntryPoints.h
 	ReaperGateway.h
@@ -79,8 +79,8 @@ set(COMMON_SOURCES
     MP4TagWriter.cpp
     MP3_Interface.cpp
     PictureUtilities.cpp
-    Project.cpp
-    ProjectManager.cpp
+    ReaperProject.cpp
+    ReaperProjectManager.cpp
     ReaperEntryPoints.cpp
 	ReaperGateway.cpp
     SaveChapterMarkersAction.cpp

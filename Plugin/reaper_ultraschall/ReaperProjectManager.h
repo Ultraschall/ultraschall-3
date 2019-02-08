@@ -26,36 +26,36 @@
 #define __ULTRASCHALL_REAPER_PROJECT_MANAGER_H_INCL__
 
 #include "Common.h"
-#include "Project.h"
+#include "ReaperProject.h"
 
 namespace ultraschall { namespace reaper {
 
-class ProjectManager
+class ReaperProjectManager
 {
 public:
-    static const Project INVALID_PROJECT;
+    static const ReaperProject INVALID_PROJECT;
 
-    static ProjectManager& Instance();
+    static ReaperProjectManager& Instance();
 
-    const Project&   CurrentProject() const;
+    const ReaperProject&   CurrentProject() const;
     ProjectReference CurrentProjectReference() const;
     UnicodeString    CurrentProjectName() const;
 
     bool           InsertProject(ProjectReference projectReference);
-    const Project& LookupProject(ProjectReference projectReference) const;
+    const ReaperProject& LookupProject(ProjectReference projectReference) const;
     void           RemoveProject(ProjectReference projectReference);
     void           RemoveAllProjects();
 
 protected:
-    virtual ~ProjectManager();
+    virtual ~ReaperProjectManager();
 
 private:
-    ProjectManager();
+    ReaperProjectManager();
 
-    ProjectManager(const ProjectManager&) = delete;
-    ProjectManager& operator=(const ProjectManager&) = delete;
+    ReaperProjectManager(const ReaperProjectManager&) = delete;
+    ReaperProjectManager& operator=(const ReaperProjectManager&) = delete;
 
-    typedef std::map<ProjectReference, Project> ProjectReferenceDictionary;
+    typedef std::map<ProjectReference, ReaperProject> ProjectReferenceDictionary;
     ProjectReferenceDictionary                  projectReferences_;
 };
 

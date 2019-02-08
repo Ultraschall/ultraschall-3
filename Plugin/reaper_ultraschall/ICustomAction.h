@@ -26,7 +26,7 @@
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
 #include "Common.h"
-#include "ProjectManager.h"
+#include "ReaperProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -44,12 +44,12 @@ public:
     {
         bool registered = false;
 
-        ProjectManager& projectManager          = ProjectManager::Instance();
+        ReaperProjectManager& projectManager          = ReaperProjectManager::Instance();
         void*           currentProjectReference = projectManager.CurrentProjectReference();
         if(currentProjectReference != nullptr)
         {
-            const Project& currentProject = projectManager.LookupProject(currentProjectReference);
-            if(Project::Validate(currentProject) == false)
+            const ReaperProject& currentProject = projectManager.LookupProject(currentProjectReference);
+            if(ReaperProject::Validate(currentProject) == false)
             {
                 registered = projectManager.InsertProject(currentProjectReference);
             }

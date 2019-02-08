@@ -29,7 +29,7 @@
 
 #include "Application.h"
 #include "FileManager.h"
-#include "ProjectManager.h"
+#include "ReaperProjectManager.h"
 #include "SaveChapterMarkersToProjectAction.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
@@ -43,8 +43,8 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 {
     ServiceStatus status = SERVICE_FAILURE;
 
-    const ProjectManager& projectManager = ProjectManager::Instance();
-    Project               currentProject = projectManager.CurrentProject();
+    const ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject               currentProject = projectManager.CurrentProject();
     const UnicodeString   projectFolder  = currentProject.FolderName();
     if(projectFolder.empty() == false)
     {
@@ -121,9 +121,9 @@ bool SaveChapterMarkersToProjectAction::ConfigureAssets()
     UnicodeStringArray messages;
     size_t             invalidAssetCount = 0;
 
-    ProjectManager& projectManager = ProjectManager::Instance();
-    Project         currentProject = projectManager.CurrentProject();
-    if(Project::Validate(currentProject) == true)
+    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject         currentProject = projectManager.CurrentProject();
+    if(ReaperProject::Validate(currentProject) == true)
     {
         chapters_ = currentProject.AllMarkers();
         if(chapters_.empty() == true)
@@ -197,8 +197,8 @@ UnicodeStringArray SaveChapterMarkersToProjectAction::ValidateChapterMarkers()
         const UnicodeString safeName     = current.Name();
         const double        safePosition = current.Position();
 
-        ProjectManager& projectManager = ProjectManager::Instance();
-        Project         currentProject = projectManager.CurrentProject();
+        ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+        ReaperProject         currentProject = projectManager.CurrentProject();
         if(currentProject.IsValidPosition(current.Position()) == false)
         {
             std::stringstream os;

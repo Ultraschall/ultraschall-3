@@ -64,9 +64,9 @@ private:
     MarkerArray           chapters_;
     BasicMediaInformation id3v2_;
 
-    static UnicodeStringArray FindTargetFiles(const Project& project);
+    static UnicodeStringArray FindTargetFiles(const ReaperProject& project);
 
-    static UnicodeString FindCoverImage(const Project& project);
+    static UnicodeString FindCoverImage(const ReaperProject& project);
 
     static ITagWriter* CreateTagWriter(const UnicodeString& targetName);
 

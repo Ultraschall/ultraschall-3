@@ -22,33 +22,33 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Project.h"
+#include "ReaperProject.h"
 #include "Application.h"
 #include "FileManager.h"
 #include "StringUtilities.h"
 
 namespace ultraschall { namespace reaper {
 
-const double Project::INVALID_POSITION = -1;
+const double ReaperProject::INVALID_POSITION = -1;
 
-Project::Project() : nativeReference_(0) {}
+ReaperProject::ReaperProject() : nativeReference_(0) {}
 
-Project::Project(ProjectReference nativeReference) : nativeReference_(nativeReference)
+ReaperProject::ReaperProject(ProjectReference nativeReference) : nativeReference_(nativeReference)
 {
     UpdateMarkers();
 }
 
-Project::~Project()
+ReaperProject::~ReaperProject()
 {
     nativeReference_ = 0;
 }
 
-Project::Project(const Project& rhs)
+ReaperProject::ReaperProject(const ReaperProject& rhs)
 {
     *this = rhs;
 }
 
-Project& Project::operator=(const Project& rhs)
+ReaperProject& ReaperProject::operator=(const ReaperProject& rhs)
 {
     if(this != &rhs)
     {
@@ -58,18 +58,18 @@ Project& Project::operator=(const Project& rhs)
     return *this;
 }
 
-bool Project::Validate(const Project& project)
+bool ReaperProject::Validate(const ReaperProject& project)
 {
     return project.nativeReference_ != 0;
 }
 
-UnicodeString Project::FullPathName() const
+UnicodeString ReaperProject::FullPathName() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, UnicodeString());
     return ReaperGateway::ProjectPath(nativeReference_);
 }
 
-UnicodeString Project::FolderName() const
+UnicodeString ReaperProject::FolderName() const
 {
     UnicodeString result;
 
@@ -94,7 +94,7 @@ UnicodeString Project::FolderName() const
     return result;
 }
 
-UnicodeString Project::FileName() const
+UnicodeString ReaperProject::FileName() const
 {
     UnicodeString result;
 
@@ -112,7 +112,7 @@ UnicodeString Project::FileName() const
     return result;
 }
 
-UnicodeString Project::Name() const
+UnicodeString ReaperProject::Name() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, UnicodeString());
 
@@ -127,21 +127,21 @@ UnicodeString Project::Name() const
     return result;
 }
 
-UnicodeString Project::Notes() const
+UnicodeString ReaperProject::Notes() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, UnicodeString());
 
     return ReaperGateway::ProjectNotes(nativeReference_);
 }
 
-bool Project::InsertMarker(const Marker& marker)
+bool ReaperProject::InsertMarker(const Marker& marker)
 {
     allMarkers_.push_back(marker);
     RefreshUI(MarkerStatus());
     return false;
 }
 
-bool Project::InsertMarker(const UnicodeString& name, const int /*color*/, const double position)
+bool ReaperProject::InsertMarker(const UnicodeString& name, const int /*color*/, const double position)
 {
     PRECONDITION_RETURN(nativeReference_ != 0, false);
     PRECONDITION_RETURN(name.empty() == false, false);
@@ -155,7 +155,7 @@ bool Project::InsertMarker(const UnicodeString& name, const int /*color*/, const
     return ReaperGateway::InsertMarker(nativeReference_, name, actualPosition);
 }
 
-double Project::CurrentPosition() const
+double ReaperProject::CurrentPosition() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
@@ -173,35 +173,35 @@ double Project::CurrentPosition() const
     return currentPosition;
 }
 
-double Project::MinPosition() const
+double ReaperProject::MinPosition() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
     return ReaperGateway::MinPosition(nativeReference_);
 }
 
-double Project::MaxPosition() const
+double ReaperProject::MaxPosition() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
     return ReaperGateway::MaxPosition(nativeReference_);
 }
 
-bool Project::IsValidPosition(const double position)
+bool ReaperProject::IsValidPosition(const double position)
 {
     PRECONDITION_RETURN(nativeReference_ != 0, false);
 
     return (position >= 0) && (position <= MaxPosition());
 }
 
-bool Project::UndoMarker()
+bool ReaperProject::UndoMarker()
 {
     PRECONDITION_RETURN(nativeReference_ != 0, false);
 
     return ReaperGateway::UndoMarker(nativeReference_, CurrentPosition());
 }
 
-MarkerArray Project::FilterMarkers(const int color) const
+MarkerArray ReaperProject::FilterMarkers(const int color) const
 {
     MarkerArray result;
 
@@ -229,14 +229,14 @@ public:
     }
 };
 
-MarkerArray Project::AllMarkers() const
+MarkerArray ReaperProject::AllMarkers() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, MarkerArray());
 
     return ReaperGateway::AllMarkers(nativeReference_);
 }
 
-void Project::UpdateMarkers()
+void ReaperProject::UpdateMarkers()
 {
     PRECONDITION(nativeReference_ != 0);
 
@@ -249,7 +249,7 @@ void Project::UpdateMarkers()
     }
 }
 
-void Project::RefreshUI(const uint32_t mask)
+void ReaperProject::RefreshUI(const uint32_t mask)
 {
     PRECONDITION(nativeReference_ != 0);
 

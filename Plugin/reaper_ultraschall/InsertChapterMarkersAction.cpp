@@ -31,7 +31,7 @@
 #include "FileUtilities.h"
 #include "InsertChapterMarkersAction.h"
 #include "Marker.h"
-#include "ProjectManager.h"
+#include "ReaperProjectManager.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
 #include "TimeUtilities.h"
@@ -50,8 +50,8 @@ ServiceStatus InsertChapterMarkersAction::Execute()
     const UnicodeString path = fileDialog.BrowseForChapters();
     PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
 
-    const ProjectManager& projectManager = ProjectManager::Instance();
-    Project               currentProject = projectManager.CurrentProject();
+    const ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject               currentProject = projectManager.CurrentProject();
 
     MarkerArray        tags;
     UnicodeStringArray errorMessages;

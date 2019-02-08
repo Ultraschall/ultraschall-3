@@ -22,39 +22,39 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ProjectManager.h"
+#include "ReaperProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
-const Project ProjectManager::INVALID_PROJECT;
+const ReaperProject ReaperProjectManager::INVALID_PROJECT;
 
-ProjectManager::ProjectManager() {}
+ReaperProjectManager::ReaperProjectManager() {}
 
-ProjectManager::~ProjectManager() {}
+ReaperProjectManager::~ReaperProjectManager() {}
 
-ProjectManager& ProjectManager::Instance()
+ReaperProjectManager& ReaperProjectManager::Instance()
 {
-    static ProjectManager self;
+    static ReaperProjectManager self;
     return self;
 }
 
-const Project& ProjectManager::CurrentProject() const
+const ReaperProject& ReaperProjectManager::CurrentProject() const
 {
     ProjectReference currentProjectReference = CurrentProjectReference();
     return LookupProject(currentProjectReference);
 }
 
-ProjectReference ProjectManager::CurrentProjectReference() const
+ProjectReference ReaperProjectManager::CurrentProjectReference() const
 {
     return ReaperGateway::CurrentProject();
 }
 
-UnicodeString ProjectManager::CurrentProjectName() const
+UnicodeString ReaperProjectManager::CurrentProjectName() const
 {
     UnicodeString name;
 
-    const Project& currentProject = CurrentProject();
-    if(Project::Validate(currentProject) == true)
+    const ReaperProject& currentProject = CurrentProject();
+    if(ReaperProject::Validate(currentProject) == true)
     {
         // TODO check whether reaper uses unicode or ansi
         name = H2U(currentProject.Name());
@@ -63,16 +63,16 @@ UnicodeString ProjectManager::CurrentProjectName() const
     return name;
 }
 
-bool ProjectManager::InsertProject(ProjectReference projectReference)
+bool ReaperProjectManager::InsertProject(ProjectReference projectReference)
 {
     PRECONDITION_RETURN(projectReference != nullptr, false);
 
     return projectReferences_
-        .insert(ProjectReferenceDictionary::value_type(projectReference, Project(projectReference)))
+        .insert(ProjectReferenceDictionary::value_type(projectReference, ReaperProject(projectReference)))
         .second;
 }
 
-const Project& ProjectManager::LookupProject(ProjectReference projectReference) const
+const ReaperProject& ReaperProjectManager::LookupProject(ProjectReference projectReference) const
 {
     PRECONDITION_RETURN(projectReference != nullptr, INVALID_PROJECT);
 
@@ -86,7 +86,7 @@ const Project& ProjectManager::LookupProject(ProjectReference projectReference) 
     return INVALID_PROJECT;
 }
 
-void ProjectManager::RemoveProject(ProjectReference projectReference)
+void ReaperProjectManager::RemoveProject(ProjectReference projectReference)
 {
     PRECONDITION(projectReference != nullptr);
 
@@ -100,7 +100,7 @@ void ProjectManager::RemoveProject(ProjectReference projectReference)
     }
 }
 
-void ProjectManager::RemoveAllProjects()
+void ReaperProjectManager::RemoveAllProjects()
 {
     while(projectReferences_.empty() == false)
     {
