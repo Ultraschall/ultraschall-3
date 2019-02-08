@@ -36,12 +36,12 @@ class ITagWriter;
 class InsertMediaPropertiesAction : public ICustomAction
 {
 public:
-    static UnicodeString UniqueId()
+    static const UnicodeChar* UniqueId()
     {
         return "ULTRASCHALL_INSERT_MEDIA_PROPERTIES";
     }
 
-    static UnicodeString UniqueName()
+    static const UnicodeChar* UniqueName()
     {
         return "ULTRASCHALL: Insert media properties into target...";
     }
