@@ -184,7 +184,7 @@ double Project::MaxPosition() const
 {
     PRECONDITION_RETURN(nativeReference_ != 0, INVALID_POSITION);
 
-    return ReaperGateway::MinPosition(nativeReference_);
+    return ReaperGateway::MaxPosition(nativeReference_);
 }
 
 bool Project::IsValidPosition(const double position)
