@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "BinaryStream.h"
+#include <zlib.h>
 
 namespace ultraschall { namespace reaper {
 
@@ -76,4 +77,3 @@ uint64_t BinaryStream::CRC32() const
 }
 
 }} // namespace ultraschall::reaper
-

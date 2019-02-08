@@ -25,8 +25,6 @@
 #ifndef __ULTRASCHALL_REAPER_BINARY_STREAM_H_INCL__
 #define __ULTRASCHALL_REAPER_BINARY_STREAM_H_INCL__
 
-#include <zlib.h>
-
 #include "Common.h"
 #include "SharedObject.h"
 
