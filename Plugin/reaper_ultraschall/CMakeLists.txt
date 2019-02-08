@@ -95,6 +95,9 @@ set(COMMON_SOURCES
 	UnicodeString.cpp
     VersionHandler.cpp
     reaper_ultraschall.cpp
+)
+
+set(EXTERNAL_SOURCES
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c
     ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c
 )
@@ -140,6 +143,7 @@ add_library(reaper_ultraschall SHARED
     ${COMMON_SOURCES}
     ${PLATFORM_INCLUDES}
     ${PLATFORM_SOURCES}
+	${EXTERNAL_SOURCES}
     ${EXTRA_SOURCES}
 )
 
@@ -197,3 +201,8 @@ source_group("Source Files"
     ${PLATFORM_SOURCES}
     ${EXTRA_SOURCES}
 )
+
+source_group("External Files"
+	${EXTERNAL_SOURCES}
+)
+
