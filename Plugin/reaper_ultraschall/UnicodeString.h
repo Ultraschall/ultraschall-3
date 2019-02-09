@@ -71,6 +71,9 @@ std::string WideUnicodeStringToHostString(const WideUnicodeString& wideUnicodeSt
 #define U2H(a) UnicodeStringToHostString((a))
 #define WU2H(a) WideUnicodeStringToHostString((a))
 
+#define U2WU(a) UnicodeStringToWideUnicodeString((a))
+#define WU2U(a) WideUnicodeStringToUnicodeString((a))
+
 }} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_FRAMEWORK_UNICODE_STRING_H_INCL__
