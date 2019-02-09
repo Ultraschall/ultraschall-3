@@ -28,25 +28,25 @@
 
 namespace ultraschall { namespace reaper {
 
-ImageFormat FindImageFormat(const uint8_t* data, const size_t dataSize)
+PICTURE_FORMAT QueryPictureFormat(const uint8_t* data, const size_t dataSize)
 {
-    PRECONDITION_RETURN(data != 0, ImageFormat::Unknown);
-    PRECONDITION_RETURN(dataSize > 0, ImageFormat::Unknown);
+    PRECONDITION_RETURN(data != 0, PICTURE_FORMAT::UNKNOWN_PICTURE);
+    PRECONDITION_RETURN(dataSize > 0, PICTURE_FORMAT::UNKNOWN_PICTURE);
 
-    ImageFormat format = ImageFormat::Unknown;
+    PICTURE_FORMAT format = PICTURE_FORMAT::UNKNOWN_PICTURE;
 
     if (dataSize >= 2)
     {
         if ((data[0] == 0xff) && (data[1] == 0xd8))
         {
-            format = ImageFormat::Jpeg;
+            format = PICTURE_FORMAT::JPEG_PICTURE;
         }
 
         if (dataSize >= 8)
         {
             if ((data[0] == 0x89) && (data[1] == 0x50) && (data[2] == 0x4e) && (data[3] == 0x47))
             {
-                format = ImageFormat::Png;
+                format = PICTURE_FORMAT::PNG_PICTURE;
             }
         }
     }

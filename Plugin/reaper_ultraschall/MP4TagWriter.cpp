@@ -74,14 +74,14 @@ static MP4TagArtworkType getMp4ImageFormat(const uint8_t* data, const size_t dat
 {
     MP4TagArtworkType mp4_format = MP4_ART_UNDEFINED;
 
-    switch(FindImageFormat(data, dataSize))
+    switch(QueryPictureFormat(data, dataSize))
     {
-        case ImageFormat::Jpeg:
+        case PICTURE_FORMAT::JPEG_PICTURE:
         {
             mp4_format = MP4_ART_JPEG;
             break;
         }
-        case ImageFormat::Png:
+        case PICTURE_FORMAT::PNG_PICTURE:
         {
             mp4_format = MP4_ART_PNG;
             break;

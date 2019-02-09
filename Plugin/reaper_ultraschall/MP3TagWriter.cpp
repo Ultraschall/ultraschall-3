@@ -38,40 +38,50 @@ bool MP3TagWriter::InsertProperties(const UnicodeString& targetName, const Basic
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
 
-    bool success = false;
+    const int duration = MP3_QueryTargetDuration(targetName);
 
+    bool                success = true;
     MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
     if(context != 0)
     {
-        success = MP3_InsertPodcastFrame(context);
-        if(true == success)
-        {
-            success = MP3_InsertTextFrame(context, "TIT2", standardProperties.Title()); // title
-        }
+        // ATP Frame Order:
+        // TALB:    UTF-16 -> Title
+        // TPE1:    UTF-16 -> Title
+        // TIT2:    UTF-16 -> Track
+        // COMM:    UTF-16 -> Comments
+        // USLT:    UTF-16 -> Comments
+        // CTOC:    UTF-16 -> <dynamic>
+        // CHAP(s)
+        //    TIT2: UTF-16 -> <dynamic>
+        // TLEN:    ASCII  -> <dynamic>
+        // TYER:    ASCII  -> Date
+        // TENC:    ASCII  -> "Ultraschall"
+        // APIC:    BIN	   -> Cover
 
-        if(true == success)
+        static const size_t MAX_SIMPLE_FRAME_MAPPINGS  = 6;
+        static const size_t MAX_COMPLEX_FRAME_MAPPINGS = 2;
+        struct MAP_ULTRASCHALL_PROPERTIES_TO_REQUIRED_APPLE_TAGS
         {
-            success = MP3_InsertTextFrame(context, "TPE1", standardProperties.Author()); // artist
+            const UnicodeChar*   FrameId;
+            const UnicodeString& DataReference;
+        } simpleFrameMappings[MAX_SIMPLE_FRAME_MAPPINGS]
+            = {{"TALB", standardProperties.Title()}, {"TPE1", standardProperties.Title()},
+               {"TIT2", standardProperties.Track()}, {"TLEN", UnicodeStringFromInt(duration)},
+               {"TYER", standardProperties.Date()},  {"TENC", UnicodeString("Ultraschall v3.2")}},
+            complexFrameMapping[MAX_COMPLEX_FRAME_MAPPINGS]
+            = {{"COMM", standardProperties.Comments()}, {"USLT", standardProperties.Comments()}};
+        for(size_t i = 0; (i < MAX_SIMPLE_FRAME_MAPPINGS) && (true == success); i++)
+        {
+            success
+                = MP3_InsertTextFrame(context, simpleFrameMappings[i].FrameId, simpleFrameMappings[i].DataReference);
         }
-
         if(true == success)
         {
-            success = MP3_InsertTextFrame(context, "TALB", standardProperties.Track()); // album
-        }
-
-        if(true == success)
-        {
-            success = MP3_InsertTextFrame(context, "TDRC", standardProperties.Date()); // date
-        }
-
-        if(true == success)
-        {
-            success = MP3_InsertTextFrame(context, "TCON", standardProperties.Content()); // genre
-        }
-
-        if(true == success)
-        {
-            success = MP3_InsertCommentsFrame(context, "COMM", standardProperties.Comments()); // comment
+            for(size_t i = 0; (i < MAX_COMPLEX_FRAME_MAPPINGS) && (true == success); i++)
+            {
+                success = MP3_InsertCommentsFrame(
+                    context, complexFrameMapping[i].FrameId, complexFrameMapping[i].DataReference);
+            }
         }
 
         if(true == success)

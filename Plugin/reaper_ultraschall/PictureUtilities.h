@@ -31,9 +31,9 @@
 
 namespace ultraschall { namespace reaper {
 
-enum class ImageFormat { Unknown, Jpeg, Png };
+enum class PICTURE_FORMAT { UNKNOWN_PICTURE, JPEG_PICTURE, PNG_PICTURE };
 
-ImageFormat FindImageFormat(const uint8_t* data, const size_t dataSize);
+PICTURE_FORMAT QueryPictureFormat(const uint8_t* data, const size_t dataSize);
 
 }} // namespace ultraschall::reaper
 

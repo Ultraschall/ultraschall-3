@@ -83,14 +83,14 @@ const char* MP3_QueryMIMEType(const uint8_t* data, const size_t dataSize)
 
     const char* mimeType = 0;
 
-    switch(FindImageFormat(data, dataSize))
+    switch(QueryPictureFormat(data, dataSize))
     {
-        case ImageFormat::Jpeg:
+        case PICTURE_FORMAT::JPEG_PICTURE:
         {
             mimeType = "image/jpeg";
             break;
         }
-        case ImageFormat::Png:
+        case PICTURE_FORMAT::PNG_PICTURE:
         {
             mimeType = "image/png";
             break;
