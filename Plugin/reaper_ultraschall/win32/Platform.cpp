@@ -188,7 +188,7 @@ bool Platform::SWSVersionCheck()
         if(pStream != 0)
 
         {
-            static const uint64_t originalCrc = 2821342186;
+            static const uint64_t originalCrc = 355942019;  // SWS 2.10.0.1 from 02/2019
             const uint64_t        crc         = pStream->CRC32();
             if(originalCrc == crc)
 
