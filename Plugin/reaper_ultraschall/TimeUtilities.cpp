@@ -181,7 +181,7 @@ ULTRASCHALL_TIMESTAMP StringToTimestamp(const UnicodeString& str)
 {
     ULTRASCHALL_TIMESTAMP timestamp;
 
-    UnicodeStringArray tokens = StringTokenize(str, '.');
+    UnicodeStringArray tokens = UnicodeStringTokenize(str, '.');
     if (tokens.size() > 1)
     {
         timestamp.milliseconds = StringToUint16(tokens[1], 0, 999);
@@ -197,7 +197,7 @@ ULTRASCHALL_TIMESTAMP StringToTimestamp(const UnicodeString& str)
         timestamp.minutes = 0;
         timestamp.hours   = 0;
 
-        tokens = StringTokenize(tokens[0], ':');
+        tokens = UnicodeStringTokenize(tokens[0], ':');
         if (tokens.size() == 1)
         {
             timestamp.seconds = StringToUint8(tokens[0], 0, 59);

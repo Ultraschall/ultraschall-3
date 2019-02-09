@@ -42,7 +42,7 @@ BasicMediaInformation BasicMediaInformation::ParseString(const UnicodeString& st
 
     if (str.empty() == false)
     {
-        UnicodeStringArray tokens = StringTokenize(str, '\n');
+        UnicodeStringArray tokens = UnicodeStringTokenize(str, '\n');
         if (tokens.empty() == false)
         {
             result.title_ = tokens[0];

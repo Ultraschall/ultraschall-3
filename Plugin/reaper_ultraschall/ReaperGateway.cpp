@@ -157,12 +157,12 @@ struct Timestamp
 
     static Timestamp FromString(const UnicodeString& str)
     {
-        UnicodeStringArray items = StringTokenize(str, ':');
+        UnicodeStringArray items = UnicodeStringTokenize(str, ':');
         std::reverse(items.begin(), items.end());
 
         Timestamp timestamp;
 
-        UnicodeStringArray buffer = StringTokenize(items[0], '.');
+        UnicodeStringArray buffer = UnicodeStringTokenize(items[0], '.');
         for(size_t i = 0; i < buffer.size(); ++i)
         {
             switch(i)

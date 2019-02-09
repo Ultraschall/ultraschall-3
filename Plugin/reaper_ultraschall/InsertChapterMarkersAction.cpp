@@ -65,7 +65,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
         {
             const UnicodeString& line = lines[i];
 
-            const UnicodeStringArray items = StringTokenize(line, ' ');
+            const UnicodeStringArray items = UnicodeStringTokenize(line, ' ');
             if(items.size() > 0)
             {
                 const double position = StringToSeconds(items[0]);

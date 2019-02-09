@@ -95,7 +95,7 @@ template<> bool SystemProperty<bool>::Get(const UnicodeString& section, const Un
     const UnicodeString& rawValue = RawValue(section, key);
     if(rawValue.empty() == false)
     {
-        if((StringLowercase(rawValue) == "true") || (StringToInt(rawValue) != 0))
+        if((StringLowercase(rawValue) == "true") || (UnicodeStringToInt(rawValue) != 0))
         {
             value = true;
         }
@@ -111,7 +111,7 @@ template<> int SystemProperty<int>::Get(const UnicodeString& section, const Unic
     const UnicodeString rawValue = RawValue(section, key);
     if(rawValue.empty() == false)
     {
-        value = StringToInt(rawValue);
+        value = UnicodeStringToInt(rawValue);
     }
 
     return value;

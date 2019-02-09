@@ -61,7 +61,7 @@ UnicodeString FileManager::StripPath(const UnicodeString& path)
 
 UnicodeStringArray FileManager::SplitPath(const UnicodeString& path)
 {
-    return StringTokenize(path, PathSeparator());
+    return UnicodeStringTokenize(path, PathSeparator());
 }
 
 bool FileManager::FileExists(const UnicodeString& path)

@@ -266,7 +266,7 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const UnicodeString& ta
 UnicodeString InsertMediaPropertiesAction::NormalizeTargetName(const UnicodeString& targetName)
 {
     UnicodeString firstStage  = targetName;
-    UnicodeString secondStage = StringTrimRight(firstStage);
+    UnicodeString secondStage = UnicodeStringTrimRight(firstStage);
     return StringLowercase(secondStage);
 }
 

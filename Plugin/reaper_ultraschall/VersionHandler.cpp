@@ -92,13 +92,13 @@ UnicodeString VersionHandler::ThemeVersion()
     UnicodeString themeVersion;
     if(versionString.empty() == false)
     {
-        const UnicodeStringArray versionTokens = StringTokenize(versionString, ':');
+        const UnicodeStringArray versionTokens = UnicodeStringTokenize(versionString, ':');
         if(versionTokens.size() == 2)
         {
             UnicodeString version = versionTokens[1];
             if(version.empty() == false)
             {
-                themeVersion = StringTrim(version);
+                themeVersion = UnicodeStringTrim(version);
             }
         }
     }
@@ -120,7 +120,7 @@ UnicodeString VersionHandler::ReaperVersion()
 {
     UnicodeString version;
 
-    const UnicodeStringArray tokens                  = StringTokenize(ReaperGateway::ApplicationVersion(), '/');
+    const UnicodeStringArray tokens                  = UnicodeStringTokenize(ReaperGateway::ApplicationVersion(), '/');
     const size_t             MIN_VERSION_TOKEN_COUNT = 1;
     if(tokens.size() >= MIN_VERSION_TOKEN_COUNT)
     {
@@ -161,13 +161,13 @@ bool VersionHandler::ReaperVersionCheck()
     UnicodeString versionString = VersionHandler::ReaperVersion();
     if(versionString.empty() == false)
     {
-        UnicodeStringArray tokens = StringTokenize(versionString, '.');
+        UnicodeStringArray tokens = UnicodeStringTokenize(versionString, '.');
         if(tokens.size() >= 2)
         {
             const int REQUIRED_REAPER_MAJOR_VERSION = 5;
             const int REQUIRED_REAPER_MINOR_VERSION = 70;
-            const int majorVersion                  = StringToInt(tokens[0]);
-            const int minorVersion                  = StringToInt(tokens[1]);
+            const int majorVersion                  = UnicodeStringToInt(tokens[0]);
+            const int minorVersion                  = UnicodeStringToInt(tokens[1]);
 
             if((REQUIRED_REAPER_MAJOR_VERSION == majorVersion) && (REQUIRED_REAPER_MINOR_VERSION <= minorVersion))
             {

@@ -130,7 +130,7 @@ void UpdateCheck()
                     std::string remoteVersion = out.str();
                     if (remoteVersion.empty() == false)
                     {
-                        StringTrim(remoteVersion);
+                        UnicodeStringTrim(remoteVersion);
                         const std::string localVersion = VersionHandler::PluginVersion();
                         if (remoteVersion > localVersion)
                         {

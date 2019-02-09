@@ -79,7 +79,7 @@ UnicodeString ReaperProject::FolderName() const
     if(fullPath.empty() == false)
     {
         const char               pathSeparator  = FileManager::PathSeparator();
-        const UnicodeStringArray pathComponents = StringTokenize(fullPath, pathSeparator);
+        const UnicodeStringArray pathComponents = UnicodeStringTokenize(fullPath, pathSeparator);
         if(pathComponents.empty() == false)
         {
             for(size_t i = 0; i < pathComponents.size() - 1; i++)
@@ -104,7 +104,7 @@ UnicodeString ReaperProject::FileName() const
     if(fullPath.empty() == false)
     {
         const char               pathSeparator  = FileManager::PathSeparator();
-        const UnicodeStringArray pathComponents = StringTokenize(fullPath, pathSeparator);
+        const UnicodeStringArray pathComponents = UnicodeStringTokenize(fullPath, pathSeparator);
         if(pathComponents.empty() == false)
         {
             result = pathComponents[pathComponents.size() - 1];
