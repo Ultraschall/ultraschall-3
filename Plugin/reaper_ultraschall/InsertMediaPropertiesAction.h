@@ -74,7 +74,11 @@ private:
 
     static UnicodeString NormalizeTargetName(const UnicodeString& targetName);
 
-    typedef enum { MP3_TARGET, MP4_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
+#ifdef ULTRASCHALL_ENABLE_MP4
+    typedef enum {MP3_TARGET, MP4_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE} TARGET_TYPE;
+#else  // #ifdef ULTRASCHALL_ENABLE_MP4
+    typedef enum { MP3_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
 
     static TARGET_TYPE EvaluateFileType(const UnicodeString& targetName);
 

@@ -204,8 +204,14 @@ UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const ReaperProj
     PRECONDITION_RETURN(projectFolder.empty() == false, targetNames);
     PRECONDITION_RETURN(projectName.empty() == false, targetNames);
 
+#ifdef ULTRASCHALL_ENABLE_MP4
     static const size_t MAX_FILE_EXTENSIONS                 = 3;
     static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {"mp3", "mp4", "m4a"};
+#else  // #ifdef ULTRASCHALL_ENABLE_MP4
+    static const size_t MAX_FILE_EXTENSIONS                 = 1;
+    static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {"mp3"};
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
+
     for(size_t i = 0; i < MAX_FILE_EXTENSIONS; i++)
     {
         UnicodeString targetName = FileManager::AppendPath(projectFolder, projectName) + "." + fileExtensions[i];
@@ -249,15 +255,21 @@ ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const UnicodeString& ta
     PRECONDITION_RETURN(targetName.empty() == false, 0);
     PRECONDITION_RETURN(targetName.length() > 4, 0);
 
-    ITagWriter*       tagWriter  = 0;
+    ITagWriter*       tagWriter  = nullptr;
     const TARGET_TYPE targetType = EvaluateFileType(targetName);
     if(targetType == MP3_TARGET)
     {
         tagWriter = new MP3TagWriter();
     }
+#ifdef ULTRASCHALL_ENABLE_MP4
     else if(targetType == MP4_TARGET)
     {
         tagWriter = new MP4TagWriter();
+    }
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
+    else
+    {
+        tagWriter = nullptr;
     }
 
     return tagWriter;
@@ -287,6 +299,7 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
             {
                 type = MP3_TARGET;
             }
+#ifdef ULTRASCHALL_ENABLE_MP4
             else if(fileExtension == "mp4")
             {
                 type = MP4_TARGET;
@@ -295,9 +308,13 @@ InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFi
             {
                 type = MP4_TARGET;
             }
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
+            else
+            {
+                type = INVALID_TARGET_TYPE;
+            }
         }
     }
-
     return type;
 }
 

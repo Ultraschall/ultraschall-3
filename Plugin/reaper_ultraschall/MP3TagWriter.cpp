@@ -38,7 +38,8 @@ bool MP3TagWriter::InsertProperties(const UnicodeString& targetName, const Basic
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
 
-    const int duration = MP3_QueryTargetDuration(targetName);
+    const UnicodeString durationString = UnicodeStringFromInt(MP3_QueryTargetDuration(targetName));
+    const UnicodeString encoderString  = "Ultraschall v3.2";
 
     bool                success = true;
     MP3_EXPORT_CONTEXT* context = MP3_StartTransaction(targetName);
@@ -50,30 +51,27 @@ bool MP3TagWriter::InsertProperties(const UnicodeString& targetName, const Basic
         // TIT2:    UTF-16 -> Track
         // COMM:    UTF-16 -> Comments
         // USLT:    UTF-16 -> Comments
-        // CTOC:    UTF-16 -> <dynamic>
-        // CHAP(s)
-        //    TIT2: UTF-16 -> <dynamic>
         // TLEN:    ASCII  -> <dynamic>
         // TYER:    ASCII  -> Date
-        // TENC:    ASCII  -> "Ultraschall"
-        // APIC:    BIN	   -> Cover
+        // TENC:    ASCII  -> "Ultraschall v3.2"
 
         static const size_t MAX_SIMPLE_FRAME_MAPPINGS  = 6;
         static const size_t MAX_COMPLEX_FRAME_MAPPINGS = 2;
         struct MAP_ULTRASCHALL_PROPERTIES_TO_REQUIRED_APPLE_TAGS
         {
             const UnicodeChar*   FrameId;
+            const CHAR_ENCODING  Encoding;
             const UnicodeString& DataReference;
         } simpleFrameMappings[MAX_SIMPLE_FRAME_MAPPINGS]
-            = {{"TALB", standardProperties.Title()}, {"TPE1", standardProperties.Title()},
-               {"TIT2", standardProperties.Track()}, {"TLEN", UnicodeStringFromInt(duration)},
-               {"TYER", standardProperties.Date()},  {"TENC", UnicodeString("Ultraschall v3.2")}},
+            = {{"TALB", UTF16, standardProperties.Title()}, {"TPE1", UTF16, standardProperties.Title()},
+               {"TIT2", UTF16, standardProperties.Track()}, {"TLEN", UTF8, durationString},
+               {"TYER", UTF8, standardProperties.Date()},   {"TENC", UTF8, encoderString}},
             complexFrameMapping[MAX_COMPLEX_FRAME_MAPPINGS]
-            = {{"COMM", standardProperties.Comments()}, {"USLT", standardProperties.Comments()}};
+            = {{"COMM", UTF16, standardProperties.Comments()}, {"USLT", UTF16, standardProperties.Comments()}};
         for(size_t i = 0; (i < MAX_SIMPLE_FRAME_MAPPINGS) && (true == success); i++)
         {
             success
-                = MP3_InsertTextFrame(context, simpleFrameMappings[i].FrameId, simpleFrameMappings[i].DataReference);
+                = MP3_InsertTextFrame(context, simpleFrameMappings[i].FrameId, simpleFrameMappings[i].DataReference, simpleFrameMappings[i].Encoding);
         }
         if(true == success)
         {

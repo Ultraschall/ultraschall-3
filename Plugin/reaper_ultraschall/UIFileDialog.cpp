@@ -74,6 +74,7 @@ UnicodeString UIFileDialog::BrowseForChapters()
     return BrowseForFile(fileExtensions);
 }
 
+#ifdef ULTRASCHALL_ENABLE_MP4
 UnicodeString UIFileDialog::BrowseForAudio()
 {
     const UnicodeString fileExtensions = "MP3 file|*.mp3|"
@@ -82,6 +83,14 @@ UnicodeString UIFileDialog::BrowseForAudio()
                                          "All files|*.*";
     return BrowseForFile(fileExtensions);
 }
+#else // #ifdef ULTRASCHALL_ENABLE_MP4
+UnicodeString UIFileDialog::BrowseForAudio()
+{
+    const UnicodeString fileExtensions = "MP3 file|*.mp3|"
+                                         "All files|*.*";
+    return BrowseForFile(fileExtensions);
+}
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
 
 UnicodeString UIFileDialog::BrowseForPicture()
 {
