@@ -24,29 +24,63 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_MP4_TAG_WRITER_H_INCL__
-#define __ULTRASCHALL_REAPER_MP4_TAG_WRITER_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
+#define __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
 
 #include "Common.h"
-#include "ITagWriter.h"
 
 namespace ultraschall { namespace reaper {
 
-class MP4TagWriter : public ITagWriter
+class MediaProperties
 {
 public:
-    virtual bool InsertProperties(const UnicodeString& targetName, const MediaProperties& standardProperties);
+    MediaProperties();
+    ~MediaProperties();
 
-    virtual bool InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage);
+    static MediaProperties ParseString(const UnicodeString& str);
 
-    virtual bool InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers);
+    bool Validate() const;
+    void Reset();
 
-    virtual bool ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers);
+    inline const UnicodeString& Title() const
+    {
+        return title_;
+    }
 
-protected:
-    virtual ~MP4TagWriter() {}
+    inline const UnicodeString& Author() const
+    {
+        return author_;
+    }
+
+    inline const UnicodeString& Track() const
+    {
+        return track_;
+    }
+
+    inline const UnicodeString& Date() const
+    {
+        return date_;
+    }
+
+    inline const UnicodeString& Content() const
+    {
+        return content_;
+    }
+
+    inline const UnicodeString& Comments() const
+    {
+        return comments_;
+    }
+
+private:
+    UnicodeString title_;    // TIT2
+    UnicodeString author_;   // TPE1
+    UnicodeString track_;    // TALB
+    UnicodeString date_;     // TDRC
+    UnicodeString content_;  // TCON
+    UnicodeString comments_; // COMM
 };
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_MP3_TAG_WRITER_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__

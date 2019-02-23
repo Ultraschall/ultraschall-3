@@ -24,63 +24,73 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
-#define __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__
-
-#include "Common.h"
+#include "MediaProperties.h"
+#include "StringUtilities.h"
 
 namespace ultraschall { namespace reaper {
 
-class BasicMediaInformation
+MediaProperties::MediaProperties() {}
+
+MediaProperties::~MediaProperties()
 {
-public:
-    BasicMediaInformation();
-    ~BasicMediaInformation();
+    Reset();
+}
 
-    static BasicMediaInformation ParseString(const UnicodeString& str);
+MediaProperties MediaProperties::ParseString(const UnicodeString& str)
+{
+    MediaProperties result;
 
-    bool Validate() const;
-    void Reset();
-
-    inline const UnicodeString& Title() const
+    if(str.empty() == false)
     {
-        return title_;
+        UnicodeStringArray tokens = UnicodeStringTokenize(str, '\n');
+        if(tokens.empty() == false)
+        {
+            result.title_ = tokens[0];
+
+            if(tokens.size() > 1)
+            {
+                result.author_ = tokens[1];
+            }
+
+            if(tokens.size() > 2)
+            {
+                result.track_ = tokens[2];
+            }
+
+            if(tokens.size() > 3)
+            {
+                result.date_ = tokens[3];
+            }
+
+            if(tokens.size() > 4)
+            {
+                result.content_ = tokens[4];
+            }
+
+            if(tokens.size() > 5)
+            {
+                result.comments_ = tokens[5];
+            }
+        }
     }
 
-    inline const UnicodeString& Author() const
-    {
-        return author_;
-    }
+    return result;
+}
 
-    inline const UnicodeString& Track() const
-    {
-        return track_;
-    }
+bool MediaProperties::Validate() const
+{
+    return (title_.empty() == false) || (author_.empty() == false) || (track_.empty() == false)
+           || (date_.empty() == false) || (content_.empty() == false);
+}
 
-    inline const UnicodeString& Date() const
-    {
-        return date_;
-    }
-
-    inline const UnicodeString& Content() const
-    {
-        return content_;
-    }
-
-    inline const UnicodeString& Comments() const
-    {
-        return comments_;
-    }
-
-private:
-    UnicodeString title_;    // TIT2
-    UnicodeString author_;   // TPE1
-    UnicodeString track_;    // TALB
-    UnicodeString date_;     // TDRC
-    UnicodeString content_;  // TCON
-    UnicodeString comments_; // COMM
-};
+void MediaProperties::Reset()
+{
+    title_.clear();
+    author_.clear();
+    track_.clear();
+    date_.clear();
+    content_.clear();
+    comments_.clear();
+}
 
 }} // namespace ultraschall::reaper
-
-#endif // #ifndef __ULTRASCHALL_REAPER_BASIC_MEDIA_INFORMATION_H_INCL__

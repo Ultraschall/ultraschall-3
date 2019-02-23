@@ -36,7 +36,7 @@
 
 namespace ultraschall { namespace reaper {
 
-bool MP4TagWriter::InsertProperties(const UnicodeString& targetName, const BasicMediaInformation& properties)
+bool MP4TagWriter::InsertProperties(const UnicodeString& targetName, const MediaProperties& properties)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
 

@@ -27,7 +27,7 @@
 #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 #define __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 
-#include "BasicMediaInformation.h"
+#include "MediaProperties.h"
 #include "Common.h"
 #include "Marker.h"
 #include "ServiceStatus.h"
@@ -38,7 +38,7 @@ namespace ultraschall { namespace reaper {
 class ITagWriter : public SharedObject
 {
 public:
-    virtual bool InsertProperties(const UnicodeString& targetName, const BasicMediaInformation& standardProperties) = 0;
+    virtual bool InsertProperties(const UnicodeString& targetName, const MediaProperties& standardProperties) = 0;
 
     virtual bool InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage) = 0;
 

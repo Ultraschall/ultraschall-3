@@ -35,7 +35,7 @@ namespace ultraschall { namespace reaper {
 class MP3TagWriter : public ITagWriter
 {
 public:
-    virtual bool InsertProperties(const UnicodeString& targetName, const BasicMediaInformation& standardProperties);
+    virtual bool InsertProperties(const UnicodeString& targetName, const MediaProperties& standardProperties);
 
     virtual bool InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage);
 

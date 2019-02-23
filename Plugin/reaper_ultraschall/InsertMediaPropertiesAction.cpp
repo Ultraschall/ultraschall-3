@@ -104,7 +104,7 @@ ServiceStatus InsertMediaPropertiesAction::Execute()
                     ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
                     if(pTagWriter != 0)
                     {
-                        BasicMediaInformation properties = BasicMediaInformation::ParseString(currentProject.Notes());
+                        MediaProperties properties = MediaProperties::ParseString(currentProject.Notes());
                         if(pTagWriter->InsertProperties(targetName, properties) == false)
                         {
                             errorRecords.push_back(ErrorRecord(targetName, "Failed to insert tags."));
@@ -328,7 +328,7 @@ bool InsertMediaPropertiesAction::ConfigureAssets()
     ReaperProject         currentProject = projectManager.CurrentProject();
     if(ReaperProject::Validate(currentProject) == true)
     {
-        id3v2_ = BasicMediaInformation::ParseString(currentProject.Notes());
+        id3v2_ = MediaProperties::ParseString(currentProject.Notes());
         if(id3v2_.Validate() == false)
         {
             const UnicodeString message = "ID3v2 tags have not been defined yet.";

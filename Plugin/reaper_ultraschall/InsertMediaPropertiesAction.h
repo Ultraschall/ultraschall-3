@@ -64,7 +64,7 @@ private:
     UnicodeStringArray    targetNames_;
     UnicodeString         cover_;
     MarkerArray           chapters_;
-    BasicMediaInformation id3v2_;
+    MediaProperties id3v2_;
 
     static UnicodeStringArray FindTargetFiles(const ReaperProject& project);
 

@@ -28,7 +28,6 @@
 
 set(COMMON_INCLUDES
     Application.h
-    BasicMediaInformation.h
     BinaryStream.h
     Common.h
     CustomActionFactory.h
@@ -42,6 +41,7 @@ set(COMMON_INCLUDES
     ITagWriter.h
     SharedObject.h
     Marker.h
+    MediaProperties.h
     MP3_Interface.h
     MP3TagWriter.h
     MP4TagWriter.h
@@ -69,7 +69,6 @@ set(COMMON_INCLUDES
 
 set(COMMON_SOURCES
     Application.cpp
-    BasicMediaInformation.cpp
     BinaryStream.cpp
     CustomActionFactory.cpp
     CustomActionManager.cpp
@@ -77,6 +76,7 @@ set(COMMON_SOURCES
     FileUtilities.cpp
     InsertChapterMarkersAction.cpp
     InsertMediaPropertiesAction.cpp
+    MediaProperties.cpp
     MP3TagWriter.cpp
     MP4TagWriter.cpp
     MP3_Interface.cpp
