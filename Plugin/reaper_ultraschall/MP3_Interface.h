@@ -45,7 +45,7 @@ uint32_t MP3_QueryTargetDuration(const UnicodeString& targetName);
 void MP3_RemoveFrames(const UnicodeString& target, const UnicodeString& frameId);
 bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const UnicodeString& id);
 
-bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text);
+bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding);
 bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text);
 bool MP3_InsertChapterFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text, const uint32_t startTime, const uint32_t endTime);
 bool MP3_InsertTableOfContentsFrame(MP3_EXPORT_CONTEXT* context, const UnicodeStringArray& tableOfContentsItems);

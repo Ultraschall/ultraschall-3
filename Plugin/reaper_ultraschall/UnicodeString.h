@@ -44,6 +44,8 @@ typedef std::map<UnicodeString, UnicodeString> UnicodeStringDictionary;
 typedef std::vector<WideUnicodeString>                 WideUnicodeStringArray;
 typedef std::map<WideUnicodeString, WideUnicodeString> WideUnicodeStringDictionary;
 
+typedef enum { UTF8, UTF16 } CHAR_ENCODING;
+
 typedef enum { NO_UTF16_BOM = 0, WITH_UTF16_BOM_LE = 1, WITH_UTF16_BOM_BE = 2 } UTF16_BOM_SPEC;
 static const char16_t* UTF16_BOM_LE = u"\xfffe"; // intel
 static const char16_t* UTF16_BOM_BE = u"\xfeff";

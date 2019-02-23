@@ -193,7 +193,42 @@ bool MP3_RemoveFrames(MP3_EXPORT_CONTEXT* context, const UnicodeString& id)
     return success;
 }
 
-bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text)
+bool MP3_InsertUTF8TextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text)
+{
+    PRECONDITION_RETURN(context != 0, false);
+    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(id.empty() == false, false);
+
+    bool success = false;
+
+    MP3_RemoveFrames(context, id.c_str());
+
+    if(text.empty() == false)
+    {
+        const char*                             frameIdString = id.c_str();
+        TagLib::ByteVector                      frameId       = TagLib::ByteVector::fromCString(frameIdString);
+        TagLib::ID3v2::TextIdentificationFrame* textFrame     = new TagLib::ID3v2::TextIdentificationFrame(frameId);
+        if(textFrame != 0)
+        {
+            const char*        rawStringData   = reinterpret_cast<const char*>(text.data());
+            unsigned int       rawStringSize   = static_cast<unsigned int>(text.size() * sizeof(char));
+            TagLib::ByteVector stringData(rawStringData, rawStringSize);
+            textFrame->setTextEncoding(TagLib::String::Type::UTF8);
+            textFrame->setText(TagLib::String(stringData, TagLib::String::Type::UTF8));
+
+            context->tag_->addFrame(textFrame);
+            success = true;
+        }
+    }
+    else
+    {
+        success = true;
+    }
+
+    return success;
+}
+
+bool MP3_InsertUTF16TextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text)
 {
     PRECONDITION_RETURN(context != 0, false);
     PRECONDITION_RETURN(context->tag_ != 0, false);
@@ -227,6 +262,13 @@ bool MP3_InsertTextFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, c
     }
 
     return success;
+}
+
+bool MP3_InsertTextFrame(
+    MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding)
+{
+    return (encoding == UTF16) ? MP3_InsertUTF16TextFrame(context, id, text) :
+                                 MP3_InsertUTF8TextFrame(context, id, text);
 }
 
 bool MP3_InsertCommentsFrame(MP3_EXPORT_CONTEXT* context, const UnicodeString& id, const UnicodeString& text)
