@@ -47,7 +47,7 @@ public:
         bool registered = false;
 
         ReaperProjectManager& projectManager          = ReaperProjectManager::Instance();
-        void*           currentProjectReference = projectManager.CurrentProjectReference();
+        void*                 currentProjectReference = projectManager.CurrentProjectReference();
         if(currentProjectReference != nullptr)
         {
             const ReaperProject& currentProject = projectManager.LookupProject(currentProjectReference);
@@ -71,7 +71,7 @@ protected:
 
 private:
     ICustomAction(const ICustomAction&) = delete;
-    ICustomAction& operator=(const ICustomAction&) = delete; 
+    ICustomAction& operator=(const ICustomAction&) = delete;
 
     static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };

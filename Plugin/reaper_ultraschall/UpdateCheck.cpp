@@ -56,45 +56,49 @@ size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream)
 double QueryCurrentTimeAsSeconds()
 {
     const std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
-    const std::chrono::duration<double>                      seconds     = std::chrono::duration_cast<std::chrono::seconds>(currentTime.time_since_epoch());
+    const std::chrono::duration<double>                      seconds
+        = std::chrono::duration_cast<std::chrono::seconds>(currentTime.time_since_epoch());
     return seconds.count();
 }
 
 void UpdateCheck()
 {
-    if (SystemProperty<bool>::Get(UPDATE_SECTION_NAME, "update_check") == true)
+    if(SystemProperty<bool>::Get(UPDATE_SECTION_NAME, "update_check") == true)
     {
         bool updateCheckRequired = false;
 
         static const std::string LAST_UPDATE_CHECK_NAME = "last_update_check";
-        if (SystemProperty<std::string>::Exists(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
+        if(SystemProperty<std::string>::Exists(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME) == true)
         {
-            const std::string previousUpdateCheckpoint = SystemProperty<std::string>::Get(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
-            if (previousUpdateCheckpoint.empty() == false)
+            const std::string previousUpdateCheckpoint
+                = SystemProperty<std::string>::Get(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME);
+            if(previousUpdateCheckpoint.empty() == false)
             {
                 try
                 {
                     const double previousTimestamp = std::stod(previousUpdateCheckpoint);
-                    if (previousTimestamp > 0)
+                    if(previousTimestamp > 0)
                     {
                         const double        now                = QueryCurrentTimeAsSeconds();
                         const double        delta              = (now - previousTimestamp);
                         static const double ONE_DAY_IN_SECONDS = 60.0 * 60.0 * 24.0;
-                        if (delta > ONE_DAY_IN_SECONDS) // standard timeout (24h)
+                        if(delta > ONE_DAY_IN_SECONDS) // standard timeout (24h)
                         {
                             updateCheckRequired = true;
                         }
                     }
-                    else // inconsistency in reaper-extstate.ini (timeout less or equal to zero make no sense), force update check
+                    else // inconsistency in reaper-extstate.ini (timeout less or equal to zero make no sense), force
+                         // update check
                     {
                         updateCheckRequired = true;
                     }
                 }
-                catch (std::invalid_argument&) // inconsistency in reaper-extstate.ini (number format), force update check
+                catch(
+                    std::invalid_argument&) // inconsistency in reaper-extstate.ini (number format), force update check
                 {
                     updateCheckRequired = true;
                 }
-                catch (std::out_of_range&) // inconsistency in reaper-extstate.ini (overflow), force update check
+                catch(std::out_of_range&) // inconsistency in reaper-extstate.ini (overflow), force update check
                 {
                     updateCheckRequired = true;
                 }
@@ -109,10 +113,10 @@ void UpdateCheck()
             updateCheckRequired = true;
         }
 
-        if (true == updateCheckRequired)
+        if(true == updateCheckRequired)
         {
             void* curlHandle = curl_easy_init();
-            if (curlHandle != 0)
+            if(curlHandle != 0)
             {
                 const std::string url = "https://ultraschall.io/ultraschall_release.txt";
                 curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
@@ -125,17 +129,17 @@ void UpdateCheck()
                 curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &out);
 
                 const CURLcode res = curl_easy_perform(curlHandle);
-                if (res == CURLE_OK)
+                if(res == CURLE_OK)
                 {
                     std::string remoteVersion = out.str();
-                    if (remoteVersion.empty() == false)
+                    if(remoteVersion.empty() == false)
                     {
                         UnicodeStringTrim(remoteVersion);
                         const std::string localVersion = VersionHandler::PluginVersion();
-                        if (remoteVersion > localVersion)
+                        if(remoteVersion > localVersion)
                         {
-                            std::string message
-                                = "An update for Ultraschall is available. Go to http://ultraschall.fm/install to download the updated version ";
+                            std::string message = "An update for Ultraschall is available. Go to "
+                                                  "http://ultraschall.fm/install to download the updated version ";
                             message += remoteVersion + ".";
                             UIMessageDialog::Show(message);
                         }
@@ -147,9 +151,10 @@ void UpdateCheck()
 
                 const double      nextTimestamp        = QueryCurrentTimeAsSeconds();
                 const std::string nextUpdateCheckpoint = std::to_string(nextTimestamp);
-                if (nextUpdateCheckpoint.empty() == false)
+                if(nextUpdateCheckpoint.empty() == false)
                 {
-                    SystemProperty<std::string>::Save(UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint);
+                    SystemProperty<std::string>::Save(
+                        UPDATE_SECTION_NAME, LAST_UPDATE_CHECK_NAME, nextUpdateCheckpoint);
                 }
             }
         }

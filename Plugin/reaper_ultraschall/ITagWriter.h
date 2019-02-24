@@ -27,9 +27,9 @@
 #ifndef __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 #define __ULTRASCHALL_REAPER_ITAG_WRITER_H_INCL__
 
-#include "MediaProperties.h"
 #include "Common.h"
 #include "Marker.h"
+#include "MediaProperties.h"
 #include "ServiceStatus.h"
 #include "SharedObject.h"
 
