@@ -5,8 +5,8 @@
       "generator": "Visual Studio 15 2017 Win64",
       "configurationType": "Debug",
       "inheritEnvironments": ["msvc_x64_x64"],
-      "buildRoot": "${workspaceRoot}\\_build\\${configurationType}",
-      "installRoot": "${workspaceRoot}\\_install\\${configurationType}",
+      "buildRoot": "${workspaceRoot}\\build\\${configurationType}",
+      "installRoot": "${workspaceRoot}\\install\\${configurationType}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": ""
@@ -16,8 +16,8 @@
       "generator": "Visual Studio 15 2017 Win64",
       "configurationType": "Release",
       "inheritEnvironments": ["msvc_x64_x64"],
-      "buildRoot": "${workspaceRoot}\\_build\\${configurationType}",
-      "installRoot": "${workspaceRoot}\\_install\\${configurationType}",
+      "buildRoot": "${workspaceRoot}\\build\\${configurationType}",
+      "installRoot": "${workspaceRoot}\\install\\${configurationType}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": ""

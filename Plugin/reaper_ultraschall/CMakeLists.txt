@@ -100,8 +100,8 @@ set(COMMON_SOURCES
 )
 
 set(EXTERNAL_SOURCES
-    ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c
-    ${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c
+    ${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c
+    ${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c
 )
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
@@ -122,8 +122,8 @@ elseif(UNIX)
     set(PLATFORM_SOURCES linux/Platform.cpp)
 endif()
 
-set_source_files_properties(${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
-set_source_files_properties(${LIBZ_LIBRARY_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
+set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
+set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
 
 if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
@@ -168,29 +168,13 @@ elseif(APPLE)
 elseif(UNIX)
 endif()
 
-if(CMAKE_BUILD_TYPE MATCHES "Debug")
-    set(LIBZ_LIBRARY ${LIBZ_LIBRARY_DEBUG})
-    set(LIBCURL_LIBRARY ${LIBCURL_LIBRARY_DEBUG})
-    set(LIBMP4V2_LIBRARY ${LIBMP4V2_LIBRARY_DEBUG})
-    set(LIBTAG_LIBRARY ${LIBTAG_LIBRARY_DEBUG})
-    set(LIBJSON11_LIBRARY ${LIBJSON11_LIBRARY_DEBUG})
-    set(LIBWXWIDGETS_LIBRARY ${LIBWXWIDGETS_LIBRARY_DEBUG})
-else()
-    set(LIBZ_LIBRARY ${LIBZ_LIBRARY_RELEASE})
-    set(LIBCURL_LIBRARY ${LIBCURL_LIBRARY_RELEASE})
-    set(LIBMP4V2_LIBRARY ${LIBMP4V2_LIBRARY_RELEASE})
-    set(LIBTAG_LIBRARY ${LIBTAG_LIBRARY_RELEASE})
-    set(LIBJSON11_LIBRARY ${LIBJSON11_LIBRARY_RELEASE})
-    set(LIBWXWIDGETS_LIBRARY ${LIBWXWIDGETS_LIBRARY_RELEASE})
-endif()
-
 target_link_libraries(reaper_ultraschall
-    ${LIBZ_LIBRARY}
-    ${LIBCURL_LIBRARY}
-    ${LIBMP4V2_LIBRARY}
-    ${LIBTAG_LIBRARY}
-    ${LIBJSON11_LIBRARY}
-    ${LIBWXWIDGETS_LIBRARY}
+    ${LIBZ_LIBRARY_PATH}
+    ${LIBCURL_LIBRARY_PATH}
+    ${LIBMP4V2_LIBRARY_PATH}
+    ${LIBTAG_LIBRARY_PATH}
+    ${LIBJSON11_LIBRARY_PATH}
+    ${LIBWXWIDGETS_LIBRARY_PATH}
     ${EXTRA_LIBRARIES}
 )
 
@@ -207,4 +191,3 @@ source_group("Source Files"
 source_group("External Files"
 	${EXTERNAL_SOURCES}
 )
-
