@@ -129,7 +129,6 @@ if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 elseif(APPLE)
-    set(EXTRA_SOURCES NotificationPanel.mm)
     add_compile_options(-mmacosx-version-min=10.11)
     set_source_files_properties(
         FileManager.cpp

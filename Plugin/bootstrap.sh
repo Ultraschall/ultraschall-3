@@ -28,7 +28,7 @@
 
 BUILD_DIRECTORY="_build"
 ERROR_LEVEL=0
-if [ -x "$(command) -v cmake"]; then
+if [ -x "$(command -v cmake)" ]; then
     if [ -d "$BUILD_DIRECTORY"]; then
         if [ -L "$BUILD_DIRECTORY"]; then
             rm -f "$BUILD_DIRECTORY"
@@ -37,15 +37,19 @@ if [ -x "$(command) -v cmake"]; then
         fi
     fi
     mkdir "$BUILD_DIRECTORY" && pushd "$BUILD_DIRECTORY"
+    echo 'Configuring projects...'
     cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../
+    echo 'Done.'
     if [ $? -eq 0]; then
-        cmake cmake.exe --build . --target reaper_ultraschall --config Debug
+        echo 'Building projects...'
+        cmake --build . --target reaper_ultraschall --config Debug
+        echo 'Done.'
         if [ $? -ne 0]; then
-            $ERROR_LEVEL=$?
+            ERROR_LEVEL=$?
             echo 'The cmake build step failed.'
         fi
     else
-        $ERROR_LEVEL=$?
+        ERROR_LEVEL=$?
         echo 'Error: The cmake configure step failed.'
     fi
     popd

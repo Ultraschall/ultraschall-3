@@ -74,7 +74,7 @@ include(ExternalProject)
 ExternalProject_Add(mp4v2
     PREFIX libmp4v2
 	GIT_REPOSITORY https://github.com/Ultraschall/mp4v2.git
-	GIT_TAG v4.0.0-prerelease1
+	GIT_TAG v2.1.0
     STEP_TARGETS build
     EXCLUDE_FROM_ALL TRUE
 	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DMP4V2_EXPORTS=0 -DMP4V2_NO_STDINT_DEFS=1

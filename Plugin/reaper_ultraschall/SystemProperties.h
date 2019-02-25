@@ -84,7 +84,7 @@ public:
 private:
     static UnicodeString RawValue(const UnicodeString& section, const UnicodeString& key)
     {
-        PRECONDITION_RETURN(section.empty() == false, false);
+        PRECONDITION_RETURN(section.empty() == false, UnicodeString());
         PRECONDITION_RETURN(key.empty() == false, UnicodeString());
 
         return ReaperGateway::GetValue(section, key);
