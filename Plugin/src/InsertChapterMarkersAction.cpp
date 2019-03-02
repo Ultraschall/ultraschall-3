@@ -30,7 +30,6 @@
 
 #include "CustomActionFactory.h"
 #include "FileManager.h"
-#include "FileUtilities.h"
 #include "InsertChapterMarkersAction.h"
 #include "Marker.h"
 #include "ReaperProjectManager.h"
@@ -58,7 +57,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
     MarkerArray        tags;
     UnicodeStringArray errorMessages;
 
-    const UnicodeStringArray lines = ReadTextFile(path);
+    const UnicodeStringArray lines = FileManager::ReadTextFile(path);
     if(lines.empty() == false)
     {
         for(size_t i = 0; i < lines.size(); i++)

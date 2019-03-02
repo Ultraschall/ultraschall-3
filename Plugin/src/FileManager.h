@@ -28,6 +28,7 @@
 #define __ULTRASCHALL_REAPER_FILE_MANAGER_H_INCL__
 
 #include "Common.h"
+#include "BinaryStream.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -42,6 +43,10 @@ public:
 
     static bool   FileExists(const UnicodeString& path);
     static size_t FileExists(const UnicodeStringArray& paths);
+
+	static BinaryStream* ReadBinaryFile(const UnicodeString& filename);
+    static UnicodeStringArray ReadTextFile(const UnicodeString& filename);
+    static void WriteTextFile(const UnicodeString& filename, const UnicodeStringArray& lines);
 };
 
 }} // namespace ultraschall::reaper

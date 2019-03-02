@@ -84,4 +84,68 @@ size_t FileManager::FileExists(const UnicodeStringArray& paths)
     return offset;
 }
 
+BinaryStream* FileManager::ReadBinaryFile(const UnicodeString& filename)
+{
+    BinaryStream* pStream = 0;
+
+    std::ifstream file(U2H(filename), std::ios::in | std::ios::binary | std::ios::ate);
+    if(file.is_open() == true)
+    {
+        const std::ifstream::pos_type fileSize = file.tellg();
+        file.seekg(std::ios::beg);
+        uint8_t* buffer = new uint8_t[fileSize];
+        if(buffer != 0)
+        {
+            file.read(reinterpret_cast<char*>(buffer), fileSize);
+            if(file)
+            {
+                pStream = new BinaryStream(fileSize);
+                if(pStream != 0)
+                {
+                    const bool succeeded = pStream->Write(0, buffer, fileSize);
+                    if(succeeded == false)
+                    {
+                        SafeRelease(pStream);
+                    }
+                }
+            }
+
+            SafeDeleteArray(buffer);
+        }
+
+        file.close();
+    }
+
+    return pStream;
+}
+
+UnicodeStringArray FileManager::ReadTextFile(const UnicodeString& filename)
+{
+    UnicodeStringArray lines;
+
+    std::ifstream inputStream(U2H(filename).c_str());
+    UnicodeString line;
+    while(std::getline(inputStream, line))
+    {
+        lines.push_back(line);
+    }
+
+    return lines;
+}
+
+void FileManager::WriteTextFile(const UnicodeString& filename, const UnicodeStringArray& lines)
+{
+    if(filename.empty() == false)
+    {
+        std::ofstream os(U2H(filename).c_str());
+        for(size_t i = 0; i < lines.size(); i++)
+        {
+            os << lines[i];
+            os << "\r\n"; // TODO check whether this is fine
+        }
+
+        os.close();
+    }
+}
+
 }}     // namespace ultraschall::reaper

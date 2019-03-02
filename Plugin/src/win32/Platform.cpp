@@ -32,9 +32,10 @@
 #include <shlobj.h>
 #include <windows.h>
 
-#include "FileUtilities.h"
-#include "Platform.h"
 #include "wx/filename.h"
+
+#include "Platform.h"
+#include "FileManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -189,7 +190,7 @@ bool Platform::SWSVersionCheck()
 
     if(Platform::FileExists(swsPlugin2_8UserPath) == true)
     {
-        reaper::BinaryStream* pStream = reaper::ReadBinaryFile(swsPlugin2_8UserPath);
+        reaper::BinaryStream* pStream = FileManager::ReadBinaryFile(swsPlugin2_8UserPath);
         if(pStream != 0)
 
         {

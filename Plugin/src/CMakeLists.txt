@@ -43,18 +43,18 @@ set(COMMON_INCLUDES
     CustomActionFactory.h
     CustomActionManager.h
     FileManager.h
-    FileUtilities.h
     ICommand.h
     ICustomAction.h
+    ID3V2.h
+    ID3V2Writer.h
     InsertChapterMarkersAction.h
     InsertMediaPropertiesAction.h
+	ISOBMFF.h
+    ISOBMFFWriter.h
     ITagWriter.h
     SharedObject.h
     Marker.h
     MediaProperties.h
-    MP3_Interface.h
-    MP3TagWriter.h
-    MP4TagWriter.h
     PictureUtilities.h
     ReaperProject.h
     ReaperProjectManager.h
@@ -83,13 +83,13 @@ set(COMMON_SOURCES
     CustomActionFactory.cpp
     CustomActionManager.cpp
     FileManager.cpp
-    FileUtilities.cpp
+    ID3V2.cpp
+    ID3V2Writer.cpp
     InsertChapterMarkersAction.cpp
     InsertMediaPropertiesAction.cpp
+	ISOBMFF.cpp
+    ISOBMFFWriter.cpp
     MediaProperties.cpp
-    MP3TagWriter.cpp
-    MP4TagWriter.cpp
-    MP3_Interface.cpp
     PictureUtilities.cpp
     ReaperProject.cpp
     ReaperProjectManager.cpp
