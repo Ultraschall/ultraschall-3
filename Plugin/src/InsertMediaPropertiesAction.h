@@ -28,8 +28,8 @@
 #define __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__
 
 #include "ICustomAction.h"
-#include "MP3TagWriter.h"
-#include "MP4TagWriter.h"
+#include "ID3V2Writer.h"
+#include "ISOBMFFWriter.h"
 
 namespace ultraschall { namespace reaper {
 
