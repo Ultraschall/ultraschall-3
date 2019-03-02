@@ -24,41 +24,18 @@
 #
 ################################################################################
 
-cmake_minimum_required(VERSION 3.13.0)
+cmake_minimum_required(VERSION 3.14)
 project(reaper_ultraschall VERSION 3.2)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(WIN32)
-    include(win32.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/win32.cmake)
 elseif(APPLE)
-    include(macos.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/macos.cmake)
 elseif(UNIX)
-    include(linux.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/linux.cmake)
 endif()
 
-set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/_ext/reaper_extension_sdk/jmde)
-
-message(STATUS "REAPER_INCLUDE_PATH = ${REAPER_INCLUDE_PATH}")
-
-include_directories(
-    ${LIBZ_INCLUDE_PATH}
-    ${LIBCURL_INCLUDE_PATH}
-    ${LIBMP4V2_INCLUDE_PATH}
-    ${LIBTAG_INCLUDE_PATH}
-    ${LIBJSON11_INCLUDE_PATH}
-    ${LIBWXWIDGETS_INCLUDE_PATH}
-    ${REAPER_INCLUDE_PATH}
-)
-
-add_subdirectory(reaper_ultraschall)
-
-add_dependencies(reaper_ultraschall zlib-build)
-add_dependencies(reaper_ultraschall curl-build)
-add_dependencies(reaper_ultraschall mp4v2-build)
-add_dependencies(reaper_ultraschall taglib-build)
-add_dependencies(reaper_ultraschall json11-build)
-add_dependencies(reaper_ultraschall wxwidgets-build)
-
-set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)

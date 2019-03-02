@@ -22,26 +22,25 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import <AppKit/AppKit.h>
-#import <Foundation/Foundation.h>
+#ifdef _LINUX_
 
 #include "Platform.h"
 #include "StringUtilities.h"
 
 #include "wx/filename.h"
 
-namespace ultraschall { namespace reaper {
+#amespace ultraschall { namespace reaper {
 
-const std::string Platform::THEME_PATH("/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip");
-const std::string Platform::SOUNDBOARD_PATH("/Audio/Plug-Ins/Components/Soundboard.component");
-const std::string Platform::SWS_PATH("<unspecified>");
-const std::string Platform::PLUGIN_PATH("<unspecified>");
-const std::string Platform::STUDIO_LINK_PATH("/Audio/Plug-Ins/Components/StudioLink.component");
-const std::string Platform::STUDIO_LINK_ONAIR_PATH("/Audio/Plug-Ins/Components/StudioLinkOnAir.component");
+const UnicodeString Platform::THEME_PATH("/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip");
+const UnicodeString Platform::SOUNDBOARD_PATH("/Audio/Plug-Ins/Components/Soundboard.component");
+const UnicodeString Platform::SWS_PATH("/REAPER/UserPlugins/reaper_sws64.dylib");
+const UnicodeString Platform::PLUGIN_PATH("/REAPER/UserPlugins/reaper_ultraschall.dylib");
+const UnicodeString Platform::STUDIO_LINK_PATH("/Audio/Plug-Ins/Components/StudioLink.component");
+const UnicodeString Platform::STUDIO_LINK_ONAIR_PATH("/Audio/Plug-Ins/Components/StudioLinkOnAir.component");
 
-std::string Platform::UserDataDirectory()
+UnicodeString Platform::UserDataDirectory()
 {
-    std::string directory;
+    UnicodeString directory;
 
     NSString* userHomeDirectory = NSHomeDirectory();
     directory                   = [userHomeDirectory UTF8String];
@@ -49,22 +48,9 @@ std::string Platform::UserDataDirectory()
     return directory;
 }
 
-#if 0
-std::string FileManager::UserApplicationSupportDirectory()
+UnicodeString Platform::ProgramFilesDirectory()
 {
-    std::string directory;
-
-    NSURL* applicationSupportDirectory =
-        [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] firstObject];
-    directory = [applicationSupportDirectory fileSystemRepresentation];
-
-    return directory;
-}
-#endif
-
-std::string Platform::ProgramFilesDirectory()
-{
-    std::string directory;
+    UnicodeString directory;
 
     NSURL* applicationSupportDirectory =
         [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSSystemDomainMask] firstObject];
@@ -73,7 +59,12 @@ std::string Platform::ProgramFilesDirectory()
     return directory;
 }
 
-bool FileExists(const std::string& path)
+UnicodeChar Platform::PathSeparator()
+{
+    return wxFileName::GetPathSeparator();
+}
+
+bool Platform::FileExists(const UnicodeString& path)
 {
     PRECONDITION_RETURN(path.empty == false, false);
 
@@ -83,11 +74,16 @@ bool FileExists(const std::string& path)
     fileExists                 = [fileManager fileExistsAtPath:[NSString stringWithUTF8String:path.c_str()]] == YES;
 }
 
-std::string Platform::ReadFileVersion(const std::string& path)
+UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix)
 {
-    PRECONDITION_RETURN(path.empty() == false, std::string());
+    return prefix + PathSeparator() + appendix;
+}
 
-    std::string version;
+UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
+{
+    PRECONDITION_RETURN(path.empty() == false, UnicodeString());
+
+    UnicodeString version;
 
     NSURL*           libraryDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] firstObject];
     NSMutableString* filePath         = [NSMutableString stringWithUTF8String:[libraryDirectory fileSystemRepresentation]];
@@ -103,4 +99,48 @@ std::string Platform::ReadFileVersion(const std::string& path)
     return version;
 }
 
-}} // namespace ultraschall::reaper
+UnicodeString FindUltraschallPluginDirectory()
+{
+    UnicodeString pluginDirectory;
+
+    // TODO
+
+    return pluginDirectory;
+}
+
+bool Platform::SWSVersionCheck()
+
+{
+    bool result = false;
+
+    UnicodeString swsPlugin2_8UserPath
+        = Platform::ProgramFilesDirectory() + SWS_PATH;
+    if(Platform::FileExists(swsPlugin2_8UserPath) == false)
+    {
+        swsPlugin2_8UserPath = Platform::AppendPath(FindUltraschallPluginDirectory(), "reaper_sws64.dylib");
+    }
+
+    if(Platform::FileExists(swsPlugin2_8UserPath) == true)
+    {
+        reaper::BinaryStream* pStream = reaper::ReadBinaryFile(swsPlugin2_8UserPath);
+        if(pStream != 0)
+
+        {
+            static const uint64_t originalCrc = 355942019;  // SWS 2.10.0.1 from 02/2019
+            const uint64_t        crc         = pStream->CRC32();
+            if(originalCrc == crc)
+
+            {
+                result = true;
+            }
+
+            SafeRelease(pStream);
+        }
+    }
+
+    return result;
+}
+
+}}
+
+#endif // #ifdef _LINUX_

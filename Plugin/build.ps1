@@ -29,13 +29,13 @@ if ($args.Count -gt 0) {
     $action = $args[0]
 }
 if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
-    $buildDirectory = "./_build"
-    if (Test-Path -PathType Container $buildDirectory) {
+    $BuildDirectory = "./build"
+    if (Test-Path -PathType Container $BuildDirectory) {
         if ($action -eq "--help") {
             Write-Host "Usage: build.ps1 [--clean|--rebuild]"
         }
         elseif ($action -eq "--clean") {
-            Push-Location $buildDirectory
+            Push-Location $BuildDirectory
             if (Test-Path x64) {
                 Remove-Item -Force -Recurse x64
             }
@@ -45,7 +45,7 @@ if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
             Pop-Location
         }
         elseif ($action -eq "--rebuild") {
-            Push-Location $buildDirectory
+            Push-Location $BuildDirectory
             & cmake.exe --build . --clean-first --target reaper_ultraschall --config Debug -j
             if ($LASTEXITCODE -ne 0) {
                 Write-Host -ForegroundColor Red  "The cmake build step failed, status = " $LASTEXITCODE
@@ -53,7 +53,7 @@ if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
             Pop-Location
         }
         else {
-            Push-Location $buildDirectory
+            Push-Location $BuildDirectory
             & cmake.exe --build . --target reaper_ultraschall --config Debug -j
             if ($LASTEXITCODE -ne 0) {
                 Write-Host -ForegroundColor Red  "The cmake build step failed, status = " $LASTEXITCODE

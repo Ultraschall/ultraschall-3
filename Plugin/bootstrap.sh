@@ -26,7 +26,7 @@
 #
 ################################################################################
 
-BUILD_DIRECTORY="_build"
+BUILD_DIRECTORY="build"
 ERROR_LEVEL=0
 if [ -x "$(command -v cmake)" ]; then
     if [ -d "$BUILD_DIRECTORY"]; then
@@ -46,11 +46,11 @@ if [ -x "$(command -v cmake)" ]; then
         echo 'Done.'
         if [ $? -ne 0]; then
             ERROR_LEVEL=$?
-            echo 'The cmake build step failed.'
+            echo 'The cmake build step failed.'  >&2
         fi
     else
         ERROR_LEVEL=$?
-        echo 'Error: The cmake configure step failed.'
+        echo 'Error: The cmake configure step failed.'  >&2
     fi
     popd
     exit $ERROR_LEVEL

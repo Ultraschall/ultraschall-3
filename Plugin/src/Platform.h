@@ -2,6 +2,8 @@
 //
 // Copyright (c) The Ultraschall Project (http://ultraschall.fm)
 //
+// The MIT License (MIT)
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -22,13 +24,36 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO linux
+#ifndef __ULTRASCHALL_REAPER_PLATFORM_H_INCL__
+#define __ULTRASCHALL_REAPER_PLATFORM_H_INCL__
 
-#include "Platform.h"
-#include "StringUtilities.h"
-
-#include "wx/filename.h"
+#include "Common.h"
 
 namespace ultraschall { namespace reaper {
 
+class Platform
+{
+public:
+    static const UnicodeString THEME_PATH;
+    static const UnicodeString SOUNDBOARD_PATH;
+    static const UnicodeString SWS_PATH;
+    static const UnicodeString PLUGIN_PATH;
+    static const UnicodeString STUDIO_LINK_PATH;
+    static const UnicodeString STUDIO_LINK_ONAIR_PATH;
+
+    static UnicodeString ProgramFilesDirectory();
+    static UnicodeString UserDataDirectory();
+
+    static UnicodeChar PathSeparator();
+
+    static bool        FileExists(const UnicodeString& path);
+    static UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix);
+
+	static UnicodeString ReadFileVersion(const UnicodeString& path);
+
+	static bool SWSVersionCheck();
+};
+
 }} // namespace ultraschall::reaper
+
+#endif // #ifndef __ULTRASCHALL_REAPER_PLATFORM_H_INCL__

@@ -25,13 +25,13 @@
 ################################################################################
 
 if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
-    $buildDirectory = "./_build"
-    if (Test-Path -PathType Container $buildDirectory) {
-        Remove-Item -Force -Recurse $buildDirectory
+    $BuildDirectory = "./build"
+    if (Test-Path -PathType Container $BuildDirectory) {
+        Remove-Item -Force -Recurse $BuildDirectory
     }
-    New-Item -ItemType Directory -Force -Path $buildDirectory | Out-Null
-    Push-Location $buildDirectory
-    & cmake.exe -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Debug -Thost=x64 ../
+    New-Item -ItemType Directory -Force -Path $BuildDirectory | Out-Null
+    Push-Location $BuildDirectory
+    & cmake.exe -G "Visual Studio 16 2019" -D CMAKE_BUILD_TYPE=Debug -A x64 -T host=x64 ../
     if ($LASTEXITCODE -eq 0) {
         & cmake.exe --build . --target reaper_ultraschall --config Debug -j
         if ($LASTEXITCODE -ne 0) {

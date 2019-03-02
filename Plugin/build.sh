@@ -29,7 +29,7 @@ if ($args.Count -gt 0) {
     $action = $args[0]
 }
 if (Get-Command "cmake.exe" -ErrorAction SilentlyContinue) {
-    $buildDirectory = "./_build"
+    $buildDirectory = "./build"
     if (Test-Path -PathType Container $buildDirectory) {
         if ($action -eq "--help") {
             Write-Host "Usage: build.ps1 [--clean|--rebuild]"

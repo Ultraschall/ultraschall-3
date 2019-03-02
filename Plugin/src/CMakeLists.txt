@@ -24,7 +24,17 @@
 #
 ################################################################################
 
-# configure plugin build
+set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include/jmde)
+
+include_directories(
+    ${LIBZ_INCLUDE_PATH}
+    ${LIBCURL_INCLUDE_PATH}
+    ${LIBMP4V2_INCLUDE_PATH}
+    ${LIBTAG_INCLUDE_PATH}
+    ${LIBJSON11_INCLUDE_PATH}
+    ${LIBWXWIDGETS_INCLUDE_PATH}
+    ${REAPER_INCLUDE_PATH}
+)
 
 set(COMMON_INCLUDES
     Application.h
@@ -110,15 +120,12 @@ set(PLATFORM_INLUDES Platform.h)
 
 if(WIN32)
     include_directories(win32)
-    set(PLATFORM_INCLUDES win32/Platform.h)
     set(PLATFORM_SOURCES win32/Platform.cpp)
 elseif(APPLE)
     include_directories(macos)
-    set(PLATFORM_INCLUDES macos/Platform.h)
     set(PLATFORM_SOURCES macos/Platform.cpp)
 elseif(UNIX)
     include_directories(linux)
-    set(PLATFORM_INCLUDES linux/Platform.h)
     set(PLATFORM_SOURCES linux/Platform.cpp)
 endif()
 
@@ -138,6 +145,27 @@ elseif(APPLE)
     )
 elseif(UNIX)
 endif()
+
+source_group("Header Files" FILES
+    ${COMMON_INCLUDES}
+    ${PLATFORM_INCLUDES}
+)
+source_group("Source Files" FILES
+    ${COMMON_SOURCES}
+    ${PLATFORM_SOURCES}
+    ${EXTRA_SOURCES}
+)
+
+source_group("External Files" FILES
+	${EXTERNAL_SOURCES}
+)
+
+message(STATUS "COMMON_INCLUDES   = ${COMMON_INCLUDES}")
+message(STATUS "COMMON_SOURCES    = ${COMMON_SOURCES}")
+message(STATUS "PLATFORM_INCLUDES = ${PLATFORM_INCLUDES}")
+message(STATUS "PLATFORM_SOURCES  = ${PLATFORM_SOURCES}")
+message(STATUS "EXTERNAL_SOURCES  = ${EXTERNAL_SOURCES}")
+message(STATUS "EXTRA_SOURCES     = ${EXTRA_SOURCES}")
 
 add_library(reaper_ultraschall SHARED
     ${COMMON_INCLUDES}
@@ -177,16 +205,11 @@ target_link_libraries(reaper_ultraschall
     ${EXTRA_LIBRARIES}
 )
 
-source_group("Header Files"
-    ${COMMON_INCLUDES}
-    ${PLATFORM_INCLUDES}
-)
-source_group("Source Files"
-    ${COMMON_SOURCES}
-    ${PLATFORM_SOURCES}
-    ${EXTRA_SOURCES}
-)
+add_dependencies(reaper_ultraschall zlib-build)
+add_dependencies(reaper_ultraschall curl-build)
+add_dependencies(reaper_ultraschall mp4v2-build)
+add_dependencies(reaper_ultraschall taglib-build)
+add_dependencies(reaper_ultraschall json11-build)
+add_dependencies(reaper_ultraschall wxwidgets-build)
 
-source_group("External Files"
-	${EXTERNAL_SOURCES}
-)
+set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
