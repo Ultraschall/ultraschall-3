@@ -49,8 +49,8 @@
 #include <podcastframe.h>
 
 namespace taglib = TagLib;
-namespace mp3 = TagLib::MPEG;
-namespace id3v2 = TagLib::ID3v2;
+namespace taglib_id3v2 = TagLib::ID3v2;
+namespace taglib_mp3 = TagLib::MPEG;
 
 #ifdef __APPLE__ 
 #pragma clang diagnostic pop
