@@ -35,7 +35,7 @@
 #include "Platform.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "UIMessageDialog.h"
+#include "UIMessageSupervisor.h"
 #include "UpdateCheck.h"
 #include "VersionHandler.h"
 
@@ -138,10 +138,11 @@ void UpdateCheck()
                         const std::string localVersion = VersionHandler::PluginVersion();
                         if(remoteVersion > localVersion)
                         {
+                            UIMessageSupervisor supervisor;
                             std::string message = "An update for Ultraschall is available. Go to "
                                                   "http://ultraschall.fm/install to download the updated version ";
                             message += remoteVersion + ".";
-                            UIMessageDialog::Show(message);
+                            supervisor.RegisterSuccess(message);
                         }
                     }
                 }

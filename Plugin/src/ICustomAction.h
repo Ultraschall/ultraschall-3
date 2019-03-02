@@ -28,41 +28,13 @@
 #define __ULTRASCHALL_REAPER_ICUSTOM_ACTION_H_INCL__
 
 #include "Common.h"
-#include "ReaperProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
 class ICustomAction : public SharedObject
 {
 public:
-    static bool ValidateCustomActionId(const int32_t id)
-    {
-        return id != INVALID_CUSTOM_ACTION_ID;
-    }
-
     virtual ServiceStatus Execute() = 0;
-
-    static bool RegisterProject()
-    {
-        bool registered = false;
-
-        ReaperProjectManager& projectManager          = ReaperProjectManager::Instance();
-        void*                 currentProjectReference = projectManager.CurrentProjectReference();
-        if(currentProjectReference != nullptr)
-        {
-            const ReaperProject& currentProject = projectManager.LookupProject(currentProjectReference);
-            if(ReaperProject::Validate(currentProject) == false)
-            {
-                registered = projectManager.InsertProject(currentProjectReference);
-            }
-            else
-            {
-                registered = true;
-            }
-        }
-
-        return registered;
-    }
 
 protected:
     ICustomAction() {}
@@ -72,8 +44,6 @@ protected:
 private:
     ICustomAction(const ICustomAction&) = delete;
     ICustomAction& operator=(const ICustomAction&) = delete;
-
-    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
 }} // namespace ultraschall::reaper

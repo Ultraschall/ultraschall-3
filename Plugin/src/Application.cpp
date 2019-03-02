@@ -24,15 +24,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "StringUtilities.h"
 #include "Application.h"
-#include "CustomActionManager.h"
+#include "CustomAction.h"
 #include "FileManager.h"
+#include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "UIMessageDialog.h"
+#include "UIMessageSupervisor.h"
 #include "UpdateCheck.h"
 #include "VersionHandler.h"
-#include "StringUtilities.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -48,9 +47,8 @@ Application& Application::Instance()
 
 ServiceStatus Application::Start()
 {
-#ifndef ULTRASCHALL_BROADCASTER
     ServiceStatus status = SERVICE_FAILURE;
-    if (HealthCheck() == true)
+    if(HealthCheck() == true)
     {
         UpdateBillOfMaterials();
         UpdateCheck();
@@ -58,25 +56,22 @@ ServiceStatus Application::Start()
     }
 
     return status;
-#else
-    return SERVICE_SUCCESS;
-#endif // #ifndef ULTRASCHALL_BROADCASTER
 }
 
 void Application::Stop() {}
 
 bool Application::OnCustomAction(const int32_t id)
 {
-    PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, false);
+    PRECONDITION_RETURN(CustomAction::ValidateCustomActionId(id) != false, false);
 
     bool executed = false;
 
     CustomActionManager& manager       = CustomActionManager::Instance();
     ICustomAction*       pCustomAction = 0;
     ServiceStatus        status        = manager.LookupCustomAction(id, pCustomAction);
-    if (ServiceSucceeded(status) && (pCustomAction != 0))
+    if(ServiceSucceeded(status) && (pCustomAction != 0))
     {
-        if (ICustomAction::RegisterProject() == true)
+        if(CustomAction::RegisterProject() == true)
         {
             pCustomAction->Execute();
             executed = true;
@@ -91,8 +86,7 @@ bool Application::OnCustomAction(const int32_t id)
 bool Application::HealthCheck()
 {
     bool ok = true;
-
-    const std::string message("ULTRASCHALL cannot continue!");
+    UIMessageSupervisor supervisor;
 
     const std::string information1("\
 The Application Support directory of your system contains an unsupported \
@@ -103,19 +97,8 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ");
 
     const std::string information3("\
-The Ultraschall REAPER Extension requires REAPER 5.70\
-");
-
-    const std::string information4("\
+The Ultraschall REAPER Extension requires REAPER 5.70. \
 If you want to use the Ultraschall REAPER extension, you must install REAPER 5.70\
-");
-
-    const std::string information5("\
-The Ultraschall REAPER Extension requires the 64-Bit version of REAPER 5.70\
-");
-
-    const std::string information6("\
-If you want to use the Ultraschall REAPER extension, you must install the 64-Bit version of REAPER 5.70\
 ");
 
     const std::string information7("\
@@ -125,38 +108,46 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
 // TODO: checks for legacy installations of ultraschall. remove in 4.x
 #ifdef _APPLE_
-    const std::string swsPlugin2_8SystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
-    if ((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
+    const std::string swsPlugin2_8SystemPath
+        = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws_extension.dylib";
+    if((true == ok) && (FileManager::FileExists(swsPlugin2_8SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_8SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string swsPlugin2_7SystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
-    if ((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
+    const std::string swsPlugin2_7SystemPath
+        = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_sws.dylib";
+    if((true == ok) && (FileManager::FileExists(swsPlugin2_7SystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + swsPlugin2_7SystemPath + information2, true);
         ok = false;
     }
 
-    const std::string ultraschallPluginSystemPath = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
-    if ((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
+    const std::string ultraschallPluginSystemPath
+        = Platform::ProgramFilesDirectory() + "/REAPER/UserPlugins/reaper_ultraschall.dylib";
+    if((true == ok) && (FileManager::FileExists(ultraschallPluginSystemPath) == true))
     {
         NotificationWindow::Show(message, information1 + ultraschallPluginSystemPath + information2, true);
         ok = false;
     }
 #endif // #ifdef _APPLE_
 
-    if ((true == ok) && (VersionHandler::ReaperVersionCheck() == false))
+    if((true == ok) && (VersionHandler::ReaperVersionCheck() == false))
     {
-        UIMessageDialog::ShowError(message, information3 + " " + information4);
+        supervisor.RegisterError(information3);
         ok = false;
     }
 
-    if ((true == ok) && (VersionHandler::SWSVersionCheck() == false))
+    if((true == ok) && (VersionHandler::SWSVersionCheck() == false))
     {
-        UIMessageDialog::ShowError(message, information7);
+        supervisor.RegisterError(information7);
         ok = false;
+    }
+
+	if(false == ok)
+    {
+        supervisor.RegisterFatalError("Ultraschall cannot continue!");
     }
 
     return ok;

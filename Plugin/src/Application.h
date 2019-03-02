@@ -79,10 +79,10 @@ template<class T> ServiceStatus Application::RegisterCustomAction() const
     status                             = factory.CreateCustomAction(uniqueId, pCustomAction);
     if(ServiceSucceeded(status) && (pCustomAction != 0))
     {
-        custom_action_register_t action     = {0};
-        action.idStr                        = uniqueId;
-        action.name                         = custom_action_type::UniqueName();
-        const int32_t id                    = ReaperGateway::RegisterCustomAction("custom_action", (void*)&action);
+        custom_action_register_t action = {0};
+        action.idStr                    = uniqueId;
+        action.name                     = custom_action_type::UniqueName();
+        const int32_t id                = ReaperGateway::RegisterCustomAction("custom_action", (void*)&action);
         if(id != 0)
         {
             CustomActionManager& manager = CustomActionManager::Instance();

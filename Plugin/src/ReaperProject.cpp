@@ -33,7 +33,7 @@ namespace ultraschall { namespace reaper {
 
 const double ReaperProject::INVALID_POSITION = -1;
 
-ReaperProject::ReaperProject() : nativeReference_(0) {}
+ReaperProject::ReaperProject() {}
 
 ReaperProject::ReaperProject(ProjectReference nativeReference) : nativeReference_(nativeReference)
 {

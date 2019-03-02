@@ -24,42 +24,49 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_SUPERVISOR_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_MESSAGE_SUPERVISOR_H_INCL__
 
 #include "Common.h"
-#include "CustomAction.h"
+#include "UIMessageClass.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
+class UIMessageSupervisor
 {
 public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
+    UIMessageSupervisor();
+    ~UIMessageSupervisor();
 
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
-
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
-
-    virtual ServiceStatus Execute() override;
+    inline void RegisterSuccess(const UnicodeString& str);
+    inline void RegisterWarning(const UnicodeString& str);
+    inline void RegisterError(const UnicodeString& str);
+    inline void RegisterFatalError(const UnicodeString& str);
 
 private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
-
-    bool ConfigureSources();
-    bool ConfigureTargets();
+    void RegisterMessage(const UIMessageClass severity, const UnicodeString& str);
 };
+
+inline void UIMessageSupervisor::RegisterSuccess (const UnicodeString& str)
+{
+    RegisterMessage(UIMessageClass::MESSAGE_SUCCESS, str);
+}
+
+inline void UIMessageSupervisor::RegisterWarning(const UnicodeString& str)
+{
+    RegisterMessage(UIMessageClass::MESSAGE_WARNING, str);
+}
+
+inline void UIMessageSupervisor::RegisterError(const UnicodeString& str)
+{
+    RegisterMessage(UIMessageClass::MESSAGE_ERROR, str);
+}
+
+inline void UIMessageSupervisor::RegisterFatalError(const UnicodeString& str)
+{
+    RegisterMessage(UIMessageClass::MESSAGE_FATAL_ERROR, str);
+}
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_SUPERVISOR_H_INCL__

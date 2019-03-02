@@ -43,7 +43,7 @@ CustomActionManager& CustomActionManager::Instance()
 
 ServiceStatus CustomActionManager::RegisterCustomAction(const UnicodeString& name, const int32_t id, ICustomAction* pCustomAction)
 {
-    PRECONDITION_RETURN(ICustomAction::ValidateCustomActionId(id) != false, SERVICE_INVALID_ARGUMENT);
+    PRECONDITION_RETURN(CustomAction::ValidateCustomActionId(id) != false, SERVICE_INVALID_ARGUMENT);
     PRECONDITION_RETURN(customActions_.size() == customActionIds_.size(), SERVICE_FAILURE);
     PRECONDITION_RETURN(pCustomAction != 0, SERVICE_INVALID_ARGUMENT);
 
@@ -83,7 +83,7 @@ ServiceStatus CustomActionManager::RegisterCustomAction(const UnicodeString& nam
 
 void CustomActionManager::UnregisterCustomAction(const int32_t id)
 {
-    PRECONDITION(ICustomAction::ValidateCustomActionId(id) != false);
+    PRECONDITION(CustomAction::ValidateCustomActionId(id) != false);
     PRECONDITION(customActions_.empty() == false);
     PRECONDITION(customActionIds_.empty() == false);
 

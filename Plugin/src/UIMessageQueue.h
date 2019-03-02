@@ -24,42 +24,36 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_QUEUE_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_MESSAGE_QUEUE_H_INCL__
 
 #include "Common.h"
-#include "CustomAction.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
+class UIMessageQueue
 {
 public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
+    ~UIMessageQueue();
 
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
+    static UIMessageQueue& Instance();
 
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
+    void Add(const UIMessage& message);
+    void Add(const UIMessageClass severity, const UnicodeString& str);
 
-    virtual ServiceStatus Execute() override;
+    void DisplayReport(const UIMessageClass severityThreshold = UIMessageClass::MESSAGE_SUCCESS);
 
 private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
+    UIMessageQueue();
 
-    bool ConfigureSources();
-    bool ConfigureTargets();
+    UIMessageQueue(const UIMessageQueue&) = delete;
+    UIMessageQueue& operator=(const UIMessageQueue&) = delete;
+
+    std::vector<UIMessage> items_;
+    std::recursive_mutex   itemsLock_;
 };
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_QUEUE_H_INCL__

@@ -24,42 +24,46 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_MESSAGE_H_INCL__
 
 #include "Common.h"
-#include "CustomAction.h"
+#include "UIMessageClass.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
+class UIMessage
 {
 public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
+    UIMessage(const UIMessageClass severity, const UnicodeString& str);
 
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
+    inline UIMessageClass        Severity() const;
+    inline const UnicodeString& Str() const;
 
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
-
-    virtual ServiceStatus Execute() override;
+    inline bool IsValid() const;
 
 private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
-
-    bool ConfigureSources();
-    bool ConfigureTargets();
+    const UIMessageClass  severity_ = INVALID_MESSAGE_CLASS;
+    const UnicodeString& str_;
 };
+
+inline UIMessageClass UIMessage::Severity() const
+{
+    return severity_;
+}
+
+inline const UnicodeString& UIMessage::Str() const
+{
+    return str_;
+}
+
+inline bool UIMessage::IsValid() const
+{
+    return (Str().empty() == false) && (Severity() != INVALID_MESSAGE_CLASS);
+}
+
+typedef std::vector<UIMessage> UIMessageArray;
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_MESSAGE_H_INCL__

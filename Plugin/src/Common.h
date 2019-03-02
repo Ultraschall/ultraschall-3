@@ -34,6 +34,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <deque>
 
 #include <algorithm>
 #include <functional>

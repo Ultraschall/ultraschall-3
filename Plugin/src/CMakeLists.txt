@@ -40,6 +40,7 @@ set(COMMON_INCLUDES
     Application.h
     BinaryStream.h
     Common.h
+    CustomAction.h
     CustomActionFactory.h
     CustomActionManager.h
     FileManager.h
@@ -68,11 +69,15 @@ set(COMMON_INCLUDES
     StringUtilities.h
     SystemProperties.h
     taglib_include.h
-    TimeUtilities.h
+	TagWriterFactory.h
     UpdateCheck.h
     UIDialog.h
     UIFileDialog.h
+    UIMessage.h
+    UIMessageClass.h
     UIMessageDialog.h
+    UIMessageQueue.h
+    UIMessageSupervisor.h
 	UnicodeString.h
     VersionHandler.h
 )
@@ -80,6 +85,7 @@ set(COMMON_INCLUDES
 set(COMMON_SOURCES
     Application.cpp
     BinaryStream.cpp
+    CustomAction.cpp
     CustomActionFactory.cpp
     CustomActionManager.cpp
     FileManager.cpp
@@ -99,11 +105,14 @@ set(COMMON_SOURCES
     SaveChapterMarkersToProjectAction.cpp
     StringUtilities.cpp
     SystemProperties.cpp
-    TimeUtilities.cpp
+	TagWriterFactory.cpp
     UpdateCheck.cpp
     UIDialog.cpp
     UIFileDialog.cpp
+    UIMessage.cpp
     UIMessageDialog.cpp
+    UIMessageQueue.cpp
+    UIMessageSupervisor.cpp
 	UnicodeString.cpp
     VersionHandler.cpp
     reaper_ultraschall.cpp

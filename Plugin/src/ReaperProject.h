@@ -57,7 +57,8 @@ public:
     static const uint32_t SHOW_EDIT_MARKERS       = 0x00000002;
     static const uint32_t SHOW_SHOWNOTE_MARKERS   = 0x00000004;
     static const uint32_t SHOW_HISTORICAL_MARKERS = 0x00000008;
-    static const uint32_t SHOW_ALL_MARKERS        = SHOW_CHAPTER_MARKERS | SHOW_EDIT_MARKERS | SHOW_SHOWNOTE_MARKERS | SHOW_HISTORICAL_MARKERS;
+    static const uint32_t SHOW_ALL_MARKERS
+        = SHOW_CHAPTER_MARKERS | SHOW_EDIT_MARKERS | SHOW_SHOWNOTE_MARKERS | SHOW_HISTORICAL_MARKERS;
 
     static const double INVALID_POSITION;
     double              CurrentPosition() const;
@@ -76,10 +77,10 @@ public:
     inline bool InsertHistoricalMarker();
     bool        UndoMarker();
 
-    void   RefreshUI(const uint32_t mask);
+    void RefreshUI(const uint32_t mask);
 
     MarkerArray AllMarkers() const;
-    void                UpdateMarkers();
+    void        UpdateMarkers();
 
     inline uint32_t MarkerStatus() const;
 
@@ -90,14 +91,14 @@ public:
     UnicodeString Notes() const;
 
 private:
-    ProjectReference nativeReference_;
-    uint32_t      markerStatus_;
+    ProjectReference nativeReference_ = nullptr;
+    uint32_t         markerStatus_    = -1;
 
     typedef MarkerArray MarkerArray;
-    MarkerArray                 allMarkers_;
+    MarkerArray         allMarkers_;
 
-    bool                InsertMarker(const Marker& marker);
-    bool                InsertMarker(const UnicodeString& name, const int color, const double position = INVALID_POSITION);
+    bool        InsertMarker(const Marker& marker);
+    bool        InsertMarker(const UnicodeString& name, const int color, const double position = INVALID_POSITION);
     MarkerArray FilterMarkers(const int color) const;
 };
 
@@ -129,7 +130,8 @@ inline bool ReaperProject::InsertShownoteMarker(const double position)
 inline bool ReaperProject::InsertHistoricalMarker()
 {
     const double currentPosition = CurrentPosition();
-    return InsertMarker("<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
+    return InsertMarker(
+        "<Adjust chapter here>", HISTORICAL_MARKER_COLOR, (currentPosition > 120) ? currentPosition - 120 : 0);
 }
 
 inline MarkerArray ReaperProject::ChapterMarkers() const

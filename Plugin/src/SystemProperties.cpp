@@ -24,9 +24,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "StringUtilities.h"
 #include "SystemProperties.h"
-#include "UIMessageDialog.h"
+#include "StringUtilities.h"
+#include "UIMessageSupervisor.h"
 #include "VersionHandler.h"
 
 namespace ultraschall { namespace reaper {
@@ -37,7 +37,8 @@ static const char* VERSION_VALUE_NAME      = "20180114";
 
 bool QuerySetPluginVersion()
 {
-    bool result = false;
+    bool                result = false;
+    UIMessageSupervisor supervisor;
 
     if(SystemProperty<UnicodeString>::Exists(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME) == true)
     {
@@ -45,39 +46,29 @@ bool QuerySetPluginVersion()
             = SystemProperty<UnicodeString>::Get(VERSIONS_SECTION_NAME, THEME_VERSION_KEY_NAME);
         if(themeVersion == VERSION_VALUE_NAME)
         {
-            SystemProperty<UnicodeString>::Save(
-                VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME);
+            SystemProperty<UnicodeString>::Save(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME, VERSION_VALUE_NAME);
             // quick sanity check
             result = SystemProperty<UnicodeString>::Exists(VERSIONS_SECTION_NAME, PLUGIN_VERSION_KEY_NAME);
         }
         else
         {
-#ifndef ULTRASCHALL_BROADCASTER
-            std::ostringstream str;
-            str << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion
-                << ") and PLUGIN (" << VERSION_VALUE_NAME
-                << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the "
-                   "new theme or check the installation "
-                   "guide on http://ultraschall.fm/install/";
-            UIMessageDialog::ShowError(str.str());
+            UnicodeStringStream os;
+            os << "There is a configuration mismatch between the ULTRASCHALL THEME (" << themeVersion
+               << ") and ULTRASCHALL PLUGIN (" << VERSION_VALUE_NAME
+               << ").\n\nULTRASCHALL will NOT work properly until you fix this. \n\nPlease proceed by installing the "
+                  "new theme or check the installation "
+                  "guide on http://ultraschall.fm/install/";
+            supervisor.RegisterFatalError(os.str());
             result = false;
-#else  // #ifndef ULTRASCHALL_BROADCASTER
-            result = true;
-#endif // #ifndef ULTRASCHALL_BROADCASTER
         }
     }
     else
     {
-#ifndef ULTRASCHALL_BROADCASTER
-        const UnicodeString str
-            = "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease "
-              "proceed by "
-              "installing the theme or check the installation guide on http://ultraschall.fm/install/";
-        UIMessageDialog::ShowError(str);
+        UnicodeStringStream os;
+        os << "The ULTRASCHALL THEME is missing.\n\nULTRASCHALL will NOT work properly until you fix this.\n\nPlease "
+              "proceed by installing the theme or check the installation guide on http://ultraschall.fm/install/";
+        supervisor.RegisterFatalError(os.str());
         result = false;
-#else  // #ifndef ULTRASCHALL_BROADCASTER
-        result = true;
-#endif // #ifndef ULTRASCHALL_BROADCASTER
     }
 
     return result;
@@ -139,8 +130,7 @@ void UpdateBillOfMaterials()
                 if(SystemProperty<UnicodeString>::Exists(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i))
                    == true)
                 {
-                    SystemProperty<UnicodeString>::Delete(
-                        BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i));
+                    SystemProperty<UnicodeString>::Delete(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i));
                 }
             }
         }
@@ -159,8 +149,8 @@ void UpdateBillOfMaterials()
         }
     }
 
-    UnicodeStringArray   bom;
-    UnicodeString itemVersion = VersionHandler::PluginVersion();
+    UnicodeStringArray bom;
+    UnicodeString      itemVersion = VersionHandler::PluginVersion();
     if(itemVersion.empty() == false)
     {
         bom.push_back("Ultraschall REAPER Extension " + itemVersion);
@@ -208,8 +198,7 @@ void UpdateBillOfMaterials()
 
         for(size_t i = 0; i < bom.size(); i++)
         {
-            SystemProperty<UnicodeString>::Save(
-                BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i + 1), bom[i]);
+            SystemProperty<UnicodeString>::Save(BOM_SECTION_NAME, ITEM_KEY_NAME_PREFIX + std::to_string(i + 1), bom[i]);
         }
     }
 }

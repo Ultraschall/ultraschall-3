@@ -24,42 +24,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-
-#include "Common.h"
-#include "CustomAction.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
-{
-public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
-
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
-
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
-
-    virtual ServiceStatus Execute() override;
-
-private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
-
-    bool ConfigureSources();
-    bool ConfigureTargets();
-};
+UIMessage::UIMessage(const UIMessageClass severity, const UnicodeString& str) :
+    severity_(severity), str_(str)
+{}
 
 }} // namespace ultraschall::reaper
-
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__

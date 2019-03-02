@@ -28,7 +28,7 @@
 #define __ULTRASCHALL_REAPER_CUSTOM_ACTION_MANAGER_H_INCL__
 
 #include "Common.h"
-#include "ICustomAction.h"
+#include "CustomAction.h"
 #include "ServiceStatus.h"
 
 namespace ultraschall { namespace reaper {

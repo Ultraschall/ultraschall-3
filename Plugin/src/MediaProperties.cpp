@@ -25,6 +25,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "MediaProperties.h"
+#include "ReaperProjectManager.h"
 #include "StringUtilities.h"
 
 namespace ultraschall { namespace reaper {
@@ -33,16 +34,19 @@ MediaProperties::MediaProperties() {}
 
 MediaProperties::~MediaProperties()
 {
-    Reset();
+    Clear();
 }
 
-MediaProperties MediaProperties::ParseString(const UnicodeString& str)
+MediaProperties MediaProperties::ParseProjectNotes()
 {
     MediaProperties result;
 
-    if(str.empty() == false)
+    const ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject               currentProject = projectManager.CurrentProject();
+    const UnicodeString         notes          = currentProject.Notes();
+    if(notes.empty() == false)
     {
-        UnicodeStringArray tokens = UnicodeStringTokenize(str, '\n');
+        UnicodeStringArray tokens = UnicodeStringTokenize(notes, '\n');
         if(tokens.empty() == false)
         {
             result.title_ = tokens[0];
@@ -83,7 +87,7 @@ bool MediaProperties::Validate() const
            || (date_.empty() == false) || (content_.empty() == false);
 }
 
-void MediaProperties::Reset()
+void MediaProperties::Clear()
 {
     title_.clear();
     author_.clear();

@@ -37,10 +37,10 @@ public:
     MediaProperties();
     ~MediaProperties();
 
-    static MediaProperties ParseString(const UnicodeString& str);
+    static MediaProperties ParseProjectNotes();
 
     bool Validate() const;
-    void Reset();
+    void Clear();
 
     inline const UnicodeString& Title() const
     {

@@ -48,6 +48,11 @@ UnicodeString UnicodeStringFromInt(const int value);
 UnicodeString StringLowercase(const UnicodeString& str);
 UnicodeString StringUppercase(const UnicodeString& str);
 
+UnicodeString MillisecondsToString(const uint32_t milliseconds, const bool roundSeconds = false);
+uint32_t StringToMilliseconds(const UnicodeString& str);
+UnicodeString SecondsToString(const double seconds, const bool roundSeconds = false);
+double StringToSeconds(const UnicodeString& str);
+
 }} // namespace ultraschall::reaper
 
 #endif // #ifndef __ULTRASCHALL_REAPER_STRING_UTILITIES_H_INCL__

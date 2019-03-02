@@ -28,20 +28,22 @@
 #define __ULTRASCHALL_REAPER_UI_MESSAGE_DIALOG_H_INCL__
 
 #include "Common.h"
+#include "UIMessage.h"
 
 namespace ultraschall { namespace reaper {
 
 class UIMessageDialog
 {
 public:
-    static void Show(const UnicodeString& message, const UnicodeString& description = "");
-    static void ShowWarning(const UnicodeString& message, const UnicodeString& description = "");
-    static void ShowError(const UnicodeString& message, const UnicodeString& description = "");
+    UIMessageDialog();
+
+    int Display(const UIMessageArray& items, const UIMessageClass& severityThreshold);
+    int ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold);
 
 private:
     static const UnicodeString UI_MESSAGE_DIALOG_CAPTION;
 
-    void Show(int32_t style, const UnicodeString& message, const UnicodeString& details);
+	static UIMessageClass MaxSeverity(const UIMessageArray& items);
 };
 
 }} // namespace ultraschall::reaper

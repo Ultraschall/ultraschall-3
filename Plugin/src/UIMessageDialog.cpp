@@ -25,41 +25,53 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UIMessageDialog.h"
+#include "Common.h"
 
 #include "wx/wx.h"
 
 namespace ultraschall { namespace reaper {
 
+#ifdef ULTRASCHALL_BROADCASTER
+static const bool forceDisplay = false;
+#else  // #ifndef ULTRASCHALL_BROADCASTER
+static const bool forceDisplay = true;
+#endif // #ifndef ULTRASCHALL_BROADCASTER
+
 const UnicodeString UIMessageDialog::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
 
-void UIMessageDialog::Show(int32_t style, const UnicodeString& message, const UnicodeString& details)
+UIMessageDialog::UIMessageDialog() {}
+
+int UIMessageDialog::Display(const UIMessageArray& items, const UIMessageClass& severityThreshold)
 {
-    PRECONDITION(message.empty() == false);
-    wxMessageBox(U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION), style);
+    if(true == forceDisplay)
+    {
+        return ForceDisplay(items, severityThreshold);
+    }
+
+    return 0;
 }
 
-void UIMessageDialog::Show(const UnicodeString& message, const UnicodeString& description)
+int UIMessageDialog::ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold)
 {
-    PRECONDITION(message.empty() == false);
+    PRECONDITION_RETURN(items.empty() == false, 0);
 
-    UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_INFORMATION, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
+    return 0;
 }
 
-void UIMessageDialog::ShowWarning(const UnicodeString& message, const UnicodeString& description)
+UIMessageClass UIMessageDialog::MaxSeverity(const UIMessageArray& items)
 {
-    PRECONDITION(message.empty() == false);
+    PRECONDITION_RETURN(items.empty() == false, UIMessageClass::INVALID_MESSAGE_CLASS);
 
-    UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_WARNING, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
-}
+    UIMessageClass maxSeverity = UIMessageClass::MESSAGE_SUCCESS;
+    for(size_t i = 0; i < items.size(); i++)
+    {
+        if(items[i].Severity() > maxSeverity)
+        {
+            maxSeverity = items[i].Severity();
+        }
+    }
 
-void UIMessageDialog::ShowError(const UnicodeString& message, const UnicodeString& description)
-{
-    PRECONDITION(message.empty() == false);
-
-    UIMessageDialog messageDialog;
-    messageDialog.Show(wxICON_ERROR, U2H(message), U2H(UI_MESSAGE_DIALOG_CAPTION));
+    return maxSeverity;
 }
 
 }} // namespace ultraschall::reaper

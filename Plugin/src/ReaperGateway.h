@@ -45,7 +45,7 @@ public:
 
     static UnicodeString ApplicationVersion();
     static int32_t       RegisterCustomAction(const UnicodeString& name, void* infoStruct);
-	static void    LockUIRefresh(const bool lock);
+    static void          LockUIRefresh(const bool lock);
 
     static UnicodeString ExportPathName();
     static UnicodeString ProjectPathName();

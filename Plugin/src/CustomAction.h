@@ -24,42 +24,35 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__
+#define __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__
 
 #include "Common.h"
-#include "CustomAction.h"
+#include "ICustomAction.h"
+#include "Marker.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
+class CustomAction : public ICustomAction
 {
 public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
+    static bool ValidateCustomActionId(const int32_t id);
+	static bool ValidateProject();
+	static bool ValidateChapterMarkers(const MarkerArray& markers);
 
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
+    static bool RegisterProject();
 
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
+	static MarkerArray GetChapterMarkers();
 
-    virtual ServiceStatus Execute() override;
+protected:
+    static UnicodeString GetProjectDirectory(); 
+    static UnicodeString GetProjectName();
+    static UnicodeString CreateProjectPath(const UnicodeString& extension = "");
 
 private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
-
-    bool ConfigureSources();
-    bool ConfigureTargets();
+    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_CUSTOM_ACTION_H_INCL__

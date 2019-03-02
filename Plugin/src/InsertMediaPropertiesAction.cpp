@@ -33,415 +33,178 @@
 #include "InsertMediaPropertiesAction.h"
 #include "StringUtilities.h"
 #include "SystemProperties.h"
+#include "TagWriterFactory.h"
 #include "TimeUtilities.h"
 #include "UIFileDialog.h"
-#include "UIMessageDialog.h"
+#include "UIMessageSupervisor.h"
 
 namespace ultraschall { namespace reaper {
-
-class ErrorRecord
-{
-public:
-    ErrorRecord(const UnicodeString& target, const UnicodeString& message) : target_(target), message_(message) {}
-
-    inline const UnicodeString& Target() const
-    {
-        return target_;
-    }
-
-    inline const UnicodeString& Message() const
-    {
-        return message_;
-    }
-
-private:
-    UnicodeString target_;
-    UnicodeString message_;
-};
 
 static DeclareCustomAction<InsertMediaPropertiesAction> action;
 
 ServiceStatus InsertMediaPropertiesAction::Execute()
 {
-    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
-    ReaperProject         currentProject = projectManager.CurrentProject();
-    if(ReaperProject::Validate(currentProject) == true)
+    PRECONDITION_RETURN(ValidateProject() == true, SERVICE_FAILURE);
+
+    PRECONDITION_RETURN(ConfigureTargets() == true, SERVICE_FAILURE);
+    PRECONDITION_RETURN(ConfigureSources() == true, SERVICE_FAILURE);
+
+	// caution! requires ConfigureSources() to be called beforehand
+    PRECONDITION_RETURN(ValidateChapterMarkers(chapterMarkers_) == true, SERVICE_FAILURE);
+
+    ServiceStatus       status = SERVICE_FAILURE;
+    UIMessageSupervisor supervisor;
+    size_t              errorCount = 0;
+
+    for(size_t i = 0; i < targets_.size(); i++)
     {
-        ResetAssets();
-
-        targetNames_ = FindTargetFiles(currentProject);
-#ifndef ULTRASCHALL_BROADCASTER
-        if(targetNames_.empty() == true)
+        ITagWriter* pTagWriter = TagWriterFactory::Create(targets_[i]);
+        if(pTagWriter != 0)
         {
-            std::stringstream os;
-            os << "Ultraschall can't find a suitable media file.";
-            os << "\r\n\r\n";
-            os << "Please select an alternative media file from the file selection dialog after closing this message.";
-            os << "\r\n\r\n";
-
-            UIMessageDialog::Show(os.str());
-
-            UIFileDialog        fileDialog("Select audio file");
-            const UnicodeString targetName = fileDialog.BrowseForAudio();
-            if(targetName.empty() == false)
+            if(pTagWriter->InsertProperties(targets_[i], mediaProperties_) == false)
             {
-                targetNames_.push_back(targetName);
+                UnicodeStringStream os;
+                os << "Failed to insert tags into " << targets_[i] << ".";
+                supervisor.RegisterError(os.str());
+                errorCount++;
             }
-        }
-#endif // #ifndef ULTRASCHALL_BROADCASTER
 
-        if((targetNames_.empty() == false) && (ConfigureAssets() == true))
+            if(pTagWriter->InsertCoverImage(targets_[i], coverImage_) == false)
+            {
+                UnicodeStringStream os;
+                os << "Failed to insert cover image into " << targets_[i] << ".";
+                supervisor.RegisterError(os.str());
+                errorCount++;
+            }
+
+            if(pTagWriter->ReplaceChapterMarkers(targets_[i], chapterMarkers_) == false)
+            {
+                UnicodeStringStream os;
+                os << "Failed to insert chapter markers into " << targets_[i] << ".";
+                supervisor.RegisterError(os.str());
+                errorCount++;
+            }
+
+            SafeRelease(pTagWriter);
+        }
+    }
+
+    if(0 == errorCount)
+    {
+        for(size_t i = 0; i < targets_.size(); i++)
         {
-            UnicodeStringArray errorMessages;
-            if(ValidateChapterMarkers(errorMessages) == true)
-            {
-                std::vector<ErrorRecord> errorRecords;
-
-                for(size_t i = 0; i < targetNames_.size(); i++)
-                {
-                    const UnicodeString& targetName = targetNames_[i];
-
-                    ITagWriter* pTagWriter = CreateTagWriter(targetNames_[i]);
-                    if(pTagWriter != 0)
-                    {
-                        MediaProperties properties = MediaProperties::ParseString(currentProject.Notes());
-                        if(pTagWriter->InsertProperties(targetName, properties) == false)
-                        {
-                            errorRecords.push_back(ErrorRecord(targetName, "Failed to insert tags."));
-                        }
-
-                        if(cover_.empty() == false)
-                        {
-                            if(pTagWriter->InsertCoverImage(targetName, cover_) == false)
-                            {
-                                errorRecords.push_back(ErrorRecord(targetName, "Failed to insert cover image."));
-                            }
-                        }
-
-                        if(chapters_.empty() == false)
-                        {
-                            if(pTagWriter->ReplaceChapterMarkers(targetName, chapters_) == false)
-                            {
-                                errorRecords.push_back(ErrorRecord(targetName, "Failed to insert chapter markers."));
-                            }
-                        }
-
-                        SafeRelease(pTagWriter);
-                    }
-                }
-
-                if(errorRecords.size() > 0)
-                {
-#ifndef ULTRASCHALL_BROADCASTER
-                    for(size_t j = 0; j < errorRecords.size(); j++)
-                    {
-                        std::stringstream os;
-                        os << "Ultraschall found the following errors while processing media files:";
-                        os << "\r\n\r\n";
-                        os << FileManager::StripPath(errorRecords[j].Target()) << ": " << errorRecords[j].Message()
-                           << "\r\n";
-                        os << "\r\n\r\n";
-
-                        UIMessageDialog::ShowError(os.str());
-                    }
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-                }
-                else
-                {
-#ifndef ULTRASCHALL_BROADCASTER
-
-                    std::stringstream os;
-                    os << "The following media files have been updated successfully:\r\n\r\n";
-                    for(size_t k = 0; k < targetNames_.size(); k++)
-                    {
-                        os << FileManager::StripPath(targetNames_[k]);
-                        if(k < (targetNames_.size() - 1))
-                        {
-                            os << "\r\n";
-                        }
-                    }
-                    os << "\r\n\r\n";
-
-                    UIMessageDialog::Show(os.str());
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-                }
-            }
-            else
-            {
-                if(errorMessages.empty() == false)
-                {
-#ifndef ULTRASCHALL_BROADCASTER
-                    std::ostringstream os;
-                    os << "Ultraschall failed to validate chapter markers.";
-                    os << "\r\n\r\n";
-                    for(size_t l = 0; l < errorMessages.size(); l++)
-                    {
-                        os << errorMessages[l];
-                    }
-                    os << "\r\n\r\n";
-
-                    UIMessageDialog::ShowError(os.str());
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-                }
-            }
+            UnicodeStringStream os;
+            os << targets_[i] << " has been updated successfully.";
+            supervisor.RegisterSuccess(os.str());
         }
+
+        status = SERVICE_SUCCESS;
+    }
+
+    return status;
+}
+
+bool InsertMediaPropertiesAction::ConfigureSources()
+{
+    bool                result = false;
+    UIMessageSupervisor supervisor;
+    size_t              invalidAssetCount = 0;
+
+    mediaProperties_.Clear();
+    coverImage_.clear();
+    chapterMarkers_.clear();
+
+    mediaProperties_ = MediaProperties::ParseProjectNotes();
+    if(mediaProperties_.Validate() == false)
+    {
+        supervisor.RegisterWarning("ID3v2 tags have not been defined yet.");
+        invalidAssetCount++;
+    }
+
+    coverImage_ = FindCoverImage();
+    if(coverImage_.empty() == true)
+    {
+        supervisor.RegisterWarning("Cover image is missing.");
+        invalidAssetCount++;
+    }
+
+    chapterMarkers_ = GetChapterMarkers();
+    if(chapterMarkers_.empty() == true)
+    {
+        supervisor.RegisterWarning("No chapters have been set.");
+        invalidAssetCount++;
+    }
+
+    if(invalidAssetCount >= 3)
+    {
+        supervisor.RegisterError("Specify at least one ID3v2 tag, a cover image or a chapter marker.");
+        result = false;
     }
     else
     {
-        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
+        result = true;
     }
 
-    return SERVICE_SUCCESS;
-}
+    return result;
+} // namespace reaper
 
-UnicodeStringArray InsertMediaPropertiesAction::FindTargetFiles(const ReaperProject& project)
+bool InsertMediaPropertiesAction::ConfigureTargets()
 {
-    UnicodeStringArray targetNames;
+    UIMessageSupervisor supervisor;
 
-    const UnicodeString projectFolder = project.FolderName();
-    const UnicodeString projectName   = project.Name();
-
-    PRECONDITION_RETURN(projectFolder.empty() == false, targetNames);
-    PRECONDITION_RETURN(projectName.empty() == false, targetNames);
+    targets_.clear();
 
 #ifdef ULTRASCHALL_ENABLE_MP4
     static const size_t MAX_FILE_EXTENSIONS                 = 3;
-    static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {"mp3", "mp4", "m4a"};
+    static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {".mp3", ".mp4", ".m4a"};
 #else  // #ifdef ULTRASCHALL_ENABLE_MP4
     static const size_t MAX_FILE_EXTENSIONS                 = 1;
-    static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {"mp3"};
+    static const char*  fileExtensions[MAX_FILE_EXTENSIONS] = {".mp3"};
 #endif // #ifdef ULTRASCHALL_ENABLE_MP4
 
     for(size_t i = 0; i < MAX_FILE_EXTENSIONS; i++)
     {
-        UnicodeString targetName = FileManager::AppendPath(projectFolder, projectName) + "." + fileExtensions[i];
+        UnicodeString targetName = CreateProjectPath(fileExtensions[i]);
         if(FileManager::FileExists(targetName) != false)
         {
-            targetNames.push_back(targetName);
+            targets_.push_back(targetName);
         }
     }
 
-    return targetNames;
+    if(targets_.empty() == true)
+    {
+        supervisor.RegisterWarning("Ultraschall can't find a suitable media file. Please select an alternative media "
+                                   "file from the file selection dialog after closing this message.");
+        UIFileDialog        fileDialog("Select audio file");
+        const UnicodeString target = fileDialog.BrowseForAudio();
+        if(target.empty() == false)
+        {
+            targets_.push_back(target);
+        }
+    }
+
+    return targets_.empty() == false;
 }
 
-UnicodeString InsertMediaPropertiesAction::FindCoverImage(const ReaperProject& project)
+UnicodeString InsertMediaPropertiesAction::FindCoverImage()
 {
-    const UnicodeString projectFolder = project.FolderName();
-    const UnicodeString projectName   = project.Name();
-
-    PRECONDITION_RETURN(projectFolder.empty() == false, UnicodeString());
-    PRECONDITION_RETURN(projectName.empty() == false, UnicodeString());
-
     UnicodeString coverImage;
 
-    UnicodeStringArray imageNames;
-    imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpg");
-    imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".jpeg");
-    imageNames.push_back(FileManager::AppendPath(projectFolder, "cover") + ".png");
-    imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpg");
-    imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".jpeg");
-    imageNames.push_back(FileManager::AppendPath(projectFolder, projectName) + ".png");
-    const size_t imageIndex = FileManager::FileExists(imageNames);
+    UnicodeStringArray       files;
+    const UnicodeStringArray extensions{".jpg", ".jpeg", ".png"};
+    for(size_t i = 0; i < extensions.size(); i++)
+    {
+        files.push_back(FileManager::AppendPath(GetProjectDirectory(), "cover") + extensions[i]);
+        files.push_back(FileManager::AppendPath(GetProjectDirectory(), GetProjectName()) + extensions[i]);
+    }
+
+    const size_t imageIndex = FileManager::FileExists(files);
     if(imageIndex != -1)
     {
-        coverImage = imageNames[imageIndex];
+        coverImage = files[imageIndex];
     }
 
     return coverImage;
 }
 
-ITagWriter* InsertMediaPropertiesAction::CreateTagWriter(const UnicodeString& targetName)
-{
-    PRECONDITION_RETURN(targetName.empty() == false, 0);
-    PRECONDITION_RETURN(targetName.length() > 4, 0);
-
-    ITagWriter*       tagWriter  = nullptr;
-    const TARGET_TYPE targetType = EvaluateFileType(targetName);
-    if(targetType == MP3_TARGET)
-    {
-        tagWriter = new MP3TagWriter();
-    }
-#ifdef ULTRASCHALL_ENABLE_MP4
-    else if(targetType == MP4_TARGET)
-    {
-        tagWriter = new MP4TagWriter();
-    }
-#endif // #ifdef ULTRASCHALL_ENABLE_MP4
-    else
-    {
-        tagWriter = nullptr;
-    }
-
-    return tagWriter;
-}
-
-UnicodeString InsertMediaPropertiesAction::NormalizeTargetName(const UnicodeString& targetName)
-{
-    UnicodeString firstStage  = targetName;
-    UnicodeString secondStage = UnicodeStringTrimRight(firstStage);
-    return StringLowercase(secondStage);
-}
-
-InsertMediaPropertiesAction::TARGET_TYPE InsertMediaPropertiesAction::EvaluateFileType(const UnicodeString& targetName)
-{
-    PRECONDITION_RETURN(targetName.empty() == false, INVALID_TARGET_TYPE);
-
-    TARGET_TYPE         type             = INVALID_TARGET_TYPE;
-    const UnicodeString cookedTargetName = NormalizeTargetName(targetName);
-    const size_t        extensionOffset  = targetName.rfind(".");
-    if(extensionOffset != UnicodeString::npos)
-    {
-        const UnicodeString fileExtension
-            = targetName.substr(extensionOffset + 1, targetName.length() - extensionOffset);
-        if(fileExtension.empty() == false)
-        {
-            if(fileExtension == "mp3")
-            {
-                type = MP3_TARGET;
-            }
-#ifdef ULTRASCHALL_ENABLE_MP4
-            else if(fileExtension == "mp4")
-            {
-                type = MP4_TARGET;
-            }
-            else if(fileExtension == "m4a")
-            {
-                type = MP4_TARGET;
-            }
-#endif // #ifdef ULTRASCHALL_ENABLE_MP4
-            else
-            {
-                type = INVALID_TARGET_TYPE;
-            }
-        }
-    }
-    return type;
-}
-
-bool InsertMediaPropertiesAction::ConfigureAssets()
-{
-    bool               result = false;
-    UnicodeStringArray messages;
-    size_t             invalidAssetCount = 0;
-
-    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
-    ReaperProject         currentProject = projectManager.CurrentProject();
-    if(ReaperProject::Validate(currentProject) == true)
-    {
-        id3v2_ = MediaProperties::ParseString(currentProject.Notes());
-        if(id3v2_.Validate() == false)
-        {
-            const UnicodeString message = "ID3v2 tags have not been defined yet.";
-            messages.push_back(message);
-            invalidAssetCount++;
-        }
-
-        cover_ = FindCoverImage(currentProject);
-        if(cover_.empty() == true)
-        {
-            const UnicodeString message = "Cover image is missing.";
-            messages.push_back(message);
-            invalidAssetCount++;
-        }
-
-        chapters_ = currentProject.AllMarkers();
-        if(chapters_.empty() == true)
-        {
-            const UnicodeString message = "No chapters have been set.";
-            messages.push_back(message);
-            invalidAssetCount++;
-        }
-
-        if(invalidAssetCount >= 3)
-        {
-#ifndef ULTRASCHALL_BROADCASTER
-            std::stringstream os;
-            os << "Your project does not meet the minimum requirements for the export to continue.";
-            os << "\r\n\r\n";
-            os << "Specify at least one ID3v2 tag, a cover image or a chapter marker.";
-            os << "\r\n\r\n";
-
-            UIMessageDialog::ShowError(os.str());
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-            result = false;
-        }
-        else if(messages.size() > 0)
-        {
-#ifndef ULTRASCHALL_BROADCASTER
-            std::stringstream os;
-
-            os << "Ultraschall has found the following non-critical issues and will continue after you close "
-                  "this message:\r\n\r\n";
-            for(size_t i = 0; i < messages.size(); i++)
-            {
-                os << (i + 1) << ") " << messages[i] << "\r\n";
-            }
-
-            os << "\r\n\r\n";
-
-            UIMessageDialog::Show(os.str());
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-            result = true;
-        }
-        else
-        {
-            result = true;
-        }
-    }
-    else
-    {
-#ifndef ULTRASCHALL_BROADCASTER
-        UIMessageDialog::ShowError("The REAPER project must be saved before the export can continue");
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-        result = false;
-    }
-
-    return result;
-}
-
-void InsertMediaPropertiesAction::ResetAssets()
-{
-    targetNames_.clear();
-    id3v2_.Reset();
-    cover_.clear();
-    chapters_.clear();
-}
-
-bool InsertMediaPropertiesAction::ValidateChapterMarkers(UnicodeStringArray& errorMessages)
-{
-    bool valid = true;
-    errorMessages.clear();
-
-    for(size_t i = 0; i < chapters_.size(); i++)
-    {
-        const Marker&       current      = chapters_[i];
-        const UnicodeString safeName     = current.Name();
-        const double        safePosition = current.Position();
-
-        ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
-        ReaperProject         currentProject = projectManager.CurrentProject();
-        if(currentProject.IsValidPosition(current.Position()) == false)
-        {
-            std::stringstream os;
-            os << "Chapter marker '" << ((safeName.empty() == false) ? safeName : UnicodeString("Unknown"))
-               << "' is out of track range.";
-            os << "\r\n";
-            errorMessages.push_back(os.str());
-
-            valid = false;
-        }
-
-        if(current.Name().empty() == true)
-        {
-            std::stringstream os;
-            os << "Chapter marker at '" << SecondsToString(safePosition) << "' has no name.";
-            os << "\r\n";
-            errorMessages.push_back(os.str());
-
-            valid = false;
-        }
-    }
-
-    return valid;
-}
 }} // namespace ultraschall::reaper

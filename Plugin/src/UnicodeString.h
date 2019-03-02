@@ -29,7 +29,9 @@
 
 #include <map>
 #include <string>
+#include <sstream>
 #include <vector>
+
 namespace ultraschall { namespace reaper {
 
 typedef char     UnicodeChar;
@@ -37,6 +39,9 @@ typedef char16_t WideUnicodeChar;
 
 typedef std::string    UnicodeString;
 typedef std::u16string WideUnicodeString;
+
+typedef std::stringstream UnicodeStringStream;
+typedef std::basic_stringstream<char16_t, std::char_traits<char16_t>, std::allocator<char16_t>> WideUnicodeStringStream;
 
 typedef std::vector<UnicodeString>             UnicodeStringArray;
 typedef std::map<UnicodeString, UnicodeString> UnicodeStringDictionary;

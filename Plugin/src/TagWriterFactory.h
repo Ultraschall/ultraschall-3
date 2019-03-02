@@ -24,42 +24,31 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
-#define __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_TAG_WRITER_FACTORY_H_INCL__
+#define __ULTRASCHALL_REAPER_TAG_WRITER_FACTORY_H_INCL__
 
 #include "Common.h"
-#include "CustomAction.h"
+#include "ITagWriter.h"
 
 namespace ultraschall { namespace reaper {
 
-class SaveChapterMarkersToProjectAction : public CustomAction
+class TagWriterFactory 
 {
 public:
-    static const UnicodeChar* UniqueId()
-    {
-        return "ULTRASCHALL_SAVE_CHAPTERS_TO_PROJECT";
-    }
-
-    static const UnicodeChar* UniqueName()
-    {
-        return "ULTRASCHALL: Save chapter markers to project folder";
-    }
-
-    static ICustomAction* CreateCustomAction()
-    {
-        return new SaveChapterMarkersToProjectAction();
-    }
-
-    virtual ServiceStatus Execute() override;
+    static ITagWriter* Create(const UnicodeString& targetName);
 
 private:
-    UnicodeString target_;
-    MarkerArray   chapterMarkers_;
+    static UnicodeString NormalizeTargetName(const UnicodeString& targetName);
 
-    bool ConfigureSources();
-    bool ConfigureTargets();
+#ifdef ULTRASCHALL_ENABLE_MP4
+    typedef enum { MP3_TARGET, MP4_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
+#else  // #ifdef ULTRASCHALL_ENABLE_MP4
+    typedef enum { MP3_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
+#endif // #ifdef ULTRASCHALL_ENABLE_MP4
+
+	static TARGET_TYPE FindFileType(const UnicodeString& targetName);
 };
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_SAVE_CHAPTER_MARKERS_TO_PROJECT_ACTION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_TAG_WRITER_FACTORY_H_INCL__

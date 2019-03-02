@@ -24,20 +24,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <fstream>
-#include <string>
-#include <vector>
-
+#include "InsertChapterMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "FileManager.h"
-#include "InsertChapterMarkersAction.h"
-#include "Marker.h"
 #include "ReaperProjectManager.h"
 #include "StringUtilities.h"
-#include "SystemProperties.h"
-#include "TimeUtilities.h"
 #include "UIFileDialog.h"
-#include "UIMessageDialog.h"
+#include "UIMessageSupervisor.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -45,27 +38,60 @@ static DeclareCustomAction<InsertChapterMarkersAction> action;
 
 ServiceStatus InsertChapterMarkersAction::Execute()
 {
-    ServiceStatus status = SERVICE_FAILURE;
+    PRECONDITION_RETURN(ValidateProject() == true, SERVICE_FAILURE);
 
-    UIFileDialog        fileDialog("Import chapter markers");
-    const UnicodeString path = fileDialog.BrowseForChapters();
-    PRECONDITION_RETURN(path.empty() == false, SERVICE_FAILURE);
+    PRECONDITION_RETURN(ConfigureSources() == true, SERVICE_FAILURE);
+    PRECONDITION_RETURN(ConfigureTargets() == true, SERVICE_FAILURE);
 
-    const ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
-    ReaperProject               currentProject = projectManager.CurrentProject();
+    PRECONDITION_RETURN(ValidateChapterMarkers(chapterMarkers_) == true, SERVICE_FAILURE);
 
-    MarkerArray        tags;
-    UnicodeStringArray errorMessages;
+    ServiceStatus       status = SERVICE_FAILURE;
+    UIMessageSupervisor supervisor;
 
-    const UnicodeStringArray lines = FileManager::ReadTextFile(path);
+    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
+    ReaperProject         currentProject = projectManager.CurrentProject();
+
+    size_t addedTags = 0;
+    for(size_t i = 0; i < chapterMarkers_.size(); i++)
+    {
+        if(currentProject.InsertChapterMarker(chapterMarkers_[i].Name(), chapterMarkers_[i].Position()) == true)
+        {
+            addedTags++;
+        }
+        else
+        {
+            UnicodeStringStream os;
+            os << "Chapter marker '" << chapterMarkers_[i].Name() << "' at position '"
+               << SecondsToString(chapterMarkers_[i].Position()) << "' could not be added.";
+            supervisor.RegisterError(os.str());
+        }
+    }
+
+    if(chapterMarkers_.size() != addedTags)
+    {
+        UnicodeStringStream os;
+        os << "Not all chapter markers were added.";
+        supervisor.RegisterError(os.str());
+    }
+
+    return status;
+}
+
+bool InsertChapterMarkersAction::ConfigureTargets()
+{
+    bool                result = false;
+    UIMessageSupervisor supervisor;
+    size_t              issueCount = 0;
+
+    chapterMarkers_.clear();
+
+    const UnicodeStringArray lines = FileManager::ReadTextFile(source_);
     if(lines.empty() == false)
     {
         for(size_t i = 0; i < lines.size(); i++)
         {
-            const UnicodeString& line = lines[i];
-
-            const UnicodeStringArray items = UnicodeStringTokenize(line, ' ');
-            if(items.size() > 0)
+            const UnicodeStringArray items = UnicodeStringTokenize(lines[i], ' ');
+            if(items.empty() == false)
             {
                 const double position = StringToSeconds(items[0]);
                 if(position >= 0)
@@ -81,64 +107,43 @@ ServiceStatus InsertChapterMarkersAction::Execute()
                         name += " " + items[j];
                     }
 
-                    tags.push_back(Marker(position, name, 0));
+                    chapterMarkers_.push_back(Marker(position, name, 0));
                 }
                 else
                 {
-                    std::stringstream os;
-                    os << "Line " << (i + 1) << " does not start with a valid timestamp.";
-                    errorMessages.push_back(os.str());
+                    UnicodeStringStream os;
+                    os << "Line " << (i + 1) << ": Invalid timestamp in '" << lines[i] << "'.";
+                    supervisor.RegisterWarning(os.str());
                 }
+            }
+            else
+            {
+                UnicodeStringStream os;
+                os << "Line " << (i + 1) << ": Invalid format in '" << lines[i] << "'.";
+                supervisor.RegisterError(os.str());
             }
         }
     }
     else
     {
-        std::stringstream os;
-        os << "The file '" << path << "' does not contain any chapter markers";
-        errorMessages.push_back(os.str());
+        UnicodeStringStream os;
+        os << "The file '" << source_ << "' does not contain chapter markers";
+        supervisor.RegisterWarning(os.str());
     }
 
-    size_t addedTags = 0;
-    for(size_t i = 0; i < tags.size(); i++)
-    {
-        if(currentProject.InsertChapterMarker(tags[i].Name(), tags[i].Position()) == true)
-        {
-            addedTags++;
-        }
-        else
-        {
-            std::stringstream os;
-            os << "Chapter marker '" << tags[i].Name() << "' at position '" << SecondsToString(tags[i].Position())
-               << "' could not be added.";
-            errorMessages.push_back(os.str());
-        }
-    }
+    return chapterMarkers_.empty() == false;
+}
 
-    if((tags.size() != addedTags) || (errorMessages.empty() == false))
-    {
-        std::stringstream os;
-        os << "The chapter marker import failed:";
-        os << "\r\n\r\n";
+bool InsertChapterMarkersAction::ConfigureSources()
+{
+    bool   result            = false;
+    size_t invalidAssetCount = 0;
 
-        for(size_t i = 0; i < errorMessages.size(); i++)
-        {
-            os << errorMessages[i] << "\r\n";
-        }
+    source_.clear();
 
-        os << "\r\n\r\n";
-
-        UIMessageDialog::ShowError(os.str());
-    }
-    else
-    {
-#ifndef ULTRASCHALL_BROADCASTER
-        UIMessageDialog::Show("The chapter markers have been added successfully.");
-#endif // #ifndef ULTRASCHALL_BROADCASTER
-        status = SERVICE_SUCCESS;
-    }
-
-    return status;
+    UIFileDialog fileDialog("Import chapter markers");
+    source_ = fileDialog.BrowseForChapters();
+    return source_.empty() == false;
 }
 
 }} // namespace ultraschall::reaper

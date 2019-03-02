@@ -31,13 +31,6 @@
 
 namespace ultraschall { namespace reaper {
 
-UnicodeString MillisecondsToString(const uint32_t milliseconds, const bool roundSeconds = false);
-
-uint32_t StringToMilliseconds(const UnicodeString& str);
-
-UnicodeString SecondsToString(const double seconds, const bool roundSeconds = false);
-
-double StringToSeconds(const UnicodeString& str);
 
 }} // namespace ultraschall::reaper
 

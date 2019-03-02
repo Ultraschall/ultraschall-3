@@ -27,15 +27,15 @@
 #ifndef __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_INSERT_MEDIA_PROPERTIES_ACTION_H_INCL__
 
-#include "ICustomAction.h"
-#include "ID3V2Writer.h"
-#include "ISOBMFFWriter.h"
+#include "Common.h"
+#include "CustomAction.h"
+#include "MediaProperties.h"
 
 namespace ultraschall { namespace reaper {
 
 class ITagWriter;
 
-class InsertMediaPropertiesAction : public ICustomAction
+class InsertMediaPropertiesAction : public CustomAction
 {
 public:
     static const UnicodeChar* UniqueId()
@@ -56,33 +56,15 @@ public:
     virtual ServiceStatus Execute() override;
 
 private:
-    InsertMediaPropertiesAction() {}
+    bool ConfigureTargets();
+    bool ConfigureSources();
 
-    bool ConfigureAssets();
-    void ResetAssets();
+    static UnicodeString FindCoverImage();
 
-    UnicodeStringArray    targetNames_;
-    UnicodeString         cover_;
-    MarkerArray           chapters_;
-    MediaProperties id3v2_;
-
-    static UnicodeStringArray FindTargetFiles(const ReaperProject& project);
-
-    static UnicodeString FindCoverImage(const ReaperProject& project);
-
-    static ITagWriter* CreateTagWriter(const UnicodeString& targetName);
-
-    static UnicodeString NormalizeTargetName(const UnicodeString& targetName);
-
-#ifdef ULTRASCHALL_ENABLE_MP4
-    typedef enum {MP3_TARGET, MP4_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE} TARGET_TYPE;
-#else  // #ifdef ULTRASCHALL_ENABLE_MP4
-    typedef enum { MP3_TARGET, INVALID_TARGET_TYPE, MAX_TARGET_TYPE = INVALID_TARGET_TYPE } TARGET_TYPE;
-#endif // #ifdef ULTRASCHALL_ENABLE_MP4
-
-    static TARGET_TYPE EvaluateFileType(const UnicodeString& targetName);
-
-    bool ValidateChapterMarkers(UnicodeStringArray& errorRecords);
+    UnicodeStringArray targets_;
+    UnicodeString      coverImage_;
+    MarkerArray        chapterMarkers_;
+    MediaProperties    mediaProperties_;
 };
 
 }} // namespace ultraschall::reaper

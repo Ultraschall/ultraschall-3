@@ -27,11 +27,12 @@
 #ifndef __ULTRASCHALL_REAPER_INSERT_CHAPTER_MARKERS_ACTION_H_INCL__
 #define __ULTRASCHALL_REAPER_INSERT_CHAPTER_MARKERS_ACTION_H_INCL__
 
-#include "ICustomAction.h"
+#include "Common.h"
+#include "CustomAction.h"
 
 namespace ultraschall { namespace reaper {
 
-class InsertChapterMarkersAction : public ICustomAction
+class InsertChapterMarkersAction : public CustomAction
 {
 public:
     static const UnicodeChar* UniqueId()
@@ -52,7 +53,11 @@ public:
     virtual ServiceStatus Execute() override;
 
 private:
-    InsertChapterMarkersAction() {}
+    UnicodeString source_;
+    MarkerArray   chapterMarkers_;
+
+    bool ConfigureTargets();
+    bool ConfigureSources();
 };
 
 }} // namespace ultraschall::reaper
