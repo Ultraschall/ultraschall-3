@@ -54,6 +54,7 @@ set(COMMON_INCLUDES
     ISOBMFFWriter.h
     ITagWriter.h
     SharedObject.h
+	Malloc.h
     Marker.h
     MediaProperties.h
     PictureUtilities.h

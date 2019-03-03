@@ -24,54 +24,38 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_COMMON_H_INCL__
-#define __ULTRASCHALL_REAPER_COMMON_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_MALLOC_H_INCL__
+#define __ULTRASCHALL_REAPER_MALLOC_H_INCL__
 
-#include <cctype>
-#include <cstdint>
 #include <cstdlib>
-
-#include <map>
-#include <string>
-#include <vector>
-#include <deque>
-
-#include <algorithm>
-#include <functional>
-
-#include <sstream>
-#include <fstream>
-#include <iomanip>
-
-#include <atomic>
-#include <mutex>
-
-#include <chrono>
-#include <ctime>
-
-#include "Malloc.h"
-#include "ServiceStatus.h"
-#include "SharedObject.h"
-#include "UnicodeString.h"
 
 namespace ultraschall { namespace reaper {
 
-#define PRECONDITION(a) \
-    {                   \
-        if ((a) == 0)   \
-        {               \
-            return;     \
-        }               \
-    }
+template<class T> inline static T* SafeAlloc(const size_t itemCount)
+{
+    return reinterpret_cast<T*>(calloc(itemCount, sizeof(T)));
+}
 
-#define PRECONDITION_RETURN(a, b) \
-    {                             \
-        if ((a) == 0)             \
-        {                         \
-            return (b);           \
-        }                         \
+//template<> inline static void* SafeAlloc(const size_t itemCount)
+//{
+//    return reinterpret_cast<void*>(calloc(itemCount, sizeof(void*)));
+//}
+
+template<class T> inline static void SafeDelete(T*& ptr)
+{
+    delete ptr;
+    ptr = 0;
+}
+
+template<class T> inline static void SafeRelease(T*& ptr)
+{
+    if(ptr != 0)
+    {
+        ptr->Release();
+        ptr = 0;
     }
+}
 
 }} // namespace ultraschall::reaper
 
-#endif // #ifndef __ULTRASCHALL_REAPER_COMMON_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_MALLOC_H_INCL__

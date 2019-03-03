@@ -37,6 +37,9 @@
 #include "Platform.h"
 #include "FileManager.h"
 
+
+#include "Malloc.h"
+
 namespace ultraschall { namespace reaper {
 
 const UnicodeString Platform::THEME_PATH("\\REAPER\\ColorThemes\\Ultraschall_3.1.ReaperThemeZip");
@@ -112,9 +115,9 @@ UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
 
     DWORD       fileVersionInfoHandle = 0;
     const DWORD fileVersionInfoSize   = GetFileVersionInfoSizeA(path.c_str(), &fileVersionInfoHandle);
-    if(fileVersionInfoSize > 0)
+    if((fileVersionInfoSize > 0) && (fileVersionInfoHandle != 0))
     {
-        uint8_t* fileVersionInfo = new uint8_t[fileVersionInfoSize];
+        uint8_t* fileVersionInfo = SafeAlloc<uint8_t>(sizeof(fileVersionInfoSize));
         if(fileVersionInfo != 0)
         {
             if(GetFileVersionInfoA(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
