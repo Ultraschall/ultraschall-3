@@ -93,7 +93,7 @@ BinaryStream* FileManager::ReadBinaryFile(const UnicodeString& filename)
     {
         const std::ifstream::pos_type fileSize = file.tellg();
         file.seekg(std::ios::beg);
-        uint8_t* buffer = SafeAlloc<uint8_t>(fileSize);
+        uint8_t* buffer = SafeAllocArray<uint8_t>(fileSize);
         if(buffer != 0)
         {
             file.read(reinterpret_cast<char*>(buffer), fileSize);
@@ -110,7 +110,7 @@ BinaryStream* FileManager::ReadBinaryFile(const UnicodeString& filename)
                 }
             }
 
-            SafeDelete(buffer);
+            SafeDeleteArray(buffer);
         }
 
         file.close();

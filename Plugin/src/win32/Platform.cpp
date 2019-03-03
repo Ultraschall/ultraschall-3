@@ -117,7 +117,7 @@ UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
     const DWORD fileVersionInfoSize   = GetFileVersionInfoSizeA(path.c_str(), &fileVersionInfoHandle);
     if((fileVersionInfoSize > 0) && (fileVersionInfoHandle != 0))
     {
-        uint8_t* fileVersionInfo = SafeAlloc<uint8_t>(sizeof(fileVersionInfoSize));
+        uint8_t* fileVersionInfo = SafeAllocArray<uint8_t>(sizeof(fileVersionInfoSize));
         if(fileVersionInfo != 0)
         {
             if(GetFileVersionInfoA(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
@@ -142,7 +142,7 @@ UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
                 }
             }
 
-            SafeDelete(fileVersionInfo);
+            SafeDeleteArray(fileVersionInfo);
         }
     }
 
