@@ -33,12 +33,6 @@ UIMessageQueue::UIMessageQueue() {}
 
 UIMessageQueue::~UIMessageQueue() {}
 
-UIMessageQueue& UIMessageQueue::Instance()
-{
-    static UIMessageQueue self;
-    return self;
-}
-
 void UIMessageQueue::Add(const UIMessage& message)
 {
     std::lock_guard<std::recursive_mutex> lock(itemsLock_);
@@ -48,14 +42,25 @@ void UIMessageQueue::Add(const UIMessage& message)
 void UIMessageQueue::Add(const UIMessageClass severity, const UnicodeString& str)
 {
     Add(UIMessage(severity, str));
+    //Add(UIMessage(UIMessageClass::MESSAGE_FATAL_ERROR, str));
+    //Add(UIMessage(UIMessageClass::MESSAGE_ERROR, str));
+    //Add(UIMessage(UIMessageClass::MESSAGE_WARNING, str));
+    //Add(UIMessage(UIMessageClass::MESSAGE_SUCCESS, str));
 }
 
-void UIMessageQueue::DisplayReport(const UIMessageClass severityThreshold)
+void UIMessageQueue::Clear()
 {
-    if(items_.empty() == false)
-    {
-        items_.clear();
-    }
+    items_.clear();
+}
+
+const UIMessageArray& UIMessageQueue::Items() const
+{
+    return items_;
+}
+
+size_t UIMessageQueue::ItemCount() const
+{
+    return items_.size();
 }
 
 }} // namespace ultraschall::reaper

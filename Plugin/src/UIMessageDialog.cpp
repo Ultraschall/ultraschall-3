@@ -24,10 +24,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "UIMessageDialog.h"
 #include "Common.h"
 
-#include "wx/wx.h"
+#include "UIApplication.h"
+#include "UIMessageDialog.h"
+
+#include <wx/listctrl.h>
 
 namespace ultraschall { namespace reaper {
 
@@ -37,7 +39,118 @@ static const bool forceDisplay = false;
 static const bool forceDisplay = true;
 #endif // #ifndef ULTRASCHALL_BROADCASTER
 
-const UnicodeString UIMessageDialog::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
+class UIMessageDisplay : public wxDialog
+{
+    DECLARE_DYNAMIC_CLASS(UIMessageDisplay)
+    DECLARE_EVENT_TABLE()
+
+public:
+    UIMessageDisplay();
+    UIMessageDisplay(const UIMessageArray& items);
+    ~UIMessageDisplay();
+
+private:
+    static const UnicodeString UI_MESSAGE_DIALOG_CAPTION;
+
+    wxBoxSizer* layout_;
+    wxButton*   closeButton_;
+    wxListView* itemList_;
+
+    static UnicodeString StringFromMessageSeverity(const UIMessageClass severity);
+    static wxColour      ColorFromMessageSeverity(const UIMessageClass severity);
+};
+
+const UnicodeString UIMessageDisplay::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
+
+IMPLEMENT_DYNAMIC_CLASS(UIMessageDisplay, wxDialog)
+
+BEGIN_EVENT_TABLE(UIMessageDisplay, wxDialog)
+END_EVENT_TABLE()
+
+UIMessageDisplay::UIMessageDisplay() : closeButton_(0), itemList_(0), layout_(0) {}
+
+UIMessageDisplay::UIMessageDisplay(const UIMessageArray& items) :
+    wxDialog(UIApplication::GetMainWindow(), wxID_ANY, UI_MESSAGE_DIALOG_CAPTION, wxDefaultPosition, wxSize(800, 500)),
+    closeButton_(0), itemList_(0), layout_(0)
+{
+    static const wxColour background(43, 43, 43);
+    static const wxColour foreground(244, 247, 255);
+
+    SetBackgroundColour(background);
+    SetForegroundColour(background);
+
+    layout_ = new wxBoxSizer(wxVERTICAL);
+    closeButton_ = new wxButton(this, wxID_ANY, "Close", wxPoint(10, 435), wxSize(70, 25));
+    layout_->Add(closeButton_, 1);
+
+    itemList_ = new wxListView(this, wxID_ANY, wxPoint(10, 10), wxSize(775, 412), wxBORDER | wxLC_REPORT | wxLC_NO_HEADER);
+    itemList_->SetBackgroundColour(background);
+    itemList_->SetForegroundColour(foreground);
+    itemList_->InsertColumn(0, "#", wxLIST_FORMAT_RIGHT, 20);
+    itemList_->InsertColumn(1, "Severity", wxLIST_FORMAT_LEFT, 100);
+    itemList_->InsertColumn(2, "Message", wxLIST_FORMAT_LEFT, 200);
+    layout_->Add(itemList_, 2);
+
+    itemList_->Hide();
+
+    for(size_t i = 0; i < items.size(); i++)
+    {
+        UnicodeStringStream os;
+        os << (i + 1);
+        itemList_->InsertItem(i, os.str(), 0);
+        itemList_->SetItemBackgroundColour(i, ColorFromMessageSeverity(items[i].Severity()));
+        itemList_->SetItemTextColour(i, wxColour(255, 255, 255));
+        itemList_->SetItem(i, 1, StringFromMessageSeverity(items[i].Severity()));
+        itemList_->SetItem(i, 2, items[i].Str());
+    }
+
+    itemList_->Show();
+
+    itemList_->SetColumnWidth(0, wxLIST_AUTOSIZE);
+    itemList_->SetColumnWidth(1, wxLIST_AUTOSIZE);
+    itemList_->SetColumnWidth(2, wxLIST_AUTOSIZE_USEHEADER);
+}
+
+UIMessageDisplay::~UIMessageDisplay()
+{
+    SafeDelete(closeButton_);
+    SafeDelete(itemList_);
+    SafeDelete(layout_);
+}
+
+UnicodeString UIMessageDisplay::StringFromMessageSeverity(const UIMessageClass severity)
+{
+    switch(severity)
+    {
+        case UIMessageClass::MESSAGE_SUCCESS:
+            return "Success";
+        case UIMessageClass::MESSAGE_WARNING:
+            return "Warning";
+        case UIMessageClass::MESSAGE_ERROR:
+            return "Error";
+        case UIMessageClass::MESSAGE_FATAL_ERROR:
+            return "Fatal Error";
+        default:
+            return "<Unknown>";
+    }
+}
+
+wxColour UIMessageDisplay::ColorFromMessageSeverity(const UIMessageClass severity)
+{
+    switch(severity)
+    {
+        case UIMessageClass::MESSAGE_SUCCESS:
+            return wxColour(0, 128, 0);
+        case UIMessageClass::MESSAGE_WARNING:
+            return wxColour(255, 140, 0);
+        case UIMessageClass::MESSAGE_ERROR:
+            return wxColour(128, 0, 0);
+        case UIMessageClass::MESSAGE_FATAL_ERROR:
+            return wxColour(128, 0, 128);
+        default:
+            return wxColour(0, 255, 0);
+    }
+}
 
 UIMessageDialog::UIMessageDialog() {}
 
@@ -54,6 +167,10 @@ int UIMessageDialog::Display(const UIMessageArray& items, const UIMessageClass& 
 int UIMessageDialog::ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold)
 {
     PRECONDITION_RETURN(items.empty() == false, 0);
+
+    UIMessageDisplay messageDisplay(items);
+    messageDisplay.Center();
+    messageDisplay.ShowModal();
 
     return 0;
 }

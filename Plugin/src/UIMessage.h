@@ -37,14 +37,14 @@ class UIMessage
 public:
     UIMessage(const UIMessageClass severity, const UnicodeString& str);
 
-    inline UIMessageClass        Severity() const;
+    inline UIMessageClass       Severity() const;
     inline const UnicodeString& Str() const;
 
     inline bool IsValid() const;
 
 private:
-    const UIMessageClass  severity_ = INVALID_MESSAGE_CLASS;
-    const UnicodeString& str_;
+    const UIMessageClass severity_ = INVALID_MESSAGE_CLASS;
+    const UnicodeString  str_;
 };
 
 inline UIMessageClass UIMessage::Severity() const

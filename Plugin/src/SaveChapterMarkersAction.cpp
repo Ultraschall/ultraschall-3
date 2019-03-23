@@ -27,6 +27,7 @@
 #include "SaveChapterMarkersAction.h"
 #include "CustomActionFactory.h"
 #include "StringUtilities.h"
+#include "FileManager.h"
 #include "UIFileDialog.h"
 #include "UIMessageSupervisor.h"
 
@@ -85,7 +86,7 @@ bool SaveChapterMarkersAction::ConfigureTargets()
     target_ = fileDialog.BrowseForDirectory();
     if(target_.empty() == false)
     {
-        target_ += GetProjectName() + ".chapters.txt";
+        target_ += FileManager::PathSeparator() + GetProjectName() + ".chapters.txt";
         result = true;
     }
     else
@@ -111,6 +112,10 @@ bool SaveChapterMarkersAction::ConfigureSources()
     {
         supervisor.RegisterWarning("No chapters have been set.");
         invalidAssetCount++;
+    }
+    else
+    {
+        result = true;
     }
 
     if(invalidAssetCount >= 1)

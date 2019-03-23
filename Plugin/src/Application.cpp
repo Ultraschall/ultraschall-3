@@ -96,16 +96,6 @@ file that must be removed in order to use the Ultraschall REAPER Extension. Plea
 ' to a different folder on your system and restart REAPER.\
 ");
 
-    const std::string information3("\
-The Ultraschall REAPER Extension requires REAPER 5.70. \
-If you want to use the Ultraschall REAPER extension, you must install REAPER 5.70\
-");
-
-    const std::string information7("\
-The installation of the Ultraschall REAPER extension has been corrupted. \
-Please reinstall the Ultraschall REAPER extension using the original or an updated installer.\
-");
-
 // TODO: checks for legacy installations of ultraschall. remove in 4.x
 #ifdef _APPLE_
     const std::string swsPlugin2_8SystemPath
@@ -135,13 +125,15 @@ Please reinstall the Ultraschall REAPER extension using the original or an updat
 
     if((true == ok) && (VersionHandler::ReaperVersionCheck() == false))
     {
-        supervisor.RegisterError(information3);
+        supervisor.RegisterError("The Ultraschall REAPER Extension requires REAPER 5.70.");
+        supervisor.RegisterError("If you want to use the Ultraschall REAPER extension, you must install REAPER 5.70");
         ok = false;
     }
 
     if((true == ok) && (VersionHandler::SWSVersionCheck() == false))
     {
-        supervisor.RegisterError(information7);
+        supervisor.RegisterError("The installation of the Ultraschall REAPER extension has been corrupted.");
+        supervisor.RegisterError("Please reinstall the Ultraschall REAPER extension using the original or an updated installer.");
         ok = false;
     }
 

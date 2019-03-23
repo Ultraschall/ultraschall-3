@@ -24,26 +24,45 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "UIMessageSupervisor.h"
-#include "UIMessageDialog.h"
+#include "UIApplication.h"
+#include "ReaperEntryPoints.h"
 
 namespace ultraschall { namespace reaper {
 
-UIMessageSupervisor::UIMessageSupervisor() {}
+IMPLEMENT_APP_NO_MAIN(UIApplication)
 
-UIMessageSupervisor::~UIMessageSupervisor()
+REAPER_PLUGIN_HINSTANCE UIApplication::hInstance_ = 0;
+wxWindow* UIApplication::mainWindow_ = 0;
+
+void UIApplication::Initialize(REAPER_PLUGIN_HINSTANCE hInstance)
 {
-    DisplayMessages();
+    hInstance_ = hInstance;
+    wxEntryStart(hInstance_);
+
+	mainWindow_ = new wxWindow();
+	mainWindow_->SetHWND((WXHWND)reaper_api::GetMainHwnd());
+    mainWindow_->AdoptAttributesFromHWND();
+    wxTopLevelWindows.Append(mainWindow_);
 }
 
-void UIMessageSupervisor::RegisterMessage(const UIMessageClass severity, const UnicodeString& str)
+void UIApplication::Uninitialize()
 {
-    messageQueue_.Add(severity, str);
+    wxTopLevelWindows.DeleteObject(mainWindow_);
+    mainWindow_->SetHWND((WXHWND)0);
+    delete mainWindow_;
+    mainWindow_ = 0;
+
+    wxEntryCleanup();
 }
 
-void UIMessageSupervisor::DisplayMessages() 
+wxWindow* UIApplication::GetMainWindow()
 {
-	UIMessageDialog::Display(messageQueue_.Items(), UIMessageClass::MESSAGE_SUCCESS);
+    return mainWindow_;
+}
+
+bool UIApplication::OnInit()
+{
+    return true;
 }
 
 }} // namespace ultraschall::reaper

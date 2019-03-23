@@ -24,26 +24,29 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "UIMessageSupervisor.h"
-#include "UIMessageDialog.h"
+#ifndef __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__
+#define __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__
+
+#include <wx/wx.h>
+#include "ReaperEntryPoints.h"
 
 namespace ultraschall { namespace reaper {
 
-UIMessageSupervisor::UIMessageSupervisor() {}
-
-UIMessageSupervisor::~UIMessageSupervisor()
+class UIApplication : public wxApp
 {
-    DisplayMessages();
-}
+public:
+    static void Initialize(REAPER_PLUGIN_HINSTANCE hInstance);
+    static void Uninitialize();
 
-void UIMessageSupervisor::RegisterMessage(const UIMessageClass severity, const UnicodeString& str)
-{
-    messageQueue_.Add(severity, str);
-}
+	static wxWindow* GetMainWindow();
 
-void UIMessageSupervisor::DisplayMessages() 
-{
-	UIMessageDialog::Display(messageQueue_.Items(), UIMessageClass::MESSAGE_SUCCESS);
-}
+    virtual bool OnInit();
+
+private:
+    static REAPER_PLUGIN_HINSTANCE hInstance_;
+    static wxWindow* mainWindow_;
+};
 
 }} // namespace ultraschall::reaper
+
+#endif // #ifndef __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__

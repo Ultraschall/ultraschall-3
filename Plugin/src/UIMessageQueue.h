@@ -35,22 +35,21 @@ namespace ultraschall { namespace reaper {
 class UIMessageQueue
 {
 public:
+    UIMessageQueue();
     ~UIMessageQueue();
-
-    static UIMessageQueue& Instance();
 
     void Add(const UIMessage& message);
     void Add(const UIMessageClass severity, const UnicodeString& str);
+    void Clear();
 
-    void DisplayReport(const UIMessageClass severityThreshold = UIMessageClass::MESSAGE_SUCCESS);
+    const UIMessageArray& Items() const;
+    size_t ItemCount() const;
 
 private:
-    UIMessageQueue();
-
     UIMessageQueue(const UIMessageQueue&) = delete;
     UIMessageQueue& operator=(const UIMessageQueue&) = delete;
 
-    std::vector<UIMessage> items_;
+    UIMessageArray items_;
     std::recursive_mutex   itemsLock_;
 };
 

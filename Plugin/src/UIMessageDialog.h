@@ -37,12 +37,10 @@ class UIMessageDialog
 public:
     UIMessageDialog();
 
-    int Display(const UIMessageArray& items, const UIMessageClass& severityThreshold);
-    int ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold);
+    static int Display(const UIMessageArray& items, const UIMessageClass& severityThreshold);
+    static int ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold);
 
 private:
-    static const UnicodeString UI_MESSAGE_DIALOG_CAPTION;
-
 	static UIMessageClass MaxSeverity(const UIMessageArray& items);
 };
 

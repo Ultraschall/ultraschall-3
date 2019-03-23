@@ -34,9 +34,8 @@
 
 #include "wx/filename.h"
 
-#include "Platform.h"
 #include "FileManager.h"
-
+#include "Platform.h"
 
 #include "Malloc.h"
 
@@ -54,7 +53,7 @@ UnicodeString Platform::ProgramFilesDirectory()
     UnicodeString directory;
 
     WideUnicodeChar* unicodeString = nullptr;
-    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, nullptr, (PWSTR*)&unicodeString);
+    const HRESULT    hr            = SHGetKnownFolderPath(FOLDERID_ProgramFilesX64, 0, nullptr, (PWSTR*)&unicodeString);
     if(SUCCEEDED(hr))
     {
         directory = WideUnicodeStringToUnicodeString(unicodeString);
@@ -68,8 +67,8 @@ UnicodeString Platform::UserDataDirectory()
 {
     UnicodeString directory;
 
-    WideUnicodeChar*         unicodeString = nullptr;
-    const HRESULT hr            = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, (PWSTR*)&unicodeString);
+    WideUnicodeChar* unicodeString = nullptr;
+    const HRESULT    hr            = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, (PWSTR*)&unicodeString);
     if(SUCCEEDED(hr))
     {
         directory = WideUnicodeStringToUnicodeString(unicodeString);
@@ -91,7 +90,7 @@ bool Platform::FileExists(const UnicodeString& path)
 
     bool fileExists = false;
 
-    HANDLE      fileHandle = CreateFileA(
+    HANDLE fileHandle = CreateFileA(
         path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
     if(INVALID_HANDLE_VALUE != fileHandle)
     {
@@ -114,7 +113,7 @@ UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
     UnicodeString version;
 
     DWORD       fileVersionInfoHandle = 0;
-    const DWORD fileVersionInfoSize   = GetFileVersionInfoSizeA(path.c_str(), &fileVersionInfoHandle);
+    const DWORD fileVersionInfoSize   = GetFileVersionInfoSize(path.c_str(), &fileVersionInfoHandle);
     if((fileVersionInfoSize > 0) && (fileVersionInfoHandle != 0))
     {
         uint8_t* fileVersionInfo = SafeAllocArray<uint8_t>(sizeof(fileVersionInfoSize));
@@ -197,7 +196,7 @@ bool Platform::SWSVersionCheck()
         if(pStream != 0)
 
         {
-            static const uint64_t originalCrc = 355942019;  // SWS 2.10.0.1 from 02/2019
+            static const uint64_t originalCrc = 355942019; // SWS 2.10.0.1 from 02/2019
             const uint64_t        crc         = pStream->CRC32();
             if(originalCrc == crc)
 

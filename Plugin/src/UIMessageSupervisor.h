@@ -29,6 +29,7 @@
 
 #include "Common.h"
 #include "UIMessageClass.h"
+#include "UIMessageQueue.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -45,9 +46,13 @@ public:
 
 private:
     void RegisterMessage(const UIMessageClass severity, const UnicodeString& str);
+
+    void DisplayMessages();
+
+    UIMessageQueue messageQueue_;
 };
 
-inline void UIMessageSupervisor::RegisterSuccess (const UnicodeString& str)
+inline void UIMessageSupervisor::RegisterSuccess(const UnicodeString& str)
 {
     RegisterMessage(UIMessageClass::MESSAGE_SUCCESS, str);
 }

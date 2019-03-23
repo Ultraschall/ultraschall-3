@@ -26,6 +26,7 @@
 
 #include "SaveChapterMarkersToProjectAction.h"
 #include "CustomActionFactory.h"
+#include "FileManager.h"
 #include "SaveChapterMarkersAction.h"
 #include "StringUtilities.h"
 #include "UIMessageSupervisor.h"
@@ -75,9 +76,8 @@ ServiceStatus SaveChapterMarkersToProjectAction::Execute()
 
 bool SaveChapterMarkersToProjectAction::ConfigureTargets()
 {
-    bool result = false;
-    target_     = GetProjectDirectory() + ".chapters.txt";
-    return result;
+    target_     = GetProjectDirectory() + FileManager::PathSeparator() + GetProjectName() + ".chapters.txt";
+    return true;
 }
 
 bool SaveChapterMarkersToProjectAction::ConfigureSources()
@@ -93,6 +93,10 @@ bool SaveChapterMarkersToProjectAction::ConfigureSources()
     {
         supervisor.RegisterWarning("No chapters have been set.");
         invalidAssetCount++;
+    }
+    else
+    {
+        result = true;
     }
 
     if(invalidAssetCount >= 1)
