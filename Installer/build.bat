@@ -13,7 +13,7 @@ rem Remove previously created installer package
 if exist %ULTRASCHALL_RELEASE_LABEL%.msi del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi
 
 rem Specify build directory
-set ULTRASCHALL_BUILD_DIRECTORY=_build
+set ULTRASCHALL_BUILD_DIRECTORY=Build
 
 rem Create folder for intermediate data
 if not exist %ULTRASCHALL_BUILD_DIRECTORY% (
@@ -26,7 +26,7 @@ echo Copying Microsoft Visual C++ 2017 CRT...
 if not exist vcredist (
     mkdir vcredist
 )
-copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.16.27012\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
+copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Preview\VC\Redist\MSVC\14.20.27508\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
 if not errorlevel 0 goto failed
 echo Done.
 
@@ -75,7 +75,7 @@ if not exist plug-in (
     mkdir plug-in
 )
 pushd plug-in
-cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release ..\..\..\Plugin > nul
+cmake -G "Visual Studio 16 2019" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release ..\..\..\Plugin > nul
 if not errorlevel 0 goto failed
 cmake --build . --target reaper_ultraschall --config Release -j > nul
 if not errorlevel 0 goto failed
