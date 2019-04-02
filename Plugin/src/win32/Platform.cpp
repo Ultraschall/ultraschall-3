@@ -114,11 +114,12 @@ UnicodeString Platform::ReadFileVersion(const UnicodeString& path)
 
     DWORD       fileVersionInfoHandle = 0;
     const DWORD fileVersionInfoSize   = GetFileVersionInfoSize(path.c_str(), &fileVersionInfoHandle);
-    if((fileVersionInfoSize > 0) && (fileVersionInfoHandle != 0))
+    if(fileVersionInfoSize > 0)
     {
-        uint8_t* fileVersionInfo = SafeAllocArray<uint8_t>(sizeof(fileVersionInfoSize));
+        uint8_t* fileVersionInfo = new uint8_t[fileVersionInfoSize];
         if(fileVersionInfo != 0)
         {
+            memset(fileVersionInfo, 0, fileVersionInfoSize * sizeof(uint8_t));
             if(GetFileVersionInfoA(path.c_str(), fileVersionInfoHandle, fileVersionInfoSize, fileVersionInfo))
             {
                 uint8_t* versionDataPtr  = 0;

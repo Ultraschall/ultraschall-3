@@ -29,7 +29,7 @@
 
 namespace ultraschall { namespace reaper {
 
-BinaryStream::BinaryStream(const size_t dataSize) : dataSize_(dataSize), data_(SafeAllocArray<uint8_t>(dataSize)) {}
+BinaryStream::BinaryStream(const size_t dataSize) : dataSize_(dataSize), data_(new uint8_t[dataSize]) {}
 
 BinaryStream::~BinaryStream()
 {
