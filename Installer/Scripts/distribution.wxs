@@ -5,7 +5,7 @@
     <!-- The URL for add/remove programs -->
     <?define InfoURL="http://ultraschall.fm/" ?>
     <?define VersionNumber="!(bind.FileVersion.ReaperUltraschallDll)" ?>
-    <?define ProductName="ULTRASCHALL-3.2-preview-3" ?>
+    <?define ProductName="ULTRASCHALL-3.2-preview-4" ?>
     <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.VersionNumber)" Manufacturer="ultraschall.fm" UpgradeCode="$(var.UpgradeCode)">
         <Package Id="*" InstallerVersion="301" Compressed="yes" Platform="x64" Description="Podcasting Extensions for the REAPER DAW" Comments="Installs the Ultraschall REAPER Extension $(var.VersionNumber)" />
         <WixVariable Id="WixUILicenseRtf" Value="Resources\license.rtf" />
@@ -97,7 +97,7 @@
         <DirectoryRef Id="TARGETDIR">
             <Merge Id="VCRedist" SourceFile="Build\vcredist\Microsoft_VC141_CRT_x64.msm" DiskId="1" Language="0" />
         </DirectoryRef>
-        <Feature Id="VCRedist" Title="Visual C++ 14.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+        <Feature Id="VCRedist" Title="Visual C++ Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist" />
         </Feature>
         <Feature Id="Complete" Level="1">
