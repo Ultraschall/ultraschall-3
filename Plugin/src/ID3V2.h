@@ -28,29 +28,28 @@
 #define __ULTRASCHALL_REAPER_ID3V2_H_INCL__
 
 #include "Common.h"
+#include "ID3V2Context.h"
 #include "Marker.h"
 
 namespace ultraschall { namespace reaper { namespace id3v2 {
 
-struct TargetContext;
-
-TargetContext* StartTransaction(const UnicodeString& targetName);
-bool           CommitTransaction(TargetContext*& context);
-void           AbortTransaction(TargetContext*& context);
+Context* StartTransaction(const UnicodeString& targetName);
+bool     CommitTransaction(Context*& context);
+void     AbortTransaction(Context*& context);
 
 uint32_t QueryTargetDuration(const UnicodeString& targetName);
 
 void RemoveFrames(const UnicodeString& target, const UnicodeString& frameId);
-bool RemoveFrames(TargetContext* context, const UnicodeString& id);
+bool RemoveFrames(Context* context, const UnicodeString& id);
 
 bool InsertTextFrame(
-    TargetContext* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding);
-bool InsertCommentsFrame(TargetContext* context, const UnicodeString& id, const UnicodeString& text);
+    Context* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding);
+bool InsertCommentsFrame(Context* context, const UnicodeString& id, const UnicodeString& text);
 bool InsertChapterFrame(
-    TargetContext* context, const UnicodeString& id, const UnicodeString& text, const uint32_t startTime,
+    Context* context, const UnicodeString& id, const UnicodeString& text, const uint32_t startTime,
     const uint32_t endTime);
-bool InsertTableOfContentsFrame(TargetContext* context, const UnicodeStringArray& tableOfContentsItems);
-bool InsertCoverPictureFrame(TargetContext* context, const UnicodeString& image);
+bool InsertTableOfContentsFrame(Context* context, const UnicodeStringArray& tableOfContentsItems);
+bool InsertCoverPictureFrame(Context* context, const UnicodeString& image);
 
 }}} // namespace ultraschall::reaper::id3v2
 

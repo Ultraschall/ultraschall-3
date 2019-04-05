@@ -36,84 +36,33 @@
 
 namespace ultraschall { namespace reaper { namespace isobmff {
 
-struct TargetContext
-{
-    MP4FileHandle  target_;
-    const MP4Tags* tags_;
-
-    TargetContext(const UnicodeString& targetName) : target_(nullptr), tags_(nullptr)
-    {
-        bool initialized = false;
-
-        target_ = MP4Modify(targetName.c_str());
-        if(target_ != nullptr)
-        {
-            tags_ = MP4TagsAlloc();
-            if(tags_ != nullptr)
-            {
-                initialized = MP4TagsFetch(tags_, target_);
-            }
-        }
-
-        if(initialized != true)
-        {
-            Reset();
-        }
-    }
-
-    ~TargetContext()
-    {
-        Reset();
-    }
-
-    inline bool IsValid() const
-    {
-        return (target_ != nullptr) && (tags_ != nullptr);
-    }
-
-    void Reset()
-    {
-        if(tags_ != nullptr)
-        {
-            MP4TagsFree(tags_);
-            tags_ = nullptr;
-        }
-
-        if(target_ != nullptr)
-        {
-            MP4Close(target_);
-            target_ = nullptr;
-        }
-    }
-
-    TargetContext(const TargetContext&) = delete;
-    TargetContext& operator=(const TargetContext&) = delete;
-};
-
-TargetContext* StartTransaction(const UnicodeString& targetName)
+Context* StartTransaction(const UnicodeString& targetName)
 {
     PRECONDITION_RETURN(targetName.empty() == false, 0);
 
-    return new TargetContext(targetName);
+    return new Context(targetName);
 }
 
-bool CommitTransaction(TargetContext*& context)
+bool CommitTransaction(Context*& context)
 {
     PRECONDITION_RETURN(context->IsValid(), false);
 
-    const bool success = MP4TagsStore(context->tags_, context->target_);
+    const bool success = MP4TagsStore(context->Tags(), context->Target());
     SafeDelete(context);
 
     return success;
 }
 
-void AbortTransaction(TargetContext*& context)
+void AbortTransaction(Context*& context)
 {
     SafeDelete(context);
 }
 
 static MP4TagArtworkType QueryArtworkType(const uint8_t* data, const size_t dataSize)
 {
+    PRECONDITION_RETURN(data != nullptr, MP4_ART_UNDEFINED);
+    PRECONDITION_RETURN(dataSize > 0, MP4_ART_UNDEFINED);
+
     MP4TagArtworkType mp4_format = MP4_ART_UNDEFINED;
 
     switch(QueryPictureFormat(data, dataSize))
@@ -137,115 +86,115 @@ static MP4TagArtworkType QueryArtworkType(const uint8_t* data, const size_t data
     return mp4_format;
 }
 
-static double QueryDuration(const TargetContext* context)
+static double QueryDuration(const Context* context)
 {
     PRECONDITION_RETURN(context != nullptr, -1);
     PRECONDITION_RETURN(context->IsValid(), -1);
 
-    const uint32_t    scale    = MP4GetTimeScale(context->target_);
-    const MP4Duration duration = MP4GetDuration(context->target_);
+    const uint32_t    scale    = MP4GetTimeScale(context->Target());
+    const MP4Duration duration = MP4GetDuration(context->Target());
 
     return static_cast<double>(duration / scale);
 }
 
-static std::vector<MP4Chapter_t> ConvertChapters(const MarkerArray& chapterMarkers, const double duration)
+static std::vector<MP4Chapter_t> ConvertChapters(const MarkerArray& chapterMarkers, const double maxDuration)
 {
+    PRECONDITION_RETURN(chapterMarkers.empty() == false, std::vector<MP4Chapter_t>());
+    PRECONDITION_RETURN(maxDuration >= 0, std::vector<MP4Chapter_t>());
+
+    std::vector<MP4Chapter_t> result;
+
     // mp4v2 library has a define named MP4V2_CHAPTER_TITLE_MAX which is 1023
     // However when mp4v2 library is writing Nero chapter in MP4File::AddNeroChapter() the title
     // will be further truncated to 255 byte length disregarding any possible utf8 multi-byte characters.
     // So we have to take care of properly truncating to that size ourselves beforehand.
     // This function does not do so itself but expects such truncated input.
-
     const size_t maxTitleBytes = std::min(255, MP4V2_CHAPTER_TITLE_MAX);
-
-    double                    current_chapter_start = 0.;
-    std::vector<MP4Chapter_t> mp4_chapters;
+    double       currentStart  = 0;
     for(size_t i = 0; i < chapterMarkers.size(); i++)
     {
-        double duration = (i == chapterMarkers.size() - 1) ?
-                              duration :
-                              chapterMarkers[i + 1].Position() - chapterMarkers[i].Position();
+        double currentDuration = (i == chapterMarkers.size() - 1) ?
+                                     maxDuration :
+                                     chapterMarkers[i + 1].Position() - chapterMarkers[i].Position();
 
         // if we run over the total size clients (like VLC) may get confused
-        if(current_chapter_start + duration > duration)
-            duration = duration - current_chapter_start;
-
-        MP4Chapter_t chapter;
+        if(currentStart + currentDuration > maxDuration)
         {
-            chapter.duration = static_cast<uint32_t>(duration * 1000.0);
-
-            const UnicodeString& markerName = chapterMarkers[i].Name();
-            if(markerName.empty() == false)
-            {
-                const size_t markerNameSize = std::min(markerName.size(), maxTitleBytes);
-                memset(chapter.title, 0, (markerNameSize + 1) * sizeof(char));
-                memmove(chapter.title, markerName.c_str(), markerNameSize);
-                chapter.title[markerNameSize] = '\0';
-            }
+            currentDuration = maxDuration - currentStart;
         }
-        mp4_chapters.push_back(chapter);
 
-        current_chapter_start += duration;
+        MP4Chapter_t currentChapter     = {0};
+        currentChapter.duration         = static_cast<uint32_t>(currentDuration * 1000);
+        const UnicodeString& markerName = chapterMarkers[i].Name();
+        if(markerName.empty() == false)
+        {
+            const size_t markerNameSize = std::min(markerName.size(), maxTitleBytes);
+            memset(currentChapter.title, 0, (markerNameSize + 1) * sizeof(char));
+            memmove(currentChapter.title, markerName.c_str(), markerNameSize);
+            result.push_back(currentChapter);
+        }
+
+        currentStart += currentDuration;
     }
 
-    return mp4_chapters;
+    return result;
 }
 
-bool InsertName(const TargetContext* context, const UnicodeString& name)
+bool InsertName(const Context* context, const UnicodeString& name)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(name.empty() == false, false);
 
-    return MP4TagsSetName(context->tags_, name.c_str());
+    return MP4TagsSetName(context->Tags(), name.c_str());
 }
 
-bool InsertArtist(const TargetContext* context, const UnicodeString& artist)
+bool InsertArtist(const Context* context, const UnicodeString& artist)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(artist.empty() == false, false);
 
-    return MP4TagsSetArtist(context->tags_, artist.c_str());
+    return MP4TagsSetArtist(context->Tags(), artist.c_str());
 }
 
-bool InsertAlbum(const TargetContext* context, const UnicodeString& album)
+bool InsertAlbum(const Context* context, const UnicodeString& album)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(album.empty() == false, false);
 
-    return MP4TagsSetAlbum(context->tags_, album.c_str());
+    return MP4TagsSetAlbum(context->Tags(), album.c_str());
 }
 
-bool InsertReleaseDate(const TargetContext* context, const UnicodeString& releaseDate)
+bool InsertReleaseDate(const Context* context, const UnicodeString& releaseDate)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(releaseDate.empty() == false, false);
 
-    return MP4TagsSetReleaseDate(context->tags_, releaseDate.c_str());
+    return MP4TagsSetReleaseDate(context->Tags(), releaseDate.c_str());
 }
 
-bool InsertGenre(const TargetContext* context, const UnicodeString& genre)
+bool InsertGenre(const Context* context, const UnicodeString& genre)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(genre.empty() == false, false);
 
-    return MP4TagsSetGenre(context->tags_, genre.c_str());
+    return MP4TagsSetGenre(context->Tags(), genre.c_str());
 }
 
-bool InsertComments(const TargetContext* context, const UnicodeString& comments)
+bool InsertComments(const Context* context, const UnicodeString& comments)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
     PRECONDITION_RETURN(comments.empty() == false, false);
 
-    return MP4TagsSetComments(context->tags_, comments.c_str());
+    return MP4TagsSetComments(context->Tags(), comments.c_str());
 }
 
-bool InsertCoverImage(const TargetContext* context, const UnicodeString& file)
+bool InsertCoverImage(const Context* context, const UnicodeString& file)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
@@ -263,14 +212,14 @@ bool InsertCoverImage(const TargetContext* context, const UnicodeString& file)
         if(mp4ArtWork.type != MP4_ART_UNDEFINED)
         {
             bool removedAll = true;
-            while((context->tags_->artworkCount > 0) && (true == removedAll))
+            while((context->Tags()->artworkCount > 0) && (true == removedAll))
             {
-                removedAll = MP4TagsRemoveArtwork(context->tags_, 0);
+                removedAll = MP4TagsRemoveArtwork(context->Tags(), 0);
             }
 
             if(true == removedAll)
             {
-                result = MP4TagsAddArtwork(context->tags_, &mp4ArtWork);
+                result = MP4TagsAddArtwork(context->Tags(), &mp4ArtWork);
             }
         }
 
@@ -280,7 +229,7 @@ bool InsertCoverImage(const TargetContext* context, const UnicodeString& file)
     return result;
 }
 
-bool InsertChapterMarkers(const TargetContext* context, const MarkerArray& markers)
+bool InsertChapterMarkers(const Context* context, const MarkerArray& markers)
 {
     PRECONDITION_RETURN(context != nullptr, false);
     PRECONDITION_RETURN(context->IsValid() != false, false);
@@ -295,7 +244,7 @@ bool InsertChapterMarkers(const TargetContext* context, const MarkerArray& marke
         if(chapters.empty() == false)
         {
             const MP4ChapterType type = MP4SetChapters(
-                context->target_, &chapters[0], static_cast<uint32_t>(chapters.size()), MP4ChapterTypeAny);
+                context->Target(), &chapters[0], static_cast<uint32_t>(chapters.size()), MP4ChapterTypeAny);
             if(MP4ChapterTypeAny == type)
             {
                 result = true;

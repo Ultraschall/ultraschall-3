@@ -24,30 +24,21 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
-#define __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+#include "ID3V2Context.h"
 
-#include "Common.h"
-#include "ISOBMFFContext.h"
-#include "Marker.h"
+namespace ultraschall { namespace reaper { namespace id3v2 {
 
-namespace ultraschall { namespace reaper { namespace isobmff {
+Context::Context(const UnicodeString& targetName) : target_(new taglib_mp3::File(targetName.c_str())), tags_(nullptr)
+{
+    if(target_->isOpen() == true)
+    {
+        tags_ = target_->ID3v2Tag();
+    }
+}
 
-Context* StartTransaction(const UnicodeString& targetName);
-bool     CommitTransaction(Context*& context);
-void     AbortTransaction(Context*& context);
+Context::~Context()
+{
+    tags_ = 0;
+}
 
-bool InsertName(const Context* context, const UnicodeString& name);
-bool InsertArtist(const Context* context, const UnicodeString& artist);
-bool InsertAlbum(const Context* context, const UnicodeString& album);
-bool InsertReleaseDate(const Context* context, const UnicodeString& releaseDate);
-bool InsertGenre(const Context* context, const UnicodeString& genre);
-bool InsertComments(const Context* context, const UnicodeString& comments);
-
-bool InsertCoverImage(const Context* context, const UnicodeString& file);
-
-bool InsertChapterMarkers(const Context* context, const MarkerArray& markers);
-
-}}} // namespace ultraschall::reaper::isobmff
-
-#endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+}}} // namespace ultraschall::reaper::id3v2

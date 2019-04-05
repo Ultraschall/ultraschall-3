@@ -24,30 +24,49 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
-#define __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_ID3V2_CONTEXT_H_INCL__
+#define __ULTRASCHALL_REAPER_ID3V2_CONTEXT_H_INCL__
 
 #include "Common.h"
-#include "ISOBMFFContext.h"
-#include "Marker.h"
 
-namespace ultraschall { namespace reaper { namespace isobmff {
+#include "taglib_include.h"
 
-Context* StartTransaction(const UnicodeString& targetName);
-bool     CommitTransaction(Context*& context);
-void     AbortTransaction(Context*& context);
+namespace ultraschall { namespace reaper { namespace id3v2 {
 
-bool InsertName(const Context* context, const UnicodeString& name);
-bool InsertArtist(const Context* context, const UnicodeString& artist);
-bool InsertAlbum(const Context* context, const UnicodeString& album);
-bool InsertReleaseDate(const Context* context, const UnicodeString& releaseDate);
-bool InsertGenre(const Context* context, const UnicodeString& genre);
-bool InsertComments(const Context* context, const UnicodeString& comments);
+class Context
+{
+public:
+    Context(const UnicodeString& targetName);
+    ~Context();
 
-bool InsertCoverImage(const Context* context, const UnicodeString& file);
+    inline bool IsValid() const;
 
-bool InsertChapterMarkers(const Context* context, const MarkerArray& markers);
+    inline taglib_mp3::File*  Target();
+    inline taglib_id3v2::Tag* Tags();
 
-}}} // namespace ultraschall::reaper::isobmff
+private:
+    taglib_mp3::File*  target_ = nullptr;
+    taglib_id3v2::Tag* tags_   = nullptr;
 
-#endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
+};
+
+inline bool Context::IsValid() const
+{
+    return (target_ != nullptr) && (tags_ != nullptr);
+}
+
+inline taglib_mp3::File* Context::Target()
+{
+    return target_;
+}
+
+inline taglib_id3v2::Tag* Context::Tags()
+{
+    return tags_;
+}
+
+}}} // namespace ultraschall::reaper::id3v2
+
+#endif // #ifndef __ULTRASCHALL_REAPER_ID3V2_CONTEXT_H_INCL__

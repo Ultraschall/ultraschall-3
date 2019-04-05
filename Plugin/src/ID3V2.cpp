@@ -24,8 +24,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "taglib_include.h"
-
 #include "BinaryStream.h"
 #include "FileManager.h"
 #include "ID3V2.h"
@@ -34,47 +32,25 @@
 
 namespace ultraschall { namespace reaper { namespace id3v2 {
 
-struct TargetContext
-{
-    taglib_mp3::File   targetFile_;
-    taglib_id3v2::Tag* tag_;
-
-    TargetContext(const UnicodeString& targetName) : targetFile_(targetName.c_str()), tag_(0)
-    {
-        if(targetFile_.isOpen() == true)
-        {
-            tag_ = targetFile_.ID3v2Tag();
-        }
-    }
-
-    ~TargetContext()
-    {
-        tag_ = 0;
-    }
-
-    TargetContext(const TargetContext&) = delete;
-    TargetContext& operator=(const TargetContext&) = delete;
-};
-
-TargetContext* StartTransaction(const UnicodeString& targetName)
+Context* StartTransaction(const UnicodeString& targetName)
 {
     PRECONDITION_RETURN(targetName.empty() == false, 0);
 
-    return new TargetContext(targetName);
+    return new Context(targetName);
 }
 
-bool CommitTransaction(TargetContext*& context)
+bool CommitTransaction(Context*& context)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
 
-    const bool success = context->targetFile_.save(taglib_mp3::File::ID3v2, true, 3);
+    const bool success = context->Target()->save(taglib_mp3::File::ID3v2, true, 3);
     SafeDelete(context);
 
     return success;
 }
 
-void AbortTransaction(TargetContext*& context)
+void AbortTransaction(Context*& context)
 {
     SafeDelete(context);
 }
@@ -163,17 +139,17 @@ void RemoveFrames(const UnicodeString& target, const UnicodeString& frameId)
     }
 }
 
-bool RemoveFrames(TargetContext* context, const UnicodeString& id)
+bool RemoveFrames(Context* context, const UnicodeString& id)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(id.empty() == false, false);
 
     bool success = false;
 
     std::vector<taglib_id3v2::Frame*> selectedFrames;
 
-    taglib_id3v2::FrameList frames = context->tag_->frameList(id.c_str());
+    taglib_id3v2::FrameList frames = context->Tags()->frameList(id.c_str());
     for(unsigned int i = 0; i < frames.size(); i++)
     {
         taglib_id3v2::Frame* frame = frames[i];
@@ -187,7 +163,7 @@ bool RemoveFrames(TargetContext* context, const UnicodeString& id)
     {
         for(size_t j = 0; j < selectedFrames.size(); j++)
         {
-            context->tag_->removeFrame(selectedFrames[j]);
+            context->Tags()->removeFrame(selectedFrames[j]);
         }
 
         success = true;
@@ -196,10 +172,10 @@ bool RemoveFrames(TargetContext* context, const UnicodeString& id)
     return success;
 }
 
-bool InsertUTF8TextFrame(TargetContext* context, const UnicodeString& id, const UnicodeString& text)
+bool InsertUTF8TextFrame(Context* context, const UnicodeString& id, const UnicodeString& text)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(id.empty() == false, false);
 
     bool success = false;
@@ -219,7 +195,7 @@ bool InsertUTF8TextFrame(TargetContext* context, const UnicodeString& id, const 
             textFrame->setTextEncoding(taglib::String::Type::UTF8);
             textFrame->setText(taglib::String(stringData, taglib::String::Type::UTF8));
 
-            context->tag_->addFrame(textFrame);
+            context->Tags()->addFrame(textFrame);
             success = true;
         }
     }
@@ -231,10 +207,10 @@ bool InsertUTF8TextFrame(TargetContext* context, const UnicodeString& id, const 
     return success;
 }
 
-bool InsertUTF16TextFrame(TargetContext* context, const UnicodeString& id, const UnicodeString& text)
+bool InsertUTF16TextFrame(Context* context, const UnicodeString& id, const UnicodeString& text)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(id.empty() == false, false);
 
     bool success = false;
@@ -255,7 +231,7 @@ bool InsertUTF16TextFrame(TargetContext* context, const UnicodeString& id, const
             textFrame->setTextEncoding(taglib::String::Type::UTF16);
             textFrame->setText(taglib::String(stringData, taglib::String::Type::UTF16));
 
-            context->tag_->addFrame(textFrame);
+            context->Tags()->addFrame(textFrame);
             success = true;
         }
     }
@@ -268,15 +244,15 @@ bool InsertUTF16TextFrame(TargetContext* context, const UnicodeString& id, const
 }
 
 bool InsertTextFrame(
-    TargetContext* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding)
+    Context* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding)
 {
     return (encoding == UTF16) ? InsertUTF16TextFrame(context, id, text) : InsertUTF8TextFrame(context, id, text);
 }
 
-bool InsertCommentsFrame(TargetContext* context, const UnicodeString& id, const UnicodeString& text)
+bool InsertCommentsFrame(Context* context, const UnicodeString& id, const UnicodeString& text)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(id.empty() == false, false);
 
     bool success = false;
@@ -295,7 +271,7 @@ bool InsertCommentsFrame(TargetContext* context, const UnicodeString& id, const 
             commentsFrame->setTextEncoding(taglib::String::Type::UTF16);
             commentsFrame->setText(taglib::String(stream, taglib::String::Type::UTF16));
 
-            context->tag_->addFrame(commentsFrame);
+            context->Tags()->addFrame(commentsFrame);
             success = true;
         }
     }
@@ -308,11 +284,11 @@ bool InsertCommentsFrame(TargetContext* context, const UnicodeString& id, const 
 }
 
 bool InsertChapterFrame(
-    TargetContext* context, const UnicodeString& id, const UnicodeString& text, const uint32_t startTime,
+    Context* context, const UnicodeString& id, const UnicodeString& text, const uint32_t startTime,
     const uint32_t endTime)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(id.empty() == false, false);
     PRECONDITION_RETURN(text.empty() == false, false);
     PRECONDITION_RETURN(startTime != 0xffffffff, false);
@@ -340,7 +316,7 @@ bool InsertChapterFrame(
             embeddedFrame->setText(taglib::String(rawStringData, taglib::String::Type::UTF16));
 
             chapterFrame->addEmbeddedFrame(embeddedFrame);
-            context->tag_->addFrame(chapterFrame);
+            context->Tags()->addFrame(chapterFrame);
 
             success = true;
         }
@@ -349,10 +325,10 @@ bool InsertChapterFrame(
     return success;
 }
 
-bool InsertTableOfContentsFrame(TargetContext* context, const UnicodeStringArray& tableOfContentsItems)
+bool InsertTableOfContentsFrame(Context* context, const UnicodeStringArray& tableOfContentsItems)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(tableOfContentsItems.empty() == false, false);
 
     bool success = false;
@@ -381,7 +357,7 @@ bool InsertTableOfContentsFrame(TargetContext* context, const UnicodeStringArray
             tableOfContentsFrame->addEmbeddedFrame(embeddedFrame);
         }
 
-        context->tag_->addFrame(tableOfContentsFrame);
+        context->Tags()->addFrame(tableOfContentsFrame);
 
         success = true;
     }
@@ -389,10 +365,10 @@ bool InsertTableOfContentsFrame(TargetContext* context, const UnicodeStringArray
     return success;
 }
 
-bool InsertCoverPictureFrame(TargetContext* context, const UnicodeString& image)
+bool InsertCoverPictureFrame(Context* context, const UnicodeString& image)
 {
     PRECONDITION_RETURN(context != 0, false);
-    PRECONDITION_RETURN(context->tag_ != 0, false);
+    PRECONDITION_RETURN(context->Tags() != 0, false);
     PRECONDITION_RETURN(image.empty() == false, false);
 
     bool success = false;
@@ -416,7 +392,7 @@ bool InsertCoverPictureFrame(TargetContext* context, const UnicodeString& image)
                     taglib::ByteVector coverData((const char*)imageData->Data(), (unsigned int)imageData->DataSize());
                     frame->setPicture(coverData);
 
-                    context->tag_->addFrame(frame);
+                    context->Tags()->addFrame(frame);
 
                     success = true;
                 }

@@ -40,12 +40,12 @@ ITagWriter* TagWriterFactory::Create(const UnicodeString& targetName)
     const TARGET_TYPE targetType = FindFileType(targetName);
     if(targetType == MP3_TARGET)
     {
-        tagWriter = new MP3TagWriter();
+        tagWriter = new id3v2::Writer();
     }
 #ifdef ULTRASCHALL_ENABLE_MP4
     else if(targetType == MP4_TARGET)
     {
-        tagWriter = new MP4TagWriter();
+        tagWriter = new isobmff::Writer();
     }
 #endif // #ifdef ULTRASCHALL_ENABLE_MP4
     else

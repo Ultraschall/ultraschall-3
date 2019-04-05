@@ -47,10 +47,12 @@ set(COMMON_INCLUDES
     ICommand.h
     ICustomAction.h
     ID3V2.h
+    ID3V2Context.h
     ID3V2Writer.h
     InsertChapterMarkersAction.h
     InsertMediaPropertiesAction.h
 	ISOBMFF.h
+	ISOBMFFContext.h
     ISOBMFFWriter.h
     ITagWriter.h
     SharedObject.h
@@ -92,10 +94,12 @@ set(COMMON_SOURCES
     CustomActionManager.cpp
     FileManager.cpp
     ID3V2.cpp
+    ID3V2Context.cpp
     ID3V2Writer.cpp
     InsertChapterMarkersAction.cpp
     InsertMediaPropertiesAction.cpp
 	ISOBMFF.cpp
+	ISOBMFFContext.cpp
     ISOBMFFWriter.cpp
     MediaProperties.cpp
     PictureUtilities.cpp

@@ -24,30 +24,50 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
-#define __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
-
 #include "Common.h"
+
 #include "ISOBMFFContext.h"
-#include "Marker.h"
 
 namespace ultraschall { namespace reaper { namespace isobmff {
 
-Context* StartTransaction(const UnicodeString& targetName);
-bool     CommitTransaction(Context*& context);
-void     AbortTransaction(Context*& context);
+Context::Context(const UnicodeString& targetName)
+{
+    bool initialized = false;
 
-bool InsertName(const Context* context, const UnicodeString& name);
-bool InsertArtist(const Context* context, const UnicodeString& artist);
-bool InsertAlbum(const Context* context, const UnicodeString& album);
-bool InsertReleaseDate(const Context* context, const UnicodeString& releaseDate);
-bool InsertGenre(const Context* context, const UnicodeString& genre);
-bool InsertComments(const Context* context, const UnicodeString& comments);
+    target_ = MP4Modify(targetName.c_str());
+    if(target_ != nullptr)
+    {
+        tags_ = MP4TagsAlloc();
+        if(tags_ != nullptr)
+        {
+            initialized = MP4TagsFetch(tags_, target_);
+        }
+    }
 
-bool InsertCoverImage(const Context* context, const UnicodeString& file);
+    if(initialized != true)
+    {
+        Reset();
+    }
+}
 
-bool InsertChapterMarkers(const Context* context, const MarkerArray& markers);
+Context::~Context()
+{
+    Reset();
+}
+
+void Context::Reset()
+{
+    if(tags_ != nullptr)
+    {
+        MP4TagsFree(tags_);
+        tags_ = nullptr;
+    }
+
+    if(target_ != nullptr)
+    {
+        MP4Close(target_);
+        target_ = nullptr;
+    }
+}
 
 }}} // namespace ultraschall::reaper::isobmff
-
-#endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__

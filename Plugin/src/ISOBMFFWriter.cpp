@@ -27,15 +27,15 @@
 #include "ISOBMFFWriter.h"
 #include "ISOBMFF.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall { namespace reaper { namespace isobmff {
 
-bool MP4TagWriter::InsertProperties(const UnicodeString& targetName, const MediaProperties& properties)
+bool Writer::InsertProperties(const UnicodeString& targetName, const MediaProperties& properties)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
 
     bool result = false;
 
-    isobmff::TargetContext* context = isobmff::StartTransaction(targetName);
+    isobmff::Context* context = isobmff::StartTransaction(targetName);
     if(context != nullptr)
     {
         result = isobmff::InsertName(context, properties.Title());
@@ -57,14 +57,14 @@ bool MP4TagWriter::InsertProperties(const UnicodeString& targetName, const Media
     return result;
 }
 
-bool MP4TagWriter::InsertCoverImage(const UnicodeString& targetName, const UnicodeString& file)
+bool Writer::InsertCoverImage(const UnicodeString& targetName, const UnicodeString& file)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(file.empty() == false, false);
 
     bool result = false;
 
-    isobmff::TargetContext* context = isobmff::StartTransaction(targetName);
+    isobmff::Context* context = isobmff::StartTransaction(targetName);
     if(context != nullptr)
     {
         result = isobmff::InsertCoverImage(context, file);
@@ -73,14 +73,14 @@ bool MP4TagWriter::InsertCoverImage(const UnicodeString& targetName, const Unico
     return result;
 }
 
-bool MP4TagWriter::InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
+bool Writer::InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(chapterMarkers.empty() == false, false);
 
     bool result = false;
 
-    isobmff::TargetContext* context = isobmff::StartTransaction(targetName);
+    isobmff::Context* context = isobmff::StartTransaction(targetName);
     if(context != nullptr)
     {
         result = isobmff::InsertChapterMarkers(context, chapterMarkers);
@@ -89,14 +89,14 @@ bool MP4TagWriter::InsertChapterMarkers(const UnicodeString& targetName, const M
     return result;
 }
 
-bool MP4TagWriter::ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
+bool Writer::ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(chapterMarkers.empty() == false, false);
 
     bool result = false;
 
-    isobmff::TargetContext* context = isobmff::StartTransaction(targetName);
+    isobmff::Context* context = isobmff::StartTransaction(targetName);
     if(context != nullptr)
     {
         result = isobmff::InsertChapterMarkers(context, chapterMarkers);
@@ -105,4 +105,4 @@ bool MP4TagWriter::ReplaceChapterMarkers(const UnicodeString& targetName, const 
     return result;
 }
 
-}} // namespace ultraschall::reaper
+}}} // namespace ultraschall::reaper::isobmff

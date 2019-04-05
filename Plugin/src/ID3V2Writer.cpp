@@ -24,25 +24,21 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <iomanip>
-#include <sstream>
-
+#include "ID3V2Writer.h"
+#include "ID3V2.h"
 #include "StringUtilities.h"
 
-#include "ID3V2.h"
-#include "ID3V2Writer.h"
+namespace ultraschall { namespace reaper { namespace id3v2 {
 
-namespace ultraschall { namespace reaper {
-
-bool MP3TagWriter::InsertProperties(const UnicodeString& targetName, const MediaProperties& standardProperties)
+bool Writer::InsertProperties(const UnicodeString& targetName, const MediaProperties& standardProperties)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
 
     const UnicodeString durationString = UnicodeStringFromInt(id3v2::QueryTargetDuration(targetName));
     const UnicodeString encoderString  = "Ultraschall v3.2";
 
-    bool                  success = true;
-    id3v2::TargetContext* context = id3v2::StartTransaction(targetName);
+    bool            success = true;
+    id3v2::Context* context = id3v2::StartTransaction(targetName);
     if(context != 0)
     {
         // ATP Frame Order:
@@ -96,14 +92,14 @@ bool MP3TagWriter::InsertProperties(const UnicodeString& targetName, const Media
     return success;
 }
 
-bool MP3TagWriter::InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage)
+bool Writer::InsertCoverImage(const UnicodeString& targetName, const UnicodeString& coverImage)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(coverImage.empty() == false, false);
 
     bool success = false;
 
-    id3v2::TargetContext* context = id3v2::StartTransaction(targetName);
+    id3v2::Context* context = id3v2::StartTransaction(targetName);
     if(context != 0)
     {
         success = id3v2::InsertCoverPictureFrame(context, coverImage);
@@ -120,7 +116,7 @@ bool MP3TagWriter::InsertCoverImage(const UnicodeString& targetName, const Unico
     return success;
 }
 
-bool MP3TagWriter::InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
+bool Writer::InsertChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(chapterMarkers.empty() == false, false);
@@ -130,7 +126,7 @@ bool MP3TagWriter::InsertChapterMarkers(const UnicodeString& targetName, const M
 
     bool success = false;
 
-    id3v2::TargetContext* context = id3v2::StartTransaction(targetName);
+    id3v2::Context* context = id3v2::StartTransaction(targetName);
     if(context != 0)
     {
         UnicodeStringArray tableOfContentsItems;
@@ -168,7 +164,7 @@ bool MP3TagWriter::InsertChapterMarkers(const UnicodeString& targetName, const M
     return success;
 }
 
-bool MP3TagWriter::ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
+bool Writer::ReplaceChapterMarkers(const UnicodeString& targetName, const MarkerArray& chapterMarkers)
 {
     PRECONDITION_RETURN(targetName.empty() == false, false);
     PRECONDITION_RETURN(chapterMarkers.empty() == false, false);
@@ -178,7 +174,7 @@ bool MP3TagWriter::ReplaceChapterMarkers(const UnicodeString& targetName, const 
 
     bool success = false;
 
-    id3v2::TargetContext* context = id3v2::StartTransaction(targetName);
+    id3v2::Context* context = id3v2::StartTransaction(targetName);
     if(context != 0)
     {
         id3v2::RemoveFrames(context, "CHAP");
@@ -218,4 +214,4 @@ bool MP3TagWriter::ReplaceChapterMarkers(const UnicodeString& targetName, const 
     return success;
 }
 
-}} // namespace ultraschall::reaper
+}}} // namespace ultraschall::reaper::id3v2

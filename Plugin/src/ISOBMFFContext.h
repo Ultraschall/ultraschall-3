@@ -24,30 +24,51 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
-#define __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
+#define __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
 
-#include "Common.h"
-#include "ISOBMFFContext.h"
-#include "Marker.h"
+#define MP4V2_EXPORTS 0
+#define MP4V2_NO_STDINT_DEFS 1
+#include <mp4v2/mp4v2.h>
 
 namespace ultraschall { namespace reaper { namespace isobmff {
 
-Context* StartTransaction(const UnicodeString& targetName);
-bool     CommitTransaction(Context*& context);
-void     AbortTransaction(Context*& context);
+class Context
+{
+public:
+    Context(const UnicodeString& targetName);
+    ~Context();
 
-bool InsertName(const Context* context, const UnicodeString& name);
-bool InsertArtist(const Context* context, const UnicodeString& artist);
-bool InsertAlbum(const Context* context, const UnicodeString& album);
-bool InsertReleaseDate(const Context* context, const UnicodeString& releaseDate);
-bool InsertGenre(const Context* context, const UnicodeString& genre);
-bool InsertComments(const Context* context, const UnicodeString& comments);
+    inline bool IsValid() const;
 
-bool InsertCoverImage(const Context* context, const UnicodeString& file);
+    inline const MP4FileHandle Target() const;
+    inline const MP4Tags*      Tags() const;
 
-bool InsertChapterMarkers(const Context* context, const MarkerArray& markers);
+private:
+    MP4FileHandle  target_ = nullptr;
+    const MP4Tags* tags_   = nullptr;
+
+    void Reset();
+
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
+};
+
+bool Context::IsValid() const
+{
+    return (target_ != nullptr) && (tags_ != nullptr);
+}
+
+inline const MP4FileHandle Context::Target() const
+{
+    return target_;
+}
+
+inline const MP4Tags* Context::Tags() const
+{
+    return tags_;
+}
 
 }}} // namespace ultraschall::reaper::isobmff
 
-#endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
