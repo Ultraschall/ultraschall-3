@@ -38,7 +38,7 @@ if [ -x "$(command -v cmake)" ]; then
     fi
     mkdir "$BUILD_DIRECTORY" && pushd "$BUILD_DIRECTORY"
     echo 'Configuring projects...'
-    cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../
+    cmake -G"Xcode" -DCMAKE_BUILD_TYPE=Debug ../
     echo 'Done.'
     if [ $? -eq 0]; then
         echo 'Building projects...'
@@ -46,11 +46,11 @@ if [ -x "$(command -v cmake)" ]; then
         echo 'Done.'
         if [ $? -ne 0]; then
             ERROR_LEVEL=$?
-            echo 'The cmake build step failed.'  >&2
+            echo 'The cmake build step failed.'
         fi
     else
         ERROR_LEVEL=$?
-        echo 'Error: The cmake configure step failed.'  >&2
+        echo 'Error: The cmake configure step failed.'
     fi
     popd
     exit $ERROR_LEVEL
