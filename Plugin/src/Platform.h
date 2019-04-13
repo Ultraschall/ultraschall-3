@@ -47,7 +47,7 @@ public:
     static UnicodeChar PathSeparator();
 
     static bool        FileExists(const UnicodeString& path);
-    static UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix);
+    static UnicodeString AppendPath(const UnicodeString &prefix, const UnicodeString &appendix);
 
 	static UnicodeString ReadFileVersion(const UnicodeString& path);
 

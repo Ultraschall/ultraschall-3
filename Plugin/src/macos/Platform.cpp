@@ -22,8 +22,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifdef _APPLE_
-
 #ifdef min
 #undef min
 #endif // #ifdef min
@@ -35,13 +33,17 @@
 #import <Foundation/Foundation.h>
 
 #include "Platform.h"
+#include "FileManager.h"
 #include "StringUtilities.h"
 
 #include "wx/filename.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
-const UnicodeString Platform::THEME_PATH("/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip");
+const UnicodeString Platform::THEME_PATH = "/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip";
 const UnicodeString Platform::SOUNDBOARD_PATH("/Audio/Plug-Ins/Components/Soundboard.component");
 const UnicodeString Platform::SWS_PATH("/REAPER/UserPlugins/reaper_sws64.dylib");
 const UnicodeString Platform::PLUGIN_PATH("/REAPER/UserPlugins/reaper_ultraschall.dylib");
@@ -76,12 +78,14 @@ UnicodeChar Platform::PathSeparator()
 
 bool Platform::FileExists(const UnicodeString& path)
 {
-    PRECONDITION_RETURN(path.empty == false, false);
+    PRECONDITION_RETURN(path.empty() == false, false);
 
     bool fileExists = false;
 
     NSFileManager* fileManager = [NSFileManager defaultManager];
     fileExists                 = [fileManager fileExistsAtPath:[NSString stringWithUTF8String:path.c_str()]] == YES;
+
+    return fileExists;
 }
 
 UnicodeString Platform::AppendPath(const UnicodeString& prefix, const UnicodeString& appendix)
@@ -123,8 +127,7 @@ bool Platform::SWSVersionCheck()
 {
     bool result = false;
 
-    UnicodeString swsPlugin2_8UserPath
-        = Platform::ProgramFilesDirectory() + SWS_PATH;
+    UnicodeString swsPlugin2_8UserPath = Platform::ProgramFilesDirectory() + SWS_PATH;
     if(Platform::FileExists(swsPlugin2_8UserPath) == false)
     {
         swsPlugin2_8UserPath = Platform::AppendPath(FindUltraschallPluginDirectory(), "reaper_sws64.dylib");
@@ -132,7 +135,7 @@ bool Platform::SWSVersionCheck()
 
     if(Platform::FileExists(swsPlugin2_8UserPath) == true)
     {
-        reaper::BinaryStream* pStream = reaper::ReadBinaryFile(swsPlugin2_8UserPath);
+        reaper::BinaryStream *pStream = FileManager::ReadBinaryFile(swsPlugin2_8UserPath);
         if(pStream != 0)
 
         {
@@ -151,6 +154,6 @@ bool Platform::SWSVersionCheck()
     return result;
 }
 
-}} // namespace ultraschall::reaper
+} // namespace reaper
+} // namespace ultraschall
 
-#endif // #ifdef _APPLE_

@@ -57,25 +57,26 @@ bool Writer::InsertProperties(const UnicodeString& targetName, const MediaProper
         {
             const UnicodeChar*   FrameId;
             const CHAR_ENCODING  Encoding;
-            const UnicodeString& DataReference;
+            const UnicodeString& Text;
         } simpleFrameMappings[MAX_SIMPLE_FRAME_MAPPINGS]
             = {{"TALB", UTF16, standardProperties.Title()}, {"TPE1", UTF16, standardProperties.Title()},
                {"TIT2", UTF16, standardProperties.Track()}, {"TLEN", UTF8, durationString},
                {"TYER", UTF8, standardProperties.Date()},   {"TENC", UTF8, encoderString}},
             complexFrameMapping[MAX_COMPLEX_FRAME_MAPPINGS]
             = {{"COMM", UTF16, standardProperties.Comments()}, {"USLT", UTF16, standardProperties.Comments()}};
+
         for(size_t i = 0; (i < MAX_SIMPLE_FRAME_MAPPINGS) && (true == success); i++)
         {
             success = id3v2::InsertTextFrame(
-                context, simpleFrameMappings[i].FrameId, simpleFrameMappings[i].DataReference,
-                simpleFrameMappings[i].Encoding);
+                context, simpleFrameMappings[i].FrameId, simpleFrameMappings[i].Text, simpleFrameMappings[i].Encoding);
         }
+
         if(true == success)
         {
             for(size_t i = 0; (i < MAX_COMPLEX_FRAME_MAPPINGS) && (true == success); i++)
             {
-                success = id3v2::InsertCommentsFrame(
-                    context, complexFrameMapping[i].FrameId, complexFrameMapping[i].DataReference);
+                success
+                    = id3v2::InsertCommentsFrame(context, complexFrameMapping[i].FrameId, complexFrameMapping[i].Text);
             }
         }
 

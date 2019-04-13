@@ -65,7 +65,7 @@ UnicodeString VersionHandler::ThemeVersion()
                             {
                                 memset(fileBuffer, 0, fileBufferSize + 1);
                                 const int readResult
-                                    = unzReadCurrentFile(themeFile, fileBuffer, unsigned int(fileBufferSize));
+                                    = unzReadCurrentFile(themeFile, fileBuffer, (unsigned int)fileBufferSize);
                                 if(readResult > 0)
                                 {
                                     versionString = H2U(fileBuffer);

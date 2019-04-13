@@ -24,9 +24,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "ID3V2.h"
 #include "BinaryStream.h"
 #include "FileManager.h"
-#include "ID3V2.h"
 #include "PictureUtilities.h"
 #include "StringUtilities.h"
 
@@ -243,8 +243,7 @@ bool InsertUTF16TextFrame(Context* context, const UnicodeString& id, const Unico
     return success;
 }
 
-bool InsertTextFrame(
-    Context* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding)
+bool InsertTextFrame(Context* context, const UnicodeString& id, const UnicodeString& text, const CHAR_ENCODING encoding)
 {
     return (encoding == UTF16) ? InsertUTF16TextFrame(context, id, text) : InsertUTF8TextFrame(context, id, text);
 }
