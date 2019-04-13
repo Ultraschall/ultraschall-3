@@ -84,6 +84,7 @@ set(COMMON_INCLUDES
     UIMessageSupervisor.h
 	UnicodeString.h
     VersionHandler.h
+    wxwidgets_include.h
 )
 
 set(COMMON_SOURCES
@@ -132,7 +133,7 @@ set(EXTERNAL_SOURCES
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-set(PLATFORM_INLUDES Platform.h)
+set(PLATFORM_INCLUDES Platform.h)
 
 if(WIN32)
     include_directories(win32)
@@ -157,6 +158,7 @@ elseif(APPLE)
         FileManager.cpp
         VersionHandler.cpp
         PluginVersionCheck.cpp
+        macos/Platform.cpp
         PROPERTIES COMPILE_FLAGS "-x objective-c++"
     )
 elseif(UNIX)
@@ -207,7 +209,11 @@ if(WIN32)
         rpcrt4.lib
     )
 elseif(APPLE)
-    set(EXTRA_LIBRARIES "-framework AppKit")
+    set(EXTRA_LIBRARIES
+        "-framework AppKit"
+        "-framework Carbon"
+        "-framework IOKit"
+        "-framework Security")
 elseif(UNIX)
 endif()
 
