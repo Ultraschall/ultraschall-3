@@ -24,25 +24,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__
-#define __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__
+#ifndef __ULTRASCHALL_REAPER_WXWIDGETS_INCLUDE_H_INCL__
+#define __ULTRASCHALL_REAPER_WXWIDGETS_INCLUDE_H_INCL__
 
-namespace ultraschall { namespace reaper {
+// clang-format off
+#include <wx/wx.h>
+#include <wx/dialog.h>
+#include <wx/listctrl.h>
+#include <wx/filename.h>
+#include <wx/window.h>
+// clang-format on
 
-class UIApplicationImpl;
-
-class UIApplication
-{
-public:
-    static void Initialize(void* hInstance, void* hwnd);
-    static void Uninitialize();
-
-	static void* GetMainWindow();
-
-private:
-    static UIApplicationImpl* impl_;
-};
-
-}} // namespace ultraschall::reaper
-
-#endif // #ifndef __ULTRASCHALL_REAPER_UI_APPLICATION_H_INCL__
+#endif // #ifndef __ULTRASCHALL_REAPER_WXWIDGETS_INCLUDE_H_INCL__

@@ -25,44 +25,101 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UIApplication.h"
-#include "ReaperEntryPoints.h"
+#include "Common.h"
+
+#include "wxwidgets_include.h"
 
 namespace ultraschall { namespace reaper {
 
-IMPLEMENT_APP_NO_MAIN(UIApplication)
-
-REAPER_PLUGIN_HINSTANCE UIApplication::hInstance_ = 0;
-wxWindow* UIApplication::mainWindow_ = 0;
-
-void UIApplication::Initialize(REAPER_PLUGIN_HINSTANCE hInstance)
+class UIApplicationImpl : public wxApp
 {
-    hInstance_ = hInstance;
-    wxEntryStart(hInstance_);
+public:
+    UIApplicationImpl();
+    virtual ~UIApplicationImpl();
 
-	mainWindow_ = new wxWindow();
-	mainWindow_->SetHWND((WXHWND)reaper_api::GetMainHwnd());
-    mainWindow_->AdoptAttributesFromHWND();
-    wxTopLevelWindows.Append(mainWindow_);
+    void Initialize(void* hInstance, void* hwnd);
+    void Uninitialize();
+
+    wxWindow* GetMainWindow();
+
+    virtual bool OnInit();
+
+private:
+    void*     hInstance_;
+    wxWindow* mainWindow_;
+};
+
+IMPLEMENT_APP_NO_MAIN(UIApplicationImpl)
+
+UIApplicationImpl::UIApplicationImpl() : wxApp(), hInstance_(nullptr), mainWindow_(nullptr) {}
+
+UIApplicationImpl::~UIApplicationImpl()
+{
+    delete mainWindow_;
+    mainWindow_ = nullptr;
+    hInstance_  = nullptr;
 }
 
-void UIApplication::Uninitialize()
+void UIApplicationImpl::Initialize(void* hInstance, void* hwnd)
 {
+    hInstance_ = hInstance;
+
+#ifdef _WIN32
+    wxEntryStart((HINSTANCE)hInstance_);
+
+    mainWindow_ = new wxWindow();
+    mainWindow_->SetHWND((WXHWND)hwnd);
+    mainWindow_->AdoptAttributesFromHWND();
+    wxTopLevelWindows.Append(mainWindow_);
+#else  /// #ifdef _WIN32
+    wxInitialize();
+#endif // #ifdef _WIN32
+}
+
+void UIApplicationImpl::Uninitialize()
+{
+#ifdef _WIN32
     wxTopLevelWindows.DeleteObject(mainWindow_);
     mainWindow_->SetHWND((WXHWND)0);
     delete mainWindow_;
     mainWindow_ = 0;
 
     wxEntryCleanup();
+#else  // #ifdef _WIN32
+    wxUninitialize();
+#endif // #ifdef _WIN32
+
+    hInstance_ = 0;
 }
 
-wxWindow* UIApplication::GetMainWindow()
+wxWindow* UIApplicationImpl::GetMainWindow()
 {
     return mainWindow_;
 }
 
-bool UIApplication::OnInit()
+bool UIApplicationImpl::OnInit()
 {
     return true;
+}
+
+UIApplicationImpl* UIApplication::impl_ = new UIApplicationImpl();
+
+void UIApplication::Initialize(void* hInstance, void* hwnd)
+{
+    PRECONDITION(impl_ != nullptr);
+    impl_->Initialize(hInstance, hwnd);
+}
+
+void UIApplication::Uninitialize()
+{
+    PRECONDITION(impl_ != nullptr);
+    impl_->Uninitialize();
+}
+
+void* UIApplication::GetMainWindow()
+{
+    PRECONDITION_RETURN(impl_ != nullptr, nullptr);
+    return impl_->GetMainWindow();
 }
 
 }} // namespace ultraschall::reaper

@@ -32,7 +32,7 @@
 #include <shlobj.h>
 #include <windows.h>
 
-#include "wx/filename.h"
+#include <wx/filename.h>
 
 #include "FileManager.h"
 #include "Platform.h"

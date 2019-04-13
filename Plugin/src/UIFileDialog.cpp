@@ -26,8 +26,7 @@
 
 #include "UIFileDialog.h"
 
-#include "wx/filename.h"
-#include "wx/wx.h"
+#include "wxwidgets_include.h"
 
 namespace ultraschall { namespace reaper {
 

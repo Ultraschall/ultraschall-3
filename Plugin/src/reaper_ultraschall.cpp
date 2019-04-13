@@ -24,10 +24,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <wx/wx.h>
-
 #include "Application.h"
-#include "ReaperEntryPoints.h"
 #include "ServiceStatus.h"
 #include "UIApplication.h"
 #include "UIMessageSupervisor.h"
@@ -40,6 +37,8 @@
 #include "SaveChapterMarkersToProjectAction.h"
 #include "SystemProperties.h"
 
+#include "ReaperEntryPoints.h"
+
 extern "C" {
 REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
     REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t* pPluginInfo)
@@ -51,7 +50,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
         {
             if(ultraschall::reaper::ReaperEntryPoints::Setup(hInstance, pPluginInfo) == true)
             {
-                ultraschall::reaper::UIApplication::Initialize(hInstance);
+                ultraschall::reaper::UIApplication::Initialize(hInstance, reaper_api::GetMainHwnd());
 
                 if(ultraschall::reaper::QuerySetPluginVersion() == true)
                 {

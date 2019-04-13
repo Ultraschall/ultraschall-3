@@ -29,7 +29,7 @@
 #include "UIApplication.h"
 #include "UIMessageDialog.h"
 
-#include <wx/listctrl.h>
+#include "wxwidgets_include.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -70,7 +70,7 @@ END_EVENT_TABLE()
 UIMessageDisplay::UIMessageDisplay() : closeButton_(0), itemList_(0), layout_(0) {}
 
 UIMessageDisplay::UIMessageDisplay(const UIMessageArray& items) :
-    wxDialog(UIApplication::GetMainWindow(), wxID_ANY, UI_MESSAGE_DIALOG_CAPTION, wxDefaultPosition, wxSize(800, 500)),
+    wxDialog(reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), wxID_ANY, UI_MESSAGE_DIALOG_CAPTION, wxDefaultPosition, wxSize(800, 500)),
     closeButton_(0), itemList_(0), layout_(0)
 {
     static const wxColour background(43, 43, 43);
@@ -79,11 +79,12 @@ UIMessageDisplay::UIMessageDisplay(const UIMessageArray& items) :
     SetBackgroundColour(background);
     SetForegroundColour(background);
 
-    layout_ = new wxBoxSizer(wxVERTICAL);
+    layout_      = new wxBoxSizer(wxVERTICAL);
     closeButton_ = new wxButton(this, wxID_ANY, "Close", wxPoint(10, 435), wxSize(70, 25));
     layout_->Add(closeButton_, 1);
 
-    itemList_ = new wxListView(this, wxID_ANY, wxPoint(10, 10), wxSize(775, 412), wxBORDER | wxLC_REPORT | wxLC_NO_HEADER);
+    itemList_
+        = new wxListView(this, wxID_ANY, wxPoint(10, 10), wxSize(775, 412), wxBORDER | wxLC_REPORT | wxLC_NO_HEADER);
     itemList_->SetBackgroundColour(background);
     itemList_->SetForegroundColour(foreground);
     itemList_->InsertColumn(0, "#", wxLIST_FORMAT_RIGHT, 20);
