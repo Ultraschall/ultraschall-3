@@ -37,8 +37,8 @@ public:
     UIApplicationImpl();
     virtual ~UIApplicationImpl();
 
-    void Initialize(void* hInstance, void* hwnd);
-    void Uninitialize();
+    void Setup(void* hInstance, void* hwnd);
+    void Teardown();
 
     wxWindow* GetMainWindow();
 
@@ -60,7 +60,7 @@ UIApplicationImpl::~UIApplicationImpl()
     hInstance_  = nullptr;
 }
 
-void UIApplicationImpl::Initialize(void* hInstance, void* hwnd)
+void UIApplicationImpl::Setup(void* hInstance, void* hwnd)
 {
     hInstance_ = hInstance;
 
@@ -76,7 +76,7 @@ void UIApplicationImpl::Initialize(void* hInstance, void* hwnd)
 #endif // #ifdef _WIN32
 }
 
-void UIApplicationImpl::Uninitialize()
+void UIApplicationImpl::Teardown()
 {
 #ifdef _WIN32
     wxTopLevelWindows.DeleteObject(mainWindow_);
@@ -107,13 +107,13 @@ UIApplicationImpl* UIApplication::impl_ = new UIApplicationImpl();
 void UIApplication::Initialize(void* hInstance, void* hwnd)
 {
     PRECONDITION(impl_ != nullptr);
-    impl_->Initialize(hInstance, hwnd);
+    impl_->Setup(hInstance, hwnd);
 }
 
 void UIApplication::Uninitialize()
 {
     PRECONDITION(impl_ != nullptr);
-    impl_->Uninitialize();
+    impl_->Teardown();
 }
 
 void* UIApplication::GetMainWindow()

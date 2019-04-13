@@ -79,9 +79,7 @@ ServiceStatus InsertChapterMarkersAction::Execute()
 
 bool InsertChapterMarkersAction::ConfigureTargets()
 {
-    bool                result = false;
     UIMessageSupervisor supervisor;
-    size_t              issueCount = 0;
 
     chapterMarkers_.clear();
 
@@ -136,9 +134,6 @@ bool InsertChapterMarkersAction::ConfigureTargets()
 
 bool InsertChapterMarkersAction::ConfigureSources()
 {
-    bool   result            = false;
-    size_t invalidAssetCount = 0;
-
     source_.clear();
 
     UIFileDialog fileDialog("Import chapter markers");

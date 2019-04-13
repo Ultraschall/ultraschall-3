@@ -67,11 +67,11 @@ IMPLEMENT_DYNAMIC_CLASS(UIMessageDisplay, wxDialog)
 BEGIN_EVENT_TABLE(UIMessageDisplay, wxDialog)
 END_EVENT_TABLE()
 
-UIMessageDisplay::UIMessageDisplay() : closeButton_(0), itemList_(0), layout_(0) {}
+UIMessageDisplay::UIMessageDisplay() : layout_(0), closeButton_(0), itemList_(0) {}
 
 UIMessageDisplay::UIMessageDisplay(const UIMessageArray& items) :
     wxDialog(reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), wxID_ANY, UI_MESSAGE_DIALOG_CAPTION, wxDefaultPosition, wxSize(800, 500)),
-    closeButton_(0), itemList_(0), layout_(0)
+    layout_(0), closeButton_(0), itemList_(0)
 {
     static const wxColour background(43, 43, 43);
     static const wxColour foreground(244, 247, 255);

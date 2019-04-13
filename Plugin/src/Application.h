@@ -30,6 +30,7 @@
 #include "Common.h"
 #include "CustomActionFactory.h"
 #include "CustomActionManager.h"
+#include "ReaperGateway.h"
 
 namespace ultraschall { namespace reaper {
 
