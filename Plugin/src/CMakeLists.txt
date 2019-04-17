@@ -34,7 +34,9 @@ include_directories(
     ${REAPER_INCLUDE_PATH}
 )
 
-if(NOT UNIX)
+if(WIN32)
+    include_directories(${LIBMP4V2_INCLUDE_PATH})
+elseif(APPLE)
     include_directories(${LIBMP4V2_INCLUDE_PATH})
 endif()
 
@@ -163,7 +165,6 @@ elseif(APPLE)
         macos/Platform.cpp
         PROPERTIES COMPILE_FLAGS "-x objective-c++"
     )
-elseif(UNIX)
 endif()
 
 source_group("Header Files" FILES
@@ -217,7 +218,6 @@ elseif(APPLE)
         "-framework Carbon"
         "-framework IOKit"
         "-framework Security")
-elseif(UNIX)
 endif()
 
 target_link_libraries(reaper_ultraschall
@@ -234,7 +234,9 @@ add_dependencies(reaper_ultraschall curl-build)
 add_dependencies(reaper_ultraschall taglib-build)
 add_dependencies(reaper_ultraschall wxwidgets-build)
 
-if(NOT UNIX)
+if(WIN32)
+	add_dependencies(reaper_ultraschall mp4v2-build)
+elseif(APPLE)
 	add_dependencies(reaper_ultraschall mp4v2-build)
 endif()
 

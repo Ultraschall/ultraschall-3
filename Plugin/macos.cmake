@@ -125,31 +125,6 @@ message(STATUS "LIBTAG_LIBRARY_PATH = ${LIBTAG_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
-# configure json11
-
-set(CURRENT_EXTERNAL_PROJECT json11)
-message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
-
-ExternalProject_Add(json11
-    PREFIX libjson11
-	GIT_REPOSITORY https://github.com/dropbox/json11.git
-    GIT_TAG v1.0.0
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
-)
-
-ExternalProject_Get_Property(json11 SOURCE_DIR)
-ExternalProject_Get_Property(json11 BINARY_DIR)
-
-set(LIBJSON11_INCLUDE_PATH ${SOURCE_DIR})
-set(LIBJSON11_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/libjson11.a)
-
-message(STATUS "LIBJSON11_INCLUDE_PATH = ${LIBJSON11_INCLUDE_PATH}")
-message(STATUS "LIBJSON11_LIBRARY_PATH = ${LIBJSON11_LIBRARY_PATH}")
-
-message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
-
 # configure wxwidgets
 
 set(CURRENT_EXTERNAL_PROJECT wxwidgets)
