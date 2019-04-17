@@ -29,12 +29,14 @@ set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include/jmde)
 include_directories(
     ${LIBZ_INCLUDE_PATH}
     ${LIBCURL_INCLUDE_PATH}
-    ${LIBMP4V2_INCLUDE_PATH}
     ${LIBTAG_INCLUDE_PATH}
-    ${LIBJSON11_INCLUDE_PATH}
     ${LIBWXWIDGETS_INCLUDE_PATH}
     ${REAPER_INCLUDE_PATH}
 )
+
+if(NOT UNIX)
+    include_directories(${LIBMP4V2_INCLUDE_PATH})
+endif()
 
 set(COMMON_INCLUDES
     Application.h
@@ -193,6 +195,7 @@ add_library(reaper_ultraschall SHARED
 	${EXTERNAL_SOURCES}
     ${EXTRA_SOURCES}
 )
+set_property(TARGET reaper_ultraschall PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(WIN32)
     set(EXTRA_LIBRARIES
@@ -222,16 +225,17 @@ target_link_libraries(reaper_ultraschall
     ${LIBCURL_LIBRARY_PATH}
     ${LIBMP4V2_LIBRARY_PATH}
     ${LIBTAG_LIBRARY_PATH}
-    ${LIBJSON11_LIBRARY_PATH}
     ${LIBWXWIDGETS_LIBRARY_PATH}
     ${EXTRA_LIBRARIES}
 )
 
 add_dependencies(reaper_ultraschall zlib-build)
 add_dependencies(reaper_ultraschall curl-build)
-add_dependencies(reaper_ultraschall mp4v2-build)
 add_dependencies(reaper_ultraschall taglib-build)
-add_dependencies(reaper_ultraschall json11-build)
 add_dependencies(reaper_ultraschall wxwidgets-build)
+
+if(NOT UNIX)
+	add_dependencies(reaper_ultraschall mp4v2-build)
+endif()
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")

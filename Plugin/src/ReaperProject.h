@@ -94,7 +94,6 @@ private:
     ProjectReference nativeReference_ = nullptr;
     uint32_t         markerStatus_    = -1;
 
-    typedef MarkerArray MarkerArray;
     MarkerArray         allMarkers_;
 
     bool        InsertMarker(const Marker& marker);

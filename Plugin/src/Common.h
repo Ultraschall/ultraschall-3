@@ -27,6 +27,11 @@
 #ifndef __ULTRASCHALL_REAPER_COMMON_H_INCL__
 #define __ULTRASCHALL_REAPER_COMMON_H_INCL__
 
+#ifdef __GNUC__
+#undef min
+#undef max
+#endif // #ifdef __GNUC__
+
 #include <cctype>
 #include <cstdint>
 #include <cstdlib>

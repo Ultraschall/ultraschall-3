@@ -27,6 +27,8 @@
 #include "ISOBMFFWriter.h"
 #include "ISOBMFF.h"
 
+#ifndef __GNUC__
+
 namespace ultraschall { namespace reaper { namespace isobmff {
 
 bool Writer::InsertProperties(const UnicodeString& targetName, const MediaProperties& properties)
@@ -106,3 +108,6 @@ bool Writer::ReplaceChapterMarkers(const UnicodeString& targetName, const Marker
 }
 
 }}} // namespace ultraschall::reaper::isobmff
+
+#endif // #ifndef __GNUC__
+

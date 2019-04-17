@@ -32,6 +32,7 @@
 
 #include <unzip.h>
 #include <zlib.h>
+#include <cstring>
 
 namespace ultraschall { namespace reaper {
 

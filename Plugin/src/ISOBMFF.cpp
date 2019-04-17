@@ -30,6 +30,8 @@
 #include "Marker.h"
 #include "PictureUtilities.h"
 
+#ifndef __GNUC__
+
 #define MP4V2_EXPORTS 0
 #define MP4V2_NO_STDINT_DEFS 1
 #include <mp4v2/mp4v2.h>
@@ -256,3 +258,6 @@ bool InsertChapterMarkers(const Context* context, const MarkerArray& markers)
 }
 
 }}} // namespace ultraschall::reaper::isobmff
+
+#endif // #ifndef __GNUC__
+

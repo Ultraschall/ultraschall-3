@@ -30,6 +30,8 @@
 #include "Common.h"
 #include "ITagWriter.h"
 
+#ifndef __GNUC__
+
 namespace ultraschall { namespace reaper { namespace isobmff {
 
 class Writer : public ITagWriter
@@ -48,5 +50,7 @@ protected:
 };
 
 }}} // namespace ultraschall::reaper::isobmff
+
+#endif // #ifndef __GNUC__
 
 #endif // #ifndef __ULTRASCHALL_REAPER_MP3_WRITER_H_INCL__

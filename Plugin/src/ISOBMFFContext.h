@@ -27,6 +27,8 @@
 #ifndef __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
 #define __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
 
+#ifndef __GNUC__
+
 #define MP4V2_EXPORTS 0
 #define MP4V2_NO_STDINT_DEFS 1
 #include <mp4v2/mp4v2.h>
@@ -70,5 +72,7 @@ inline const MP4Tags* Context::Tags() const
 }
 
 }}} // namespace ultraschall::reaper::isobmff
+
+#endif // #ifndef __GNUC__
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_CONTEXT_H_INCL__
