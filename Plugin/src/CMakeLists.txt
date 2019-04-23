@@ -140,9 +140,6 @@ elseif(UNIX)
     set(PLATFORM_SOURCES linux/Platform.cpp)
 endif()
 
-set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
-set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
-
 if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
@@ -215,5 +212,9 @@ target_link_libraries(reaper_ultraschall
     ${LIBWXWIDGETS_LIBRARY_PATH}
     ${EXTRA_LIBRARIES}
 )
+
+if(UNIX)
+    add_dependencies(reaper_ultraschall taglib-build)
+endif()
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
