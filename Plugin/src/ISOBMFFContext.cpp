@@ -28,8 +28,6 @@
 
 #include "ISOBMFFContext.h"
 
-#ifndef __GNUC__
-
 namespace ultraschall { namespace reaper { namespace isobmff {
 
 Context::Context(const UnicodeString& targetName)
@@ -73,6 +71,4 @@ void Context::Reset()
 }
 
 }}} // namespace ultraschall::reaper::isobmff
-
-#endif // #ifndef __GNUC__
 

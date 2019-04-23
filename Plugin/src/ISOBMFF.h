@@ -31,8 +31,6 @@
 #include "ISOBMFFContext.h"
 #include "Marker.h"
 
-#ifndef __GNUC__
-
 namespace ultraschall { namespace reaper { namespace isobmff {
 
 Context* StartTransaction(const UnicodeString& targetName);
@@ -51,8 +49,6 @@ bool InsertCoverImage(const Context* context, const UnicodeString& file);
 bool InsertChapterMarkers(const Context* context, const MarkerArray& markers);
 
 }}} // namespace ultraschall::reaper::isobmff
-
-#endif // #ifndef __GNUC__
 
 #endif // #ifndef __ULTRASCHALL_REAPER_ISOBMFF_H_INCL__
 

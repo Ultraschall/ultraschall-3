@@ -24,13 +24,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cstring>
+
 #include "ISOBMFF.h"
 #include "Common.h"
 #include "FileManager.h"
 #include "Marker.h"
 #include "PictureUtilities.h"
-
-#ifndef __GNUC__
 
 #define MP4V2_EXPORTS 0
 #define MP4V2_NO_STDINT_DEFS 1
@@ -259,5 +259,4 @@ bool InsertChapterMarkers(const Context* context, const MarkerArray& markers)
 
 }}} // namespace ultraschall::reaper::isobmff
 
-#endif // #ifndef __GNUC__
 
