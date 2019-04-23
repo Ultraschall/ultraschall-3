@@ -8,30 +8,19 @@ include(ExternalProject)
 set(CURRENT_EXTERNAL_PROJECT zlib)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-ExternalProject_Add(zlib
-    PREFIX libz
-	GIT_REPOSITORY https://github.com/madler/zlib.git
-    GIT_TAG v1.2.11
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-)
+find_package(ZLIB)
+if(ZLIB_FOUND)
+	message(STATUS "Found zlib version " ${ZLIB_VERSION_STRING})
 
-ExternalProject_Get_Property(zlib SOURCE_DIR)
-ExternalProject_Get_Property(zlib BINARY_DIR)
-
-set(LIBZ_INCLUDE_PATH
-    ${BINARY_DIR}
-    ${SOURCE_DIR}
-    ${SOURCE_DIR}/contrib/minizip
-)
-
-set(LIBZ_LIBRARY_PATH ${BINARY_DIR}/libz.a)
-set(LIBZ_SOURCE_PATH ${SOURCE_DIR})
+	find_package(PkgConfig)
+	pkg_check_modules(UNZIP minizip)
+        find_library(minizip_LIBRARY minizip)
+	set(LIBZ_INCLUDE_PATH ${ZLIB_INCLUDE_DIRS} ${UNZIP_INCLUDEDIR})
+	set(LIBZ_LIBRARY_PATH ${ZLIB_LIBRARIES} ${minizip_LIBRARY})
+endif()
 
 message(STATUS "LIBZ_INCLUDE_PATH = ${LIBZ_INCLUDE_PATH}")
 message(STATUS "LIBZ_LIBRARY_PATH = ${LIBZ_LIBRARY_PATH}")
-message(STATUS "LIBZ_SOURCE_PATH  = ${LIBZ_SOURCE_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
@@ -40,20 +29,12 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 set(CURRENT_EXTERNAL_PROJECT curl)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-ExternalProject_Add(curl
-    PREFIX libcurl
-	GIT_REPOSITORY https://github.com/curl/curl.git
-	GIT_TAG curl-7_63_0
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_CURL_EXE=OFF -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCURL_STATICLIB=ON -DHTTP_ONLY=ON -DENABLE_IPV6=ON -DCMAKE_USE_OPENSSL=ON -DCURL_CA_PATH=none -DBUILD_TESTING=OFF
-)
-
-ExternalProject_Get_Property(curl SOURCE_DIR)
-ExternalProject_Get_Property(curl BINARY_DIR)
-
-set(LIBCURL_INCLUDE_PATH ${SOURCE_DIR}/include)
-set(LIBCURL_LIBRARY_PATH ${BINARY_DIR}/lib/libcurl.a)
+find_package(CURL)
+if(CURL_FOUND)
+	message(STATUS "Found curl version " ${CURL_VERSION_STRING})
+	set(LIBCURL_INCLUDE_PATH ${CURL_INCLUDE_DIRS})
+	set(LIBCURL_LIBRARY_PATH ${CURL_LIBRARIES})
+endif()
 
 message(STATUS "LIBCURL_INCLUDE_PATH = ${LIBCURL_INCLUDE_PATH}")
 message(STATUS "LIBCURL_LIBRARY_PATH = ${LIBCURL_LIBRARY_PATH}")
@@ -65,32 +46,29 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 set(CURRENT_EXTERNAL_PROJECT taglib)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-include(ExternalProject)
-ExternalProject_Add(taglib
-    PREFIX libtag
-	GIT_REPOSITORY https://github.com/taglib/taglib.git
-	GIT_TAG v1.11.1
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_BINDINGS=OFF
-)
-
-ExternalProject_Get_Property(taglib SOURCE_DIR)
-ExternalProject_Get_Property(taglib BINARY_DIR)
-
-set(LIBTAG_INCLUDE_PATH
-    ${BINARY_DIR} # taglib_config.h
-    ${SOURCE_DIR}/taglib
-    ${SOURCE_DIR}/taglib/toolkit
-    ${SOURCE_DIR}/taglib/mpeg
-    ${SOURCE_DIR}/taglib/mpeg/id3v2
-    ${SOURCE_DIR}/taglib/mpeg/id3v2/frames
-)
-
-set(LIBTAG_LIBRARY_PATH ${BINARY_DIR}/taglib/libtag.a)
+find_package(PkgConfig)
+pkg_check_modules(LIBTAG taglib)
+find_library(taglib_LIBRARY tag)
+set(LIBTAG_INCLUDE_PATH ${LIBTAG_INCLUDEDIR})
+set(LIBTAG_LIBRARY_PATH ${taglib_LIBRARY})
 
 message(STATUS "LIBTAG_INCLUDE_PATH = ${LIBTAG_INCLUDE_PATH}")
 message(STATUS "LIBTAG_LIBRARY_PATH = ${LIBTAG_LIBRARY_PATH}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure mp4v2
+
+set(CURRENT_EXTERNAL_PROJECT mp4v2)
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring...")
+
+find_package(PkgConfig)
+find_library(mp4v2_LIBRARY mp4v2)
+set(LIBMP4V2_INCLUDE_PATH /usr/include)
+set(LIBMP4V2_LIBRARY_PATH ${mp4v2_LIBRARY})
+
+message(STATUS "LIBMP4V2_INCLUDE_PATH = ${LIBMP4V2_INCLUDE_PATH}")
+message(STATUS "LIBMP4V2_LIBRARY_PATH = ${LIBMP4V2_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
@@ -99,29 +77,15 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 set(CURRENT_EXTERNAL_PROJECT wxwidgets)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-ExternalProject_Add(wxwidgets
-    PREFIX libwxwidgets
-	GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-    GIT_TAG v3.1.2
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-    #CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DwxBUILD_SAMPLES=OFF -DwxBUILD_TESTS=OFF -DwxBUILD_DEMOS=OFF -DwxBUILD_INSTALL=OFF -DwxUSE_STL=ON -DwxUSE_STD_CONTAINERS=ON
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DwxBUILD_SHARED=OFF -DwxBUILD_PRECOMP=OFF -DwxUSE_STL=ON -DwxUSE_LIBLZMA=ON -DwxUSE_LIBPNG=builtin -DwxBUILD_TOOLKIT=gtk3 -DwxUSE_DETECT_SM=OFF -DwxBUILD_SAMPLES=OFF -DwxBUILD_TESTS=OFF -DwxBUILD_DEMOS=OFF -DwxBUILD_INSTALL=OFF -DwxUSE_XRC=OFF -DwxUSE_HELP=OFF -DwxUSE_WXHTML_HELP=OFF DwxUSE_XML=OFF -DwxUSE_AUI=OFF -DwxUSE_PROPGRID=OFF -DwxUSE_RIBBON=OFF -Dwx_USE_STC_=OFF -DwxUSE_LOGGUI=OFF -DwxUSE_LOGWINDOW=OFF -DwxUSE_LOG_DIALOG=OFF -DwxUSE_POSTSCRIPT=OFF -DwxUSE_AFM_FOR_POSTSCRIPT=OFF -DwxUSE_PRINTING_ARCHITECTURE=OFF -DwxUSE_SVG=OFF -DwxUSE_WEBVIEW=OFF
-)
-
-ExternalProject_Get_Property(wxwidgets SOURCE_DIR)
-ExternalProject_Get_Property(wxwidgets BINARY_DIR)
-
-set(LIBWXWIDGETS_INCLUDE_PATH
-    ${BINARY_DIR}/lib/wx/include/gtk3-unicode-static-3.1
-    ${SOURCE_DIR}/include
-)
-
-    set(LIBWXWIDGETS_LIBRARY_PATH
-    ${BINARY_DIR}/lib/libwx_baseu-3.1.a
-    ${BINARY_DIR}/lib/libwx_gtk3u_core-3.1.a
-    ${BINARY_DIR}/lib/libwxpng-3.1.a
-    )
+set(wxWidgets_CONFIG_EXECUTABLE wx-config-gtk3)
+#set(wxWidgets_CONFIG_OPTIONS --toolkit=core --toolkit=base --prefix=/usr)
+find_package(wxWidgets REQUIRED core base)
+if(wxWidgets_FOUND)
+	include(${wxWidgets_USE_FILE})
+	message(STATUS "Found wxwidgets version " ${wxWidgets_VERSION_STRING})
+	set(LIBWXWIDGETS_INCLUDE_PATH ${wxWidgets_INCLUDE_DIRS})
+	set(LIBWXWIDGETS_LIBRARY_PATH ${wxWidgets_LIBRARIES})
+endif()
 
 message(STATUS "LIBWXWIDGETS_INCLUDE_PATH = ${LIBWXWIDGETS_INCLUDE_PATH}")
 message(STATUS "LIBWXWIDGETS_LIBRARY_PATH = ${LIBWXWIDGETS_LIBRARY_PATH}")
