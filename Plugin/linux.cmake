@@ -46,29 +46,11 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 set(CURRENT_EXTERNAL_PROJECT taglib)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-include(ExternalProject)
-ExternalProject_Add(taglib
-    PREFIX libtag
-	GIT_REPOSITORY https://github.com/taglib/taglib.git
-	GIT_TAG v1.11.1
-    STEP_TARGETS build
-    EXCLUDE_FROM_ALL TRUE
-	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_BINDINGS=OFF
-)
-
-ExternalProject_Get_Property(taglib SOURCE_DIR)
-ExternalProject_Get_Property(taglib BINARY_DIR)
-
-set(LIBTAG_INCLUDE_PATH
-    ${BINARY_DIR} # taglib_config.h
-    ${SOURCE_DIR}/taglib
-    ${SOURCE_DIR}/taglib/toolkit
-    ${SOURCE_DIR}/taglib/mpeg
-    ${SOURCE_DIR}/taglib/mpeg/id3v2
-    ${SOURCE_DIR}/taglib/mpeg/id3v2/frames
-)
-
-set(LIBTAG_LIBRARY_PATH ${BINARY_DIR}/taglib/${CMAKE_BUILD_TYPE}/tag.lib)
+find_package(PkgConfig)
+pkg_check_modules(LIBTAG taglib)
+find_library(taglib_LIBRARY minizip)
+set(LIBTAG_INCLUDE_PATH ${LIBTAG_INCLUDEDIR})
+set(LIBTAG_LIBRARY_PATH ${taglib_LIBRARY})
 
 message(STATUS "LIBTAG_INCLUDE_PATH = ${LIBTAG_INCLUDE_PATH}")
 message(STATUS "LIBTAG_LIBRARY_PATH = ${LIBTAG_LIBRARY_PATH}")

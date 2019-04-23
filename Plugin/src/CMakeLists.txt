@@ -213,8 +213,4 @@ target_link_libraries(reaper_ultraschall
     ${EXTRA_LIBRARIES}
 )
 
-if(UNIX)
-    add_dependencies(reaper_ultraschall taglib-build)
-endif()
-
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
