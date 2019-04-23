@@ -48,7 +48,7 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ..
 
 find_package(PkgConfig)
 pkg_check_modules(LIBTAG taglib)
-find_library(taglib_LIBRARY minizip)
+find_library(taglib_LIBRARY tag)
 set(LIBTAG_INCLUDE_PATH ${LIBTAG_INCLUDEDIR})
 set(LIBTAG_LIBRARY_PATH ${taglib_LIBRARY})
 
@@ -77,7 +77,6 @@ message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 set(CURRENT_EXTERNAL_PROJECT wxwidgets)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-set(wxWidgets_CONFIG_EXECUTABLE wx-config-gtk3)
 find_package(wxWidgets REQUIRED core base)
 if(wxWidgets_FOUND)
 	include(${wxWidgets_USE_FILE})
