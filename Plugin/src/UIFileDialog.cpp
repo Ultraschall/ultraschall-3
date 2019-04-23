@@ -59,7 +59,7 @@ UnicodeString UIFileDialog::BrowseForFile(const UnicodeString& fileExtensions)
         resultPath.Append(fileDialog.GetDirectory());
         resultPath.Append(wxFileName::GetPathSeparator());
         resultPath.Append(fileDialog.GetFilename());
-        filename = H2U(resultPath).c_str();
+        filename = H2U(UnicodeString(resultPath.mb_str()));
     }
 
     return filename;
@@ -110,7 +110,7 @@ UnicodeString UIFileDialog::BrowseForDirectory()
     {
         wxString resultPath;
         resultPath.Append(directoryDialog.GetPath());
-        directory = H2U(resultPath);
+        directory = H2U(UnicodeString(resultPath.mb_str()));
     }
 
     return directory;
