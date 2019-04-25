@@ -1,52 +1,55 @@
 # UBUNTU BIONIC (18.04)
 
-## INSTALL THE ESSENTIAL BUILD TOOLS
+## Build Environment
 
-```bash
-sudo apt-get update
-sudo apt-get install -y build-essential
-```
+1. Install the essential build tools
 
-## INSTALL GIT
+    ```bash
+    sudo apt-get update
+    sudo apt-get install -y build-essential
+    ```
 
-```bash
-sudo apt-get install -y git
-```
+2. Install git
 
-## CHECK OUT ULTRASCHALL
+    ```bash
+    sudo apt-get install -y git
+    ```
 
-```bash
-git clone https://github.com/Ultraschall/ultraschall-3.git
-```
+3. Check out the plugin
 
-## INSTALL THE REQUIRED DEPENDENCIES
+    ```bash
+    git clone https://github.com/Ultraschall/ultraschall-3.git
+    ```
 
-```bash
-sudo apt-get install -y libz-dev
-sudo apt-get install -y libminizip-dev
-sudo apt-get install -y libcurl4-openssl-dev
-sudo apt-get install -y libtag1-dev
-sudo apt-get install -y libmp4v2-dev
-sudo apt-get install -y libgtk-3-dev
-sudo apt-get install -y libwxgtk3.0-dev
-```
+4. Install the required dependencies
 
-## INSTALL CMAKE
+    ```bash
+    sudo apt-get install -y libz-dev
+    sudo apt-get install -y libminizip-dev
+    sudo apt-get install -y libcurl4-openssl-dev
+    sudo apt-get install -y libtag1-dev
+    sudo apt-get install -y libmp4v2-dev
+    sudo apt-get install -y libgtk-3-dev
+    sudo apt-get install -y libwxgtk3.0-dev
+    ```
 
-```bash
-sudo apt-get install -y cmake
-```
+5. Install cmake
 
-## SETUP THE BUILD ENVIRONMENT
+    ```bash
+    sudo apt-get install -y cmake
+    ```
 
-```bash
-cd ultraschall-3/Plugin
-mkdir build && cd build
-cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../
-```
+6. Configure the plugin
 
-## BUILD THE ULTRASCHALL PLUGIN FOR REAPER
+    ```bash
+    cd ultraschall-3
+    cd Plugin
+    mkdir build && cd build
+    cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../
+    ```
 
-```bash
-cmake --build . --target reaper_ultraschall
-```
+## Build Process
+
+    ```bash
+    cmake --build . --target reaper_ultraschall
+    ```
