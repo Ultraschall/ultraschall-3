@@ -29,8 +29,9 @@ set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include/jmde)
 include_directories(
     ${LIBZ_INCLUDE_PATH}
     ${LIBCURL_INCLUDE_PATH}
-    ${LIBTAG_INCLUDE_PATH}
     ${LIBMP4V2_INCLUDE_PATH}
+    ${LIBTAG_INCLUDE_PATH}
+    ${LIBJSON11_INCLUDE_PATH}
     ${LIBWXWIDGETS_INCLUDE_PATH}
     ${REAPER_INCLUDE_PATH}
 )
@@ -125,9 +126,14 @@ set(COMMON_SOURCES
     reaper_ultraschall.cpp
 )
 
+    set(EXTERNAL_SOURCES
+    ${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c
+    ${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c
+)
+
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-set(PLATFORM_INCLUDES Platform.h)
+set(PLATFORM_INLUDES Platform.h)
 
 if(WIN32)
     include_directories(win32)
@@ -139,6 +145,9 @@ elseif(UNIX)
     include_directories(linux)
     set(PLATFORM_SOURCES linux/Platform.cpp)
 endif()
+
+    set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
+    set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
 
 if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
@@ -172,6 +181,7 @@ message(STATUS "COMMON_INCLUDES   = ${COMMON_INCLUDES}")
 message(STATUS "COMMON_SOURCES    = ${COMMON_SOURCES}")
 message(STATUS "PLATFORM_INCLUDES = ${PLATFORM_INCLUDES}")
 message(STATUS "PLATFORM_SOURCES  = ${PLATFORM_SOURCES}")
+message(STATUS "EXTERNAL_SOURCES  = ${EXTERNAL_SOURCES}")
 message(STATUS "EXTRA_SOURCES     = ${EXTRA_SOURCES}")
 
 add_library(reaper_ultraschall SHARED
@@ -179,6 +189,7 @@ add_library(reaper_ultraschall SHARED
     ${COMMON_SOURCES}
     ${PLATFORM_INCLUDES}
     ${PLATFORM_SOURCES}
+    ${EXTERNAL_SOURCES}
     ${EXTRA_SOURCES}
 )
 
@@ -209,8 +220,16 @@ target_link_libraries(reaper_ultraschall
     ${LIBCURL_LIBRARY_PATH}
     ${LIBMP4V2_LIBRARY_PATH}
     ${LIBTAG_LIBRARY_PATH}
+    ${LIBJSON11_LIBRARY_PATH}
     ${LIBWXWIDGETS_LIBRARY_PATH}
     ${EXTRA_LIBRARIES}
 )
+
+    add_dependencies(reaper_ultraschall zlib-build)
+    add_dependencies(reaper_ultraschall curl-build)
+    add_dependencies(reaper_ultraschall mp4v2-build)
+    add_dependencies(reaper_ultraschall taglib-build)
+    add_dependencies(reaper_ultraschall json11-build)
+    add_dependencies(reaper_ultraschall wxwidgets-build)
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
