@@ -33,6 +33,7 @@
 #include <wx/listctrl.h>
 #include <wx/filename.h>
 #include <wx/window.h>
+#include <wx/nativewin.h>
 // clang-format on
 
 #endif // #ifndef __ULTRASCHALL_REAPER_WXWIDGETS_INCLUDE_H_INCL__
