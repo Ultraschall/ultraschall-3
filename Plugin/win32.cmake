@@ -20,12 +20,7 @@ ExternalProject_Add(zlib
 ExternalProject_Get_Property(zlib SOURCE_DIR)
 ExternalProject_Get_Property(zlib BINARY_DIR)
 
-set(LIBZ_INCLUDE_PATH
-    ${BINARY_DIR}
-    ${SOURCE_DIR}
-    ${SOURCE_DIR}/contrib/minizip
-)
-
+set(LIBZ_INCLUDE_PATH ${BINARY_DIR} ${SOURCE_DIR} ${SOURCE_DIR}/contrib/minizip)
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(LIBZ_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/zlibstaticd.lib)
 else()
@@ -58,7 +53,6 @@ ExternalProject_Get_Property(curl SOURCE_DIR)
 ExternalProject_Get_Property(curl BINARY_DIR)
 
 set(LIBCURL_INCLUDE_PATH ${SOURCE_DIR}/include)
-
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(LIBCURL_LIBRARY_PATH ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libcurl-d.lib)
 else()
@@ -152,6 +146,36 @@ set(LIBJSON11_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/json11.lib)
 
 message(STATUS "LIBJSON11_INCLUDE_PATH = ${LIBJSON11_INCLUDE_PATH}")
 message(STATUS "LIBJSON11_LIBRARY_PATH = ${LIBJSON11_LIBRARY_PATH}")
+
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
+
+# configure expat
+
+set(CURRENT_EXTERNAL_PROJECT expat)
+message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
+
+ExternalProject_Add(expat
+    PREFIX libexpat
+    SOURCE_SUBDIR expat
+	GIT_REPOSITORY https://github.com/libexpat/libexpat.git
+    GIT_TAG R_2_2_6
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+    CMAKE_ARGS -DBUILD_tools=OFF -DBUILD_examples=OFF -DBUILD_tests=OFF -DBUILD_shared=OFF -DBUILD_doc=OFF -DINSTALL=OFF -DXML_DTD=OFF -DXML_NS=ON
+)
+
+ExternalProject_Get_Property(expat SOURCE_DIR)
+ExternalProject_Get_Property(expat BINARY_DIR)
+
+set(LIBEXPAT_INCLUDE_PATH ${SOURCE_DIR})
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(LIBEXPAT_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/expatd.lib)
+else()
+    set(LIBEXPAT_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/expat.lib)
+endif()
+
+message(STATUS "LIBEXPAT_INCLUDE_PATH = ${LIBEXPAT_INCLUDE_PATH}")
+message(STATUS "LIBEXPAT_LIBRARY_PATH = ${LIBEXPAT_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 

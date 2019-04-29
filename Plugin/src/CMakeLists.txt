@@ -29,9 +29,10 @@ set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include/jmde)
 include_directories(
     ${LIBZ_INCLUDE_PATH}
     ${LIBCURL_INCLUDE_PATH}
-    ${LIBMP4V2_INCLUDE_PATH}
     ${LIBTAG_INCLUDE_PATH}
+    ${LIBMP4V2_INCLUDE_PATH}
     ${LIBJSON11_INCLUDE_PATH}
+    ${LIBEXPAT_INCLUDE_PATH}
     ${LIBWXWIDGETS_INCLUDE_PATH}
     ${REAPER_INCLUDE_PATH}
 )
@@ -218,18 +219,20 @@ endif()
 target_link_libraries(reaper_ultraschall
     ${LIBZ_LIBRARY_PATH}
     ${LIBCURL_LIBRARY_PATH}
-    ${LIBMP4V2_LIBRARY_PATH}
     ${LIBTAG_LIBRARY_PATH}
+    ${LIBMP4V2_LIBRARY_PATH}
     ${LIBJSON11_LIBRARY_PATH}
+    ${LIBEXPAT_LIBRARY_PATH}
     ${LIBWXWIDGETS_LIBRARY_PATH}
     ${EXTRA_LIBRARIES}
 )
 
     add_dependencies(reaper_ultraschall zlib-build)
     add_dependencies(reaper_ultraschall curl-build)
-    add_dependencies(reaper_ultraschall mp4v2-build)
     add_dependencies(reaper_ultraschall taglib-build)
+    add_dependencies(reaper_ultraschall mp4v2-build)
     add_dependencies(reaper_ultraschall json11-build)
+    add_dependencies(reaper_ultraschall expat-build)
     add_dependencies(reaper_ultraschall wxwidgets-build)
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
