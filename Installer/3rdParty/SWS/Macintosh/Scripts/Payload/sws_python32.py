@@ -325,14 +325,14 @@ def BR_ItemAtMouseCursor(p0):
 def BR_MIDI_CCLaneRemove(p0,p1):
   a=rpr_getfp('BR_MIDI_CCLaneRemove')
   f=CFUNCTYPE(c_byte,c_uint,c_int)(a)
-  t=(rpr_packp('HWND',p0),c_int(p1))
+  t=(rpr_packp('void*',p0),c_int(p1))
   r=f(t[0],t[1])
   return r
 
 def BR_MIDI_CCLaneReplace(p0,p1,p2):
   a=rpr_getfp('BR_MIDI_CCLaneReplace')
   f=CFUNCTYPE(c_byte,c_uint,c_int,c_int)(a)
-  t=(rpr_packp('HWND',p0),c_int(p1),c_int(p2))
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2))
   r=f(t[0],t[1],t[2])
   return r
 
@@ -418,12 +418,267 @@ def BR_TrackFX_GetFXModuleName(p0,p1,p2,p3):
   r=f(t[0],t[1],t[2],t[3])
   return (r,p0,p1,rpr_unpacks(t[2]),p3)
 
+def BR_Win32_CB_FindString(p0,p1,p2):
+  a=rpr_getfp('BR_Win32_CB_FindString')
+  f=CFUNCTYPE(c_int,c_uint,c_int,c_char_p)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),rpr_packsc(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
+def BR_Win32_CB_FindStringExact(p0,p1,p2):
+  a=rpr_getfp('BR_Win32_CB_FindStringExact')
+  f=CFUNCTYPE(c_int,c_uint,c_int,c_char_p)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),rpr_packsc(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
+def BR_Win32_ClientToScreen(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_Win32_ClientToScreen')
+  f=CFUNCTYPE(None,c_uint,c_int,c_int,c_void_p,c_void_p)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4))
+  f(t[0],t[1],t[2],byref(t[3]),byref(t[4]))
+  return (p0,p1,p2,int(t[3].value),int(t[4].value))
+
+def BR_Win32_FindWindowEx(p0,p1,p2,p3,p4,p5):
+  a=rpr_getfp('BR_Win32_FindWindowEx')
+  f=CFUNCTYPE(c_uint,c_char_p,c_char_p,c_char_p,c_char_p,c_byte,c_byte)(a)
+  t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3),c_byte(p4),c_byte(p5))
+  r=f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_GET_X_LPARAM(p0):
+  a=rpr_getfp('BR_Win32_GET_X_LPARAM')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_GET_Y_LPARAM(p0):
+  a=rpr_getfp('BR_Win32_GET_Y_LPARAM')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_GetConstant(p0):
+  a=rpr_getfp('BR_Win32_GetConstant')
+  f=CFUNCTYPE(c_int,c_char_p)(a)
+  t=(rpr_packsc(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_GetCursorPos(p0,p1):
+  a=rpr_getfp('BR_Win32_GetCursorPos')
+  f=CFUNCTYPE(c_byte,c_void_p,c_void_p)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(byref(t[0]),byref(t[1]))
+  return (r,int(t[0].value),int(t[1].value))
+
+def BR_Win32_GetFocus():
+  a=rpr_getfp('BR_Win32_GetFocus')
+  f=CFUNCTYPE(c_uint)(a)
+  r=f()
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_GetForegroundWindow():
+  a=rpr_getfp('BR_Win32_GetForegroundWindow')
+  f=CFUNCTYPE(c_uint)(a)
+  r=f()
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_GetMainHwnd():
+  a=rpr_getfp('BR_Win32_GetMainHwnd')
+  f=CFUNCTYPE(c_uint)(a)
+  r=f()
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_GetMixerHwnd(p0):
+  a=rpr_getfp('BR_Win32_GetMixerHwnd')
+  f=CFUNCTYPE(c_uint,c_void_p)(a)
+  t=(c_byte(p0),)
+  r=f(byref(t[0]))
+  return (rpr_unpackp('void*',r),int(t[0].value))
+
+def BR_Win32_GetMonitorRectFromRect(p0,p1,p2,p3,p4,p5,p6,p7,p8):
+  a=rpr_getfp('BR_Win32_GetMonitorRectFromRect')
+  f=CFUNCTYPE(None,c_byte,c_int,c_int,c_int,c_int,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(c_byte(p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4),c_int(p5),c_int(p6),c_int(p7),c_int(p8))
+  f(t[0],t[1],t[2],t[3],t[4],byref(t[5]),byref(t[6]),byref(t[7]),byref(t[8]))
+  return (p0,p1,p2,p3,p4,int(t[5].value),int(t[6].value),int(t[7].value),int(t[8].value))
+
+def BR_Win32_GetParent(p0):
+  a=rpr_getfp('BR_Win32_GetParent')
+  f=CFUNCTYPE(c_uint,c_uint)(a)
+  t=(rpr_packp('void*',p0),)
+  r=f(t[0])
+  return rpr_unpackp('void*',r)
+
 def BR_Win32_GetPrivateProfileString(p0,p1,p2,p3,p4,p5):
   a=rpr_getfp('BR_Win32_GetPrivateProfileString')
   f=CFUNCTYPE(c_int,c_char_p,c_char_p,c_char_p,c_char_p,c_char_p,c_int)(a)
   t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3),rpr_packs(p4),c_int(p5))
   r=f(t[0],t[1],t[2],t[3],t[4],t[5])
   return (r,p0,p1,p2,p3,rpr_unpacks(t[4]),p5)
+
+def BR_Win32_GetWindow(p0,p1):
+  a=rpr_getfp('BR_Win32_GetWindow')
+  f=CFUNCTYPE(c_uint,c_uint,c_int)(a)
+  t=(rpr_packp('void*',p0),c_int(p1))
+  r=f(t[0],t[1])
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_GetWindowLong(p0,p1):
+  a=rpr_getfp('BR_Win32_GetWindowLong')
+  f=CFUNCTYPE(c_int,c_uint,c_int)(a)
+  t=(rpr_packp('void*',p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_GetWindowRect(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_Win32_GetWindowRect')
+  f=CFUNCTYPE(c_byte,c_uint,c_void_p,c_void_p,c_void_p,c_void_p)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4))
+  r=f(t[0],byref(t[1]),byref(t[2]),byref(t[3]),byref(t[4]))
+  return (r,p0,int(t[1].value),int(t[2].value),int(t[3].value),int(t[4].value))
+
+def BR_Win32_GetWindowText(p0,p1,p2):
+  a=rpr_getfp('BR_Win32_GetWindowText')
+  f=CFUNCTYPE(c_int,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('void*',p0),rpr_packs(p1),c_int(p2))
+  r=f(t[0],t[1],t[2])
+  return (r,p0,rpr_unpacks(t[1]),p2)
+
+def BR_Win32_HIBYTE(p0):
+  a=rpr_getfp('BR_Win32_HIBYTE')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_HIWORD(p0):
+  a=rpr_getfp('BR_Win32_HIWORD')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_HwndToString(p0,p1,p2):
+  a=rpr_getfp('BR_Win32_HwndToString')
+  f=CFUNCTYPE(None,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('void*',p0),rpr_packs(p1),c_int(p2))
+  f(t[0],t[1],t[2])
+  return (p0,rpr_unpacks(t[1]),p2)
+
+def BR_Win32_IsWindow(p0):
+  a=rpr_getfp('BR_Win32_IsWindow')
+  f=CFUNCTYPE(c_byte,c_uint)(a)
+  t=(rpr_packp('void*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_IsWindowVisible(p0):
+  a=rpr_getfp('BR_Win32_IsWindowVisible')
+  f=CFUNCTYPE(c_byte,c_uint)(a)
+  t=(rpr_packp('void*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_LOBYTE(p0):
+  a=rpr_getfp('BR_Win32_LOBYTE')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_LOWORD(p0):
+  a=rpr_getfp('BR_Win32_LOWORD')
+  f=CFUNCTYPE(c_int,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_MAKELONG(p0,p1):
+  a=rpr_getfp('BR_Win32_MAKELONG')
+  f=CFUNCTYPE(c_int,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_MAKELPARAM(p0,p1):
+  a=rpr_getfp('BR_Win32_MAKELPARAM')
+  f=CFUNCTYPE(c_int,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_MAKELRESULT(p0,p1):
+  a=rpr_getfp('BR_Win32_MAKELRESULT')
+  f=CFUNCTYPE(c_int,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_MAKEWORD(p0,p1):
+  a=rpr_getfp('BR_Win32_MAKEWORD')
+  f=CFUNCTYPE(c_int,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_MAKEWPARAM(p0,p1):
+  a=rpr_getfp('BR_Win32_MAKEWPARAM')
+  f=CFUNCTYPE(c_int,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_MIDIEditor_GetActive():
+  a=rpr_getfp('BR_Win32_MIDIEditor_GetActive')
+  f=CFUNCTYPE(c_uint)(a)
+  r=f()
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_ScreenToClient(p0,p1,p2,p3,p4):
+  a=rpr_getfp('BR_Win32_ScreenToClient')
+  f=CFUNCTYPE(None,c_uint,c_int,c_int,c_void_p,c_void_p)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2),c_int(p3),c_int(p4))
+  f(t[0],t[1],t[2],byref(t[3]),byref(t[4]))
+  return (p0,p1,p2,int(t[3].value),int(t[4].value))
+
+def BR_Win32_SendMessage(p0,p1,p2,p3):
+  a=rpr_getfp('BR_Win32_SendMessage')
+  f=CFUNCTYPE(c_int,c_uint,c_int,c_int,c_int)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return r
+
+def BR_Win32_SetFocus(p0):
+  a=rpr_getfp('BR_Win32_SetFocus')
+  f=CFUNCTYPE(c_uint,c_uint)(a)
+  t=(rpr_packp('void*',p0),)
+  r=f(t[0])
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_SetForegroundWindow(p0):
+  a=rpr_getfp('BR_Win32_SetForegroundWindow')
+  f=CFUNCTYPE(c_int,c_uint)(a)
+  t=(rpr_packp('void*',p0),)
+  r=f(t[0])
+  return r
+
+def BR_Win32_SetWindowLong(p0,p1,p2):
+  a=rpr_getfp('BR_Win32_SetWindowLong')
+  f=CFUNCTYPE(c_int,c_uint,c_int,c_int)(a)
+  t=(rpr_packp('void*',p0),c_int(p1),c_int(p2))
+  r=f(t[0],t[1],t[2])
+  return r
+
+def BR_Win32_SetWindowPos(p0,p1,p2,p3,p4,p5,p6):
+  a=rpr_getfp('BR_Win32_SetWindowPos')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_int,c_int,c_int,c_int,c_int)(a)
+  t=(rpr_packp('void*',p0),rpr_packsc(p1),c_int(p2),c_int(p3),c_int(p4),c_int(p5),c_int(p6))
+  r=f(t[0],t[1],t[2],t[3],t[4],t[5],t[6])
+  return r
 
 def BR_Win32_ShellExecute(p0,p1,p2,p3,p4):
   a=rpr_getfp('BR_Win32_ShellExecute')
@@ -432,11 +687,60 @@ def BR_Win32_ShellExecute(p0,p1,p2,p3,p4):
   r=f(t[0],t[1],t[2],t[3],t[4])
   return r
 
+def BR_Win32_ShowWindow(p0,p1):
+  a=rpr_getfp('BR_Win32_ShowWindow')
+  f=CFUNCTYPE(c_byte,c_uint,c_int)(a)
+  t=(rpr_packp('void*',p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def BR_Win32_StringToHwnd(p0):
+  a=rpr_getfp('BR_Win32_StringToHwnd')
+  f=CFUNCTYPE(c_uint,c_char_p)(a)
+  t=(rpr_packsc(p0),)
+  r=f(t[0])
+  return rpr_unpackp('void*',r)
+
+def BR_Win32_WindowFromPoint(p0,p1):
+  a=rpr_getfp('BR_Win32_WindowFromPoint')
+  f=CFUNCTYPE(c_uint,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return rpr_unpackp('void*',r)
+
 def BR_Win32_WritePrivateProfileString(p0,p1,p2,p3):
   a=rpr_getfp('BR_Win32_WritePrivateProfileString')
   f=CFUNCTYPE(c_byte,c_char_p,c_char_p,c_char_p,c_char_p)(a)
   t=(rpr_packsc(p0),rpr_packsc(p1),rpr_packsc(p2),rpr_packsc(p3))
   r=f(t[0],t[1],t[2],t[3])
+  return r
+
+def CF_EnumerateActions(p0,p1,p2,p3):
+  a=rpr_getfp('CF_EnumerateActions')
+  f=CFUNCTYPE(c_int,c_int,c_int,c_char_p,c_int)(a)
+  t=(c_int(p0),c_int(p1),rpr_packs(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return (r,p0,p1,rpr_unpacks(t[2]),p3)
+
+def CF_EnumMediaSourceCues(p0,p1,p2,p3,p4,p5,p6):
+  a=rpr_getfp('CF_EnumMediaSourceCues')
+  f=CFUNCTYPE(c_int,c_uint,c_int,c_void_p,c_void_p,c_void_p,c_char_p,c_int)(a)
+  t=(rpr_packp('PCM_source*',p0),c_int(p1),c_double(p2),c_double(p3),c_byte(p4),rpr_packs(p5),c_int(p6))
+  r=f(t[0],t[1],byref(t[2]),byref(t[3]),byref(t[4]),t[5],t[6])
+  return (r,p0,p1,float(t[2].value),float(t[3].value),int(t[4].value),rpr_unpacks(t[5]),p6)
+
+def CF_EnumSelectedFX(p0,p1):
+  a=rpr_getfp('CF_EnumSelectedFX')
+  f=CFUNCTYPE(c_int,c_uint,c_int)(a)
+  t=(rpr_packp('FxChain*',p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def CF_ExportMediaSource(p0,p1):
+  a=rpr_getfp('CF_ExportMediaSource')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p)(a)
+  t=(rpr_packp('PCM_source*',p0),rpr_packsc(p1))
+  r=f(t[0],t[1])
   return r
 
 def CF_GetClipboard(p0,p1):
@@ -453,11 +757,93 @@ def CF_GetClipboardBig(p0):
   r=f(t[0])
   return str(r.decode())
 
+def CF_GetCommandText(p0,p1):
+  a=rpr_getfp('CF_GetCommandText')
+  f=CFUNCTYPE(c_char_p,c_int,c_int)(a)
+  t=(c_int(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return str(r.decode())
+
+def CF_GetFocusedFXChain():
+  a=rpr_getfp('CF_GetFocusedFXChain')
+  f=CFUNCTYPE(c_uint)(a)
+  r=f()
+  return rpr_unpackp('FxChain*',r)
+
+def CF_GetMediaSourceBitDepth(p0):
+  a=rpr_getfp('CF_GetMediaSourceBitDepth')
+  f=CFUNCTYPE(c_int,c_uint)(a)
+  t=(rpr_packp('PCM_source*',p0),)
+  r=f(t[0])
+  return r
+
+def CF_GetMediaSourceMetadata(p0,p1,p2,p3):
+  a=rpr_getfp('CF_GetMediaSourceMetadata')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_char_p,c_int)(a)
+  t=(rpr_packp('PCM_source*',p0),rpr_packsc(p1),rpr_packs(p2),c_int(p3))
+  r=f(t[0],t[1],t[2],t[3])
+  return (r,p0,p1,rpr_unpacks(t[2]),p3)
+
+def CF_GetMediaSourceOnline(p0):
+  a=rpr_getfp('CF_GetMediaSourceOnline')
+  f=CFUNCTYPE(c_byte,c_uint)(a)
+  t=(rpr_packp('PCM_source*',p0),)
+  r=f(t[0])
+  return r
+
+def CF_GetMediaSourceRPP(p0,p1,p2):
+  a=rpr_getfp('CF_GetMediaSourceRPP')
+  f=CFUNCTYPE(c_byte,c_uint,c_char_p,c_int)(a)
+  t=(rpr_packp('PCM_source*',p0),rpr_packs(p1),c_int(p2))
+  r=f(t[0],t[1],t[2])
+  return (r,p0,rpr_unpacks(t[1]),p2)
+
+def CF_GetSWSVersion(p0,p1):
+  a=rpr_getfp('CF_GetSWSVersion')
+  f=CFUNCTYPE(None,c_char_p,c_int)(a)
+  t=(rpr_packs(p0),c_int(p1))
+  f(t[0],t[1])
+  return (rpr_unpacks(t[0]),p1)
+
+def CF_GetTakeFXChain(p0):
+  a=rpr_getfp('CF_GetTakeFXChain')
+  f=CFUNCTYPE(c_uint,c_uint)(a)
+  t=(rpr_packp('MediaItem_Take*',p0),)
+  r=f(t[0])
+  return rpr_unpackp('FxChain*',r)
+
+def CF_GetTrackFXChain(p0):
+  a=rpr_getfp('CF_GetTrackFXChain')
+  f=CFUNCTYPE(c_uint,c_uint)(a)
+  t=(rpr_packp('MediaTrack*',p0),)
+  r=f(t[0])
+  return rpr_unpackp('FxChain*',r)
+
+def CF_LocateInExplorer(p0):
+  a=rpr_getfp('CF_LocateInExplorer')
+  f=CFUNCTYPE(c_byte,c_char_p)(a)
+  t=(rpr_packsc(p0),)
+  r=f(t[0])
+  return r
+
 def CF_SetClipboard(p0):
   a=rpr_getfp('CF_SetClipboard')
   f=CFUNCTYPE(None,c_char_p)(a)
   t=(rpr_packsc(p0),)
   f(t[0])
+
+def CF_SetMediaSourceOnline(p0,p1):
+  a=rpr_getfp('CF_SetMediaSourceOnline')
+  f=CFUNCTYPE(None,c_uint,c_byte)(a)
+  t=(rpr_packp('PCM_source*',p0),c_byte(p1))
+  f(t[0],t[1])
+
+def CF_ShellExecute(p0):
+  a=rpr_getfp('CF_ShellExecute')
+  f=CFUNCTYPE(c_byte,c_char_p)(a)
+  t=(rpr_packsc(p0),)
+  r=f(t[0])
+  return r
 
 def FNG_AddMidiNote(p0):
   a=rpr_getfp('FNG_AddMidiNote')
@@ -506,6 +892,13 @@ def FNG_SetMidiNoteIntProperty(p0,p1,p2):
   t=(rpr_packp('RprMidiNote*',p0),rpr_packsc(p1),c_int(p2))
   f(t[0],t[1],t[2])
 
+def NF_AnalyzeMediaItemPeakAndRMS(p0,p1,p2,p3,p4,p5):
+  a=rpr_getfp('NF_AnalyzeMediaItemPeakAndRMS')
+  f=CFUNCTYPE(c_byte,c_uint,c_double,c_uint,c_uint,c_uint,c_uint)(a)
+  t=(rpr_packp('MediaItem*',p0),c_double(p1),rpr_packp('void*',p2),rpr_packp('void*',p3),rpr_packp('void*',p4),rpr_packp('void*',p5))
+  r=f(t[0],t[1],t[2],t[3],t[4],t[5])
+  return r
+
 def NF_AnalyzeTakeLoudness(p0,p1,p2,p3,p4,p5,p6,p7):
   a=rpr_getfp('NF_AnalyzeTakeLoudness')
   f=CFUNCTYPE(c_byte,c_uint,c_byte,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p,c_void_p)(a)
@@ -541,6 +934,13 @@ def NF_GetMediaItemMaxPeak(p0):
   r=f(t[0])
   return r
 
+def NF_GetMediaItemMaxPeakAndMaxPeakPos(p0,p1):
+  a=rpr_getfp('NF_GetMediaItemMaxPeakAndMaxPeakPos')
+  f=CFUNCTYPE(c_double,c_uint,c_void_p)(a)
+  t=(rpr_packp('MediaItem*',p0),c_double(p1))
+  r=f(t[0],byref(t[1]))
+  return (r,p0,float(t[1].value))
+
 def NF_GetMediaItemPeakRMS_NonWindowed(p0):
   a=rpr_getfp('NF_GetMediaItemPeakRMS_NonWindowed')
   f=CFUNCTYPE(c_double,c_uint)(a)
@@ -554,6 +954,38 @@ def NF_GetMediaItemPeakRMS_Windowed(p0):
   t=(rpr_packp('MediaItem*',p0),)
   r=f(t[0])
   return r
+
+def NF_GetSWSMarkerRegionSub(p0):
+  a=rpr_getfp('NF_GetSWSMarkerRegionSub')
+  f=CFUNCTYPE(c_char_p,c_int)(a)
+  t=(c_int(p0),)
+  r=f(t[0])
+  return str(r.decode())
+
+def NF_GetSWSTrackNotes(p0):
+  a=rpr_getfp('NF_GetSWSTrackNotes')
+  f=CFUNCTYPE(c_char_p,c_uint)(a)
+  t=(rpr_packp('MediaTrack*',p0),)
+  r=f(t[0])
+  return str(r.decode())
+
+def NF_SetSWSMarkerRegionSub(p0,p1):
+  a=rpr_getfp('NF_SetSWSMarkerRegionSub')
+  f=CFUNCTYPE(c_byte,c_char_p,c_int)(a)
+  t=(rpr_packsc(p0),c_int(p1))
+  r=f(t[0],t[1])
+  return r
+
+def NF_SetSWSTrackNotes(p0,p1):
+  a=rpr_getfp('NF_SetSWSTrackNotes')
+  f=CFUNCTYPE(None,c_uint,c_char_p)(a)
+  t=(rpr_packp('MediaTrack*',p0),rpr_packsc(p1))
+  f(t[0],t[1])
+
+def NF_UpdateSWSMarkerRegionSubWindow():
+  a=rpr_getfp('NF_UpdateSWSMarkerRegionSubWindow')
+  f=CFUNCTYPE(None)(a)
+  f()
 
 def SN_FocusMIDIEditor():
   a=rpr_getfp('SN_FocusMIDIEditor')
