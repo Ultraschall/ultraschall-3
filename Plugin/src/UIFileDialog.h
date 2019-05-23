@@ -28,11 +28,10 @@
 #define __ULTRASCHALL_REAPER_UI_FILE_DIALOG_H_INCL__
 
 #include "Common.h"
-#include "UIDialog.h"
 
 namespace ultraschall { namespace reaper {
 
-class UIFileDialog : public UIDialog
+class UIFileDialog 
 {
 public:
     UIFileDialog(const UnicodeString& caption, const UnicodeString& initialDirectory = "");

@@ -25,6 +25,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UIFileDialog.h"
+#include "UIApplication.h"
 
 #include "wxwidgets_include.h"
 
@@ -41,7 +42,7 @@ UIFileDialog::UIFileDialog(const UnicodeString& caption, const UnicodeString& in
 
 UnicodeString UIFileDialog::BrowseForFile(const UnicodeString& fileExtensions)
 {
-    PRECONDITION_RETURN(GetParent() != 0, UnicodeString());
+    PRECONDITION_RETURN(UIApplication::GetMainWindow() != nullptr, UnicodeString());
 
     UnicodeString filename;
 
@@ -52,7 +53,8 @@ UnicodeString UIFileDialog::BrowseForFile(const UnicodeString& fileExtensions)
     }
 
     wxFileDialog fileDialog(
-        GetParent(), U2H(caption_), U2H(initialDirectory_), "", U2H(actualFileExtension), wxFD_OPEN, wxDefaultPosition);
+        reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), U2H(caption_), U2H(initialDirectory_), "",
+        U2H(actualFileExtension), wxFD_OPEN, wxDefaultPosition);
     if(fileDialog.ShowModal() == wxID_OK)
     {
         wxString resultPath;
@@ -82,7 +84,7 @@ UnicodeString UIFileDialog::BrowseForAudio()
                                          "All files|*.*";
     return BrowseForFile(fileExtensions);
 }
-#else // #ifdef ULTRASCHALL_ENABLE_MP4
+#else  // #ifdef ULTRASCHALL_ENABLE_MP4
 UnicodeString UIFileDialog::BrowseForAudio()
 {
     const UnicodeString fileExtensions = "MP3 file|*.mp3|"
@@ -101,11 +103,13 @@ UnicodeString UIFileDialog::BrowseForPicture()
 
 UnicodeString UIFileDialog::BrowseForDirectory()
 {
-    PRECONDITION_RETURN(GetParent() != 0, UnicodeString());
+    PRECONDITION_RETURN(UIApplication::GetMainWindow() != nullptr, UnicodeString());
 
     UnicodeString directory;
 
-    wxDirDialog directoryDialog(GetParent(), "Select", U2H(initialDirectory_), 0, wxDefaultPosition);
+    wxDirDialog directoryDialog(
+        reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), "Select", U2H(initialDirectory_), 0,
+        wxDefaultPosition);
     if(directoryDialog.ShowModal() == wxID_OK)
     {
         wxString resultPath;

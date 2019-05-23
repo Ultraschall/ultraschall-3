@@ -76,7 +76,6 @@ set(COMMON_INCLUDES
 	TagWriterFactory.h
     UpdateCheck.h
 	UIApplication.h
-    UIDialog.h
     UIFileDialog.h
     UIMessage.h
     UIMessageClass.h
@@ -116,7 +115,6 @@ set(COMMON_SOURCES
 	TagWriterFactory.cpp
     UpdateCheck.cpp
 	UIApplication.cpp
-    UIDialog.cpp
     UIFileDialog.cpp
     UIMessage.cpp
     UIMessageDialog.cpp
