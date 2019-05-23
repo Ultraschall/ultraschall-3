@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-    <title>ULTRASCHALL-3.2-preview-3</title>
+    <title>UULTRASCHALL-3.2-build495</title>
     <organization>fm.ultraschall</organization>
     <options customize="never" require-scripts="true" rootVolumeOnly="true" />
     <domains enable_anywhere="false" enable_localSystem="false" enable_currentUserHome="true" />
@@ -11,16 +11,18 @@
     <!-- List all component packages -->
     <pkg-ref id="fm.ultraschall.Soundboard.Component" version="3.1.1">UltraschallSoundboard.pkg</pkg-ref>
     <pkg-ref id="com.itsr.StudioLink.Component" version="17.0.3">StudioLink.pkg</pkg-ref>
-    <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.1.1">UltraschallPluginExtension.pkg</pkg-ref>
-    <pkg-ref id="fm.ultraschall.Resources" version="3.1.1">UltraschallResources.pkg</pkg-ref>
-    <pkg-ref id="com.mj-s.sws" version="2.9.6">SWS_Extension-2.9.6.pkg</pkg-ref>
-    <pkg-ref id="com.mj-s.sws.Scripts" version="2.9.6">SWS_ExtensionScripts-2.9.6.pkg</pkg-ref>
+    <pkg-ref id="fm.ultraschall.Plugin.Extension" version="3.2.0">UltraschallPlugin.pkg</pkg-ref>
+    <pkg-ref id="fm.ultraschall.API" version="3.2.0">UltraschallAPI.pkg</pkg-ref>
+    <pkg-ref id="fm.ultraschall.Resources" version="3.2.0">UltraschallResources.pkg</pkg-ref>
+    <pkg-ref id="com.mj-s.sws" version="2.10.0">SWS_Extension-2.10.0.pkg</pkg-ref>
+    <pkg-ref id="com.mj-s.sws.Scripts" version="2.10.0">SWS_ExtensionScripts-2.10.0.pkg</pkg-ref>
     <!-- List them again here. They can now be organised as a hierarchy if you want. -->
     <choices-outline>
         <line choice="fm.ultraschall.Soundboard.Component" />
         <line choice="com.itsr.StudioLink.Component" />
         <line choice="fm.ultraschall.Plugin.Extension" />
         <line choice="fm.ultraschall.Resources" />
+        <line choice="fm.ultraschall.API" />
         <line choice="com.mj-s.sws" />
         <line choice="com.mj-s.sws.Scripts" />
     </choices-outline>
@@ -36,6 +38,9 @@
     </choice>
     <choice id="fm.ultraschall.Resources" visible="false" title="Ultraschall Resources" description="Additional documents and images." start_selected="true">
         <pkg-ref id="fm.ultraschall.Resources" />
+    </choice>
+    <choice id="fm.ultraschall.API" visible="false" title="Ultraschall API" description="A collection of LUA scripts for programming Ultraschall." start_selected="true">
+        <pkg-ref id="fm.ultraschall.API" />
     </choice>
     <choice id="com.mj-s.sws" visible="true" title="SWS REAPER Extension" description="SWS REAPER Extension (see http://sws.mj-s.com)" start_selected="true">
         <pkg-ref id="com.mj-s.sws" />

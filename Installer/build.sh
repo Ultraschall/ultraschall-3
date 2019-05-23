@@ -1,33 +1,33 @@
 #!/bin/sh
 
-export ULTRASCHALL_RELEASE=ULTRASCHALL-3.2-preview-3
+export ULTRASCHALL_RELEASE=ULTRASCHALL-3.2-build495
 export ULTRASCHALL_RELEASE_DISK_READ_WRITE=$ULTRASCHALL_RELEASE.readwrite.dmg
 export ULTRASCHALL_RELEASE_DISK_READ_ONLY=$ULTRASCHALL_RELEASE.dmg
 export ULTRASCHALL_RELEASE_INTERMEDIATE=$ULTRASCHALL_RELEASE.intermediate
 
 # Cleanup old installer image
 if [ -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY ]; then
-	rm -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY
+  rm -f ./$ULTRASCHALL_RELEASE_DISK_READ_ONLY
 fi
 
 # Cleanup temporary _intermediate directory
 if [ -d ./_intermediate ]; then
-	rm -rf ._intermediate
+  rm -rf ._intermediate
 fi
 mkdir ./_intermediate
 
 # Cleanup temporary _build directory
-if [ -d ./_build ]; then
-	rm -rf ./_build
-fi
-mkdir ./_build
+# if [ -d ./_build ]; then
+#   rm -rf ./_build
+# fi
+mkdir -p ./_build
 
 # Cleanup temporary _payload directory
 if [ -d ./_payload ]; then
-	rm -rf ./_payload
+  rm -rf ./_payload
 fi
-mkdir ./_payload
-mkdir ./_payload/Add-ons
+mkdir -p ./_payload
+mkdir -p ./_payload/Add-ons
 
 # Build and copy release notes to _payload directory
 pandoc --from=markdown --to=html --standalone --self-contained --quiet --css=../Tools/ultraschall.css --output=./_payload/README.html ../Docs/Release/README.md
@@ -58,10 +58,19 @@ cp ./Resources/backgroundv3.png ./_payload/.background/background.png
 
 # Create Ultraschall REAPER Extension package
 cd ./_build
-cmake -G "Xcode" ../../Plugin/reaper_ultraschall
+cmake -G "Xcode" -DCMAKE_BUILD_TYPE=Release ../../Plugin
 cmake --build . --target reaper_ultraschall --config Release
-cd ../
-pkgbuild --root ./_build/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./_build/UltraschallPluginExtension.pkg
+cd ..
+pkgbuild --root ./_build/src/Release --scripts ./Scripts/Plugin --identifier fm.ultraschall.Plugin.Extension --install-location /Library/Application\ Support/REAPER/UserPlugins ./_build/UltraschallPlugin.pkg
+
+# Download current Ultraschall API files
+git clone https://github.com/Ultraschall/ultraschall-portable.git ./_build/ultraschall-portable
+mkdir -p ./_build/api_root/ultraschall_api
+cp -r ./_build/ultraschall-portable/UserPlugins/ultraschall_api ./_build/api_root
+rm -rf ./_build/ultraschall-portable
+
+# Create Ultraschall API package
+pkgbuild --root ./_build/api_root --identifier fm.ultraschall.api --install-location /Library/Application\ Support/REAPER/UserPlugins ./_build/UltraschallAPI.pkg
 
 # Create Ultraschall Soundboard package
 pkgbuild --root ./3rdParty/Soundboard/Macintosh --identifier fm.ultraschall.Soundboard.Component --install-location /Library/Audio/Plug-Ins/Components ./_build/UltraschallSoundboard.pkg
@@ -71,14 +80,14 @@ pkgbuild --root ./3rdParty/StudioLink/Macintosh --identifier com.itsr.StudioLink
 
 # Create SWS REAPER Plugin Extension package
 chmod 755 ./3rdParty/SWS/Macintosh/UserPlugins/Scripts/preinstall
-pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./_build/SWS_Extension-2.9.6.pkg
+pkgbuild --root ./3rdParty/SWS/Macintosh/UserPlugins/Payload --scripts ./3rdParty/SWS/Macintosh/UserPlugins/Scripts --identifier com.mj-s.sws --install-location /Library/Application\ Support/REAPER/UserPlugins ./_build/SWS_Extension-2.10.0.pkg
 
 # Create SWS REAPER Plugin Scripts package
 chmod 755 ./3rdParty/SWS/Macintosh/Scripts/Scripts/preinstall
-pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./_build/SWS_ExtensionScripts-2.9.6.pkg
+pkgbuild --root ./3rdParty/SWS/Macintosh/Scripts/Payload --scripts ./3rdParty/SWS/Macintosh/Scripts/Scripts --identifier com.mj-s.sws.Scripts --install-location /Library/Application\ Support/REAPER/Scripts ./_build/SWS_ExtensionScripts-2.10.0.pkg
 
 # Create Ultraschall Resources package
-pkgbuild --root ../Plugin/Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./_build/UltraschallResources.pkg
+pkgbuild --root ../Resources --identifier fm.ultraschall.Resources --install-location /Library/Application\ Support/Ultraschall ./_build/UltraschallResources.pkg
 
 # Create Ultraschall Soundflower Uninstaller package
 pkgbuild --scripts ../Tools/SoundflowerUninstaller/Scripts --nopayload --identifier fm.ultraschall.SoundflowerUninstaller ./_build/UltraschallSoundflowerUninstaller.pkg
@@ -109,7 +118,7 @@ codesign --sign "Developer ID Application: Heiko Panjas (8J2G689FCZ)" ./$ULTRASC
 echo Creating disk layout...
 echo '
    tell application "Finder"
-     tell disk "ULTRASCHALL-3.2-preview-3.intermediate"
+     tell disk "ULTRASCHALL-3.2-build495.intermediate"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
@@ -118,7 +127,7 @@ echo '
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set background picture of viewOptions to file ".background:background.png"
-           set position of item "ULTRASCHALL-3.2-preview-3.pkg" of container window to {50, 30}
+           set position of item "ULTRASCHALL-3.2-build495.pkg" of container window to {50, 30}
            set position of item "Ultraschall_3.1.ReaperConfigZip" of container window to {200, 30}
            set position of item "README.html" of container window to {50, 135}
            set position of item "INSTALL.html" of container window to {200, 135}
@@ -149,4 +158,4 @@ rm -rf ./$ULTRASCHALL_RELEASE_INTERMEDIATE
 rm -rf ./$ULTRASCHALL_RELEASE_DISK_READ_WRITE
 rm -rf ./_payload
 rm -rf ./_intermediate
-rm -rf ./_build
+# rm -rf ./_build
