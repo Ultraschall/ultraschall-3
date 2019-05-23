@@ -32,7 +32,7 @@
                         <Component Id="ReaperPluginsComponent" Guid="C03BAC23-1BA8-4E6D-9B5A-88E09ED2E9E2" Win64="yes">
                             <RemoveFolder Id="RemoveReaperPluginsComponent" Directory="ReaperPluginsFolder" On="uninstall" />
                             <RegistryValue Root="HKCU" Key="Software\Ultraschall" Name="Uninstall" Type="string" Value="1.0.0.0" KeyPath="yes" />
-                            <File Id="ReaperUltraschallDll" Name="reaper_ultraschall.dll" DiskId="1" Source="Build\plug-in\src\Release\reaper_ultraschall.dll" />
+                            <File Id="ReaperUltraschallDll" Name="reaper_ultraschall.dll" DiskId="1" Source="_build\plug-in\src\Release\reaper_ultraschall.dll" />
                             <File Name="reaper_sws64.dll" DiskId="1" Source="3rdParty\SWS\Windows\reaper_sws64.dll" />
                         </Component>
                     </Directory>
@@ -41,19 +41,19 @@
                     <Component Id="UltraschallComponent" Guid="9F68E7D5-9D8E-45B9-9AED-3E1137F2466C" Win64="yes">
                         <RemoveFolder Id="RemoveUltraschallComponent" Directory="UltraschallFolder" On="uninstall" />
                         <RegistryValue Root="HKCU" Key="Software\Ultraschall" Name="Uninstall" Type="string" Value="1.0.0.0" KeyPath="yes" />
-                        <File Name="Ultraschall Keyboard Layout.pdf" DiskId="1" Source="Build\add-ons\Ultraschall Keyboard Layout.pdf">
+                        <File Name="Ultraschall Keyboard Layout.pdf" DiskId="1" Source="_build\add-ons\Ultraschall Keyboard Layout.pdf">
                             <Shortcut Id="KeyboardLayoutPdfShortcut" Directory="ShortcutsFolder" Name="Ultraschall Keyboard Layout.pdf" />
                         </File>
-                        <File Name="README.html" DiskId="1" Source="Build\resources\README.html">
+                        <File Name="README.html" DiskId="1" Source="_build\resources\README.html">
                             <Shortcut Id="ReadmeShortcut" Directory="ShortcutsFolder" Name="README.html" />
                         </File>
-                        <File Name="CHANGELOG.html" DiskId="1" Source="Build\resources\CHANGELOG.html">
+                        <File Name="CHANGELOG.html" DiskId="1" Source="_build\resources\CHANGELOG.html">
                             <Shortcut Id="ChangelogShortcut" Directory="ShortcutsFolder" Name="CHANGELOG.html" />
                         </File>
-                        <File Name="INSTALL.html" DiskId="1" Source="Build\resources\INSTALL.html">
+                        <File Name="INSTALL.html" DiskId="1" Source="_build\resources\INSTALL.html">
                             <Shortcut Id="InstallShortcut" Directory="ShortcutsFolder" Name="INSTALL.html" />
                         </File>
-                        <File Name="Ultraschall_3.1.ReaperConfigZip" DiskId="1" Source="Build\theme\Ultraschall_3.1.ReaperConfigZip">
+                        <File Name="Ultraschall_3.1.ReaperConfigZip" DiskId="1" Source="_build\theme\Ultraschall_3.1.ReaperConfigZip">
                             <Shortcut Id="ThemeDesktopShortcut" Directory="DesktopFolder" Name="Ultraschall REAPER Theme" WorkingDirectory="INSTALLDIR" Icon="Icon.exe" IconIndex="0" />
                             <Shortcut Id="ThemeShortcut" Directory="ShortcutsFolder" Name="Ultraschall REAPER Theme" Icon="Icon.exe" IconIndex="0" />
                         </File>
@@ -62,11 +62,11 @@
                         <Component Id="UltraschallAddonsComponent" Guid="C0213247-331D-4004-A6AA-5943351DD48A" Win64="yes">
                             <RemoveFolder Id="RemoveUltraschallAddonsComponent" Directory="UltraschallAddonFolder" On="uninstall" />
                             <RegistryValue Root="HKCU" Key="Software\Ultraschall" Name="Uninstall" Type="string" Value="1.0.0.0" KeyPath="yes" />
-                            <File Id="ResAppIcon" Name="Ultraschall App-Icon.png" DiskId="1" Source="Build\add-ons\Ultraschall App-Icon.png" />
-                            <File Id="ResWebbanner" Name="Ultraschall Webbanner.pdf" DiskId="1" Source="Build\add-ons\Ultraschall Webbanner.pdf" />
-                            <File Id="ResWebbanner400" Name="Ultraschall Webbanner 400px.png" DiskId="1" Source="Build\add-ons\Ultraschall Webbanner 400px.png" />
-                            <File Id="ResWebbanner800" Name="Ultraschall Webbanner 800px.png" DiskId="1" Source="Build\add-ons\Ultraschall Webbanner 800px.png" />
-                            <File Id="ResWebbanner2000" Name="Ultraschall Webbanner 2000px.jpg" DiskId="1" Source="Build\add-ons\Ultraschall Webbanner 2000px.jpg" />
+                            <File Id="ResAppIcon" Name="Ultraschall App-Icon.png" DiskId="1" Source="_build\add-ons\Ultraschall App-Icon.png" />
+                            <File Id="ResWebbanner" Name="Ultraschall Webbanner.pdf" DiskId="1" Source="_build\add-ons\Ultraschall Webbanner.pdf" />
+                            <File Id="ResWebbanner400" Name="Ultraschall Webbanner 400px.png" DiskId="1" Source="_build\add-ons\Ultraschall Webbanner 400px.png" />
+                            <File Id="ResWebbanner800" Name="Ultraschall Webbanner 800px.png" DiskId="1" Source="_build\add-ons\Ultraschall Webbanner 800px.png" />
+                            <File Id="ResWebbanner2000" Name="Ultraschall Webbanner 2000px.jpg" DiskId="1" Source="_build\add-ons\Ultraschall Webbanner 2000px.jpg" />
                         </Component>
                     </Directory>
                 </Directory>
@@ -95,7 +95,7 @@
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
-            <Merge Id="VCRedist" SourceFile="Build\vcredist\Microsoft_VC141_CRT_x64.msm" DiskId="1" Language="0" />
+            <Merge Id="VCRedist" SourceFile="_build\vcredist\Microsoft_VC142_CRT_x64.msm" DiskId="1" Language="0" />
         </DirectoryRef>
         <Feature Id="VCRedist" Title="Visual C++ Runtime" AllowAdvertise="no" Display="hidden" Level="1">
             <MergeRef Id="VCRedist" />

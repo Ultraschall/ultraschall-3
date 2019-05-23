@@ -7,13 +7,13 @@ echo *                                                                    *
 echo **********************************************************************
 
 rem Specify name of installer package
-set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.2-preview-4
+set ULTRASCHALL_RELEASE_LABEL=ULTRASCHALL-3.2-build495
 
 rem Remove previously created installer package
 if exist %ULTRASCHALL_RELEASE_LABEL%.msi del /f /q %ULTRASCHALL_RELEASE_LABEL%.msi
 
 rem Specify build directory
-set ULTRASCHALL_BUILD_DIRECTORY=Build
+set ULTRASCHALL_BUILD_DIRECTORY=_build
 
 rem Create folder for intermediate data
 if not exist %ULTRASCHALL_BUILD_DIRECTORY% (
@@ -26,7 +26,7 @@ echo Copying Microsoft Visual C++ CRT...
 if not exist vcredist (
     mkdir vcredist
 )
-copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\14.20.27508\MergeModules\Microsoft_VC141_CRT_x64.msm" vcredist > nul
+copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\14.21.27702\MergeModules\Microsoft_VC142_CRT_x64.msm" vcredist > nul
 if not errorlevel 0 goto failed
 echo Done.
 
@@ -81,6 +81,22 @@ cmake --build . --target reaper_ultraschall --config Release -j > nul
 if not errorlevel 0 goto failed
 popd
 echo Done.
+
+echo Copying Ultraschall API files...
+if not exist ultraschall-portable (
+    git clone https://github.com/Ultraschall/ultraschall-portable.git
+)
+if not exist api_root (
+    mkdir api_root
+)
+pushd api_root
+if not exist ultraschall_api (
+    mkdir ultraschall_api
+)
+pushd ultraschall_api
+xcopy ..\..\ultraschall-portable\UserPlugins\ultraschall_api /s /e /y /c
+popd
+popd
 
 rem Leave %ULTRASCHALL_BUILD_DIRECTORY% folder
 popd
