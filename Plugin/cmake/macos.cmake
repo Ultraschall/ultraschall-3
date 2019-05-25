@@ -176,45 +176,28 @@ message(STATUS "LIBEXPAT_LIBRARY_PATH = ${LIBEXPAT_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
-# configure wxwidgets
+# configure wdl
 
-set(CURRENT_EXTERNAL_PROJECT wxwidgets)
+set(CURRENT_EXTERNAL_PROJECT wdl)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-ExternalProject_Add(wxwidgets
-    PREFIX libwxwidgets
-	GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-    GIT_TAG v3.1.2
+ExternalProject_Add(wdl
+    PREFIX libwdl
+    SOURCE_SUBDIR wdl
+	GIT_REPOSITORY https://github.com/justinfrankel/WDL.git
     STEP_TARGETS build
     EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DwxBUILD_SAMPLES=OFF -DwxBUILD_TESTS=OFF -DwxBUILD_DEMOS=OFF -DwxBUILD_INSTALL=OFF -DwxUSE_STL=ON -DwxUSE_STD_CONTAINERS=ON -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 -DwxUSE_SOUND=OFF
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
 )
 
-ExternalProject_Get_Property(wxwidgets SOURCE_DIR)
-ExternalProject_Get_Property(wxwidgets BINARY_DIR)
+ExternalProject_Get_Property(wdl SOURCE_DIR)
+# ExternalProject_Get_Property(wdl BINARY_DIR)
 
-set(LIBWXWIDGETS_INCLUDE_PATH
-    ${BINARY_DIR}/lib/wx/include/osx_cocoa-unicode-static-3.1
-    ${SOURCE_DIR}/include
-)
+set(LIBWDL_INCLUDE_PATH ${SOURCE_DIR})
+# set(LIBWDL_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/libwdl.a)
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(LIBWXWIDGETS_LIBRARY_PATH
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwx_baseud-3.1.a
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwx_osx_cocoaud_core-3.1.a
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwxpng-3.1.a
-    )
-else()
-    set(LIBWXWIDGETS_LIBRARY_PATH
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwx_baseu-3.1.a
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwx_osx_cocoau_core-3.1.a
-        ${BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/libwxpng-3.1.a
-    )
-endif()
-
-message(STATUS "LIBWXWIDGETS_INCLUDE_PATH = ${LIBWXWIDGETS_INCLUDE_PATH}")
-message(STATUS "LIBWXWIDGETS_LIBRARY_PATH = ${LIBWXWIDGETS_LIBRARY_PATH}")
+message(STATUS "LIBWDL_INCLUDE_PATH = ${LIBWDL_INCLUDE_PATH}")
+message(STATUS "LIBWDL_LIBRARY_PATH = ${LIBWDL_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
-
-add_definitions(-D__WXOSX_COCOA__ -D__WXMAC__ -D__WXOSX__)

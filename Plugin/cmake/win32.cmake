@@ -179,45 +179,28 @@ message(STATUS "LIBEXPAT_LIBRARY_PATH = ${LIBEXPAT_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
-# configure wxwidgets
+# configure wdl
 
-set(CURRENT_EXTERNAL_PROJECT wxwidgets)
+set(CURRENT_EXTERNAL_PROJECT wdl)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-ExternalProject_Add(wxwidgets
-    PREFIX libwxwidgets
-	GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-    GIT_TAG v3.1.2
+ExternalProject_Add(wdl
+    PREFIX libwdl
+    SOURCE_SUBDIR wdl
+	GIT_REPOSITORY https://github.com/justinfrankel/WDL.git
     STEP_TARGETS build
     EXCLUDE_FROM_ALL TRUE
-    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DwxBUILD_SAMPLES=OFF -DwxBUILD_TESTS=OFF -DwxBUILD_DEMOS=OFF -DwxBUILD_INSTALL=OFF -DwxBUILD_MSVC_MULTIPROC=ON -DwxUSE_STL=ON -DwxUSE_STD_CONTAINERS=ON
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
 )
 
-ExternalProject_Get_Property(wxwidgets SOURCE_DIR)
-ExternalProject_Get_Property(wxwidgets BINARY_DIR)
+ExternalProject_Get_Property(wdl SOURCE_DIR)
+# ExternalProject_Get_Property(wdl BINARY_DIR)
 
-set(LIBWXWIDGETS_INCLUDE_PATH
-    ${BINARY_DIR}/lib/vc_x64_lib/mswud
-    ${SOURCE_DIR}/include
-)
+set(LIBWDL_INCLUDE_PATH ${SOURCE_DIR})
+# set(LIBWDL_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/libwdl.a)
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(LIBWXWIDGETS_LIBRARY_PATH
-        ${BINARY_DIR}/lib/vc_x64_lib/wxbase31ud.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31ud_core.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxpngd.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxzlibd.lib
-    )
-else()
-    set(LIBWXWIDGETS_LIBRARY_PATH
-        ${BINARY_DIR}/lib/vc_x64_lib/wxbase31u.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxmsw31u_core.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxpng.lib
-        ${BINARY_DIR}/lib/vc_x64_lib/wxzlib.lib
-    )
-endif()
-
-message(STATUS "LIBWXWIDGETS_INCLUDE_PATH = ${LIBWXWIDGETS_INCLUDE_PATH}")
-message(STATUS "LIBWXWIDGETS_LIBRARY_PATH = ${LIBWXWIDGETS_LIBRARY_PATH}")
+message(STATUS "LIBWDL_INCLUDE_PATH = ${LIBWDL_INCLUDE_PATH}")
+message(STATUS "LIBWDL_LIBRARY_PATH = ${LIBWDL_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")

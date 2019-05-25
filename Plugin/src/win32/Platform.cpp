@@ -32,8 +32,6 @@
 #include <shlobj.h>
 #include <windows.h>
 
-#include <wx/filename.h>
-
 #include "FileManager.h"
 #include "Platform.h"
 
@@ -81,7 +79,7 @@ UnicodeString Platform::UserDataDirectory()
 
 UnicodeChar Platform::PathSeparator()
 {
-    return wxFileName::GetPathSeparator();
+    return '\\';
 }
 
 bool Platform::FileExists(const UnicodeString& path)

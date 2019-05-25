@@ -36,8 +36,6 @@
 #include "FileManager.h"
 #include "StringUtilities.h"
 
-#include "wx/filename.h"
-
 namespace ultraschall
 {
 namespace reaper
@@ -73,7 +71,7 @@ UnicodeString Platform::ProgramFilesDirectory()
 
 UnicodeChar Platform::PathSeparator()
 {
-    return wxFileName::GetPathSeparator();
+    return '/';
 }
 
 bool Platform::FileExists(const UnicodeString& path)
