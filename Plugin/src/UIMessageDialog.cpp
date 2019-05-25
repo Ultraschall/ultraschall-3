@@ -26,12 +26,14 @@
 
 #include "Common.h"
 
-#include "UIApplication.h"
 #include "UIMessageDialog.h"
 
-#include "wxwidgets_include.h"
+#include "ReaperEntryPoints.h"
 
-namespace ultraschall { namespace reaper {
+namespace ultraschall
+{
+namespace reaper
+{
 
 #ifdef ULTRASCHALL_BROADCASTER
 static const bool forceDisplay = false;
@@ -39,125 +41,107 @@ static const bool forceDisplay = false;
 static const bool forceDisplay = true;
 #endif // #ifndef ULTRASCHALL_BROADCASTER
 
-class UIMessageDisplay : public wxDialog
+class UIMessageDisplay
 {
-    DECLARE_DYNAMIC_CLASS(UIMessageDisplay)
-    DECLARE_EVENT_TABLE()
-
 public:
     UIMessageDisplay();
-    UIMessageDisplay(const UIMessageArray& items);
+    UIMessageDisplay(const UIMessageArray &items);
     ~UIMessageDisplay();
 
 private:
     static const UnicodeString UI_MESSAGE_DIALOG_CAPTION;
 
-    wxBoxSizer* layout_;
-    wxButton*   closeButton_;
-    wxListView* itemList_;
-
     static UnicodeString StringFromMessageSeverity(const UIMessageClass severity);
-    static wxColour      ColorFromMessageSeverity(const UIMessageClass severity);
+    // static wxColour ColorFromMessageSeverity(const UIMessageClass severity);
 };
 
 const UnicodeString UIMessageDisplay::UI_MESSAGE_DIALOG_CAPTION("Ultraschall");
 
-IMPLEMENT_DYNAMIC_CLASS(UIMessageDisplay, wxDialog)
+UIMessageDisplay::UIMessageDisplay() {}
 
-BEGIN_EVENT_TABLE(UIMessageDisplay, wxDialog)
-END_EVENT_TABLE()
-
-UIMessageDisplay::UIMessageDisplay() : layout_(0), closeButton_(0), itemList_(0) {}
-
-UIMessageDisplay::UIMessageDisplay(const UIMessageArray& items) :
-    wxDialog(reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), wxID_ANY, UI_MESSAGE_DIALOG_CAPTION, wxDefaultPosition, wxSize(800, 500)),
-    layout_(0), closeButton_(0), itemList_(0)
+UIMessageDisplay::UIMessageDisplay(const UIMessageArray &items)
 {
-    static const wxColour background(43, 43, 43);
-    static const wxColour foreground(244, 247, 255);
+    // static const wxColour background(43, 43, 43);
+    // static const wxColour foreground(244, 247, 255);
 
-    SetBackgroundColour(background);
-    SetForegroundColour(background);
+    // SetBackgroundColour(background);
+    // SetForegroundColour(background);
 
-    layout_      = new wxBoxSizer(wxVERTICAL);
-    closeButton_ = new wxButton(this, wxID_ANY, "Close", wxPoint(10, 435), wxSize(70, 25));
-    layout_->Add(closeButton_, 1);
+    // layout_ = new wxBoxSizer(wxVERTICAL);
+    // closeButton_ = new wxButton(this, wxID_ANY, "Close", wxPoint(10, 435), wxSize(70, 25));
+    // layout_->Add(closeButton_, 1);
 
-    itemList_
-        = new wxListView(this, wxID_ANY, wxPoint(10, 10), wxSize(775, 412), wxBORDER | wxLC_REPORT | wxLC_NO_HEADER);
-    itemList_->SetBackgroundColour(background);
-    itemList_->SetForegroundColour(foreground);
-    itemList_->InsertColumn(0, "#", wxLIST_FORMAT_RIGHT, 20);
-    itemList_->InsertColumn(1, "Severity", wxLIST_FORMAT_LEFT, 100);
-    itemList_->InsertColumn(2, "Message", wxLIST_FORMAT_LEFT, 200);
-    layout_->Add(itemList_, 2);
+    // itemList_ = new wxListView(this, wxID_ANY, wxPoint(10, 10), wxSize(775, 412), wxBORDER | wxLC_REPORT | wxLC_NO_HEADER);
+    // itemList_->SetBackgroundColour(background);
+    // itemList_->SetForegroundColour(foreground);
+    // itemList_->InsertColumn(0, "#", wxLIST_FORMAT_RIGHT, 20);
+    // itemList_->InsertColumn(1, "Severity", wxLIST_FORMAT_LEFT, 100);
+    // itemList_->InsertColumn(2, "Message", wxLIST_FORMAT_LEFT, 200);
+    // layout_->Add(itemList_, 2);
 
-    itemList_->Hide();
+    // itemList_->Hide();
 
-    for(size_t i = 0; i < items.size(); i++)
-    {
-        UnicodeStringStream os;
-        os << (i + 1);
-        itemList_->InsertItem(i, os.str(), 0);
-        itemList_->SetItemBackgroundColour(i, ColorFromMessageSeverity(items[i].Severity()));
-        itemList_->SetItemTextColour(i, wxColour(255, 255, 255));
-        itemList_->SetItem(i, 1, StringFromMessageSeverity(items[i].Severity()));
-        itemList_->SetItem(i, 2, items[i].Str());
-    }
+    // for (size_t i = 0; i < items.size(); i++)
+    // {
+    //     UnicodeStringStream os;
+    //     os << (i + 1);
+    //     itemList_->InsertItem(i, os.str(), 0);
+    //     itemList_->SetItemBackgroundColour(i, ColorFromMessageSeverity(items[i].Severity()));
+    //     itemList_->SetItemTextColour(i, wxColour(255, 255, 255));
+    //     itemList_->SetItem(i, 1, StringFromMessageSeverity(items[i].Severity()));
+    //     itemList_->SetItem(i, 2, items[i].Str());
+    // }
 
-    itemList_->Show();
+    // itemList_->Show();
 
-    itemList_->SetColumnWidth(0, wxLIST_AUTOSIZE);
-    itemList_->SetColumnWidth(1, wxLIST_AUTOSIZE);
-    itemList_->SetColumnWidth(2, wxLIST_AUTOSIZE_USEHEADER);
+    // itemList_->SetColumnWidth(0, wxLIST_AUTOSIZE);
+    // itemList_->SetColumnWidth(1, wxLIST_AUTOSIZE);
+    // itemList_->SetColumnWidth(2, wxLIST_AUTOSIZE_USEHEADER);
 }
 
 UIMessageDisplay::~UIMessageDisplay()
 {
-    SafeDelete(closeButton_);
-    SafeDelete(itemList_);
-    SafeDelete(layout_);
 }
 
 UnicodeString UIMessageDisplay::StringFromMessageSeverity(const UIMessageClass severity)
 {
-    switch(severity)
+    switch (severity)
     {
-        case UIMessageClass::MESSAGE_SUCCESS:
-            return "Success";
-        case UIMessageClass::MESSAGE_WARNING:
-            return "Warning";
-        case UIMessageClass::MESSAGE_ERROR:
-            return "Error";
-        case UIMessageClass::MESSAGE_FATAL_ERROR:
-            return "Fatal Error";
-        default:
-            return "<Unknown>";
+    case UIMessageClass::MESSAGE_SUCCESS:
+        return "Success";
+    case UIMessageClass::MESSAGE_WARNING:
+        return "Warning";
+    case UIMessageClass::MESSAGE_ERROR:
+        return "Error";
+    case UIMessageClass::MESSAGE_FATAL_ERROR:
+        return "Fatal Error";
+    default:
+        return "<Unknown>";
     }
 }
 
-wxColour UIMessageDisplay::ColorFromMessageSeverity(const UIMessageClass severity)
-{
-    switch(severity)
-    {
-        case UIMessageClass::MESSAGE_SUCCESS:
-            return wxColour(0, 128, 0);
-        case UIMessageClass::MESSAGE_WARNING:
-            return wxColour(255, 140, 0);
-        case UIMessageClass::MESSAGE_ERROR:
-            return wxColour(128, 0, 0);
-        case UIMessageClass::MESSAGE_FATAL_ERROR:
-            return wxColour(128, 0, 128);
-        default:
-            return wxColour(0, 255, 0);
-    }
-}
+// wxColour UIMessageDisplay::ColorFromMessageSeverity(const UIMessageClass severity)
+// {
+//     switch (severity)
+//     {
+//     case UIMessageClass::MESSAGE_SUCCESS:
+//         return wxColour(0, 128, 0);
+//     case UIMessageClass::MESSAGE_WARNING:
+//         return wxColour(255, 140, 0);
+//     case UIMessageClass::MESSAGE_ERROR:
+//         return wxColour(128, 0, 0);
+//     case UIMessageClass::MESSAGE_FATAL_ERROR:
+//         return wxColour(128, 0, 128);
+//     default:
+//         return wxColour(0, 255, 0);
+//     }
+// }
 
 UIMessageDialog::UIMessageDialog() {}
 
-int UIMessageDialog::Display(const UIMessageArray& items, const UIMessageClass& severityThreshold)
+int UIMessageDialog::Display(const UIMessageArray &items, const UIMessageClass &severityThreshold)
 {
-    if(true == forceDisplay)
+    if (true == forceDisplay)
     {
         return ForceDisplay(items, severityThreshold);
     }
@@ -165,25 +149,25 @@ int UIMessageDialog::Display(const UIMessageArray& items, const UIMessageClass& 
     return 0;
 }
 
-int UIMessageDialog::ForceDisplay(const UIMessageArray& items, const UIMessageClass& severityThreshold)
+int UIMessageDialog::ForceDisplay(const UIMessageArray &items, const UIMessageClass &severityThreshold)
 {
     PRECONDITION_RETURN(items.empty() == false, 0);
 
     UIMessageDisplay messageDisplay(items);
-    messageDisplay.Center();
-    messageDisplay.ShowModal();
+    // messageDisplay.Center();
+    // messageDisplay.ShowModal();
 
     return 0;
 }
 
-UIMessageClass UIMessageDialog::MaxSeverity(const UIMessageArray& items)
+UIMessageClass UIMessageDialog::MaxSeverity(const UIMessageArray &items)
 {
     PRECONDITION_RETURN(items.empty() == false, UIMessageClass::INVALID_MESSAGE_CLASS);
 
     UIMessageClass maxSeverity = UIMessageClass::MESSAGE_SUCCESS;
-    for(size_t i = 0; i < items.size(); i++)
+    for (size_t i = 0; i < items.size(); i++)
     {
-        if(items[i].Severity() > maxSeverity)
+        if (items[i].Severity() > maxSeverity)
         {
             maxSeverity = items[i].Severity();
         }
@@ -192,4 +176,5 @@ UIMessageClass UIMessageDialog::MaxSeverity(const UIMessageArray& items)
     return maxSeverity;
 }
 
-}} // namespace ultraschall::reaper
+} // namespace reaper
+} // namespace ultraschall

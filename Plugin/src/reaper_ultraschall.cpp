@@ -26,7 +26,6 @@
 
 #include "Application.h"
 #include "ServiceStatus.h"
-#include "UIApplication.h"
 #include "UIMessageSupervisor.h"
 
 #include "CustomActionManager.h"
@@ -39,71 +38,68 @@
 
 #include "ReaperEntryPoints.h"
 
-extern "C" {
-REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
-    REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t* pPluginInfo)
+extern "C"
 {
-    if(pPluginInfo != 0)
+    REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
+        REAPER_PLUGIN_HINSTANCE hInstance, reaper_plugin_info_t *pPluginInfo)
     {
-        static bool started = false;
-        if(false == started)
+        if (pPluginInfo != 0)
         {
-            if(ultraschall::reaper::ReaperEntryPoints::Setup(hInstance, pPluginInfo) == true)
+            static bool started = false;
+            if (false == started)
             {
-                ultraschall::reaper::UIApplication::Initialize(hInstance, reaper_api::GetMainHwnd());
-
-                if(ultraschall::reaper::QuerySetPluginVersion() == true)
+                if (ultraschall::reaper::ReaperEntryPoints::Setup(hInstance, pPluginInfo) == true)
                 {
-                    ultraschall::reaper::Application& application = ultraschall::reaper::Application::Instance();
-                    if(ServiceSucceeded(application.Start()))
+                    if (ultraschall::reaper::QuerySetPluginVersion() == true)
                     {
-                        application.RegisterCustomAction<ultraschall::reaper::InsertChapterMarkersAction>();
-                        application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersAction>();
-                        application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersToProjectAction>();
-                        application.RegisterCustomAction<ultraschall::reaper::InsertMediaPropertiesAction>();
-                        started = true;
+                        ultraschall::reaper::Application &application = ultraschall::reaper::Application::Instance();
+                        if (ServiceSucceeded(application.Start()))
+                        {
+                            application.RegisterCustomAction<ultraschall::reaper::InsertChapterMarkersAction>();
+                            application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersAction>();
+                            application.RegisterCustomAction<ultraschall::reaper::SaveChapterMarkersToProjectAction>();
+                            application.RegisterCustomAction<ultraschall::reaper::InsertMediaPropertiesAction>();
+                            started = true;
+                        }
                     }
                 }
+                else
+                {
+                    ultraschall::reaper::UIMessageSupervisor supervisor;
+                    supervisor.RegisterFatalError("Ultraschall failed to load!");
+                    supervisor.RegisterFatalError(
+                        "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.");
+                }
             }
-            else
-            {
-                ultraschall::reaper::UIMessageSupervisor supervisor;
-                supervisor.RegisterFatalError("Ultraschall failed to load!");
-                supervisor.RegisterFatalError(
-                    "You are trying to load a version of REAPER that is not compatible to Ultraschall 3.");
-            }
-        }
 
-        return 1;
-    }
-    else
-    {
-        static bool stopped = false;
-        if(false == stopped)
+            return 1;
+        }
+        else
         {
-            ultraschall::reaper::Application& application = ultraschall::reaper::Application::Instance();
-            application.Stop();
+            static bool stopped = false;
+            if (false == stopped)
+            {
+                ultraschall::reaper::Application &application = ultraschall::reaper::Application::Instance();
+                application.Stop();
 
-            ultraschall::reaper::UIApplication::Uninitialize();
+                stopped = true;
+            }
 
-            stopped = true;
+            return 0;
         }
-
-        return 0;
     }
-}
 }
 
 #ifdef _WIN32
 BOOL APIENTRY DllMain(HMODULE, ULONG ul_reason_for_call, LPVOID)
 {
-    switch(ul_reason_for_call)
+    switch (ul_reason_for_call)
     {
-        case DLL_PROCESS_ATTACH:
-        case DLL_THREAD_ATTACH:
-        case DLL_THREAD_DETACH:
-        case DLL_PROCESS_DETACH:
-            break;
+    case DLL_PROCESS_ATTACH:
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+    case DLL_PROCESS_DETACH:
+        break;
     }
     return TRUE;
 }

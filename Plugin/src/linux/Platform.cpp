@@ -49,7 +49,7 @@ UnicodeString Platform::ProgramFilesDirectory()
 
 UnicodeChar Platform::PathSeparator()
 {
-    return wxFileName::GetPathSeparator();
+    return '/';
 }
 
 bool Platform::FileExists(const UnicodeString& path)

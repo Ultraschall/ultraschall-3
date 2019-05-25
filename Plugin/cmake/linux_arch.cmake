@@ -72,20 +72,28 @@ message(STATUS "LIBMP4V2_LIBRARY_PATH = ${LIBMP4V2_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")
 
-# configure wxwidgets
+# configure wdl
 
-set(CURRENT_EXTERNAL_PROJECT wxwidgets)
+set(CURRENT_EXTERNAL_PROJECT wdl)
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Configuring ...")
 
-find_package(wxWidgets REQUIRED core base)
-if(wxWidgets_FOUND)
-	include(${wxWidgets_USE_FILE})
-	message(STATUS "Found wxwidgets version " ${wxWidgets_VERSION_STRING})
-	set(LIBWXWIDGETS_INCLUDE_PATH ${wxWidgets_INCLUDE_DIRS})
-	set(LIBWXWIDGETS_LIBRARY_PATH ${wxWidgets_LIBRARIES})
-endif()
+ExternalProject_Add(wdl
+    PREFIX libwdl
+    SOURCE_SUBDIR wdl
+	GIT_REPOSITORY https://github.com/justinfrankel/WDL.git
+    STEP_TARGETS build
+    EXCLUDE_FROM_ALL TRUE
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+)
 
-message(STATUS "LIBWXWIDGETS_INCLUDE_PATH = ${LIBWXWIDGETS_INCLUDE_PATH}")
-message(STATUS "LIBWXWIDGETS_LIBRARY_PATH = ${LIBWXWIDGETS_LIBRARY_PATH}")
+ExternalProject_Get_Property(wdl SOURCE_DIR)
+# ExternalProject_Get_Property(wdl BINARY_DIR)
+
+set(LIBWDL_INCLUDE_PATH ${SOURCE_DIR})
+# set(LIBWDL_LIBRARY_PATH ${BINARY_DIR}/${CMAKE_BUILD_TYPE}/libwdl.a)
+
+message(STATUS "LIBWDL_INCLUDE_PATH = ${LIBWDL_INCLUDE_PATH}")
+message(STATUS "LIBWDL_LIBRARY_PATH = ${LIBWDL_LIBRARY_PATH}")
 
 message(STATUS "${CURRENT_EXTERNAL_PROJECT}<${CMAKE_BUILD_TYPE}>: Done.")

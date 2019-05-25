@@ -25,44 +25,43 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UIFileDialog.h"
-#include "UIApplication.h"
 
-#include "wxwidgets_include.h"
+#include "ReaperEntryPoints.h"
 
-namespace ultraschall { namespace reaper {
-
-UIFileDialog::UIFileDialog(const UnicodeString& caption, const UnicodeString& initialDirectory) :
-    caption_(caption), initialDirectory_(initialDirectory)
+namespace ultraschall
 {
-    if(caption_.empty() == true)
+namespace reaper
+{
+
+UIFileDialog::UIFileDialog(const UnicodeString &caption, const UnicodeString &initialDirectory) : caption_(caption), initialDirectory_(initialDirectory)
+{
+    if (caption_.empty() == true)
     {
         caption_ = "Open file";
     }
 }
 
-UnicodeString UIFileDialog::BrowseForFile(const UnicodeString& fileExtensions)
+UnicodeString UIFileDialog::BrowseForFile(const UnicodeString &fileExtensions)
 {
-    PRECONDITION_RETURN(UIApplication::GetMainWindow() != nullptr, UnicodeString());
-
     UnicodeString filename;
 
     UnicodeString actualFileExtension = "All files|*.*";
-    if(fileExtensions.empty() == false)
+    if (fileExtensions.empty() == false)
     {
         actualFileExtension = fileExtensions;
     }
 
-    wxFileDialog fileDialog(
-        reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), U2H(caption_), U2H(initialDirectory_), "",
-        U2H(actualFileExtension), wxFD_OPEN, wxDefaultPosition);
-    if(fileDialog.ShowModal() == wxID_OK)
-    {
-        wxString resultPath;
-        resultPath.Append(fileDialog.GetDirectory());
-        resultPath.Append(wxFileName::GetPathSeparator());
-        resultPath.Append(fileDialog.GetFilename());
-        filename = H2U(UnicodeString(resultPath.mb_str()));
-    }
+    // wxFileDialog fileDialog(
+    //     reaoer_api::GetMainHwnd(), U2H(caption_), U2H(initialDirectory_), "",
+    //     U2H(actualFileExtension), wxFD_OPEN, wxDefaultPosition);
+    // if (fileDialog.ShowModal() == wxID_OK)
+    // {
+    //     wxString resultPath;
+    //     resultPath.Append(fileDialog.GetDirectory());
+    //     resultPath.Append(wxFileName::GetPathSeparator());
+    //     resultPath.Append(fileDialog.GetFilename());
+    //     filename = H2U(UnicodeString(resultPath.mb_str()));
+    // }
 
     return filename;
 }
@@ -103,21 +102,20 @@ UnicodeString UIFileDialog::BrowseForPicture()
 
 UnicodeString UIFileDialog::BrowseForDirectory()
 {
-    PRECONDITION_RETURN(UIApplication::GetMainWindow() != nullptr, UnicodeString());
-
     UnicodeString directory;
 
-    wxDirDialog directoryDialog(
-        reinterpret_cast<wxWindow*>(UIApplication::GetMainWindow()), "Select", U2H(initialDirectory_), 0,
-        wxDefaultPosition);
-    if(directoryDialog.ShowModal() == wxID_OK)
-    {
-        wxString resultPath;
-        resultPath.Append(directoryDialog.GetPath());
-        directory = H2U(UnicodeString(resultPath.mb_str()));
-    }
+    // wxDirDialog directoryDialog(
+    //     reaoer_api::GetMainHwnd(), "Select", U2H(initialDirectory_), 0,
+    //     wxDefaultPosition);
+    // if (directoryDialog.ShowModal() == wxID_OK)
+    // {
+    //     wxString resultPath;
+    //     resultPath.Append(directoryDialog.GetPath());
+    //     directory = H2U(UnicodeString(resultPath.mb_str()));
+    // }
 
     return directory;
 }
 
-}} // namespace ultraschall::reaper
+} // namespace reaper
+} // namespace ultraschall
