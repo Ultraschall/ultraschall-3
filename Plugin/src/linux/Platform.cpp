@@ -26,8 +26,6 @@
 #include "Platform.h"
 #include "StringUtilities.h"
 
-#include "wx/filename.h"
-
 namespace ultraschall { namespace reaper {
 
 const UnicodeString Platform::THEME_PATH("/REAPER/ColorThemes/Ultraschall_3.1.ReaperThemeZip");
@@ -79,4 +77,3 @@ bool Platform::SWSVersionCheck()
 }
 
 }}
-
