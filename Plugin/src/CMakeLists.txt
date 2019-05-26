@@ -246,6 +246,7 @@ elseif(${ULTRASCHALL_TARGET_SYSTEM} STREQUAL "macos")
     add_dependencies(reaper_ultraschall json11-build)
     add_dependencies(reaper_ultraschall expat-build)
 elseif(${ULTRASCHALL_TARGET_SYSTEM} STREQUAL "ubuntu")
+    add_dependencies(reaper_ultraschall taglib-build)
     add_dependencies(reaper_ultraschall json11-build)
 endif()
 
