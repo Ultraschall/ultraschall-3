@@ -24,7 +24,7 @@
 #
 ################################################################################
 
-set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include/jmde)
+set(REAPER_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 include_directories(
     ${LIBZ_INCLUDE_PATH}
@@ -121,10 +121,14 @@ set(COMMON_SOURCES
     reaper_ultraschall.cpp
 )
 
-set(EXTERNAL_SOURCES
-    ${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c
-    ${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c
-)
+if(NOT UNIX)
+    set(EXTERNAL_SOURCES
+        ${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c
+        ${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c
+    )
+    set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
+    set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
+endif()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
@@ -140,9 +144,6 @@ elseif(UNIX)
     include_directories(linux)
     set(PLATFORM_SOURCES linux/Platform.cpp)
 endif()
-
-set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/ioapi.c PROPERTIES GENERATED TRUE)
-set_source_files_properties(${LIBZ_SOURCE_PATH}/contrib/minizip/unzip.c PROPERTIES GENERATED TRUE)
 
 if(WIN32)
     set(EXTRA_SOURCES reaper_ultraschall.rc)
@@ -220,12 +221,20 @@ target_link_libraries(reaper_ultraschall
     ${EXTRA_LIBRARIES}
 )
 
-add_dependencies(reaper_ultraschall zlib-build)
-add_dependencies(reaper_ultraschall curl-build)
-add_dependencies(reaper_ultraschall taglib-build)
-add_dependencies(reaper_ultraschall mp4v2-build)
-add_dependencies(reaper_ultraschall json11-build)
-add_dependencies(reaper_ultraschall expat-build)
 add_dependencies(reaper_ultraschall wdl-build)
+
+if(NOT UNIX)
+    add_dependencies(reaper_ultraschall zlib-build)
+    add_dependencies(reaper_ultraschall curl-build)
+    add_dependencies(reaper_ultraschall taglib-build)
+    add_dependencies(reaper_ultraschall mp4v2-build)
+    add_dependencies(reaper_ultraschall json11-build)
+    add_dependencies(reaper_ultraschall expat-build)
+else()
+    if(${ULTRASCHALL_TARGET_SYSTEM} STREQUAL "ubuntu")
+        add_dependencies(reaper_ultraschall taglib-build)
+        add_dependencies(reaper_ultraschall json11-build)
+    endif()
+endif()
 
 set_target_properties(reaper_ultraschall PROPERTIES PREFIX "")
