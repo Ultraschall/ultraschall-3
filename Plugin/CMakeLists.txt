@@ -43,8 +43,12 @@ elseif(UNIX)
         set(ULTRASCHALL_TARGET_SYSTEM "arch")
     elseif(${CMAKE_SYSTEM} MATCHES "ubuntu")
         set(ULTRASCHALL_TARGET_SYSTEM "ubuntu")
+    elseif(${CMAKE_SYSTEM} MATCHES "Microsoft")
+        set(ULTRASCHALL_TARGET_SYSTEM "ubuntu")
     endif()
 endif()
+
+message(STATUS "ULTRASCHALL_TARGET_SYSTEM = " ${ULTRASCHALL_TARGET_SYSTEM})
 
 if(${ULTRASCHALL_TARGET_SYSTEM} STREQUAL "win32")
     include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/win32.cmake)
