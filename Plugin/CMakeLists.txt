@@ -43,7 +43,9 @@ elseif(UNIX)
         set(ULTRASCHALL_TARGET_SYSTEM "arch")
     elseif(${CMAKE_SYSTEM} MATCHES "ubuntu")
         set(ULTRASCHALL_TARGET_SYSTEM "ubuntu")
-    elseif(${CMAKE_SYSTEM} MATCHES "Microsoft")
+    elseif(${CMAKE_SYSTEM} MATCHES "Microsoft") # WSL
+        set(ULTRASCHALL_TARGET_SYSTEM "ubuntu")
+    elseif(${CMAKE_SYSTEM} MATCHES "azure") # Azure DevOps
         set(ULTRASCHALL_TARGET_SYSTEM "ubuntu")
     endif()
 endif()
