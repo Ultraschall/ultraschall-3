@@ -7,25 +7,31 @@ The following features will be presented in detail in our Ultraschall tutorial v
 
 ### Changelog
 
-- [BUGFIX] Ultraschall crashes on import of chapter markers when the selected input file contains malformed timestamp entries.
+- [UPDATE] Ultraschall now includes the SWS Plug-in V2.10.0.
+  [https://github.com/Ultraschall/ultraschall-portable/issues/112](https://github.com/Ultraschall/ultraschall-portable/issues/112)
 
-- [BUGFIX] Exclude region markers from chapter marker export (Issue #46).
+- [FIXED] Plug-in: Improve Update Check. (Thanks, [@343max](https://twitter.com/343max))
+  [https://github.com/Ultraschall/ultraschall-portable/issues/26](https://github.com/Ultraschall/ultraschall-portable/issues/26)
 
-- [BUGFIX] The chapter marker export fails if a chapter marker title contains one or more non-ASCII character(s).
+- [FIXED] Ultraschall crashes on import of chapter markers when the selected input file contains malformed timestamp entries. (Thanks, [@moritzklenk](https://twitter.com/moritzklenk))
+  [https://github.com/Ultraschall/ultraschall-portable/issues/111](https://github.com/Ultraschall/ultraschall-portable/issues/111)
 
-- [BUGFIX] The Chapter marker export fails if the length of a chapter marker title exceeds [FIXME] characters.
+- [FIXED] The chapter marker export includes region markers.
+  [https://github.com/Ultraschall/ultraschall-portable/issues/46](https://github.com/Ultraschall/ultraschall-portable/issues/46)
 
----
+- [FIXED] The chapter marker export fails if a chapter marker title contains one or more non-ASCII character(s). (Thanks, Marcus von [@diezugfunker](https://twitter.com/diezugfunker))
+  [https://github.com/Ultraschall/ultraschall-portable/issues/110](https://github.com/Ultraschall/ultraschall-portable/issues/110)
 
-- [FEHLER] Absturz beim Import von Kapitelmarken, wenn die ausgewählte Datei fehlerhafte Zeiteinträge enthält.
-
-- [FEHLER] Beim Export von Chaptermarks werden auch Regions exportiert (Issue #46).
-
-- [FEHLER] Der Export von Kapitelmarken schlägt fehl, wenn ein Kapitelmarke eine oder mehrere Nicht-ASCII-Zeichen enthält.
-
-- [FEHLER] Der Export von Kapitelmarken schlägt fehl, wenn die Länge eines Kapitelmarkentitels 64 Zeichen überschreitet.
+- [FIXED] The chapter marker export fails if the length of a chapter marker title exceeds 62 characters.
+  [https://github.com/Ultraschall/ultraschall-portable/issues/109](https://github.com/Ultraschall/ultraschall-portable/issues/109)
 
 ### Known Issues
+
+- [FEATURE] The Apple Podcast app (iOS) does not display exported chapter marker in MP3 files. (Thanks, [@twittlik](https://twitter.com/twittlik))
+  [https://github.com/Ultraschall/ultraschall-portable/issues/113](https://github.com/Ultraschall/ultraschall-portable/issues/113)
+
+- [BUG] The iTunes preview website does not play podcasts that contain exported data from Ultraschall. (Thanks, [@schanzpaulifunk](https://twitter.com/schanzpaulifunk))
+  [https://github.com/Ultraschall/ultraschall-portable/issues/114](https://github.com/Ultraschall/ultraschall-portable/issues/114)
 
 ## 3.1 Miedinger - January 2018
 
