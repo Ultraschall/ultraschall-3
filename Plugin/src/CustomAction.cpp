@@ -133,11 +133,4 @@ bool CustomAction::ValidateChapterMarkers(const MarkerArray& markers)
     return valid;
 }
 
-MarkerArray CustomAction::GetChapterMarkers() 
-{
-    ReaperProjectManager& projectManager = ReaperProjectManager::Instance();
-    ReaperProject         currentProject = projectManager.CurrentProject();
-    return currentProject.AllMarkers();
-}
-
 }} // namespace ultraschall::reaper

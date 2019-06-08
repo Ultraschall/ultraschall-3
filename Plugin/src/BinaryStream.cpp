@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "BinaryStream.h"
-#include <zlib.h>
 #include <cstring>
+#include <zlib.h>
 
 namespace ultraschall { namespace reaper {
 
@@ -34,7 +34,7 @@ BinaryStream::BinaryStream(const size_t dataSize) : dataSize_(dataSize), data_(n
 
 BinaryStream::~BinaryStream()
 {
-    dataSize_ = 0;
+    dataSize_ = INVALID_DATA_SIZE;
     SafeDeleteArray(data_);
 }
 

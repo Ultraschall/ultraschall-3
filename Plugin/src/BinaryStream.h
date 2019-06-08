@@ -35,6 +35,8 @@ namespace ultraschall { namespace reaper {
 class BinaryStream : public SharedObject
 {
 public:
+    static const size_t INVALID_DATA_SIZE = -1;
+
     BinaryStream(const size_t dataSize);
 
     size_t DataSize() const;
@@ -51,8 +53,8 @@ protected:
     virtual ~BinaryStream();
 
 private:
-    size_t   dataSize_;
-    uint8_t* data_;
+    size_t   dataSize_ = INVALID_DATA_SIZE;
+    uint8_t* data_     = nullptr;
 };
 
 }} // namespace ultraschall::reaper

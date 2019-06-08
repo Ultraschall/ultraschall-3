@@ -37,6 +37,7 @@
 #include "TimeUtilities.h"
 #include "UIFileDialog.h"
 #include "UIMessageSupervisor.h"
+#include "ReaperProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -128,7 +129,7 @@ bool InsertMediaPropertiesAction::ConfigureSources()
         invalidAssetCount++;
     }
 
-    chapterMarkers_ = GetChapterMarkers();
+    chapterMarkers_ = ReaperProjectManager::Instance().CurrentProject().AllMarkers();
     if(chapterMarkers_.empty() == true)
     {
         supervisor.RegisterWarning("No chapters have been set.");

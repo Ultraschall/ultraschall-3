@@ -36,21 +36,18 @@ namespace ultraschall { namespace reaper {
 class CustomAction : public ICustomAction
 {
 public:
+    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
+
     static bool ValidateCustomActionId(const int32_t id);
-	static bool ValidateProject();
-	static bool ValidateChapterMarkers(const MarkerArray& markers);
+    static bool ValidateProject();
+    static bool ValidateChapterMarkers(const MarkerArray& markers);
 
     static bool RegisterProject();
 
-	static MarkerArray GetChapterMarkers();
-
 protected:
-    static UnicodeString GetProjectDirectory(); 
+    static UnicodeString GetProjectDirectory();
     static UnicodeString GetProjectName();
     static UnicodeString CreateProjectPath(const UnicodeString& extension = "");
-
-private:
-    static const int32_t INVALID_CUSTOM_ACTION_ID = -1;
 };
 
 }} // namespace ultraschall::reaper

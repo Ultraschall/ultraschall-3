@@ -30,6 +30,7 @@
 #include "SaveChapterMarkersAction.h"
 #include "StringUtilities.h"
 #include "UIMessageSupervisor.h"
+#include "ReaperProjectManager.h"
 
 namespace ultraschall { namespace reaper {
 
@@ -86,9 +87,7 @@ bool SaveChapterMarkersToProjectAction::ConfigureSources()
     UIMessageSupervisor supervisor;
     size_t              invalidAssetCount = 0;
 
-    chapterMarkers_.clear();
-
-    chapterMarkers_ = GetChapterMarkers();
+    chapterMarkers_ = ReaperProjectManager::Instance().CurrentProject().AllMarkers();
     if(chapterMarkers_.empty() == true)
     {
         supervisor.RegisterWarning("No chapters have been set.");

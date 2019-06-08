@@ -40,7 +40,7 @@ template<class T> inline static void SafeDeleteArray(T*& ptr)
 template<class T> inline static void SafeDelete(T*& ptr)
 {
     delete ptr;
-    ptr = 0;
+    ptr = nullptr;
 }
 
 template<class T> inline static void SafeRelease(T*& ptr)
