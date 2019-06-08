@@ -52,7 +52,8 @@ public:
 
     inline ProjectReference NativeReference() const;
 
-    static const uint32_t INVALID_MARKER_MASK     = 0xffffffff;
+    static const uint32_t INVALID_MARKER_MASK = 0xffffffff;
+
     static const uint32_t SHOW_CHAPTER_MARKERS    = 0x00000001;
     static const uint32_t SHOW_EDIT_MARKERS       = 0x00000002;
     static const uint32_t SHOW_SHOWNOTE_MARKERS   = 0x00000004;
@@ -90,16 +91,26 @@ public:
 
     UnicodeString Notes() const;
 
+protected:
+    inline bool SetMarkerStatus(const uint32_t mask);
+
 private:
     ProjectReference nativeReference_ = nullptr;
-    uint32_t         markerStatus_    = -1;
+    uint32_t         markerStatus_    = INVALID_MARKER_MASK;
 
-    MarkerArray         allMarkers_;
+    MarkerArray allMarkers_;
 
     bool        InsertMarker(const Marker& marker);
     bool        InsertMarker(const UnicodeString& name, const int color, const double position = INVALID_POSITION);
     MarkerArray FilterMarkers(const int color) const;
 };
+
+inline bool ReaperProject::SetMarkerStatus(const uint32_t mask)
+{
+    PRECONDITION_RETURN(mask != INVALID_MARKER_MASK, false);
+    markerStatus_ = mask;
+    return true;
+}
 
 inline uint32_t ReaperProject::MarkerStatus() const
 {

@@ -258,46 +258,48 @@ void ReaperProject::RefreshUI(const uint32_t mask)
     AutoPreventUIRefresh();
     ReaperGateway::ClearMarkers(nativeReference_);
 
-    markerStatus_ = mask;
-    std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker& marker) {
-        bool insert = false;
-
-        if(markerStatus_ & SHOW_CHAPTER_MARKERS)
-        {
-            if(marker.Color() == CHAPTER_MARKER_COLOR)
+    if(SetMarkerStatus(mask) == true)
+    {
+        std::for_each(allMarkers_.begin(), allMarkers_.end(), [&](const Marker& marker) {
+            bool           insert       = false;
+            const uint32_t markerStatus = MarkerStatus();
+            if(markerStatus & SHOW_CHAPTER_MARKERS)
             {
-                insert = true;
+                if(marker.Color() == CHAPTER_MARKER_COLOR)
+                {
+                    insert = true;
+                }
             }
-        }
 
-        if(MarkerStatus() & SHOW_EDIT_MARKERS)
-        {
-            if(marker.Color() == EDIT_MARKER_COLOR)
+            if(markerStatus & SHOW_EDIT_MARKERS)
             {
-                insert = true;
+                if(marker.Color() == EDIT_MARKER_COLOR)
+                {
+                    insert = true;
+                }
             }
-        }
 
-        if(MarkerStatus() & SHOW_SHOWNOTE_MARKERS)
-        {
-            if(marker.Color() == SHOWNOTE_MARKER_COLOR)
+            if(markerStatus & SHOW_SHOWNOTE_MARKERS)
             {
-                insert = true;
+                if(marker.Color() == SHOWNOTE_MARKER_COLOR)
+                {
+                    insert = true;
+                }
             }
-        }
 
-        if(MarkerStatus() & SHOW_HISTORICAL_MARKERS)
-        {
-            if(marker.Color() == HISTORICAL_MARKER_COLOR)
+            if(markerStatus & SHOW_HISTORICAL_MARKERS)
             {
-                insert = true;
+                if(marker.Color() == HISTORICAL_MARKER_COLOR)
+                {
+                    insert = true;
+                }
             }
-        }
 
-        if(true == insert)
-        {
-            ReaperGateway::InsertMarker(nativeReference_, marker);
-        }
-    });
+            if(true == insert)
+            {
+                ReaperGateway::InsertMarker(nativeReference_, marker);
+            }
+        });
+    }
 }
 }} // namespace ultraschall::reaper
