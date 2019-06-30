@@ -32,22 +32,6 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif // #ifdef __APPLE__
 
-#ifdef __linux__
-#define TAGLIB_STATIC
-#include <taglib/tstringlist.h>
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
-#include <taglib/tbytevectorlist.h>
-#include <taglib/tpropertymap.h>
-#include <taglib/mpegfile.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/chapterframe.h>
-#include <taglib/textidentificationframe.h>
-#include <taglib/attachedpictureframe.h>
-#include <taglib/commentsframe.h>
-#include <taglib/tableofcontentsframe.h>
-#include <taglib/podcastframe.h>
-#else // #ifdef __linux__
 #define TAGLIB_STATIC
 #include <tstringlist.h>
 #include <fileref.h>
@@ -62,7 +46,6 @@
 #include <commentsframe.h>
 #include <tableofcontentsframe.h>
 #include <podcastframe.h>
-#endif // #ifdef __linux__
 
 namespace taglib = TagLib;
 namespace taglib_id3v2 = TagLib::ID3v2;
