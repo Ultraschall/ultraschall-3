@@ -38,6 +38,10 @@ if [ "$1" = "--bootstrap" ]; then
   ResetTools $TOOLS_DIRECTORY
   source ./bootstrap.sh
   exit 0
+elif [ "$1" = "--clean-all" ]; then
+  ResetBuild $BUILD_DIRECTORY
+  ResetTools $TOOLS_DIRECTORY
+  exit 0
 elif [ "$1" = "--clean" ]; then
   ResetBuild $BUILD_DIRECTORY
   exit 0
