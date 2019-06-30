@@ -458,16 +458,5 @@ settings.json
 # !c_cpp_properties.json
 .vscode/
 
-REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrlbm
-REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrldb
-REAPER/Plugin/reaper_ultraschall/reaper_ultraschall.srctrlprj
-
-Plugin/_ext/zlib/
-Plugin/_ext/curl/
-Plugin/_ext/taglib/
-Plugin/_ext/mp4v2/
-Plugin/_ext/wxwidgets/
-
-# exclude build instructions from ignore list
-!Docs/Build/
-!Docs/Release/
+_build/
+_tools/
